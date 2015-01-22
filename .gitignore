@@ -1,0 +1,6 @@
+/node_modules
+/.gradle
+/.idea
+/vendor
+.env
+composer.lock
