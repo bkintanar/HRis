@@ -47,7 +47,9 @@ class CreateEmployeesTable extends Migration {
             $table->string('mid_rtn')->nullable()->unique();
             $table->date('birth_date')->nullable();
             $table->string('remarks')->nullable();
-            $table->date('hire_date')->nullable();
+            $table->date('joined_date')->nullable();
+            $table->date('probation_end_date')->nullable();
+            $table->date('permanency_date')->nullable();
             $table->date('resign_date')->nullable();
 
             // We'll need to ensure that MySQL uses the InnoDB engine to

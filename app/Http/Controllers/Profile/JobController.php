@@ -4,6 +4,7 @@ use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use HRis\Employee;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\JobRequest;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 
 /**
@@ -32,14 +33,7 @@ class JobController extends Controller {
      */
     public function job(JobRequest $request, $employee_id = null)
     {
-        if ($employee_id)
-        {
-            $employee = $this->employee->with('user', 'country', 'province', 'city')->whereEmployeeId($employee_id)->first();
-        }
-        else
-        {
-            $employee = $this->employee->with('user', 'country', 'province', 'city')->whereUserId($this->loggedUser->id)->first();
-        }
+        $employee = $this->employee->getEmployeeById($employee_id, $this->loggedUser->id);
 
         $this->data['employee'] = $employee;
 
@@ -62,14 +56,7 @@ class JobController extends Controller {
      */
     public function showJobEditForm(JobRequest $request, $employee_id = null)
     {
-        if ($employee_id)
-        {
-            $employee = $this->employee->with('user', 'country', 'province', 'city')->whereEmployeeId($employee_id)->first();
-        }
-        else
-        {
-            $employee = $this->employee->with('user', 'country', 'province', 'city')->whereUserId($this->loggedUser->id)->first();
-        }
+        $employee = $this->employee->getEmployeeById($employee_id, $this->loggedUser->id);
 
         $this->data['employee'] = $employee;
 
@@ -92,6 +79,14 @@ class JobController extends Controller {
         $id = $request->get('id');
 
         $employee = $this->employee->whereId($id)->first();
+
+        $employee->job_title_id = $request->get('job_title_id');
+        $employee->employment_status_id = $request->get('employment_status_id');
+        $employee->department_id = $request->get('department_id');
+//        $employee->effective_date = $request->get('effective_date');
+        $employee->joined_date = $request->get('joined_date');
+        $employee->probation_end_date = $request->get('probation_end_date');
+        $employee->permanency_date = $request->get('permanency_date');
 
         $employee->save();
 

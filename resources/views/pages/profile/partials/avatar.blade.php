@@ -12,7 +12,9 @@
         <h3>{{ ($employee->job_title_id != 0) ? $employee->jobTitle->name : '' }}</h3>
 
         @if(\Request::is('*personal-details/edit'))
-        <button id="addAvatar" href="javascript:void(0);" type="button" class="btn btn-primary btn-xs">Edit Avatar</button>
+            <h4><span id="addAvatar" class="label label-primary">Edit Avatar</span></h4>
+        @else
+            <h4><span class="label {{ isset($employee->employmentStatus) ? $employee->employmentStatus->class : '' }}">{{ isset($employee->employmentStatus) ? $employee->employmentStatus->name : '' }}</span></h4>
         @endif
        </div>
     </div>

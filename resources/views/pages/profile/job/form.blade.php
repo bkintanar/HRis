@@ -96,15 +96,15 @@
     @if ($disabled == '')
     <div class="form-group">
         <div class="col-sm-4 col-sm-offset-2">
-            {!! Html::link(str_replace('/edit', '', \Request::path()), 'Cancel', ['class' => 'btn btn-white']) !!}
-            {!! Form::submit('Save changes', ['class' => 'btn btn-primary']) !!}
+            {!! Html::link(str_replace('/edit', '', \Request::path()), 'Cancel', ['class' => 'btn btn-white btn-xs']) !!}
+            {!! Form::submit('Save changes', ['class' => 'btn btn-primary btn-xs']) !!}
         </div>
     </div>
     @else
         @if($loggedUser->hasAccess(\Request::segment(1).'.job.update'))
         <div class="form-group">
             <div class="col-sm-4 col-sm-offset-2">
-                {!! Html::link(\Request::path() . '/edit', 'Modify', ['class' => 'btn btn-primary']) !!}
+                {!! Html::link(\Request::path() . '/edit', 'Modify', ['class' => 'btn btn-primary btn-xs']) !!}
             </div>
         </div>
         @endif

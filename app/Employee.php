@@ -72,9 +72,9 @@ class Employee extends Model {
     {
         if ($employee_id)
         {
-            return self::whereEmployeeId($employee_id)->with('user', 'country', 'province', 'city')->first();
+            return self::whereEmployeeId($employee_id)->with('user', 'country', 'province', 'city', 'employmentStatus')->first();
         }
 
-        return self::whereUserId($user_id)->with('user', 'country', 'province', 'city')->first();
+        return self::whereUserId($user_id)->with('user', 'country', 'province', 'city', 'employmentStatus')->first();
     }
 }
