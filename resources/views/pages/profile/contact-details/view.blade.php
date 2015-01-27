@@ -36,6 +36,18 @@
     {!! Html::script('/js/notification.js') !!}
 
     <script>
+        $(document).ready(function () {
+
+            var address_province_id = $("#address_province_id").val();
+
+            if (address_province_id == 0)
+            {
+                $("#address_city_id").html("");
+                $("#address_city_id").append('<option value="0" selected>--- Select ---</option>');
+
+                $('.chosen-select').trigger("chosen:updated");
+            }
+        });
 
         $('.chosen-select').chosen();
 

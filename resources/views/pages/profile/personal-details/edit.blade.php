@@ -36,7 +36,7 @@
                             <div class="spinner" style="display: none">Loading...</div>
                         </div>
                         <div class="action" id="cus-input">
-                            <input type="file" id="file" style="float:left; width: 275px">
+                            <input type="file" id="file" style="float:left; width: 270px">
                             <input type="button" class="btn btn-danger btn-xs" id="btnZoomOut" value="-">&nbsp;
                             <input type="button" class="btn btn-warning btn-xs" id="btnZoomIn" value="+">&nbsp;
                             <input type="button" class="btn btn-primary btn-xs" id="btnCrop" value="Crop">

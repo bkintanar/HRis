@@ -170,7 +170,7 @@ class Navlink extends Model {
         $nav = '<div class="col-lg-12 top-nav-b"><div class="btn-group top-nav-li"><ul>';
 
         $profileNav = Navlink::whereHref('profile')->first();
-        $navigations = Navlink::whereParentId(-1)->get();
+        $navigations = Navlink::whereParentId(- 1)->get();
 //dd($profileNav);
         foreach ($navigations as $navigation)
         {
@@ -218,7 +218,7 @@ class Navlink extends Model {
     {
         $children = Navlink::whereParentId($parent->id)->get();
 
-        $result = '<div id="tab-' . $parent->id . '" class="tab-pane' . ($parent->id == 2 ? ' active' : '') . '">';
+        $result = '<div id="tab-' . $parent->id . '" class="tab-pane' . ($parent->id == PROFILE_IDS ? ' active' : '') . '">';
         $result .= '<div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
@@ -248,8 +248,8 @@ class Navlink extends Model {
     {
         if ($pim)
         {
-            $href = str_replace('profile', 'pim/employee-list/' . \Request::segment(3), $navigation->href);
-            $permission = str_replace('pim/employee-list/' . \Request::segment(3), 'pim', $href);
+            $href = str_replace('profile', 'pim/employee-list/' . Request::segment(3), $navigation->href);
+            $permission = str_replace('pim/employee-list/' . Request::segment(3), 'pim', $href);
             $link = str_replace('/', '.', $permission);
         }
         else

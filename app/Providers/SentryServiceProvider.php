@@ -1,4 +1,5 @@
 <?php namespace HRis\Providers;
+
 /**
  * Part of the Sentry package.
  *
@@ -55,7 +56,7 @@ class SentryServiceProvider extends ServiceProvider {
 	 */
 	protected function registerHasher()
 	{
-		$this->app['sentry.hasher'] = $this->app->share(function($app)
+		$this->app['sentry.hasher'] = $this->app->share(function ($app)
 		{
 			$hasher = $app['config']['sentry.hasher'];
 
@@ -89,7 +90,7 @@ class SentryServiceProvider extends ServiceProvider {
 	 */
 	protected function registerUserProvider()
 	{
-		$this->app['sentry.user'] = $this->app->share(function($app)
+		$this->app['sentry.user'] = $this->app->share(function ($app)
 		{
 			$model = $app['config']['sentry.users.model'];
 
@@ -103,8 +104,8 @@ class SentryServiceProvider extends ServiceProvider {
 				$loginAttribute = $app['config']['sentry.users.login_attribute'];
 
 				forward_static_call_array(
-					array($model, 'setLoginAttributeName'),
-					array($loginAttribute)
+					[$model, 'setLoginAttributeName'],
+					[$loginAttribute]
 				);
 			}
 
@@ -114,8 +115,8 @@ class SentryServiceProvider extends ServiceProvider {
 				$groupModel = $app['config']['sentry.groups.model'];
 
 				forward_static_call_array(
-					array($model, 'setGroupModel'),
-					array($groupModel)
+					[$model, 'setGroupModel'],
+					[$groupModel]
 				);
 			}
 
@@ -125,8 +126,8 @@ class SentryServiceProvider extends ServiceProvider {
 				$pivotTable = $app['config']['sentry.user_groups_pivot_table'];
 
 				forward_static_call_array(
-					array($model, 'setUserGroupsPivot'),
-					array($pivotTable)
+					[$model, 'setUserGroupsPivot'],
+					[$pivotTable]
 				);
 			}
 
@@ -141,7 +142,7 @@ class SentryServiceProvider extends ServiceProvider {
 	 */
 	protected function registerGroupProvider()
 	{
-		$this->app['sentry.group'] = $this->app->share(function($app)
+		$this->app['sentry.group'] = $this->app->share(function ($app)
 		{
 			$model = $app['config']['sentry.groups.model'];
 
@@ -151,8 +152,8 @@ class SentryServiceProvider extends ServiceProvider {
 				$userModel = $app['config']['sentry.users.model'];
 
 				forward_static_call_array(
-					array($model, 'setUserModel'),
-					array($userModel)
+					[$model, 'setUserModel'],
+					[$userModel]
 				);
 			}
 
@@ -162,8 +163,8 @@ class SentryServiceProvider extends ServiceProvider {
 				$pivotTable = $app['config']['sentry.user_groups_pivot_table'];
 
 				forward_static_call_array(
-					array($model, 'setUserGroupsPivot'),
-					array($pivotTable)
+					[$model, 'setUserGroupsPivot'],
+					[$pivotTable]
 				);
 			}
 
@@ -178,7 +179,7 @@ class SentryServiceProvider extends ServiceProvider {
 	 */
 	protected function registerThrottleProvider()
 	{
-		$this->app['sentry.throttle'] = $this->app->share(function($app)
+		$this->app['sentry.throttle'] = $this->app->share(function ($app)
 		{
 			$model = $app['config']['sentry.throttling.model'];
 
@@ -194,8 +195,8 @@ class SentryServiceProvider extends ServiceProvider {
 				$attemptLimit = $app['config']['sentry.throttling.attempt_limit'];
 
 				forward_static_call_array(
-					array($model, 'setAttemptLimit'),
-					array($attemptLimit)
+					[$model, 'setAttemptLimit'],
+					[$attemptLimit]
 				);
 			}
 			if (method_exists($model, 'setSuspensionTime'))
@@ -203,19 +204,19 @@ class SentryServiceProvider extends ServiceProvider {
 				$suspensionTime = $app['config']['sentry.throttling.suspension_time'];
 
 				forward_static_call_array(
-					array($model, 'setSuspensionTime'),
-					array($suspensionTime)
+					[$model, 'setSuspensionTime'],
+					[$suspensionTime]
 				);
 			}
-			
+
 			// Define the User model to use for relationships.
 			if (method_exists($model, 'setUserModel'))
 			{
 				$userModel = $app['config']['sentry.users.model'];
 
 				forward_static_call_array(
-					array($model, 'setUserModel'),
-					array($userModel)
+					[$model, 'setUserModel'],
+					[$userModel]
 				);
 			}
 
@@ -230,7 +231,7 @@ class SentryServiceProvider extends ServiceProvider {
 	 */
 	protected function registerSession()
 	{
-		$this->app['sentry.session'] = $this->app->share(function($app)
+		$this->app['sentry.session'] = $this->app->share(function ($app)
 		{
 			$key = $app['config']['sentry.cookie.key'];
 
@@ -245,7 +246,7 @@ class SentryServiceProvider extends ServiceProvider {
 	 */
 	protected function registerCookie()
 	{
-		$this->app['sentry.cookie'] = $this->app->share(function($app)
+		$this->app['sentry.cookie'] = $this->app->share(function ($app)
 		{
 			$key = $app['config']['sentry.cookie.key'];
 
@@ -273,7 +274,7 @@ class SentryServiceProvider extends ServiceProvider {
 	 */
 	protected function registerSentry()
 	{
-		$this->app['sentry'] = $this->app->share(function($app)
+		$this->app['sentry'] = $this->app->share(function ($app)
 		{
 			return new Sentry(
 				$app['sentry.user'],

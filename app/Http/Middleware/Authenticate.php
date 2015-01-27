@@ -5,33 +5,33 @@ use Closure;
 
 class Authenticate {
 
-	/**
-	 * The Sentry implementation.
-	 *
-	 * @var Sentry
-	 */
-	protected $auth;
+    /**
+     * The Sentry implementation.
+     *
+     * @var Sentry
+     */
+    protected $auth;
 
     /**
      * Create a new filter instance.
      *
      * @param  Sentry $auth
      */
-	public function __construct(Sentry $auth)
-	{
-		$this->auth = $auth;
-	}
+    public function __construct(Sentry $auth)
+    {
+        $this->auth = $auth;
+    }
 
-	/**
-	 * Handle an incoming request.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  \Closure  $next
-	 * @return mixed
-	 */
-	public function handle($request, Closure $next)
-	{
-		$auth = $this->auth;
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure $next
+     * @return mixed
+     */
+    public function handle($request, Closure $next)
+    {
+        $auth = $this->auth;
 
         if ( ! $auth::check())
         {
@@ -46,6 +46,6 @@ class Authenticate {
         }
 
         return $next($request);
-	}
+    }
 
 }

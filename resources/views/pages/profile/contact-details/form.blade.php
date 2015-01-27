@@ -26,7 +26,6 @@
             </div>
     </div>
 
-
     <div class="form-group">
             {!! Form::label('address_postal_code', 'Zip/Postal Code', ['class' => 'col-md-2 control-label', 'data-mask' => '9999']) !!}
             <div class="col-md-4">

@@ -118,8 +118,8 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button class="btn btn-white" data-dismiss="modal" type="button">Close</button>
-                            {!! Form::submit('Save changes', ['class' => 'btn btn-primary']) !!}
+                            <button class="btn btn-white btn-xs" data-dismiss="modal" type="button">Close</button>
+                            {!! Form::submit('Save changes', ['class' => 'btn btn-primary btn-xs']) !!}
                         </div>
                     {!! Form::close() !!}<!--// form-->
                 </div>

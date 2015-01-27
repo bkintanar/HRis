@@ -5,6 +5,7 @@ use HRis\Employee;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\PIM\PIMRequest;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request;
 
 /**
  * @Middleware("auth")
