@@ -12,7 +12,7 @@ class CreateJobHistoriesTable extends Migration {
      */
     public function up()
     {
-        Schema::create('job_histories', function(Blueprint $table)
+        Schema::create('job_histories', function (Blueprint $table)
         {
             $table->increments('id');
             $table->string('employee_id');
