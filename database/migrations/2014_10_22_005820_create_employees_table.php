@@ -18,10 +18,6 @@ class CreateEmployeesTable extends Migration {
             $table->string('employee_id');
             $table->integer('face_id')->nullable();
             $table->integer('user_id');
-            $table->integer('job_title_id');
-            $table->integer('department_id');
-            $table->integer('employment_status_id');
-            $table->integer('work_shift_id');
             $table->integer('marital_status_id');
             $table->integer('nationality_id');
             $table->string('first_name')->nullable();

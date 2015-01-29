@@ -2,9 +2,9 @@
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use HRis\Employee;
+use HRis\JobHistory;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\JobRequest;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 
 /**
@@ -14,11 +14,12 @@ class JobController extends Controller {
 
     protected $user;
 
-    public function __construct(Sentry $auth, Employee $employee)
+    public function __construct(Sentry $auth, Employee $employee, JobHistory $job_history)
     {
         parent::__construct($auth);
 
         $this->employee = $employee;
+        $this->job_history = $job_history;
     }
 
     /**
@@ -36,6 +37,7 @@ class JobController extends Controller {
         $employee = $this->employee->getEmployeeById($employee_id, $this->loggedUser->id);
 
         $this->data['employee'] = $employee;
+        $this->data['job_histories'] = $employee->orderedJobHistories();
 
         $this->data['disabled'] = 'disabled';
         $this->data['pim'] = $request->is('*pim/*') ? true : false;
@@ -59,6 +61,7 @@ class JobController extends Controller {
         $employee = $this->employee->getEmployeeById($employee_id, $this->loggedUser->id);
 
         $this->data['employee'] = $employee;
+        $this->data['job_histories'] = $employee->orderedJobHistories();
 
         $this->data['disabled'] = '';
         $this->data['pim'] = $request->is('*pim/*') ? true : false;
@@ -79,17 +82,16 @@ class JobController extends Controller {
         $id = $request->get('id');
 
         $employee = $this->employee->whereId($id)->first();
+        $job_history = $this->job_history;
 
-        $employee->job_title_id = $request->get('job_title_id');
-        $employee->employment_status_id = $request->get('employment_status_id');
-        $employee->department_id = $request->get('department_id');
-//        $employee->effective_date = $request->get('effective_date');
+        $job_history->insert($request->only($request->fillables()));
+
         $employee->joined_date = $request->get('joined_date');
         $employee->probation_end_date = $request->get('probation_end_date');
         $employee->permanency_date = $request->get('permanency_date');
 
         $employee->save();
 
-        return Redirect::to($request->path());
+        return Redirect::to($request->path())->with('success', 'Created Successfully.');;
     }
 }

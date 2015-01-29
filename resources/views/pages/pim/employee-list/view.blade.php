@@ -38,8 +38,8 @@
                                     <td><a href="/pim/employee-list/{{ $employee->employee_id }}/personal-details">{{ $employee->employee_id }}</a></td>
                                     <td>{{ $employee->first_name }}</td>
                                     <td>{{ $employee->last_name }}</td>
-                                    <td>{{ isset($employee->jobTitle) ? $employee->jobTitle->name : '' }}</td>
-                                    <td><span class="label {{ isset($employee->employmentStatus) ? $employee->employmentStatus->class : '' }}">{{ isset($employee->employmentStatus) ? $employee->employmentStatus->name : '' }}</span></td>
+                                    <td>{{ isset($employee->jobHistory()->job_title_id) ? $employee->jobHistory()->jobTitle->name : '' }}</td>
+                                    <td><span class="label {{ isset($employee->jobHistory()->employment_status_id) ? $employee->jobHistory()->employmentStatus->class : '' }}">{{ isset($employee->jobHistory()->employment_status_id) ? $employee->jobHistory()->employmentStatus->name : '' }}</span></td>
                                     <td>
                                         <button rel="edit" id="{{$employee->id}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-paste"></i></button>
                                         <button rel="delete" id="{{$employee->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-trash"></i></button>
