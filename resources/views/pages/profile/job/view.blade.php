@@ -18,20 +18,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-12">
-        <div class="ibox float-e-margins">
-            <div class="ibox-title">
-                <h5>Job History</h5>
-                <div class="ibox-tools">
-                    <a class="collapse-link">
-                        <i class="fa fa-chevron-up"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="ibox-content">
-            </div>
-        </div>
-    </div>
+    @include('pages.profile.job.job-history')
 </div>
 @stop
 
@@ -47,9 +34,34 @@
     {!! Html::script('/js/plugins/chosen/chosen.jquery.js') !!}
 
     <script>
+        $(document).ready(function () {
 
-        $('.chosen-select').chosen();
+            function deleteRecord(dataId)
+            {
+                $.ajax({
+                    type: "DELETE",
+                    url: '/ajax/' + '{{\Request::path()}}',
+                    data: { id: dataId, _token: $('input[name=_token]').val() }
+                }).done(function( response ) {
 
+                    if (response == 'success')
+                    {
+                        $('#jobHistory_' + dataId).remove();
+                    }
+                    else
+                    {
+                        // failed
+                    }
+                });
+            }
+
+            $('.btn-xs').click(function(){
+               deleteRecord($(this).attr('id'));
+            });
+
+            $('.chosen-select').chosen();
+
+        });
     </script>
 
 @stop

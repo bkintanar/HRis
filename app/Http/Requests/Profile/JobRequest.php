@@ -7,6 +7,20 @@ use Illuminate\Support\Facades\View;
 
 class JobRequest extends Request {
 
+    public function fillables()
+    {
+        return [
+            'employee_id',
+            'job_title_id',
+            'employment_status_id',
+            'department_id',
+            'effective_date',
+            'location_id',
+            'work_shift_id',
+            'comments'
+        ];
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *

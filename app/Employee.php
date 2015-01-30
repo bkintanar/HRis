@@ -65,16 +65,31 @@ class Employee extends Model {
 
     public function skills()
     {
-        return $this->belongsToMany('HRis\Skill');
+        return $this->hasMany('HRis\Skill');
+    }
+
+    public function jobHistory()
+    {
+        return $this->jobHistories()->orderBy('job_histories.id', 'desc')->first();
+    }
+
+    public function jobHistories()
+    {
+        return $this->hasMany('HRis\JobHistory', 'employee_id', 'employee_id');
+    }
+
+    public function orderedJobHistories()
+    {
+        return $this->jobHistories()->orderBy('job_histories.id', 'desc')->get();
     }
 
     public function getEmployeeById($employee_id, $user_id)
     {
         if ($employee_id)
         {
-            return self::whereEmployeeId($employee_id)->with('user', 'country', 'province', 'city', 'employmentStatus')->first();
+            return self::whereEmployeeId($employee_id)->with('user', 'country', 'province', 'city', 'employmentStatus', 'jobHistories')->first();
         }
 
-        return self::whereUserId($user_id)->with('user', 'country', 'province', 'city', 'employmentStatus')->first();
+        return self::whereUserId($user_id)->with('user', 'country', 'province', 'city', 'employmentStatus', 'jobHistories')->first();
     }
 }

@@ -5,23 +5,19 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateEmployeesTable extends Migration {
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-        Schema::create('employees', function(Blueprint $table)
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('employees', function (Blueprint $table)
         {
             $table->increments('id');
             $table->string('employee_id');
             $table->integer('face_id')->nullable();
             $table->integer('user_id');
-            $table->integer('job_title_id');
-            $table->integer('department_id');
-            $table->integer('employment_status_id');
-            $table->integer('work_shift_id');
             $table->integer('marital_status_id');
             $table->integer('nationality_id');
             $table->string('first_name')->nullable();
@@ -64,16 +60,16 @@ class CreateEmployeesTable extends Migration {
             $table->index('work_shift_id');
             $table->index('nationality_id');
         });
-	}
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
         Schema::drop('employees');
-	}
+    }
 
 }

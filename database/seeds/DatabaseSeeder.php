@@ -28,6 +28,8 @@ class DatabaseSeeder extends Seeder {
 		$this->call('DepartmentsTableSeeder');
 		$this->call('CountriesTableSeeder');
 		$this->call('CitiesTableSeeder');
+		$this->call('LocationTableSeeder');
+		$this->call('WorkShiftsTableSeeder');
 	}
 
 }
