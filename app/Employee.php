@@ -65,7 +65,7 @@ class Employee extends Model {
 
     public function skills()
     {
-        return $this->hasMany('HRis\Skill');
+        return $this->belongsTo('HRis\Skill');
     }
 
     public function jobHistory()
