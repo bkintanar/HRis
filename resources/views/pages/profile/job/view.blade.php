@@ -1,25 +1,26 @@
 @extends(\Request::is('*pim/*') ? 'master.adm-master' : 'master.default')
 
 @section('content')
-<div class="row">
-    {!! HRis\Navlink::profileLinks($pim) !!}
-    <div class="col-lg-12">
-        <div class="ibox float-e-margins">
-            <div class="ibox-title">
-                <h5>Job Details</h5>
-                <div class="ibox-tools">
-                    <a class="collapse-link">
-                        <i class="fa fa-chevron-up"></i>
-                    </a>
+    @include('partials.notification')
+    <div class="row">
+        {!! HRis\Navlink::profileLinks($pim) !!}
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Job Details</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    @include('pages.profile.job.form')
                 </div>
             </div>
-            <div class="ibox-content">
-                @include('pages.profile.job.form')
-            </div>
         </div>
+        @include('pages.profile.job.job-history')
     </div>
-    @include('pages.profile.job.job-history')
-</div>
 @stop
 
 @section('custom_css')
@@ -33,11 +34,26 @@
     <!-- Chosen -->
     {!! Html::script('/js/plugins/chosen/chosen.jquery.js') !!}
 
+    {!! Html::script('/js/notification.js') !!}
+
     <script>
         $(document).ready(function () {
 
-            function deleteRecord(dataId)
+            function deleteAction()
             {
+                if($('.JobHistoryList').length < 2){
+                    $('.action').remove();
+                }
+            }
+
+            deleteAction();
+
+            $('.chosen-select').chosen();
+
+            $('.btn-xs').click(function(){
+
+                var dataId = $(this).attr('id');
+
                 $.ajax({
                     type: "DELETE",
                     url: '/ajax/' + '{{\Request::path()}}',
@@ -46,20 +62,25 @@
 
                     if (response == 'success')
                     {
+                        $('html').animate({scrollTop : 0},800);
+
+                        $('#notification-info').show();
+                        $("#notification-info").delay(5000).fadeOut();
                         $('#jobHistory_' + dataId).remove();
+
+                        if($('.JobHistoryList').length == 0){
+                          $('#emergencyContactsBody').append('<tr><td colspan="5">No emergency contacts listed</td></tr>');
+                        }
+
+                        deleteAction();
                     }
                     else
                     {
-                        // failed
+                      // failed
                     }
                 });
-            }
 
-            $('.btn-xs').click(function(){
-               deleteRecord($(this).attr('id'));
             });
-
-            $('.chosen-select').chosen();
 
         });
     </script>

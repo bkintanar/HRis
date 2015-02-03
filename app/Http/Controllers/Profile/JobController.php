@@ -38,6 +38,7 @@ class JobController extends Controller {
 
         $this->data['employee'] = $employee;
         $this->data['job_histories'] = $employee->orderedJobHistories();
+        $this->data['number_job_histories'] = count($employee->orderedJobHistories());
 
         $this->data['disabled'] = 'disabled';
         $this->data['pim'] = $request->is('*pim/*') ? true : false;
@@ -62,6 +63,7 @@ class JobController extends Controller {
 
         $this->data['employee'] = $employee;
         $this->data['job_histories'] = $employee->orderedJobHistories();
+        $this->data['number_job_histories'] = count($employee->orderedJobHistories());
 
         $this->data['disabled'] = '';
         $this->data['pim'] = $request->is('*pim/*') ? true : false;
@@ -92,6 +94,8 @@ class JobController extends Controller {
 
         $employee->save();
 
-        return Redirect::to($request->path())->with('success', 'Created Successfully.');;
+        \Session::flash('success', 'Job Details Successfully Modified');
+
+        return Redirect::to($request->path());
     }
 }
