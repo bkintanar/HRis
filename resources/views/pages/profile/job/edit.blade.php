@@ -45,47 +45,12 @@
     <script>
         $(document).ready(function () {
 
-            var defaults;
-
             function deleteAction()
             {
                 if($('.JobHistoryList').length < 2){
                     $('.action').remove();
                 }
             }
-
-            function disableButton(status)
-            {
-                $('#save-button').attr('disabled', status);
-            }
-
-            function getValues()
-            {
-                searchIDs = new Array();
-                var i = 0;
-                $('.form-fields').each(function () {
-                    searchIDs[i] = $(this).val();
-                    i++;
-                });
-
-                return searchIDs.toString();
-            }
-
-            defaults = getValues();
-            deleteAction();
-            disableButton(true);
-
-            $('.form-fields').change(function(){
-                var changes = getValues();
-                if(changes !== defaults)
-                {
-                    disableButton(false);
-                }
-                else
-                {
-                    disableButton(true);
-                }
-            });
 
             deleteAction();
 
@@ -113,7 +78,17 @@
 
                     if (response == 'success')
                     {
-                        window.location = "?success=1";
+                        $('html').animate({scrollTop : 0},800);
+
+                        $('#notification-info').show();
+                        $("#notification-info").delay(5000).fadeOut();
+                        $('#jobHistory_' + dataId).remove();
+
+                        if($('.JobHistoryList').length == 0){
+                          $('#emergencyContactsBody').append('<tr><td colspan="5">No emergency contacts listed</td></tr>');
+                        }
+
+                        deleteAction();
                     }
                     else
                     {
