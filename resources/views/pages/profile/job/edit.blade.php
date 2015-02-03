@@ -85,7 +85,7 @@
                         $('#jobHistory_' + dataId).remove();
 
                         if($('.JobHistoryList').length == 0){
-                          $('#emergencyContactsBody').append('<tr><td colspan="5">No emergency contacts listed</td></tr>');
+                          $('#emergencyContactsBody').append('<tr><td colspan="5">No Job History listed</td></tr>');
                         }
 
                         deleteAction();
