@@ -39,48 +39,9 @@
     <script>
         $(document).ready(function () {
 
-            function deleteAction()
-            {
-                if($('.JobHistoryList').length < 2){
-                    $('.action').remove();
-                }
-            }
-
-            deleteAction();
+            $('.action').remove();
 
             $('.chosen-select').chosen();
-
-            $('.btn-xs').click(function(){
-
-                var dataId = $(this).attr('id');
-
-                $.ajax({
-                    type: "DELETE",
-                    url: '/ajax/' + '{{\Request::path()}}',
-                    data: { id: dataId, _token: $('input[name=_token]').val() }
-                }).done(function( response ) {
-
-                    if (response == 'success')
-                    {
-                        $('html').animate({scrollTop : 0},800);
-
-                        $('#notification-info').show();
-                        $("#notification-info").delay(5000).fadeOut();
-                        $('#jobHistory_' + dataId).remove();
-
-                        if($('.JobHistoryList').length == 0){
-                          $('#emergencyContactsBody').append('<tr><td colspan="5">No emergency contacts listed</td></tr>');
-                        }
-
-                        deleteAction();
-                    }
-                    else
-                    {
-                      // failed
-                    }
-                });
-
-            });
 
         });
     </script>
