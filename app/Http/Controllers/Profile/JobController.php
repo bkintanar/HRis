@@ -38,7 +38,6 @@ class JobController extends Controller {
 
         $this->data['employee'] = $employee;
         $this->data['job_histories'] = $employee->orderedJobHistories();
-        $this->data['number_job_histories'] = count($employee->orderedJobHistories());
 
         $this->data['disabled'] = 'disabled';
         $this->data['pim'] = $request->is('*pim/*') ? true : false;
@@ -63,7 +62,6 @@ class JobController extends Controller {
 
         $this->data['employee'] = $employee;
         $this->data['job_histories'] = $employee->orderedJobHistories();
-        $this->data['number_job_histories'] = count($employee->orderedJobHistories());
 
         $this->data['disabled'] = '';
         $this->data['pim'] = $request->is('*pim/*') ? true : false;
