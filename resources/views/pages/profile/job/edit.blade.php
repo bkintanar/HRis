@@ -1,7 +1,6 @@
 @extends(\Request::is('*pim/*') ? 'master.adm-master' : 'master.default')
 
 @section('content')
-
 <div class="row">
         {!! HRis\Navlink::profileLinks($pim) !!}
     <div class="col-lg-12">
@@ -78,8 +77,6 @@
 
                     if (response == 'success')
                     {
-                        $('html').animate({scrollTop : 0},800);
-
                         $('#notification-info').show();
                         $("#notification-info").delay(5000).fadeOut();
                         $('#jobHistory_' + dataId).remove();
@@ -87,6 +84,8 @@
                         if($('.JobHistoryList').length == 0){
                           $('#JobHistoryBody').append('<tr><td colspan="5">No job history listed</td></tr>');
                         }
+
+                        location.reload();
 
                         deleteAction();
                     }
