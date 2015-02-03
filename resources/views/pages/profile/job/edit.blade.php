@@ -85,7 +85,7 @@
                         $('#jobHistory_' + dataId).remove();
 
                         if($('.JobHistoryList').length == 0){
-                          $('#JobHistoryBody').append('<tr><td colspan="5">No Job History listed</td></tr>');
+                          $('#JobHistoryBody').append('<tr><td colspan="5">No job history listed</td></tr>');
                         }
 
                         deleteAction();
