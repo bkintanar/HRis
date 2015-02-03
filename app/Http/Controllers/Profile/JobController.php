@@ -92,6 +92,6 @@ class JobController extends Controller {
 
         $employee->save();
 
-        return Redirect::to($request->path())->with('success', 'Created Successfully.');;
+        return Redirect::to($request->path())->with('success', 'Record successfully updated.');
     }
 }
