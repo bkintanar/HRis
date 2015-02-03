@@ -814,8 +814,8 @@ class AjaxController extends Controller {
     /**
      * Delete the profile job details.
      *
-     * @Delete("ajax/profile/job/edit")
-     * @Delete("ajax/pim/employee-list/{id}/job/edit")
+     * @Delete("ajax/profile/job")
+     * @Delete("ajax/pim/employee-list/{id}/job")
      *
      * @param JobRequest $request
      */
