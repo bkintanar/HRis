@@ -6,9 +6,9 @@
 	"type": "project",
 	"require": {
 	  "laravel/framework": "5.0.*",
-	  "illuminate/html": "5.0.x-dev",
+	  "illuminate/html": "5.0.*@dev",
 	  "cartalyst/sentry": "2.1.*dev",
-	  "adamgoose/laravel-annotations": "5.0.x-dev",
+	  "adamgoose/laravel-annotations": "5.0.*dev",
 	  "filp/whoops": "~1.0"
 	},
 	"require-dev": {

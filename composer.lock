@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "35166a6749d550fe6ad60669d03ffa0e",
+    "hash": "233de9c998a068b2f44327570bb1c931",
     "packages": [
         {
             "name": "adamgoose/laravel-annotations",
