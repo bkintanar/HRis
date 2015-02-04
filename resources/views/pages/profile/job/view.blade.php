@@ -1,7 +1,6 @@
 @extends(\Request::is('*pim/*') ? 'master.adm-master' : 'master.default')
 
 @section('content')
-    @include('partials.notification')
     <div class="row">
         {!! HRis\Navlink::profileLinks($pim) !!}
         <div class="col-lg-12">
