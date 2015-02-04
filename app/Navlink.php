@@ -169,9 +169,8 @@ class Navlink extends Model {
 
         $nav = '<div class="col-lg-12 top-nav-b"><div class="btn-group top-nav-li"><ul>';
 
-        $profileNav = Navlink::whereHref('profile')->first();
         $navigations = Navlink::whereParentId(- 1)->get();
-//dd($profileNav);
+
         foreach ($navigations as $navigation)
         {
             $format = Navlink::formatHref($navigation, $pim);
