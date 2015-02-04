@@ -32,8 +32,6 @@ class DatabaseSeeder extends Seeder {
         $this->call('WorkShiftsTableSeeder');
         $this->call('TaxTableSeeder');
         $this->call('SssContributionTableSeeder');
-        $this->call('SalaryComponentsTableSeeder');
-        $this->call('EmployeeSalaryComponentsSeeder');
     }
 
 }
