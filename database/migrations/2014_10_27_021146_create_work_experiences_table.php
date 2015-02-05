@@ -5,14 +5,15 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateWorkExperiencesTable extends Migration {
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-        Schema::create('work_experiences', function (Blueprint $table) {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('work_experiences', function (Blueprint $table)
+        {
             $table->increments('id');
             $table->integer('employee_id');
             $table->string('company');
@@ -21,16 +22,16 @@ class CreateWorkExperiencesTable extends Migration {
             $table->date('to_date')->nullable();
             $table->string('comment');
         });
-	}
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::drop('work_experiences');
-	}
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('work_experiences');
+    }
 
 }

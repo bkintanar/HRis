@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class SssContributionTableSeeder extends Seeder {
+class SSSContributionsTableSeeder extends Seeder {
 
     /**
      * Run the database seeds.
@@ -11,9 +11,9 @@ class SssContributionTableSeeder extends Seeder {
      */
     public function run()
     {
-        DB::table('sss_contribution')->truncate();
+        DB::table('sss_contributions')->truncate();
 
-        DB::table('sss_contribution')->insert(
+        DB::table('sss_contributions')->insert(
             [
                 [
                     'range_compensation_from'  => 1000.00,
