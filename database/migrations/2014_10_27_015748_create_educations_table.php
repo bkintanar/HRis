@@ -5,14 +5,15 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateEducationsTable extends Migration {
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-        Schema::create('educations', function (Blueprint $table) {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('educations', function (Blueprint $table)
+        {
             $table->increments('id');
             $table->integer('employee_id');
             $table->integer('education_level_id');
@@ -22,16 +23,16 @@ class CreateEducationsTable extends Migration {
             $table->date('to_date')->nullable();
             $table->string('gpa_score')->nullable();
         });
-	}
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
         Schema::drop('educations');
-	}
+    }
 
 }

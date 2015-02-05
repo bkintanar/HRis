@@ -30,8 +30,8 @@ class DatabaseSeeder extends Seeder {
         $this->call('CitiesTableSeeder');
         $this->call('LocationTableSeeder');
         $this->call('WorkShiftsTableSeeder');
-        $this->call('TaxTableSeeder');
-        $this->call('SssContributionTableSeeder');
+        $this->call('TaxComputationsTableSeeder');
+        $this->call('SSSContributionsTableSeeder');
     }
 
 }

@@ -5,14 +5,15 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateNavlinksTable extends Migration {
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-        Schema::create('navlinks', function (Blueprint $table) {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('navlinks', function (Blueprint $table)
+        {
             $table->increments('id');
             $table->string('name');
             $table->string('href');
@@ -20,16 +21,16 @@ class CreateNavlinksTable extends Migration {
             $table->integer('parent_id');
             $table->timestamps();
         });
-	}
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
         Schema::drop('navlinks');
-	}
+    }
 
 }

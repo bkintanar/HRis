@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSssTable extends Migration {
+class CreateSSSContributionsTable extends Migration {
 
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateSssTable extends Migration {
      */
     public function up()
     {
-        Schema::create('sss_contribution', function (Blueprint $table)
+        Schema::create('sss_contributions', function (Blueprint $table)
         {
             $table->increments('id');
             $table->decimal('range_compensation_from', 10, 2);
