@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Redirect;
  */
 class DependentsController extends Controller {
 
+    /**
+     * @param Sentry $auth
+     * @param Employee $employee
+     * @param Dependent $dependent
+     */
     public function __construct(Sentry $auth, Employee $employee, Dependent $dependent)
     {
         parent::__construct($auth);
@@ -62,16 +67,7 @@ class DependentsController extends Controller {
     {
         try
         {
-            $dependent = new Dependent;
-
-            $dependent->employee_id = $request->get('employee_id');
-            $dependent->first_name = $request->get('first_name');
-            $dependent->middle_name = $request->get('middle_name');
-            $dependent->last_name = $request->get('last_name');
-            $dependent->relationship_id = $request->get('relationship_id');
-            $dependent->birth_date = $request->get('birth_date') ? $request->get('birth_date') : null;
-
-            $dependent->save();
+            $this->dependent->create($request->all());
         } catch (Exception $e)
         {
             return Redirect::to($request->path())->with('danger', 'Unable to add record to the database.');
@@ -99,13 +95,8 @@ class DependentsController extends Controller {
 
         try
         {
-            $dependent->first_name = $request->get('first_name');
-            $dependent->middle_name = $request->get('middle_name');
-            $dependent->last_name = $request->get('last_name');
-            $dependent->relationship_id = $request->get('relationship_id');
-            $dependent->birth_date = $request->get('birth_date') ? $request->get('birth_date') : null;
+            $dependent->update($request->all());
 
-            $dependent->save();
         } catch (Exception $e)
         {
             return Redirect::to($request->path())->with('danger', 'Unable to update record.');

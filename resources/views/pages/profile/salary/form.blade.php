@@ -2,63 +2,100 @@
     {!! Form::hidden('user[id]') !!}
     {!! Form::hidden('id') !!}
 
-    <h5 style="width: 100%; text-indent: 30px; background-color: #D1FFEF; line-height: 28px;">All Earnings</h5>
-    @foreach($employee->employeeSalaryComponents as $value)
-        @if($value->salaryComponent->type == 1)
-        <div class="form-group">
-                {!! Form::label('$value', $value->salaryComponent->components, ['class' => 'col-md-2 control-label']) !!}
-                <div class="col-md-4">
-                {!! Form::text('salary', $value->value, ['class' => 'form-control', 'data-mask' => '99,999.99', $disabled]) !!}
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>All Earnings</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
                 </div>
+            </div>
+            <div class="ibox-content">
+                @foreach($employee->employeeSalaryComponents as $value)
+                    @if($value->salaryComponent->type == 1)
+                    <div class="form-group">
+                        {!! Form::label('$value', $value->salaryComponent->components, ['class' => 'col-md-2 control-label']) !!}
+                        <div class="col-md-4">
+                        {!! Form::text('salary', $value->value, ['class' => 'form-control earnings', 'data-mask' => '99,999.99', $disabled]) !!}
+                        </div>
 
-                <label for="joined_date" class="col-md-2 control-label">Effective Date</label>
-                <div class="col-md-4" id="datepicker">
-                    <div class="input-group date" id="data_1">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>{!! Form::text('date', $value->effective_date, ['class' => 'form-control', 'data-mask' => '9999-99-99', $disabled]) !!}
+                        <label for="joined_date" class="col-md-2 control-label">Effective Date</label>
+                        <div class="col-md-4" id="datepicker">
+                            <div class="input-group date" id="data_1">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>{!! Form::text('date', $value->effective_date, ['class' => 'form-control', 'data-mask' => '9999-99-99', $disabled]) !!}
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    @endif
+                @endforeach
+            </div>
         </div>
-        @endif
-    @endforeach
-    <div class="hr-line-dashed"></div>
+    </div>
 
-    <h5 style="width: 100%; text-indent: 30px; background-color: #FFD7D1; line-height: 28px;">All Deductions</h5>
-    @foreach($employee->employeeSalaryComponents as $value)
-        @if($value->salaryComponent->type == 2)
-        <div class="form-group">
-                {!! Form::label('$value', $value->salaryComponent->components, ['class' => 'col-md-2 control-label']) !!}
-                <div class="col-md-4">
-                {!! Form::text('salary', $value->value, ['class' => 'form-control', 'data-mask' => '99,999.99', $disabled]) !!}
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>All Deductions</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
                 </div>
+            </div>
+            <div class="ibox-content">
+                @foreach($employee->employeeSalaryComponents as $value)
+                    @if($value->salaryComponent->type == 2)
+                    <div class="form-group">
+                        {!! Form::label('$value', $value->salaryComponent->components, ['class' => 'col-md-2 control-label']) !!}
+                        <div class="col-md-4">
+                        {!! Form::text('salary', $value->value, ['class' => 'form-control deductions', 'data-mask' => '99,999.99', $disabled]) !!}
+                        </div>
 
-                <label for="joined_date" class="col-md-2 control-label">Effective Date</label>
-                <div class="col-md-4" id="datepicker">
-                    <div class="input-group date" id="data_1">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>{!! Form::text('date', $value->effective_date, ['class' => 'form-control', 'data-mask' => '9999-99-99', $disabled]) !!}
+                        <label for="joined_date" class="col-md-2 control-label">Effective Date</label>
+                        <div class="col-md-4" id="datepicker">
+                          <div class="input-group date" id="data_1">
+                              <span class="input-group-addon"><i class="fa fa-calendar"></i></span>{!! Form::text('date', $value->effective_date, ['class' => 'form-control', 'data-mask' => '9999-99-99', $disabled]) !!}
+                          </div>
+                        </div>
                     </div>
-                </div>
+                    @endif
+                @endforeach
+            </div>
         </div>
-        @endif
-    @endforeach
-    <div class="hr-line-dashed"></div>
+    </div>
 
     <!-- End - Salary -->
 
-    @if ($disabled == '')
-    <div class="form-group">
-        <div class="col-sm-4 col-sm-offset-2">
-            {!! Html::link(str_replace('/edit', '', \Request::path()), 'Cancel', ['class' => 'btn btn-white btn-xs']) !!}
-            {!! Form::submit('Save changes', ['class' => 'btn btn-primary btn-xs']) !!}
-        </div>
-    </div>
-    @else
-        @if($loggedUser->hasAccess(\Request::segment(1).'.contact-details.update'))
-        <div class="form-group">
-            <div class="col-sm-4 col-sm-offset-2">
-                {!! Html::link(\Request::path() . '/edit', 'Modify', ['class' => 'btn btn-primary btn-xs']) !!}
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Salary Summary</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <p class="earnings"><span class="label-total">Total Earnings: </span><span class="value"></span></p>
+                <p class="deduction"><span class="label-total">Total Deductions: </span></p>
+                <p><span class="label-total">Total: </span></p>
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-2">
+                    @if ($disabled == '')
+                            {!! Html::link(str_replace('/edit', '', \Request::path()), 'Cancel', ['class' => 'btn btn-white btn-xs']) !!}
+                            {!! Form::submit('Save changes', ['class' => 'btn btn-primary btn-xs']) !!}
+                    @else
+                        @if($loggedUser->hasAccess(\Request::segment(1).'.contact-details.update'))
+                                {!! Html::link(\Request::path() . '/edit', 'Modify', ['class' => 'btn btn-primary btn-xs']) !!}
+                        @endif
+                    @endif
+                    </div>
+                </div>
             </div>
         </div>
-        @endif
-    @endif
+    </div>
 
 {!! Form::close() !!}

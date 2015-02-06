@@ -12,12 +12,109 @@ class Employee extends Model {
      * @var bool
      */
     public $timestamps = false;
+
     /**
      * The database table used by the model.
      *
      * @var string
      */
     protected $table = 'employees';
+
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'employee_id',
+        'face_id',
+        'first_name',
+        'middle_name',
+        'last_name',
+        'gender',
+        'birth_date',
+        'social_security',
+        'tax_identification',
+        'philhealth',
+        'hdmf_pagibig',
+        'marital_status_id',
+        'nationality_id',
+        'address_1',
+        'address_2',
+        'address_city_id',
+        'address_province_id',
+        'address_country_id',
+        'address_postal_code',
+        'home_phone',
+        'mobile_phone',
+        'work_email',
+        'other_email',
+        'joined_date',
+        'probation_end_date',
+        'permanency_date',
+    ];
+
+    /**
+     * @param $value
+     */
+    public function setEmployeeIdAttribute($value)
+    {
+        $this->attributes['employee_id'] = $value ? : null;
+    }
+
+    /**
+     * @param $value
+     */
+    public function setFaceIdAttribute($value)
+    {
+        $this->attributes['face_id'] = $value ? : null;
+    }
+
+    /**
+     * @param $value
+     */
+    public function setPhilHealthAttribute($value)
+    {
+        $this->attributes['philhealth'] = $value ? : null;
+    }
+
+    /**
+     * @param $value
+     */
+    public function setHdmfPagibigAttribute($value)
+    {
+        $this->attributes['hdmf_pagibig'] = $value ? : null;
+    }
+
+    /**
+     * @param $value
+     */
+    public function setBirthDateAttribute($value)
+    {
+        $this->attributes['birth_date'] = $value ? : null;
+    }
+
+    /**
+     * @param $value
+     */
+    public function setJoinedDateAttribute($value)
+    {
+        $this->attributes['joined_date'] = $value ? : null;
+    }
+
+    /**
+     * @param $value
+     */
+    public function setProbationEndDateAttribute($value)
+    {
+        $this->attributes['probation_end_date'] = $value ? : null;
+    }
+
+    /**
+     * @param $value
+     */
+    public function setPermanencyDateAttribute($value)
+    {
+        $this->attributes['permanency_date'] = $value ? : null;
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -120,7 +217,7 @@ class Employee extends Model {
      */
     public function jobHistories()
     {
-        return $this->hasMany('HRis\JobHistory', 'employee_id', 'employee_id');
+        return $this->hasMany('HRis\JobHistory');
     }
 
     /**

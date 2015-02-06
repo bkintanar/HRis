@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Redirect;
  */
 class EmergencyContactsController extends Controller {
 
+    /**
+     * @param Sentry $auth
+     * @param Employee $employee
+     * @param EmergencyContact $emergencyContact
+     */
     public function __construct(Sentry $auth, Employee $employee, EmergencyContact $emergencyContact)
     {
         parent::__construct($auth);
@@ -63,17 +68,8 @@ class EmergencyContactsController extends Controller {
     {
         try
         {
-            $emergencyContact = new EmergencyContact;
+            $this->emergencyContact->create($request->all());
 
-            $emergencyContact->employee_id = $request->get('id');
-            $emergencyContact->first_name = $request->get('first_name');
-            $emergencyContact->middle_name = $request->get('middle_name');
-            $emergencyContact->last_name = $request->get('last_name');
-            $emergencyContact->relationship_id = $request->get('relationship_id');
-            $emergencyContact->home_phone = $request->get('home_phone');
-            $emergencyContact->mobile_phone = $request->get('mobile_phone');
-
-            $emergencyContact->save();
         } catch (Exception $e)
         {
             return Redirect::to($request->path())->with('danger', 'Unable to add record to the database.');
@@ -101,14 +97,8 @@ class EmergencyContactsController extends Controller {
 
         try
         {
-            $emergencyContact->first_name = $request->get('first_name');
-            $emergencyContact->middle_name = $request->get('middle_name');
-            $emergencyContact->last_name = $request->get('last_name');
-            $emergencyContact->relationship_id = $request->get('relationship_id');
-            $emergencyContact->home_phone = $request->get('home_phone');
-            $emergencyContact->mobile_phone = $request->get('mobile_phone');
+            $emergencyContact->update($request->all());
 
-            $emergencyContact->save();
         } catch (Exception $e)
         {
             return Redirect::to($request->path())->with('danger', 'Unable to update record.');

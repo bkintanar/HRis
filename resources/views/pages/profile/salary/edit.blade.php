@@ -2,30 +2,11 @@
 
 @section('content')
     @include('partials.notification')
-    <div class="row">
-        {!! HRis\Navlink::profileLinks($pim) !!}
-        <div class="col-lg-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>All Earnings</h5>
-                    <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="ibox-content">
-                    @include('pages.profile.salary.form')
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('pages.profile.salary.form-earnings')
 @stop
 
 @section('custom_css')
-
     {!! Html::style('/css/plugins/chosen/chosen.css') !!}
-
 @stop
 
 @section('custom_js')

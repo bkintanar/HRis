@@ -18,6 +18,10 @@ use Illuminate\Support\Facades\Redirect;
  */
 class QualificationsController extends Controller {
 
+    /**
+     * @param Sentry $auth
+     * @param Employee $employee
+     */
     public function __construct(Sentry $auth, Employee $employee)
     {
         parent::__construct($auth);
@@ -71,8 +75,11 @@ class QualificationsController extends Controller {
         try
         {
             $workExperience->create($request->all());
+
         } catch (Exception $e)
         {
+            dd($e->getMessage());
+
             return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('danger', 'Unable to add record to the database.');
         }
 
@@ -128,6 +135,7 @@ class QualificationsController extends Controller {
         try
         {
             $education->create($request->all());
+
         } catch (Exception $e)
         {
             return Redirect::to(str_replace('/educations', '', $request->path()))->with('danger', 'Unable to add record to the database.');
@@ -158,6 +166,7 @@ class QualificationsController extends Controller {
         try
         {
             $education->update($request->all());
+
         } catch (Exception $e)
         {
             return Redirect::to(str_replace('/educations', '', $request->path()))->with('danger', 'Unable to update record.');
@@ -182,8 +191,8 @@ class QualificationsController extends Controller {
             $employee = $this->employee->whereId($request->get('id'))->first();
 
             $skill_id = $request->get('skill_id');
-            $years_of_experience = $request->get('years_of_experience') ? $request->get('years_of_experience') : null;
-            $comment = $request->get('skill_comment') ? $request->get('skill_comment') : null;
+            $years_of_experience = $request->get('years_of_experience') or null;
+            $comment = $request->get('skill_comment') or null;
 
             $employee->skills()->attach($skill_id, [
                 'years_of_experience' => $years_of_experience,

@@ -4,29 +4,14 @@
     @include('partials.notification')
     <div class="row">
         {!! HRis\Navlink::profileLinks($pim) !!}
-        <div class="col-lg-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Salary Details</h5>
-                    <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="ibox-content">
-                    @include('pages.profile.salary.form')
-                </div>
-            </div>
-        </div>
+        @include('pages.profile.salary.form')
     </div>
 @stop
 
 @section('custom_css')
-
     {!! Html::style('/css/plugins/chosen/chosen.css') !!}
-
 @stop
+
 @section('custom_js')
     <!-- Input Mask-->
     {!! Html::script('/js/plugins/jasny/jasny-bootstrap.min.js') !!}
@@ -37,10 +22,26 @@
 
     <script>
 
+            function getValues(type)
+            {
+                var data = 0;
+                $('.' + type).each(function () {
+                    data += parseFloat($(this).val());
+                });
+
+
+                return data.toFixed(2);
+            }
+
+            earnings = getValues('earnings');
+            deductions = getValues('deductions');
+
+            $('.deduction').html(deductions);
+            alert(deductions);
+
         $('.chosen-select').chosen();
 
     </script>
-
 @stop
 
 @section('action_area')
