@@ -6,12 +6,12 @@
     <div class="form-group">
             <label for="job_title_id" class="col-md-2 control-label">Job Title</label>
             <div class="col-sm-4">
-                {!! Form::select('job_title_id', HRis\JobTitle::lists('name', 'id'), $employee->jobHistory()->job_title_id, ['class' => 'form-control chosen-select form-fields', $disabled]) !!}
+                {!! Form::select('job_title_id', HRis\JobTitle::lists('name', 'id'), isset($employee->jobHistory()->job_title_id) ? $employee->jobHistory()->job_title_id : 0, ['class' => 'form-control chosen-select', $disabled]) !!}
             </div>
 
             <label for="employment_status_id" class="col-md-2 control-label">Employment Status</label>
             <div class="col-sm-4">
-                {!! Form::select('employment_status_id', HRis\EmploymentStatus::lists('name', 'id'), $employee->jobHistory()->employment_status_id, ['class' => 'form-control chosen-select form-fields', $disabled]) !!}
+                {!! Form::select('employment_status_id', HRis\EmploymentStatus::lists('name', 'id'), isset($employee->jobHistory()->employment_status_id) ? $employee->jobHistory()->employment_status_id : 0, ['class' => 'form-control chosen-select', $disabled]) !!}
             </div>
     </div>
     <!-- End - Job Details -->
@@ -20,13 +20,13 @@
 
             <label for="department_id" class="col-md-2 control-label">Department</label>
             <div class="col-sm-4">
-                {!! Form::select('department_id', HRis\Department::lists('name', 'id'), $employee->jobHistory()->department_id, ['class' => 'form-control chosen-select form-fields', $disabled]) !!}
+                {!! Form::select('department_id', HRis\Department::lists('name', 'id'), isset($employee->jobHistory()->department_id) ? $employee->jobHistory()->department_id : 0, ['class' => 'form-control chosen-select', $disabled]) !!}
             </div>
 
             <label for="effective_date" class="col-md-2 control-label">Effective Date</label>
             <div class="col-md-4" id="datepicker">
                     <div class="input-group date">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>{!! Form::text('effective_date', $employee->jobHistory()->effective_date, ['class' => 'form-control form-fields', 'data-mask' => '9999-99-99', $disabled]) !!}
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>{!! Form::text('effective_date', isset($employee->jobHistory()->effective_date) ? $employee->jobHistory()->effective_date : null, ['class' => 'form-control', 'data-mask' => '9999-99-99', $disabled]) !!}
                     </div>
             </div>
 
@@ -36,12 +36,12 @@
 
             <label for="" class="col-md-2 control-label">Location</label>
             <div class="col-sm-4">
-                        {!! Form::select('location_id', HRis\Location::lists('name', 'id'), $employee->jobHistory()->location_id, ['class' => 'form-control chosen-select form-fields', $disabled]) !!}
+                        {!! Form::select('location_id', HRis\Location::lists('name', 'id'), isset($employee->jobHistory()->location_id) ? $employee->jobHistory()->location_id : 0, ['class' => 'form-control chosen-select', $disabled]) !!}
             </div>
 
             <label for="" class="col-md-2 control-label">Work Shift</label>
             <div class="col-sm-4">
-                        {!! Form::select('work_shift_id', HRis\WorkShift::lists('name', 'id'), $employee->jobHistory()->work_shift_id, ['class' => 'form-control chosen-select form-fields', $disabled]) !!}
+                        {!! Form::select('work_shift_id', HRis\WorkShift::lists('name', 'id'), isset($employee->jobHistory()->work_shift_id) ? $employee->jobHistory()->work_shift_id : 0, ['class' => 'form-control chosen-select', $disabled]) !!}
 
             </div>
 
