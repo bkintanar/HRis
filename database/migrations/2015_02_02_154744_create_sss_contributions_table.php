@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSSSContributionsTable extends Migration {
+class CreateSssContributionsTable extends Migration {
 
     /**
      * Run the migrations.
