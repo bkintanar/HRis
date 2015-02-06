@@ -21,7 +21,9 @@ use HRis\Http\Requests\Profile\EmergencyContactsRequest;
 use HRis\Http\Requests\Profile\QualificationsEducationRequest;
 use HRis\Http\Requests\Profile\QualificationsSkillRequest;
 use HRis\Http\Requests\Profile\QualificationsWorkExperienceRequest;
+use HRis\Http\Requests\Profile\JobRequest;
 use HRis\JobTitle;
+use HRis\JobHistory;
 use HRis\Nationality;
 use HRis\PayGrade;
 use HRis\Skill;
@@ -799,6 +801,32 @@ class AjaxController extends Controller {
             try
             {
                 EducationLevel::whereId($educationId)->delete();
+
+                print('success');
+            } catch (\Exception $e)
+            {
+                print('failed');
+            }
+
+        }
+    }
+
+    /**
+     * Delete the profile job details.
+     *
+     * @Delete("ajax/profile/job/edit")
+     * @Delete("ajax/pim/employee-list/{id}/job/edit")
+     *
+     * @param JobRequest $request
+     */
+    public function deleteJobHistory(JobRequest $request)
+    {
+        if ($request->ajax())
+        {
+            $jobHistoryId = $request->get('id');
+            try
+            {
+                JobHistory::whereId($jobHistoryId)->delete();
 
                 print('success');
             } catch (\Exception $e)

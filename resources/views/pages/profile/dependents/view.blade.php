@@ -72,7 +72,7 @@
                     <div class="modal-body">
                         <!--Add form-->
                         {!! Form::open(['method' => 'POST', 'url' => str_replace('/edit', '', \Request::path()), 'class' => 'form-horizontal']) !!}
-                            {!! Form::hidden('id', $employee->id) !!}
+                            {!! Form::hidden('employee_id', $employee->employee_id) !!}
                             {!! Form::hidden('dependent_id', '', ['id' => 'dependent_id']) !!}
                             {!! Form::hidden('_method', 'POST', ['id' => 'dependentForm']) !!}
                             <div class="form-group">

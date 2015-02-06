@@ -58,6 +58,11 @@ class JobController extends Controller {
      */
     public function showJobEditForm(JobRequest $request, $employee_id = null)
     {
+        if(\Input::get('success'))
+        {
+            return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
+        }
+
         $employee = $this->employee->getEmployeeById($employee_id, $this->loggedUser->id);
 
         $this->data['employee'] = $employee;
@@ -92,6 +97,6 @@ class JobController extends Controller {
 
         $employee->save();
 
-        return Redirect::to($request->path())->with('success', 'Created Successfully.');;
+        return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
     }
 }

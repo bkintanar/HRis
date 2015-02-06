@@ -42,7 +42,7 @@ class DependentsController extends Controller {
 
         $this->data['employee'] = $employee;
 
-        $this->data['dependents'] = $this->dependent->whereEmployeeId($employee->id)->get();
+        $this->data['dependents'] = $this->dependent->whereEmployeeId($employee->employee_id)->get();
 
         $this->data['pim'] = $request->is('*pim/*') ? true : false;
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Dependents' : 'My Dependents';
@@ -64,7 +64,7 @@ class DependentsController extends Controller {
         {
             $dependent = new Dependent;
 
-            $dependent->employee_id = $request->get('id');
+            $dependent->employee_id = $request->get('employee_id');
             $dependent->first_name = $request->get('first_name');
             $dependent->middle_name = $request->get('middle_name');
             $dependent->last_name = $request->get('last_name');

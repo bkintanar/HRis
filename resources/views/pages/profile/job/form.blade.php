@@ -7,12 +7,12 @@
     <div class="form-group">
             <label for="job_title_id" class="col-md-2 control-label">Job Title</label>
             <div class="col-sm-4">
-                {!! Form::select('job_title_id', HRis\JobTitle::lists('name', 'id'), $employee->jobHistory()->job_title_id, ['class' => 'form-control chosen-select', $disabled]) !!}
+                {!! Form::select('job_title_id', HRis\JobTitle::lists('name', 'id'), $employee->jobHistory()->job_title_id, ['class' => 'form-control chosen-select form-fields', $disabled]) !!}
             </div>
 
             <label for="employment_status_id" class="col-md-2 control-label">Employment Status</label>
             <div class="col-sm-4">
-                {!! Form::select('employment_status_id', HRis\EmploymentStatus::lists('name', 'id'), $employee->jobHistory()->employment_status_id, ['class' => 'form-control chosen-select', $disabled]) !!}
+                {!! Form::select('employment_status_id', HRis\EmploymentStatus::lists('name', 'id'), $employee->jobHistory()->employment_status_id, ['class' => 'form-control chosen-select form-fields', $disabled]) !!}
             </div>
     </div>
     <!-- End - Job Details -->
@@ -21,13 +21,13 @@
 
             <label for="department_id" class="col-md-2 control-label">Department</label>
             <div class="col-sm-4">
-                {!! Form::select('department_id', HRis\Department::lists('name', 'id'), $employee->jobHistory()->department_id, ['class' => 'form-control chosen-select', $disabled]) !!}
+                {!! Form::select('department_id', HRis\Department::lists('name', 'id'), $employee->jobHistory()->department_id, ['class' => 'form-control chosen-select form-fields', $disabled]) !!}
             </div>
 
             <label for="effective_date" class="col-md-2 control-label">Effective Date</label>
             <div class="col-md-4" id="datepicker">
                     <div class="input-group date">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>{!! Form::text('effective_date', $employee->jobHistory()->effective_date, ['class' => 'form-control', 'data-mask' => '9999-99-99', $disabled]) !!}
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>{!! Form::text('effective_date', $employee->jobHistory()->effective_date, ['class' => 'form-control form-fields', 'data-mask' => '9999-99-99', $disabled]) !!}
                     </div>
             </div>
 
@@ -37,12 +37,12 @@
 
             <label for="" class="col-md-2 control-label">Location</label>
             <div class="col-sm-4">
-                        {!! Form::select('location_id', HRis\Location::lists('name', 'id'), $employee->jobHistory()->location_id, ['class' => 'form-control chosen-select', $disabled]) !!}
+                        {!! Form::select('location_id', HRis\Location::lists('name', 'id'), $employee->jobHistory()->location_id, ['class' => 'form-control chosen-select form-fields', $disabled]) !!}
             </div>
 
             <label for="" class="col-md-2 control-label">Work Shift</label>
             <div class="col-sm-4">
-                        {!! Form::select('work_shift_id', HRis\WorkShift::lists('name', 'id'), $employee->jobHistory()->work_shift_id, ['class' => 'form-control chosen-select', $disabled]) !!}
+                        {!! Form::select('work_shift_id', HRis\WorkShift::lists('name', 'id'), $employee->jobHistory()->work_shift_id, ['class' => 'form-control chosen-select form-fields', $disabled]) !!}
 
             </div>
 
@@ -52,7 +52,7 @@
 
             <label for="" class="col-md-2 control-label">Comments</label>
             <div class="col-sm-10">
-                {!! Form::textarea('comments', null, ['class' => 'form-control', 'rows' => '3', $disabled, 'style' => 'resize:vertical;']) !!}
+                {!! Form::textarea('comments', null, ['class' => 'form-control form-fields', 'rows' => '3', $disabled, 'style' => 'resize:vertical;']) !!}
             </div>
 
 
@@ -92,7 +92,7 @@
     <div class="form-group">
         <div class="col-sm-4 col-sm-offset-2">
             {!! Html::link(str_replace('/edit', '', \Request::path()), 'Cancel', ['class' => 'btn btn-white btn-xs']) !!}
-            {!! Form::submit('Save changes', ['class' => 'btn btn-primary btn-xs']) !!}
+            {!! Form::submit('Save changes', ['class' => 'btn btn-primary btn-xs', 'id' => 'save-button']) !!}
         </div>
     </div>
     @else

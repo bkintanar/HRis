@@ -17,7 +17,7 @@ class LocationTableSeeder extends Seeder {
         DB::table('locations')->insert(
             [
                 ['id' => 1, 'name' => 'Unit 203'],
-                ['id' => 2, 'name' => 'Unit 626'],
+                ['id' => 2, 'name' => 'Unit 606'],
 
             ]
         );

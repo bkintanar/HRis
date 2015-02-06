@@ -65,7 +65,7 @@ class Employee extends Model {
 
     public function skills()
     {
-        return $this->hasMany('HRis\Skill');
+        return $this->hasMany('HRis\Skill', 'employee_id', 'employee_id');
     }
 
     public function jobHistory()
@@ -87,9 +87,20 @@ class Employee extends Model {
     {
         if ($employee_id)
         {
-            return self::whereEmployeeId($employee_id)->with('user', 'country', 'province', 'city', 'employmentStatus', 'jobHistories')->first();
+            return self::whereEmployeeId($employee_id)->with('user', 'country', 'province', 'city', 'employmentStatus', 'jobHistories', 'dependents')->first();
         }
 
-        return self::whereUserId($user_id)->with('user', 'country', 'province', 'city', 'employmentStatus', 'jobHistories')->first();
+        return self::whereUserId($user_id)->with('user', 'country', 'province', 'city', 'employmentStatus', 'jobHistories', 'dependents')->first();
     }
+
+    public function dependents()
+    {
+        return $this->hasMany('HRis\Dependent', 'employee_id', 'employee_id');
+    }
+
+    public function employeeSalaryComponents()
+    {
+        return $this->hasMany('HRis\EmployeeSalaryComponents', 'employee_id', 'employee_id')->with('salaryComponent');
+    }
+
 }

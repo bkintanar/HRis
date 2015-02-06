@@ -1,7 +1,7 @@
 @extends(\Request::is('*pim/*') ? 'master.adm-master' : 'master.default')
 
 @section('content')
-
+@include('partials.notification')
 <div class="row">
         {!! HRis\Navlink::profileLinks($pim) !!}
     <div class="col-lg-12">
@@ -45,6 +45,50 @@
     <script>
         $(document).ready(function () {
 
+            var defaults;
+
+            function deleteAction()
+            {
+                if($('.JobHistoryList').length < 2){
+                    $('.action').remove();
+                }
+            }
+
+            function disableButton(status)
+            {
+                $('#save-button').attr('disabled', status);
+            }
+
+            function getValues()
+            {
+                searchIDs = new Array();
+                var i = 0;
+                $('.form-fields').each(function () {
+                    searchIDs[i] = $(this).val();
+                    i++;
+                });
+
+                return searchIDs.toString();
+            }
+
+            defaults = getValues();
+            deleteAction();
+            disableButton(true);
+
+            $('.form-fields').change(function(){
+                var changes = getValues();
+                if(changes !== defaults)
+                {
+                    disableButton(false);
+                }
+                else
+                {
+                    disableButton(true);
+                }
+            });
+
+            deleteAction();
+
             // Date picker
             $('#datepicker .input-group.date').datepicker({
                 todayBtn: "linked",
@@ -56,6 +100,28 @@
             });
 
             $('.chosen-select').chosen();
+
+            $('.btn-xs').click(function(){
+
+                var dataId = $(this).attr('id');
+
+                $.ajax({
+                    type: "DELETE",
+                    url: '/ajax/' + '{{\Request::path()}}',
+                    data: { id: dataId, _token: $('input[name=_token]').val() }
+                }).done(function( response ) {
+
+                    if (response == 'success')
+                    {
+                        window.location = "?success=1";
+                    }
+                    else
+                    {
+                      // failed
+                    }
+                });
+
+            });
         });
 
     </script>

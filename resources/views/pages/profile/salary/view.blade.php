@@ -1,13 +1,13 @@
 @extends(\Request::is('*pim/*') ? 'master.adm-master' : 'master.default')
 
 @section('content')
-@include('partials.notification')
+    @include('partials.notification')
     <div class="row">
         {!! HRis\Navlink::profileLinks($pim) !!}
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Job Details</h5>
+                    <h5>All Earnings</h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -15,11 +15,10 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-                    @include('pages.profile.job.form')
+                    @include('pages.profile.salary.form')
                 </div>
             </div>
         </div>
-        @include('pages.profile.job.job-history')
     </div>
 @stop
 
@@ -37,13 +36,9 @@
     {!! Html::script('/js/notification.js') !!}
 
     <script>
-        $(document).ready(function () {
 
-            $('.action').remove();
+        $('.chosen-select').chosen();
 
-            $('.chosen-select').chosen();
-
-        });
     </script>
 
 @stop
