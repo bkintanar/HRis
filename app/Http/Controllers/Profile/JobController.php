@@ -2,9 +2,9 @@
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use HRis\Employee;
-use HRis\JobHistory;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\JobRequest;
+use HRis\JobHistory;
 use Illuminate\Support\Facades\Redirect;
 
 /**
@@ -12,8 +12,16 @@ use Illuminate\Support\Facades\Redirect;
  */
 class JobController extends Controller {
 
+    /**
+     * @var
+     */
     protected $user;
 
+    /**
+     * @param Sentry $auth
+     * @param Employee $employee
+     * @param JobHistory $job_history
+     */
     public function __construct(Sentry $auth, Employee $employee, JobHistory $job_history)
     {
         parent::__construct($auth);
@@ -84,13 +92,9 @@ class JobController extends Controller {
         $employee = $this->employee->whereId($id)->first();
         $job_history = $this->job_history;
 
-        $job_history->insert($request->only($request->fillables()));
+        $job_history->create($request->all());
 
-        $employee->joined_date = $request->get('joined_date');
-        $employee->probation_end_date = $request->get('probation_end_date');
-        $employee->permanency_date = $request->get('permanency_date');
-
-        $employee->save();
+        $employee->update($request->only('joined_date', 'probation_end_date', 'permanency_date'));
 
         return Redirect::to($request->path())->with('success', 'Record successfully updated.');
     }

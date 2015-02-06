@@ -15,7 +15,7 @@ class CreateJobHistoriesTable extends Migration {
         Schema::create('job_histories', function (Blueprint $table)
         {
             $table->increments('id');
-            $table->string('employee_id');
+            $table->integer('employee_id');
             $table->integer('job_title_id')->nullable();
             $table->integer('department_id')->nullable();
             $table->integer('employment_status_id')->nullable();
