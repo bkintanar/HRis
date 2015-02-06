@@ -13,9 +13,12 @@ class EmployeeSalaryComponents extends Model {
 
     public $timestamps = false;
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function salaryComponent()
     {
-        return $this->belongsToMany('HRis\SalaryComponents', 'id', 'component_id');
+        return $this->hasOne('HRis\SalaryComponents', 'id', 'component_id');
     }
 
 }

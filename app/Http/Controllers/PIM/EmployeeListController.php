@@ -42,11 +42,22 @@ class EmployeeListController extends Controller {
      * Show the PIM - Employee with the given Id.
      *
      * @Get("pim/employee-list/{id}")
+     * @param $employee_id
+     * @return
      */
-    public function viewEmployee()
+    public function viewEmployee($employee_id)
     {
-        // TODO: Check if {id} exist
-        return Redirect::to(Request::path() . '/personal-details');
+        $employee = $this->employee->whereId($employee_id)->first();
+
+        if ($employee)
+        {
+            return Redirect::to(Request::path() . '/personal-details');
+        }
+        else
+        {
+            // TODO: Show Employee ID not found error
+            die('not found');
+        }
     }
 
     /**

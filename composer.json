@@ -5,10 +5,11 @@
 	"license": "MIT",
 	"type": "project",
 	"require": {
-		"laravel/framework": "~5.0",
-	  	"illuminate/html": "5.*",
-	  	"cartalyst/sentry": "2.1.*dev",
-	  	"adamgoose/laravel-annotations": "~5.0"
+	  "laravel/framework": "5.0.*",
+	  "illuminate/html": "5.0.*@dev",
+	  "cartalyst/sentry": "2.1.*dev",
+	  "adamgoose/laravel-annotations": "5.0.*dev",
+	  "filp/whoops": "~1.0"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",
@@ -43,6 +44,5 @@
 	},
 	"config": {
 		"preferred-install": "dist"
-	},
-	"minimum-stability": "dev"
+	}
 }

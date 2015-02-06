@@ -52,6 +52,7 @@ class Navlink extends Model {
             $item .= '>' . PHP_EOL;
         }
 
+        // TODO: Don't hard code [2, 14]
         if (count($children) && ! in_array($link->id, [2, 14]))
         {
             $item .= '<a href="#">' . PHP_EOL;
@@ -75,6 +76,7 @@ class Navlink extends Model {
             $item .= $link->name . PHP_EOL;
         }
 
+        // TODO: Don't hard code [2, 14]
         if (count($children) && ! in_array($link->id, [2, 14]))
         {
             $item .= '<span class="fa arrow"></span>' . PHP_EOL;
@@ -83,7 +85,7 @@ class Navlink extends Model {
 
         $item .= '</a>' . PHP_EOL;
 
-
+        // TODO: Don't hard code [2, 14]
         if (count($children) && ! in_array($link->id, [2, 14]))
         {
             if (Navlink::whereId($children[0]->parent_id)->pluck('parent_id') > 0)
@@ -147,6 +149,7 @@ class Navlink extends Model {
             }
             else
             {
+                // TODO: Store 'GWO-' to config. Employee ID prefixes should not be hard coded.
                 if (substr($sublink, 0, 4) == 'GWO-')
                 {
                     $str .= '<li>' . '<a href="' . $href . '">' . ucwords(in_array($sublink, $exception) ? strtoupper($sublink) : $sublink) . '</a></li>';
@@ -169,9 +172,8 @@ class Navlink extends Model {
 
         $nav = '<div class="col-lg-12 top-nav-b"><div class="btn-group top-nav-li"><ul>';
 
-        $profileNav = Navlink::whereHref('profile')->first();
         $navigations = Navlink::whereParentId(- 1)->get();
-//dd($profileNav);
+
         foreach ($navigations as $navigation)
         {
             $format = Navlink::formatHref($navigation, $pim);

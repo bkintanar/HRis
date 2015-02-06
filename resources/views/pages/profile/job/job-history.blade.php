@@ -26,13 +26,13 @@
                         <tbody id="JobHistoryBody">
                             @foreach($job_histories as $job_history)
                                 <tr class="JobHistoryList" id="jobHistory_{{$job_history->id}}">
-                                    <td>{{ isset($job_history->jobTitle->name) ? $job_history->jobTitle->name : '' }}</td>
-                                    <td>{{ isset($job_history->department->name) ? $job_history->department->name : '' }}</td>
-                                    <td>{{ isset($job_history->effective_date) ? $job_history->effective_date : '' }}</td>
-                                    <td>{{ isset($job_history->employmentStatus->name) ? $job_history->employmentStatus->name : '' }}</td>
-                                    <td>{{ isset($job_history->workShift->name) ? $job_history->workShift->name : '' }}</td>
-                                    <td>{{ isset($job_history->location->name) ? $job_history->location->name : '' }}</td>
-                                    <td>{{ isset($job_history->comments) ? $job_history->comments : '' }}</td>
+                                    <td>{{ $job_history->jobTitle->name or ''}}</td>
+                                    <td>{{ $job_history->department->name or '' }}</td>
+                                    <td>{{ $job_history->effective_date }}</td>
+                                    <td><span class="label {{ $job_history->employmentStatus->class or '' }}"> {{ $job_history->employmentStatus->name or '' }}</span></td>
+                                    <td>{{ $job_history->workShift->name or '' }}</td>
+                                    <td>{{ $job_history->location->name or '' }}</td>
+                                    <td>{{ $job_history->comments }}</td>
                                     <td class="action">
                                         <button rel="delete" id="{{$job_history->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-trash"></i></button>
                                     </td>

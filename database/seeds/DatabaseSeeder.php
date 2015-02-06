@@ -28,12 +28,12 @@ class DatabaseSeeder extends Seeder {
         $this->call('DepartmentsTableSeeder');
         $this->call('CountriesTableSeeder');
         $this->call('CitiesTableSeeder');
-        $this->call('LocationTableSeeder');
+        $this->call('LocationsTableSeeder');
         $this->call('WorkShiftsTableSeeder');
-        $this->call('TaxTableSeeder');
-        $this->call('SssContributionTableSeeder');
+        $this->call('TaxComputationsTableSeeder');
+        $this->call('SSSContributionsTableSeeder');
         $this->call('SalaryComponentsTableSeeder');
-        $this->call('EmployeeSalaryComponentsSeeder');
+        $this->call('EmployeeSalaryComponentsTableSeeder');
     }
 
 }

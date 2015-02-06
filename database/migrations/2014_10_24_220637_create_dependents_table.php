@@ -5,14 +5,15 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateDependentsTable extends Migration {
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-        Schema::create('dependents', function (Blueprint $table) {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('dependents', function (Blueprint $table)
+        {
             $table->increments('id');
             $table->integer('employee_id');
             $table->string('first_name');
@@ -23,13 +24,13 @@ class CreateDependentsTable extends Migration {
         });
     }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
         Schema::drop('dependents');
     }
 }

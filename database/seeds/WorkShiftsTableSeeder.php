@@ -25,16 +25,16 @@ class WorkShiftsTableSeeder extends Seeder {
                 ],
                 [
                     'id'        => 2,
-                    'name'      => 'Night Shift',
-                    'from_time' => '23:00:00',
-                    'to_time'   => '08:00:00',
+                    'name'      => 'Afternoon Shift',
+                    'from_time' => '14:00:00',
+                    'to_time'   => '23:00:00',
                     'duration'  => 9
                 ],
                 [
                     'id'        => 3,
-                    'name'      => 'Afternoon Shift',
-                    'from_time' => '14:00:00',
-                    'to_time'   => '23:00:00',
+                    'name'      => 'Night Shift',
+                    'from_time' => '23:00:00',
+                    'to_time'   => '08:00:00',
                     'duration'  => 9
                 ],
 

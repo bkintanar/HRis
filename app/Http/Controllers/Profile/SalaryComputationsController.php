@@ -7,6 +7,7 @@ use HRis\Http\Requests\Profile\SalaryRequest;
 use HRis\Employee;
 use HRis\Sss;
 use HRis\EmployeeSalaryComponents;
+use HRis\SalaryComponents;
 use HRis\TaxComputations;
 use HRis\Dependent;
 
@@ -78,7 +79,30 @@ class SalaryComputationsController extends Controller {
 //        $this->data['salary'] = $semiMonthly;
 //
 
-        dd($employee);
+//        dd($employee->employeeSalaryComponents);
+
+//        foreach($employee->employeeSalaryComponents as $value)
+//        {
+//            echo $value . '<br/><br/>';
+//        }
+
+//        echo "<pre>";
+//        print_r($employee);
+//
+//        dd($employee);
+//
+//        $employeeComponents = json_decode($employee->employeeSalaryComponents);
+//
+//        echo '<pre>';
+////        print_r($employeeComponents);
+//
+//        foreach($employeeComponents as $value)
+//        {
+////            print_r($value);
+//            echo $value->salary_component->components . '<br/>';
+//        }
+//
+//        die;
 
         $this->data['employee'] = $employee;
 

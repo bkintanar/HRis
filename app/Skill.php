@@ -2,8 +2,16 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Skill
+ * @package HRis
+ */
 class Skill extends Model {
 
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
     /**
      * The database table used by the model.
      *
@@ -11,8 +19,9 @@ class Skill extends Model {
      */
     protected $table = 'skills';
 
-    public $timestamps = false;
-
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function employees()
     {
         return $this->belongsToMany('HRis\Employee');

@@ -2,41 +2,46 @@
     {!! Form::hidden('user[id]') !!}
     {!! Form::hidden('id') !!}
 
-        @foreach($employee->employeeSalaryComponents as $value)
-            <div class="form-group">
-                    {!! Form::label('$value', 'Basic Salary', ['class' => 'col-md-2 control-label']) !!}
-                    <div class="col-md-4">
-                    {!! Form::text('salary', null, ['class' => 'form-control', 'data-mask' => '99,999.99', $disabled]) !!}
-                    </div>
-
-                    <label for="joined_date" class="col-md-2 control-label">Effective Date</label>
-                    <div class="col-md-4" id="datepicker">
-                        <div class="input-group date" id="data_1">
-                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>{!! Form::text('date', null, ['class' => 'form-control', 'data-mask' => '9999-99-99', $disabled]) !!}
-                        </div>
-                    </div>
-            </div>
-        @endforeach
-
-
-    <div class="hr-line-dashed"></div>
-
-
+    <h5 style="width: 100%; text-indent: 30px; background-color: #D1FFEF; line-height: 28px;">All Earnings</h5>
+    @foreach($employee->employeeSalaryComponents as $value)
+        @if($value->salaryComponent->type == 1)
         <div class="form-group">
-                {!! Form::label('salary', 'Basic Salary', ['class' => 'col-md-2 control-label']) !!}
+                {!! Form::label('$value', $value->salaryComponent->components, ['class' => 'col-md-2 control-label']) !!}
                 <div class="col-md-4">
-                {!! Form::text('salary', null, ['class' => 'form-control', 'data-mask' => '99,999.99', $disabled]) !!}
+                {!! Form::text('salary', $value->value, ['class' => 'form-control', 'data-mask' => '99,999.99', $disabled]) !!}
                 </div>
 
                 <label for="joined_date" class="col-md-2 control-label">Effective Date</label>
                 <div class="col-md-4" id="datepicker">
                     <div class="input-group date" id="data_1">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>{!! Form::text('date', null, ['class' => 'form-control', 'data-mask' => '9999-99-99', $disabled]) !!}
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>{!! Form::text('date', $value->effective_date, ['class' => 'form-control', 'data-mask' => '9999-99-99', $disabled]) !!}
                     </div>
                 </div>
         </div>
-
+        @endif
+    @endforeach
     <div class="hr-line-dashed"></div>
+
+    <h5 style="width: 100%; text-indent: 30px; background-color: #FFD7D1; line-height: 28px;">All Deductions</h5>
+    @foreach($employee->employeeSalaryComponents as $value)
+        @if($value->salaryComponent->type == 2)
+        <div class="form-group">
+                {!! Form::label('$value', $value->salaryComponent->components, ['class' => 'col-md-2 control-label']) !!}
+                <div class="col-md-4">
+                {!! Form::text('salary', $value->value, ['class' => 'form-control', 'data-mask' => '99,999.99', $disabled]) !!}
+                </div>
+
+                <label for="joined_date" class="col-md-2 control-label">Effective Date</label>
+                <div class="col-md-4" id="datepicker">
+                    <div class="input-group date" id="data_1">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>{!! Form::text('date', $value->effective_date, ['class' => 'form-control', 'data-mask' => '9999-99-99', $disabled]) !!}
+                    </div>
+                </div>
+        </div>
+        @endif
+    @endforeach
+    <div class="hr-line-dashed"></div>
+
     <!-- End - Salary -->
 
     @if ($disabled == '')
