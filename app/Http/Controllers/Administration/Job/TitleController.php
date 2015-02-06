@@ -29,7 +29,7 @@ class TitleController extends Controller {
     public function titles(JobTitleRequest $request)
     {
         // TODO: fix me
-        $this->data['jobTitles'] = JobTitle::all();
+        $this->data['jobTitles'] = JobTitle::where('id', '>', 0)->get();
 
         $this->data['pageTitle'] = 'Job Titles';
 

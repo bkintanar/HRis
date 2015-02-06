@@ -29,7 +29,7 @@ class EmploymentStatusController extends Controller {
     public function employmentStatus(EmploymentStatusRequest $request)
     {
         // TODO:: fix me
-        $this->data['employmentStatuses'] = EmploymentStatus::all();
+        $this->data['employmentStatuses'] = EmploymentStatus::where('id', '>', 0)->get();
 
         $this->data['pageTitle'] = 'Employment Status';
 

@@ -29,7 +29,7 @@ class WorkShiftController extends Controller {
     public function workShifts(WorkShiftRequest $request)
     {
         // TODO: fix me
-        $this->data['workShifts'] = WorkShift::all();
+        $this->data['workShifts'] = WorkShift::where('id', '>', 0)->get();
 
         $this->data['pageTitle'] = 'Work Shifts';
 
