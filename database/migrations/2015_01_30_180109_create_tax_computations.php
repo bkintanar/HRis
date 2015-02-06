@@ -16,6 +16,7 @@ class CreateTaxComputations extends Migration {
         {
             $table->increments('id');
             $table->decimal('ME_S', 10, 2);
+            $table->decimal('ME1_S1', 10, 2);
             $table->decimal('ME2_S2', 10, 2);
             $table->decimal('ME3_S3', 10, 2);
             $table->decimal('ME4_S4', 10, 2);
