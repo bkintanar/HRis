@@ -35,7 +35,7 @@ class QualificationsController extends Controller {
      * @param null $employee_id
      * @return \Illuminate\View\View
      */
-    public function qualifications(QualificationsRequest $request, $employee_id = null)
+    public function index(QualificationsRequest $request, $employee_id = null)
     {
         $employee = $this->employee->getEmployeeById($employee_id, $this->loggedUser->id);
 
@@ -50,7 +50,7 @@ class QualificationsController extends Controller {
         $this->data['educations'] = $employee->educations;
         $this->data['skills'] = $employee->skills;
 
-        $this->data['pim'] = $request->is('*pim/*') ? true : false;
+        $this->data['pim'] = $request->is('*pim/*') or false;
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Qualifications' : 'My Qualifications';
 
         return $this->template('pages.profile.qualifications.view');
@@ -66,18 +66,11 @@ class QualificationsController extends Controller {
      * @param WorkExperience $workExperience
      * @return
      */
-    public function saveWorkExperience(QualificationsWorkExperienceRequest $request, WorkExperience $workExperience)
+    public function storeWorkExperience(QualificationsWorkExperienceRequest $request, WorkExperience $workExperience)
     {
         try
         {
-            $workExperience->employee_id = $request->get('id');
-            $workExperience->company = $request->get('company');
-            $workExperience->job_title = $request->get('job_title');
-            $workExperience->from_date = $request->get('from_date') ? $request->get('from_date') : null;
-            $workExperience->to_date = $request->get('to_date') ? $request->get('to_date') : null;
-            $workExperience->comment = $request->get('comment');
-
-            $workExperience->save();
+            $workExperience->create($request->all());
         } catch (Exception $e)
         {
             return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('danger', 'Unable to add record to the database.');
@@ -96,7 +89,7 @@ class QualificationsController extends Controller {
      * @param WorkExperience $workExperience
      * @return
      */
-    public function updateWorkExperience(QualificationsWorkExperienceRequest $request, WorkExperience $workExperience, $employee_id = null)
+    public function updateWorkExperience(QualificationsWorkExperienceRequest $request, WorkExperience $workExperience)
     {
         $workExperience = $workExperience->whereId($request->get('work_experience_id'))->first();
 
@@ -107,15 +100,12 @@ class QualificationsController extends Controller {
 
         try
         {
-            $workExperience->company = $request->get('company');
-            $workExperience->job_title = $request->get('job_title');
-            $workExperience->from_date = $request->get('from_date') ? $request->get('from_date') : null;
-            $workExperience->to_date = $request->get('to_date') ? $request->get('to_date') : null;
-            $workExperience->comment = $request->get('comment');
+            $workExperience->update($request->all());
 
-            $workExperience->save();
         } catch (Exception $e)
         {
+            dd($e->getMessage());
+
             return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('danger', 'Unable to update record.');
         }
 
@@ -133,19 +123,11 @@ class QualificationsController extends Controller {
      * @param Education $education
      * @return
      */
-    public function saveEducation(QualificationsEducationRequest $request, Education $education)
+    public function storeEducation(QualificationsEducationRequest $request, Education $education)
     {
         try
         {
-            $education->employee_id = $request->get('id');
-            $education->education_level_id = $request->get('education_level_id');
-            $education->institute = $request->get('institute');
-            $education->major_specialization = $request->get('major_specialization');
-            $education->from_date = $request->get('from_date') ? $request->get('from_date') : null;
-            $education->to_date = $request->get('to_date') ? $request->get('to_date') : null;
-            $education->gpa_score = $request->get('gpa_score') ? $request->get('gpa_score') : null;
-
-            $education->save();
+            $education->create($request->all());
         } catch (Exception $e)
         {
             return Redirect::to(str_replace('/educations', '', $request->path()))->with('danger', 'Unable to add record to the database.');
@@ -175,15 +157,7 @@ class QualificationsController extends Controller {
 
         try
         {
-            $education->employee_id = $request->get('id');
-            $education->education_level_id = $request->get('education_level_id');
-            $education->institute = $request->get('institute');
-            $education->major_specialization = $request->get('major_specialization');
-            $education->from_date = $request->get('from_date') ? $request->get('from_date') : null;
-            $education->to_date = $request->get('to_date') ? $request->get('to_date') : null;
-            $education->gpa_score = $request->get('gpa_score') ? $request->get('gpa_score') : null;
-
-            $education->save();
+            $education->update($request->all());
         } catch (Exception $e)
         {
             return Redirect::to(str_replace('/educations', '', $request->path()))->with('danger', 'Unable to update record.');
@@ -201,15 +175,15 @@ class QualificationsController extends Controller {
      * @param QualificationsSkillRequest $request
      * @return
      */
-    public function saveSkill(QualificationsSkillRequest $request)
+    public function storeSkill(QualificationsSkillRequest $request)
     {
         try
         {
             $employee = $this->employee->whereId($request->get('id'))->first();
 
             $skill_id = $request->get('skill_id');
-            $years_of_experience = $request->get('years_of_experience') ? $request->get('years_of_experience') : null;;;
-            $comment = $request->get('skill_comment') ? $request->get('skill_comment') : null;;
+            $years_of_experience = $request->get('years_of_experience') ? $request->get('years_of_experience') : null;
+            $comment = $request->get('skill_comment') ? $request->get('skill_comment') : null;
 
             $employee->skills()->attach($skill_id, [
                 'years_of_experience' => $years_of_experience,
@@ -245,8 +219,8 @@ class QualificationsController extends Controller {
         try
         {
             $employeeSkill->skill_id = $request->get('skill_id');
-            $employeeSkill->years_of_experience = $request->get('years_of_experience') ? $request->get('years_of_experience') : null;;;
-            $employeeSkill->comment = $request->get('skill_comment') ? $request->get('skill_comment') : null;;
+            $employeeSkill->years_of_experience = $request->get('years_of_experience') or null;
+            $employeeSkill->comment = $request->get('skill_comment') or null;
 
             $employeeSkill->save();
         } catch (Exception $e)

@@ -2,6 +2,10 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class WorkExperience
+ * @package HRis
+ */
 class WorkExperience extends Model {
 
     /**
@@ -11,8 +15,14 @@ class WorkExperience extends Model {
      */
     protected $table = 'work_experiences';
 
-    public $timestamps = false;
+    /**
+     * @var array
+     */
+    protected $fillable = ['employee_id', 'company', 'job_title', 'from_date', 'to_date', 'comment'];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function employee()
     {
         return $this->belongsTo('HRis\Employee', 'id', 'employee_id');

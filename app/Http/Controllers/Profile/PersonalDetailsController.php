@@ -33,7 +33,7 @@ class PersonalDetailsController extends Controller {
      * @param null $employee_id
      * @return \Illuminate\View\View
      */
-    public function personalDetails(PersonalDetailsRequest $request, $employee_id = null)
+    public function index(PersonalDetailsRequest $request, $employee_id = null)
     {
         $employee = $this->employee->getEmployeeById($employee_id, $this->loggedUser->id);
 
@@ -60,7 +60,7 @@ class PersonalDetailsController extends Controller {
      * @param null $employee_id
      * @return \Illuminate\View\View
      */
-    public function showPersonalDetailsEditForm(PersonalDetailsRequest $request, $employee_id = null)
+    public function show(PersonalDetailsRequest $request, $employee_id = null)
     {
         $employee = $this->employee->getEmployeeById($employee_id, $this->loggedUser->id);
 
@@ -86,7 +86,7 @@ class PersonalDetailsController extends Controller {
      *
      * @param PersonalDetailsRequest $request
      */
-    public function updatePersonalDetails(PersonalDetailsRequest $request)
+    public function update(PersonalDetailsRequest $request)
     {
         $id = $request->get('id');
         $employee_id = $request->get('employee_id');
