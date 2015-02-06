@@ -1,6 +1,6 @@
 <?php namespace HRis\Providers;
 
-use Adamgoose\AnnotationsServiceProvider as ServiceProvider;
+use Collective\Annotations\AnnotationsServiceProvider as ServiceProvider;
 
 class AnnotationsServiceProvider extends ServiceProvider {
 
