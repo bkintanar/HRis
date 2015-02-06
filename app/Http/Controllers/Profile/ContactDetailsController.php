@@ -14,10 +14,20 @@ use Illuminate\Support\Facades\View;
  */
 class ContactDetailsController extends Controller {
 
+    /**
+     * @var Employee
+     */
     protected $employee;
 
+    /**
+     * @var
+     */
     protected $user;
 
+    /**
+     * @param Sentry $auth
+     * @param Employee $employee
+     */
     public function __construct(Sentry $auth, Employee $employee)
     {
         parent::__construct($auth);
@@ -102,18 +112,7 @@ class ContactDetailsController extends Controller {
 
         try
         {
-            $employee->address_1 = $request->get('address_1');
-            $employee->address_2 = $request->get('address_2');
-            $employee->address_city_id = $request->get('address_city_id');
-            $employee->address_province_id = $request->get('address_province_id');
-            $employee->address_country_id = $request->get('address_country_id');
-            $employee->address_postal_code = $request->get('address_postal_code');
-            $employee->home_phone = $request->get('home_phone');
-            $employee->mobile_phone = $request->get('mobile_phone');
-            $employee->work_email = $request->get('work_email');
-            $employee->other_email = $request->get('other_email');
-
-            $employee->save();
+            $employee->update($request->all());
         } catch (Exception $e)
         {
             return Redirect::to($request->path())->with('danger', 'Unable to update record.');

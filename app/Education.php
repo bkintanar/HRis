@@ -16,6 +16,11 @@ class Education extends Model {
     protected $table = 'educations';
 
     /**
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * @var array
      */
     protected $fillable = [
@@ -27,6 +32,22 @@ class Education extends Model {
         'to_date',
         'gpa_score'
     ];
+
+    /**
+     * @param $value
+     */
+    public function setFromDateAttribute($value)
+    {
+        $this->attributes['from_date'] = $value ?: null;
+    }
+
+    /**
+     * @param $value
+     */
+    public function setToDateAttribute($value)
+    {
+        $this->attributes['to_date'] = $value ?: null;
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

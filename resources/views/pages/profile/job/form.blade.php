@@ -1,7 +1,6 @@
 {!! Form::model($employee, ['method' => 'PATCH', 'url' => str_replace('/edit', '', \Request::path()), 'class' => 'form-horizontal']) !!}
-    {!! Form::hidden('user[id]') !!}
     {!! Form::hidden('id') !!}
-    {!! Form::hidden('employee_id', $employee->employee_id) !!}
+    {!! Form::hidden('employee_id', $employee->id) !!}
 
     <!-- End - Employment Commencement -->
     <div class="form-group">

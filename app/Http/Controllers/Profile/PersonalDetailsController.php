@@ -14,8 +14,15 @@ use Illuminate\Support\Facades\View;
  */
 class PersonalDetailsController extends Controller {
 
+    /**
+     * @var
+     */
     protected $user;
 
+    /**
+     * @param Sentry $auth
+     * @param Employee $employee
+     */
     public function __construct(Sentry $auth, Employee $employee)
     {
         parent::__construct($auth);
@@ -117,23 +124,11 @@ class PersonalDetailsController extends Controller {
 
         try
         {
-            $employee->employee_id = $request->get('employee_id') ? $request->get('employee_id') : null;
-            $employee->face_id = $request->get('face_id') ? $request->get('face_id') : null;
-            $employee->first_name = $request->get('first_name');
-            $employee->middle_name = $request->get('middle_name');
-            $employee->last_name = $request->get('last_name');
-            $employee->gender = $request->get('gender');
-            $employee->birth_date = $request->get('birth_date');
-            $employee->social_security = $request->get('social_security');
-            $employee->tax_identification = $request->get('tax_identification');
-            $employee->philhealth = $request->get('philhealth');
-            $employee->hdmf_pagibig = $request->get('hdmf_pagibig');
-            $employee->marital_status_id = $request->get('marital_status_id');
-            $employee->nationality_id = $request->get('nationality_id');
-
-            $employee->save();
+            $employee->update($request->all());
         } catch (Exception $e)
         {
+            dd($e->getMessage());
+
             return Redirect::to($request->path())->with('danger', 'Unable to update record.');
         }
 

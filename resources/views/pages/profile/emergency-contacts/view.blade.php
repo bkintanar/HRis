@@ -74,7 +74,7 @@
                     <div class="modal-body">
                         <!--Add form-->
                         {!! Form::open(['method' => 'POST', 'url' => str_replace('/edit', '', \Request::path()), 'class' => 'form-horizontal']) !!}
-                            {!! Form::hidden('id', $employee->id) !!}
+                            {!! Form::hidden('employee_id', $employee->id) !!}
                             {!! Form::hidden('emergency_contact_id', '', ['id' => 'emergency_contact_id']) !!}
                             {!! Form::hidden('_method', 'POST', ['id' => 'emergencyContactForm']) !!}
                             <div class="form-group">
