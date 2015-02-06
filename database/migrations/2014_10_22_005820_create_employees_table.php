@@ -53,11 +53,7 @@ class CreateEmployeesTable extends Migration {
             $table->engine = 'InnoDB';
             $table->index('employee_id');
             $table->index('user_id');
-            $table->index('job_title_id');
-            $table->index('department_id');
-            $table->index('employment_status_id');
             $table->index('marital_status_id');
-            $table->index('work_shift_id');
             $table->index('nationality_id');
         });
     }
