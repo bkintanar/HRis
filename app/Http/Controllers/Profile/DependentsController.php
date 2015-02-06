@@ -31,7 +31,7 @@ class DependentsController extends Controller {
      * @param null $employee_id
      * @return \Illuminate\View\View
      */
-    public function dependents(DependentsRequest $request, $employee_id = null)
+    public function index(DependentsRequest $request, $employee_id = null)
     {
         $employee = $this->employee->getEmployeeById($employee_id, $this->loggedUser->id);
 
@@ -58,7 +58,7 @@ class DependentsController extends Controller {
      *
      * @param DependentsRequest $request
      */
-    public function saveDependent(DependentsRequest $request)
+    public function store(DependentsRequest $request)
     {
         try
         {
@@ -88,7 +88,7 @@ class DependentsController extends Controller {
      *
      * @param DependentsRequest $request
      */
-    public function updateDependent(DependentsRequest $request)
+    public function update(DependentsRequest $request)
     {
         $dependent = $this->dependent->whereId($request->get('dependent_id'))->first();
 

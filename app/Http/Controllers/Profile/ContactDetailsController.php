@@ -6,6 +6,8 @@ use HRis\Employee;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\ContactDetailsRequest;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\View;
 
 /**
  * @Middleware("auth")
@@ -33,7 +35,7 @@ class ContactDetailsController extends Controller {
      * @param null $employee_id
      * @return \Illuminate\View\View
      */
-    public function contactDetails(ContactDetailsRequest $request, $employee_id = null)
+    public function index(ContactDetailsRequest $request, $employee_id = null)
     {
         $employee = $this->employee->getEmployeeById($employee_id, $this->loggedUser->id);
 
@@ -61,7 +63,7 @@ class ContactDetailsController extends Controller {
      * @param null $employee_id
      * @return \Illuminate\View\View
      */
-    public function showContactDetailsEditForm(ContactDetailsRequest $request, $employee_id = null)
+    public function show(ContactDetailsRequest $request, $employee_id = null)
     {
         $employee = $this->employee->getEmployeeById($employee_id, $this->loggedUser->id);
 
@@ -87,7 +89,7 @@ class ContactDetailsController extends Controller {
      *
      * @param ContactDetailsRequest $request
      */
-    public function updateContactDetails(ContactDetailsRequest $request)
+    public function update(ContactDetailsRequest $request)
     {
         $id = $request->get('id');
 

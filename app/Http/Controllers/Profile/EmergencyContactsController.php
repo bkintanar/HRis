@@ -31,7 +31,7 @@ class EmergencyContactsController extends Controller {
      * @param null $employee_id
      * @return \Illuminate\View\View
      */
-    public function emergencyContacts(EmergencyContactsRequest $request, $employee_id = null)
+    public function index(EmergencyContactsRequest $request, $employee_id = null)
     {
         $employee = $this->employee->getEmployeeById($employee_id, $this->loggedUser->id);
 
@@ -59,7 +59,7 @@ class EmergencyContactsController extends Controller {
      *
      * @param EmergencyContactsRequest $request
      */
-    public function saveEmergencyContact(EmergencyContactsRequest $request)
+    public function store(EmergencyContactsRequest $request)
     {
         try
         {
@@ -90,7 +90,7 @@ class EmergencyContactsController extends Controller {
      *
      * @param EmergencyContactsRequest $request
      */
-    public function updateEmergencyContact(EmergencyContactsRequest $request)
+    public function update(EmergencyContactsRequest $request)
     {
         $emergencyContact = $this->emergencyContact->whereId($request->get('emergency_contact_id'))->first();
 

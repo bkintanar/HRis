@@ -68,7 +68,7 @@
                 <div class="modal-body">
                     <!--Add form-->
                     {!! Form::open(['method' => 'POST', 'url' => str_replace('/edit', '', \Request::path()).'/educations', 'class' => 'form-horizontal']) !!}
-                        {!! Form::hidden('id', $employee->id) !!}
+                        {!! Form::hidden('employee_id', $employee->id) !!}
                         {!! Form::hidden('education_id', '', ['id' => 'education_id']) !!}
                         {!! Form::hidden('_method', 'POST', ['id' => 'educationForm']) !!}
                         <div class="form-group">

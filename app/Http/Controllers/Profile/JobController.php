@@ -32,7 +32,7 @@ class JobController extends Controller {
      * @param null $employee_id
      * @return \Illuminate\View\View
      */
-    public function job(JobRequest $request, $employee_id = null)
+    public function index(JobRequest $request, $employee_id = null)
     {
         $employee = $this->employee->getEmployeeById($employee_id, $this->loggedUser->id);
 
@@ -56,7 +56,7 @@ class JobController extends Controller {
      * @param null $employee_id
      * @return \Illuminate\View\View
      */
-    public function showJobEditForm(JobRequest $request, $employee_id = null)
+    public function show(JobRequest $request, $employee_id = null)
     {
         $employee = $this->employee->getEmployeeById($employee_id, $this->loggedUser->id);
 
@@ -77,7 +77,7 @@ class JobController extends Controller {
      * @Patch("pim/employee-list/{id}/job")
      * @param JobRequest $request
      */
-    public function updateJob(JobRequest $request)
+    public function update(JobRequest $request)
     {
         $id = $request->get('id');
 
