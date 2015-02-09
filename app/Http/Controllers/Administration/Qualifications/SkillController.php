@@ -11,6 +11,15 @@ use Illuminate\Support\Facades\Redirect;
  */
 class SkillController extends Controller {
 
+    /**
+     * @var Skill
+     */
+    protected $skill;
+
+    /**
+     * @param Sentry $auth
+     * @param Skill $skill
+     */
     public function __construct(Sentry $auth, Skill $skill)
     {
         parent::__construct($auth);
@@ -26,7 +35,7 @@ class SkillController extends Controller {
      * @param SkillRequest $request
      * @return \Illuminate\View\View
      */
-    public function skill(SkillRequest $request)
+    public function index(SkillRequest $request)
     {
         $this->data['skills'] = Skill::where('id', '>', 0)->get();
 
@@ -42,14 +51,12 @@ class SkillController extends Controller {
      *
      * @param SkillRequest $request
      */
-    public function saveSkill(SkillRequest $request)
+    public function store(SkillRequest $request)
     {
         try
         {
-            $skill = new Skill;
-            $skill->name = $request->get('name');
+            $this->skill->create($request->all());
 
-            $skill->save();
         } catch (Exception $e)
         {
             return Redirect::to($request->path())->with('danger', 'Unable to add record to the database.');
@@ -65,9 +72,10 @@ class SkillController extends Controller {
      *
      * @param SkillRequest $request
      */
-    public function updateSkill(SkillRequest $request)
+    public function update(SkillRequest $request)
     {
         $skill = $this->skill->whereId($request->get('skill_id'))->first();
+
         if ( ! $skill)
         {
             return Redirect::to($request->path())->with('danger', 'Unable to retrieve record from database.');
@@ -75,9 +83,8 @@ class SkillController extends Controller {
 
         try
         {
-            $skill->name = $request->get('name');
+            $skill->update($request->all());
 
-            $skill->save();
         } catch (Exception $e)
         {
             return Redirect::to($request->path())->with('danger', 'Unable to update record.');

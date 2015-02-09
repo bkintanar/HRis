@@ -14,6 +14,16 @@ use Illuminate\Support\Facades\Redirect;
 class EmergencyContactsController extends Controller {
 
     /**
+     * @var Employee
+     */
+    protected $employee;
+
+    /**
+     * @var EmergencyContact
+     */
+    protected $emergencyContact;
+
+    /**
      * @param Sentry $auth
      * @param Employee $employee
      * @param EmergencyContact $emergencyContact
@@ -34,6 +44,7 @@ class EmergencyContactsController extends Controller {
      *
      * @param EmergencyContactsRequest $request
      * @param null $employee_id
+     *
      * @return \Illuminate\View\View
      */
     public function index(EmergencyContactsRequest $request, $employee_id = null)
@@ -50,7 +61,7 @@ class EmergencyContactsController extends Controller {
         $this->data['emergencyContacts'] = $this->emergencyContact->whereEmployeeId($employee->id)->get();
 
         $this->data['disabled'] = 'disabled';
-        $this->data['pim'] = $request->is('*pim/*') ? true : false;
+        $this->data['pim'] = $request->is('*pim/*') ? : false;
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Emergency Contacts' : 'My Emergency Contacts';
 
         return $this->template('pages.profile.emergency-contacts.view');
@@ -105,5 +116,59 @@ class EmergencyContactsController extends Controller {
         }
 
         return Redirect::to($request->path())->with('success', 'Record successfully updated.');
+    }
+
+    /**
+     * Delete the profile emergency contact.
+     *
+     * @Delete("ajax/profile/emergency-contacts")
+     * @Delete("ajax/pim/employee-list/{id}/emergency-contacts")
+     *
+     * @param EmergencyContactsRequest $request
+     */
+    public function delete(EmergencyContactsRequest $request)
+    {
+        if ($request->ajax())
+        {
+            $emergencyContactId = $request->get('id');
+
+            try
+            {
+                $this->emergencyContact->whereId($emergencyContactId)->delete();
+
+                print('success');
+
+            } catch (Exception $e)
+            {
+                print('failed');
+            }
+        }
+    }
+
+    /**
+     * Get the profile emergency contact.
+     *
+     * @Get("ajax/profile/emergency-contacts")
+     * @Get("ajax/pim/employee-list/{id}/emergency-contacts")
+     *
+     * @param EmergencyContactsRequest $request
+     */
+    public function show(EmergencyContactsRequest $request)
+    {
+        if ($request->ajax())
+        {
+            $emergencyContactId = $request->get('id');
+
+            try
+            {
+                $emergencyContact = $this->emergencyContact->whereId($emergencyContactId)->first();
+
+                print(json_encode($emergencyContact));
+
+            } catch (Exception $e)
+            {
+                print('failed');
+            }
+        }
     }
 }

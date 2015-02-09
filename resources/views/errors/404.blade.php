@@ -24,7 +24,7 @@
         <h3 class="font-bold">Page Not Found</h3>
 
         <div class="error-desc">
-            Sorry, but you are forbiddin to access the page you are looking for. Try checking the URL for error, then hit the refresh button on your browser or try found something else in our app.
+            Sorry, but the page you are looking for has note been found. Try checking the URL for error, then hit the refresh button on your browser or try found something else in our app.
             <form class="form-inline m-t" role="form">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Search for page">
