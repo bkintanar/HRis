@@ -20,11 +20,6 @@ class ContactDetailsController extends Controller {
     protected $employee;
 
     /**
-     * @var
-     */
-    protected $user;
-
-    /**
      * @param Sentry $auth
      * @param Employee $employee
      */
@@ -43,6 +38,7 @@ class ContactDetailsController extends Controller {
      *
      * @param ContactDetailsRequest $request
      * @param null $employee_id
+     *
      * @return \Illuminate\View\View
      */
     public function index(ContactDetailsRequest $request, $employee_id = null)
@@ -57,7 +53,7 @@ class ContactDetailsController extends Controller {
         $this->data['employee'] = $employee;
 
         $this->data['disabled'] = 'disabled';
-        $this->data['pim'] = $request->is('*pim/*') ? true : false;
+        $this->data['pim'] = $request->is('*pim/*') ? : false;
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Contact Details' : 'My Contact Details';
 
         return $this->template('pages.profile.contact-details.view');
@@ -71,6 +67,7 @@ class ContactDetailsController extends Controller {
      *
      * @param ContactDetailsRequest $request
      * @param null $employee_id
+     *
      * @return \Illuminate\View\View
      */
     public function show(ContactDetailsRequest $request, $employee_id = null)
@@ -85,7 +82,7 @@ class ContactDetailsController extends Controller {
         $this->data['employee'] = $employee;
 
         $this->data['disabled'] = '';
-        $this->data['pim'] = $request->is('*pim/*') ? true : false;
+        $this->data['pim'] = $request->is('*pim/*') ? : false;
         $this->data['pageTitle'] = $this->data['pim'] ? 'Edit Employee Contact Details' : 'Edit My Contact Details';
 
         return $this->template('pages.profile.contact-details.edit');
@@ -113,6 +110,7 @@ class ContactDetailsController extends Controller {
         try
         {
             $employee->update($request->all());
+
         } catch (Exception $e)
         {
             return Redirect::to($request->path())->with('danger', 'Unable to update record.');

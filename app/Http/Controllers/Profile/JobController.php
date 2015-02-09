@@ -13,9 +13,14 @@ use Illuminate\Support\Facades\Redirect;
 class JobController extends Controller {
 
     /**
-     * @var
+     * @var Employee
      */
-    protected $user;
+    protected $employee;
+
+    /**
+     * @var JobHistory
+     */
+    protected $job_history;
 
     /**
      * @param Sentry $auth
@@ -31,13 +36,14 @@ class JobController extends Controller {
     }
 
     /**
-     * Show the profile contact details.
+     * Show the Profile - Job.
      *
      * @Get("profile/job")
      * @Get("pim/employee-list/{id}/job")
      *
      * @param JobRequest $request
      * @param null $employee_id
+     *
      * @return \Illuminate\View\View
      */
     public function index(JobRequest $request, $employee_id = null)
@@ -48,20 +54,21 @@ class JobController extends Controller {
         $this->data['job_histories'] = $employee->orderedJobHistories();
 
         $this->data['disabled'] = 'disabled';
-        $this->data['pim'] = $request->is('*pim/*') ? true : false;
+        $this->data['pim'] = $request->is('*pim/*') ? : false;
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Job Details' : 'My Job Details';
 
         return $this->template('pages.profile.job.view');
     }
 
     /**
-     * Show the profile contact details form.
+     * Show the Profile - Job Form.
      *
      * @Get("profile/job/edit")
      * @Get("pim/employee-list/{id}/job/edit")
      *
      * @param JobRequest $request
      * @param null $employee_id
+     *
      * @return \Illuminate\View\View
      */
     public function show(JobRequest $request, $employee_id = null)
@@ -77,17 +84,18 @@ class JobController extends Controller {
         $this->data['job_histories'] = $employee->orderedJobHistories();
 
         $this->data['disabled'] = '';
-        $this->data['pim'] = $request->is('*pim/*') ? true : false;
+        $this->data['pim'] = $request->is('*pim/*') ? : false;
         $this->data['pageTitle'] = $this->data['pim'] ? 'Edit Employee Job Details' : 'Edit My Job Details';
 
         return $this->template('pages.profile.job.edit');
     }
 
     /**
-     * Updates the profile contact details.
+     * Updates the Profile - Job.
      *
      * @Patch("profile/job")
      * @Patch("pim/employee-list/{id}/job")
+     *
      * @param JobRequest $request
      */
     public function update(JobRequest $request)

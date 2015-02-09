@@ -11,11 +11,11 @@ use Illuminate\Support\Facades\Redirect;
  */
 class PayGradeController extends Controller {
 
-    public function __construct(Sentry $auth, PayGrade $payGrade)
+    public function __construct(Sentry $auth, PayGrade $pay_grade)
     {
         parent::__construct($auth);
 
-        $this->payGrade = $payGrade;
+        $this->pay_grade = $pay_grade;
     }
 
     /**
@@ -26,7 +26,7 @@ class PayGradeController extends Controller {
      * @param PayGradeRequest $request
      * @return \Illuminate\View\View
      */
-    public function payGrades(PayGradeRequest $request)
+    public function index(PayGradeRequest $request)
     {
         // TODO: fix me
         $this->data['payGrades'] = PayGrade::all();
@@ -43,16 +43,12 @@ class PayGradeController extends Controller {
      *
      * @param PayGradeRequest $request
      */
-    public function savePayGrade(PayGradeRequest $request)
+    public function store(PayGradeRequest $request)
     {
         try
         {
-            $pay_grade = new PayGrade;
-            $pay_grade->name = $request->get('name');
-            $pay_grade->min_salary = $request->get('min_salary');
-            $pay_grade->max_salary = $request->get('max_salary');
+            $this->pay_grade->create($request->all());
 
-            $pay_grade->save();
         } catch (Exception $e)
         {
             return Redirect::to($request->path())->with('danger', 'Unable to add record to the database.');
@@ -68,9 +64,9 @@ class PayGradeController extends Controller {
      *
      * @param PayGradeRequest $request
      */
-    public function updatePayGrade(PayGradeRequest $request)
+    public function update(PayGradeRequest $request)
     {
-        $pay_grade = $this->payGrade->whereId($request->get('pay_grade_id'))->first();
+        $pay_grade = $this->pay_grade->whereId($request->get('pay_grade_id'))->first();
 
         if ( ! $pay_grade)
         {
@@ -79,11 +75,8 @@ class PayGradeController extends Controller {
 
         try
         {
-            $pay_grade->name = $request->get('name');
-            $pay_grade->min_salary = $request->get('min_salary');
-            $pay_grade->max_salary = $request->get('max_salary');
+            $pay_grade->update($request->all());
 
-            $pay_grade->save();
         } catch (Exception $e)
         {
             return Redirect::to($request->path())->with('danger', 'Unable to update record.');

@@ -19,6 +19,11 @@ use Illuminate\Support\Facades\Redirect;
 class QualificationsController extends Controller {
 
     /**
+     * @var Employee
+     */
+    protected $employee;
+
+    /**
      * @param Sentry $auth
      * @param Employee $employee
      */
@@ -37,6 +42,7 @@ class QualificationsController extends Controller {
      *
      * @param QualificationsRequest $request
      * @param null $employee_id
+     *
      * @return \Illuminate\View\View
      */
     public function index(QualificationsRequest $request, $employee_id = null)
@@ -54,7 +60,7 @@ class QualificationsController extends Controller {
         $this->data['educations'] = $employee->educations;
         $this->data['skills'] = $employee->skills;
 
-        $this->data['pim'] = $request->is('*pim/*') or false;
+        $this->data['pim'] = $request->is('*pim/*') ? : false;
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Qualifications' : 'My Qualifications';
 
         return $this->template('pages.profile.qualifications.view');
@@ -68,7 +74,6 @@ class QualificationsController extends Controller {
      *
      * @param QualificationsWorkExperienceRequest $request
      * @param WorkExperience $workExperience
-     * @return
      */
     public function storeWorkExperience(QualificationsWorkExperienceRequest $request, WorkExperience $workExperience)
     {
@@ -94,7 +99,6 @@ class QualificationsController extends Controller {
      *
      * @param QualificationsWorkExperienceRequest $request
      * @param WorkExperience $workExperience
-     * @return
      */
     public function updateWorkExperience(QualificationsWorkExperienceRequest $request, WorkExperience $workExperience)
     {
@@ -117,7 +121,6 @@ class QualificationsController extends Controller {
         }
 
         return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('success', 'Record successfully updated.');
-
     }
 
     /**
@@ -128,7 +131,6 @@ class QualificationsController extends Controller {
      *
      * @param QualificationsEducationRequest $request
      * @param Education $education
-     * @return
      */
     public function storeEducation(QualificationsEducationRequest $request, Education $education)
     {
@@ -152,7 +154,6 @@ class QualificationsController extends Controller {
      *
      * @param QualificationsEducationRequest $request
      * @param Education $education
-     * @return
      */
     public function updateEducation(QualificationsEducationRequest $request, Education $education)
     {
@@ -182,7 +183,6 @@ class QualificationsController extends Controller {
      * @Post("pim/employee-list/{id}/qualifications/skills")
      *
      * @param QualificationsSkillRequest $request
-     * @return
      */
     public function storeSkill(QualificationsSkillRequest $request)
     {
@@ -198,6 +198,7 @@ class QualificationsController extends Controller {
                 'years_of_experience' => $years_of_experience,
                 'comment'             => $comment
             ]);
+
         } catch (Exception $e)
         {
             return Redirect::to(str_replace('/skills', '', $request->path()))->with('danger', 'Unable to add record to the database.');
@@ -214,7 +215,6 @@ class QualificationsController extends Controller {
      *
      * @param QualificationsSkillRequest $request
      * @param EmployeeSkill $employeeSkill
-     * @return
      */
     public function updateSkill(QualificationsSkillRequest $request, EmployeeSkill $employeeSkill)
     {
@@ -228,10 +228,11 @@ class QualificationsController extends Controller {
         try
         {
             $employeeSkill->skill_id = $request->get('skill_id');
-            $employeeSkill->years_of_experience = $request->get('years_of_experience') or null;
-            $employeeSkill->comment = $request->get('skill_comment') or null;
+            $employeeSkill->years_of_experience = $request->get('years_of_experience') ? : null;
+            $employeeSkill->comment = $request->get('skill_comment') ? : null;
 
             $employeeSkill->save();
+
         } catch (Exception $e)
         {
             return Redirect::to(str_replace('/skills', '', $request->path()))->with('danger', 'Unable to update record.');

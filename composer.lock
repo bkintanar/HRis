@@ -72,12 +72,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cartalyst/sentry.git",
-                "reference": "e9c534ef9595207aa8927bc718e8820ced0201a2"
+                "reference": "3dd90ad0f465b4f72e9217c9d5fc27c732c8f4d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cartalyst/sentry/zipball/e9c534ef9595207aa8927bc718e8820ced0201a2",
-                "reference": "e9c534ef9595207aa8927bc718e8820ced0201a2",
+                "url": "https://api.github.com/repos/cartalyst/sentry/zipball/3dd90ad0f465b4f72e9217c9d5fc27c732c8f4d7",
+                "reference": "3dd90ad0f465b4f72e9217c9d5fc27c732c8f4d7",
                 "shasum": ""
             },
             "require": {
@@ -164,7 +164,7 @@
                 "laravel",
                 "security"
             ],
-            "time": "2015-01-29 20:17:26"
+            "time": "2015-02-06 20:48:31"
         },
         {
             "name": "classpreloader/classpreloader",
@@ -796,16 +796,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.0.0",
+            "version": "v5.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "44c61252b5762ff53ad181ed416e3006c50a6a9b"
+                "reference": "022d46dc5eff9056e25078f283d2810749275966"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/44c61252b5762ff53ad181ed416e3006c50a6a9b",
-                "reference": "44c61252b5762ff53ad181ed416e3006c50a6a9b",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/022d46dc5eff9056e25078f283d2810749275966",
+                "reference": "022d46dc5eff9056e25078f283d2810749275966",
                 "shasum": ""
             },
             "require": {
@@ -917,7 +917,62 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2015-02-04 13:59:07"
+            "time": "2015-02-06 19:37:20"
+        },
+        {
+            "name": "laravelcollective/annotations",
+            "version": "v5.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/LaravelCollective/annotations.git",
+                "reference": "2f0be8ebdcf8fde39f74dc2f5bcfaac857596f65"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/LaravelCollective/annotations/zipball/2f0be8ebdcf8fde39f74dc2f5bcfaac857596f65",
+                "reference": "2f0be8ebdcf8fde39f74dc2f5bcfaac857596f65",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/annotations": "~1.0",
+                "illuminate/console": "~5.0",
+                "illuminate/filesystem": "~5.0",
+                "illuminate/support": "~5.0",
+                "php": ">=5.4.0",
+                "symfony/console": "2.6.*",
+                "symfony/finder": "2.6.*"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Collective\\Annotations\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Adam Engebretson",
+                    "email": "adam@enge.me"
+                },
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylorotwell@gmail.com"
+                }
+            ],
+            "description": "Route Annotations for The Laravel Framework.",
+            "keywords": [
+                "annotations",
+                "framework",
+                "laravel"
+            ],
+            "time": "2015-02-04 20:30:17"
         },
         {
             "name": "league/flysystem",

@@ -20,6 +20,11 @@ class Skill extends Model {
     protected $table = 'skills';
 
     /**
+     * @var array
+     */
+    protected $fillable = ['name'];
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function employees()

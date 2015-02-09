@@ -17,7 +17,7 @@ class PersonalDetailsController extends Controller {
     /**
      * @var
      */
-    protected $user;
+    protected $employee;
 
     /**
      * @param Sentry $auth
@@ -38,6 +38,7 @@ class PersonalDetailsController extends Controller {
      *
      * @param PersonalDetailsRequest $request
      * @param null $employee_id
+     *
      * @return \Illuminate\View\View
      */
     public function index(PersonalDetailsRequest $request, $employee_id = null)
@@ -52,7 +53,7 @@ class PersonalDetailsController extends Controller {
         $this->data['employee'] = $employee;
 
         $this->data['disabled'] = 'disabled';
-        $this->data['pim'] = $request->is('*pim/*') ? true : false;
+        $this->data['pim'] = $request->is('*pim/*') ? : false;
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Personal Details' : 'My Personal Details';
 
         return $this->template('pages.profile.personal-details.view');
@@ -63,8 +64,10 @@ class PersonalDetailsController extends Controller {
      *
      * @Get("profile/personal-details/edit")
      * @Get("pim/employee-list/{id}/personal-details/edit")
+     *
      * @param PersonalDetailsRequest $request
      * @param null $employee_id
+     *
      * @return \Illuminate\View\View
      */
     public function show(PersonalDetailsRequest $request, $employee_id = null)
@@ -79,7 +82,7 @@ class PersonalDetailsController extends Controller {
         $this->data['employee'] = $employee;
 
         $this->data['disabled'] = '';
-        $this->data['pim'] = $request->is('*pim/*') ? true : false;
+        $this->data['pim'] = $request->is('*pim/*') ? : false;
         $this->data['pageTitle'] = $this->data['pim'] ? 'Edit Employee Contact Details' : 'Edit My Contact Details';
 
         return $this->template('pages.profile.personal-details.edit');
@@ -105,9 +108,9 @@ class PersonalDetailsController extends Controller {
             return Redirect::to($request->path())->with('danger', 'Unable to retrieve record from database.');
         }
 
-
-        $original_id = $this->employee->whereEmployeeId($employee_id)->pluck('id');
-        if ($id != $original_id && ! is_null($original_id))
+        // If user is trying to update the employee_id to a used employee_id.
+        $original_employee_id = $this->employee->whereEmployeeId($employee_id)->pluck('id');
+        if ($id != $original_employee_id && ! is_null($original_employee_id))
         {
             $path = $request->path();
 
@@ -125,10 +128,9 @@ class PersonalDetailsController extends Controller {
         try
         {
             $employee->update($request->all());
+
         } catch (Exception $e)
         {
-            dd($e->getMessage());
-
             return Redirect::to($request->path())->with('danger', 'Unable to update record.');
         }
 

@@ -4,17 +4,17 @@ use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Administration\NationalityRequest;
 use HRis\Nationality;
-use HRis\User;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Request;
 
 /**
  * @Middleware("auth")
  */
 class NationalityController extends Controller {
 
-    protected $user;
-
+    /**
+     * @param Sentry $auth
+     * @param Nationality $nationality
+     */
     public function __construct(Sentry $auth, Nationality $nationality)
     {
         parent::__construct($auth);
@@ -46,14 +46,12 @@ class NationalityController extends Controller {
      *
      * @param NationalityRequest $request
      */
-    public function saveNationality(NationalityRequest $request)
+    public function store(NationalityRequest $request)
     {
         try
         {
-            $nationality = new Nationality;
-            $nationality->name = $request->get('name');
+            $this->nationality->create($request->all());
 
-            $nationality->save();
         } catch (Exception $e)
         {
             return Redirect::to($request->path())->with('danger', 'Unable to add record to the database.');
@@ -69,7 +67,7 @@ class NationalityController extends Controller {
      *
      * @param NationalityRequest $request
      */
-    public function updateNationality(NationalityRequest $request)
+    public function update(NationalityRequest $request)
     {
         $nationality = $this->nationality->whereId($request->get('nationality_id'))->first();
 
@@ -80,9 +78,7 @@ class NationalityController extends Controller {
 
         try
         {
-            $nationality->name = $request->get('name');
-
-            $nationality->save();
+            $nationality->update($request->all());
         } catch (Exception $e)
         {
             return Redirect::to($request->path())->with('danger', 'Unable to update record.');

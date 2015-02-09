@@ -11,11 +11,20 @@ use Illuminate\Support\Facades\Redirect;
  */
 class WorkShiftController extends Controller {
 
-    public function __construct(Sentry $auth, WorkShift $workShift)
+    /**
+     * @var WorkShift
+     */
+    protected $work_shift;
+
+    /**
+     * @param Sentry $auth
+     * @param WorkShift $work_shift
+     */
+    public function __construct(Sentry $auth, WorkShift $work_shift)
     {
         parent::__construct($auth);
 
-        $this->workShift = $workShift;
+        $this->work_shift = $work_shift;
     }
 
     /**
@@ -26,7 +35,7 @@ class WorkShiftController extends Controller {
      * @param WorkShiftRequest $request
      * @return \Illuminate\View\View
      */
-    public function workShifts(WorkShiftRequest $request)
+    public function index(WorkShiftRequest $request)
     {
         // TODO: fix me
         $this->data['workShifts'] = WorkShift::where('id', '>', 0)->get();
@@ -43,17 +52,12 @@ class WorkShiftController extends Controller {
      *
      * @param WorkShiftRequest $request
      */
-    public function saveWorkShift(WorkShiftRequest $request)
+    public function store(WorkShiftRequest $request)
     {
         try
         {
-            $work_shift = new WorkShift;
-            $work_shift->name = $request->get('name');
-            $work_shift->from_time = $request->get('from_time');
-            $work_shift->to_time = $request->get('to_time');
-            $work_shift->duration = $request->get('duration');
+            $this->work_shift->create($request->all());
 
-            $work_shift->save();
         } catch (Exception $e)
         {
             return Redirect::to($request->path())->with('danger', 'Unable to add record to the database.');
@@ -69,9 +73,9 @@ class WorkShiftController extends Controller {
      *
      * @param WorkShiftRequest $request
      */
-    public function updateWorkShift(WorkShiftRequest $request)
+    public function update(WorkShiftRequest $request)
     {
-        $work_shift = $this->workShift->whereId($request->get('work_shift_id'))->first();
+        $work_shift = $this->work_shift->whereId($request->get('work_shift_id'))->first();
 
         if ( ! $work_shift)
         {
@@ -80,12 +84,8 @@ class WorkShiftController extends Controller {
 
         try
         {
-            $work_shift->name = $request->get('name');
-            $work_shift->from_time = $request->get('from_time');
-            $work_shift->to_time = $request->get('to_time');
-            $work_shift->duration = $request->get('duration');
+            $work_shift->update($request->all());
 
-            $work_shift->save();
         } catch (Exception $e)
         {
             return Redirect::to($request->path())->with('danger', 'Unable to update record.');

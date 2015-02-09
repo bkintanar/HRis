@@ -2,7 +2,16 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class PayGrade
+ * @package HRis
+ */
 class PayGrade extends Model {
+
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
 
     /**
      * The database table used by the model.
@@ -11,5 +20,8 @@ class PayGrade extends Model {
      */
     protected $table = 'pay_grades';
 
-    public $timestamps = false;
+    /**
+     * @var array
+     */
+    protected $fillable = ['name', 'min_salary', 'max_salary'];
 }

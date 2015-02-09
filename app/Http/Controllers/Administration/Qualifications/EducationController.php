@@ -11,6 +11,15 @@ use Illuminate\Support\Facades\Redirect;
  */
 class EducationController extends Controller {
 
+    /**
+     * @var EducationLevel
+     */
+    protected $education;
+
+    /**
+     * @param Sentry $auth
+     * @param EducationLevel $education
+     */
     public function __construct(Sentry $auth, EducationLevel $education)
     {
         parent::__construct($auth);
@@ -24,9 +33,10 @@ class EducationController extends Controller {
      * @Get("admin/qualifications/educations")
      *
      * @param EducationRequest $request
+     *
      * @return \Illuminate\View\View
      */
-    public function education(EducationRequest $request)
+    public function index(EducationRequest $request)
     {
         $this->data['educations'] = EducationLevel::where('id', '>', 0)->get();
 
@@ -42,14 +52,12 @@ class EducationController extends Controller {
      *
      * @param EducationRequest $request
      */
-    public function saveEducation(EducationRequest $request)
+    public function store(EducationRequest $request)
     {
         try
         {
-            $education = new EducationLevel;
-            $education->name = $request->get('name');
+            $this->education->create($request->all());
 
-            $education->save();
         } catch (Exception $e)
         {
             return Redirect::to($request->path())->with('danger', 'Unable to add record to the database.');
@@ -65,7 +73,7 @@ class EducationController extends Controller {
      *
      * @param EducationRequest $request
      */
-    public function updateEducation(EducationRequest $request)
+    public function update(EducationRequest $request)
     {
         $education = $this->education->whereId($request->get('education_id'))->first();
 
@@ -76,9 +84,8 @@ class EducationController extends Controller {
 
         try
         {
-            $education->name = $request->get('name');
+            $education->update($request->all());
 
-            $education->save();
         } catch (Exception $e)
         {
             return Redirect::to($request->path())->with('danger', 'Unable to update record.');

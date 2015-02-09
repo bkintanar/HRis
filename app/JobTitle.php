@@ -2,7 +2,16 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class JobTitle
+ * @package HRis
+ */
 class JobTitle extends Model {
+
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
 
     /**
      * The database table used by the model.
@@ -11,5 +20,8 @@ class JobTitle extends Model {
      */
     protected $table = 'job_titles';
 
-    public $timestamps = false;
+    /**
+     * @var array
+     */
+    protected $fillable = ['name', 'description'];
 }
