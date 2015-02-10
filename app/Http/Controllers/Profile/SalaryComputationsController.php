@@ -5,8 +5,7 @@ use HRis\Http\Requests;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\SalaryRequest;
 use HRis\Employee;
-use HRis\Sss;
-use HRis\EmployeeSalaryComponents;
+use HRis\SSSContributions;
 use HRis\SalaryComponents;
 use HRis\TaxComputations;
 use HRis\Dependent;
@@ -35,76 +34,51 @@ class SalaryComputationsController extends Controller {
      */
     public function salary(SalaryRequest $request, $employee_id = null)
     {
-        $employee = $this->employee->whereEmployeeId($employee_id)->with('employeeSalaryComponents')->first();
-//        $semiMonthly = $employee->employeeSalary->salary / 2;
-//        $contributions = $employee->employeeContributions->first();
+        $employee = $this->employee->getEmployeeSalarydetails($employee_id, $this->loggedUser->id);
+        $employeeComponents = $employee->employeeSalaryComponents;
+        $deductions = 0;
 
+        foreach($employeeComponents as $key => $employeeComponent)
+        {
+            if($employeeComponent->component_id == 1)
+            {
+                $semiMonthly = $employeeComponents[$key]->value / 2;
+                $employeeComponents[$key]->value = $semiMonthly;
+            }
+            if($employeeComponent->component_id == 2)
+            {
+                if($employeeComponents[$key]->value == 0)
+                {
+                    $getSSS = SSSContributions::where('range_compensation_from', '<=', $semiMonthly)
+                        ->orderBy('range_compensation_from', 'desc')
+                        ->first();
+                    $employeeComponents[$key]->value = $getSSS->sss_ee;
+                }
+            }
+            if($employeeComponent->salaryComponent->type == 2)
+            {
+                $deductions += $employeeComponent->value;
+            }
+        }
 
-//        if (!$contributions->SSS)
-//        {
-//            $getSSS = Sss::where('range_compensation_from', '<=', $semiMonthly)->orderBy('range_compensation_from', 'desc')->first();
-//            $contributions->SSS = $getSSS->sss_ee;
-//        }
-//
-//        $status = 'ME_S';
-//        if (count($employee->dependents))
-//        {
-//            $status = 'ME' . count($employee->dependents) . '_S' . count($employee->dependents);
-//        }
-//
-//        $deductions = $contributions->SSS + $contributions->PhilHealth + $contributions->HDMF;
-//        $taxableSalary = $semiMonthly - $deductions;
-//        $taxes = $this->tax_computations->getTaxRate($status, $taxableSalary);
-//
-//        $over = 0;
-//        if ($taxableSalary > $taxes->$status)
-//        {
-//            $over = $taxableSalary - $taxes->$status;
-//        }
-//        $totalTax = $taxes->exemption + ($over * $taxes->percentage_over);
-//        $finalSalary = $taxableSalary - $totalTax;
-//
-//        echo $taxableSalary;
-//        echo '<br/>';
-//        echo '<br/>';
-//        echo 'Total Ded: ' . $deductions . ' (' . $contributions->SSS . ' ' . $contributions->PhilHealth . ' ' . $contributions->HDMF . ')';
-//        echo '<br/>';
-//        echo 'Total Tax: ' . round($totalTax, 2);
-//        echo '<br/>';
-//        echo 'Salary: ' . round($finalSalary, 2);
-//
-//        die;
-//
-//        $this->data['employee'] = $employee;
-//        $this->data['salary'] = $semiMonthly;
-//
+        $status = 'ME_S';
+        if (count($employee->dependents))
+        {
+            $status = 'ME' . count($employee->dependents) . '_S' . count($employee->dependents);
+        }
 
-//        dd($employee->employeeSalaryComponents);
+        $taxableSalary = $semiMonthly - $deductions;
+        $taxes = $this->tax_computations->getTaxRate($status, $taxableSalary);
 
-//        foreach($employee->employeeSalaryComponents as $value)
-//        {
-//            echo $value . '<br/><br/>';
-//        }
-
-//        echo "<pre>";
-//        print_r($employee);
-//
-//        dd($employee);
-//
-//        $employeeComponents = json_decode($employee->employeeSalaryComponents);
-//
-//        echo '<pre>';
-////        print_r($employeeComponents);
-//
-//        foreach($employeeComponents as $value)
-//        {
-////            print_r($value);
-//            echo $value->salary_component->components . '<br/>';
-//        }
-//
-//        die;
+        $over = 0;
+        if ($taxableSalary > $taxes->$status)
+        {
+            $over = $taxableSalary - $taxes->$status;
+        }
+        $totalTax = $taxes->exemption + ($over * $taxes->percentage_over);
 
         $this->data['employee'] = $employee;
+        $this->data['tax'] = round($totalTax, 2);
 
         $this->data['disabled'] = 'disabled';
         $this->data['pim'] = $request->is('*pim/*') ? true : false;
@@ -125,7 +99,7 @@ class SalaryComputationsController extends Controller {
      */
     public function showSalaryEditForm(SalaryRequest $request, $employee_id = null)
     {
-        $employee = $this->employee->whereEmployeeId($employee_id)->with('employeeSalary', 'dependents', 'employeeContributions')->first();
+        $employee = $this->employee->getEmployeeSalarydetails($employee_id, $this->loggedUser->id);
 
         $this->data['employee'] = $employee;
 

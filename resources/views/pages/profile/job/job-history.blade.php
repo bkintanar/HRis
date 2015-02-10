@@ -9,7 +9,6 @@
                 </div>
             </div>
             <div class="ibox-content">
-                @if(count($job_histories))
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -24,6 +23,7 @@
                             </tr>
                         </thead>
                         <tbody id="JobHistoryBody">
+                        @if(count($job_histories))
                             @foreach($job_histories as $job_history)
                                 <tr class="JobHistoryList" id="jobHistory_{{$job_history->id}}">
                                     <td>{{ $job_history->jobTitle->name or ''}}</td>
@@ -39,11 +39,11 @@
 
                                 </tr>
                             @endforeach
+                        @else
+                            <tr><td colspan="5">No job history listed</td></tr>
+                        @endif
                         </tbody>
                     </table>
-                @else
-                    <p>No Data</p>
-                @endif
             </div>
         </div>
 </div>

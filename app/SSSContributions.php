@@ -2,14 +2,14 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Sss extends Model {
+class SSSContributions extends Model {
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'sss_contribution';
+    protected $table = 'sss_contributions';
 
     public $timestamps = false;
 

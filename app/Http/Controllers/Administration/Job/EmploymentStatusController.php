@@ -11,11 +11,20 @@ use Illuminate\Support\Facades\Redirect;
  */
 class EmploymentStatusController extends Controller {
 
-    public function __construct(Sentry $auth, EmploymentStatus $employmentStatus)
+    /**
+     * @var EmploymentStatus
+     */
+    protected $employment_status;
+
+    /**
+     * @param Sentry $auth
+     * @param EmploymentStatus $employment_status
+     */
+    public function __construct(Sentry $auth, EmploymentStatus $employment_status)
     {
         parent::__construct($auth);
 
-        $this->employmentStatus = $employmentStatus;
+        $this->employment_status = $employment_status;
     }
 
     /**
@@ -24,12 +33,13 @@ class EmploymentStatusController extends Controller {
      * @Get("admin/job/employment-status")
      *
      * @param EmploymentStatusRequest $request
+     *
      * @return \Illuminate\View\View
      */
-    public function employmentStatus(EmploymentStatusRequest $request)
+    public function index(EmploymentStatusRequest $request)
     {
         // TODO:: fix me
-        $this->data['employmentStatuses'] = EmploymentStatus::all();
+        $this->data['employmentStatuses'] = $this->employment_status->where('id', '>', 0)->get();
 
         $this->data['pageTitle'] = 'Employment Status';
 
@@ -43,21 +53,18 @@ class EmploymentStatusController extends Controller {
      *
      * @param EmploymentStatusRequest $request
      */
-    public function saveEmploymentStatus(EmploymentStatusRequest $request)
+    public function store(EmploymentStatusRequest $request)
     {
         try
         {
-            $employment_status = new EmploymentStatus;
-            $employment_status->name = $request->get('name');
-            $employment_status->class = $request->get('class');
+            $this->employment_status->create($request->all());
 
-            $employment_status->save();
         } catch (Exception $e)
         {
-            return Redirect::to($request->path())->with('danger', 'Unable to add record to the database.');
+            return Redirect::to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', 'Record successfully added.');
+        return Redirect::to($request->path())->with('success', SUCCESS_ADD_MESSAGE);
     }
 
     /**
@@ -67,26 +74,24 @@ class EmploymentStatusController extends Controller {
      *
      * @param EmploymentStatusRequest $request
      */
-    public function updateEmploymentStatus(EmploymentStatusRequest $request)
+    public function update(EmploymentStatusRequest $request)
     {
-        $employment_status = $this->employmentStatus->whereId($request->get('employment_status_id'))->first();
+        $employment_status = $this->employment_status->whereId($request->get('employment_status_id'))->first();
 
         if ( ! $employment_status)
         {
-            return Redirect::to($request->path())->with('danger', 'Unable to retrieve record from database.');
+            return Redirect::to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
         try
         {
-            $employment_status->name = $request->get('name');
-            $employment_status->class = $request->get('class');
+            $employment_status->update($request->all());
 
-            $employment_status->save();
         } catch (Exception $e)
         {
-            return Redirect::to($request->path())->with('danger', 'Unable to update record.');
+            return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', 'Record successfully updated.');
+        return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
     }
 }

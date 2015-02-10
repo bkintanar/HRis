@@ -32,8 +32,8 @@
                             </thead>
 
                             <tbody id="dependentsBody">
-                                @if(count($dependents))
-                                    @foreach($dependents as $dependent)
+                                @if(count($employee->dependents))
+                                    @foreach($employee->dependents as $dependent)
                                     <tr class="dependentsList" id="dependent_{{$dependent->id}}">
                                         <td>{{ $dependent->first_name }} {{$dependent->middle_name}} {{ $dependent->last_name }}</td>
                                         <td>{{ HRis\Relationship::whereId($dependent->relationship_id)->pluck('name') }}</td>

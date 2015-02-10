@@ -2,7 +2,16 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class EducationLevel
+ * @package HRis
+ */
 class EducationLevel extends Model {
+
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
 
     /**
      * The database table used by the model.
@@ -11,6 +20,9 @@ class EducationLevel extends Model {
      */
     protected $table = 'education_levels';
 
-    public $timestamps = false;
+    /**
+     * @var array
+     */
+    protected $fillable = ['name'];
 
 }

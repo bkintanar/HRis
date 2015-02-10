@@ -22,22 +22,22 @@
 
     <script>
 
-            function getValues(type)
-            {
-                var data = 0;
-                $('.' + type).each(function () {
-                    data += parseFloat($(this).val());
-                });
+        function getValues(type)
+        {
+            var data = 0;
+            $('.' + type).each(function () {
+                data += Number($(this).val());
+            });
 
+            return data;
+        }
 
-                return data.toFixed(2);
-            }
+        earnings = getValues('earnings');
+        deductions = getValues('deductions');
 
-            earnings = getValues('earnings');
-            deductions = getValues('deductions');
-
-            $('.deduction').html(deductions);
-            alert(deductions);
+        $('.display-earnings').append(parseFloat(earnings).toFixed(2));
+        $('.display-deduction').append(parseFloat(deductions).toFixed(2));
+        $('.display-total').append(parseFloat(earnings - deductions).toFixed(2));
 
         $('.chosen-select').chosen();
 

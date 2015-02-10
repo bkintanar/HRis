@@ -20,11 +20,6 @@ class ContactDetailsController extends Controller {
     protected $employee;
 
     /**
-     * @var
-     */
-    protected $user;
-
-    /**
      * @param Sentry $auth
      * @param Employee $employee
      */
@@ -43,6 +38,7 @@ class ContactDetailsController extends Controller {
      *
      * @param ContactDetailsRequest $request
      * @param null $employee_id
+     *
      * @return \Illuminate\View\View
      */
     public function index(ContactDetailsRequest $request, $employee_id = null)
@@ -57,7 +53,7 @@ class ContactDetailsController extends Controller {
         $this->data['employee'] = $employee;
 
         $this->data['disabled'] = 'disabled';
-        $this->data['pim'] = $request->is('*pim/*') ? true : false;
+        $this->data['pim'] = $request->is('*pim/*') ? : false;
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Contact Details' : 'My Contact Details';
 
         return $this->template('pages.profile.contact-details.view');
@@ -71,6 +67,7 @@ class ContactDetailsController extends Controller {
      *
      * @param ContactDetailsRequest $request
      * @param null $employee_id
+     *
      * @return \Illuminate\View\View
      */
     public function show(ContactDetailsRequest $request, $employee_id = null)
@@ -85,7 +82,7 @@ class ContactDetailsController extends Controller {
         $this->data['employee'] = $employee;
 
         $this->data['disabled'] = '';
-        $this->data['pim'] = $request->is('*pim/*') ? true : false;
+        $this->data['pim'] = $request->is('*pim/*') ? : false;
         $this->data['pageTitle'] = $this->data['pim'] ? 'Edit Employee Contact Details' : 'Edit My Contact Details';
 
         return $this->template('pages.profile.contact-details.edit');
@@ -107,17 +104,18 @@ class ContactDetailsController extends Controller {
 
         if ( ! $employee)
         {
-            return Redirect::to($request->path())->with('danger', 'Unable to retrieve record from database.');
+            return Redirect::to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
         try
         {
             $employee->update($request->all());
+
         } catch (Exception $e)
         {
-            return Redirect::to($request->path())->with('danger', 'Unable to update record.');
+            return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', 'Record successfully updated.');
+        return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
     }
 }

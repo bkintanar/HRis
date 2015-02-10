@@ -11,11 +11,20 @@ use Illuminate\Support\Facades\Redirect;
  */
 class TitleController extends Controller {
 
-    public function __construct(Sentry $auth, JobTitle $jobTitle)
+    /**
+     * @var JobTitle
+     */
+    protected $job_title;
+
+    /**
+     * @param Sentry $auth
+     * @param JobTitle $job_title
+     */
+    public function __construct(Sentry $auth, JobTitle $job_title)
     {
         parent::__construct($auth);
 
-        $this->jobTitle = $jobTitle;
+        $this->job_title = $job_title;
     }
 
     /**
@@ -26,10 +35,10 @@ class TitleController extends Controller {
      * @param JobTitleRequest $request
      * @return \Illuminate\View\View
      */
-    public function titles(JobTitleRequest $request)
+    public function index(JobTitleRequest $request)
     {
         // TODO: fix me
-        $this->data['jobTitles'] = JobTitle::all();
+        $this->data['jobTitles'] = JobTitle::where('id', '>', 0)->get();
 
         $this->data['pageTitle'] = 'Job Titles';
 
@@ -43,21 +52,18 @@ class TitleController extends Controller {
      *
      * @param JobTitleRequest $request
      */
-    public function saveTitle(JobTitleRequest $request)
+    public function store(JobTitleRequest $request)
     {
         try
         {
-            $job_title = new JobTitle;
-            $job_title->name = $request->get('name');
-            $job_title->description = $request->get('description');
+            $this->job_title->create($request->all());
 
-            $job_title->save();
         } catch (Exception $e)
         {
-            return Redirect::to($request->path())->with('danger', 'Unable to add record to the database.');
+            return Redirect::to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', 'Record successfully added.');
+        return Redirect::to($request->path())->with('success', SUCCESS_ADD_MESSAGE);
     }
 
     /**
@@ -67,26 +73,24 @@ class TitleController extends Controller {
      *
      * @param JobTitleRequest $request
      */
-    public function updateTitle(JobTitleRequest $request)
+    public function update(JobTitleRequest $request)
     {
-        $job_title = $this->jobTitle->whereId($request->get('job_title_id'))->first();
+        $job_title = $this->job_title->whereId($request->get('job_title_id'))->first();
 
         if ( ! $job_title)
         {
-            return Redirect::to($request->path())->with('danger', 'Unable to retrieve record from database.');
+            return Redirect::to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
         try
         {
-            $job_title->name = $request->get('name');
-            $job_title->description = $request->get('description');
+            $job_title->update($request->all());
 
-            $job_title->save();
         } catch (Exception $e)
         {
-            return Redirect::to($request->path())->with('danger', 'Unable to update record.');
+            return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', 'Record successfully updated.');
+        return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
     }
 }

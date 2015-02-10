@@ -2,7 +2,7 @@
 
 @section('content')
     @include('partials.notification')
-    @include('pages.profile.salary.form-earnings')
+    @include('pages.profile.salary.form')
 @stop
 
 @section('custom_css')
@@ -20,9 +20,33 @@
     <script>
         $(document).ready(function () {
 
+            $('.fields').change(function () {
+                display();
+            });
+
             $('.chosen-select').chosen();
 
         });
+
+        function getValues(type)
+        {
+            var data = 0;
+            $('.' + type).each(function () {
+                data += Number($(this).val());
+            });
+
+            return data;
+        }
+
+        function display()
+        {
+            earnings = getValues('earnings');
+            deductions = getValues('deductions');
+
+            $('.display-earnings').append(parseFloat(earnings).toFixed(2));
+            $('.display-deduction').append(parseFloat(deductions).toFixed(2));
+            $('.display-total').append(parseFloat(earnings - deductions).toFixed(2));
+        }
 
     </script>
 

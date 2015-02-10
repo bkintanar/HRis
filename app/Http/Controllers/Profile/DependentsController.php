@@ -14,6 +14,16 @@ use Illuminate\Support\Facades\Redirect;
 class DependentsController extends Controller {
 
     /**
+     * @var Dependent
+     */
+    protected $dependent;
+
+    /**
+     * @var Employee
+     */
+    protected $employee;
+
+    /**
      * @param Sentry $auth
      * @param Employee $employee
      * @param Dependent $dependent
@@ -34,6 +44,7 @@ class DependentsController extends Controller {
      *
      * @param DependentsRequest $request
      * @param null $employee_id
+     *
      * @return \Illuminate\View\View
      */
     public function index(DependentsRequest $request, $employee_id = null)
@@ -47,9 +58,7 @@ class DependentsController extends Controller {
 
         $this->data['employee'] = $employee;
 
-        $this->data['dependents'] = $this->dependent->whereEmployeeId($employee->employee_id)->get();
-
-        $this->data['pim'] = $request->is('*pim/*') ? true : false;
+        $this->data['pim'] = $request->is('*pim/*') ? : false;
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Dependents' : 'My Dependents';
 
         return $this->template('pages.profile.dependents.view');
@@ -70,10 +79,10 @@ class DependentsController extends Controller {
             $this->dependent->create($request->all());
         } catch (Exception $e)
         {
-            return Redirect::to($request->path())->with('danger', 'Unable to add record to the database.');
+            return Redirect::to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', 'Record successfully added.');
+        return Redirect::to($request->path())->with('success', SUCCESS_ADD_MESSAGE);
     }
 
     /**
@@ -103,5 +112,59 @@ class DependentsController extends Controller {
         }
 
         return Redirect::to($request->path())->with('success', 'Record successfully updated.');
+    }
+
+    /**
+     * Delete the profile dependent.
+     *
+     * @Delete("ajax/profile/dependents")
+     * @Delete("ajax/pim/employee-list/{id}/dependents")
+     * @param DependentsRequest $request
+     */
+    public function deleteDependent(DependentsRequest $request)
+    {
+        if ($request->ajax())
+        {
+            $dependentId = $request->get('id');
+
+            try
+            {
+                $this->dependent->whereId($dependentId)->delete();
+
+                print('success');
+
+            } catch (Exception $e)
+            {
+                print('failed');
+            }
+        }
+    }
+
+    /**
+     * Get the profile dependent.
+     *
+     * @Get("ajax/profile/dependents")
+     * @Get("ajax/pim/employee-list/{id}/dependents")
+     *
+     * @param DependentsRequest $request
+     */
+    public function getDependent(DependentsRequest $request)
+    {
+        if ($request->ajax())
+        {
+            $dependentId = $request->get('id');
+
+            try
+            {
+                $dependent = $this->dependent->whereId($dependentId)->first();
+
+                print(json_encode($dependent));
+
+            } catch (Exception $e)
+            {
+                print('failed');
+            }
+
+        }
     }
 }

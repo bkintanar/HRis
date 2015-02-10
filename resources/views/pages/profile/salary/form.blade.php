@@ -18,7 +18,7 @@
                     <div class="form-group">
                         {!! Form::label('$value', $value->salaryComponent->components, ['class' => 'col-md-2 control-label']) !!}
                         <div class="col-md-4">
-                        {!! Form::text('salary', $value->value, ['class' => 'form-control earnings', 'data-mask' => '99,999.99', $disabled]) !!}
+                        {!! Form::text('salary', $value->value, ['class' => 'form-control fields earnings', 'data-mask' => '99,999.99', $disabled]) !!}
                         </div>
 
                         <label for="joined_date" class="col-md-2 control-label">Effective Date</label>
@@ -50,7 +50,7 @@
                     <div class="form-group">
                         {!! Form::label('$value', $value->salaryComponent->components, ['class' => 'col-md-2 control-label']) !!}
                         <div class="col-md-4">
-                        {!! Form::text('salary', $value->value, ['class' => 'form-control deductions', 'data-mask' => '99,999.99', $disabled]) !!}
+                        {!! Form::text('salary', $value->value, ['class' => 'form-control fields deductions', 'data-mask' => '99,999.99', $disabled]) !!}
                         </div>
 
                         <label for="joined_date" class="col-md-2 control-label">Effective Date</label>
@@ -62,6 +62,12 @@
                     </div>
                     @endif
                 @endforeach
+                    <div class="form-group">
+                        {!! Form::label('tax', 'Tax', ['class' => 'col-md-2 control-label']) !!}
+                        <div class="col-md-4">
+                        {!! Form::text('tax', $tax, ['class' => 'form-control fields deductions', 'data-mask' => '99,999.99', $disabled]) !!}
+                        </div>
+                    </div>
             </div>
         </div>
     </div>
@@ -79,9 +85,9 @@
                 </div>
             </div>
             <div class="ibox-content">
-                <p class="earnings"><span class="label-total">Total Earnings: </span><span class="value"></span></p>
-                <p class="deduction"><span class="label-total">Total Deductions: </span></p>
-                <p><span class="label-total">Total: </span></p>
+                <p class="display-earnings"><span class="label-total">Total Earnings: </span></p>
+                <p class="display-deduction"><span class="label-total">Total Deductions: </span></p>
+                <p class="display-total"><span class="label-total">Total: </span></p>
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-2">
                     @if ($disabled == '')

@@ -12,26 +12,41 @@ use Illuminate\Support\Facades\Redirect;
  */
 class TerminationReasonsController extends Controller {
 
-    public function __construct(Sentry $auth, Employee $employee, TerminationReason $terminationReason)
+    /**
+     * @var Employee
+     */
+    protected $employee;
+
+    /**
+     * @var TerminationReason
+     */
+    protected $termination_reason;
+
+    /**
+     * @param Sentry $auth
+     * @param Employee $employee
+     * @param TerminationReason $termination_reason
+     */
+    public function __construct(Sentry $auth, Employee $employee, TerminationReason $termination_reason)
     {
         parent::__construct($auth);
 
         $this->employee = $employee;
-        $this->terminationReasons = $terminationReason;
+        $this->termination_reason = $termination_reason;
     }
 
     /**
      * Show the PIM - Termination Reasons.
      *
      * @Get("pim/configuration/termination-reasons")
+     *
      * @param TerminationReasonsRequest $request
      * @return \Illuminate\View\View
      */
-    public function terminationReasons(TerminationReasonsRequest $request)
+    public function index(TerminationReasonsRequest $request)
     {
         $this->data['employee'] = $this->employee->whereUserId($this->loggedUser->id)->first();
-        $this->data['terminationReasons'] = $this->terminationReasons->get();
-
+        $this->data['terminationReasons'] = $this->termination_reason->get();
         $this->data['pageTitle'] = 'Termination Reasons';
 
         return $this->template('pages.pim.configuration.termination-reasons.view');
@@ -44,20 +59,18 @@ class TerminationReasonsController extends Controller {
      *
      * @param TerminationReasonsRequest $request
      */
-    public function saveTerminationReason(TerminationReasonsRequest $request)
+    public function store(TerminationReasonsRequest $request)
     {
         try
         {
-            $termination_reason = new TerminationReason;
-            $termination_reason->name = $request->get('name');
+            $this->termination_reason->create($request->all());
 
-            $termination_reason->save();
         } catch (Exception $e)
         {
-            return Redirect::to($request->path())->with('danger', 'Unable to add record to the database.');
+            return Redirect::to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', 'Record successfully added.');
+        return Redirect::to($request->path())->with('success', SUCCESS_ADD_MESSAGE);
     }
 
     /**
@@ -67,25 +80,24 @@ class TerminationReasonsController extends Controller {
      *
      * @param TerminationReasonsRequest $request
      */
-    public function updateTerminationReason(TerminationReasonsRequest $request)
+    public function update(TerminationReasonsRequest $request)
     {
-        $termination_reason = $this->terminationReasons->whereId($request->get('termination_reason_id'))->first();
+        $termination_reason = $this->termination_reason->whereId($request->get('termination_reason_id'))->first();
 
         if ( ! $termination_reason)
         {
-            return Redirect::to($request->path())->with('danger', 'Unable to retrieve record from database.');
+            return Redirect::to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
         try
         {
-            $termination_reason->name = $request->get('name');
+            $termination_reason->update($request->all());
 
-            $termination_reason->save();
         } catch (Exception $e)
         {
-            return Redirect::to($request->path())->with('danger', 'Unable to update record.');
+            return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', 'Record successfully updated.');
+        return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGEW);
     }
 }

@@ -201,7 +201,7 @@ class Employee extends Model {
      */
     public function skills()
     {
-        return $this->hasMany('HRis\Skill', 'employee_id', 'employee_id');
+        return $this->belongsToMany('HRis\Skill');
     }
 
     /**
@@ -243,14 +243,35 @@ class Employee extends Model {
         return self::whereUserId($user_id)->with('user', 'country', 'province', 'city', 'employmentStatus', 'jobHistories', 'dependents')->first();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function dependents()
     {
         return $this->hasMany('HRis\Dependent', 'employee_id', 'employee_id');
     }
 
+    /**
+     * @return mixed
+     */
     public function employeeSalaryComponents()
     {
-        return $this->hasMany('HRis\EmployeeSalaryComponents', 'employee_id', 'employee_id')->with('salaryComponent');
+        return $this->hasMany('HRis\EmployeeSalaryComponents', 'employee_id', 'employee_id')->with('salaryComponent')->orderBy('component_id', 'asc');
+    }
+
+    /**
+     * @param $employee_id
+     * @param $user_id
+     * @return mixed
+     */
+    public function getEmployeeSalarydetails($employee_id, $user_id)
+    {
+        if ($employee_id)
+        {
+            return self::whereEmployeeId($employee_id)->with('employeeSalaryComponents', 'dependents')->first();
+        }
+
+        return self::whereEmployeeId($user_id)->with('employeeSalaryComponents', 'dependents')->first();
     }
 
 }
