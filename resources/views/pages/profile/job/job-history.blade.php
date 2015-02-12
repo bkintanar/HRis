@@ -36,7 +36,6 @@
                                     <td class="action">
                                         <button rel="delete" id="{{$job_history->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-trash"></i></button>
                                     </td>
-
                                 </tr>
                             @endforeach
                         @else

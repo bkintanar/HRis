@@ -117,4 +117,58 @@ class EmergencyContactsController extends Controller {
 
         return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
     }
+
+    /**
+     * Delete the profile emergency contact.
+     *
+     * @Delete("ajax/profile/emergency-contacts")
+     * @Delete("ajax/pim/employee-list/{id}/emergency-contacts")
+     *
+     * @param EmergencyContactsRequest $request
+     */
+    public function delete(EmergencyContactsRequest $request)
+    {
+        if ($request->ajax())
+        {
+            $emergencyContactId = $request->get('id');
+
+            try
+            {
+                $this->emergencyContact->whereId($emergencyContactId)->delete();
+
+                print('success');
+
+            } catch (Exception $e)
+            {
+                print('failed');
+            }
+        }
+    }
+
+    /**
+     * Get the profile emergency contact.
+     *
+     * @Get("ajax/profile/emergency-contacts")
+     * @Get("ajax/pim/employee-list/{id}/emergency-contacts")
+     *
+     * @param EmergencyContactsRequest $request
+     */
+    public function show(EmergencyContactsRequest $request)
+    {
+        if ($request->ajax())
+        {
+            $emergencyContactId = $request->get('id');
+
+            try
+            {
+                $emergencyContact = $this->emergencyContact->whereId($emergencyContactId)->first();
+
+                print(json_encode($emergencyContact));
+
+            } catch (Exception $e)
+            {
+                print('failed');
+            }
+        }
+    }
 }
