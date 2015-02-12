@@ -18,28 +18,28 @@ class SalaryComponentsTableSeeder extends Seeder {
             [
                 [
                     'id'                    => 1,
-                    'components'            => 'Monthly Basic',
+                    'name'                  => 'Monthly Basic',
                     'type'                  => 1,
                     'part_of_total_payable' => 1,
                     'cost_to_company'       => 1
                 ],
                 [
                     'id'                    => 2,
-                    'components'            => 'SSS',
+                    'name'                  => 'SSS',
                     'type'                  => 2,
                     'part_of_total_payable' => 1,
                     'cost_to_company'       => 0
                 ],
                 [
                     'id'                    => 3,
-                    'components'            => 'PhilHealth',
+                    'name'                  => 'PhilHealth',
                     'type'                  => 2,
                     'part_of_total_payable' => 1,
                     'cost_to_company'       => 0
                 ],
                 [
                     'id'                    => 4,
-                    'components'            => 'HDMF',
+                    'name'                  => 'HDMF',
                     'type'                  => 2,
                     'part_of_total_payable' => 1,
                     'cost_to_company'       => 0
