@@ -741,7 +741,8 @@ class AjaxController extends Controller {
     {
         if ($request->ajax())
         {
-            $semiMonthly = $request->get('salary') / 2;
+            $mode = \Config::get('salary.semi_monthly');
+            $semiMonthly = $request->get('salary') / $mode;
             $status = $request->get('status');
             $sss = $request->get('sss');
             try

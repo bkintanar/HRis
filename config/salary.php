@@ -2,6 +2,6 @@
 
 return [
     'daily' => 22,
-    'semiMonthly' => 2,
+    'semi_monthly' => 2,
     'monthly' => 1
 ];

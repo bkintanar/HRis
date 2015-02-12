@@ -12,7 +12,7 @@
             @foreach($employee->employeeSalaryComponents as $value)
                 @if($value->salaryComponent->type == 2)
                 <div class="form-group">
-                    {!! Form::label('$value', $value->salaryComponent->name, ['class' => 'col-md-2 control-label']) !!}
+                    {!! Form::label($value, $value->salaryComponent->name, ['class' => 'col-md-2 control-label']) !!}
                     <div class="col-md-4">
                     {!! Form::hidden($value->salaryComponent->name . '[component_id]', $value->component_id) !!}
                         @if($value->component_id == 2)
