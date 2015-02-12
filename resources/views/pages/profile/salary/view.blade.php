@@ -32,14 +32,23 @@
             return data;
         }
 
-        earnings = getValues('earnings');
-        deductions = getValues('deductions');
+        function display()
+        {
+            earnings = getValues('earnings') + parseFloat($('#salary').val() / 2);
+            deductions = getValues('deductions') + parseFloat($('.tax').val());
 
-        $('.display-earnings').append(parseFloat(earnings).toFixed(2));
-        $('.display-deduction').append(parseFloat(deductions).toFixed(2));
-        $('.display-total').append(parseFloat(earnings - deductions).toFixed(2));
+            $('#total-earnings').html(parseFloat(earnings).toFixed(2));
+            $('#total-deductions').html(parseFloat(deductions).toFixed(2));
+            $('#total-salary').html(parseFloat(earnings - deductions).toFixed(2));
+        }
 
-        $('.chosen-select').chosen();
+        $(document).ready(function () {
+
+            $('.chosen-select').chosen();
+
+            display();
+
+        });
 
     </script>
 @stop

@@ -22,6 +22,9 @@ use HRis\Http\Requests\Profile\QualificationsEducationRequest;
 use HRis\Http\Requests\Profile\QualificationsSkillRequest;
 use HRis\Http\Requests\Profile\QualificationsWorkExperienceRequest;
 use HRis\Http\Requests\Profile\JobRequest;
+use HRis\Http\Requests\Profile\SalaryRequest;
+use HRis\TaxComputations;
+use HRis\SSSContributions;
 use HRis\JobTitle;
 use HRis\JobHistory;
 use HRis\Nationality;
@@ -723,6 +726,55 @@ class AjaxController extends Controller {
                 print('failed');
             }
 
+        }
+    }
+
+    /**
+     * get the profile tax salary details.
+     *
+     * @Get("ajax/profile/salary/edit")
+     * @Get("ajax/pim/employee-list/{id}/salary/edit")
+     *
+     * @param SalaryRequest $request
+     */
+    public function updateSalary(SalaryRequest $request)
+    {
+        if ($request->ajax())
+        {
+            $semiMonthly = $request->get('salary') / 2;
+            $status = $request->get('status');
+            $sss = $request->get('sss');
+            try
+            {
+                if ($request->get('type') == 'sss')
+                {
+                    $getSSS = SSSContributions::where('range_compensation_from', '<=', $semiMonthly)
+                        ->orderBy('range_compensation_from', 'desc')
+                        ->first();
+                    $deductions = ($request->get('deductions') - $sss) + $getSSS->sss_ee;
+                    $sss = $getSSS->sss_ee;
+                    $taxableSalary = $semiMonthly - $deductions;
+                }
+                else {
+                    $taxableSalary = $semiMonthly - $request->get('deductions');
+                }
+                $taxes = TaxComputations::getTaxRate($status, $taxableSalary);
+
+                $over = 0;
+                if ($taxableSalary > $taxes->$status)
+                {
+                    $over = $taxableSalary - $taxes->$status;
+                }
+                $totalTax = $taxes->exemption + ($over * $taxes->percentage_over);
+
+                $return = json_encode(['tax' => $totalTax, 'sss' => $sss]);
+
+                print($return);
+
+            } catch (\Exception $e)
+            {
+                //                    print($e->getMessage());
+            }
         }
     }
 }

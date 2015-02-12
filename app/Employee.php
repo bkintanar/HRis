@@ -256,7 +256,11 @@ class Employee extends Model {
      */
     public function employeeSalaryComponents()
     {
-        return $this->hasMany('HRis\EmployeeSalaryComponents', 'employee_id', 'employee_id')->with('salaryComponent')->orderBy('component_id', 'asc');
+        return $this->hasMany('HRis\EmployeeSalaryComponents', 'employee_id', 'employee_id')
+            ->with('salaryComponent')
+            ->orderBy('id', 'desc')
+            ->orderBy('effective_date', 'desc')
+            ->take(4);
     }
 
     /**

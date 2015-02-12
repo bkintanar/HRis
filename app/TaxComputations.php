@@ -11,9 +11,17 @@ class TaxComputations extends Model {
      */
     protected $table = 'tax_computations';
 
+    /**
+     * @var bool
+     */
     public $timestamps = false;
 
-    public function getTaxRate($status, $taxableSalary)
+    /**
+     * @param $status
+     * @param $taxableSalary
+     * @return mixed
+     */
+    public static function getTaxRate($status, $taxableSalary)
     {
         return self::where($status, '<', $taxableSalary)
             ->orderBy($status, 'desc')

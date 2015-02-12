@@ -7,16 +7,6 @@ use Illuminate\Support\Facades\View;
 
 class SalaryRequest extends Request {
 
-    public function fillables()
-    {
-        return [
-            'employee_id',
-            'component_id',
-            'value',
-            'effective_date',
-        ];
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
