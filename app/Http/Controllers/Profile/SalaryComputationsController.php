@@ -5,22 +5,19 @@ use HRis\Http\Requests;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\SalaryRequest;
 use HRis\Employee;
-use HRis\Sss;
 use HRis\EmployeeSalaryComponents;
-use HRis\TaxComputations;
-use HRis\Dependent;
-
+use HRis\Services\Salary;
 use Illuminate\Http\Request;
 
 class SalaryComputationsController extends Controller {
 
-    public function __construct(Sentry $auth, Employee $employee, TaxComputations $tax_computations, Dependent $dependent)
+    public function __construct(Sentry $auth, Employee $employee, EmployeeSalaryComponents $employee_salary_components, Salary $salary_services)
     {
         parent::__construct($auth);
 
         $this->employee = $employee;
-        $this->tax_computations = $tax_computations;
-        $this->dependent = $dependent;
+        $this->employee_salary_components = $employee_salary_components;
+        $this->salary_services = $salary_services;
     }
 
     /**
@@ -34,53 +31,12 @@ class SalaryComputationsController extends Controller {
      */
     public function salary(SalaryRequest $request, $employee_id = null)
     {
-        $employee = $this->employee->whereEmployeeId($employee_id)->with('employeeSalaryComponents')->first();
-//        $semiMonthly = $employee->employeeSalary->salary / 2;
-//        $contributions = $employee->employeeContributions->first();
+        $employee = $this->employee->getEmployeeSalarydetails($employee_id, $this->loggedUser->id);
 
-
-//        if (!$contributions->SSS)
-//        {
-//            $getSSS = Sss::where('range_compensation_from', '<=', $semiMonthly)->orderBy('range_compensation_from', 'desc')->first();
-//            $contributions->SSS = $getSSS->sss_ee;
-//        }
-//
-//        $status = 'ME_S';
-//        if (count($employee->dependents))
-//        {
-//            $status = 'ME' . count($employee->dependents) . '_S' . count($employee->dependents);
-//        }
-//
-//        $deductions = $contributions->SSS + $contributions->PhilHealth + $contributions->HDMF;
-//        $taxableSalary = $semiMonthly - $deductions;
-//        $taxes = $this->tax_computations->getTaxRate($status, $taxableSalary);
-//
-//        $over = 0;
-//        if ($taxableSalary > $taxes->$status)
-//        {
-//            $over = $taxableSalary - $taxes->$status;
-//        }
-//        $totalTax = $taxes->exemption + ($over * $taxes->percentage_over);
-//        $finalSalary = $taxableSalary - $totalTax;
-//
-//        echo $taxableSalary;
-//        echo '<br/>';
-//        echo '<br/>';
-//        echo 'Total Ded: ' . $deductions . ' (' . $contributions->SSS . ' ' . $contributions->PhilHealth . ' ' . $contributions->HDMF . ')';
-//        echo '<br/>';
-//        echo 'Total Tax: ' . round($totalTax, 2);
-//        echo '<br/>';
-//        echo 'Salary: ' . round($finalSalary, 2);
-//
-//        die;
-//
-//        $this->data['employee'] = $employee;
-//        $this->data['salary'] = $semiMonthly;
-//
-
-        dd($employee);
+        $salary = $this->salary_services->getSalaryDetails($employee);
 
         $this->data['employee'] = $employee;
+        $this->data['tax'] = $salary['totalTax'];
 
         $this->data['disabled'] = 'disabled';
         $this->data['pim'] = $request->is('*pim/*') ? true : false;
@@ -103,13 +59,50 @@ class SalaryComputationsController extends Controller {
     {
         $employee = $this->employee->whereEmployeeId($employee_id)->with('employeeSalary', 'dependents', 'employeeContributions')->first();
 
+        $salary = $this->salary_services->getSalaryDetails($employee);
+
         $this->data['employee'] = $employee;
+        $this->data['tax'] = $salary['totalTax'];
+        $this->data['tax_status'] = $salary['employee_status'];
 
         $this->data['disabled'] = '';
         $this->data['pim'] = $request->is('*pim/*') ? true : false;
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Salary Details' : 'My Salary Details';
 
         return $this->template('pages.profile.salary.edit');
+    }
+
+    /**
+     * Updates the Profile - Salary.
+     *
+     * @Patch("profile/salary")
+     * @Patch("pim/employee-list/{id}/salary")
+     *
+     * @param SalaryRequest $request
+     */
+    public function update(SalaryRequest $request)
+    {
+        $id = $request->get('id');
+        $fields = $request->except('id', '_method', '_token', 'user', 'tax');
+
+        foreach($fields as $value)
+        {
+            $value['employee_id'] = $id;
+            if($value['effective_date'] == 0)
+            {
+                $value['effective_date'] = date('Y-m-d');
+            }
+
+            try
+            {
+                $this->employee_salary_components->create($value);
+            } catch (Exception $e)
+            {
+                return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
+            }
+        }
+        return \Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
+
     }
 
 }

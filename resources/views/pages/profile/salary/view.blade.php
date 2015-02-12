@@ -37,7 +37,33 @@
 
     <script>
 
-        $('.chosen-select').chosen();
+        function getValues(type)
+        {
+            var data = 0;
+            $('.' + type).each(function () {
+                data += Number($(this).val());
+            });
+
+            return data;
+        }
+
+        function display()
+        {
+            earnings = getValues('earnings') + parseFloat($('#salary').val() / 2);
+            deductions = getValues('deductions') + parseFloat($('.tax').val());
+
+            $('#total-earnings').html(parseFloat(earnings).toFixed(2));
+            $('#total-deductions').html(parseFloat(deductions).toFixed(2));
+            $('#total-salary').html(parseFloat(earnings - deductions).toFixed(2));
+        }
+
+        $(document).ready(function () {
+
+            $('.chosen-select').chosen();
+
+            display();
+
+        });
 
     </script>
 
