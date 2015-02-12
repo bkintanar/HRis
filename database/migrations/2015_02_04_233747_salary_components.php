@@ -15,7 +15,7 @@ class SalaryComponents extends Migration {
         Schema::create('salary_components', function (Blueprint $table)
         {
             $table->increments('id');
-            $table->string('components');
+            $table->string('name');
             $table->integer('type');
             $table->integer('part_of_total_payable');
             $table->integer('cost_to_company');
