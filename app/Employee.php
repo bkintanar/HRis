@@ -51,7 +51,6 @@ class Employee extends Model {
         'probation_end_date',
         'permanency_date',
     ];
-
     /**
      * @param $value
      */

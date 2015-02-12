@@ -84,7 +84,6 @@ class QualificationsController extends Controller {
         } catch (Exception $e)
         {
             dd($e->getMessage());
-
             return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('danger', 'Unable to add record to the database.');
         }
 
