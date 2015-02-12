@@ -14,6 +14,7 @@ class Salary {
 
     function getSalaryDetails($employee)
     {
+        $mode = \Config::get('salary.semi_monthly');
         $employeeComponents = $employee->employeeSalaryComponents;
         $deductions = 0;
 
@@ -21,7 +22,7 @@ class Salary {
         {
             if ($employeeComponent->component_id == 1)
             {
-                $semiMonthly = $employeeComponent->value / 2;
+                $semiMonthly = $employeeComponent->value / $mode;
             }
             if ($employeeComponent->component_id == 2)
             {
