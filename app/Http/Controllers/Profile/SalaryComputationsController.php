@@ -1,5 +1,6 @@
 <?php namespace HRis\Http\Controllers\Profile;
 
+use Redirect;
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use HRis\Http\Requests;
 use HRis\Http\Controllers\Controller;
@@ -102,7 +103,7 @@ class SalaryComputationsController extends Controller {
                 return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
             }
         }
-        return \Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
+        return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
 
     }
 

@@ -1,5 +1,7 @@
 <?php namespace HRis\Http\Controllers;
 
+use Config;
+use Exception;
 use HRis\City;
 use HRis\Dependent;
 use HRis\Education;
@@ -87,7 +89,7 @@ class AjaxController extends Controller {
                 $workExperience = WorkExperience::whereId($workExperienceId)->first();
 
                 print(json_encode($workExperience));
-            } catch (\Exception $e)
+            } catch (Exception $e)
             {
                 print('failed');
             }
@@ -115,7 +117,7 @@ class AjaxController extends Controller {
                 WorkExperience::whereId($workExperienceId)->delete();
 
                 print('success');
-            } catch (\Exception $e)
+            } catch (Exception $e)
             {
                 print('failed');
             }
@@ -143,7 +145,7 @@ class AjaxController extends Controller {
                 $education = Education::whereId($educationId)->first();
 
                 print(json_encode($education));
-            } catch (\Exception $e)
+            } catch (Exception $e)
             {
                 print('failed');
             }
@@ -171,7 +173,7 @@ class AjaxController extends Controller {
                 Education::whereId($educationId)->delete();
 
                 print('success');
-            } catch (\Exception $e)
+            } catch (Exception $e)
             {
                 print('failed');
             }
@@ -199,7 +201,7 @@ class AjaxController extends Controller {
                 $skill = EmployeeSkill::whereId($employeeSkillId)->first();
 
                 print(json_encode($skill));
-            } catch (\Exception $e)
+            } catch (Exception $e)
             {
                 print('failed');
             }
@@ -227,7 +229,7 @@ class AjaxController extends Controller {
                 EmployeeSkill::whereId($employeeSkillId)->delete();
 
                 print('success');
-            } catch (\Exception $e)
+            } catch (Exception $e)
             {
                 print('failed');
             }
@@ -263,7 +265,7 @@ class AjaxController extends Controller {
 
                 print($filename);
 
-            } catch (\Exception $e)
+            } catch (Exception $e)
             {
                 print('failed');
             }
@@ -290,7 +292,7 @@ class AjaxController extends Controller {
                 $terminationReason = TerminationReason::whereId($terminationReasonId)->first();
 
                 print(json_encode($terminationReason));
-            } catch (\Exception $e)
+            } catch (Exception $e)
             {
                 print('failed');
             }
@@ -317,7 +319,7 @@ class AjaxController extends Controller {
                 TerminationReason::whereId($terminationReasonId)->delete();
 
                 print('success');
-            } catch (\Exception $e)
+            } catch (Exception $e)
             {
                 print('failed');
             }
@@ -344,7 +346,7 @@ class AjaxController extends Controller {
                 $jobTitle = JobTitle::whereId($jobTitleId)->first();
 
                 print(json_encode($jobTitle));
-            } catch (\Exception $e)
+            } catch (Exception $e)
             {
                 print('failed');
             }
@@ -371,7 +373,7 @@ class AjaxController extends Controller {
                 JobTitle::whereId($jobTitleId)->delete();
 
                 print('success');
-            } catch (\Exception $e)
+            } catch (Exception $e)
             {
                 print('failed');
             }
@@ -398,7 +400,7 @@ class AjaxController extends Controller {
                 $employmentStatus = EmploymentStatus::whereId($employmentStatusId)->first();
 
                 print(json_encode($employmentStatus));
-            } catch (\Exception $e)
+            } catch (Exception $e)
             {
                 print('failed');
             }
@@ -425,7 +427,7 @@ class AjaxController extends Controller {
                 EmploymentStatus::whereId($employmentStatusId)->delete();
 
                 print('success');
-            } catch (\Exception $e)
+            } catch (Exception $e)
             {
                 print('failed');
             }
@@ -452,7 +454,7 @@ class AjaxController extends Controller {
                 $nationality = Nationality::whereId($nationalityId)->first();
 
                 print(json_encode($nationality));
-            } catch (\Exception $e)
+            } catch (Exception $e)
             {
                 print('failed');
             }
@@ -479,7 +481,7 @@ class AjaxController extends Controller {
                 Nationality::whereId($nationalityId)->delete();
 
                 print('success');
-            } catch (\Exception $e)
+            } catch (Exception $e)
             {
                 print('failed');
             }
@@ -505,7 +507,7 @@ class AjaxController extends Controller {
                 $workShift = WorkShift::whereId($workShiftId)->first();
 
                 print(json_encode($workShift));
-            } catch (\Exception $e)
+            } catch (Exception $e)
             {
                 print('failed');
             }
@@ -532,7 +534,7 @@ class AjaxController extends Controller {
                 WorkShift::whereId($workShiftId)->delete();
 
                 print('success');
-            } catch (\Exception $e)
+            } catch (Exception $e)
             {
                 print('failed');
             }
@@ -559,7 +561,7 @@ class AjaxController extends Controller {
                 $payGrade = PayGrade::whereId($payGradeId)->first();
 
                 print(json_encode($payGrade));
-            } catch (\Exception $e)
+            } catch (Exception $e)
             {
                 print('failed');
             }
@@ -586,7 +588,7 @@ class AjaxController extends Controller {
                 PayGrade::whereId($payGradeId)->delete();
 
                 print('success');
-            } catch (\Exception $e)
+            } catch (Exception $e)
             {
                 print('failed');
             }
@@ -613,7 +615,7 @@ class AjaxController extends Controller {
                 $skill = Skill::whereId($skillId)->first();
 
                 print(json_encode($skill));
-            } catch (\Exception $e)
+            } catch (Exception $e)
             {
                 print('failed');
             }
@@ -640,7 +642,7 @@ class AjaxController extends Controller {
                 Skill::whereId($skillId)->delete();
 
                 print('success');
-            } catch (\Exception $e)
+            } catch (Exception $e)
             {
                 print('failed');
             }
@@ -668,7 +670,7 @@ class AjaxController extends Controller {
 
                 print(json_encode($education));
 
-            } catch (\Exception $e)
+            } catch (Exception $e)
             {
                 print('failed');
             }
@@ -695,7 +697,7 @@ class AjaxController extends Controller {
                 EducationLevel::whereId($educationId)->delete();
 
                 print('success');
-            } catch (\Exception $e)
+            } catch (Exception $e)
             {
                 print('failed');
             }
@@ -721,7 +723,7 @@ class AjaxController extends Controller {
                 JobHistory::whereId($jobHistoryId)->delete();
 
                 print('success');
-            } catch (\Exception $e)
+            } catch (Exception $e)
             {
                 print('failed');
             }
@@ -741,7 +743,7 @@ class AjaxController extends Controller {
     {
         if ($request->ajax())
         {
-            $mode = \Config::get('salary.semi_monthly');
+            $mode = Config::get('salary.semi_monthly');
             $semiMonthly = $request->get('salary') / $mode;
             $status = $request->get('status');
             $sss = $request->get('sss');
@@ -772,7 +774,7 @@ class AjaxController extends Controller {
 
                 print($return);
 
-            } catch (\Exception $e)
+            } catch (Exception $e)
             {
                 //                    print($e->getMessage());
             }

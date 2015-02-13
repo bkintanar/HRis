@@ -13,4 +13,15 @@ class SalaryComponents extends Model {
 
     public $timestamps = false;
 
+    function getSalaryAndSSS()
+    {
+        $salaryComponents = self::where('components', 'LIKE', '%Basic%')
+            ->orWhere('components', 'LIKE', '%SSS%')
+            ->orderBy('id', 'asc')
+            ->get(['id'])
+            ->take(2);
+
+        return ['monthlyBasic' => $salaryComponents->first()->id, 'SSS' => $salaryComponents->last()->id];
+    }
+
 }
