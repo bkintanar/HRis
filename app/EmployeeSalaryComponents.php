@@ -12,10 +12,10 @@ class EmployeeSalaryComponents extends Model {
     protected $table = 'employee_salary_components';
 
     protected $fillable = [
-        "component_id",
-        "value",
-        "employee_id",
-        "effective_date"
+        'component_id',
+        'value',
+        'employee_id',
+        'effective_date'
     ];
 
     public $timestamps = false;

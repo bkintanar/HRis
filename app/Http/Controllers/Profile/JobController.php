@@ -6,6 +6,7 @@ use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\JobRequest;
 use HRis\JobHistory;
 use Illuminate\Support\Facades\Redirect;
+use Input;
 
 /**
  * @Middleware("auth")
@@ -73,7 +74,7 @@ class JobController extends Controller {
      */
     public function show(JobRequest $request, $employee_id = null)
     {
-        if(\Input::get('success'))
+        if(Input::get('success'))
         {
             return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
         }

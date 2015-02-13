@@ -1,34 +1,39 @@
 <?php namespace HRis\Services;
 
+use Config;
 use HRis\SSSContributions;
 use HRis\TaxComputations;
 use HRis\Dependent;
+use HRis\SalaryComponents;
 
 class Salary {
 
-    public function __construct(TaxComputations $tax_computations, Dependent $dependent)
+    public function __construct(TaxComputations $tax_computations, Dependent $dependent, SSSContributions $sss_contribution, SalaryComponents $salary_components)
     {
         $this->tax_computations = $tax_computations;
         $this->dependent = $dependent;
+        $this->sss_contribution = $sss_contribution;
+        $this->salary_components = $salary_components;
     }
 
     function getSalaryDetails($employee)
     {
-        $mode = \Config::get('salary.semi_monthly');
+        $mode = Config::get('salary.semi_monthly');
         $employeeComponents = $employee->employeeSalaryComponents;
+        $componentsIds = $this->salary_components->getSalaryAndSSS();
         $deductions = 0;
 
-        foreach ($employeeComponents as $key => $employeeComponent)
+        foreach ($employeeComponents as $employeeComponent)
         {
-            if ($employeeComponent->component_id == 1)
+            if ($employeeComponent->component_id == $componentsIds['monthlyBasic'])
             {
                 $semiMonthly = $employeeComponent->value / $mode;
             }
-            if ($employeeComponent->component_id == 2)
+            if ($employeeComponent->component_id == $componentsIds['SSS'])
             {
                 if ($employeeComponent->value == 0)
                 {
-                    $getSSS = SSSContributions::where('range_compensation_from', '<=', $semiMonthly)
+                    $getSSS = $this->sss_contribution->where('range_compensation_from', '<=', $semiMonthly)
                         ->orderBy('range_compensation_from', 'desc')
                         ->first();
                     $employeeComponent->value = $getSSS->sss_ee;
