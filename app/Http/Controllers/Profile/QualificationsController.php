@@ -83,12 +83,11 @@ class QualificationsController extends Controller {
 
         } catch (Exception $e)
         {
-            dd($e->getMessage());
-
-            return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('danger', 'Unable to add record to the database.');
+//            dd($e->getMessage());
+            return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('danger', UNABLE_ADD_MESSAGE);
         }
 
-        return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('success', 'Record successfully added.');
+        return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('success', SUCCESS_ADD_MESSAGE);
     }
 
     /**
@@ -106,7 +105,7 @@ class QualificationsController extends Controller {
 
         if ( ! $workExperience)
         {
-            return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('danger', 'Unable to retrieve record from database.');
+            return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
         try
@@ -115,12 +114,12 @@ class QualificationsController extends Controller {
 
         } catch (Exception $e)
         {
-            dd($e->getMessage());
-
-            return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('danger', 'Unable to update record.');
+//            dd($e->getMessage());
+            return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
-        return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('success', 'Record successfully updated.');
+        return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('success', SUCCESS_UPDATE_MESSAGE);
+
     }
 
     /**
@@ -140,10 +139,10 @@ class QualificationsController extends Controller {
 
         } catch (Exception $e)
         {
-            return Redirect::to(str_replace('/educations', '', $request->path()))->with('danger', 'Unable to add record to the database.');
+            return Redirect::to(str_replace('/educations', '', $request->path()))->with('danger', UNABLE_ADD_MESSAGE);
         }
 
-        return Redirect::to(str_replace('/educations', '', $request->path()))->with('success', 'Record successfully added.');
+        return Redirect::to(str_replace('/educations', '', $request->path()))->with('success', SUCCESS_ADD_MESSAGE);
     }
 
     /**
@@ -161,7 +160,7 @@ class QualificationsController extends Controller {
 
         if ( ! $education)
         {
-            return Redirect::to(str_replace('/educations', '', $request->path()))->with('danger', 'Unable to retrieve record from database.');
+            return Redirect::to(str_replace('/educations', '', $request->path()))->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
         try
@@ -170,10 +169,10 @@ class QualificationsController extends Controller {
 
         } catch (Exception $e)
         {
-            return Redirect::to(str_replace('/educations', '', $request->path()))->with('danger', 'Unable to update record.');
+            return Redirect::to(str_replace('/educations', '', $request->path()))->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
-        return Redirect::to(str_replace('/educations', '', $request->path()))->with('success', 'Record successfully updated.');
+        return Redirect::to(str_replace('/educations', '', $request->path()))->with('success', SUCCESS_UPDATE_MESSAGE);
     }
 
     /**
@@ -201,10 +200,10 @@ class QualificationsController extends Controller {
 
         } catch (Exception $e)
         {
-            return Redirect::to(str_replace('/skills', '', $request->path()))->with('danger', 'Unable to add record to the database.');
+            return Redirect::to(str_replace('/skills', '', $request->path()))->with('danger', UNABLE_ADD_MESSAGE);
         }
 
-        return Redirect::to(str_replace('/skills', '', $request->path()))->with('success', 'Record successfully added.');
+        return Redirect::to(str_replace('/skills', '', $request->path()))->with('success', SUCCESS_ADD_MESSAGE);
     }
 
     /**
@@ -222,7 +221,7 @@ class QualificationsController extends Controller {
 
         if ( ! $employeeSkill)
         {
-            return Redirect::to(str_replace('/skills', '', $request->path()))->with('danger', 'Unable to retrieve record from database.');
+            return Redirect::to(str_replace('/skills', '', $request->path()))->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
         try
@@ -235,9 +234,9 @@ class QualificationsController extends Controller {
 
         } catch (Exception $e)
         {
-            return Redirect::to(str_replace('/skills', '', $request->path()))->with('danger', 'Unable to update record.');
+            return Redirect::to(str_replace('/skills', '', $request->path()))->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
-        return Redirect::to(str_replace('/skills', '', $request->path()))->with('success', 'Record successfully updated.');
+        return Redirect::to(str_replace('/skills', '', $request->path()))->with('success', SUCCESS_UPDATE_MESSAGE);
     }
 }

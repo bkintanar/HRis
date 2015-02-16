@@ -6,6 +6,7 @@ use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\JobRequest;
 use HRis\JobHistory;
 use Illuminate\Support\Facades\Redirect;
+use Input;
 
 /**
  * @Middleware("auth")
@@ -73,6 +74,11 @@ class JobController extends Controller {
      */
     public function show(JobRequest $request, $employee_id = null)
     {
+        if(Input::get('success'))
+        {
+            return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
+        }
+
         $employee = $this->employee->getEmployeeById($employee_id, $this->loggedUser->id);
 
         $this->data['employee'] = $employee;
@@ -101,9 +107,8 @@ class JobController extends Controller {
         $job_history = $this->job_history;
 
         $job_history->create($request->all());
-
         $employee->update($request->only('joined_date', 'probation_end_date', 'permanency_date'));
 
-        return Redirect::to($request->path())->with('success', 'Record successfully updated.');
+        return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
     }
 }

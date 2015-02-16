@@ -105,7 +105,7 @@ class PersonalDetailsController extends Controller {
 
         if ( ! $employee)
         {
-            return Redirect::to($request->path())->with('danger', 'Unable to retrieve record from database.');
+            return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
         // If user is trying to update the employee_id to a used employee_id.
@@ -122,7 +122,7 @@ class PersonalDetailsController extends Controller {
                 $path = implode('/', $path);
             }
 
-            return Redirect::to($path)->with('danger', 'Employee Id already in use.');
+            return Redirect::to($path)->with('danger', EMPLOYEE_ID_IN_MESSAGE);
         }
 
         try
@@ -131,9 +131,9 @@ class PersonalDetailsController extends Controller {
 
         } catch (Exception $e)
         {
-            return Redirect::to($request->path())->with('danger', 'Unable to update record.');
+            return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', 'Record successfully updated.');
+        return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
     }
 }

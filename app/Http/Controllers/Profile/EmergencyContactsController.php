@@ -83,10 +83,10 @@ class EmergencyContactsController extends Controller {
 
         } catch (Exception $e)
         {
-            return Redirect::to($request->path())->with('danger', 'Unable to add record to the database.');
+            return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', 'Record successfully added.');
+        return Redirect::to($request->path())->with('success', SUCCESS_ADD_MESSAGE);
     }
 
     /**
@@ -103,7 +103,7 @@ class EmergencyContactsController extends Controller {
 
         if ( ! $emergencyContact)
         {
-            return Redirect::to($request->path())->with('danger', 'Unable to retrieve record from database.');
+            return Redirect::to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
         try
@@ -112,10 +112,10 @@ class EmergencyContactsController extends Controller {
 
         } catch (Exception $e)
         {
-            return Redirect::to($request->path())->with('danger', 'Unable to update record.');
+            return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', 'Record successfully updated.');
+        return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
     }
 
     /**

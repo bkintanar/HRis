@@ -58,8 +58,6 @@ class DependentsController extends Controller {
 
         $this->data['employee'] = $employee;
 
-        $this->data['dependents'] = $this->dependent->whereEmployeeId($employee->id)->get();
-
         $this->data['pim'] = $request->is('*pim/*') ? : false;
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Dependents' : 'My Dependents';
 
@@ -79,13 +77,12 @@ class DependentsController extends Controller {
         try
         {
             $this->dependent->create($request->all());
-
         } catch (Exception $e)
         {
-            return Redirect::to($request->path())->with('danger', 'Unable to add record to the database.');
+            return Redirect::to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', 'Record successfully added.');
+        return Redirect::to($request->path())->with('success', SUCCESS_ADD_MESSAGE);
     }
 
     /**

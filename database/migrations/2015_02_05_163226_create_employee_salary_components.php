@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEmployeeSalariesTable extends Migration {
+class CreateEmployeeSalaryComponentsTable extends Migration {
 
     /**
      * Run the migrations.
@@ -12,14 +12,15 @@ class CreateEmployeeSalariesTable extends Migration {
      */
     public function up()
     {
-        Schema::create('employee_salaries', function (Blueprint $table)
+        Schema::create('employee_salary_components', function (Blueprint $table)
         {
             $table->increments('id');
             $table->string('employee_id');
-            $table->decimal('salary', 10, 2);
-            $table->date('date');
+            $table->integer('component_id');
+            $table->decimal('value', 10, 2);
+            $table->date('effective_date');
         });
-    }
+	}
 
     /**
      * Reverse the migrations.
@@ -28,7 +29,7 @@ class CreateEmployeeSalariesTable extends Migration {
      */
     public function down()
     {
-        Schema::drop('employee_salaries');
+        Schema::drop('employee_salary_components');
     }
 
 }

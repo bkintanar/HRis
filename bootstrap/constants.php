@@ -6,3 +6,10 @@ const PERMISSION_DELETE = 4;
 const PERMISSION_CREATE = 8;
 
 const PROFILE_IDS = 2;
+
+const UNABLE_ADD_MESSAGE = 'Unable to add record to the database.';
+const UNABLE_RETRIEVE_MESSAGE = 'Unable to retrieve record from database.';
+const UNABLE_UPDATE_MESSAGE = 'Unable to update record.';
+const SUCCESS_ADD_MESSAGE = 'Record successfully added.';
+const SUCCESS_UPDATE_MESSAGE = 'Record successfully updated.';
+const EMPLOYEE_ID_IN_MESSAGE = 'Employee Id already in use.';

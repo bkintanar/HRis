@@ -5,7 +5,7 @@ use HRis\Http\Requests\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 
-class JobRequest extends Request {
+class SalaryRequest extends Request {
 
     /**
      * Get the validation rules that apply to the request.
@@ -32,7 +32,7 @@ class JobRequest extends Request {
     {
         $user = $user::getUser();
 
-        $permission = Request::is('*pim/*') ? 'pim.job' : 'profile.job';
+        $permission = Request::is('*pim/*') ? 'pim.salary' : 'profile.salary';
 
         // Update
         if (Request::isMethod('patch') || Request::is('*/edit'))
