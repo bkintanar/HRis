@@ -1,5 +1,6 @@
 <?php namespace HRis;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -33,6 +34,19 @@ class JobHistory extends Model {
         'work_shift_id',
         'comments'
     ];
+
+    /**
+     * @var array
+     */
+    protected $dates = ['effective_date'];
+
+    /**
+     * @param $value
+     */
+    public function setEffectiveDateAttribute($value)
+    {
+        $this->attributes['effective_date'] = Carbon::parse($value) ? : null;
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -73,4 +87,5 @@ class JobHistory extends Model {
     {
         return $this->hasOne('HRis\Location', 'id', 'location_id');
     }
+
 }

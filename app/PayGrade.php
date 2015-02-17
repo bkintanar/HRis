@@ -24,4 +24,5 @@ class PayGrade extends Model {
      * @var array
      */
     protected $fillable = ['name', 'min_salary', 'max_salary'];
+
 }

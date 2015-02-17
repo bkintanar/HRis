@@ -2,6 +2,10 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Province
+ * @package HRis
+ */
 class Province extends Model {
 
     /**

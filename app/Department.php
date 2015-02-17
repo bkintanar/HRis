@@ -2,6 +2,10 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Department
+ * @package HRis
+ */
 class Department extends Model {
 
     /**

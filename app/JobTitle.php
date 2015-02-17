@@ -24,4 +24,5 @@ class JobTitle extends Model {
      * @var array
      */
     protected $fillable = ['name', 'description'];
+
 }

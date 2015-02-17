@@ -1,5 +1,6 @@
 <?php namespace HRis;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -9,17 +10,15 @@ use Illuminate\Database\Eloquent\Model;
 class Education extends Model {
 
     /**
+     * @var bool
+     */
+    public $timestamps = false;
+    /**
      * The database table used by the model.
      *
      * @var string
      */
     protected $table = 'educations';
-
-    /**
-     * @var bool
-     */
-    public $timestamps = false;
-
     /**
      * @var array
      */
@@ -34,11 +33,16 @@ class Education extends Model {
     ];
 
     /**
+     * @var array
+     */
+    protected $dates = ['from_date', 'to_date'];
+
+    /**
      * @param $value
      */
     public function setFromDateAttribute($value)
     {
-        $this->attributes['from_date'] = $value ?: null;
+        $this->attributes['from_date'] = Carbon::parse($value) ? : null;
     }
 
     /**
@@ -46,7 +50,7 @@ class Education extends Model {
      */
     public function setToDateAttribute($value)
     {
-        $this->attributes['to_date'] = $value ?: null;
+        $this->attributes['to_date'] = Carbon::parse($value) ? : null;
     }
 
     /**

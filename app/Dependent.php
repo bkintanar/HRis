@@ -1,5 +1,6 @@
 <?php namespace HRis;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -12,6 +13,7 @@ class Dependent extends Model {
      * @var bool
      */
     public $timestamps = false;
+
     /**
      * The database table used by the model.
      *
@@ -32,10 +34,18 @@ class Dependent extends Model {
     ];
 
     /**
+     * Additional fields to treat as Carbon instances.
+     *
+     * @var array
+     */
+    protected $dates = ['birth_date'];
+
+    /**
      * @param $value
      */
     public function setBirthDateAttribute($value)
     {
-        $this->attributes['birth_date'] = $value ? : null;
+        $this->attributes['birth_date'] = Carbon::parse($value) ? : null;
     }
+
 }

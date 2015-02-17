@@ -1,5 +1,6 @@
 <?php namespace HRis;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -19,26 +20,31 @@ class WorkExperience extends Model {
      * @var string
      */
     protected $table = 'work_experiences';
-    
+
     /**
      * @var array
      */
     protected $fillable = ['employee_id', 'company', 'job_title', 'from_date', 'to_date', 'comment'];
 
     /**
-     * @param $value
+     * @var array
      */
-    public function setFromDateAttribute($value)
-    {
-        $this->attributes['from_date'] = $value ? : null;
-    }
+    protected $dates = ['from_date', 'to_date'];
 
     /**
      * @param $value
      */
     public function setToDateAttribute($value)
     {
-        $this->attributes['to_date'] = $value ? : null;
+        $this->attributes['to_date'] = Carbon::parse($value) ? : null;
+    }
+
+    /**
+     * @param $value
+     */
+    public function setFromDateAttribute($value)
+    {
+        $this->attributes['from_date'] = Carbon::parse($value) ? : null;
     }
 
     /**
