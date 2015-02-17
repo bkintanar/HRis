@@ -2,7 +2,16 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Group
+ * @package HRis
+ */
 class Group extends Model {
+
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
 
     /**
      * The database table used by the model.
@@ -11,11 +20,11 @@ class Group extends Model {
      */
     protected $table = 'groups';
 
-    public $timestamps = false;
-
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function users()
     {
         return $this->belongsToMany('HRis\Group', 'users_groups', 'group_id', 'user_id');
     }
-
 }

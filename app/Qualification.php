@@ -2,7 +2,16 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Qualification
+ * @package HRis
+ */
 class Qualification extends Model {
+
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
 
     /**
      * The database table used by the model.
@@ -10,7 +19,5 @@ class Qualification extends Model {
      * @var string
      */
     protected $table = 'dependents';
-
-    public $timestamps = false;
 
 }

@@ -17,6 +17,7 @@ class TerminationReason extends Model {
      * @var array
      */
     protected $fillable = ['name'];
+
     /**
      * The database table used by the model.
      *

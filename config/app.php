@@ -147,6 +147,7 @@ return [
 		'HRis\Providers\RouteServiceProvider',
 		'HRis\Providers\AnnotationsServiceProvider',
 		'HRis\Providers\SentryServiceProvider',
+        'Barryvdh\Debugbar\ServiceProvider',
 
 	],
 
@@ -198,6 +199,7 @@ return [
 		'Form'      => 'Illuminate\Html\FormFacade',
 		'Html'      => 'Illuminate\Html\HtmlFacade',
 		'Sentry'    => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
+		'Debugbar' => 'Barryvdh\Debugbar\Facade',
 
 	],
 

@@ -1,8 +1,18 @@
 <?php namespace HRis;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class EmployeeSalaryComponents
+ * @package HRis
+ */
 class EmployeeSalaryComponents extends Model {
+
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
 
     /**
      * The database table used by the model.
@@ -11,6 +21,9 @@ class EmployeeSalaryComponents extends Model {
      */
     protected $table = 'employee_salary_components';
 
+    /**
+     * @var array
+     */
     protected $fillable = [
         'component_id',
         'value',
@@ -18,7 +31,18 @@ class EmployeeSalaryComponents extends Model {
         'effective_date'
     ];
 
-    public $timestamps = false;
+    /**
+     * @var array
+     */
+    protected $dates = ['effective_date'];
+
+    /**
+     * @param $value
+     */
+    public function setEffectiveDateAttribute($value)
+    {
+        $this->attributes['effective_date'] = Carbon::parse($value) ? : null;
+    }
 
     public function salaryComponent()
     {
