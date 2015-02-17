@@ -15,10 +15,10 @@
 @section('custom_js')
     <!-- Input Mask-->
     {!! Html::script('/js/plugins/jasny/jasny-bootstrap.min.js') !!}
+    <!-- iCheck -->
+    {!! Html::script('/js/plugins/iCheck/icheck.min.js') !!}
     <!-- Chosen -->
     {!! Html::script('/js/plugins/chosen/chosen.jquery.js') !!}
-
-    {!! Html::script('/js/notification.js') !!}
 
     <script>
 
@@ -26,7 +26,7 @@
         {
             var data = 0;
             $('.' + type).each(function () {
-                data += Number($(this).val());
+                data += parseFloat($(this).val());
             });
 
             return data;
@@ -35,22 +35,38 @@
         function display()
         {
             earnings = getValues('earnings') + parseFloat($('#salary').val() / 2);
-            deductions = getValues('deductions') + parseFloat($('.tax').val());
+            deductions = getValues('deductions') + parseFloat($('.tax').html());
 
             $('#total-earnings').html(parseFloat(earnings).toFixed(2));
             $('#total-deductions').html(parseFloat(deductions).toFixed(2));
             $('#total-salary').html(parseFloat(earnings - deductions).toFixed(2));
         }
 
+        function updateSalary(type)
+        {
+            var datas = { salary: $('#salary').val(), status: '{{$tax_status}}', deductions: getValues('deductions'), sss: $('#sss').val(), type: type }
+                $.ajax({
+                    type: "GET",
+                    url: '/ajax/' + '{{\Request::path()}}',
+                    data: datas
+                }).done(function( response ) {
+                    var values = jQuery.parseJSON(response);
+                    $('#sss').val(parseFloat(values.sss).toFixed(2));
+                    $('.tax').html(parseFloat(values.tax).toFixed(2));
+                    display();
+                });
+        }
+
         $(document).ready(function () {
 
             $('.chosen-select').chosen();
 
-            display();
+            updateSalary();
 
         });
 
     </script>
+
 @stop
 
 @section('action_area')

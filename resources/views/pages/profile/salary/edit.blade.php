@@ -19,6 +19,8 @@
     {!! Html::script('/js/plugins/iCheck/icheck.min.js') !!}
     <!-- Chosen -->
     {!! Html::script('/js/plugins/chosen/chosen.jquery.js') !!}
+    <!-- Date Picker -->
+    {!! Html::script('js/plugins/datepicker/bootstrap-datepicker.js') !!}
 
     <script>
 
@@ -26,7 +28,8 @@
         {
             var data = 0;
             $('.' + type).each(function () {
-                data += parseFloat($(this).val());
+                value = checkIfEmpty($(this).val());
+                data += value;
             });
 
             return data;
@@ -35,7 +38,7 @@
         function display()
         {
             earnings = getValues('earnings') + parseFloat($('#salary').val() / 2);
-            deductions = getValues('deductions') + parseFloat($('.tax').val());
+            deductions = getValues('deductions') + parseFloat($('.tax').html());
 
             $('#total-earnings').html(parseFloat(earnings).toFixed(2));
             $('#total-deductions').html(parseFloat(deductions).toFixed(2));
@@ -44,7 +47,8 @@
 
         function updateSalary(type)
         {
-            var datas = { salary: $('#salary').val(), status: '{{$tax_status}}', deductions: getValues('deductions'), sss: $('#sss').val(), type: type }
+            current_sss = checkIfEmpty($('#sss').val());
+            var datas = { salary: $('#salary').val(), status: '{{$tax_status}}', deductions: getValues('deductions'), sss: current_sss, type: type }
                 $.ajax({
                     type: "GET",
                     url: '/ajax/' + '{{\Request::path()}}',
@@ -52,15 +56,25 @@
                 }).done(function( response ) {
                     var values = jQuery.parseJSON(response);
                     $('#sss').val(parseFloat(values.sss).toFixed(2));
-                    $('.tax').val(parseFloat(values.tax).toFixed(2));
+                    $('.tax').html(parseFloat(values.tax).toFixed(2));
+                    display();
                 });
-            display();
+        }
+
+        function checkIfEmpty(value)
+        {
+            if( !value )
+            {
+                value = 0;
+            }
+
+            return parseFloat(value);
         }
 
         $(document).ready(function () {
 
             $('#salary').change(function () {
-                updateSalary('tax');
+                updateSalary();
             });
 
             $('#rfrsh-sss').click(function () {
@@ -68,12 +82,24 @@
             });
 
             $('.fields').change(function () {
-                display();
+                $(this).val(parseFloat($(this).val()).toFixed(2));
+                updateSalary();
+            });
+
+            updateSalary();
+
+
+            // Date picker
+            $('#datepicker .input-group.date').datepicker({
+                todayBtn: "linked",
+                format: 'yyyy-mm-dd',
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true
             });
 
             $('.chosen-select').chosen();
-
-            display();
 
         });
 
