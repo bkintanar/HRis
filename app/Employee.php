@@ -251,7 +251,8 @@ class Employee extends Model {
     {
         return $this->hasMany('HRis\EmployeeSalaryComponents', 'employee_id', 'employee_id')
             ->with('salaryComponent')
-            ->orderBy('id', 'desc')
+            ->groupBy('component_id')
+            ->orderBy('component_id', 'asc')
             ->orderBy('effective_date', 'desc')
             ->take(4);
     }

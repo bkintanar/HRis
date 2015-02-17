@@ -735,6 +735,8 @@ class AjaxController extends Controller {
      * get the profile tax salary details.
      *
      * @Get("ajax/profile/salary/edit")
+     * @Get("ajax/profile/salary")
+     * @Get("ajax/pim/employee-list/{id}/salary")
      * @Get("ajax/pim/employee-list/{id}/salary/edit")
      *
      * @param SalaryRequest $request
@@ -747,6 +749,7 @@ class AjaxController extends Controller {
             $semiMonthly = $request->get('salary') / $mode;
             $status = $request->get('status');
             $sss = $request->get('sss');
+            $taxableSalary = $semiMonthly - $request->get('deductions');
             try
             {
                 if ($request->get('type') == 'sss')
@@ -757,9 +760,6 @@ class AjaxController extends Controller {
                     $deductions = ($request->get('deductions') - $sss) + $getSSS->sss_ee;
                     $sss = $getSSS->sss_ee;
                     $taxableSalary = $semiMonthly - $deductions;
-                }
-                else {
-                    $taxableSalary = $semiMonthly - $request->get('deductions');
                 }
                 $taxes = TaxComputations::getTaxRate($status, $taxableSalary);
 

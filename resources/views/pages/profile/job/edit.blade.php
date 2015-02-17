@@ -52,7 +52,38 @@
                 }
             }
 
+            function disableButton(status)
+            {
+                $('#save-button').attr('disabled', status);
+            }
+
+            function getValues()
+            {
+                searchIDs = new Array();
+                var i = 0;
+                $('.form-fields').each(function () {
+                    searchIDs[i] = $(this).val();
+                    i++;
+                });
+
+                return searchIDs.toString();
+            }
+
+            defaults = getValues();
             deleteAction();
+            disableButton(true);
+
+            $('.form-fields').change(function(){
+                var changes = getValues();
+                if(changes !== defaults)
+                {
+                    disableButton(false);
+                }
+                else
+                {
+                    disableButton(true);
+                }
+            });
 
             // Date picker
             $('#datepicker .input-group.date').datepicker({

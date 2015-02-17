@@ -10,8 +10,18 @@ use HRis\EmployeeSalaryComponents;
 use HRis\Services\Salary;
 use Illuminate\Http\Request;
 
+/**
+ * Class SalaryComputationsController
+ * @package HRis\Http\Controllers\Profile
+ */
 class SalaryComputationsController extends Controller {
 
+    /**
+     * @param Sentry $auth
+     * @param Employee $employee
+     * @param EmployeeSalaryComponents $employee_salary_components
+     * @param Salary $salary_services
+     */
     public function __construct(Sentry $auth, Employee $employee, EmployeeSalaryComponents $employee_salary_components, Salary $salary_services)
     {
         parent::__construct($auth);
@@ -34,10 +44,15 @@ class SalaryComputationsController extends Controller {
     {
         $employee = $this->employee->getEmployeeSalarydetails($employee_id, $this->loggedUser->id);
 
-        $salary = $this->salary_services->getSalaryDetails($employee);
+        $employee_status = 'ME_S';
+        $dependents = count($employee->dependents);
+        if ($dependents)
+        {
+            $employee_status = 'ME' . $dependents . '_S' . $dependents;
+        }
 
         $this->data['employee'] = $employee;
-        $this->data['tax'] = $salary['totalTax'];
+        $this->data['tax_status'] = $employee_status;
 
         $this->data['disabled'] = 'disabled';
         $this->data['pim'] = $request->is('*pim/*') ? true : false;
@@ -60,17 +75,22 @@ class SalaryComputationsController extends Controller {
     {
         $employee = $this->employee->whereEmployeeId($employee_id)->with('employeeSalary', 'dependents', 'employeeContributions')->first();
 
-        $salary = $this->salary_services->getSalaryDetails($employee);
+        $employee_status = 'ME_S';
+        $dependents = count($employee->dependents);
+        if ($dependents)
+        {
+            $employee_status = 'ME' . $dependents . '_S' . $dependents;
+        }
 
         $this->data['employee'] = $employee;
-        $this->data['tax'] = $salary['totalTax'];
-        $this->data['tax_status'] = $salary['employee_status'];
+        $this->data['tax_status'] = $employee_status;
 
         $this->data['disabled'] = '';
         $this->data['pim'] = $request->is('*pim/*') ? true : false;
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Salary Details' : 'My Salary Details';
 
         return $this->template('pages.profile.salary.edit');
+
     }
 
     /**
@@ -86,10 +106,10 @@ class SalaryComputationsController extends Controller {
         $id = $request->get('id');
         $fields = $request->except('id', '_method', '_token', 'user', 'tax');
 
-        foreach($fields as $value)
+        foreach ($fields as $value)
         {
             $value['employee_id'] = $id;
-            if($value['effective_date'] == 0)
+            if ($value['effective_date'] == 0)
             {
                 $value['effective_date'] = date('Y-m-d');
             }
@@ -102,6 +122,7 @@ class SalaryComputationsController extends Controller {
                 return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
             }
         }
+
         return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
 
     }
