@@ -16,6 +16,10 @@ body.boxed-layout #wrapper
   -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75)
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75)
 
+.top-navigation.boxed-layout #wrapper,
+.boxed-layout #wrapper.top-navigation
+  max-width: 1300px !important
+
 .block
   display: block
 
@@ -71,6 +75,11 @@ video
   /* Only for demo */
   width: 24%
 
+/* Summernote text editor  */
+.note-editor
+  height: auto
+  min-height: 300px
+
 /* MODAL */
 .modal-content
   background-clip: padding-box
@@ -86,6 +95,29 @@ video
 
 .modal-body
   padding: 20px 30px 30px 30px
+
+.inmodal .modal-body
+  background: #f8fafb
+
+.inmodal .modal-header
+  padding: 30px 15px
+  text-align: center
+
+.animated.modal.fade .modal-dialog
+  -webkit-transform: none
+  -ms-transform: none
+  -o-transform: none
+  transform: none
+
+.inmodal .modal-title
+  font-size: 26px
+
+.inmodal .modal-icon
+  font-size: 84px
+  color: #e2e3e3
+
+.modal-footer
+  margin-top: 0
 
 /* WRAPPERS */
 
@@ -170,7 +202,7 @@ body.body-small .footer.fixed
 /* PANELS */
 
 .page-heading
-  border-top: 4px solid $border-color
+  border-top: 0
   padding: 0px 10px 20px 10px
 
 .panel-heading h1, .panel-heading h2
@@ -433,6 +465,10 @@ table.table-mail tr td
   padding: 4px 10px
   font-size: 12px
 
+.ibox .open > .dropdown-menu
+  left: auto
+  right: 0
+
 /* BACKGROUNDS */
 
 .gray-bg
@@ -536,6 +572,7 @@ table.table-mail tr td
 
 .jumbotron
   border-radius: 6px
+  padding: 40px
 
 .jumbotron h1
   margin-top: 0
@@ -563,11 +600,40 @@ table.table-mail tr td
 .text-muted
   color: #888888
 
-.dashboard_2 nav.navbar,
-.dashboard_3 nav.navbar,
-.inbox nav.navbar,
-.email_view nav.navbar,
-.email_compose nav.navbar
+.simple_tag
+  background-color: #f3f3f4
+  border: 1px solid #e7eaec
+  border-radius: 2px
+  color: inherit
+  font-size: 10px
+  margin-right: 5px
+  margin-top: 5px
+  padding: 5px 12px
+  display: inline-block
+
+.img-shadow
+  -webkit-box-shadow: 0px 0px 3px 0px rgba(145,145,145,1)
+  -moz-box-shadow: 0px 0px 3px 0px rgba(145,145,145,1)
+  box-shadow: 0px 0px 3px 0px rgba(145,145,145,1)
+
+
+/* For handle diferent bg color in AngularJS version */
+.dashboards\.dashboard_2 nav.navbar,
+.dashboards\.dashboard_3 nav.navbar,
+.mailbox\.inbox nav.navbar,
+.mailbox\.email_view nav.navbar,
+.mailbox\.email_compose nav.navbar,
+.dashboards\.dashboard_4_1 nav.navbar
+  background: #fff
+
+
+/* For handle diferent bg color in MVC version */
+.Dashboard_2 .navbar.navbar-static-top,
+.Dashboard_3 .navbar.navbar-static-top,
+.Dashboard_4_1 .navbar.navbar-static-top,
+.ComposeEmail .navbar.navbar-static-top,
+.EmailView .navbar.navbar-static-top,
+.Inbox .navbar.navbar-static-top
   background: #fff
 
 /* MARGINS & PADDINGS */
@@ -805,4 +871,10 @@ table.table-mail tr td
 
 .space-30
   margin: 30px 0
+
+
+// Bootstrap issue in 3.3.0 with modal https://github.com/twbs/bootstrap/issues/9855
+// Fix
+body.modal-open
+  padding-right: inherit !important
 
