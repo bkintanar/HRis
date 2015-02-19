@@ -1,7 +1,7 @@
 <?php
 
+use HRis\Department;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Model;
 
 class DepartmentsTableSeeder extends Seeder {
 
@@ -16,6 +16,7 @@ class DepartmentsTableSeeder extends Seeder {
 
         DB::table('departments')->insert(
             [
+                ['id' => 10, 'name' => '--- Select ---'],
                 ['id' => 1, 'name' => 'Administration'],
                 ['id' => 2, 'name' => 'Human Resource'],
                 ['id' => 3, 'name' => 'Development'],
@@ -23,6 +24,10 @@ class DepartmentsTableSeeder extends Seeder {
                 ['id' => 5, 'name' => 'Customer Service'],
             ]
         );
+
+        $department = Department::whereName('--- Select ---')->first();
+        $department->id = 0;
+        $department->save();
     }
 
 }
