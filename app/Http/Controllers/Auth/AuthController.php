@@ -1,5 +1,6 @@
 <?php namespace HRis\Http\Controllers\Auth;
 
+use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use Exception;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Auth\LoginRequest;
