@@ -26,7 +26,7 @@
             <label for="effective_date" class="col-md-2 control-label">Effective Date</label>
             <div class="col-md-4" id="datepicker">
                     <div class="input-group date">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>{!! Form::text('effective_date', isset($employee->jobHistory()->effective_date) ? $employee->jobHistory()->effective_date : null, ['class' => 'form-control form-fields', 'data-mask' => '9999-99-99', $disabled]) !!}
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>{!! Form::text('effective_date', isset($employee->jobHistory()->effective_date) ? $employee->jobHistory()->effective_date : null, ['class' => 'form-control form-fields', 'data-mask form-fields' => '9999-99-99', $disabled]) !!}
                     </div>
             </div>
 

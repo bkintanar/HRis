@@ -44,6 +44,7 @@ class SalaryComputationsController extends Controller {
     public function salary(SalaryRequest $request, $employee_id = null)
     {
         $employee = $this->employee->getEmployeeSalarydetails($employee_id, $this->loggedUser->id);
+        $test = $this->employee_salary_components->whereEmployeeId(1)->with('salaryComponent')->get();
 
         $employee_status = 'ME_S';
         $dependents = count($employee->dependents);

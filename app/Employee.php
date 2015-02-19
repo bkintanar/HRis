@@ -1,5 +1,6 @@
 <?php namespace HRis;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -51,6 +52,12 @@ class Employee extends Model {
         'probation_end_date',
         'permanency_date',
     ];
+
+    /**
+     * @var array
+     */
+    protected $dates = ['birth_date', 'joined_date', 'probation_end_date', 'permanency_date', 'resign_date'];
+
     /**
      * @param $value
      */
@@ -96,7 +103,7 @@ class Employee extends Model {
      */
     public function setJoinedDateAttribute($value)
     {
-        $this->attributes['joined_date'] = $value ? : null;
+        $this->attributes['joined_date'] = Carbon::parse($value) ? : null;
     }
 
     /**
@@ -104,7 +111,7 @@ class Employee extends Model {
      */
     public function setProbationEndDateAttribute($value)
     {
-        $this->attributes['probation_end_date'] = $value ? : null;
+        $this->attributes['probation_end_date'] = Carbon::parse($value) ? : null;
     }
 
     /**
@@ -112,7 +119,15 @@ class Employee extends Model {
      */
     public function setPermanencyDateAttribute($value)
     {
-        $this->attributes['permanency_date'] = $value ? : null;
+        $this->attributes['permanency_date'] = Carbon::parse($value) ? : null;
+    }
+
+    /**
+     * @param $value
+     */
+    public function setResignDateAttribute($value)
+    {
+        $this->attributes['resign_date'] = Carbon::parse($value) ? : null;
     }
 
     /**
@@ -247,7 +262,7 @@ class Employee extends Model {
      */
     public function dependents()
     {
-        return $this->hasMany('HRis\Dependent', 'employee_id', 'employee_id');
+        return $this->hasMany('HRis\Dependent', 'employee_id', 'id');
     }
 
     /**
@@ -255,7 +270,7 @@ class Employee extends Model {
      */
     public function employeeSalaryComponents()
     {
-        return $this->hasMany('HRis\EmployeeSalaryComponents', 'employee_id', 'employee_id')
+        return $this->hasMany('HRis\EmployeeSalaryComponents', 'employee_id', 'id')
             ->with('salaryComponent')
             ->groupBy('component_id')
             ->orderBy('component_id', 'asc')
