@@ -75,28 +75,25 @@
                         {!! Form::open(['method' => 'POST', 'url' => \Request::path(), 'class' => 'form-horizontal']) !!}
                             {!! Form::hidden('pay_grade_id', '', ['id' => 'pay_grade_id']) !!}
                             {!! Form::hidden('_method', 'POST', ['id' => 'payGradeForm']) !!}
+
                             <div class="form-group">
-                                <div class="row">
-                                    {!! Form::label('name', 'Name', ['class' => 'col-md-3 control-label']) !!}
-                                    <div class="col-md-9">
-                                        {!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
-                                    </div>
+                                {!! Form::label('name', 'Name', ['class' => 'col-md-3 control-label']) !!}
+                                <div class="col-md-9">
+                                    {!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
                                 </div>
                             </div>
+
                             <div class="form-group">
-                                <div class="row">
-                                    {!! Form::label('min_salary', 'Minimum Salary', ['class' => 'col-md-3 control-label']) !!}
-                                    <div class="col-md-9">
-                                        {!! Form::text('min_salary', null, ['class' => 'form-control', 'required' => '', 'pattern' => '[0-9]{6}', 'maxlength' => '6', 'min' => '1', 'max' => '999999', 'onkeyup' => 'javascript: this.value = this.value.replace(/[^0-9]/g,\'\');']) !!}
-                                    </div>
+                                {!! Form::label('min_salary', 'Minimum Salary', ['class' => 'col-md-3 control-label']) !!}
+                                <div class="col-md-9">
+                                    {!! Form::text('min_salary', null, ['class' => 'form-control', 'required' => '', 'pattern' => '[0-9]{6}', 'maxlength' => '6', 'min' => '1', 'max' => '999999', 'onkeyup' => 'javascript: this.value = this.value.replace(/[^0-9]/g,\'\');']) !!}
                                 </div>
                             </div>
+
                             <div class="form-group">
-                                <div class="row">
-                                    {!! Form::label('max_salary', 'Maximum Salary', ['class' => 'col-md-3 control-label']) !!}
-                                    <div class="col-md-9">
-                                        {!! Form::text('max_salary', null, ['class' => 'form-control', 'required' => '', 'pattern' => '[0-9]{6}', 'maxlength' => '6', 'min' => '1', 'max' => '999999', 'onkeyup' => 'javascript: this.value = this.value.replace(/[^0-9]/g,\'\');']) !!}
-                                    </div>
+                                {!! Form::label('max_salary', 'Maximum Salary', ['class' => 'col-md-3 control-label']) !!}
+                                <div class="col-md-9">
+                                    {!! Form::text('max_salary', null, ['class' => 'form-control', 'required' => '', 'pattern' => '[0-9]{6}', 'maxlength' => '6', 'min' => '1', 'max' => '999999', 'onkeyup' => 'javascript: this.value = this.value.replace(/[^0-9]/g,\'\');']) !!}
                                 </div>
                             </div>
 

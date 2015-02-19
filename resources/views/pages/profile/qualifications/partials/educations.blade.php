@@ -71,55 +71,43 @@
                         {!! Form::hidden('employee_id', $employee->id) !!}
                         {!! Form::hidden('education_id', '', ['id' => 'education_id']) !!}
                         {!! Form::hidden('_method', 'POST', ['id' => 'educationForm']) !!}
+
                         <div class="form-group">
-                            <div class="row">
-                                {!! Form::label('level', 'Level', ['class' => 'col-md-3 control-label']) !!}
-                                <div class="col-md-9">
-                                    {!! Form::select('education_level_id', HRis\EducationLevel::lists('name', 'id'), null, ['class' => 'form-control chosen-select', 'id' => 'education_level_id']) !!}
+                            {!! Form::label('level', 'Level', ['class' => 'col-md-3 control-label']) !!}
+                            <div class="col-md-9">
+                                {!! Form::select('education_level_id', HRis\EducationLevel::lists('name', 'id'), null, ['class' => 'form-control chosen-select', 'id' => 'education_level_id']) !!}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::label('institute', 'Institute', ['class' => 'col-md-3 control-label']) !!}
+                            <div class="col-md-9">
+                                {!! Form::text('institute', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::label('major_specialization', 'Major/Specialization', ['class' => 'col-md-3 control-label']) !!}
+                            <div class="col-md-9">
+                                {!! Form::text('major_specialization', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::label('educationDateRange', 'Year', ['class' => 'col-md-3 control-label']) !!}
+                            <div class="col-md-9">
+                                <div class="input-daterange input-group input-full-width" id="datepicker">
+                                    {!! Form::text('from_date', null, ['class' => 'input-sm form-control', 'data-mask' => '9999-99-99', 'id' => 'education_from_date']) !!}
+                                    <span class="input-group-addon">to</span>
+                                    {!! Form::text('to_date', null, ['class' => 'input-sm form-control', 'data-mask' => '9999-99-99', 'id' => 'education_to_date']) !!}
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <div class="row">
-                                {!! Form::label('institute', 'Institute', ['class' => 'col-md-3 control-label']) !!}
-
-                                <div class="col-md-9">
-                                    {!! Form::text('institute', null, ['class' => 'form-control']) !!}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="row">
-                                {!! Form::label('major_specialization', 'Major/Specialization', ['class' => 'col-md-3 control-label']) !!}
-
-                                <div class="col-md-9">
-                                    {!! Form::text('major_specialization', null, ['class' => 'form-control']) !!}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group" id="educationDateRange">
-                            <div class="row">
-                                {!! Form::label('educationDateRange', 'Year', ['class' => 'col-md-3 control-label']) !!}
-                                <div class="col-md-9">
-                                    <div class="input-daterange input-group input-full-width" id="datepicker">
-                                        {!! Form::text('from_date', null, ['class' => 'input-sm form-control', 'data-mask' => '9999-99-99', 'id' => 'education_from_date']) !!}
-                                        <span class="input-group-addon">to</span>
-                                        {!! Form::text('to_date', null, ['class' => 'input-sm form-control', 'data-mask' => '9999-99-99', 'id' => 'education_to_date']) !!}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="row">
-                                {!! Form::label('gpa_score', 'GPA/Score', ['class' => 'col-md-3 control-label']) !!}
-
-                                <div class="col-md-9">
-                                    {!! Form::text('gpa_score', null, ['class' => 'form-control']) !!}
-                                </div>
+                            {!! Form::label('gpa_score', 'GPA/Score', ['class' => 'col-md-3 control-label']) !!}
+                            <div class="col-md-9">
+                                {!! Form::text('gpa_score', null, ['class' => 'form-control']) !!}
                             </div>
                         </div>
 

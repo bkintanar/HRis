@@ -76,44 +76,34 @@
                         {!! Form::hidden('work_experience_id', '', ['id' => 'work_experience_id']) !!}
                         {!! Form::hidden('_method', 'POST', ['id' => 'workExperienceForm']) !!}
                         <div class="form-group">
-                            <div class="row">
-                                {!! Form::label('company', 'Company', ['class' => 'col-md-3 control-label']) !!}
-                                <div class="col-md-9">
-                                    {!! Form::text('company', null, ['class' => 'form-control']) !!}
+                            {!! Form::label('company', 'Company', ['class' => 'col-md-3 control-label']) !!}
+                            <div class="col-md-9">
+                                {!! Form::text('company', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::label('job_title', 'Job Title', ['class' => 'col-md-3 control-label']) !!}
+                            <div class="col-md-9">
+                                {!! Form::text('job_title', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::label('workExperienceDateRange', 'Year', ['class' => 'col-md-3 control-label']) !!}
+                            <div class="col-md-9">
+                                <div class="input-daterange input-group input-full-width" id="datepicker">
+                                    {!! Form::text('from_date', null, ['class' => 'input-sm form-control', 'data-mask' => '9999-99-99', 'id' => 'work_experience_from_date']) !!}
+                                    <span class="input-group-addon">to</span>
+                                    {!! Form::text('to_date', null, ['class' => 'input-sm form-control', 'data-mask' => '9999-99-99', 'id' => 'work_experience_to_date']) !!}
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <div class="row">
-                                {!! Form::label('job_title', 'Job Title', ['class' => 'col-md-3 control-label']) !!}
-
-                                <div class="col-md-9">
-                                    {!! Form::text('job_title', null, ['class' => 'form-control']) !!}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group" id="workExperienceDateRange">
-                            <div class="row">
-                                {!! Form::label('workExperienceDateRange', 'Year', ['class' => 'col-md-3 control-label']) !!}
-                                <div class="col-md-9">
-                                    <div class="input-daterange input-group input-full-width" id="datepicker">
-                                        {!! Form::text('from_date', null, ['class' => 'input-sm form-control', 'data-mask' => '9999-99-99', 'id' => 'work_experience_from_date']) !!}
-                                        <span class="input-group-addon">to</span>
-                                        {!! Form::text('to_date', null, ['class' => 'input-sm form-control', 'data-mask' => '9999-99-99', 'id' => 'work_experience_to_date']) !!}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="row">
-                                {!! Form::label('comment', 'Comment', ['class' => 'col-md-3 control-label']) !!}
-
-                                <div class="col-md-9">
-                                    {!! Form::textarea('comment', null, ['class' => 'form-control', 'size' => '30x5']) !!}
-                                </div>
+                            {!! Form::label('comment', 'Comment', ['class' => 'col-md-3 control-label']) !!}
+                            <div class="col-md-9">
+                                {!! Form::textarea('comment', null, ['class' => 'form-control', 'size' => '30x5']) !!}
                             </div>
                         </div>
 

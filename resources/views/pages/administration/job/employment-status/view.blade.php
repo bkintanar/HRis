@@ -71,20 +71,18 @@
                         {!! Form::open(['method' => 'POST', 'url' => \Request::path(), 'class' => 'form-horizontal']) !!}
                             {!! Form::hidden('employment_status_id', '', ['id' => 'employment_status_id']) !!}
                             {!! Form::hidden('_method', 'POST', ['id' => 'employmentStatusForm']) !!}
+
                             <div class="form-group">
-                                <div class="row">
-                                    {!! Form::label('name', 'Name', ['class' => 'col-md-3 control-label']) !!}
-                                    <div class="col-md-9">
-                                        {!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
-                                    </div>
+                                {!! Form::label('name', 'Name', ['class' => 'col-md-3 control-label']) !!}
+                                <div class="col-md-9">
+                                    {!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
                                 </div>
                             </div>
+
                             <div class="form-group">
-                                <div class="row">
-                                    {!! Form::label('class', 'Class', ['class' => 'col-md-3 control-label']) !!}
-                                    <div class="col-md-9">
-                                        {!! Form::text('class', null, ['class' => 'form-control', 'required']) !!}
-                                    </div>
+                                {!! Form::label('class', 'Class', ['class' => 'col-md-3 control-label']) !!}
+                                <div class="col-md-9">
+                                    {!! Form::text('class', null, ['class' => 'form-control', 'required']) !!}
                                 </div>
                             </div>
 

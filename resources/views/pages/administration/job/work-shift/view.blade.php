@@ -73,32 +73,29 @@
                         {!! Form::open(['method' => 'POST', 'url' => \Request::path(), 'class' => 'form-horizontal']) !!}
                             {!! Form::hidden('work_shift_id', '', ['id' => 'work_shift_id']) !!}
                             {!! Form::hidden('_method', 'POST', ['id' => 'workShiftForm']) !!}
+
                             <div class="form-group">
-                                <div class="row">
-                                    {!! Form::label('name', 'Name', ['class' => 'col-md-3 control-label']) !!}
-                                    <div class="col-md-9">
-                                        {!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
+                                {!! Form::label('class', 'Class', ['class' => 'col-md-3 control-label']) !!}
+                                <div class="col-md-9">
+                                    {!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                {!! Form::label('workShiftDateRange', 'Work Hours', ['class' => 'col-md-3 control-label']) !!}
+                                <div class="col-md-9">
+                                    <div class='input-group input-daterange input-full-width' id='timepicker'>
+                                        {!! Form::text('from_time', null, ['class' => 'input-sm form-control', 'data-mask' => '99:99:00', 'id' => 'from_time']) !!}
+                                        <span class="input-group-addon">to</span>
+                                        {!! Form::text('to_time', null, ['class' => 'input-sm form-control', 'data-mask' => '99:99:00', 'id' => 'to_time']) !!}
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group" id="workShiftDateRange">
-                                <div class="row">
-                                    {!! Form::label('workShiftDateRange', 'Work Hours', ['class' => 'col-md-3 control-label']) !!}
-                                    <div class="col-md-9">
-                                        <div class='input-group input-daterange input-full-width' id='timepicker'>
-                                            {!! Form::text('from_time', null, ['class' => 'input-sm form-control', 'data-mask' => '99:99:00', 'id' => 'from_time']) !!}
-                                            <span class="input-group-addon">to</span>
-                                            {!! Form::text('to_time', null, ['class' => 'input-sm form-control', 'data-mask' => '99:99:00', 'id' => 'to_time']) !!}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
                             <div class="form-group">
-                                <div class="row">
-                                    {!! Form::label('duration', 'Duration', ['class' => 'col-md-3 control-label']) !!}
-                                    <div class="col-md-9">
-                                        {!! Form::text('duration', null, ['class' => 'form-control']) !!}
-                                    </div>
+                                {!! Form::label('duration', 'Duration', ['class' => 'col-md-3 control-label']) !!}
+                                <div class="col-md-9">
+                                    {!! Form::text('duration', null, ['class' => 'form-control']) !!}
                                 </div>
                             </div>
 
