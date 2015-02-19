@@ -58,76 +58,64 @@
         </div>
     </div><!-- Modal -->
     <div class="modal fade" id="employeeModal" tabindex="-1">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button class="close" data-dismiss="modal" type="button">&times;</button>
 
-                        <h4 class="modal-title" id="myModalLabel">Emergency Contact Details</h4>
+                        <h4 class="modal-title" id="myModalLabel">Add New Employee</h4>
                     </div>
 
                     <div class="modal-body">
                         <!--Add form-->
                         {!! Form::open(['method' => 'POST', 'url' => str_replace('/edit', '', \Request::path()), 'class' => 'form-horizontal']) !!}
-                            {!! Form::hidden('id', $employee->id) !!}
-                            {!! Form::hidden('emergency_contact_id', '', ['id' => 'emergency_contact_id']) !!}
-                            {!! Form::hidden('_method', 'POST', ['id' => 'emergencyContactForm']) !!}
+                            {!! Form::hidden('_method', 'POST', ['id' => 'employeeForm']) !!}
+
                             <div class="form-group">
-                                <div class="row">
-                                    {!! Form::label('first_name', 'First Name', ['class' => 'col-md-3 control-label']) !!}
-                                    <div class="col-md-9">
-                                        {!! Form::text('first_name', null, ['class' => 'form-control']) !!}
-                                    </div>
+                                {!! Form::label('first_name', 'Full Name', ['class' => 'col-md-2 control-label']) !!}
+                                <div class="col-md-4">
+                                    {!! Form::text('first_name', null, ['class' => 'form-control', 'required']) !!}
+                                    <span class="help-block m-b-none">First Name</span>
+                                </div>
+                                <div class="col-md-2">
+                                    {!! Form::text('middle_name', null, ['class' => 'form-control']) !!}
+                                    <span class="help-block m-b-none">Middle Name</span>
+                                </div>
+                                <div class="col-md-4">
+                                    {!! Form::text('last_name', null, ['class' => 'form-control', 'required', 'id' => 'last_name']) !!}
+                                    <span class="help-block m-b-none">Last Name</span>
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <div class="row">
-                                    {!! Form::label('middle_name', 'Middle Name', ['class' => 'col-md-3 control-label']) !!}
+                            <div class="hr-line-dashed"></div>
 
-                                    <div class="col-md-9">
-                                        {!! Form::text('middle_name', null, ['class' => 'form-control']) !!}
-                                    </div>
+                            <div class="form-group">
+                                {!! Form::label('employee_id', 'Employee Id', ['class' => 'col-md-2 control-label']) !!}
+                                <div class="col-sm-4">
+                                    {!! Form::text('employee_id', null, ['class' => 'form-control', 'data-mask' => 'GWO-9999', 'required' => 'required']) !!}
+                                </div>
+                                {!! Form::label('face_id', 'Face Id', ['class' => 'col-md-2 control-label']) !!}
+                                <div class="col-sm-4">
+                                    {!! Form::text('face_id', null, ['class' => 'form-control', 'data-mask' => '999']) !!}
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <div class="row">
-                                    {!! Form::label('last_name', 'Last Name', ['class' => 'col-md-3 control-label']) !!}
+                            <div class="hr-line-dashed"></div>
 
-                                    <div class="col-md-9">
-                                        {!! Form::text('last_name', null, ['class' => 'form-control']) !!}
-                                    </div>
+                            <div class="form-group">
+                                {!! Form::label('gender', 'Gender', ['class' => 'col-md-2 control-label']) !!}
+                                <div class="col-sm-4">
+                                    <label class="radio-inline i-checks">
+                                        {!! Form::radio('gender', 'M', null) !!} Male
+                                    </label>
+                                    <label class="radio-inline i-checks">
+                                        {!! Form::radio('gender', 'F', null) !!} Female
+                                    </label>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <div class="row">
-                                    {!! Form::label('relationship_id', 'Relationship', ['class' => 'col-md-3 control-label']) !!}
-
-                                    <div class="col-md-9">
-                                        {!! Form::select('relationship_id', HRis\Relationship::lists('name', 'id'), null, ['class' => 'form-control chosen-select']) !!}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="row">
-                                    {!! Form::label('home_phone', 'Home Telephone', ['class' => 'col-md-3 control-label']) !!}
-
-                                    <div class="col-md-9">
-                                        {!! Form::text('home_phone', null, ['class' => 'form-control', 'data-mask' => '099 999 9999']) !!}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="row">
-                                    {!! Form::label('mobile_phone', 'Mobile', ['class' => 'col-md-3 control-label']) !!}
-
-                                    <div class="col-md-9">
-                                        {!! Form::text('mobile_phone', null, ['class' => 'form-control', 'data-mask' => '0999 999 9999']) !!}
-                                    </div>
+                                {!! Form::label('marital_status_id', 'Marital Status', ['class' => 'col-md-2 control-label']) !!}
+                                <div class="col-sm-4">
+                                    {!! Form::select('marital_status_id', HRis\MaritalStatus::lists('name', 'id'), 1, ['class' => 'form-control chosen-select']) !!}
                                 </div>
                             </div>
 
@@ -144,24 +132,38 @@
 </div>
 @stop
 
+@section('custom_css')
+    {!! Html::style('/css/plugins/iCheck/custom.css') !!}
+    {!! Html::style('/css/plugins/chosen/chosen.css') !!}
+@stop
+
 @section('custom_js')
-<script>
+    <!-- iCheck -->
+    {!! Html::script('/js/plugins/iCheck/icheck.min.js') !!}
+    <!-- Chosen -->
+    {!! Html::script('/js/plugins/chosen/chosen.jquery.js') !!}
+
+    <script>
         $(document).ready(function () {
+
+            $('#employeeModal').on('shown.bs.modal', function (e) {
+                $('.chosen-select').chosen();
+            });
+
 
             $('#addEmployee').click(function () {
 
-                $('#first_name').val('');
-                $('#middle_name').val('');
-                $('#last_name').val('');
-                $('#relationship_id').val(0);
-                $('#home_phone').val('');
-                $('#mobile_phone').val('');
-
-                $('.chosen-select').trigger("chosen:updated");
-
-                $("#emergencyContactForm").attr("value", "POST");
                 $('#employeeModal').modal('toggle');
+
+                $('.i-checks').iCheck({
+                    checkboxClass: 'icheckbox_square-green',
+                    radioClass: 'iradio_square-green'
+                });
+
+
             });
+
+
         });
     </script>
 @stop

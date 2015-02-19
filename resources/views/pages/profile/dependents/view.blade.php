@@ -75,53 +75,37 @@
                             {!! Form::hidden('employee_id', $employee->id) !!}
                             {!! Form::hidden('dependent_id', '', ['id' => 'dependent_id']) !!}
                             {!! Form::hidden('_method', 'POST', ['id' => 'dependentForm']) !!}
+
                             <div class="form-group">
-                                <div class="row">
-                                    {!! Form::label('first_name', 'First Name', ['class' => 'col-md-3 control-label']) !!}
-                                    <div class="col-md-9">
-                                        {!! Form::text('first_name', null, ['class' => 'form-control', 'required']) !!}
-                                    </div>
+                                {!! Form::label('first_name', 'First Name', ['class' => 'col-md-3 control-label']) !!}
+                                <div class="col-md-9">
+                                    {!! Form::text('first_name', null, ['class' => 'form-control', 'required']) !!}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('middle_name', 'Middle Name', ['class' => 'col-md-3 control-label']) !!}
+                                <div class="col-md-9">
+                                    {!! Form::text('middle_name', null, ['class' => 'form-control', 'required']) !!}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('last_name', 'Last Name', ['class' => 'col-md-3 control-label']) !!}
+                                <div class="col-md-9">
+                                    {!! Form::text('last_name', null, ['class' => 'form-control', 'required']) !!}
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <div class="row">
-                                    {!! Form::label('middle_name', 'Middle Name', ['class' => 'col-md-3 control-label']) !!}
-
-                                    <div class="col-md-9">
-                                        {!! Form::text('middle_name', null, ['class' => 'form-control']) !!}
-                                    </div>
+                                {!! Form::label('relationship_id', 'Relationship', ['class' => 'col-md-3 control-label']) !!}
+                                <div class="col-md-9">
+                                    {!! Form::select('relationship_id', HRis\Relationship::lists('name', 'id'), null, ['class' => 'form-control chosen-select']) !!}
                                 </div>
                             </div>
-
                             <div class="form-group">
-                                <div class="row">
-                                    {!! Form::label('last_name', 'Last Name', ['class' => 'col-md-3 control-label']) !!}
-
-                                    <div class="col-md-9">
-                                        {!! Form::text('last_name', null, ['class' => 'form-control']) !!}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="row">
-                                    {!! Form::label('relationship_id', 'Relationship', ['class' => 'col-md-3 control-label']) !!}
-
-                                    <div class="col-md-9">
-                                        {!! Form::select('relationship_id', HRis\Relationship::lists('name', 'id'), null, ['class' => 'form-control chosen-select']) !!}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="row">
-                                    {!! Form::label('birth_date', 'Birth Date', ['class' => 'col-md-3 control-label']) !!}
-
-                                    <div class="col-md-9" id="datepicker_birth_date">
-                                        <div class="input-group date">
-                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>{!! Form::text('birth_date', null, ['class' => 'form-control', 'data-mask' => '9999-99-99']) !!}
-                                        </div>
+                                {!! Form::label('birth_date', 'Birth Date', ['class' => 'col-md-3 control-label']) !!}
+                                <div class="col-md-9">
+                                    <div class="input-group date">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>{!! Form::text('birth_date', null, ['class' => 'form-control', 'data-mask' => '9999-99-99']) !!}
                                     </div>
                                 </div>
                             </div>
