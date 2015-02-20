@@ -262,7 +262,7 @@ class Employee extends Model {
      */
     public function dependents()
     {
-        return $this->hasMany('HRis\Dependent', 'employee_id', 'id');
+        return $this->hasMany('HRis\Dependent', 'employee_id', 'employee_id');
     }
 
     /**

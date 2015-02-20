@@ -2,6 +2,10 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Country
+ * @package HRis
+ */
 class Country extends Model {
 
     /**

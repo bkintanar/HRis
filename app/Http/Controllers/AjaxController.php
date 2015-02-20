@@ -761,6 +761,9 @@ class AjaxController extends Controller {
                     $sss = $getSSS->sss_ee;
                     $taxableSalary = $semiMonthly - $deductions;
                 }
+                else {
+                    $taxableSalary = $semiMonthly - $request->get('deductions');
+                }
                 $taxes = TaxComputations::getTaxRate($status, $taxableSalary);
 
                 $over = 0;
@@ -769,13 +772,13 @@ class AjaxController extends Controller {
                     $over = $taxableSalary - $taxes->$status;
                 }
                 $totalTax = $taxes->exemption + ($over * $taxes->percentage_over);
-
-                $return = json_encode(['tax' => $totalTax, 'sss' => $sss, 'salary' => $semiMonthly]);
+                $return = json_encode(['tax' => $totalTax, 'sss' => $sss, 'salary' => $taxableSalary]);
 
                 print($return);
 
             } catch (Exception $e)
             {
+                //                    print($e->getMessage());
             }
         }
     }

@@ -2,7 +2,16 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class EmployeeSkill
+ * @package HRis
+ */
 class EmployeeSkill extends Model {
+
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
 
     /**
      * The database table used by the model.
@@ -10,7 +19,5 @@ class EmployeeSkill extends Model {
      * @var string
      */
     protected $table = 'employee_skill';
-
-    public $timestamps = false;
 
 }

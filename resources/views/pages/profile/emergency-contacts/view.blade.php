@@ -78,61 +78,44 @@
                             {!! Form::hidden('emergency_contact_id', '', ['id' => 'emergency_contact_id']) !!}
                             {!! Form::hidden('_method', 'POST', ['id' => 'emergencyContactForm']) !!}
                             <div class="form-group">
-                                <div class="row">
-                                    {!! Form::label('first_name', 'First Name', ['class' => 'col-md-3 control-label']) !!}
-                                    <div class="col-md-9">
-                                        {!! Form::text('first_name', null, ['class' => 'form-control']) !!}
-                                    </div>
+                                {!! Form::label('first_name', 'Full Name', ['class' => 'col-md-3 control-label']) !!}
+                                <div class="col-md-9">
+                                    {!! Form::text('first_name', null, ['class' => 'form-control', 'required']) !!}
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <div class="row">
-                                    {!! Form::label('middle_name', 'Middle Name', ['class' => 'col-md-3 control-label']) !!}
-
-                                    <div class="col-md-9">
-                                        {!! Form::text('middle_name', null, ['class' => 'form-control']) !!}
-                                    </div>
+                                {!! Form::label('middle_name', 'Middle Name', ['class' => 'col-md-3 control-label']) !!}
+                                <div class="col-md-9">
+                                    {!! Form::text('middle_name', null, ['class' => 'form-control']) !!}
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <div class="row">
-                                    {!! Form::label('last_name', 'Last Name', ['class' => 'col-md-3 control-label']) !!}
-
-                                    <div class="col-md-9">
-                                        {!! Form::text('last_name', null, ['class' => 'form-control']) !!}
-                                    </div>
+                                {!! Form::label('last_name', 'Last Name', ['class' => 'col-md-3 control-label']) !!}
+                                <div class="col-md-9">
+                                    {!! Form::text('last_name', null, ['class' => 'form-control', 'required', 'id' => 'last_name']) !!}
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <div class="row">
-                                    {!! Form::label('relationship_id', 'Relationship', ['class' => 'col-md-3 control-label']) !!}
-
-                                    <div class="col-md-9">
-                                        {!! Form::select('relationship_id', HRis\Relationship::lists('name', 'id'), null, ['class' => 'form-control chosen-select']) !!}
-                                    </div>
+                                {!! Form::label('relationship_id', 'Relationship', ['class' => 'col-md-3 control-label']) !!}
+                                <div class="col-md-9">
+                                    {!! Form::select('relationship_id', HRis\Relationship::lists('name', 'id'), null, ['class' => 'form-control chosen-select']) !!}
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <div class="row">
-                                    {!! Form::label('home_phone', 'Home Telephone', ['class' => 'col-md-3 control-label']) !!}
-
-                                    <div class="col-md-9">
-                                        {!! Form::text('home_phone', null, ['class' => 'form-control', 'data-mask' => '099 999 9999']) !!}
-                                    </div>
+                                {!! Form::label('mobile_phone', 'Mobile', ['class' => 'col-md-3 control-label']) !!}
+                                <div class="col-md-9">
+                                    {!! Form::text('mobile_phone', null, ['class' => 'form-control', 'data-mask' => '0999 999 9999']) !!}
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <div class="row">
-                                    {!! Form::label('mobile_phone', 'Mobile', ['class' => 'col-md-3 control-label']) !!}
-
-                                    <div class="col-md-9">
-                                        {!! Form::text('mobile_phone', null, ['class' => 'form-control', 'data-mask' => '0999 999 9999']) !!}
-                                    </div>
+                                {!! Form::label('home_phone', 'Home Telephone', ['class' => 'col-md-3 control-label']) !!}
+                                <div class="col-md-9">
+                                    {!! Form::text('home_phone', null, ['class' => 'form-control', 'data-mask' => '099 999 9999']) !!}
                                 </div>
                             </div>
 

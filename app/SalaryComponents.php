@@ -32,7 +32,7 @@ class SalaryComponents extends Model {
             ->take(2);
 
         return ['monthlyBasic' => $salaryComponents->first()->id, 'SSS' => $salaryComponents->last()->id];
-        
+
     }
 
 }

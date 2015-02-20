@@ -4,6 +4,10 @@ use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Request;
 
+/**
+ * Class Navlink
+ * @package HRis
+ */
 class Navlink extends Model {
 
     /**
@@ -13,6 +17,9 @@ class Navlink extends Model {
      */
     protected $table = 'navlinks';
 
+    /**
+     * @return string
+     */
     public static function generate()
     {
         $sentry = Sentry::getUser();
@@ -37,6 +44,11 @@ class Navlink extends Model {
         return $result;
     }
 
+    /**
+     * @param $link
+     * @param $children
+     * @return string
+     */
     public static function generateNavLinkItem($link, $children)
     {
         $sentry = Sentry::getUser();
@@ -117,6 +129,10 @@ class Navlink extends Model {
         return $item;
     }
 
+    /**
+     * @param $href
+     * @return bool
+     */
     public static function isURLActive($href)
     {
         $request = Request::capture();
@@ -129,6 +145,10 @@ class Navlink extends Model {
         return false;
     }
 
+    /**
+     * @param $_link
+     * @return string
+     */
     public static function breadcrumb($_link)
     {
         $str = '';
@@ -166,6 +186,10 @@ class Navlink extends Model {
         return $str;
     }
 
+    /**
+     * @param bool $pim
+     * @return string
+     */
     public static function profileLinks($pim = false)
     {
         $sentry = Sentry::getUser();
@@ -203,6 +227,32 @@ class Navlink extends Model {
 
     }
 
+    /**
+     * @param $navigation
+     * @param $pim
+     * @return array
+     */
+    private static function formatHref($navigation, $pim)
+    {
+        if ($pim)
+        {
+            $href = str_replace('profile', 'pim/employee-list/' . Request::segment(3), $navigation->href);
+            $permission = str_replace('pim/employee-list/' . Request::segment(3), 'pim', $href);
+            $link = str_replace('/', '.', $permission);
+        }
+        else
+        {
+            $href = $navigation->href;
+            $link = str_replace('/', '.', $href);
+        }
+
+        return ['href' => $href, 'link' => $link];
+    }
+
+    /**
+     * @param $id
+     * @return string
+     */
     public static function permissionTable($id)
     {
         $parents = Navlink::whereParentId(0)->get();
@@ -216,6 +266,11 @@ class Navlink extends Model {
         return $result;
     }
 
+    /**
+     * @param $parent
+     * @param $id
+     * @return string
+     */
     public static function permissionTab($parent, $id)
     {
         $children = Navlink::whereParentId($parent->id)->get();
@@ -246,21 +301,37 @@ class Navlink extends Model {
         return $result;
     }
 
-    private static function formatHref($navigation, $pim)
+    /**
+     * @param $children
+     * @param $id
+     * @param bool $indent
+     * @param bool $double
+     * @return string
+     */
+    private static function generatePermissions($children, $id, $indent = false, $double = false)
     {
-        if ($pim)
+        $result = '';
+        foreach ($children as $child)
         {
-            $href = str_replace('profile', 'pim/employee-list/' . Request::segment(3), $navigation->href);
-            $permission = str_replace('pim/employee-list/' . Request::segment(3), 'pim', $href);
-            $link = str_replace('/', '.', $permission);
-        }
-        else
-        {
-            $href = $navigation->href;
-            $link = str_replace('/', '.', $href);
+            $result .= '<tr><td class="' . ($indent == true ? 'indent' : '') . ($double == true ? '-double' : '') . ' ta-left">' . $child->name . '</td>';
+            $result .= '<td></td>';
+
+            $result .= Navlink::generateCheckbox($child, $id, PERMISSION_VIEW);
+            $result .= Navlink::generateCheckbox($child, $id, PERMISSION_UPDATE);
+            $result .= Navlink::generateCheckbox($child, $id, PERMISSION_DELETE);
+            $result .= Navlink::generateCheckbox($child, $id, PERMISSION_CREATE);
+
+            $result .= '</tr>';
+
+            $childrenOfChild = Navlink::whereParentId($child->id)->get();
+
+            if (count($childrenOfChild))
+            {
+                $result .= Navlink::generatePermissions($childrenOfChild, $id, true, $indent == true ? true : false);
+            }
         }
 
-        return ['href' => $href, 'link' => $link];
+        return $result;
     }
 
     /**
@@ -301,29 +372,4 @@ class Navlink extends Model {
         return '<td></td>';
     }
 
-    private static function generatePermissions($children, $id, $indent = false, $double = false)
-    {
-        $result = '';
-        foreach ($children as $child)
-        {
-            $result .= '<tr><td class="' . ($indent == true ? 'indent' : '') . ($double == true ? '-double' : '') . ' ta-left">' . $child->name . '</td>';
-            $result .= '<td></td>';
-
-            $result .= Navlink::generateCheckbox($child, $id, PERMISSION_VIEW);
-            $result .= Navlink::generateCheckbox($child, $id, PERMISSION_UPDATE);
-            $result .= Navlink::generateCheckbox($child, $id, PERMISSION_DELETE);
-            $result .= Navlink::generateCheckbox($child, $id, PERMISSION_CREATE);
-
-            $result .= '</tr>';
-
-            $childrenOfChild = Navlink::whereParentId($child->id)->get();
-
-            if (count($childrenOfChild))
-            {
-                $result .= Navlink::generatePermissions($childrenOfChild, $id, true, $indent == true ? true : false);
-            }
-        }
-
-        return $result;
-    }
 }

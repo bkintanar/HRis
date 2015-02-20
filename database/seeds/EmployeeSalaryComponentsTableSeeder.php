@@ -64,6 +64,13 @@ class EmployeeSalaryComponentsTableSeeder extends Seeder {
                     'value'          => 50.00,
                     'effective_date' => '2013-10-31'
                 ],
+                [
+                    'id'             => 8,
+                    'employee_id'    => 2,
+                    'component_id'   => 2,
+                    'value'          => 290.65,
+                    'effective_date' => '2013-10-31'
+                ],
             ]
         );
 

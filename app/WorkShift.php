@@ -24,4 +24,26 @@ class WorkShift extends Model {
      * @var array
      */
     protected $fillable = ['name', 'from_date', 'to_date', 'duration'];
+
+    /**
+     * @var array
+     */
+    protected $dates = ['from_date', 'to_date'];
+
+    /**
+     * @param $value
+     */
+    public function setToDateAttribute($value)
+    {
+        $this->attributes['to_date'] = Carbon::parse($value) ? : null;
+    }
+
+    /**
+     * @param $value
+     */
+    public function setFromDateAttribute($value)
+    {
+        $this->attributes['from_date'] = Carbon::parse($value) ? : null;
+    }
+
 }

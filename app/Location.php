@@ -2,7 +2,16 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Location
+ * @package HRis
+ */
 class Location extends Model {
+
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
 
     /**
      * The database table used by the model.
@@ -11,5 +20,4 @@ class Location extends Model {
      */
     protected $table = 'locations';
 
-    public $timestamps = false;
 } 

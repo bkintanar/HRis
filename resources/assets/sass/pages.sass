@@ -66,6 +66,10 @@
   margin-left: -150px
   margin-top: -330px
 
+  .loginColumns
+    width: 760px
+    margin: 8% auto 0
+
 .logo-name
   color: #e6e6e6
   font-size: 180px
@@ -99,7 +103,7 @@
 /* DASBOARD */
 
 .dashboard-header
-  border-top: 4px solid $border-color
+  border-top: 0
   padding: 20px 20px 20px 20px
 
 .dashboard-header h2
@@ -312,10 +316,10 @@ ul.notes li div
 .file-manager h5.tag-title
   margin-top: 20px
 
-.file-manager .tag-list li
+.tag-list li
   float: left
 
-.file-manager .tag-list li a
+.tag-list li a
   font-size: 10px
   background-color: $gray
   padding: 5px 12px
@@ -551,3 +555,104 @@ dd.project-people
   padding: 2px 6px
   font-size: 10px
   text-transform: uppercase
+
+/* Chat view */
+.message-input
+  height: 90px !important
+
+.chat-avatar
+  white: 36px
+  height: 36px
+  float: left
+  margin-right: 10px
+
+.chat-user-name
+  padding: 10px
+
+.chat-user
+  padding: 8px 10px
+  border-bottom: 1px solid #e7eaec
+
+.chat-user a
+  color: inherit
+
+.chat-view
+  z-index: 2012
+
+.chat-users, .chat-statistic
+  margin-left: -30px
+
+.chat-view .ibox-content
+  padding: 0
+
+.chat-message
+  padding: 10px 20px
+
+.message-avatar
+  height: 48px
+  width: 48px
+  border: 1px solid #e7eaec
+  border-radius: 4px
+  margin-top: 1px
+
+.chat-discussion .chat-message:nth-child(2n+1) .message-avatar
+  float: left
+  margin-right: 10px
+
+.chat-discussion .chat-message:nth-child(2n) .message-avatar
+  float: right
+  margin-left: 10px
+
+.message
+  background-color: #fff
+  border: 1px solid #e7eaec
+  text-align: left
+  display: block
+  padding: 10px 20px
+  position: relative
+  border-radius: 4px
+
+.chat-discussion .chat-message:nth-child(2n+1) .message-date
+  float: right
+
+.chat-discussion .chat-message:nth-child(2n) .message-date
+  float: left
+
+.chat-discussion .chat-message:nth-child(2n+1) .message
+  text-align: left
+  margin-left: 55px
+
+.chat-discussion .chat-message:nth-child(2n) .message
+  text-align: right
+  margin-right: 55px
+
+.message-date
+  font-size: 10px
+  color: #888888
+
+.message-content
+  display: block
+
+.chat-discussion
+  background: #eee
+  padding: 15px
+  height: 400px
+  overflow-y: auto
+
+.chat-users
+  overflow-y: auto
+  height: 400px
+
+.chat-message-form .form-group
+  margin-bottom: 0
+
+/* jsTree */
+.jstree-open > .jstree-anchor > .fa-folder:before
+  content: "\f07c"
+
+.jstree-default .jstree-icon.none
+  width: 0
+
+  @media (max-width: 992px)
+    .chat-users, .chat-statistic
+      margin-left: 0px

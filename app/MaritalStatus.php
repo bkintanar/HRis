@@ -2,6 +2,10 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class MaritalStatus
+ * @package HRis
+ */
 class MaritalStatus extends Model {
 
     /**

@@ -36,7 +36,7 @@ class Salary {
         $employee_salary_components = $employee->employeeSalaryComponents;
         $component_ids = $this->salary_components->getSalaryAndSSS();
         $deductions = 0;
-
+        $semiMonthly = 0;
         foreach ($employee_salary_components as $employee_salary_component)
         {
             if ($employee_salary_component->component_id == $component_ids['monthlyBasic'])
@@ -70,11 +70,16 @@ class Salary {
         $taxes = $this->tax_computations->getTaxRate($employee_status, $taxableSalary);
 
         $over = 0;
-        if ($taxableSalary > $taxes->$employee_status)
+        $totalTax = 0;
+        if($taxes)
         {
-            $over = $taxableSalary - $taxes->$employee_status;
-        }
+            if ($taxableSalary > $taxes->$employee_status)
+            {
+                $over = $taxableSalary - $taxes->$employee_status;
+            }
+
         $totalTax = $taxes->exemption + ($over * $taxes->percentage_over);
+        }
 
         return ['totalTax' => round($totalTax, 2), 'employee_status' => $employee_status];
 

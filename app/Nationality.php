@@ -24,4 +24,5 @@ class Nationality extends Model {
      * @var array
      */
     protected $fillable = ['name'];
+
 }

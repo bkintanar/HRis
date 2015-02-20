@@ -2,7 +2,16 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class TaxComputations
+ * @package HRis
+ */
 class TaxComputations extends Model {
+
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
 
     /**
      * The database table used by the model.
@@ -10,11 +19,6 @@ class TaxComputations extends Model {
      * @var string
      */
     protected $table = 'tax_computations';
-
-    /**
-     * @var bool
-     */
-    public $timestamps = false;
 
     /**
      * @param $status

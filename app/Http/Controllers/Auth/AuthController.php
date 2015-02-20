@@ -1,5 +1,7 @@
 <?php namespace HRis\Http\Controllers\Auth;
 
+use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use Exception;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Auth\LoginRequest;
 use Illuminate\Support\Facades\Redirect;
@@ -56,7 +58,7 @@ class AuthController extends Controller {
             return redirect('/auth/login')->withInput($request->only('email'))->withErrors([
                 'email' => $e->getMessage(),
             ]);
-        } catch (\Exception $e)
+        } catch (Exception $e)
         {
             return redirect('/auth/login')->withInput($request->only('email'))->withErrors([
                 'email' => 'These credentials do not match our records.',
@@ -74,9 +76,7 @@ class AuthController extends Controller {
      */
     public function getLogout()
     {
-        $auth = $this->auth;
-
-        $auth::logout();
+        Sentry::logout();
 
         return redirect('/');
     }

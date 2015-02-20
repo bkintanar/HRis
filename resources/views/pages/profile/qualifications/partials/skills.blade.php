@@ -70,32 +70,23 @@
                         {!! Form::hidden('employee_skill_id', '', ['id' => 'employee_skill_id']) !!}
                         {!! Form::hidden('_method', 'POST', ['id' => 'skillForm']) !!}
                         <div class="form-group">
-                            <div class="row">
-                                {!! Form::label('skill_id', 'Skill', ['class' => 'col-md-3 control-label']) !!}
-
-                                <div class="col-md-9">
-                                    {!! Form::select('skill_id', HRis\Skill::lists('name', 'id'), null, ['class' => 'form-control chosen-select']) !!}
-                                </div>
+                            {!! Form::label('skill_id', 'Skill', ['class' => 'col-md-3 control-label']) !!}
+                            <div class="col-md-9">
+                                {!! Form::select('skill_id', HRis\Skill::lists('name', 'id'), null, ['class' => 'form-control chosen-select']) !!}
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <div class="row">
-                                {!! Form::label('years_of_experience', 'Years Experience', ['class' => 'col-md-3 control-label']) !!}
-
-                                <div class="col-md-9">
-                                    {!! Form::text('years_of_experience', null, ['class' => 'form-control']) !!}
-                                </div>
+                            {!! Form::label('years_of_experience', 'Years Experience', ['class' => 'col-md-3 control-label']) !!}
+                            <div class="col-md-9">
+                                {!! Form::text('years_of_experience', null, ['class' => 'form-control']) !!}
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <div class="row">
-                                {!! Form::label('skill_comment', 'Comments', ['class' => 'col-md-3 control-label']) !!}
-
-                                <div class="col-md-9">
-                                    {!! Form::textarea('skill_comment', null, ['class' => 'form-control', 'size' => '30x5']) !!}
-                                </div>
+                            {!! Form::label('skill_comment', 'Comments', ['class' => 'col-md-3 control-label']) !!}
+                            <div class="col-md-9">
+                                {!! Form::textarea('skill_comment', null, ['class' => 'form-control', 'size' => '30x5']) !!}
                             </div>
                         </div>
 

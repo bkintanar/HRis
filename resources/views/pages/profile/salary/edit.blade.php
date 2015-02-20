@@ -19,8 +19,6 @@
     {!! Html::script('/js/plugins/iCheck/icheck.min.js') !!}
     <!-- Chosen -->
     {!! Html::script('/js/plugins/chosen/chosen.jquery.js') !!}
-    <!-- Date Picker -->
-    {!! Html::script('js/plugins/datepicker/bootstrap-datepicker.js') !!}
 
     <script>
 
@@ -28,8 +26,7 @@
         {
             var data = 0;
             $('.' + type).each(function () {
-                value = checkIfEmpty($(this).val());
-                data += value;
+                data += parseFloat($(this).val());
             });
 
             return data;
@@ -47,8 +44,7 @@
 
         function updateSalary(type)
         {
-            current_sss = checkIfEmpty($('#sss').val());
-            var datas = { salary: $('#salary').val(), status: '{{$tax_status}}', deductions: getValues('deductions'), sss: current_sss, type: type }
+            var datas = { salary: $('#salary').val(), status: '{{$tax_status}}', deductions: getValues('deductions'), sss: $('#sss').val(), type: type }
                 $.ajax({
                     type: "GET",
                     url: '/ajax/' + '{{\Request::path()}}',
@@ -59,16 +55,6 @@
                     $('.tax').html(parseFloat(values.tax).toFixed(2));
                     display();
                 });
-        }
-
-        function checkIfEmpty(value)
-        {
-            if( !value )
-            {
-                value = 0;
-            }
-
-            return parseFloat(value);
         }
 
         $(document).ready(function () {
@@ -100,7 +86,6 @@
             });
 
             $('.chosen-select').chosen();
-
         });
 
     </script>
