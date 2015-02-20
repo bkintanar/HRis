@@ -49,7 +49,7 @@
 
         function display()
         {
-            earnings = getValues('earnings') + parseFloat($('#salary').val() / 2);
+            earnings = getValues('earnings') + '{{$salary}}';
             deductions = getValues('deductions') + parseFloat($('.tax').html());
 
             $('#total-earnings').html(parseFloat(earnings).toFixed(2));

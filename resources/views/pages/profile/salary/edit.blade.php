@@ -37,9 +37,9 @@
             return data;
         }
 
-        function display()
+        function display(values)
         {
-            earnings = getValues('earnings') + parseFloat($('#salary').val() / 2);
+            earnings = getValues('earnings') + values.salary;
             deductions = getValues('deductions') + parseFloat($('.tax').html());
 
             $('#total-earnings').html(parseFloat(earnings).toFixed(2));
@@ -59,7 +59,7 @@
                     var values = jQuery.parseJSON(response);
                     $('#sss').val(parseFloat(values.sss).toFixed(2));
                     $('.tax').html(parseFloat(values.tax).toFixed(2));
-                    display();
+                    display(values);
                 });
         }
 

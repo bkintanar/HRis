@@ -776,7 +776,7 @@ class AjaxController extends Controller {
 
             } catch (Exception $e)
             {
-                //                    print($e->getMessage());
+
             }
         }
     }
