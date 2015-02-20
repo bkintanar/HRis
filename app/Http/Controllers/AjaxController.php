@@ -772,13 +772,13 @@ class AjaxController extends Controller {
                     $over = $taxableSalary - $taxes->$status;
                 }
                 $totalTax = $taxes->exemption + ($over * $taxes->percentage_over);
-                $return = json_encode(['tax' => $totalTax, 'sss' => $sss, 'salary' => $taxableSalary]);
+                $return = json_encode(['tax' => $totalTax, 'sss' => $sss, 'salary' => $semiMonthly]);
 
                 print($return);
 
             } catch (Exception $e)
             {
-                //                    print($e->getMessage());
+
             }
         }
     }

@@ -38,7 +38,8 @@ class SalaryComputationsController extends Controller {
         $salary = $this->salary_services->getSalaryDetails($employee);
 
         $this->data['employee'] = $employee;
-        $this->data['tax'] = $salary['totalTax'];
+        $this->data['tax'] = $salary['total_tax'];
+        $this->data['salary'] = $salary['salary'];
 
         $this->data['disabled'] = 'disabled';
         $this->data['pim'] = $request->is('*pim/*') ? true : false;
@@ -65,7 +66,8 @@ class SalaryComputationsController extends Controller {
         $salary = $this->salary_services->getSalaryDetails($employee);
 
         $this->data['employee'] = $employee;
-        $this->data['tax'] = $salary['totalTax'];
+        $this->data['tax'] = $salary['total_tax'];
+        $this->data['salary'] = $salary['salary'];
         $this->data['tax_status'] = $salary['employee_status'];
 
         $this->data['disabled'] = '';
