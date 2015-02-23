@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class MaritalStatus extends Model {
 
+    use HasPlaceholder;
+
     /**
      * The database table used by the model.
      *
