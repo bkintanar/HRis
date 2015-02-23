@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class WorkShift extends Model {
 
+    use HasPlaceholder;
+
     /**
      * @var bool
      */
@@ -22,7 +24,7 @@ class WorkShift extends Model {
      * @var array
      */
     protected $fillable = ['name', 'from_date', 'to_date', 'duration'];
-    
+
     /**
      * The database table used by the model.
      *

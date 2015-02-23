@@ -46,7 +46,7 @@
 
         {!! Form::label('marital_status_id', 'Marital Status', ['class' => 'col-md-2 control-label']) !!}
         <div class="col-sm-4">
-            {!! Form::select('marital_status_id', $marital_statuses, $employee->marital_status_id, ['class' => 'form-control chosen-select', $disabled]) !!}
+            {!! Form::select('marital_status_id', HRis\Eloquent\MaritalStatus::listsWithPlaceholder('name', 'id'), $employee->marital_status_id, ['class' => 'form-control chosen-select', $disabled]) !!}
         </div>
     </div>
     <!-- End - Gender & Marital Status -->
@@ -54,7 +54,7 @@
     <div class="form-group">
         {!! Form::label('nationality_id', 'Nationality', ['class' => 'col-md-2 control-label']) !!}
         <div class="col-sm-4">
-            {!! Form::select('nationality_id', HRis\Eloquent\Nationality::lists('name', 'id'), $employee->nationality_id, ['class' => 'form-control chosen-select', $disabled]) !!}
+            {!! Form::select('nationality_id', HRis\Eloquent\Nationality::listsWithPlaceholder('name', 'id'), $employee->nationality_id, ['class' => 'form-control chosen-select', $disabled]) !!}
         </div>
         {!! Form::label('birth_date', 'Date of Birth', ['class' => 'col-md-2 control-label']) !!}
         <div class="col-sm-4" id="datepicker_birth_date">
