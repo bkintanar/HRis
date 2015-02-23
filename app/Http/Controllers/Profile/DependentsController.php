@@ -2,8 +2,8 @@
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use Exception;
-use HRis\Dependent;
-use HRis\Employee;
+use HRis\Eloquent\Dependent;
+use HRis\Eloquent\Employee;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\DependentsRequest;
 use Illuminate\Support\Facades\Redirect;

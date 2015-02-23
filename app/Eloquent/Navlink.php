@@ -1,4 +1,4 @@
-<?php namespace HRis;
+<?php namespace HRis\Eloquent;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use Illuminate\Database\Eloquent\Model;

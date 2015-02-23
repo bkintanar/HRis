@@ -1,14 +1,13 @@
 <?php namespace HRis\Http\Controllers\Profile;
 
-use Redirect;
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
-use HRis\Http\Requests;
+use HRis\Eloquent\Employee;
+use HRis\Eloquent\EmployeeSalaryComponents;
 use HRis\Http\Controllers\Controller;
+use HRis\Http\Requests;
 use HRis\Http\Requests\Profile\SalaryRequest;
-use HRis\Employee;
-use HRis\EmployeeSalaryComponents;
 use HRis\Services\Salary;
-use Illuminate\Http\Request;
+use Redirect;
 
 /**
  * Class SalaryComputationsController

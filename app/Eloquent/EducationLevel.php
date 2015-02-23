@@ -1,12 +1,12 @@
-<?php namespace HRis;
+<?php namespace HRis\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class JobTitle
+ * Class EducationLevel
  * @package HRis
  */
-class JobTitle extends Model {
+class EducationLevel extends Model {
 
     /**
      * @var bool
@@ -18,11 +18,11 @@ class JobTitle extends Model {
      *
      * @var string
      */
-    protected $table = 'job_titles';
+    protected $table = 'education_levels';
 
     /**
      * @var array
      */
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['name'];
 
 }

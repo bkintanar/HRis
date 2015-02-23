@@ -1,4 +1,4 @@
-<?php namespace HRis;
+<?php namespace HRis\Eloquent;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -53,7 +53,7 @@ class JobHistory extends Model {
      */
     public function jobTitle()
     {
-        return $this->hasOne('HRis\JobTitle', 'id', 'job_title_id');
+        return $this->hasOne('HRis\Eloquent\JobTitle', 'id', 'job_title_id');
     }
 
     /**
@@ -61,7 +61,7 @@ class JobHistory extends Model {
      */
     public function department()
     {
-        return $this->hasOne('HRis\Department', 'id', 'department_id');
+        return $this->hasOne('HRis\Eloquent\Department', 'id', 'department_id');
     }
 
     /**
@@ -69,7 +69,7 @@ class JobHistory extends Model {
      */
     public function employmentStatus()
     {
-        return $this->hasOne('HRis\EmploymentStatus', 'id', 'employment_status_id');
+        return $this->hasOne('HRis\Eloquent\EmploymentStatus', 'id', 'employment_status_id');
     }
 
     /**
@@ -77,7 +77,7 @@ class JobHistory extends Model {
      */
     public function workShift()
     {
-        return $this->hasOne('HRis\WorkShift', 'id', 'work_shift_id');
+        return $this->hasOne('HRis\Eloquent\WorkShift', 'id', 'work_shift_id');
     }
 
     /**
@@ -85,7 +85,7 @@ class JobHistory extends Model {
      */
     public function location()
     {
-        return $this->hasOne('HRis\Location', 'id', 'location_id');
+        return $this->hasOne('HRis\Eloquent\Location', 'id', 'location_id');
     }
 
 }

@@ -115,7 +115,7 @@
 
                                 {!! Form::label('marital_status_id', 'Marital Status', ['class' => 'col-md-2 control-label']) !!}
                                 <div class="col-sm-4">
-                                    {!! Form::select('marital_status_id', HRis\MaritalStatus::lists('name', 'id'), 1, ['class' => 'form-control chosen-select']) !!}
+                                    {!! Form::select('marital_status_id', HRis\Eloquent\MaritalStatus::lists('name', 'id'), 1, ['class' => 'form-control chosen-select']) !!}
                                 </div>
                             </div>
 
@@ -146,7 +146,7 @@
     <script>
         $(document).ready(function () {
 
-            $('#employeeModal').on('shown.bs.modal', function (e) {
+            $('#employeeModal').on('shown.bs.modal', function () {
                 $('.chosen-select').chosen();
             });
 

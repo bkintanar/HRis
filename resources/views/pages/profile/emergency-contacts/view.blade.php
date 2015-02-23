@@ -3,7 +3,7 @@
 @section('content')
     @include('partials.notification')
     <div class="row">
-            {!! HRis\Navlink::profileLinks($pim) !!}
+            {!! HRis\Eloquent\Navlink::profileLinks($pim) !!}
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
@@ -37,7 +37,7 @@
                                     @foreach($emergencyContacts as $emergencyContact)
                                     <tr class="emergencyContactsList" id="emergencyContact_{{$emergencyContact->id}}">
                                         <td>{{ $emergencyContact->first_name }} {{$emergencyContact->middle_name}} {{ $emergencyContact->last_name }}</td>
-                                        <td>{{ HRis\Relationship::whereId($emergencyContact->relationship_id)->pluck('name') }}</td>
+                                        <td>{{ HRis\Eloquent\Relationship::whereId($emergencyContact->relationship_id)->pluck('name') }}</td>
                                         <td>{{ $emergencyContact->home_phone }}</td>
                                         <td>{{ $emergencyContact->mobile_phone }}</td>
                                         <td>
@@ -101,7 +101,7 @@
                             <div class="form-group">
                                 {!! Form::label('relationship_id', 'Relationship', ['class' => 'col-md-3 control-label']) !!}
                                 <div class="col-md-9">
-                                    {!! Form::select('relationship_id', HRis\Relationship::lists('name', 'id'), null, ['class' => 'form-control chosen-select']) !!}
+                                    {!! Form::select('relationship_id', HRis\Eloquent\Relationship::lists('name', 'id'), null, ['class' => 'form-control chosen-select']) !!}
                                 </div>
                             </div>
 

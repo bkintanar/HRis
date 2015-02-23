@@ -1,6 +1,5 @@
 <?php
 
-use HRis\WorkShift;
 use Illuminate\Database\Seeder;
 
 class WorkShiftsTableSeeder extends Seeder {
@@ -16,13 +15,6 @@ class WorkShiftsTableSeeder extends Seeder {
 
         DB::table('work_shifts')->insert(
             [
-                [
-                    'id'        => 0,
-                    'name'      => '--- Select ---',
-                    'from_time' => '00:00:00',
-                    'to_time'   => '00:00:00',
-                    'duration'  => 0
-                ],
                 [
                     'id'        => 1,
                     'name'      => 'Admin',
@@ -75,9 +67,5 @@ class WorkShiftsTableSeeder extends Seeder {
 
             ]
         );
-
-        $work_shift = WorkShift::whereName('--- Select ---')->first();
-        $work_shift->id = 0;
-        $work_shift->save();
     }
 }

@@ -1,6 +1,5 @@
 <?php
 
-use HRis\JobTitle;
 use Illuminate\Database\Seeder;
 
 class JobTitlesTableSeeder extends Seeder {
@@ -16,7 +15,6 @@ class JobTitlesTableSeeder extends Seeder {
 
         DB::table('job_titles')->insert(
             [
-                ['id' => 0, 'name' => '--- Select ---', 'description' => ''],
                 ['id' => 1, 'name' => 'Operations Manager', 'description' => ''],
                 ['id' => 2, 'name' => 'Project Manager', 'description' => ''],
                 ['id' => 3, 'name' => 'HR Officer', 'description' => ''],
@@ -30,10 +28,6 @@ class JobTitlesTableSeeder extends Seeder {
                 ['id' => 11, 'name' => 'System Admin', 'description' => ''],
             ]
         );
-
-        $job_title = JobTitle::whereName('--- Select ---')->first();
-        $job_title->id = 0;
-        $job_title->save();
     }
 
 }

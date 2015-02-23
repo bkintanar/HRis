@@ -1,7 +1,7 @@
 <?php namespace HRis\Http\Controllers\Administration\Job;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
-use HRis\EmploymentStatus;
+use HRis\Eloquent\EmploymentStatus;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Administration\EmploymentStatusRequest;
 use Illuminate\Support\Facades\Redirect;

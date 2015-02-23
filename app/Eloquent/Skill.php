@@ -1,4 +1,4 @@
-<?php namespace HRis;
+<?php namespace HRis\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -30,7 +30,7 @@ class Skill extends Model {
      */
     public function employees()
     {
-        return $this->belongsToMany('HRis\Employee');
+        return $this->belongsToMany('HRis\Eloquent\Employee');
     }
 
 }

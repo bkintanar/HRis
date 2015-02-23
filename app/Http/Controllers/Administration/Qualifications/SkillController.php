@@ -1,9 +1,9 @@
 <?php namespace HRis\Http\Controllers\Administration\Qualifications;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use HRis\Eloquent\Skill;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Administration\SkillRequest;
-use HRis\Skill;
 use Illuminate\Support\Facades\Redirect;
 
 /**

@@ -1,12 +1,12 @@
-<?php namespace HRis;
+<?php namespace HRis\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Location
+ * Class TerminationReason
  * @package HRis
  */
-class Location extends Model {
+class TerminationReason extends Model {
 
     /**
      * @var bool
@@ -14,10 +14,15 @@ class Location extends Model {
     public $timestamps = false;
 
     /**
+     * @var array
+     */
+    protected $fillable = ['name'];
+
+    /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'locations';
+    protected $table = 'termination_reasons';
 
-} 
+}
