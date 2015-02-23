@@ -14,15 +14,15 @@ class EmploymentStatus extends Model {
     public $timestamps = false;
 
     /**
+     * @var array
+     */
+    protected $fillable = ['name', 'class'];
+
+    /**
      * The database table used by the model.
      *
      * @var string
      */
     protected $table = 'employment_statuses';
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['name', 'class'];
 
 }

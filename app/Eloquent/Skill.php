@@ -14,16 +14,16 @@ class Skill extends Model {
     public $timestamps = false;
 
     /**
+     * @var array
+     */
+    protected $fillable = ['name'];
+
+    /**
      * The database table used by the model.
      *
      * @var string
      */
     protected $table = 'skills';
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['name'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

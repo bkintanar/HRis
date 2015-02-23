@@ -14,29 +14,21 @@ class WorkShift extends Model {
     public $timestamps = false;
 
     /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'work_shifts';
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['name', 'from_date', 'to_date', 'duration'];
-
-    /**
      * @var array
      */
     protected $dates = ['from_date', 'to_date'];
 
     /**
-     * @param $value
+     * @var array
      */
-    public function setToDateAttribute($value)
-    {
-        $this->attributes['to_date'] = Carbon::parse($value) ? : null;
-    }
+    protected $fillable = ['name', 'from_date', 'to_date', 'duration'];
+    
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'work_shifts';
 
     /**
      * @param $value
@@ -46,4 +38,11 @@ class WorkShift extends Model {
         $this->attributes['from_date'] = Carbon::parse($value) ? : null;
     }
 
+    /**
+     * @param $value
+     */
+    public function setToDateAttribute($value)
+    {
+        $this->attributes['to_date'] = Carbon::parse($value) ? : null;
+    }
 }

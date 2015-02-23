@@ -13,12 +13,12 @@ class Education extends Model {
      * @var bool
      */
     public $timestamps = false;
+
     /**
-     * The database table used by the model.
-     *
-     * @var string
+     * @var array
      */
-    protected $table = 'educations';
+    protected $dates = ['from_date', 'to_date'];
+
     /**
      * @var array
      */
@@ -33,9 +33,19 @@ class Education extends Model {
     ];
 
     /**
-     * @var array
+     * The database table used by the model.
+     *
+     * @var string
      */
-    protected $dates = ['from_date', 'to_date'];
+    protected $table = 'educations';
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function employee()
+    {
+        return $this->belongsTo('HRis\Eloquent\Employee', 'id', 'employee_id');
+    }
 
     /**
      * @param $value
@@ -51,14 +61,6 @@ class Education extends Model {
     public function setToDateAttribute($value)
     {
         $this->attributes['to_date'] = Carbon::parse($value) ? : null;
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function employee()
-    {
-        return $this->belongsTo('HRis\Eloquent\Employee', 'id', 'employee_id');
     }
 
 }

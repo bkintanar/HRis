@@ -14,15 +14,15 @@ class JobTitle extends Model {
     public $timestamps = false;
 
     /**
+     * @var array
+     */
+    protected $fillable = ['name', 'description'];
+
+    /**
      * The database table used by the model.
      *
      * @var string
      */
     protected $table = 'job_titles';
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['name', 'description'];
 
 }
