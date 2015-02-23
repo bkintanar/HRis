@@ -1,6 +1,5 @@
 <?php namespace HRis\Http\Controllers;
 
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Redirect;
 
 /**
