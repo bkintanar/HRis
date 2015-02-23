@@ -1,4 +1,4 @@
-<?php namespace HRis;
+<?php namespace HRis\Eloquent;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -52,7 +52,7 @@ class WorkExperience extends Model {
      */
     public function employee()
     {
-        return $this->belongsTo('HRis\Employee', 'id', 'employee_id');
+        return $this->belongsTo('HRis\Eloquent\Employee', 'id', 'employee_id');
     }
 
 }

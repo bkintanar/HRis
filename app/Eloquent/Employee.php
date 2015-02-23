@@ -1,4 +1,4 @@
-<?php namespace HRis;
+<?php namespace HRis\Eloquent;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -135,7 +135,7 @@ class Employee extends Model {
      */
     public function user()
     {
-        return $this->hasOne('HRis\User', 'id', 'user_id');
+        return $this->hasOne('HRis\Eloquent\User', 'id', 'user_id');
     }
 
     /**
@@ -143,7 +143,7 @@ class Employee extends Model {
      */
     public function jobTitle()
     {
-        return $this->hasOne('HRis\JobTitle', 'id', 'job_title_id');
+        return $this->hasOne('HRis\Eloquent\JobTitle', 'id', 'job_title_id');
     }
 
     /**
@@ -151,7 +151,7 @@ class Employee extends Model {
      */
     public function department()
     {
-        return $this->hasOne('HRis\Department', 'id', 'department_id');
+        return $this->hasOne('HRis\Eloquent\Department', 'id', 'department_id');
     }
 
     /**
@@ -159,7 +159,7 @@ class Employee extends Model {
      */
     public function employmentStatus()
     {
-        return $this->hasOne('HRis\EmploymentStatus', 'id', 'employment_status_id');
+        return $this->hasOne('HRis\Eloquent\EmploymentStatus', 'id', 'employment_status_id');
     }
 
     /**
@@ -167,7 +167,7 @@ class Employee extends Model {
      */
     public function country()
     {
-        return $this->hasOne('HRis\Country', 'id', 'address_country_id');
+        return $this->hasOne('HRis\Eloquent\Country', 'id', 'address_country_id');
     }
 
     /**
@@ -175,7 +175,7 @@ class Employee extends Model {
      */
     public function province()
     {
-        return $this->hasOne('HRis\Province', 'id', 'address_province_id');
+        return $this->hasOne('HRis\Eloquent\Province', 'id', 'address_province_id');
     }
 
     /**
@@ -183,7 +183,7 @@ class Employee extends Model {
      */
     public function city()
     {
-        return $this->hasOne('HRis\City', 'id', 'address_city_id');
+        return $this->hasOne('HRis\Eloquent\City', 'id', 'address_city_id');
     }
 
     /**
@@ -191,7 +191,7 @@ class Employee extends Model {
      */
     public function workShift()
     {
-        return $this->hasOne('HRis\WorkShift', 'id', 'work_shift_id');
+        return $this->hasOne('HRis\Eloquent\WorkShift', 'id', 'work_shift_id');
     }
 
     /**
@@ -199,7 +199,7 @@ class Employee extends Model {
      */
     public function workExperiences()
     {
-        return $this->hasMany('HRis\WorkExperience');
+        return $this->hasMany('HRis\Eloquent\WorkExperience');
     }
 
     /**
@@ -207,7 +207,7 @@ class Employee extends Model {
      */
     public function educations()
     {
-        return $this->hasMany('HRis\Education');
+        return $this->hasMany('HRis\Eloquent\Education');
     }
 
     /**
@@ -215,7 +215,7 @@ class Employee extends Model {
      */
     public function skills()
     {
-        return $this->belongsToMany('HRis\Skill');
+        return $this->belongsToMany('HRis\Eloquent\Skill');
     }
 
     /**
@@ -231,7 +231,7 @@ class Employee extends Model {
      */
     public function jobHistories()
     {
-        return $this->hasMany('HRis\JobHistory');
+        return $this->hasMany('HRis\Eloquent\JobHistory');
     }
 
     /**
@@ -262,7 +262,7 @@ class Employee extends Model {
      */
     public function dependents()
     {
-        return $this->hasMany('HRis\Dependent', 'employee_id', 'employee_id');
+        return $this->hasMany('HRis\Eloquent\Dependent', 'employee_id', 'employee_id');
     }
 
     /**
@@ -270,7 +270,7 @@ class Employee extends Model {
      */
     public function employeeSalaryComponents()
     {
-        return $this->hasMany('HRis\EmployeeSalaryComponents', 'employee_id', 'employee_id')
+        return $this->hasMany('HRis\Eloquent\EmployeeSalaryComponents', 'employee_id', 'employee_id')
             ->with('salaryComponent')
             ->orderBy('id', 'desc')
             ->orderBy('effective_date', 'desc')

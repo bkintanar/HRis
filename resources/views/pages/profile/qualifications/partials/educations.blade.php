@@ -31,7 +31,7 @@
                             @if(count($educations))
                                 @foreach($educations as $education)
                                 <tr class="educationsList" id="education_{{$education->id}}">
-                                    <td>{{ HRis\EducationLevel::whereId($education->education_level_id)->pluck('name') }}</td>
+                                    <td>{{ HRis\Eloquent\EducationLevel::whereId($education->education_level_id)->pluck('name') }}</td>
                                     <td>{{ $education->from_date }} - {{ $education->to_date }}</td>
                                     <td>{{ $education->gpa_score }}</td>
                                     <td>
@@ -75,7 +75,7 @@
                         <div class="form-group">
                             {!! Form::label('level', 'Level', ['class' => 'col-md-3 control-label']) !!}
                             <div class="col-md-9">
-                                {!! Form::select('education_level_id', HRis\EducationLevel::lists('name', 'id'), null, ['class' => 'form-control chosen-select', 'id' => 'education_level_id']) !!}
+                                {!! Form::select('education_level_id', HRis\Eloquent\EducationLevel::lists('name', 'id'), null, ['class' => 'form-control chosen-select', 'id' => 'education_level_id']) !!}
                             </div>
                         </div>
 

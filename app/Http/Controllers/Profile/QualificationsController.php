@@ -2,15 +2,15 @@
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use Exception;
-use HRis\Education;
-use HRis\Employee;
-use HRis\EmployeeSkill;
+use HRis\Eloquent\Education;
+use HRis\Eloquent\Employee;
+use HRis\Eloquent\EmployeeSkill;
+use HRis\Eloquent\WorkExperience;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\QualificationsEducationRequest;
 use HRis\Http\Requests\Profile\QualificationsRequest;
 use HRis\Http\Requests\Profile\QualificationsSkillRequest;
 use HRis\Http\Requests\Profile\QualificationsWorkExperienceRequest;
-use HRis\WorkExperience;
 use Illuminate\Support\Facades\Redirect;
 
 /**

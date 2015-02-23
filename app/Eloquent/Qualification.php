@@ -1,12 +1,12 @@
-<?php namespace HRis;
+<?php namespace HRis\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class EducationLevel
+ * Class Qualification
  * @package HRis
  */
-class EducationLevel extends Model {
+class Qualification extends Model {
 
     /**
      * @var bool
@@ -18,11 +18,6 @@ class EducationLevel extends Model {
      *
      * @var string
      */
-    protected $table = 'education_levels';
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['name'];
+    protected $table = 'dependents';
 
 }

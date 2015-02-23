@@ -1,4 +1,4 @@
-<?php namespace HRis;
+<?php namespace HRis\Eloquent;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -49,7 +49,7 @@ class EmployeeSalaryComponents extends Model {
      */
     public function salaryComponent()
     {
-        return $this->hasOne('HRis\SalaryComponents', 'id', 'component_id');
+        return $this->hasOne('HRis\Eloquent\SalaryComponents', 'id', 'component_id');
     }
 
 }

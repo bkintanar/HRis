@@ -29,7 +29,7 @@
                         <li>
                             <a href="/">Home</a>
                         </li>
-                        {!! HRis\Navlink::breadcrumb(\Request::path()) !!}
+                        {!! HRis\Eloquent\Navlink::breadcrumb(\Request::path()) !!}
                     </ol>
                 </div>
                 @yield('action_area')

@@ -1,9 +1,9 @@
 <?php namespace HRis\Http\Controllers\Administration\Job;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use HRis\Eloquent\JobTitle;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Administration\JobTitleRequest;
-use HRis\JobTitle;
 use Illuminate\Support\Facades\Redirect;
 
 /**

@@ -3,7 +3,7 @@
 @section('content')
     @include('partials.notification')
     <div class="row">
-            {!! HRis\Navlink::profileLinks($pim) !!}
+            {!! HRis\Eloquent\Navlink::profileLinks($pim) !!}
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
@@ -36,7 +36,7 @@
                                     @foreach($employee->dependents as $dependent)
                                     <tr class="dependentsList" id="dependent_{{$dependent->id}}">
                                         <td>{{ $dependent->first_name }} {{$dependent->middle_name}} {{ $dependent->last_name }}</td>
-                                        <td>{{ HRis\Relationship::whereId($dependent->relationship_id)->pluck('name') }}</td>
+                                        <td>{{ HRis\Eloquent\Relationship::whereId($dependent->relationship_id)->pluck('name') }}</td>
                                         <td>{{ $dependent->birth_date }}</td>
                                         <td>
                                             @if($loggedUser->hasAccess(\Request::segment(1).'.dependents.update'))
@@ -98,7 +98,7 @@
                             <div class="form-group">
                                 {!! Form::label('relationship_id', 'Relationship', ['class' => 'col-md-3 control-label']) !!}
                                 <div class="col-md-9">
-                                    {!! Form::select('relationship_id', HRis\Relationship::lists('name', 'id'), null, ['class' => 'form-control chosen-select']) !!}
+                                    {!! Form::select('relationship_id', HRis\Eloquent\Relationship::lists('name', 'id'), null, ['class' => 'form-control chosen-select']) !!}
                                 </div>
                             </div>
                             <div class="form-group">

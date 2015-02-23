@@ -1,10 +1,10 @@
 <?php namespace HRis\Http\Controllers\PIM\Configuration;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
-use HRis\Employee;
+use HRis\Eloquent\Employee;
+use HRis\Eloquent\TerminationReason;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\PIM\TerminationReasonsRequest;
-use HRis\TerminationReason;
 use Illuminate\Support\Facades\Redirect;
 
 /**

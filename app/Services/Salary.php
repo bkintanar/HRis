@@ -1,10 +1,10 @@
 <?php namespace HRis\Services;
 
 use Config;
-use HRis\SSSContributions;
-use HRis\TaxComputations;
-use HRis\Dependent;
-use HRis\SalaryComponents;
+use HRis\Eloquent\Dependent;
+use HRis\Eloquent\SalaryComponents;
+use HRis\Eloquent\SSSContributions;
+use HRis\Eloquent\TaxComputations;
 
 class Salary {
 

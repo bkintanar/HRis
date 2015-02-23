@@ -2,14 +2,22 @@
 
 use Config;
 use Exception;
-use HRis\City;
-use HRis\Dependent;
-use HRis\Education;
-use HRis\EducationLevel;
-use HRis\EmergencyContact;
-use HRis\Employee;
-use HRis\EmployeeSkill;
-use HRis\EmploymentStatus;
+use HRis\Eloquent\City;
+use HRis\Eloquent\Education;
+use HRis\Eloquent\EducationLevel;
+use HRis\Eloquent\Employee;
+use HRis\Eloquent\EmployeeSkill;
+use HRis\Eloquent\EmploymentStatus;
+use HRis\Eloquent\JobHistory;
+use HRis\Eloquent\JobTitle;
+use HRis\Eloquent\Nationality;
+use HRis\Eloquent\PayGrade;
+use HRis\Eloquent\Skill;
+use HRis\Eloquent\SSSContributions;
+use HRis\Eloquent\TaxComputations;
+use HRis\Eloquent\TerminationReason;
+use HRis\Eloquent\WorkExperience;
+use HRis\Eloquent\WorkShift;
 use HRis\Http\Requests\Administration\EducationRequest;
 use HRis\Http\Requests\Administration\EmploymentStatusRequest;
 use HRis\Http\Requests\Administration\JobTitleRequest;
@@ -18,23 +26,11 @@ use HRis\Http\Requests\Administration\PayGradeRequest;
 use HRis\Http\Requests\Administration\SkillRequest;
 use HRis\Http\Requests\Administration\WorkShiftRequest;
 use HRis\Http\Requests\PIM\TerminationReasonsRequest;
-use HRis\Http\Requests\Profile\DependentsRequest;
-use HRis\Http\Requests\Profile\EmergencyContactsRequest;
+use HRis\Http\Requests\Profile\JobRequest;
 use HRis\Http\Requests\Profile\QualificationsEducationRequest;
 use HRis\Http\Requests\Profile\QualificationsSkillRequest;
 use HRis\Http\Requests\Profile\QualificationsWorkExperienceRequest;
-use HRis\Http\Requests\Profile\JobRequest;
 use HRis\Http\Requests\Profile\SalaryRequest;
-use HRis\TaxComputations;
-use HRis\SSSContributions;
-use HRis\JobTitle;
-use HRis\JobHistory;
-use HRis\Nationality;
-use HRis\PayGrade;
-use HRis\Skill;
-use HRis\TerminationReason;
-use HRis\WorkExperience;
-use HRis\WorkShift;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Request;
 
@@ -758,7 +754,8 @@ class AjaxController extends Controller {
                     $sss = $getSSS->sss_ee;
                     $taxableSalary = $semiMonthly - $deductions;
                 }
-                else {
+                else
+                {
                     $taxableSalary = $semiMonthly - $request->get('deductions');
                 }
                 $taxes = TaxComputations::getTaxRate($status, $taxableSalary);

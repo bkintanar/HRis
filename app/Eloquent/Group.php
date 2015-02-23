@@ -1,4 +1,4 @@
-<?php namespace HRis;
+<?php namespace HRis\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,6 +25,6 @@ class Group extends Model {
      */
     public function users()
     {
-        return $this->belongsToMany('HRis\Group', 'users_groups', 'group_id', 'user_id');
+        return $this->belongsToMany('HRis\Eloquent\Group', 'users_groups', 'group_id', 'user_id');
     }
 }

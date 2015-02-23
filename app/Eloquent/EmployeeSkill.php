@@ -1,12 +1,12 @@
-<?php namespace HRis;
+<?php namespace HRis\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Qualification
+ * Class EmployeeSkill
  * @package HRis
  */
-class Qualification extends Model {
+class EmployeeSkill extends Model {
 
     /**
      * @var bool
@@ -18,6 +18,6 @@ class Qualification extends Model {
      *
      * @var string
      */
-    protected $table = 'dependents';
+    protected $table = 'employee_skill';
 
 }

@@ -1,15 +1,13 @@
 <?php namespace HRis\Http\Controllers\Profile;
 
-use Redirect;
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
-use HRis\Http\Requests;
+use HRis\Eloquent\Employee;
+use HRis\Eloquent\EmployeeSalaryComponents;
 use HRis\Http\Controllers\Controller;
+use HRis\Http\Requests;
 use HRis\Http\Requests\Profile\SalaryRequest;
-use HRis\Employee;
-use HRis\EmployeeSalaryComponents;
 use HRis\Services\Salary;
-
-use Illuminate\Http\Request;
+use Redirect;
 
 class SalaryComputationsController extends Controller {
 
@@ -87,10 +85,10 @@ class SalaryComputationsController extends Controller {
         $id = $request->get('id');
         $fields = $request->except('id', '_method', '_token', 'user', 'tax');
 
-        foreach($fields as $value)
+        foreach ($fields as $value)
         {
             $value['employee_id'] = $id;
-            if($value['effective_date'] == 0)
+            if ($value['effective_date'] == 0)
             {
                 $value['effective_date'] = date('Y-m-d');
             }
@@ -103,6 +101,7 @@ class SalaryComputationsController extends Controller {
                 return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
             }
         }
+
         return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
 
     }

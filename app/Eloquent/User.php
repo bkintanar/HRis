@@ -1,4 +1,4 @@
-<?php namespace HRis;
+<?php namespace HRis\Eloquent;
 
 use Cartalyst\Sentry\Users\Eloquent\User as SentryUser;
 use Illuminate\Auth\Authenticatable;
@@ -56,7 +56,7 @@ class User extends SentryUser implements AuthenticatableContract, CanResetPasswo
      */
     public function employee()
     {
-        return $this->hasOne('HRis\Employee');
+        return $this->hasOne('HRis\Eloquent\Employee');
     }
 
 }

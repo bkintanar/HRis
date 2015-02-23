@@ -1,18 +1,18 @@
-<?php namespace HRis;
+<?php namespace HRis\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class MaritalStatus
+ * Class Relationship
  * @package HRis
  */
-class MaritalStatus extends Model {
+class Relationship extends Model {
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'marital_statuses';
+    protected $table = 'relationships';
 
 }

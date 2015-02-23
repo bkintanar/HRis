@@ -1,8 +1,8 @@
 <?php namespace HRis\Http\Controllers\Administration;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use HRis\Eloquent\User;
 use HRis\Http\Controllers\Controller;
-use HRis\User;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 
