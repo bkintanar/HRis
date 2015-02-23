@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class EmployeeSalaryComponents
  * @package HRis
  */
-class EmployeeSalaryComponents extends Model {
+class EmployeeSalaryComponent extends Model {
 
     /**
      * @var bool
@@ -49,7 +49,7 @@ class EmployeeSalaryComponents extends Model {
      */
     public function salaryComponent()
     {
-        return $this->hasOne('HRis\SalaryComponents', 'id', 'component_id');
+        return $this->hasOne('HRis\SalaryComponent', 'id', 'component_id');
     }
 
 }

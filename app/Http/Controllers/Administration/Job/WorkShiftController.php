@@ -1,9 +1,9 @@
 <?php namespace HRis\Http\Controllers\Administration\Job;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use HRis\Eloquent\WorkShift;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Administration\WorkShiftRequest;
-use HRis\WorkShift;
 use Illuminate\Support\Facades\Redirect;
 
 /**

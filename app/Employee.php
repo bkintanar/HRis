@@ -268,9 +268,9 @@ class Employee extends Model {
     /**
      * @return mixed
      */
-    public function employeeSalaryComponents()
+    public function employeeSalaryComponent()
     {
-        return $this->hasMany('HRis\EmployeeSalaryComponents', 'employee_id', 'id')
+        return $this->hasMany('HRis\EmployeeSalaryComponent', 'employee_id', 'id')
             ->with('salaryComponent')
             ->groupBy('component_id')
             ->orderBy('component_id', 'asc')
@@ -287,10 +287,10 @@ class Employee extends Model {
     {
         if ($employee_id)
         {
-            return self::whereEmployeeId($employee_id)->with('employeeSalaryComponents', 'dependents')->first();
+            return self::whereEmployeeId($employee_id)->with('employeeSalaryComponent', 'dependents')->first();
         }
 
-        return self::whereEmployeeId($user_id)->with('employeeSalaryComponents', 'dependents')->first();
+        return self::whereEmployeeId($user_id)->with('employeeSalaryComponent', 'dependents')->first();
     }
 
 }

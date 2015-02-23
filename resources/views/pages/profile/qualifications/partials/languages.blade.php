@@ -30,7 +30,7 @@
                             @foreach($qualifications as $qualification)
                             <tr id="qualification_{{$qualification->id}}">
                                 <td>{{ $qualification->first_name }} {{$qualification->middle_name}} {{ $qualification->last_name }}</td>
-                                <td>{{ HRis\Relationship::whereId($qualification->relationship_id)->pluck('name') }}</td>
+                                <td>{{ HRis\Eloquent\Relationship::whereId($qualification->relationship_id)->pluck('name') }}</td>
                                 <td>{{ $qualification->home_phone }}</td>
                                 <td>{{ $qualification->mobile_phone }}</td>
                                 <td>
@@ -95,7 +95,7 @@
                                 {!! Form::label('relationship_id', 'Relationship', ['class' => 'col-md-3 control-label']) !!}
 
                                 <div class="col-md-9">
-                                    {!! Form::select('relationship_id', HRis\Relationship::lists('name', 'id'), null, ['class' => 'form-control chosen-select']) !!}
+                                    {!! Form::select('relationship_id', HRis\Eloquent\Relationship::lists('name', 'id'), null, ['class' => 'form-control chosen-select']) !!}
                                 </div>
                             </div>
                         </div>

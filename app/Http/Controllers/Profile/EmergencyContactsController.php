@@ -2,8 +2,8 @@
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use Exception;
-use HRis\EmergencyContact;
-use HRis\Employee;
+use HRis\Eloquent\EmergencyContact;
+use HRis\Eloquent\Employee;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\EmergencyContactsRequest;
 use Illuminate\Support\Facades\Redirect;

@@ -1,10 +1,10 @@
 <?php namespace HRis\Http\Controllers\Profile;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
-use HRis\Employee;
+use HRis\Eloquent\Employee;
+use HRis\Eloquent\JobHistory;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\JobRequest;
-use HRis\JobHistory;
 use Illuminate\Support\Facades\Redirect;
 use Input;
 
@@ -74,7 +74,7 @@ class JobController extends Controller {
      */
     public function show(JobRequest $request, $employee_id = null)
     {
-        if(Input::get('success'))
+        if (Input::get('success'))
         {
             return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
         }

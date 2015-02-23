@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class TaxComputations
  * @package HRis
  */
-class TaxComputations extends Model {
+class TaxComputation extends Model {
 
     /**
      * @var bool

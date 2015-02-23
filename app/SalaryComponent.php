@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class SalaryComponents
  * @package HRis
  */
-class SalaryComponents extends Model {
+class SalaryComponent extends Model {
 
     /**
      * The database table used by the model.
@@ -31,7 +31,7 @@ class SalaryComponents extends Model {
             ->get(['id'])
             ->take(2);
 
-        return ['monthlyBasic' => $salaryComponents->first()->id, 'SSS' => $salaryComponents->last()->id];
+        return ['monthly_basic' => $salaryComponents->first()->id, 'SSS' => $salaryComponents->last()->id];
 
     }
 

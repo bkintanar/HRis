@@ -1,8 +1,8 @@
 <?php namespace HRis\Services;
 
-use HRis\User;
-use Validator;
+use HRis\Eloquent\User;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
+use Validator;
 
 class Registrar implements RegistrarContract {
 

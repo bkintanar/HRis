@@ -1,7 +1,7 @@
 <?php namespace HRis\Http\Controllers\Administration\Qualifications;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
-use HRis\EducationLevel;
+use HRis\Eloquent\EducationLevel;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Administration\EducationRequest;
 use Illuminate\Support\Facades\Redirect;

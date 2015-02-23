@@ -1,12 +1,12 @@
-<?php namespace HRis;
+<?php namespace HRis\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class SSSContributions
+ * Class Nationality
  * @package HRis
  */
-class SSSContributions extends Model {
+class Nationality extends Model {
 
     /**
      * @var bool
@@ -14,9 +14,15 @@ class SSSContributions extends Model {
     public $timestamps = false;
 
     /**
+     * @var array
+     */
+    protected $fillable = ['name'];
+
+    /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'sss_contributions';
+    protected $table = 'nationalities';
+
 }

@@ -1,24 +1,22 @@
 <?php namespace HRis\Http\Controllers\Profile;
 
-use Redirect;
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
-use HRis\Http\Requests;
+use HRis\Eloquent\Employee;
+use HRis\Eloquent\EmployeeSalaryComponent;
 use HRis\Http\Controllers\Controller;
+use HRis\Http\Requests;
 use HRis\Http\Requests\Profile\SalaryRequest;
-use HRis\Employee;
-use HRis\EmployeeSalaryComponents;
 use HRis\Services\Salary;
-
-use Illuminate\Http\Request;
+use Redirect;
 
 class SalaryComputationsController extends Controller {
 
-    public function __construct(Sentry $auth, Employee $employee, EmployeeSalaryComponents $employee_salary_components, Salary $salary_services)
+    public function __construct(Sentry $auth, Employee $employee, EmployeeSalaryComponent $employee_salary_component, Salary $salary_services)
     {
         parent::__construct($auth);
 
         $this->employee = $employee;
-        $this->employee_salary_components = $employee_salary_components;
+        $this->employee_salary_component = $employee_salary_component;
         $this->salary_services = $salary_services;
     }
 
@@ -29,6 +27,7 @@ class SalaryComputationsController extends Controller {
      * @Get("pim/employee-list/{id}/salary")
      *
      * @param SalaryRequest $request
+     * @param null $employee_id
      * @return Response
      */
     public function salary(SalaryRequest $request, $employee_id = null)
@@ -91,22 +90,23 @@ class SalaryComputationsController extends Controller {
         $id = $request->get('id');
         $fields = $request->except('id', '_method', '_token', 'user', 'tax');
 
-        foreach($fields as $value)
+        foreach ($fields as $value)
         {
             $value['employee_id'] = $id;
-            if($value['effective_date'] == 0)
+            if ($value['effective_date'] == 0)
             {
                 $value['effective_date'] = date('Y-m-d');
             }
 
             try
             {
-                $this->employee_salary_components->create($value);
+                $this->employee_salary_component->create($value);
             } catch (Exception $e)
             {
                 return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
             }
         }
+
         return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
 
     }

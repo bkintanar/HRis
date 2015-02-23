@@ -1,9 +1,9 @@
 <?php namespace HRis\Http\Controllers\Administration;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use HRis\Eloquent\Nationality;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Administration\NationalityRequest;
-use HRis\Nationality;
 use Illuminate\Support\Facades\Redirect;
 
 /**

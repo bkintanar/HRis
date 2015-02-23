@@ -1,10 +1,10 @@
 <?php namespace HRis\Services;
 
 use Config;
-use HRis\SSSContributions;
-use HRis\TaxComputations;
-use HRis\Dependent;
-use HRis\SalaryComponents;
+use HRis\Eloquent\Dependent;
+use HRis\Eloquent\SalaryComponent;
+use HRis\Eloquent\SSSContribution;
+use HRis\Eloquent\TaxComputation;
 
 /**
  * Class Salary
@@ -13,17 +13,17 @@ use HRis\SalaryComponents;
 class Salary {
 
     /**
-     * @param TaxComputations $tax_computations
+     * @param TaxComputation $tax_computation
      * @param Dependent $dependent
-     * @param SSSContributions $sss_contribution
-     * @param SalaryComponents $salary_components
+     * @param SSSContribution $sss_contribution
+     * @param SalaryComponent $salary_component
      */
-    public function __construct(TaxComputations $tax_computations, Dependent $dependent, SSSContributions $sss_contribution, SalaryComponents $salary_components)
+    public function __construct(TaxComputation $tax_computation, Dependent $dependent, SSSContribution $sss_contribution, SalaryComponent $salary_component)
     {
-        $this->tax_computations = $tax_computations;
+        $this->tax_computation = $tax_computation;
         $this->dependent = $dependent;
         $this->sss_contribution = $sss_contribution;
-        $this->salary_components = $salary_components;
+        $this->salary_component = $salary_component;
     }
 
     /**
@@ -33,10 +33,11 @@ class Salary {
     function getSalaryDetails($employee)
     {
         $mode = Config::get('salary.semi_monthly');
-        $employee_salary_components = $employee->employeeSalaryComponents;
-        $component_ids = $this->salary_components->getSalaryAndSSS();
+        $employee_salary_components = $employee->employeeSalaryComponent;
+        $component_ids = $this->salary_component->getSalaryAndSSS();
         $deductions = 0;
         $salary = 0;
+
         foreach ($employee_salary_components as $employee_salary_component)
         {
             if ($employee_salary_component->component_id == $component_ids['monthlyBasic'])
@@ -67,7 +68,7 @@ class Salary {
         }
 
         $taxableSalary = $salary - $deductions;
-        $taxes = $this->tax_computations->getTaxRate($employee_status, $taxableSalary);
+        $taxes = $this->tax_computation->getTaxRate($employee_status, $taxableSalary);
 
         $over = 0;
         $totalTax = 0;
