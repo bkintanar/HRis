@@ -15,11 +15,9 @@ class JobHistory extends Model {
     public $timestamps = false;
 
     /**
-     * The database table used by the model.
-     *
-     * @var string
+     * @var array
      */
-    protected $table = 'job_histories';
+    protected $dates = ['effective_date'];
 
     /**
      * @var array
@@ -36,25 +34,11 @@ class JobHistory extends Model {
     ];
 
     /**
-     * @var array
+     * The database table used by the model.
+     *
+     * @var string
      */
-    protected $dates = ['effective_date'];
-
-    /**
-     * @param $value
-     */
-    public function setEffectiveDateAttribute($value)
-    {
-        $this->attributes['effective_date'] = Carbon::parse($value) ? : null;
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function jobTitle()
-    {
-        return $this->hasOne('HRis\Eloquent\JobTitle', 'id', 'job_title_id');
-    }
+    protected $table = 'job_histories';
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -75,9 +59,9 @@ class JobHistory extends Model {
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function workShift()
+    public function jobTitle()
     {
-        return $this->hasOne('HRis\Eloquent\WorkShift', 'id', 'work_shift_id');
+        return $this->hasOne('HRis\Eloquent\JobTitle', 'id', 'job_title_id');
     }
 
     /**
@@ -86,6 +70,22 @@ class JobHistory extends Model {
     public function location()
     {
         return $this->hasOne('HRis\Eloquent\Location', 'id', 'location_id');
+    }
+
+    /**
+     * @param $value
+     */
+    public function setEffectiveDateAttribute($value)
+    {
+        $this->attributes['effective_date'] = Carbon::parse($value) ? : null;
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function workShift()
+    {
+        return $this->hasOne('HRis\Eloquent\WorkShift', 'id', 'work_shift_id');
     }
 
 }

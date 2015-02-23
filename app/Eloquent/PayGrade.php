@@ -14,15 +14,15 @@ class PayGrade extends Model {
     public $timestamps = false;
 
     /**
+     * @var array
+     */
+    protected $fillable = ['name', 'min_salary', 'max_salary'];
+
+    /**
      * The database table used by the model.
      *
      * @var string
      */
     protected $table = 'pay_grades';
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['name', 'min_salary', 'max_salary'];
 
 }

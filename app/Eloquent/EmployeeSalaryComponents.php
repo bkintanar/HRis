@@ -15,11 +15,9 @@ class EmployeeSalaryComponents extends Model {
     public $timestamps = false;
 
     /**
-     * The database table used by the model.
-     *
-     * @var string
+     * @var array
      */
-    protected $table = 'employee_salary_components';
+    protected $dates = ['effective_date'];
 
     /**
      * @var array
@@ -32,17 +30,11 @@ class EmployeeSalaryComponents extends Model {
     ];
 
     /**
-     * @var array
+     * The database table used by the model.
+     *
+     * @var string
      */
-    protected $dates = ['effective_date'];
-
-    /**
-     * @param $value
-     */
-    public function setEffectiveDateAttribute($value)
-    {
-        $this->attributes['effective_date'] = Carbon::parse($value) ? : null;
-    }
+    protected $table = 'employee_salary_components';
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -50,6 +42,14 @@ class EmployeeSalaryComponents extends Model {
     public function salaryComponent()
     {
         return $this->hasOne('HRis\Eloquent\SalaryComponents', 'id', 'component_id');
+    }
+
+    /**
+     * @param $value
+     */
+    public function setEffectiveDateAttribute($value)
+    {
+        $this->attributes['effective_date'] = Carbon::parse($value) ? : null;
     }
 
 }

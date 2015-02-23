@@ -15,11 +15,9 @@ class WorkExperience extends Model {
     public $timestamps = false;
 
     /**
-     * The database table used by the model.
-     *
-     * @var string
+     * @var array
      */
-    protected $table = 'work_experiences';
+    protected $dates = ['from_date', 'to_date'];
 
     /**
      * @var array
@@ -27,16 +25,18 @@ class WorkExperience extends Model {
     protected $fillable = ['employee_id', 'company', 'job_title', 'from_date', 'to_date', 'comment'];
 
     /**
-     * @var array
+     * The database table used by the model.
+     *
+     * @var string
      */
-    protected $dates = ['from_date', 'to_date'];
+    protected $table = 'work_experiences';
 
     /**
-     * @param $value
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function setToDateAttribute($value)
+    public function employee()
     {
-        $this->attributes['to_date'] = Carbon::parse($value) ? : null;
+        return $this->belongsTo('HRis\Eloquent\Employee', 'id', 'employee_id');
     }
 
     /**
@@ -48,11 +48,11 @@ class WorkExperience extends Model {
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @param $value
      */
-    public function employee()
+    public function setToDateAttribute($value)
     {
-        return $this->belongsTo('HRis\Eloquent\Employee', 'id', 'employee_id');
+        $this->attributes['to_date'] = Carbon::parse($value) ? : null;
     }
 
 }

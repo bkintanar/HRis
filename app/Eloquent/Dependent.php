@@ -15,11 +15,11 @@ class Dependent extends Model {
     public $timestamps = false;
 
     /**
-     * The database table used by the model.
+     * Additional fields to treat as Carbon instances.
      *
-     * @var string
+     * @var array
      */
-    protected $table = 'dependents';
+    protected $dates = ['birth_date'];
 
     /**
      * @var array
@@ -34,11 +34,11 @@ class Dependent extends Model {
     ];
 
     /**
-     * Additional fields to treat as Carbon instances.
+     * The database table used by the model.
      *
-     * @var array
+     * @var string
      */
-    protected $dates = ['birth_date'];
+    protected $table = 'dependents';
 
     /**
      * @param $value
