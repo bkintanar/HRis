@@ -25,9 +25,9 @@ class HomeController extends Controller {
      */
     public function dashboard()
     {
-        $employee = Employee::whereId(11)->first();
+        $employee = Employee::whereId(5)->first();
 
-        $timelog = $employee->getTimeLog('2015-02-16');
+        $timelog = $employee->getTimeLog('2015-02-02');
 
         dd($timelog);
 
