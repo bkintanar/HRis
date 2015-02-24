@@ -149,19 +149,35 @@ class Employee extends Model {
     }
 
     /**
+     * @param $start_date
+     * @return array
+     */
+    public function getTimeLog($start_date)
+    {
+        $work_shift = $this->jobHistory()->workShift()->first();
+
+        $wstp = $work_shift->getTimeLogSpan($start_date);
+
+        $time_in = $this->timelogs()->whereSwipeDate($wstp['from_datetime']->toDateString())->where('swipe_time', '>=', $wstp['from_datetime']->toTimeString())->first();
+        $time_out = $this->timelogs()->whereSwipeDate($wstp['to_datetime']->toDateString())->where('swipe_time', '<=', $wstp['to_datetime']->toTimeString())->orderBy('id', 'desc')->first();
+
+        return ['time_in' => $time_in, 'time_out' => $time_out];
+    }
+
+    /**
      * @return mixed
      */
     public function jobHistory()
     {
-        return $this->jobHistories()->orderBy('job_histories.id', 'desc')->first();
+        return $this->jobHistories()->with('workShift')->orderBy('job_histories.id', 'desc')->first();
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function jobHistories()
+    public function timelogs()
     {
-        return $this->hasMany('HRis\Eloquent\JobHistory');
+        return $this->hasMany('HRis\Eloquent\TimeLog', 'face_id', 'face_id');
     }
 
     /**
@@ -178,6 +194,14 @@ class Employee extends Model {
     public function orderedJobHistories()
     {
         return $this->jobHistories()->with('jobTitle', 'department', 'employmentStatus', 'workShift', 'location')->orderBy('job_histories.id', 'desc')->get();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function jobHistories()
+    {
+        return $this->hasMany('HRis\Eloquent\JobHistory');
     }
 
     /**
@@ -282,14 +306,6 @@ class Employee extends Model {
     public function workExperiences()
     {
         return $this->hasMany('HRis\Eloquent\WorkExperience');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function workShift()
-    {
-        return $this->hasOne('HRis\Eloquent\WorkShift', 'id', 'work_shift_id');
     }
 
 }
