@@ -1,5 +1,6 @@
 <?php namespace HRis\Eloquent;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -35,17 +36,26 @@ class WorkShift extends Model {
     /**
      * @param $value
      */
-    public function setFromDateAttribute($value)
+    public function setFromTimeAttribute($value)
     {
-        $this->attributes['from_date'] = Carbon::parse($value) ? : null;
+        $this->attributes['from_time'] = Carbon::parse($value) ? : null;
     }
 
     /**
      * @param $value
      */
-    public function setToDateAttribute($value)
+    public function setToTimeAttribute($value)
     {
-        $this->attributes['to_date'] = Carbon::parse($value) ? : null;
+        $this->attributes['to_time'] = Carbon::parse($value) ? : null;
+    }
+
+    public function getTimeLogSpan($start_date)
+    {
+        // TODO: Add these to config
+        $from_datetime = Carbon::parse($start_date . ' ' . $this->from_time)->subHour(1);
+        $to_datetime = Carbon::parse($from_datetime)->addHours(11)->subSecond(1);
+
+        return ['from_datetime' => $from_datetime, 'to_datetime' => $to_datetime];
     }
 
 }

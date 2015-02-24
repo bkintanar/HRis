@@ -101,9 +101,9 @@ class Employee extends Model {
     /**
      * @return mixed
      */
-    public function employeeSalaryComponents()
+    public function employeeSalaryComponent()
     {
-        return $this->hasMany('HRis\Eloquent\EmployeeSalaryComponents', 'employee_id', 'employee_id')
+        return $this->hasMany('HRis\Eloquent\EmployeeSalaryComponent', 'employee_id', 'id')
             ->with('salaryComponent')
             ->orderBy('id', 'desc')
             ->orderBy('effective_date', 'desc')
@@ -142,10 +142,10 @@ class Employee extends Model {
     {
         if ($employee_id)
         {
-            return self::whereEmployeeId($employee_id)->with('employeeSalaryComponents', 'dependents')->first();
+            return self::whereEmployeeId($employee_id)->with('employeeSalaryComponent', 'dependents')->first();
         }
 
-        return self::whereEmployeeId($user_id)->with('employeeSalaryComponents', 'dependents')->first();
+        return self::whereEmployeeId($user_id)->with('employeeSalaryComponent', 'dependents')->first();
     }
 
     /**

@@ -3,10 +3,10 @@
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class SSSContributions
+ * Class SSSContribution
  * @package HRis
  */
-class SSSContributions extends Model {
+class SSSContribution extends Model {
 
     /**
      * @var bool
@@ -19,5 +19,4 @@ class SSSContributions extends Model {
      * @var string
      */
     protected $table = 'sss_contributions';
-
 }

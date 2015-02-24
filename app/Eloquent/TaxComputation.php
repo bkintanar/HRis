@@ -3,10 +3,10 @@
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class TaxComputations
+ * Class TaxComputation
  * @package HRis
  */
-class TaxComputations extends Model {
+class TaxComputation extends Model {
 
     /**
      * @var bool

@@ -4,10 +4,10 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class EmployeeSalaryComponents
+ * Class EmployeeSalaryComponent
  * @package HRis
  */
-class EmployeeSalaryComponents extends Model {
+class EmployeeSalaryComponent extends Model {
 
     /**
      * @var bool
@@ -41,7 +41,7 @@ class EmployeeSalaryComponents extends Model {
      */
     public function salaryComponent()
     {
-        return $this->hasOne('HRis\Eloquent\SalaryComponents', 'id', 'component_id');
+        return $this->hasOne('HRis\Eloquent\SalaryComponent', 'id', 'component_id');
     }
 
     /**

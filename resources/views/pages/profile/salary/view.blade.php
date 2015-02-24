@@ -26,7 +26,7 @@
         {
             var data = 0;
             $('.' + type).each(function () {
-                data += Number($(this).val());
+                data += parseFloat($(this).val());
             });
 
             return data;
@@ -34,8 +34,10 @@
 
         function display()
         {
-            earnings = getValues('earnings') + parseFloat($('#salary').val() / 2);
-            deductions = getValues('deductions') + parseFloat($('.tax').val());
+            earnings = getValues('earnings') + '{{$salary}}';
+            deductions = getValues('deductions') + parseFloat($('.tax').html());
+
+            console.log($('.tax').html());
 
             $('#total-earnings').html(parseFloat(earnings).toFixed(2));
             $('#total-deductions').html(parseFloat(deductions).toFixed(2));

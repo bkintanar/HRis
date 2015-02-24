@@ -13,8 +13,8 @@ use HRis\Eloquent\JobTitle;
 use HRis\Eloquent\Nationality;
 use HRis\Eloquent\PayGrade;
 use HRis\Eloquent\Skill;
-use HRis\Eloquent\SSSContributions;
-use HRis\Eloquent\TaxComputations;
+use HRis\Eloquent\SSSContribution;
+use HRis\Eloquent\TaxComputation;
 use HRis\Eloquent\TerminationReason;
 use HRis\Eloquent\WorkExperience;
 use HRis\Eloquent\WorkShift;
@@ -731,6 +731,8 @@ class AjaxController extends Controller {
      * get the profile tax salary details.
      *
      * @Get("ajax/profile/salary/edit")
+     * @Get("ajax/profile/salary")
+     * @Get("ajax/pim/employee-list/{id}/salary")
      * @Get("ajax/pim/employee-list/{id}/salary/edit")
      *
      * @param SalaryRequest $request
@@ -743,11 +745,12 @@ class AjaxController extends Controller {
             $semiMonthly = $request->get('salary') / $mode;
             $status = $request->get('status');
             $sss = $request->get('sss');
+            $taxableSalary = $semiMonthly - $request->get('deductions');
             try
             {
                 if ($request->get('type') == 'sss')
                 {
-                    $getSSS = SSSContributions::where('range_compensation_from', '<=', $semiMonthly)
+                    $getSSS = SSSContribution::where('range_compensation_from', '<=', $semiMonthly)
                         ->orderBy('range_compensation_from', 'desc')
                         ->first();
                     $deductions = ($request->get('deductions') - $sss) + $getSSS->sss_ee;
@@ -758,7 +761,7 @@ class AjaxController extends Controller {
                 {
                     $taxableSalary = $semiMonthly - $request->get('deductions');
                 }
-                $taxes = TaxComputations::getTaxRate($status, $taxableSalary);
+                $taxes = TaxComputation::getTaxRate($status, $taxableSalary);
 
                 $over = 0;
                 if ($taxableSalary > $taxes->$status)
@@ -766,14 +769,13 @@ class AjaxController extends Controller {
                     $over = $taxableSalary - $taxes->$status;
                 }
                 $totalTax = $taxes->exemption + ($over * $taxes->percentage_over);
-
-                $return = json_encode(['tax' => $totalTax, 'sss' => $sss]);
+                $return = json_encode(['tax' => $totalTax, 'sss' => $sss, 'salary' => $semiMonthly]);
 
                 print($return);
 
             } catch (Exception $e)
             {
-                //                    print($e->getMessage());
+
             }
         }
     }
