@@ -13,6 +13,7 @@ class Kernel extends ConsoleKernel {
     protected $commands = [
         'HRis\Console\Commands\ParseTimeLog',
         'HRis\Console\Commands\ImportEmployeeList',
+        'HRis\Console\Commands\UpdateFaceId',
     ];
 
     /**

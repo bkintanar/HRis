@@ -161,7 +161,7 @@ class Employee extends Model {
         $time_in = $this->timelogs()->whereSwipeDate($wstp['from_datetime']->toDateString())->where('swipe_time', '>=', $wstp['from_datetime']->toTimeString())->first();
         $time_out = $this->timelogs()->whereSwipeDate($wstp['to_datetime']->toDateString())->where('swipe_time', '<=', $wstp['to_datetime']->toTimeString())->orderBy('id', 'desc')->first();
 
-        return ['time_in' => $time_in, 'time_out' => $time_out];
+        return ['time_in' => $time_in ? $time_in->swipe_time : null, 'time_out' => $time_out  ? $time_out->swipe_time : null];
     }
 
     /**
