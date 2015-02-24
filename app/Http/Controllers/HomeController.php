@@ -1,5 +1,6 @@
 <?php namespace HRis\Http\Controllers;
 
+use HRis\Eloquent\Employee;
 use Illuminate\Support\Facades\Redirect;
 
 /**
@@ -24,6 +25,12 @@ class HomeController extends Controller {
      */
     public function dashboard()
     {
+        $employee = Employee::whereId(11)->first();
+
+        $timelog = $employee->getTimeLog('2015-02-16');
+
+        dd($timelog);
+
         $this->data['pageTitle'] = 'Dashboard';
 
         return $this->template('pages.home');

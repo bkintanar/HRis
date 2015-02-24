@@ -5,7 +5,9 @@
         <div>
             <div>
 
-                <h1 class="logo-name">HR+</h1>
+                <div class="logo-wrapper">
+                    <img src="/img/hris-logo.png">
+                </div>
 
             </div>
             <h3>Welcome to HRis</h3>
