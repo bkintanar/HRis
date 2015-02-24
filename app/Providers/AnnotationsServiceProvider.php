@@ -41,6 +41,7 @@ class AnnotationsServiceProvider extends ServiceProvider {
         'HRis\Http\Controllers\Administration\Qualifications\EducationController',
         'HRis\Http\Controllers\Administration\UserManagementController',
         'HRis\Http\Controllers\Administration\NationalityController',
+        'HRis\Http\Controllers\Time\Attendance\EmployeeRecordsController',
     ];
 
     /**

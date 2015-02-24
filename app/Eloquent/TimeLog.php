@@ -1,5 +1,6 @@
 <?php namespace HRis\Eloquent;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -16,7 +17,7 @@ class TimeLog extends Model {
     /**
      * @var array
      */
-    protected $fillable = ['face_id', 'swipe_date', 'swipe_time'];
+    protected $fillable = ['face_id', 'swipe_date', 'swipe_time', 'swipe_datetime'];
 
     /**
      * The database table used by the model.
@@ -24,5 +25,15 @@ class TimeLog extends Model {
      * @var string
      */
     protected $table = 'time_log';
+
+    public function getSwipeDatetimeAttribute($value)
+    {
+        $this->attributes['swipe_datetime'] = Carbon::parse($this->swipe_date . ' ' . $this->swipe_time);
+    }
+
+    public function employee()
+    {
+        return $this->belongsTo('HRis\Eloquent\Employee', 'face_id', 'face_id');
+    }
 
 }
