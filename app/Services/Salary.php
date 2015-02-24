@@ -71,9 +71,15 @@ class Salary {
         $taxes = $this->tax_computations->getTaxRate($employee_status, $taxableSalary);
 
         $over = 0;
-        if ($taxableSalary > $taxes->$employee_status)
+        $totalTax = 0;
+        if ($taxes)
         {
-            $over = $taxableSalary - $taxes->$employee_status;
+            if ($taxableSalary > $taxes->$employee_status)
+            {
+                $over = $taxableSalary - $taxes->$employee_status;
+            }
+
+            $totalTax = $taxes->exemption + ($over * $taxes->percentage_over);
         }
         $totalTax = $taxes->exemption + ($over * $taxes->percentage_over);
 

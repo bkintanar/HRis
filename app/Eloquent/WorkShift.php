@@ -34,6 +34,19 @@ class WorkShift extends Model {
     protected $table = 'work_shifts';
 
     /**
+     * @param $start_date
+     * @return array
+     */
+    public function getTimeLogSpan($start_date)
+    {
+        // TODO: Add these to config
+        $from_datetime = Carbon::parse($start_date . ' ' . $this->from_time)->subHour(1);
+        $to_datetime = Carbon::parse($from_datetime)->addHours(11)->subSecond(1);
+
+        return ['from_datetime' => $from_datetime, 'to_datetime' => $to_datetime];
+    }
+
+    /**
      * @param $value
      */
     public function setFromTimeAttribute($value)
@@ -49,12 +62,4 @@ class WorkShift extends Model {
         $this->attributes['to_time'] = Carbon::parse($value) ? : null;
     }
 
-    public function getTimeLogSpan($start_date)
-    {
-        // TODO: Add these to config
-        $from_datetime = Carbon::parse($start_date . ' ' . $this->from_time)->subHour(1);
-        $to_datetime = Carbon::parse($from_datetime)->addHours(11)->subSecond(1);
-
-        return ['from_datetime' => $from_datetime, 'to_datetime' => $to_datetime];
-    }
 }

@@ -3,9 +3,7 @@
 use Carbon\Carbon;
 use HRis\Eloquent\City;
 use HRis\Eloquent\Employee;
-use HRis\Eloquent\TimeLog;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Log;
 use League\Csv\Reader;
 
 class ImportEmployeeList extends Command {
@@ -31,7 +29,7 @@ class ImportEmployeeList extends Command {
      */
     public function handle()
     {
-        $csv = Reader::createFromPath(storage_path().'/employee.csv');
+        $csv = Reader::createFromPath(storage_path() . '/employee.csv');
 
         $csv->setOffset(2);
         $data = $csv->query();

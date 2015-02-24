@@ -175,6 +175,14 @@ class Employee extends Model {
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+    public function jobHistories()
+    {
+        return $this->hasMany('HRis\Eloquent\JobHistory');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function timelogs()
     {
         return $this->hasMany('HRis\Eloquent\TimeLog', 'face_id', 'face_id');
@@ -194,14 +202,6 @@ class Employee extends Model {
     public function orderedJobHistories()
     {
         return $this->jobHistories()->with('jobTitle', 'department', 'employmentStatus', 'workShift', 'location')->orderBy('job_histories.id', 'desc')->get();
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function jobHistories()
-    {
-        return $this->hasMany('HRis\Eloquent\JobHistory');
     }
 
     /**
