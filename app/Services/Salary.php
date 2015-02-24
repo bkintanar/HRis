@@ -72,14 +72,14 @@ class Salary {
 
         $over = 0;
         $totalTax = 0;
-        if($taxes)
+        if ($taxes)
         {
             if ($taxableSalary > $taxes->$employee_status)
             {
                 $over = $taxableSalary - $taxes->$employee_status;
             }
 
-        $totalTax = $taxes->exemption + ($over * $taxes->percentage_over);
+            $totalTax = $taxes->exemption + ($over * $taxes->percentage_over);
         }
 
         return ['total_tax' => round($totalTax, 2), 'employee_status' => $employee_status, 'salary' => $salary];

@@ -28,7 +28,7 @@ class ParseTimeLog extends Command {
      */
     public function handle()
     {
-        $csv = Reader::createFromPath(storage_path().'/file.csv');
+        $csv = Reader::createFromPath(storage_path() . '/file.csv');
 
         $csv->setOffset(1);
         $data = $csv->query();
@@ -36,9 +36,9 @@ class ParseTimeLog extends Command {
         foreach ($data as $lineIndex => $row)
         {
 
-            $times = array_slice($row, 4, count($row)-1);
+            $times = array_slice($row, 4, count($row) - 1);
 
-            foreach($times as $time)
+            foreach ($times as $time)
             {
                 if (empty($time))
                 {

@@ -87,5 +87,4 @@ class JobHistory extends Model {
     {
         return $this->hasOne('HRis\Eloquent\WorkShift', 'id', 'work_shift_id');
     }
-
 }

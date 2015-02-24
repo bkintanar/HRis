@@ -9,16 +9,15 @@ use Illuminate\Database\Eloquent\Model;
 class SalaryComponent extends Model {
 
     /**
+     * @var bool
+     */
+    public $timestamps = false;
+    /**
      * The database table used by the model.
      *
      * @var string
      */
     protected $table = 'salary_components';
-
-    /**
-     * @var bool
-     */
-    public $timestamps = false;
 
     /**
      * @return array
