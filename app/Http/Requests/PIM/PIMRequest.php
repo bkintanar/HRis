@@ -39,6 +39,11 @@ class PIMRequest extends Request {
         {
             return ($user->hasAccess($permission . '.view'));
         }
+        // Create
+        else if (Request::isMethod('post'))
+        {
+            return ($user->hasAccess($permission . '.create'));
+        }
     }
 
     public function forbiddenResponse()

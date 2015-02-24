@@ -52,4 +52,15 @@ class EmployeeSalaryComponents extends Model {
         $this->attributes['effective_date'] = Carbon::parse($value) ? : null;
     }
 
+    /**
+     * @return array
+     */
+    function getCurrentComponentValue($employee_id, $component_id)
+    {
+        return $this->whereEmployeeId($employee_id)
+            ->whereComponentId($component_id)
+            ->orderBy('effective_date', 'desc')
+            ->first();
+    }
+
 }

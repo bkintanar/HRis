@@ -64,6 +64,41 @@ class EmployeeSalaryComponentsSeeder extends Seeder {
                     'value'          => 50.00,
                     'effective_date' => '2013-10-31'
                 ],
+                [
+                    'id'             => 8,
+                    'employee_id'    => 2,
+                    'component_id'   => 2,
+                    'value'          => 290.65,
+                    'effective_date' => '2013-10-31'
+                ],
+                [
+                    'id'             => 9,
+                    'employee_id'    => 3,
+                    'component_id'   => 1,
+                    'value'          => 25000.00,
+                    'effective_date' => '2013-10-31'
+                ],
+                [
+                    'id'             => 10,
+                    'employee_id'    => 3,
+                    'component_id'   => 3,
+                    'value'          => 168.75,
+                    'effective_date' => '2013-10-31'
+                ],
+                [
+                    'id'             => 11,
+                    'employee_id'    => 3,
+                    'component_id'   => 4,
+                    'value'          => 50.00,
+                    'effective_date' => '2013-10-31'
+                ],
+                [
+                    'id'             => 12,
+                    'employee_id'    => 3,
+                    'component_id'   => 2,
+                    'value'          => 290.65,
+                    'effective_date' => '2013-10-31'
+                ],
             ]
         );
 
