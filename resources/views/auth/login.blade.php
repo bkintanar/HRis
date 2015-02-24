@@ -5,7 +5,9 @@
         <div>
             <div>
 
-                <img src="/img/hris-logo.png">
+                <div class="logo-wrapper">
+                    <img src="/img/hris-logo.png">
+                </div>
 
             </div>
             <h3>Welcome to HRis</h3>
