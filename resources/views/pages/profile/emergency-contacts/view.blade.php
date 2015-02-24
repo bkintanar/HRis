@@ -3,7 +3,7 @@
 @section('content')
     @include('partials.notification')
     <div class="row">
-            {!! HRis\Eloquent\Navlink::profileLinks($pim) !!}
+            {!! \HRis\Eloquent\Navlink::profileLinks($pim) !!}
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
@@ -101,7 +101,7 @@
                             <div class="form-group">
                                 {!! Form::label('relationship_id', 'Relationship', ['class' => 'col-md-3 control-label']) !!}
                                 <div class="col-md-9">
-                                    {!! Form::select('relationship_id', HRis\Eloquent\Relationship::listsWithPlaceholder('name', 'id'), null, ['class' => 'form-control chosen-select']) !!}
+                                    {!! Form::select('relationship_id', HRis\Eloquent\Relationship::lists('name', 'id'), null, ['class' => 'form-control chosen-select']) !!}
                                 </div>
                             </div>
 

@@ -29,15 +29,15 @@
                         <tbody id="skillsBody">
                             @if(count($skills))
                                 @foreach($skills as $skill)
-                                <tr class="skillsList" id="employee_skill_{{HRis\Eloquent\EmployeeSkill::whereSkillId($skill->id)->whereEmployeeId($employee->id)->pluck('id')}}">
-                                    <td>{{ HRis\Eloquent\Skill::whereId($skill->id)->pluck('name') }}</td>
-                                    <td>{{ HRis\Eloquent\EmployeeSkill::whereSkillId($skill->id)->whereEmployeeId($employee->id)->pluck('years_of_experience') }}</td>
+                                <tr class="skillsList" id="employee_skill_{{\HRis\Eloquent\EmployeeSkill::whereSkillId($skill->id)->whereEmployeeId($employee->id)->pluck('id')}}">
+                                    <td>{{ \HRis\Eloquent\Skill::whereId($skill->id)->pluck('name') }}</td>
+                                    <td>{{ \HRis\Eloquent\EmployeeSkill::whereSkillId($skill->id)->whereEmployeeId($employee->id)->pluck('years_of_experience') }}</td>
                                     <td>
                                         @if($loggedUser->hasAccess(\Request::segment(1).'.qualifications.skills.update'))
-                                        <button rel="editSkill" id="{{HRis\Eloquent\EmployeeSkill::whereSkillId($skill->id)->whereEmployeeId($employee->id)->pluck('id')}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-paste"></i></button>
+                                        <button rel="editSkill" id="{{\HRis\Eloquent\EmployeeSkill::whereSkillId($skill->id)->whereEmployeeId($employee->id)->pluck('id')}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-paste"></i></button>
                                         @endif
                                         @if($loggedUser->hasAccess(\Request::segment(1).'.qualifications.skills.delete'))
-                                        <button rel="deleteSkill" id="{{HRis\Eloquent\EmployeeSkill::whereSkillId($skill->id)->whereEmployeeId($employee->id)->pluck('id')}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-trash"></i></button>
+                                        <button rel="deleteSkill" id="{{\HRis\Eloquent\EmployeeSkill::whereSkillId($skill->id)->whereEmployeeId($employee->id)->pluck('id')}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-trash"></i></button>
                                         @endif
                                     </td>
                                 </tr>
@@ -72,7 +72,7 @@
                         <div class="form-group">
                             {!! Form::label('skill_id', 'Skill', ['class' => 'col-md-3 control-label']) !!}
                             <div class="col-md-9">
-                                {!! Form::select('skill_id', HRis\Eloquent\Skill::listsWithPlaceholder('name', 'id'), null, ['class' => 'form-control chosen-select']) !!}
+                                {!! Form::select('skill_id', \HRis\Eloquent\Skill::lists('name', 'id'), null, ['class' => 'form-control chosen-select']) !!}
                             </div>
                         </div>
 

@@ -67,7 +67,7 @@
 
                                             {!! Form::open(['method' => 'POST', 'url' => str_replace('/edit', '', \Request::path()), 'class' => 'form-horizontal']) !!}
                                             <div class="tab-content">
-                                                {!! HRis\Eloquent\Navlink::permissionTable($user->id) !!}
+                                                {!! \HRis\Eloquent\Navlink::permissionTable($user->id) !!}
                                             </div>
                                             {!! Form::close() !!}
 

@@ -1,5 +1,5 @@
 {!! Form::model($employee, ['method' => 'PATCH', 'url' => str_replace('/edit', '', \Request::path()), 'class' => 'form-horizontal']) !!}
-    {!! Form::hidden('id') !!}
+    {!! Form::hidden('employee_id', $employee->id) !!}
 
     @include('pages.profile.salary.form-earnings')
     @include('pages.profile.salary.form-deductions')

@@ -24,7 +24,7 @@ class WorkShift extends Model {
      * @var array
      */
     protected $fillable = ['name', 'from_date', 'to_date', 'duration'];
-
+    
     /**
      * The database table used by the model.
      *

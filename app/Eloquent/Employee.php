@@ -127,10 +127,10 @@ class Employee extends Model {
     {
         if ($employee_id)
         {
-            return self::whereEmployeeId($employee_id)->with('user', 'country', 'province', 'city', 'employmentStatus', 'jobHistories', 'dependents')->first();
+            return self::whereEmployeeId($employee_id)->with('user', 'country', 'province', 'city', 'employmentStatus', 'jobHistories', 'dependents', 'employeeWorkShift')->first();
         }
 
-        return self::whereUserId($user_id)->with('user', 'country', 'province', 'city', 'employmentStatus', 'jobHistories', 'dependents')->first();
+        return self::whereUserId($user_id)->with('user', 'country', 'province', 'city', 'employmentStatus', 'jobHistories', 'dependents', 'employeeWorkShift')->first();
     }
 
     /**
@@ -290,6 +290,14 @@ class Employee extends Model {
     public function workShift()
     {
         return $this->hasOne('HRis\Eloquent\WorkShift', 'id', 'work_shift_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function employeeWorkShift()
+    {
+        return $this->hasOne('HRis\Eloquent\EmployeeWorkShift', 'employee_id', 'id')->orderBy('effective_date', 'desc');
     }
 
 }
