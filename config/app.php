@@ -200,6 +200,7 @@ return [
 		'Html'      => 'Illuminate\Html\HtmlFacade',
 		'Sentry'    => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
 		'Debugbar' => 'Barryvdh\Debugbar\Facade',
+        'Carbon' => 'Carbon\Carbon',
 
 	],
 

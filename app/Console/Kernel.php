@@ -11,7 +11,8 @@ class Kernel extends ConsoleKernel {
      * @var array
      */
     protected $commands = [
-        'HRis\Console\Commands\Inspire',
+        'HRis\Console\Commands\ParseTimeLog',
+        'HRis\Console\Commands\ImportEmployeeList',
     ];
 
     /**
