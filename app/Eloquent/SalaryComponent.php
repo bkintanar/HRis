@@ -6,12 +6,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class SalaryComponents
  * @package HRis
  */
-class SalaryComponents extends Model {
-
-    /**
-     * @var bool
-     */
-    public $timestamps = false;
+class SalaryComponent extends Model {
 
     /**
      * The database table used by the model.
@@ -21,17 +16,23 @@ class SalaryComponents extends Model {
     protected $table = 'salary_components';
 
     /**
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * @return array
      */
     function getSalaryAndSSS()
     {
-        $salaryComponents = self::where('components', 'LIKE', '%Basic%')
-            ->orWhere('components', 'LIKE', '%SSS%')
+        $salaryComponent = self::where('name', 'LIKE', '%Basic%')
+            ->orWhere('name', 'LIKE', '%SSS%')
             ->orderBy('id', 'asc')
             ->get(['id'])
             ->take(2);
 
-        return ['monthlyBasic' => $salaryComponents->first()->id, 'SSS' => $salaryComponents->last()->id];
+        return ['monthlyBasic' => $salaryComponent->first()->id, 'SSS' => $salaryComponent->last()->id];
+
     }
 
 }

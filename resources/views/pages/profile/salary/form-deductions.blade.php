@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="ibox-content">
-            @foreach($employee->employeeSalaryComponents as $value)
+            @foreach($employee->employeeSalaryComponent as $value)
                 @if($value->salaryComponent->type == 2)
                 <div class="form-group">
                     {!! Form::label($value, $value->salaryComponent->name, ['class' => 'col-md-2 control-label']) !!}
@@ -37,7 +37,7 @@
                 <div class="form-group">
                     {!! Form::label('tax', 'Tax', ['class' => 'col-md-2 control-label']) !!}
                     <div class="col-md-4">
-                    {!! Form::text('tax', $tax, ['class' => 'form-control fields tax', 'data-mask' => '99999.99', $disabled]) !!}
+                    <p class="form-control fields tax">{{$tax}}</p>
                     </div>
                 </div>
         </div>

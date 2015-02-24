@@ -32,10 +32,10 @@
             return data;
         }
 
-        function display()
+        function display(values)
         {
-            earnings = getValues('earnings') + parseFloat($('#salary').val() / 2);
-            deductions = getValues('deductions') + parseFloat($('.tax').val());
+            earnings = getValues('earnings') + values.salary;
+            deductions = getValues('deductions') + parseFloat($('.tax').html());
 
             $('#total-earnings').html(parseFloat(earnings).toFixed(2));
             $('#total-deductions').html(parseFloat(deductions).toFixed(2));
@@ -52,15 +52,15 @@
                 }).done(function( response ) {
                     var values = jQuery.parseJSON(response);
                     $('#sss').val(parseFloat(values.sss).toFixed(2));
-                    $('.tax').val(parseFloat(values.tax).toFixed(2));
+                    $('.tax').html(parseFloat(values.tax).toFixed(2));
+                    display(values);
                 });
-            display();
         }
 
         $(document).ready(function () {
 
             $('#salary').change(function () {
-                updateSalary('tax');
+                updateSalary();
             });
 
             $('#rfrsh-sss').click(function () {
@@ -68,13 +68,24 @@
             });
 
             $('.fields').change(function () {
-                display();
+                $(this).val(parseFloat($(this).val()).toFixed(2));
+                updateSalary();
+            });
+
+            updateSalary();
+
+
+            // Date picker
+            $('#datepicker .input-group.date').datepicker({
+                todayBtn: "linked",
+                format: 'yyyy-mm-dd',
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true
             });
 
             $('.chosen-select').chosen();
-
-            display();
-
         });
 
     </script>

@@ -2,7 +2,7 @@
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use HRis\Eloquent\Employee;
-use HRis\Eloquent\EmployeeSalaryComponents;
+use HRis\Eloquent\EmployeeSalaryComponent;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests;
 use HRis\Http\Requests\Profile\SalaryRequest;
@@ -11,12 +11,12 @@ use Redirect;
 
 class SalaryComputationsController extends Controller {
 
-    public function __construct(Sentry $auth, Employee $employee, EmployeeSalaryComponents $employee_salary_components, Salary $salary_services)
+    public function __construct(Sentry $auth, Employee $employee, EmployeeSalaryComponent $employee_salary_component, Salary $salary_services)
     {
         parent::__construct($auth);
 
         $this->employee = $employee;
-        $this->employee_salary_components = $employee_salary_components;
+        $this->employee_salary_component = $employee_salary_component;
         $this->salary_services = $salary_services;
     }
 
@@ -27,6 +27,7 @@ class SalaryComputationsController extends Controller {
      * @Get("pim/employee-list/{id}/salary")
      *
      * @param SalaryRequest $request
+     * @param null $employee_id
      * @return Response
      */
     public function salary(SalaryRequest $request, $employee_id = null)
@@ -36,13 +37,15 @@ class SalaryComputationsController extends Controller {
         $salary = $this->salary_services->getSalaryDetails($employee);
 
         $this->data['employee'] = $employee;
-        $this->data['tax'] = $salary['totalTax'];
+        $this->data['tax'] = $salary['total_tax'];
+        $this->data['salary'] = $salary['salary'];
 
         $this->data['disabled'] = 'disabled';
         $this->data['pim'] = $request->is('*pim/*') ? true : false;
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Salary Details' : 'My Salary Details';
 
         return $this->template('pages.profile.salary.view');
+
     }
 
     /**
@@ -62,7 +65,8 @@ class SalaryComputationsController extends Controller {
         $salary = $this->salary_services->getSalaryDetails($employee);
 
         $this->data['employee'] = $employee;
-        $this->data['tax'] = $salary['totalTax'];
+        $this->data['tax'] = $salary['total_tax'];
+        $this->data['salary'] = $salary['salary'];
         $this->data['tax_status'] = $salary['employee_status'];
 
         $this->data['disabled'] = '';
@@ -70,6 +74,7 @@ class SalaryComputationsController extends Controller {
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Salary Details' : 'My Salary Details';
 
         return $this->template('pages.profile.salary.edit');
+
     }
 
     /**
@@ -95,7 +100,7 @@ class SalaryComputationsController extends Controller {
 
             try
             {
-                $this->employee_salary_components->create($value);
+                $this->employee_salary_component->create($value);
             } catch (Exception $e)
             {
                 return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
