@@ -87,7 +87,7 @@ class Employee extends Model {
      */
     public function dependents()
     {
-        return $this->hasMany('HRis\Eloquent\Dependent', 'employee_id', 'employee_id');
+        return $this->hasMany('HRis\Eloquent\Dependent', 'employee_id', 'id');
     }
 
     /**
