@@ -36,14 +36,6 @@ class EmployeeWorkShift extends Model {
     protected $table = 'employee_work_shifts';
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function workShift()
-    {
-        return $this->hasOne('HRis\Eloquent\WorkShift', 'id', 'work_shift_id');
-    }
-
-    /**
      * @param null $fillables
      * @param $employee_id
      * @return mixed
@@ -56,4 +48,24 @@ class EmployeeWorkShift extends Model {
             ->first($fillables)->toArray();
     }
 
+    /**
+     * @param $start_date
+     * @return array
+     */
+    public function getTimeLogSpan($start_date)
+    {
+        // TODO: Add these to config
+        $from_datetime = Carbon::parse($start_date . ' ' . $this->workShift->from_time)->subHour(1);
+        $to_datetime = Carbon::parse($from_datetime)->addHours(14)->subSecond(1);
+
+        return ['from_datetime' => $from_datetime, 'to_datetime' => $to_datetime];
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function workShift()
+    {
+        return $this->hasOne('HRis\Eloquent\WorkShift', 'id', 'work_shift_id');
+    }
 }

@@ -1,7 +1,5 @@
 <?php namespace HRis\Console\Commands;
 
-use Carbon\Carbon;
-use HRis\Eloquent\City;
 use HRis\Eloquent\Employee;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;

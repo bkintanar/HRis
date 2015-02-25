@@ -2,8 +2,8 @@
 
 use Config;
 use HRis\Eloquent\Dependent;
-use HRis\Eloquent\SalaryComponent;
 use HRis\Eloquent\EmployeeSalaryComponent;
+use HRis\Eloquent\SalaryComponent;
 use HRis\Eloquent\SSSContribution;
 use HRis\Eloquent\TaxComputation;
 

@@ -26,14 +26,14 @@ class TimeLog extends Model {
      */
     protected $table = 'time_log';
 
-    public function getSwipeDatetimeAttribute($value)
-    {
-        $this->attributes['swipe_datetime'] = Carbon::parse($this->swipe_date . ' ' . $this->swipe_time);
-    }
-
     public function employee()
     {
         return $this->belongsTo('HRis\Eloquent\Employee', 'face_id', 'face_id');
+    }
+
+    public function getSwipeDatetimeAttribute($value)
+    {
+        $this->attributes['swipe_datetime'] = Carbon::parse($this->swipe_date . ' ' . $this->swipe_time);
     }
 
 }

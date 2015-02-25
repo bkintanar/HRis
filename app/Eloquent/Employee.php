@@ -154,14 +154,34 @@ class Employee extends Model {
      */
     public function getTimeLog($start_date)
     {
-        $work_shift = $this->jobHistory()->workShift()->first();
+        $work_shift = $this->employeeWorkShift()->first();
 
         $wstp = $work_shift->getTimeLogSpan($start_date);
 
         $time_in = $this->timelogs()->whereSwipeDate($wstp['from_datetime']->toDateString())->where('swipe_time', '>=', $wstp['from_datetime']->toTimeString())->first();
         $time_out = $this->timelogs()->whereSwipeDate($wstp['to_datetime']->toDateString())->where('swipe_time', '<=', $wstp['to_datetime']->toTimeString())->orderBy('id', 'desc')->first();
 
-        return ['time_in' => $time_in ? $time_in->swipe_time : null, 'time_out' => $time_out  ? $time_out->swipe_time : null];
+        return ['time_in'  => $time_in ? $time_in->swipe_time : null,
+                'time_out' => $time_out ? $time_out->swipe_time : null
+        ];
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function employeeWorkShift()
+    {
+        return $this->hasMany('HRis\Eloquent\EmployeeWorkShift', 'employee_id', 'id')
+            ->orderBy('effective_date', 'desc')
+            ->orderBy('id', 'desc');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function timelogs()
+    {
+        return $this->hasMany('HRis\Eloquent\TimeLog', 'face_id', 'face_id');
     }
 
     /**
@@ -178,14 +198,6 @@ class Employee extends Model {
     public function jobHistories()
     {
         return $this->hasMany('HRis\Eloquent\JobHistory');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function timelogs()
-    {
-        return $this->hasMany('HRis\Eloquent\TimeLog', 'face_id', 'face_id');
     }
 
     /**
@@ -314,15 +326,5 @@ class Employee extends Model {
     public function workShift()
     {
         return $this->hasOne('HRis\Eloquent\WorkShift', 'id', 'work_shift_id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function employeeWorkShift()
-    {
-        return $this->hasMany('HRis\Eloquent\EmployeeWorkShift', 'employee_id', 'id')
-            ->orderBy('effective_date', 'desc')
-            ->orderBy('id', 'desc');
     }
 }

@@ -18,12 +18,12 @@ class EmployeeRecordsController extends Controller {
      */
     public function index($date = null)
     {
-        if(is_null($date))
+        if (is_null($date))
         {
             $date = Carbon::now()->toDateString();
         }
         $this->data['date'] = $date;
-        $this->data['employees'] = Employee::whereNotNull('face_id')->with('timelogs')->take(8)->get();
+        $this->data['employees'] = Employee::whereNotNull('face_id')->where('id', '>', 1)->with('timelogs')->take(2)->get();
 
         $this->data['pageTitle'] = 'Employee Records';
 

@@ -100,7 +100,7 @@ class SalaryComputationsController extends Controller {
             try
             {
                 $kani = $this->employee_salary_component->getCurrentComponentValue($id, $value['component_id']);
-                if($kani->value != 0 && $kani->value != $value['value'])
+                if ($kani->value != 0 && $kani->value != $value['value'])
                 {
                     $this->employee_salary_component->create($value);
                 }

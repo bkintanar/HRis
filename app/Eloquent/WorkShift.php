@@ -25,26 +25,13 @@ class WorkShift extends Model {
      * @var array
      */
     protected $fillable = ['name', 'from_date', 'to_date', 'duration'];
-    
+
     /**
      * The database table used by the model.
      *
      * @var string
      */
     protected $table = 'work_shifts';
-
-    /**
-     * @param $start_date
-     * @return array
-     */
-    public function getTimeLogSpan($start_date)
-    {
-        // TODO: Add these to config
-        $from_datetime = Carbon::parse($start_date . ' ' . $this->from_time)->subHour(1);
-        $to_datetime = Carbon::parse($from_datetime)->addHours(14)->subSecond(1);
-
-        return ['from_datetime' => $from_datetime, 'to_datetime' => $to_datetime];
-    }
 
     /**
      * @param $value

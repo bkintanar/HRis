@@ -96,7 +96,7 @@ class EmployeeListController extends Controller {
         try
         {
             $temp = $this->employee->create($request->all());
-            foreach($this->salary_component->all() as $value)
+            foreach ($this->salary_component->all() as $value)
             {
                 $salary_components = ['employee_id' => $temp->id, 'component_id' => $value->id, 'value' => 0];
                 $this->employee_salary_component->create($salary_components);
@@ -105,6 +105,7 @@ class EmployeeListController extends Controller {
         {
             return Redirect::to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
+
         return Redirect::to($request->path())->with('success', SUCCESS_ADD_MESSAGE);
     }
 }
