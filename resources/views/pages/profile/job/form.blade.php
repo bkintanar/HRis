@@ -1,5 +1,4 @@
 {!! Form::model($employee, ['method' => 'PATCH', 'url' => str_replace('/edit', '', \Request::path()), 'class' => 'form-horizontal']) !!}
-    {!! Form::hidden('id') !!}
     {!! Form::hidden('employee_id', $employee->id) !!}
 
     <!-- End - Employment Commencement -->

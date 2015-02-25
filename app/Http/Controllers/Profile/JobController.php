@@ -3,6 +3,7 @@
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use HRis\Eloquent\Employee;
 use HRis\Eloquent\JobHistory;
+use HRis\Eloquent\EmployeeWorkShift;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\JobRequest;
 use Illuminate\Support\Facades\Redirect;
@@ -28,12 +29,13 @@ class JobController extends Controller {
      * @param Employee $employee
      * @param JobHistory $job_history
      */
-    public function __construct(Sentry $auth, Employee $employee, JobHistory $job_history)
+    public function __construct(Sentry $auth, Employee $employee, JobHistory $job_history, EmployeeWorkShift $employee_work_shift)
     {
         parent::__construct($auth);
 
         $this->employee = $employee;
         $this->job_history = $job_history;
+        $this->employee_work_shift = $employee_work_shift;
     }
 
     /**
@@ -101,13 +103,11 @@ class JobController extends Controller {
      */
     public function update(JobRequest $request)
     {
-        $id = $request->get('id');
+        $this->job_history->create($request->except('work_shift_id'));
 
-        $employee = $this->employee->whereId($id)->first();
-        $job_history = $this->job_history;
+        $this->employee_work_shift->create($request->only('employee_id', 'work_shift_id'));
 
-        $job_history->create($request->all());
-
+        $employee = $this->employee->whereId($request->get('employee_id'))->first();
         $employee->update($request->only('joined_date', 'probation_end_date', 'permanency_date'));
 
         return Redirect::to($request->path())->with('success', 'Record successfully updated.');
