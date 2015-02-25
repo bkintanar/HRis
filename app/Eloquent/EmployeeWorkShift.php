@@ -44,7 +44,9 @@ class EmployeeWorkShift extends Model {
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @param null $fillables
+     * @param $employee_id
+     * @return mixed
      */
     public function getCurrentEmployeeWorkShift($fillables = null, $employee_id)
     {

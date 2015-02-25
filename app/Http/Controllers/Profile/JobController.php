@@ -1,5 +1,6 @@
 <?php namespace HRis\Http\Controllers\Profile;
 
+use Carbon\Carbon;
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use HRis\Eloquent\Employee;
 use HRis\Eloquent\JobHistory;
@@ -28,6 +29,7 @@ class JobController extends Controller {
      * @param Sentry $auth
      * @param Employee $employee
      * @param JobHistory $job_history
+     * @param EmployeeWorkShift $employee_work_shift
      */
     public function __construct(Sentry $auth, Employee $employee, JobHistory $job_history, EmployeeWorkShift $employee_work_shift)
     {
@@ -105,22 +107,25 @@ class JobController extends Controller {
     {
         $employee_id = $request->get('employee_id');
 
-        $job_history = $this->job_history;
-        $job_history_fillables = $job_history->getFillable();
-        $current_employee_job = $job_history->getCurrentEmployeeJob($job_history_fillables, $employee_id);
-
-        if(array_diff($current_employee_job, $request->only($job_history_fillables)))
-        {
-            $$job_history->create($request->all());
-        }
-
         $employee_work_shift = $this->employee_work_shift;
         $work_shift_fillables = $employee_work_shift->getFillable();
         $current_work_shift = $employee_work_shift->getCurrentEmployeeWorkShift($work_shift_fillables, $employee_id);
+        $work_shift_request_fields = $request->only($work_shift_fillables);
 
-        if(array_diff($current_work_shift, $request->only($work_shift_fillables)))
+        if ($current_work_shift != $work_shift_request_fields)
         {
-            $employee_work_shift->create($request->all());
+            $work_shift_request_fields['effective_date'] = Carbon::now()->toDateString();
+            $employee_work_shift->create($work_shift_request_fields);
+        }
+
+        $job_history = $this->job_history;
+        $job_history_fillables = $job_history->getFillable();
+        $current_employee_job = $job_history->getCurrentEmployeeJob($job_history_fillables, $employee_id);
+        $job_request_fields = $request->only($job_history_fillables);
+
+        if ($current_employee_job != $job_request_fields)
+        {
+            $job_history->create($job_request_fields);
         }
 
         $employee = $this->employee->whereId($employee_id)->first();
