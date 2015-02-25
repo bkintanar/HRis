@@ -29,7 +29,6 @@ class JobHistory extends Model {
         'department_id',
         'effective_date',
         'location_id',
-        '',
         'comments'
     ];
 
