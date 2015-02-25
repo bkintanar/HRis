@@ -43,4 +43,15 @@ class EmployeeWorkShift extends Model {
         return $this->hasOne('HRis\Eloquent\WorkShift', 'id', 'work_shift_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function getCurrentEmployeeWorkShift($fillables = null, $employee_id)
+    {
+        return $this->whereEmployeeId($employee_id)
+            ->orderBy('effective_date', 'desc')
+            ->orderBy('id', 'desc')
+            ->first($fillables)->toArray();
+    }
+
 }

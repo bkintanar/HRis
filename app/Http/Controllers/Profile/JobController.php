@@ -103,11 +103,27 @@ class JobController extends Controller {
      */
     public function update(JobRequest $request)
     {
-        $this->job_history->create($request->except('work_shift_id'));
+        $employee_id = $request->get('employee_id');
 
-        $this->employee_work_shift->create($request->only('employee_id', 'work_shift_id'));
+        $job_history = $this->job_history;
+        $job_history_fillables = $job_history->getFillable();
+        $current_employee_job = $job_history->getCurrentEmployeeJob($job_history_fillables, $employee_id);
 
-        $employee = $this->employee->whereId($request->get('employee_id'))->first();
+        if(array_diff($current_employee_job, $request->only($job_history_fillables)))
+        {
+            $$job_history->create($request->all());
+        }
+
+        $employee_work_shift = $this->employee_work_shift;
+        $work_shift_fillables = $employee_work_shift->getFillable();
+        $current_work_shift = $employee_work_shift->getCurrentEmployeeWorkShift($work_shift_fillables, $employee_id);
+
+        if(array_diff($current_work_shift, $request->only($work_shift_fillables)))
+        {
+            $employee_work_shift->create($request->all());
+        }
+
+        $employee = $this->employee->whereId($employee_id)->first();
         $employee->update($request->only('joined_date', 'probation_end_date', 'permanency_date'));
 
         return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
