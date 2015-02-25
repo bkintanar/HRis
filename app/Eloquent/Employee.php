@@ -321,6 +321,6 @@ class Employee extends Model {
      */
     public function employeeWorkShift()
     {
-        return $this->hasOne('HRis\Eloquent\EmployeeWorkShift', 'employee_id', 'id')->orderBy('effective_date', 'desc');
+        return $this->hasOne('HRis\Eloquent\EmployeeWorkShift', 'employee_id', 'id');
     }
 }
