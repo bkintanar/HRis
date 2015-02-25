@@ -3,8 +3,8 @@
 use Carbon\Carbon;
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use HRis\Eloquent\Employee;
-use HRis\Eloquent\JobHistory;
 use HRis\Eloquent\EmployeeWorkShift;
+use HRis\Eloquent\JobHistory;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\JobRequest;
 use Illuminate\Support\Facades\Redirect;

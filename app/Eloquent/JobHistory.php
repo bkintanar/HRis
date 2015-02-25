@@ -56,6 +56,19 @@ class JobHistory extends Model {
     }
 
     /**
+     * @param null $fillables
+     * @param $employee_id
+     * @return mixed
+     */
+    public function getCurrentEmployeeJob($fillables = null, $employee_id)
+    {
+        return $this->whereEmployeeId($employee_id)
+            ->orderBy('effective_date', 'desc')
+            ->orderBy('id', 'desc')
+            ->first($fillables)->toArray();
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function jobTitle()
@@ -85,18 +98,5 @@ class JobHistory extends Model {
     public function workShift()
     {
         return $this->hasOne('HRis\Eloquent\WorkShift', 'id', 'work_shift_id');
-    }
-
-    /**
-     * @param null $fillables
-     * @param $employee_id
-     * @return mixed
-     */
-    public function getCurrentEmployeeJob($fillables = null, $employee_id)
-    {
-        return $this->whereEmployeeId($employee_id)
-            ->orderBy('effective_date', 'desc')
-            ->orderBy('id', 'desc')
-            ->first($fillables)->toArray();
     }
 }

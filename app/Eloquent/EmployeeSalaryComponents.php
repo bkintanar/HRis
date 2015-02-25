@@ -37,6 +37,17 @@ class EmployeeSalaryComponents extends Model {
     protected $table = 'employee_salary_components';
 
     /**
+     * @return array
+     */
+    function getCurrentComponentValue($employee_id, $component_id)
+    {
+        return $this->whereEmployeeId($employee_id)
+            ->whereComponentId($component_id)
+            ->orderBy('effective_date', 'desc')
+            ->first();
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function salaryComponent()
@@ -50,17 +61,6 @@ class EmployeeSalaryComponents extends Model {
     public function setEffectiveDateAttribute($value)
     {
         $this->attributes['effective_date'] = Carbon::parse($value) ? : null;
-    }
-
-    /**
-     * @return array
-     */
-    function getCurrentComponentValue($employee_id, $component_id)
-    {
-        return $this->whereEmployeeId($employee_id)
-            ->whereComponentId($component_id)
-            ->orderBy('effective_date', 'desc')
-            ->first();
     }
 
 }
