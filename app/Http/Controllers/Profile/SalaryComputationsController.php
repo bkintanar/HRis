@@ -33,7 +33,6 @@ class SalaryComputationsController extends Controller {
     public function salary(SalaryRequest $request, $employee_id = null)
     {
         $employee = $this->employee->getEmployeeSalarydetails($employee_id, $this->loggedUser->id);
-
         $salary = $this->salary_services->getSalaryDetails($employee);
 
         $this->data['employee'] = $employee;
@@ -87,8 +86,8 @@ class SalaryComputationsController extends Controller {
      */
     public function update(SalaryRequest $request)
     {
-        $id = $request->get('id');
-        $fields = $request->except('id', '_method', '_token', 'user', 'tax');
+        $id = $request->get('employee_id');
+        $fields = $request->except('_method', '_token', 'employee_id');
 
         foreach ($fields as $value)
         {
@@ -100,7 +99,17 @@ class SalaryComputationsController extends Controller {
 
             try
             {
-                $this->employee_salary_component->create($value);
+                $kani = $this->employee_salary_component->getCurrentComponentValue($id, $value['component_id']);
+                if($kani->value != 0 && $kani->value != $value['value'])
+                {
+                    $this->employee_salary_component->create($value);
+                }
+                else
+                {
+                    $kani->value = $value['value'];
+                    $kani->effective_date = $value['effective_date'];
+                    $kani->save();
+                }
             } catch (Exception $e)
             {
                 return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);

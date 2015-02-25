@@ -41,7 +41,7 @@
 
             <label for="" class="col-md-2 control-label">Work Shift</label>
             <div class="col-sm-4">
-                {!! Form::select('work_shift_id', HRis\Eloquent\WorkShift::listsWithPlaceholder('name', 'id'), isset($employee->jobHistory()->work_shift_id) ? $employee->jobHistory()->work_shift_id : 0, ['class' => 'form-control chosen-select form-fields', $disabled]) !!}
+                {!! Form::select('work_shift_id', HRis\Eloquent\WorkShift::listsWithPlaceholder('name', 'id'), isset($employee->employeeWorkShift->work_shift_id) ? $employee->employeeWorkShift->work_shift_id : 0, ['class' => 'form-control chosen-select form-fields', $disabled]) !!}
             </div>
 
     </div>

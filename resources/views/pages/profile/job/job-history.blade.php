@@ -16,7 +16,6 @@
                                 <th>Department</th>
                                 <th>Effective Date</th>
                                 <th>Employment Status</th>
-                                <th>Work Shift</th>
                                 <th>Location</th>
                                 <th>Comments</th>
                                 <th class="action">Action</th>
@@ -30,7 +29,6 @@
                                     <td>{{ $job_history->department->name or '' }}</td>
                                     <td>{{ $job_history->effective_date }}</td>
                                     <td><span class="label {{ $job_history->employmentStatus->class or '' }}"> {{ $job_history->employmentStatus->name or '' }}</span></td>
-                                    <td>{{ $job_history->workShift->name or '' }}</td>
                                     <td>{{ $job_history->location->name or '' }}</td>
                                     <td>{{ $job_history->comments }}</td>
                                     <td class="action">

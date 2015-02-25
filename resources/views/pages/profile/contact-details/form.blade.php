@@ -33,7 +33,7 @@
             </div>
             {!! Form::label('address_country_id', 'Country', ['class' => 'col-md-2 control-label']) !!}
             <div class="col-md-4">
-                {!! Form::select('address_country_id', HRis\Eloquent\Country::listsWithPlaceholder('name', 'id', 185), $employee->address_country_id, ['class' => 'form-control chosen-select', $disabled]) !!}
+                {!! Form::select('address_country_id', HRis\Eloquent\Country::listsWithPlaceholder('name', 'id'), $employee->address_country_id, ['class' => 'form-control chosen-select', $disabled]) !!}
             </div>
 
     </div>

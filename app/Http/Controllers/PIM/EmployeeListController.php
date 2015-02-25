@@ -2,6 +2,8 @@
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use HRis\Eloquent\Employee;
+use HRis\Eloquent\EmployeeSalaryComponent;
+use HRis\Eloquent\SalaryComponent;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\PIM\PIMRequest;
 use Illuminate\Support\Facades\Redirect;
@@ -22,12 +24,16 @@ class EmployeeListController extends Controller {
     /**
      * @param Sentry $auth
      * @param Employee $employee
+     * @param EmployeeSalaryComponent $employee_salary_component
+     * @param SalaryComponent $salary_component
      */
-    public function __construct(Sentry $auth, Employee $employee)
+    public function __construct(Sentry $auth, Employee $employee, EmployeeSalaryComponent $employee_salary_component, SalaryComponent $salary_component)
     {
         parent::__construct($auth);
 
         $this->employee = $employee;
+        $this->employee_salary_component = $employee_salary_component;
+        $this->salary_component = $salary_component;
     }
 
     /**
@@ -76,5 +82,29 @@ class EmployeeListController extends Controller {
     public function pim(PIMRequest $request)
     {
         return Redirect::to($request->path() . '/employee-list');
+    }
+
+    /**
+     * Adding new user - Employee.
+     *
+     * @Post("pim/employee-list")
+     *
+     * @param PIMRequest $request
+     */
+    public function store(PIMRequest $request)
+    {
+        try
+        {
+            $temp = $this->employee->create($request->all());
+            foreach($this->salary_component->all() as $value)
+            {
+                $salary_components = ['employee_id' => $temp->id, 'component_id' => $value->id, 'value' => 0];
+                $this->employee_salary_component->create($salary_components);
+            }
+        } catch (Exception $e)
+        {
+            return Redirect::to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
+        }
+        return Redirect::to($request->path())->with('success', SUCCESS_ADD_MESSAGE);
     }
 }
