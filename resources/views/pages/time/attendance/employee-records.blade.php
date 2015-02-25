@@ -35,8 +35,8 @@
                                     <tr id="timelog_{{$employee->id}}">
                                         <td>{{ $employee->first_name ? $employee->first_name . ' ' . $employee->last_name : '' }}</td>
                                         <td> </td>
-                                        <td> {{ $employee->getTimeLog('2015-02-05')['time_in'] }} </td>
-                                        <td> {{ $employee->getTimeLog('2015-02-05')['time_out'] }} </td>
+                                        <td> {{ $employee->getTimeLog($date)['time_in'] }} </td>
+                                        <td> {{ $employee->getTimeLog($date)['time_out'] }} </td>
                                         <td>
                                             <button rel="edit" id="{{$employee->id}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-paste"></i></button>
                                             <button rel="delete" id="{{$employee->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-trash"></i></button>

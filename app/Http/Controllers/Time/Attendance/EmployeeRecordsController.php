@@ -1,7 +1,7 @@
 <?php namespace HRis\Http\Controllers\Time\Attendance;
 
+use Carbon\Carbon;
 use HRis\Eloquent\Employee;
-use HRis\Eloquent\TimeLog;
 use HRis\Http\Controllers\Controller;
 
 /**
@@ -10,12 +10,19 @@ use HRis\Http\Controllers\Controller;
 class EmployeeRecordsController extends Controller {
 
     /**
-     * Show the application dashboard to the user.
-     *
      * @Get("time/attendance/employee-records")
+     * @Get("time/attendance/employee-records/{date}")
+     *
+     * @param null $date
+     * @return \Illuminate\View\View
      */
-    public function index()
+    public function index($date = null)
     {
+        if(is_null($date))
+        {
+            $date = Carbon::now()->toDateString();
+        }
+        $this->data['date'] = $date;
         $this->data['employees'] = Employee::whereNotNull('face_id')->with('timelogs')->take(8)->get();
 
         $this->data['pageTitle'] = 'Employee Records';
