@@ -1,8 +1,10 @@
 <?php namespace HRis\Http\Controllers\Profile;
 
+use Carbon\Carbon;
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use HRis\Eloquent\Employee;
 use HRis\Eloquent\JobHistory;
+use HRis\Eloquent\EmployeeWorkShift;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\JobRequest;
 use Illuminate\Support\Facades\Redirect;
@@ -27,13 +29,15 @@ class JobController extends Controller {
      * @param Sentry $auth
      * @param Employee $employee
      * @param JobHistory $job_history
+     * @param EmployeeWorkShift $employee_work_shift
      */
-    public function __construct(Sentry $auth, Employee $employee, JobHistory $job_history)
+    public function __construct(Sentry $auth, Employee $employee, JobHistory $job_history, EmployeeWorkShift $employee_work_shift)
     {
         parent::__construct($auth);
 
         $this->employee = $employee;
         $this->job_history = $job_history;
+        $this->employee_work_shift = $employee_work_shift;
     }
 
     /**
@@ -101,12 +105,30 @@ class JobController extends Controller {
      */
     public function update(JobRequest $request)
     {
-        $id = $request->get('id');
+        $employee_id = $request->get('employee_id');
 
-        $employee = $this->employee->whereId($id)->first();
+        $employee_work_shift = $this->employee_work_shift;
+        $work_shift_fillables = $employee_work_shift->getFillable();
+        $current_work_shift = $employee_work_shift->getCurrentEmployeeWorkShift($work_shift_fillables, $employee_id);
+        $work_shift_request_fields = $request->only($work_shift_fillables);
+
+        if ($current_work_shift != $work_shift_request_fields)
+        {
+            $work_shift_request_fields['effective_date'] = Carbon::now()->toDateString();
+            $employee_work_shift->create($work_shift_request_fields);
+        }
+
         $job_history = $this->job_history;
+        $job_history_fillables = $job_history->getFillable();
+        $current_employee_job = $job_history->getCurrentEmployeeJob($job_history_fillables, $employee_id);
+        $job_request_fields = $request->only($job_history_fillables);
 
-        $job_history->create($request->all());
+        if ($current_employee_job != $job_request_fields)
+        {
+            $job_history->create($job_request_fields);
+        }
+
+        $employee = $this->employee->whereId($employee_id)->first();
         $employee->update($request->only('joined_date', 'probation_end_date', 'permanency_date'));
 
         return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);

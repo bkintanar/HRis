@@ -1,5 +1,4 @@
 {!! Form::model($employee, ['method' => 'PATCH', 'url' => str_replace('/edit', '', \Request::path()), 'class' => 'form-horizontal']) !!}
-    {!! Form::hidden('id') !!}
     {!! Form::hidden('employee_id', $employee->id) !!}
 
     <!-- End - Employment Commencement -->
@@ -41,7 +40,7 @@
 
             <label for="" class="col-md-2 control-label">Work Shift</label>
             <div class="col-sm-4">
-                {!! Form::select('work_shift_id', HRis\Eloquent\WorkShift::listsWithPlaceholder('name', 'id'), isset($employee->employeeWorkShift->work_shift_id) ? $employee->employeeWorkShift->work_shift_id : 0, ['class' => 'form-control chosen-select form-fields', $disabled]) !!}
+                {!! Form::select('work_shift_id', HRis\Eloquent\WorkShift::listsWithPlaceholder('name', 'id'), $employee->employeeWorkShift()->first() ? $employee->employeeWorkShift()->first()->work_shift_id : 0, ['class' => 'form-control chosen-select form-fields', $disabled]) !!}
             </div>
 
     </div>
