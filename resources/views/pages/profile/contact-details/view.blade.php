@@ -3,7 +3,7 @@
 @section('content')
     @include('partials.notification')
     <div class="row">
-        {!! \HRis\Eloquent\Navlink::profileLinks($pim) !!}
+        {!! HRis\Eloquent\Navlink::profileLinks($pim) !!}
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
