@@ -88,7 +88,9 @@ class JobHistory extends Model {
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @param null $fillables
+     * @param $employee_id
+     * @return mixed
      */
     public function getCurrentEmployeeJob($fillables = null, $employee_id)
     {
