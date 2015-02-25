@@ -308,4 +308,21 @@ class Employee extends Model {
         return $this->hasMany('HRis\Eloquent\WorkExperience');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function workShift()
+    {
+        return $this->hasOne('HRis\Eloquent\WorkShift', 'id', 'work_shift_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function employeeWorkShift()
+    {
+        return $this->hasMany('HRis\Eloquent\EmployeeWorkShift', 'employee_id', 'id')
+            ->orderBy('effective_date', 'desc')
+            ->orderBy('id', 'desc');
+    }
 }
