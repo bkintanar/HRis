@@ -59,7 +59,7 @@
         {!! Form::label('birth_date', 'Date of Birth', ['class' => 'col-md-2 control-label']) !!}
         <div class="col-sm-4" id="datepicker_birth_date">
             <div class="input-group date">
-                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>{!! Form::text('birth_date', $employee->birth_date->toDateString(), ['class' => 'form-control', 'data-mask' => '9999-99-99', $disabled]) !!}
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>{!! Form::text('birth_date', $employee->birth_date ? $employee->birth_date->toDateString() : null, ['class' => 'form-control', 'data-mask' => '9999-99-99', $disabled]) !!}
             </div>
         </div>
     </div>

@@ -128,8 +128,8 @@ class JobController extends Controller {
             $job_history->create($job_request_fields);
         }
 
-        $employee = $this->employee->whereId($employee_id)->first();
-        $employee->update($request->only('joined_date', 'probation_end_date', 'permanency_date'));
+        $this->employee->whereId($employee_id)
+            ->update($request->only('joined_date', 'probation_end_date', 'permanency_date'));
 
         return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
     }
