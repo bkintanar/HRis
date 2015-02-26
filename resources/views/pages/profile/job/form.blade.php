@@ -63,14 +63,14 @@
                 <label for="joined_date" class="col-md-2 control-label">Joined Date</label>
                 <div class="col-md-4" id="datepicker">
                         <div class="input-group date" id="data_1">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>{!! Form::text('joined_date', $employee->joined_date ? $employee->joined_date->toDateString() : null, ['class' => 'form-control', 'data-mask' => '9999-99-99', $disabled]) !!}
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>{!! Form::text('joined_date', $employee->joined_date ? $employee->joined_date->toDateString() : null, ['class' => 'form-control form-fields', 'data-mask' => '9999-99-99', $disabled]) !!}
                         </div>
                 </div>
 
                 <label for="probation_end_date" class="col-md-2 control-label">Probation End Date</label>
                 <div class="col-md-4" id="datepicker">
                         <div class="input-group date">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>{!! Form::text('probation_end_date', $employee->probation_end_date ? $employee->probation_end_date->toDateString() : null, ['class' => 'form-control', 'data-mask' => '9999-99-99', $disabled]) !!}
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>{!! Form::text('probation_end_date', $employee->probation_end_date ? $employee->probation_end_date->toDateString() : null, ['class' => 'form-control form-fields', 'data-mask' => '9999-99-99', $disabled]) !!}
                         </div>
                 </div>
         </div>
@@ -79,7 +79,7 @@
                 <label for="permanency_date" class="col-md-2 control-label">Date of Permanency</label>
                 <div class="col-md-4" id="datepicker">
                         <div class="input-group date" id="data_1">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>{!! Form::text('permanency_date', $employee->permanency_date ? $employee->permanency_date->toDateString() : null, ['class' => 'form-control', 'data-mask' => '9999-99-99', $disabled]) !!}
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>{!! Form::text('permanency_date', $employee->permanency_date ? $employee->permanency_date->toDateString() : null, ['class' => 'form-control form-fields', 'data-mask' => '9999-99-99', $disabled]) !!}
                         </div>
                 </div>
         </div>

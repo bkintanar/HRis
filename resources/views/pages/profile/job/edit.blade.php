@@ -43,31 +43,34 @@
     {!! Html::script('js/plugins/datepicker/bootstrap-datepicker.js') !!}
 
     <script>
+
+        function deleteAction()
+        {
+            if($('.JobHistoryList').length < 2){
+                $('.action').remove();
+            }
+        }
+
+        function disableButton(status)
+        {
+            $('#save-button').attr('disabled', status);
+        }
+
+        function getValues()
+        {
+            searchIDs = new Array();
+            var i = 0;
+            $('.form-fields').each(function () {
+                searchIDs[i] = $(this).val();
+                i++;
+            });
+
+            return searchIDs.toString();
+        }
+
         $(document).ready(function () {
 
-            function deleteAction()
-            {
-                if($('.JobHistoryList').length < 2){
-                    $('.action').remove();
-                }
-            }
-
-            function disableButton(status)
-            {
-                $('#save-button').attr('disabled', status);
-            }
-
-            function getValues()
-            {
-                searchIDs = new Array();
-                var i = 0;
-                $('.form-fields').each(function () {
-                    searchIDs[i] = $(this).val();
-                    i++;
-                });
-
-                return searchIDs.toString();
-            }
+            var defaults;
 
             defaults = getValues();
             deleteAction();
@@ -121,10 +124,6 @@
                         }
 
                         deleteAction();
-                    }
-                    else
-                    {
-                      // failed
                     }
                 });
 
