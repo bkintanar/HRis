@@ -42,21 +42,25 @@ class EmployeeWorkShift extends Model {
      */
     public function getCurrentEmployeeWorkShift($fillables = null, $employee_id)
     {
-        return $this->whereEmployeeId($employee_id)
+        $employee_work_shift = $this->whereEmployeeId($employee_id)
             ->orderBy('effective_date', 'desc')
             ->orderBy('id', 'desc')
-            ->first($fillables)->toArray();
+            ->first($fillables);
+
+        return $employee_work_shift ? $employee_work_shift->toArray() : null;
     }
 
     /**
      * @param $start_date
      * @return array
      */
-    public function getTimeLogSpan($start_date)
+    public function getWorkShiftRange($start_date)
     {
-        // TODO: Add these to config
+
+//        dd($this->workShift->from_time);
+//         TODO: Add these to config
         $from_datetime = Carbon::parse($start_date . ' ' . $this->workShift->from_time)->subHour(1);
-        $to_datetime = Carbon::parse($from_datetime)->addHours(14)->subSecond(1);
+        $to_datetime = Carbon::parse($from_datetime)->addHours($this->workShift->duration)->subSecond(1);
 
         return ['from_datetime' => $from_datetime, 'to_datetime' => $to_datetime];
     }

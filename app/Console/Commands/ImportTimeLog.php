@@ -5,7 +5,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use League\Csv\Reader;
 
-class ParseTimeLog extends Command {
+class ImportTimeLog extends Command {
 
     /**
      * The console command description.
@@ -19,7 +19,7 @@ class ParseTimeLog extends Command {
      *
      * @var string
      */
-    protected $name = 'timelog';
+    protected $name = 'import:timelog';
 
     /**
      * Execute the console command.
@@ -28,7 +28,7 @@ class ParseTimeLog extends Command {
      */
     public function handle()
     {
-        $csv = Reader::createFromPath(storage_path() . '/file.csv');
+        $csv = Reader::createFromPath(storage_path() . '/attendance.csv');
 
         $csv->setOffset(1);
         $data = $csv->query();

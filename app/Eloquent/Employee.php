@@ -24,6 +24,7 @@ class Employee extends Model {
      */
     protected $fillable = [
         'employee_id',
+        'user_id',
         'face_id',
         'first_name',
         'middle_name',
@@ -156,13 +157,12 @@ class Employee extends Model {
     {
         $work_shift = $this->employeeWorkShift()->first();
 
-        $wstp = $work_shift->getTimeLogSpan($start_date);
-
+        $wstp = $work_shift->getWorkShiftRange($start_date);
         $time_in = $this->timelogs()->whereSwipeDate($wstp['from_datetime']->toDateString())->where('swipe_time', '>=', $wstp['from_datetime']->toTimeString())->first();
         $time_out = $this->timelogs()->whereSwipeDate($wstp['to_datetime']->toDateString())->where('swipe_time', '<=', $wstp['to_datetime']->toTimeString())->orderBy('id', 'desc')->first();
 
-        return ['time_in'  => $time_in ? $time_in->swipe_time : null,
-                'time_out' => $time_out ? $time_out->swipe_time : null
+        return ['time_in'  => $time_in ? Carbon::parse($time_in->swipe_time)->format('h:i A') : null,
+                'time_out' => $time_out ? Carbon::parse($time_out->swipe_time)->format('h:i A') : null
         ];
     }
 
@@ -238,6 +238,22 @@ class Employee extends Model {
     public function setEmployeeIdAttribute($value)
     {
         $this->attributes['employee_id'] = $value ? : null;
+    }
+
+    /**
+     * @param $value
+     */
+    public function setUserIdAttribute($value)
+    {
+        $this->attributes['user_id'] = $value ? : null;
+    }
+
+    /**
+     * @param $value
+     */
+    public function setMaritalStatusIdAttribute($value)
+    {
+        $this->attributes['marital_status_id'] = $value ? : null;
     }
 
     /**

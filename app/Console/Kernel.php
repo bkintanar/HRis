@@ -11,7 +11,7 @@ class Kernel extends ConsoleKernel {
      * @var array
      */
     protected $commands = [
-        'HRis\Console\Commands\ParseTimeLog',
+        'HRis\Console\Commands\ImportTimeLog',
         'HRis\Console\Commands\ImportEmployeeList',
         'HRis\Console\Commands\UpdateFaceId',
     ];
