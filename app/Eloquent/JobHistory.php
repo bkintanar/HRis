@@ -62,10 +62,12 @@ class JobHistory extends Model {
      */
     public function getCurrentEmployeeJob($fillables = null, $employee_id)
     {
-        return $this->whereEmployeeId($employee_id)
+        $job = $this->whereEmployeeId($employee_id)
             ->orderBy('effective_date', 'desc')
             ->orderBy('id', 'desc')
-            ->first($fillables)->toArray();
+            ->first($fillables);
+
+        return $job ? $job->toArray() : null;
     }
 
     /**

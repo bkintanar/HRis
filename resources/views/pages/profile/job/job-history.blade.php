@@ -27,7 +27,7 @@
                                 <tr class="JobHistoryList" id="jobHistory_{{$job_history->id}}">
                                     <td>{{ $job_history->jobTitle->name or ''}}</td>
                                     <td>{{ $job_history->department->name or '' }}</td>
-                                    <td>{{ $job_history->effective_date }}</td>
+                                    <td>{{ $job_history->effective_date ? $job_history->effective_date->format('F j, Y') : '' }}</td>
                                     <td><span class="label {{ $job_history->employmentStatus->class or '' }}"> {{ $job_history->employmentStatus->name or '' }}</span></td>
                                     <td>{{ $job_history->location->name or '' }}</td>
                                     <td>{{ $job_history->comments }}</td>

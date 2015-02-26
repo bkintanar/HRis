@@ -23,7 +23,7 @@ class EmployeeRecordsController extends Controller {
             $date = Carbon::now()->toDateString();
         }
         $this->data['date'] = $date;
-        $this->data['employees'] = Employee::whereNotNull('face_id')->where('id', '>', 1)->with('timelogs')->take(2)->get();
+        $this->data['employees'] = Employee::whereNotNull('face_id')->where('id', '>', 1)->with('timelogs')->take(5)->get();
 
         $this->data['pageTitle'] = 'Employee Records';
 
