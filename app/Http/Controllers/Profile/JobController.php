@@ -53,7 +53,7 @@ class JobController extends Controller {
      */
     public function index(JobRequest $request, $employee_id = null)
     {
-        $employee = $this->employee->getEmployeeById($employee_id, $this->loggedUser->id);
+        $employee = $this->employee->getEmployeeById($employee_id, $this->loggedUser->employee->id);
 
         $this->data['employee'] = $employee;
         $this->data['job_histories'] = $employee->orderedJobHistories();

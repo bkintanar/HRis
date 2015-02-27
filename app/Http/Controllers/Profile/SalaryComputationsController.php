@@ -41,7 +41,8 @@ class SalaryComputationsController extends Controller {
      */
     public function salary(SalaryRequest $request, $employee_id = null)
     {
-        $employee = $this->employee->getEmployeeSalarydetails($employee_id, $this->loggedUser->id);
+        $employee = $this->employee->getEmployeeSalaryDetails($employee_id, $this->loggedUser->employee->id);
+
         $salary = $this->salary_services->getSalaryDetails($employee);
 
         $this->data['employee'] = $employee;
@@ -67,7 +68,7 @@ class SalaryComputationsController extends Controller {
      */
     public function showSalaryEditForm(SalaryRequest $request, $employee_id = null)
     {
-        $employee = $this->employee->whereEmployeeId($employee_id)->with('employeeSalary', 'dependents', 'employeeContributions')->first();
+        $employee = $this->employee->getEmployeeSalaryDetails($employee_id, $this->loggedUser->id);
 
         $employee_status = 'ME_S';
         $dependents = count($employee->dependents);
@@ -112,16 +113,16 @@ class SalaryComputationsController extends Controller {
 
             try
             {
-                $kani = $this->employee_salary_component->getCurrentComponentValue($id, $value['component_id']);
-                if ($kani->value != 0 && $kani->value != $value['value'])
+                $employee_salary_component = $this->employee_salary_component->getCurrentComponentValue($id, $value['component_id']);
+                if ($employee_salary_component->value != 0 && $employee_salary_component->value != $value['value'])
                 {
                     $this->employee_salary_component->create($value);
                 }
                 else
                 {
-                    $kani->value = $value['value'];
-                    $kani->effective_date = $value['effective_date'];
-                    $kani->save();
+                    $employee_salary_component->value = $value['value'];
+                    $employee_salary_component->effective_date = $value['effective_date'];
+                    $employee_salary_component->save();
                 }
             } catch (Exception $e)
             {
