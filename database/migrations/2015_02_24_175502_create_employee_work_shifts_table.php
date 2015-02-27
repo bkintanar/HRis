@@ -17,7 +17,7 @@ class CreateEmployeeWorkShiftsTable extends Migration {
             $table->increments('id');
             $table->string('employee_id');
             $table->integer('work_shift_id');
-            $table->date('effective_date');
+            $table->date('effective_date')->nullable();
         });
 	}
 

@@ -146,7 +146,7 @@ class Employee extends Model {
             return self::whereEmployeeId($employee_id)->with('employeeSalaryComponents', 'dependents')->first();
         }
 
-        return self::whereEmployeeId($user_id)->with('employeeSalaryComponents', 'dependents')->first();
+        return self::whereId($user_id)->with('employeeSalaryComponent', 'dependents')->first();
     }
 
     /**
