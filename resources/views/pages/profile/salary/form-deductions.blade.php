@@ -29,7 +29,7 @@
                     <div class="col-md-4" id="datepicker">
                       <div class="input-group date" id="data_1">
                           <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                          {!! Form::text($value->salaryComponent->name . '[effective_date]', $value->effective_date ? $value->effective_date : null, ['class' => 'form-control', 'data-mask' => '9999-99-99', $disabled]) !!}
+                          {!! Form::text($value->salaryComponent->name . '[effective_date]', $value->effective_date ? $value->effective_date->toDateString() : null, ['class' => 'form-control', 'data-mask' => '9999-99-99', $disabled]) !!}
                       </div>
                     </div>
                 </div>
