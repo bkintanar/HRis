@@ -136,7 +136,7 @@ class Employee extends Model {
 
     /**
      * @param $employee_id
-     * @param $user_id
+     * @param $user_employee_id
      * @return mixed
      */
     public function getEmployeeSalaryDetails($employee_id, $user_employee_id)
