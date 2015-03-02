@@ -18,7 +18,7 @@ class CreateEmployeeSalaryComponentsTable extends Migration {
             $table->string('employee_id');
             $table->integer('component_id');
             $table->decimal('value', 10, 2);
-            $table->date('effective_date');
+            $table->date('effective_date')->nullable();
         });
 	}
 

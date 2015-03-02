@@ -136,17 +136,17 @@ class Employee extends Model {
 
     /**
      * @param $employee_id
-     * @param $user_id
+     * @param $user_employee_id
      * @return mixed
      */
-    public function getEmployeeSalarydetails($employee_id, $user_id)
+    public function getEmployeeSalaryDetails($employee_id, $user_employee_id)
     {
         if ($employee_id)
         {
             return self::whereEmployeeId($employee_id)->with('employeeSalaryComponent', 'dependents')->first();
         }
 
-        return self::whereEmployeeId($user_id)->with('employeeSalaryComponent', 'dependents')->first();
+        return self::whereId($user_employee_id)->with('employeeSalaryComponent', 'dependents')->first();
     }
 
     /**
