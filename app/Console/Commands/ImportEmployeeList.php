@@ -57,10 +57,11 @@ class ImportEmployeeList extends Command {
             $data['hdmf_pagibig'] = $row[18] ? : null;
             $data['mid_rtn'] = $row[19] ? : null;
 
-            $new_user = Employee::create($data);
-            foreach (SalaryComponent::all() as $value)
+            $new_employee = Employee::create($data);
+            $components = SalaryComponent::all();
+            foreach ($components as $value)
             {
-                $salary_components = ['employee_id' => $new_user->id, 'component_id' => $value->id, 'value' => 0];
+                $salary_components = ['employee_id' => $new_employee->id, 'component_id' => $value->id, 'value' => 0];
                 EmployeeSalaryComponent::create($salary_components);
             }
 //            dd($data);
