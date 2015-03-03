@@ -29,7 +29,7 @@ class GenerateAttendance extends Command {
      */
     public function handle()
     {
-        $employee_ids = [2, 3, 4, 5, 6, 7];
+        $employee_ids = [11];
 
         foreach ($employee_ids as $employee_id)
         {

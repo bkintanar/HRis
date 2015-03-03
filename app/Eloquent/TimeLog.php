@@ -1,6 +1,5 @@
 <?php namespace HRis\Eloquent;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**

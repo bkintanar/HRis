@@ -46,10 +46,11 @@ class ImportTimeLog extends Command {
                     continue;
                 }
 
-                $data = ['face_id'        => $row[0],
-                         'swipe_date'     => $row[3],
-                         'swipe_time'     => $time,
-                         'swipe_datetime' => Carbon::parse($row[3] . ' ' . $time)
+                $data = [
+                    'face_id'        => $row[0],
+                    'swipe_date'     => $row[3],
+                    'swipe_time'     => $time,
+                    'swipe_datetime' => Carbon::parse($row[3] . ' ' . $time)
                 ];
                 $timelog = TimeLog::create($data);
 
