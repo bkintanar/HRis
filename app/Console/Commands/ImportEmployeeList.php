@@ -3,6 +3,8 @@
 use Carbon\Carbon;
 use HRis\Eloquent\City;
 use HRis\Eloquent\Employee;
+use HRis\Eloquent\EmployeeSalaryComponent;
+use HRis\Eloquent\SalaryComponent;
 use Illuminate\Console\Command;
 use League\Csv\Reader;
 
@@ -55,7 +57,13 @@ class ImportEmployeeList extends Command {
             $data['hdmf_pagibig'] = $row[18] ? : null;
             $data['mid_rtn'] = $row[19] ? : null;
 
-            Employee::create($data);
+            $new_employee = Employee::create($data);
+            $components = SalaryComponent::all();
+            foreach ($components as $value)
+            {
+                $salary_components = ['employee_id' => $new_employee->id, 'component_id' => $value->id, 'value' => 0];
+                EmployeeSalaryComponent::create($salary_components);
+            }
 //            dd($data);
         }
     }
