@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Employee extends Model {
 
+    use HasPlaceholder;
+
     /**
      * @var bool
      */
@@ -376,4 +378,10 @@ class Employee extends Model {
     {
         return $this->hasOne('HRis\Eloquent\WorkShift', 'id', 'work_shift_id');
     }
+
+    public function getFullNameAttribute()
+    {
+        return $this->first_name . ' ' . ($this->middle_name ? $this->middle_name . ' ' : '') . $this->last_name . ($this->suffix_name ? ' ' . $this->suffix_name : '');
+    }
+
 }

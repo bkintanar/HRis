@@ -51,11 +51,6 @@ class PersonalDetailsController extends Controller {
             return Response::make(View::make('errors.404'), 404);
         }
 
-        // TODO: Move to a method accessible by all Models
-        $marital_statuses = MaritalStatus::lists('name', 'id');
-        array_unshift($marital_statuses, '--- Select ---');
-
-        $this->data['marital_statuses'] = $marital_statuses;
         $this->data['employee'] = $employee;
 
         $this->data['disabled'] = 'disabled';
