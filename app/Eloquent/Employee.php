@@ -120,6 +120,23 @@ class Employee extends Model {
     }
 
     /**
+     * @param $paginate
+     * @param $sort
+     * @return mixed
+     */
+    public function getEmployeeList($paginate = true, $sort = 'id')
+    {
+        $employees = Employee::with('user', 'jobTitle', 'employmentStatus')->orderBy($sort, 'asc');
+
+        if ($paginate)
+        {
+            return $employees->paginate(DATAS_PER_PAGE);
+        }
+
+        return $employees->get();
+    }
+
+    /**
      * @param $employee_id
      * @param $user_id
      * @return mixed
@@ -161,8 +178,9 @@ class Employee extends Model {
         $time_in = $this->timelogs()->whereSwipeDate($wstp['from_datetime']->toDateString())->where('swipe_time', '>=', $wstp['from_datetime']->toTimeString())->first();
         $time_out = $this->timelogs()->whereSwipeDate($wstp['to_datetime']->toDateString())->where('swipe_time', '<=', $wstp['to_datetime']->toTimeString())->orderBy('id', 'desc')->first();
 
-        return ['time_in'  => $time_in ? Carbon::parse($time_in->swipe_time)->format('h:i A') : null,
-                'time_out' => $time_out ? Carbon::parse($time_out->swipe_time)->format('h:i A') : null
+        return [
+            'time_in'  => $time_in ? Carbon::parse($time_in->swipe_time)->format('h:i A') : null,
+            'time_out' => $time_out ? Carbon::parse($time_out->swipe_time)->format('h:i A') : null
         ];
     }
 
@@ -171,7 +189,7 @@ class Employee extends Model {
      */
     public function employeeWorkShift()
     {
-        return $this->hasMany('HRis\Eloquent\EmployeeWorkShift', 'employee_id', 'id')
+        return $this->hasMany('HRis\Eloquent\EmployeeWorkShift', 'employee_id', 'id')->with('workShift')
             ->orderBy('effective_date', 'desc')
             ->orderBy('id', 'desc');
     }

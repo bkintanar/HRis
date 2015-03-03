@@ -30,6 +30,7 @@ class AnnotationsServiceProvider extends ServiceProvider {
         'HRis\Http\Controllers\Profile\JobController',
         'HRis\Http\Controllers\Profile\SalaryComputationsController',
         'HRis\Http\Controllers\Profile\QualificationsController',
+        'HRis\Http\Controllers\Profile\WorkShiftController',
 //        'HRis\Http\Controllers\Profile\PermissionController',
         'HRis\Http\Controllers\PIM\EmployeeListController',
         'HRis\Http\Controllers\PIM\Configuration\TerminationReasonsController',

@@ -6,6 +6,7 @@ use HRis\Eloquent\EmployeeSalaryComponent;
 use HRis\Eloquent\SalaryComponent;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\PIM\PIMRequest;
+use HRis\Services\Pagination;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
@@ -26,14 +27,21 @@ class EmployeeListController extends Controller {
      * @param Employee $employee
      * @param EmployeeSalaryComponent $employee_salary_component
      * @param SalaryComponent $salary_component
+     * @param Pagination $pagination
      */
-    public function __construct(Sentry $auth, Employee $employee, EmployeeSalaryComponent $employee_salary_component, SalaryComponent $salary_component)
+    public function __construct(
+        Sentry $auth,
+        Employee $employee,
+        EmployeeSalaryComponent $employee_salary_component,
+        SalaryComponent $salary_component,
+        Pagination $pagination)
     {
         parent::__construct($auth);
 
         $this->employee = $employee;
         $this->employee_salary_component = $employee_salary_component;
         $this->salary_component = $salary_component;
+        $this->pagination = $pagination;
     }
 
     /**
@@ -47,7 +55,16 @@ class EmployeeListController extends Controller {
      */
     public function index(PIMRequest $request)
     {
-        $this->data['employees'] = $this->employee->with('user', 'jobTitle', 'employmentStatus')->get();
+        $sort = 'id';
+        if ($request->get('sort'))
+        {
+            $sort = $request->get('sort');
+        }
+
+        $employees = $this->employee->getEmployeeList(true, $sort);
+
+        $this->data['employees'] = $employees;
+        $this->data['path'] = $request->path();
         $this->data['pim'] = true;
         $this->data['pageTitle'] = 'Employee Information';
 

@@ -5,6 +5,8 @@ const PERMISSION_UPDATE = 2;
 const PERMISSION_DELETE = 4;
 const PERMISSION_CREATE = 8;
 
+const DATAS_PER_PAGE = 15;
+
 const PROFILE_IDS = 2;
 
 const UNABLE_ADD_MESSAGE = 'Unable to add record to the database.';

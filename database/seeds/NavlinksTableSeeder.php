@@ -272,6 +272,14 @@ class NavlinksTableSeeder extends Seeder {
                  'created_at' => '0000-00-00 00:00:00',
                  'updated_at' => '0000-00-00 00:00:00'
                 ],
+                ['id'         => 33,
+                 'name'       => 'Work Shift',
+                 'href'       => 'profile/work-shift',
+                 'icon'       => 'fa-briefcase',
+                 'parent_id'  => - 1,
+                 'created_at' => '0000-00-00 00:00:00',
+                 'updated_at' => '0000-00-00 00:00:00'
+                ],
             ]
         );
     }
