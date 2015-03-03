@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel {
         'HRis\Console\Commands\ImportTimeLog',
         'HRis\Console\Commands\ImportEmployeeList',
         'HRis\Console\Commands\UpdateFaceId',
+        'HRis\Console\Commands\GenerateAttendance',
     ];
 
     /**

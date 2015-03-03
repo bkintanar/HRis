@@ -223,6 +223,12 @@ class Navlink extends Model {
 
         $nav .= '</ul></div></div>';
 
+        $tidy = new \Tidy;
+
+        $tidy->parseString($nav, ['indent' => true, 'wrap' => 200], 'utf8');
+//        $tidy->cleanRepair();
+        $tidy = str_replace(['<body>', '</body>'], '', $tidy->body()->value);
+
         return $nav;
 
     }

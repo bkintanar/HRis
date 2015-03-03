@@ -56,11 +56,11 @@ class EmployeeWorkShift extends Model {
      */
     public function getWorkShiftRange($start_date)
     {
+        $employee_work_shift = self::whereEmployeeId($this->employee_id)->where('effective_date', '<=', $start_date)->orderBy('id', 'desc')->first();
 
-//        dd($this->workShift->from_time);
-//         TODO: Add these to config
-        $from_datetime = Carbon::parse($start_date . ' ' . $this->workShift->from_time)->subHour(1);
-        $to_datetime = Carbon::parse($from_datetime)->addHours($this->workShift->duration)->subSecond(1);
+        // TODO: Add these to config
+        $from_datetime = Carbon::parse($start_date . ' ' . $employee_work_shift->workShift->from_time)->subHour(1);
+        $to_datetime = Carbon::parse($start_date . ' ' . $employee_work_shift->workShift->from_time)->addHours($employee_work_shift->workShift->duration + 1)->subSecond(1);
 
         return ['from_datetime' => $from_datetime, 'to_datetime' => $to_datetime];
     }

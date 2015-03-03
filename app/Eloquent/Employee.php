@@ -161,8 +161,41 @@ class Employee extends Model {
         $time_in = $this->timelogs()->whereSwipeDate($wstp['from_datetime']->toDateString())->where('swipe_time', '>=', $wstp['from_datetime']->toTimeString())->first();
         $time_out = $this->timelogs()->whereSwipeDate($wstp['to_datetime']->toDateString())->where('swipe_time', '<=', $wstp['to_datetime']->toTimeString())->orderBy('id', 'desc')->first();
 
-        return ['time_in'  => $time_in ? Carbon::parse($time_in->swipe_time)->format('h:i A') : null,
-                'time_out' => $time_out ? Carbon::parse($time_out->swipe_time)->format('h:i A') : null
+        // If employee logs out more than one hour after the work shift schedule check for extended time
+        if ($time_out == null && $time_in != null)
+        {
+            $time_out = $this->timelogs()->where('swipe_datetime', '<=', $wstp['to_datetime']->addHours(4)->toDateTimeString())->orderBy('id', 'desc')->first();
+
+            if ($time_out != null and $wstp['from_datetime']->addHours(24)->toDateTimeString() < $time_out->swipe_datetime)
+            {
+                $time_out = null;
+            }
+
+            if ($time_in->id == $time_out->id)
+            {
+                $time_out = null;
+            }
+        }
+
+        // Checks for failure to Login or Logout
+        if ($time_out && $time_in)
+        {
+            if ($time_out->swipe_time == $time_in->swipe_time)
+            {
+                if ($time_out->swipe_datetime >= $wstp['to_datetime']->subHour(1)->toDateTimeString() and $time_out->swipe_datetime <= $wstp['to_datetime']->addHours(4)->toDateTimeString())
+                {
+                    $time_in = null;
+                }
+                else
+                {
+                    $time_out = null;
+                }
+            }
+        }
+
+        return [
+            'in_time'  => $time_in ? $time_in->swipe_time : null,
+            'out_time' => $time_out ? $time_out->swipe_time : null
         ];
     }
 
@@ -243,22 +276,6 @@ class Employee extends Model {
     /**
      * @param $value
      */
-    public function setUserIdAttribute($value)
-    {
-        $this->attributes['user_id'] = $value ? : null;
-    }
-
-    /**
-     * @param $value
-     */
-    public function setMaritalStatusIdAttribute($value)
-    {
-        $this->attributes['marital_status_id'] = $value ? : null;
-    }
-
-    /**
-     * @param $value
-     */
     public function setFaceIdAttribute($value)
     {
         $this->attributes['face_id'] = $value ? : null;
@@ -278,6 +295,14 @@ class Employee extends Model {
     public function setJoinedDateAttribute($value)
     {
         $this->attributes['joined_date'] = Carbon::parse($value) ? : null;
+    }
+
+    /**
+     * @param $value
+     */
+    public function setMaritalStatusIdAttribute($value)
+    {
+        $this->attributes['marital_status_id'] = $value ? : null;
     }
 
     /**
@@ -310,6 +335,14 @@ class Employee extends Model {
     public function setResignDateAttribute($value)
     {
         $this->attributes['resign_date'] = Carbon::parse($value) ? : null;
+    }
+
+    /**
+     * @param $value
+     */
+    public function setUserIdAttribute($value)
+    {
+        $this->attributes['user_id'] = $value ? : null;
     }
 
     /**
