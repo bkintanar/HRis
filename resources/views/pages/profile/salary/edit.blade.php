@@ -90,7 +90,6 @@
 
             updateSalary();
 
-
             // Date picker
             $('#datepicker .input-group.date').datepicker({
                 todayBtn: "linked",

@@ -22,11 +22,11 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Id</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Job Title</th>
-                                <th>Employment Status</th>
+                                <th><a href="/{{$path}}?page=1&sort=id">Id</a></th>
+                                <th><a href="/{{$path}}?page=1&sort=first_name">First Name</a></th>
+                                <th><a href="/{{$path}}?page=1&sort=last_name">Last Name</a></th>
+                                <th><a href="/{{$path}}?page=1">Job Title</a></th>
+                                <th><a href="/{{$path}}?page=1">Employment Status</a></th>
                                 <th class="fix-width">Action</th>
                             </tr>
                         </thead>
@@ -54,6 +54,9 @@
                         </tbody>
                     </table>
                 </div>
+
+                    {!! HRis\Services\Pagination::setupPagination($employees, $path) !!}
+
             </div>
         </div>
     </div><!-- Modal -->

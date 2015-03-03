@@ -107,17 +107,6 @@ class JobController extends Controller {
     {
         $employee_id = $request->get('employee_id');
 
-        $employee_work_shift = $this->employee_work_shift;
-        $work_shift_fillables = $employee_work_shift->getFillable();
-        $current_work_shift = $employee_work_shift->getCurrentEmployeeWorkShift($work_shift_fillables, $employee_id);
-        $work_shift_request_fields = $request->only($work_shift_fillables);
-
-        if ($current_work_shift != $work_shift_request_fields)
-        {
-            $work_shift_request_fields['effective_date'] = Carbon::now()->toDateString();
-            $employee_work_shift->create($work_shift_request_fields);
-        }
-
         $job_history = $this->job_history;
         $job_history_fillables = $job_history->getFillable();
         $current_employee_job = $job_history->getCurrentEmployeeJob($job_history_fillables, $employee_id);
