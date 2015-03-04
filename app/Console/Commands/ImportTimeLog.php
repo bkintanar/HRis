@@ -13,7 +13,7 @@ class ImportTimeLog extends Command {
      *
      * @var string
      */
-    protected $description = 'Display an inspiring quote';
+    protected $description = 'Import timelog from a given CSV file.';
 
     /**
      * The console command name.

@@ -28,6 +28,7 @@ class EmployeeRecordsController extends Controller {
             $date = Carbon::now()->toDateString();
         }
         $this->data['date'] = $date;
+        $this->data['work_date'] = null;
         $this->data['employee'] = Employee::whereId(1)->first();
         $this->data['disabled'] = false;
 

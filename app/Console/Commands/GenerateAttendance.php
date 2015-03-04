@@ -13,7 +13,7 @@ class GenerateAttendance extends Command {
      *
      * @var string
      */
-    protected $description = 'Display an inspiring quote';
+    protected $description = 'Parse the Timelog table and generate attendance report.';
 
     /**
      * The console command name.
@@ -29,7 +29,7 @@ class GenerateAttendance extends Command {
      */
     public function handle()
     {
-        $employee_ids = [11];
+        $employee_ids = [2, 3, 4, 5, 6, 7, 8, 10, 11, 19];
 
         foreach ($employee_ids as $employee_id)
         {
@@ -42,7 +42,9 @@ class GenerateAttendance extends Command {
 
                 $timelog = $employee->getTimeLog($start->toDateString());
 
-                if ($timelog['in_time'] == null and $timelog['out_time'] == null)
+                $next_day = $employee->getTimeLog(Carbon::parse($start)->addDay()->toDateString());
+
+                if (($next_day['in_time'] == null and $next_day['out_time'] == null) or ($timelog['in_time'] == null and $timelog['out_time'] == null))
                 {
                     $start = $start->addDay(1);
 
@@ -56,7 +58,7 @@ class GenerateAttendance extends Command {
                     'out_time'    => $timelog['out_time']
                 ];
 
-                $attendance = Attendance::create($data);
+                $attendance = Attendance::updateOrCreate($data);
 
                 $this->info($attendance);
                 Log::info($attendance);
