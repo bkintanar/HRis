@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class Employee
@@ -122,6 +123,30 @@ class Employee extends Model {
     }
 
     /**
+     * @param $paginate
+     * @param $sort
+     * @param $direction
+     * @return mixed
+     */
+    public function getEmployeeList($paginate = true, $sort = 'employees.id', $direction = 'asc')
+    {
+        $employees = $this->select('employees.id', 'employees.employee_id', 'employees.first_name', 'employees.last_name', 'job_titles.name as job', 'employment_statuses.name as status', 'employment_statuses.class');
+        $employees->leftJoin(
+            \DB::raw('(select `employee_id`, `job_title_id`, `employment_status_id`, max(`effective_date`) as `effective_date` from `job_histories` group by `employee_id`) as `jh`'),
+            'employees.id', '=', 'jh.employee_id');
+        $employees->leftJoin('job_titles', 'jh.job_title_id', '=', 'job_titles.id');
+        $employees->leftJoin('employment_statuses', 'jh.employment_status_id', '=', 'employment_statuses.id');
+        $employees->orderBy($sort, $direction);
+
+        if ($paginate)
+        {
+            return $employees->paginate(DATAS_PER_PAGE);
+        }
+
+        return $employees;
+    }
+
+    /**
      * @param $employee_id
      * @param $user_id
      * @return mixed
@@ -206,7 +231,7 @@ class Employee extends Model {
      */
     public function employeeWorkShift()
     {
-        return $this->hasMany('HRis\Eloquent\EmployeeWorkShift', 'employee_id', 'id')
+        return $this->hasMany('HRis\Eloquent\EmployeeWorkShift', 'employee_id', 'id')->with('workShift')
             ->orderBy('effective_date', 'desc')
             ->orderBy('id', 'desc');
     }

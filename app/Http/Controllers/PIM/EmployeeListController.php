@@ -6,6 +6,7 @@ use HRis\Eloquent\EmployeeSalaryComponent;
 use HRis\Eloquent\SalaryComponent;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\PIM\PIMRequest;
+use HRis\Services\Pagination;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
@@ -26,14 +27,28 @@ class EmployeeListController extends Controller {
      * @param Employee $employee
      * @param EmployeeSalaryComponent $employee_salary_component
      * @param SalaryComponent $salary_component
+     * @param Pagination $pagination
      */
-    public function __construct(Sentry $auth, Employee $employee, EmployeeSalaryComponent $employee_salary_component, SalaryComponent $salary_component)
+    public function __construct(
+        Sentry $auth,
+        Employee $employee,
+        EmployeeSalaryComponent $employee_salary_component,
+        SalaryComponent $salary_component,
+        Pagination $pagination)
     {
         parent::__construct($auth);
 
         $this->employee = $employee;
         $this->employee_salary_component = $employee_salary_component;
         $this->salary_component = $salary_component;
+        $this->pagination = $pagination;
+        $this->columns = [
+            'employees.id' => 'Id',
+            'employees.first_name' => 'First Name',
+            'employees.last_name' => 'Last Name',
+            'job_titles.name' => 'Job Title',
+            'employment_statuses.name' => 'Employment Status'
+        ];
     }
 
     /**
@@ -47,7 +62,14 @@ class EmployeeListController extends Controller {
      */
     public function index(PIMRequest $request)
     {
-        $this->data['employees'] = $this->employee->with('user', 'jobTitle', 'employmentStatus')->get();
+        $sort = $request->get('sort') != '' ? $request->get('sort') : 'employees.id';
+        $direction = $request->get('direction') != '' ? $request->get('direction') : 'asc';
+
+        $employees = $this->employee->getEmployees(true, $sort, $direction);
+
+        $this->data['employees'] = $employees;
+        $this->data['settings'] = ['path' => $request->path(), 'sort' => $sort, 'direction' => $direction];
+        $this->data['columns'] = $this->columns;
         $this->data['pim'] = true;
         $this->data['pageTitle'] = 'Employee Information';
 

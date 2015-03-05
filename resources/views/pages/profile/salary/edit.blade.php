@@ -19,6 +19,8 @@
     {!! Html::script('/js/plugins/iCheck/icheck.min.js') !!}
     <!-- Chosen -->
     {!! Html::script('/js/plugins/chosen/chosen.jquery.js') !!}
+    <!-- Date Picker -->
+    {!! Html::script('js/plugins/datepicker/bootstrap-datepicker.js') !!}
 
     <script>
 
@@ -73,7 +75,6 @@
             });
 
             updateSalary();
-
 
             // Date picker
             $('#datepicker .input-group.date').datepicker({

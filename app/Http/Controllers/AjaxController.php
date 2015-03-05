@@ -6,6 +6,7 @@ use HRis\Eloquent\City;
 use HRis\Eloquent\Education;
 use HRis\Eloquent\EducationLevel;
 use HRis\Eloquent\Employee;
+use HRis\Eloquent\EmployeeWorkShift;
 use HRis\Eloquent\EmployeeSkill;
 use HRis\Eloquent\EmploymentStatus;
 use HRis\Eloquent\JobHistory;
@@ -777,6 +778,32 @@ class AjaxController extends Controller {
             {
 
             }
+        }
+    }
+
+    /**
+     * Delete the profile work-shift details.
+     *
+     * @Delete("ajax/profile/work-shift/edit")
+     * @Delete("ajax/pim/employee-list/{id}/work-shift/edit")
+     *
+     * @param WorkShiftRequest $request
+     */
+    public function deleteWorkShiftData(WorkShiftRequest $request)
+    {
+        if ($request->ajax())
+        {
+            $WorkShiftId = $request->get('id');
+            try
+            {
+                EmployeeWorkShift::whereId($WorkShiftId)->delete();
+
+                print('success');
+            } catch (Exception $e)
+            {
+                print('failed');
+            }
+
         }
     }
 }

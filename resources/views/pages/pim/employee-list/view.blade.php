@@ -22,11 +22,9 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Id</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Job Title</th>
-                                <th>Employment Status</th>
+                                @foreach($columns as $key => $column)
+                                    <th>{!! HRis\Services\Pagination::getSortLinks($key, $column, $settings) !!}</th>
+                                @endforeach
                                 <th class="fix-width">Action</th>
                             </tr>
                         </thead>
@@ -38,8 +36,8 @@
                                     <td><a href="/pim/employee-list/{{ $employee->employee_id }}/personal-details">{{ $employee->employee_id }}</a></td>
                                     <td>{{ $employee->first_name }}</td>
                                     <td>{{ $employee->last_name }}</td>
-                                    <td>{{ isset($employee->jobHistory()->job_title_id) ? $employee->jobHistory()->jobTitle->name : '' }}</td>
-                                    <td><span class="label {{ isset($employee->jobHistory()->employment_status_id) ? $employee->jobHistory()->employmentStatus->class : '' }}">{{ isset($employee->jobHistory()->employment_status_id) ? $employee->jobHistory()->employmentStatus->name : '' }}</span></td>
+                                    <td>{{ isset($employee->job) ? $employee->job : '' }}</td>
+                                    <td><span class="label {{ isset($employee->class) ? $employee->class : '' }}">{{ isset($employee->status) ? $employee->status : '' }}</span></td>
                                     <td>
                                         <button rel="edit" id="{{$employee->id}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-paste"></i></button>
                                         <button rel="delete" id="{{$employee->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-trash"></i></button>
@@ -54,6 +52,9 @@
                         </tbody>
                     </table>
                 </div>
+
+                    {!! HRis\Services\Pagination::setupPagination($employees, $settings) !!}
+
             </div>
         </div>
     </div><!-- Modal -->
