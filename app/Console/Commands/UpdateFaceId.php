@@ -12,7 +12,7 @@ class UpdateFaceId extends Command {
      *
      * @var string
      */
-    protected $description = 'Display an inspiring quote';
+    protected $description = 'Update Face ID column in the employee table.';
 
     /**
      * The console command name.

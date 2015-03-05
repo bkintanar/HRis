@@ -42,6 +42,13 @@ class EmployeeListController extends Controller {
         $this->employee_salary_component = $employee_salary_component;
         $this->salary_component = $salary_component;
         $this->pagination = $pagination;
+        $this->columns = [
+            'employees.id' => 'Id',
+            'employees.first_name' => 'First Name',
+            'employees.last_name' => 'Last Name',
+            'job_titles.name' => 'Job Title',
+            'employment_statuses.name' => 'Employment Status'
+        ];
     }
 
     /**
@@ -55,16 +62,14 @@ class EmployeeListController extends Controller {
      */
     public function index(PIMRequest $request)
     {
-        $sort = 'id';
-        if ($request->get('sort'))
-        {
-            $sort = $request->get('sort');
-        }
+        $sort = $request->get('sort') != '' ? $request->get('sort') : 'employees.id';
+        $direction = $request->get('direction') != '' ? $request->get('direction') : 'asc';
 
-        $employees = $this->employee->getEmployeeList(true, $sort);
+        $employees = $this->employee->getEmployees(true, $sort, $direction);
 
         $this->data['employees'] = $employees;
-        $this->data['path'] = $request->path();
+        $this->data['settings'] = ['path' => $request->path(), 'sort' => $sort, 'direction' => $direction];
+        $this->data['columns'] = $this->columns;
         $this->data['pim'] = true;
         $this->data['pageTitle'] = 'Employee Information';
 

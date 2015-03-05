@@ -15,7 +15,7 @@ class ImportEmployeeList extends Command {
      *
      * @var string
      */
-    protected $description = 'Display an inspiring quote';
+    protected $description = 'Import employee list from a given CSV file.';
 
     /**
      * The console command name.

@@ -1,25 +1,41 @@
 <?php namespace HRis\Services;
 
 
+use Request;
+
 class Pagination {
 
-    public static function setupPagination($data, $path)
+    public static function setupPagination($data, $settings)
     {
-        $path = '/' . $path . '/?page=';
-
-        $data =  [
+        $path = '/' . $settings['path'] . '/?page=';
+        $sort = '&sort=' . $settings['sort'];
+        $direction = '&direction=' . $settings['direction'];
+        $data = [
             'currentPage'     => $data->currentPage(),
             'prevPageUrl'     => $path . ($data->currentPage() == 1 ? 1 : $data->currentPage() - 1),
-            'firstPageUrl'    => $path . '1',
-            'lastPageUrl'     => $path . $data->lastPage(),
             'nextPageUrl'     => $data->nextPageUrl(),
-            'hasMorePages'    => $data->hasMorePages(),
+            'totalPages'      => $data->lastPage(),
             'total'           => $data->total(),
-            'count'           => $data->count(),
+            'pathPage'        => $path,
+            'sortPage'        => $sort,
+            'directionPage'        => $direction,
             'total_displayed' => ($data->currentPage() == $data->lastPage()) ? ($data->currentPage() - 1) * DATAS_PER_PAGE + $data->count() : $data->currentPage() * $data->count(),
-         ];
+        ];
 
         return \View::make('partials.pagination', $data);
+    }
+
+    public static function getSortLinks($column, $name, $settings)
+    {
+        $fullUrl = Request::fullUrl();
+        $direction = $settings['direction'];
+
+        if (strpos($fullUrl, $column) !== false)
+        {
+            $direction = $direction == 'asc' ? 'desc' : 'asc';
+        }
+
+        return '<a href="/' . $settings['path'] . "?page=1&sort=$column&direction=$direction" . '">' . $name . '  <span class="' . $direction . ' "></span> </a>';
     }
 
 } 

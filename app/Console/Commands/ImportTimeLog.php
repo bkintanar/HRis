@@ -1,5 +1,6 @@
 <?php namespace HRis\Console\Commands;
 
+use Carbon\Carbon;
 use HRis\Eloquent\TimeLog;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
@@ -12,7 +13,7 @@ class ImportTimeLog extends Command {
      *
      * @var string
      */
-    protected $description = 'Display an inspiring quote';
+    protected $description = 'Import timelog from a given CSV file.';
 
     /**
      * The console command name.
@@ -45,7 +46,12 @@ class ImportTimeLog extends Command {
                     continue;
                 }
 
-                $data = ['face_id' => $row[0], 'swipe_date' => $row[3], 'swipe_time' => $time];
+                $data = [
+                    'face_id'        => $row[0],
+                    'swipe_date'     => $row[3],
+                    'swipe_time'     => $time,
+                    'swipe_datetime' => Carbon::parse($row[3] . ' ' . $time)
+                ];
                 $timelog = TimeLog::create($data);
 
                 $this->info($timelog);

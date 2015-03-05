@@ -18,6 +18,7 @@ class CreateTimeLogTable extends Migration {
             $table->string('face_id');
             $table->date('swipe_date');
             $table->time('swipe_time');
+            $table->datetime('swipe_datetime');
         });
 	}
 
