@@ -65,7 +65,7 @@ class EmployeeListController extends Controller {
         $sort = $request->get('sort') != '' ? $request->get('sort') : 'employees.id';
         $direction = $request->get('direction') != '' ? $request->get('direction') : 'asc';
 
-        $employees = $this->employee->getEmployees(true, $sort, $direction);
+        $employees = $this->employee->getEmployeeList(true, $sort, $direction);
 
         $this->data['employees'] = $employees;
         $this->data['settings'] = ['path' => $request->path(), 'sort' => $sort, 'direction' => $direction];
