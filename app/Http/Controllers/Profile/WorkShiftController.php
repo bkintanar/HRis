@@ -2,20 +2,24 @@
 
 use Carbon\Carbon;
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
-use HRis\Http\Requests;
 use HRis\Eloquent\Employee;
 use HRis\Eloquent\EmployeeWorkShift;
-
 use HRis\Http\Controllers\Controller;
+use HRis\Http\Requests;
 use HRis\Http\Requests\Profile\WorkShiftRequest;
 use Illuminate\Support\Facades\Redirect;
 use Input;
 
+/**
+ * Class WorkShiftController
+ * @package HRis\Http\Controllers\Profile
+ */
 class WorkShiftController extends Controller {
 
     /**
      * @param Sentry $auth
      * @param Employee $employee
+     * @param EmployeeWorkShift $employee_work_shift
      */
     public function __construct(Sentry $auth, Employee $employee, EmployeeWorkShift $employee_work_shift)
     {
@@ -28,16 +32,16 @@ class WorkShiftController extends Controller {
     /**
      * Show the Profile - Work Shift.
      *
-     * @Get("profile/work-shift")
-     * @Get("pim/employee-list/{id}/work-shift")
+     * @Get("profile/work-shifts")
+     * @Get("pim/employee-list/{id}/work-shifts")
      *
      * @param WorkShiftRequest $request
      * @param null $employee_id
      *
      * @return \Illuminate\View\View
      */
-	public function index(WorkShiftRequest $request, $employee_id = null)
-	{
+    public function index(WorkShiftRequest $request, $employee_id = null)
+    {
         $employee = $this->employee->getEmployeeById($employee_id, $this->loggedUser->id);
 
         $this->data['employee'] = $employee;
@@ -48,20 +52,20 @@ class WorkShiftController extends Controller {
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Job Details' : 'My Job Details';
 
         return $this->template('pages.profile.workshift.view');
-	}
+    }
 
-	/**
-	 * Show the form for editing the specified resource.
+    /**
+     * Show the form for editing the specified resource.
      *
-     * @Get("profile/work-shift/edit")
-     * @Get("pim/employee-list/{id}/work-shift/edit")
-	 *
-	 * @param  WorkShiftRequest $request
+     * @Get("profile/work-shifts/edit")
+     * @Get("pim/employee-list/{id}/work-shifts/edit")
+     *
+     * @param  WorkShiftRequest $request
      * @param null $employee_id
-	 * @return Response
-	 */
-	public function show(WorkShiftRequest $request, $employee_id = null)
-	{
+     * @return Response
+     */
+    public function show(WorkShiftRequest $request, $employee_id = null)
+    {
         if (Input::get('success'))
         {
             return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
@@ -77,19 +81,19 @@ class WorkShiftController extends Controller {
         $this->data['pageTitle'] = $this->data['pim'] ? 'Edit Employee Job Details' : 'Edit My Job Details';
 
         return $this->template('pages.profile.workshift.edit');
-	}
+    }
 
-	/**
+    /**
      * Updates the Profile - Work Shift.
      *
-     * @Patch("profile/work-shift")
-     * @Patch("pim/employee-list/{id}/work-shift")
-	 *
+     * @Patch("profile/work-shifts")
+     * @Patch("pim/employee-list/{id}/work-shifts")
+     *
      * @param  WorkShiftRequest $request
-	 * @return Response
-	 */
-	public function update(WorkShiftRequest $request)
-	{
+     * @return Response
+     */
+    public function update(WorkShiftRequest $request)
+    {
         $employee_id = $request->get('employee_id');
 
         $employee_work_shift = $this->employee_work_shift;
@@ -104,17 +108,17 @@ class WorkShiftController extends Controller {
         }
 
         return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
-	}
+    }
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
 
 }

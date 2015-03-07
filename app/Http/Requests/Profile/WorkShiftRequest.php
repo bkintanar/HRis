@@ -5,7 +5,12 @@ use HRis\Http\Requests\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 
+/**
+ * Class WorkShiftRequest
+ * @package HRis\Http\Requests\Profile
+ */
 class WorkShiftRequest extends Request {
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -48,6 +53,9 @@ class WorkShiftRequest extends Request {
         }
     }
 
+    /**
+     * @return mixed
+     */
     public function forbiddenResponse()
     {
         return Response::make(View::make('errors.403'), 403);

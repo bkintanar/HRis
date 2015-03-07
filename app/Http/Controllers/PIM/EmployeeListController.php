@@ -43,10 +43,10 @@ class EmployeeListController extends Controller {
         $this->salary_component = $salary_component;
         $this->pagination = $pagination;
         $this->columns = [
-            'employees.id' => 'Id',
-            'employees.first_name' => 'First Name',
-            'employees.last_name' => 'Last Name',
-            'job_titles.name' => 'Job Title',
+            'employees.id'             => 'Id',
+            'employees.first_name'     => 'First Name',
+            'employees.last_name'      => 'Last Name',
+            'job_titles.name'          => 'Job Title',
             'employment_statuses.name' => 'Employment Status'
         ];
     }

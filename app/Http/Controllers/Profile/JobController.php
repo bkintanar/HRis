@@ -1,6 +1,5 @@
 <?php namespace HRis\Http\Controllers\Profile;
 
-use Carbon\Carbon;
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use HRis\Eloquent\Employee;
 use HRis\Eloquent\EmployeeWorkShift;
