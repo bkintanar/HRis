@@ -1,6 +1,5 @@
 <?php namespace HRis\Eloquent;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -17,14 +16,11 @@ class WorkShift extends Model {
     public $timestamps = false;
 
     /**
+     * The attributes that are mass assignable.
+     *
      * @var array
      */
-    protected $dates = ['from_date', 'to_date'];
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['name', 'from_date', 'to_date', 'duration'];
+    protected $fillable = ['name', 'from_time', 'to_time', 'duration'];
 
     /**
      * The database table used by the model.
@@ -32,21 +28,5 @@ class WorkShift extends Model {
      * @var string
      */
     protected $table = 'work_shifts';
-
-    /**
-     * @param $value
-     */
-    public function setFromTimeAttribute($value)
-    {
-        $this->attributes['from_time'] = Carbon::parse($value) ? : null;
-    }
-
-    /**
-     * @param $value
-     */
-    public function setToTimeAttribute($value)
-    {
-        $this->attributes['to_time'] = Carbon::parse($value) ? : null;
-    }
 
 }

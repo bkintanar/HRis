@@ -17,11 +17,15 @@ class Employee extends Model {
     public $timestamps = false;
 
     /**
+     * Additional fields to treat as Carbon instances.
+     *
      * @var array
      */
     protected $dates = ['birth_date', 'joined_date', 'probation_end_date', 'permanency_date', 'resign_date'];
 
     /**
+     * The attributes that are mass assignable.
+     *
      * @var array
      */
     protected $fillable = [
@@ -52,6 +56,7 @@ class Employee extends Model {
         'joined_date',
         'probation_end_date',
         'permanency_date',
+        'resign_date'
     ];
 
     /**
@@ -78,14 +83,6 @@ class Employee extends Model {
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function department()
-    {
-        return $this->hasOne('HRis\Eloquent\Department', 'id', 'department_id');
-    }
-
-    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function dependents()
@@ -102,7 +99,7 @@ class Employee extends Model {
     }
 
     /**
-     * @return mixed
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function employeeSalaryComponent()
     {
@@ -114,32 +111,24 @@ class Employee extends Model {
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function employmentStatus()
-    {
-        return $this->hasOne('HRis\Eloquent\EmploymentStatus', 'id', 'employment_status_id');
-    }
-
-    /**
      * @param $employee_id
      * @param $user_id
-     * @return mixed
+     * @return \HRis\Eloquent\Employee
      */
     public function getEmployeeById($employee_id, $user_id)
     {
         if ($employee_id)
         {
-            return self::whereEmployeeId($employee_id)->with('user', 'country', 'province', 'city', 'employmentStatus', 'jobHistories', 'dependents', 'employeeWorkShift')->first();
+            return self::whereEmployeeId($employee_id)->with('user', 'country', 'province', 'city', 'jobHistories', 'dependents', 'employeeWorkShift')->first();
         }
 
-        return self::whereUserId($user_id)->with('user', 'country', 'province', 'city', 'employmentStatus', 'jobHistories', 'dependents', 'employeeWorkShift')->first();
+        return self::whereUserId($user_id)->with('user', 'country', 'province', 'city', 'jobHistories', 'dependents', 'employeeWorkShift')->first();
     }
 
     /**
-     * @param $paginate
-     * @param $sort
-     * @param $direction
+     * @param bool $paginate
+     * @param string $sort
+     * @param string $direction
      * @return mixed
      */
     public function getEmployeeList($paginate = true, $sort = 'employees.id', $direction = 'asc')
@@ -234,7 +223,7 @@ class Employee extends Model {
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return mixed
      */
     public function employeeWorkShift()
     {
@@ -268,19 +257,11 @@ class Employee extends Model {
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function jobTitle()
-    {
-        return $this->hasOne('HRis\Eloquent\JobTitle', 'id', 'job_title_id');
-    }
-
-    /**
      * @return mixed
      */
     public function orderedJobHistories()
     {
-        return $this->jobHistories()->with('jobTitle', 'department', 'employmentStatus', 'workShift', 'location')->orderBy('job_histories.id', 'desc')->get();
+        return $this->jobHistories()->with('jobTitle', 'department', 'workShift', 'location')->orderBy('job_histories.id', 'desc')->get();
     }
 
     /**
@@ -292,91 +273,91 @@ class Employee extends Model {
     }
 
     /**
-     * @param $value
+     * @param $birth_date
      */
-    public function setBirthDateAttribute($value)
+    public function setBirthDateAttribute($birth_date)
     {
-        $this->attributes['birth_date'] = $value ? : null;
+        $this->attributes['birth_date'] = Carbon::parse($birth_date) ? : null;
     }
 
     /**
-     * @param $value
+     * @param $employee_id
      */
-    public function setEmployeeIdAttribute($value)
+    public function setEmployeeIdAttribute($employee_id)
     {
-        $this->attributes['employee_id'] = $value ? : null;
+        $this->attributes['employee_id'] = $employee_id ? : null;
     }
 
     /**
-     * @param $value
+     * @param $face_id
      */
-    public function setFaceIdAttribute($value)
+    public function setFaceIdAttribute($face_id)
     {
-        $this->attributes['face_id'] = $value ? : null;
+        $this->attributes['face_id'] = $face_id ? : null;
     }
 
     /**
-     * @param $value
+     * @param $hdmf_pagibig
      */
-    public function setHdmfPagibigAttribute($value)
+    public function setHdmfPagibigAttribute($hdmf_pagibig)
     {
-        $this->attributes['hdmf_pagibig'] = $value ? : null;
+        $this->attributes['hdmf_pagibig'] = $hdmf_pagibig ? : null;
     }
 
     /**
-     * @param $value
+     * @param $joined_date
      */
-    public function setJoinedDateAttribute($value)
+    public function setJoinedDateAttribute($joined_date)
     {
-        $this->attributes['joined_date'] = Carbon::parse($value) ? : null;
+        $this->attributes['joined_date'] = Carbon::parse($joined_date) ? : null;
     }
 
     /**
-     * @param $value
+     * @param $marital_status_id
      */
-    public function setMaritalStatusIdAttribute($value)
+    public function setMaritalStatusIdAttribute($marital_status_id)
     {
-        $this->attributes['marital_status_id'] = $value ? : null;
+        $this->attributes['marital_status_id'] = $marital_status_id ? : null;
     }
 
     /**
-     * @param $value
+     * @param $permanency_date
      */
-    public function setPermanencyDateAttribute($value)
+    public function setPermanencyDateAttribute($permanency_date)
     {
-        $this->attributes['permanency_date'] = Carbon::parse($value) ? : null;
+        $this->attributes['permanency_date'] = Carbon::parse($permanency_date) ? : null;
     }
 
     /**
-     * @param $value
+     * @param $philhealth
      */
-    public function setPhilHealthAttribute($value)
+    public function setPhilHealthAttribute($philhealth)
     {
-        $this->attributes['philhealth'] = $value ? : null;
+        $this->attributes['philhealth'] = $philhealth ? : null;
     }
 
     /**
-     * @param $value
+     * @param $probation_end_date
      */
-    public function setProbationEndDateAttribute($value)
+    public function setProbationEndDateAttribute($probation_end_date)
     {
-        $this->attributes['probation_end_date'] = Carbon::parse($value) ? : null;
+        $this->attributes['probation_end_date'] = Carbon::parse($probation_end_date) ? : null;
     }
 
     /**
-     * @param $value
+     * @param $resign_date
      */
-    public function setResignDateAttribute($value)
+    public function setResignDateAttribute($resign_date)
     {
-        $this->attributes['resign_date'] = Carbon::parse($value) ? : null;
+        $this->attributes['resign_date'] = Carbon::parse($resign_date) ? : null;
     }
 
     /**
-     * @param $value
+     * @param $user_id
      */
-    public function setUserIdAttribute($value)
+    public function setUserIdAttribute($user_id)
     {
-        $this->attributes['user_id'] = $value ? : null;
+        $this->attributes['user_id'] = $user_id ? : null;
     }
 
     /**
@@ -401,14 +382,6 @@ class Employee extends Model {
     public function workExperiences()
     {
         return $this->hasMany('HRis\Eloquent\WorkExperience');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function workShift()
-    {
-        return $this->hasOne('HRis\Eloquent\WorkShift', 'id', 'work_shift_id');
     }
 
 }

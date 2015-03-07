@@ -15,11 +15,15 @@ class EmployeeSalaryComponent extends Model {
     public $timestamps = false;
 
     /**
+     * Additional fields to treat as Carbon instances.
+     *
      * @var array
      */
     protected $dates = ['effective_date'];
 
     /**
+     * The attributes that are mass assignable.
+     *
      * @var array
      */
     protected $fillable = [
@@ -37,6 +41,8 @@ class EmployeeSalaryComponent extends Model {
     protected $table = 'employee_salary_components';
 
     /**
+     * @param $employee_id
+     * @param $component_id
      * @return array
      */
     function getCurrentComponentValue($employee_id, $component_id)
@@ -56,11 +62,11 @@ class EmployeeSalaryComponent extends Model {
     }
 
     /**
-     * @param $value
+     * @param $effective_date
      */
-    public function setEffectiveDateAttribute($value)
+    public function setEffectiveDateAttribute($effective_date)
     {
-        $this->attributes['effective_date'] = Carbon::parse($value) ? : null;
+        $this->attributes['effective_date'] = Carbon::parse($effective_date) ? : null;
     }
 
 }
