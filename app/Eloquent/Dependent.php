@@ -22,6 +22,8 @@ class Dependent extends Model {
     protected $dates = ['birth_date'];
 
     /**
+     * The attributes that are mass assignable.
+     *
      * @var array
      */
     protected $fillable = [
@@ -41,11 +43,11 @@ class Dependent extends Model {
     protected $table = 'dependents';
 
     /**
-     * @param $value
+     * @param $birth_date
      */
-    public function setBirthDateAttribute($value)
+    public function setBirthDateAttribute($birth_date)
     {
-        $this->attributes['birth_date'] = Carbon::parse($value) ? : null;
+        $this->attributes['birth_date'] = Carbon::parse($birth_date) ? : null;
     }
 
 }

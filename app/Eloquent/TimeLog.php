@@ -14,6 +14,8 @@ class TimeLog extends Model {
     public $timestamps = false;
 
     /**
+     * The attributes that are mass assignable.
+     *
      * @var array
      */
     protected $fillable = ['face_id', 'swipe_date', 'swipe_time', 'swipe_datetime'];
@@ -25,6 +27,9 @@ class TimeLog extends Model {
      */
     protected $table = 'time_log';
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function employee()
     {
         return $this->belongsTo('HRis\Eloquent\Employee', 'face_id', 'face_id');

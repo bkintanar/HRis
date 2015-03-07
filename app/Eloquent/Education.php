@@ -20,6 +20,8 @@ class Education extends Model {
     protected $dates = ['from_date', 'to_date'];
 
     /**
+     * The attributes that are mass assignable.
+     *
      * @var array
      */
     protected $fillable = [
@@ -48,19 +50,19 @@ class Education extends Model {
     }
 
     /**
-     * @param $value
+     * @param $from_date
      */
-    public function setFromDateAttribute($value)
+    public function setFromDateAttribute($from_date)
     {
-        $this->attributes['from_date'] = Carbon::parse($value) ? : null;
+        $this->attributes['from_date'] = Carbon::parse($from_date) ? : null;
     }
 
     /**
-     * @param $value
+     * @param $to_date
      */
-    public function setToDateAttribute($value)
+    public function setToDateAttribute($to_date)
     {
-        $this->attributes['to_date'] = Carbon::parse($value) ? : null;
+        $this->attributes['to_date'] = Carbon::parse($to_date) ? : null;
     }
 
 }

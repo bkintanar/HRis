@@ -15,11 +15,15 @@ class EmployeeWorkShift extends Model {
     public $timestamps = false;
 
     /**
+     * Additional fields to treat as Carbon instances.
+     *
      * @var array
      */
     protected $dates = ['effective_date'];
 
     /**
+     * The attributes that are mass assignable.
+     *
      * @var array
      */
     protected $fillable = [
@@ -63,6 +67,14 @@ class EmployeeWorkShift extends Model {
         $to_datetime = Carbon::parse($start_date . ' ' . $employee_work_shift->workShift->from_time)->addHours($employee_work_shift->workShift->duration + 1)->subSecond(1);
 
         return ['from_datetime' => $from_datetime, 'to_datetime' => $to_datetime];
+    }
+
+    /**
+     * @param $effective_date
+     */
+    public function setEffectiveDateAttribute($effective_date)
+    {
+        $this->attributes['effective_date'] = Carbon::parse($effective_date) ? : null;
     }
 
     /**

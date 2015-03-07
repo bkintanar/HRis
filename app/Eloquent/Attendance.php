@@ -8,7 +8,16 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Attendance extends Model {
 
+    /**
+     * @var bool
+     */
     public $timestamps = false;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'employee_id',
         'work_date',
