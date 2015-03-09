@@ -6,8 +6,11 @@
 
 class_name: FunctionalTester
 modules:
-    enabled: [Filesystem, FunctionalHelper, Laravel5, Db, PhpBrowser]
+    enabled: [FunctionalHelper, Laravel5, PhpBrowser]
 
     config:
         PhpBrowser:
-            url: http://hris.loc/
+            url: http://bkintanar.hris-test.liberty/
+
+        Laravel5:
+            environment_file: .env.testing

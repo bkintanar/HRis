@@ -11,7 +11,7 @@ settings:
 modules:
     config:
         Db:
-            dsn: 'mysql:host=localhost;dbname=hris'
-            user: 'hris'
-            password: 'hris'
+            dsn: 'mysql:host=localhost;dbname=testing_hris'
+            user: 'bkintanar'
+            password: 'bkintanar'
             dump: tests/_data/dump.sql
