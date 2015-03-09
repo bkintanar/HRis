@@ -54,4 +54,14 @@ $app->singleton(
 
 require_once('constants.php');
 
+if (!$app->runningInConsole())
+{
+    $server = $_SERVER['HTTP_HOST'];
+
+    if (strpos($server, 'hris-test.liberty'))
+    {
+        $app->loadEnvironmentFrom('.env.testing');
+    }
+}
+
 return $app;
