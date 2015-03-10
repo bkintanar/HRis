@@ -20,13 +20,14 @@
                 <p class="display-earnings"><span class="label-total">Total Earnings: </span><span id="total-earnings"></span></p>
                 <p class="display-deduction"><span class="label-total">Total Deductions: </span><span id="total-deductions"></span></p>
                 <p class="display-total"><span class="label-total">Total: </span><span id="total-salary"></span></p>
+
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-2">
                     @if ($disabled == '')
                         {!! Html::link(str_replace('/edit', '', \Request::path()), 'Cancel', ['class' => 'btn btn-white btn-xs']) !!}
                         {!! Form::submit('Save changes', ['class' => 'btn btn-primary btn-xs']) !!}
                     @else
-                        @if($loggedUser->hasAccess(\Request::segment(1).'.contact-details.update'))
+                        @if($loggedUser->hasAccess(\Request::segment(1).'.salary.update'))
                             {!! Html::link(\Request::path() . '/edit', 'Modify', ['class' => 'btn btn-primary btn-xs']) !!}
                         @endif
                     @endif
