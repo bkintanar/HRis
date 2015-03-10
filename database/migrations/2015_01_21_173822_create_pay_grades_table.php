@@ -1,9 +1,19 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreatePayGradesTable extends Migration {
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('pay_grades');
+    }
 
     /**
      * Run the migrations.
@@ -19,16 +29,6 @@ class CreatePayGradesTable extends Migration {
             $table->integer('min_salary');
             $table->integer('max_salary');
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::drop('pay_grades');
     }
 
 }

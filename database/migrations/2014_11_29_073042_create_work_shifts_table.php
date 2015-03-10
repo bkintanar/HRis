@@ -1,9 +1,19 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateWorkShiftsTable extends Migration {
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('work_shifts');
+    }
 
     /**
      * Run the migrations.
@@ -21,16 +31,6 @@ class CreateWorkShiftsTable extends Migration {
             $table->integer('duration');
             $table->integer('extension');
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::drop('work_shifts');
     }
 
 }

@@ -1,17 +1,27 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateSalaryComponentsTable extends Migration {
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('salary_components');
+    }
+
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
         Schema::create('salary_components', function (Blueprint $table)
         {
             $table->increments('id');
@@ -20,16 +30,6 @@ class CreateSalaryComponentsTable extends Migration {
             $table->integer('part_of_total_payable');
             $table->integer('cost_to_company');
         });
-	}
-
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-        Schema::drop('salary_components');
-	}
+    }
 
 }
