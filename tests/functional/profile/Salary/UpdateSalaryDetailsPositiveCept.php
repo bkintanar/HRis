@@ -2,7 +2,7 @@
 $I = new FunctionalTester($scenario);
 
 $I->am('HRis User');
-$I->wantTo('Delete Dependent. [Positive Test]');
+$I->wantTo('Update My Salary Details. [Positive Test]');
 
 # Authorize User
 $I->amOnPage('/auth/login');
@@ -17,13 +17,16 @@ $I->seeCurrentUrlEquals('/dashboard');
 $I->click('Profile');
 $I->seeCurrentUrlEquals('/profile/personal-details');
 
-$I->click('Dependents');
-$I->seeCurrentUrlEquals('/profile/dependents');
+# Salary
+$I->click('Salary');
+$I->seeCurrentUrlEquals('/profile/salary');
 
-# Delete record
-$I->see('Tested  Suited');
-$I->click('button[title=Delete]');
+# Modify record
+$I->amOnPage('/profile/salary/edit');
+$I->fillField('Monthly_Basic["value"]', '50000.00');
+$I->click('Save changes');
 
-$I->seeCurrentUrlEquals('/profile/dependents');
-$I->click('Dependents');
-$I->dontSee('Tested  Suited');
+$I->seeCurrentUrlEquals('/profile/salary');
+$I->see('Record successfully updated.');
+
+

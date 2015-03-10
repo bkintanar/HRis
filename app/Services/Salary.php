@@ -57,6 +57,9 @@ class Salary {
         $dependents = count($employee->dependents);
         if ($dependents)
         {
+            if($dependents>4){
+                $dependents = 4;
+            }
             $employee_status = 'ME' . $dependents . '_S' . $dependents;
         }
 
