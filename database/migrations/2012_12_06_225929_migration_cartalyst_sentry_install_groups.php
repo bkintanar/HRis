@@ -23,6 +23,16 @@ use Illuminate\Database\Migrations\Migration;
 class MigrationCartalystSentryInstallGroups extends Migration {
 
     /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('groups');
+    }
+
+    /**
      * Run the migrations.
      *
      * @return void
@@ -41,16 +51,6 @@ class MigrationCartalystSentryInstallGroups extends Migration {
             $table->engine = 'InnoDB';
             $table->unique('name');
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::drop('groups');
     }
 
 }

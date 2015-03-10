@@ -12,7 +12,7 @@
 */
 
 $app = new Illuminate\Foundation\Application(
-	realpath(__DIR__.'/../')
+    realpath(__DIR__ . '/../')
 );
 
 /*
@@ -27,18 +27,18 @@ $app = new Illuminate\Foundation\Application(
 */
 
 $app->singleton(
-	'Illuminate\Contracts\Http\Kernel',
-	'HRis\Http\Kernel'
+    'Illuminate\Contracts\Http\Kernel',
+    'HRis\Http\Kernel'
 );
 
 $app->singleton(
-	'Illuminate\Contracts\Console\Kernel',
-	'HRis\Console\Kernel'
+    'Illuminate\Contracts\Console\Kernel',
+    'HRis\Console\Kernel'
 );
 
 $app->singleton(
-	'Illuminate\Contracts\Debug\ExceptionHandler',
-	'HRis\Exceptions\Handler'
+    'Illuminate\Contracts\Debug\ExceptionHandler',
+    'HRis\Exceptions\Handler'
 );
 
 /*
@@ -54,7 +54,7 @@ $app->singleton(
 
 require_once('constants.php');
 
-if (!$app->runningInConsole())
+if ( ! $app->runningInConsole())
 {
     $server = $_SERVER['HTTP_HOST'];
 

@@ -23,6 +23,16 @@ use Illuminate\Database\Migrations\Migration;
 class MigrationCartalystSentryInstallThrottle extends Migration {
 
     /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('throttle');
+    }
+
+    /**
      * Run the migrations.
      *
      * @return void
@@ -46,16 +56,6 @@ class MigrationCartalystSentryInstallThrottle extends Migration {
             $table->engine = 'InnoDB';
             $table->index('user_id');
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::drop('throttle');
     }
 
 }

@@ -23,6 +23,16 @@ use Illuminate\Database\Migrations\Migration;
 class MigrationCartalystSentryInstallUsers extends Migration {
 
     /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('users');
+    }
+
+    /**
      * Run the migrations.
      *
      * @return void
@@ -52,16 +62,6 @@ class MigrationCartalystSentryInstallUsers extends Migration {
             $table->index('activation_code');
             $table->index('reset_password_code');
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::drop('users');
     }
 
 }

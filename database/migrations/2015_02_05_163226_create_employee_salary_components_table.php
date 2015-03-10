@@ -1,9 +1,19 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateEmployeeSalaryComponents extends Migration {
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('employee_salary_components');
+    }
 
     /**
      * Run the migrations.
@@ -20,16 +30,6 @@ class CreateEmployeeSalaryComponents extends Migration {
             $table->decimal('value', 10, 2);
             $table->date('effective_date')->nullable();
         });
-	}
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::drop('employee_salary_components');
     }
 
 }

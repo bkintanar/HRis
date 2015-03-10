@@ -1,17 +1,27 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateTimeLogTable extends Migration {
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('time_log');
+    }
+
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
         Schema::create('time_log', function (Blueprint $table)
         {
             $table->increments('id');
@@ -20,16 +30,6 @@ class CreateTimeLogTable extends Migration {
             $table->time('swipe_time');
             $table->datetime('swipe_datetime');
         });
-	}
-
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-        Schema::drop('time_log');
-	}
+    }
 
 }
