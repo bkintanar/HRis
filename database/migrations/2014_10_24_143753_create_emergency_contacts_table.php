@@ -1,9 +1,19 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateEmergencyContactsTable extends Migration {
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('emergency_contacts');
+    }
 
     /**
      * Run the migrations.
@@ -23,16 +33,6 @@ class CreateEmergencyContactsTable extends Migration {
             $table->string('home_phone');
             $table->string('mobile_phone');
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::drop('emergency_contacts');
     }
 
 }

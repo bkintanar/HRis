@@ -1,9 +1,19 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateCitiesTable extends Migration {
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('cities');
+    }
 
     /**
      * Run the migrations.
@@ -18,16 +28,6 @@ class CreateCitiesTable extends Migration {
             $table->integer('province_id');
             $table->string('name');
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::drop('cities');
     }
 
 }

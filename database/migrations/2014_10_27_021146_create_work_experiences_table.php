@@ -1,9 +1,19 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateWorkExperiencesTable extends Migration {
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('work_experiences');
+    }
 
     /**
      * Run the migrations.
@@ -22,16 +32,6 @@ class CreateWorkExperiencesTable extends Migration {
             $table->date('to_date')->nullable();
             $table->string('comment');
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::drop('work_experiences');
     }
 
 }

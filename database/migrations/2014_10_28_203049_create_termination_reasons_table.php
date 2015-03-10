@@ -1,9 +1,19 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateTerminationReasonsTable extends Migration {
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('termination_reasons');
+    }
 
     /**
      * Run the migrations.
@@ -17,16 +27,6 @@ class CreateTerminationReasonsTable extends Migration {
             $table->increments('id');
             $table->string('name');
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::drop('termination_reasons');
     }
 
 }

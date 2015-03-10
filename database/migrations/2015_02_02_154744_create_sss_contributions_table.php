@@ -1,9 +1,19 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateSssContributionsTable extends Migration {
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('sss_contributions');
+    }
 
     /**
      * Run the migrations.
@@ -26,16 +36,6 @@ class CreateSssContributionsTable extends Migration {
             $table->decimal('total_contribution_ee', 10, 2);
             $table->decimal('total_contribution_total', 10, 2);
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::drop('sss_contributions');
     }
 
 }

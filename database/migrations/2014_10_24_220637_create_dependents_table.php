@@ -1,9 +1,19 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateDependentsTable extends Migration {
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('dependents');
+    }
 
     /**
      * Run the migrations.
@@ -22,15 +32,5 @@ class CreateDependentsTable extends Migration {
             $table->integer('relationship_id');
             $table->date('birth_date')->nullable();
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::drop('dependents');
     }
 }

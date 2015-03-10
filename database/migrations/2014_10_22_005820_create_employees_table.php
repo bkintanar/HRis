@@ -1,9 +1,19 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateEmployeesTable extends Migration {
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('employees');
+    }
 
     /**
      * Run the migrations.
@@ -56,16 +66,6 @@ class CreateEmployeesTable extends Migration {
             $table->index('marital_status_id');
             $table->index('nationality_id');
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::drop('employees');
     }
 
 }
