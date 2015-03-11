@@ -20,13 +20,9 @@ $I->seeCurrentUrlEquals('/profile/personal-details');
 # Salary
 $I->click('Salary');
 $I->seeCurrentUrlEquals('/profile/salary');
+$I->click('Modify');
 
 # Modify record
 $I->amOnPage('/profile/salary/edit');
-$I->fillField('Monthly_Basic["value"]', '50000.00');
-$I->click('Save changes');
-
-$I->seeCurrentUrlEquals('/profile/salary');
-$I->see('Record successfully updated.');
-
+$I->see('Save changes');
 

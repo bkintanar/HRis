@@ -68,7 +68,7 @@ class SalaryComputationsController extends Controller {
      */
     public function showSalaryEditForm(SalaryRequest $request, $employee_id = null)
     {
-        $employee = $this->employee->getEmployeeSalaryDetails($employee_id, $this->loggedUser->id);
+        $employee = $this->employee->getEmployeeSalaryDetails($employee_id, $this->loggedUser->employee->id);
 
         $employee_status = 'ME_S';
         $dependents = count($employee->dependents);
