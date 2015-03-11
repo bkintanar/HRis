@@ -2,7 +2,7 @@
 $I = new FunctionalTester($scenario);
 
 $I->am('HRis User');
-$I->wantTo('Add Qualifications. [Positive Test]');
+$I->wantTo('Add Job Title. [Negative Test]');
 
 # Authorize User
 $I->amOnPage('/auth/login');
@@ -13,20 +13,16 @@ $I->click('Login');
 # Dashboard
 $I->seeCurrentUrlEquals('/dashboard');
 
-# Profile
-$I->click('Profile');
-$I->seeCurrentUrlEquals('/profile/personal-details');
-
-# Qualifications
-$I->click('Qualifications');
-$I->seeCurrentUrlEquals('/profile/qualifications');
+# Job Title
+$I->click('Job Titles');
+$I->seeCurrentUrlEquals('/admin/job/titles');
 
 # Add new record
 $I->see('Add a new row');
-$I->fillField('company', 'Test');
-$I->fillField('job_title', 'Suite');
+$I->fillField('name', '');
+$I->fillField('description', 'Description Test: ' . Carbon::now()->toDateTimeString());
 $I->click('Save changes');
 
-$I->seeCurrentUrlEquals('/profile/qualifications');
+$I->expect('the form is not submitted');
 $I->see('Record successfully added.');
 

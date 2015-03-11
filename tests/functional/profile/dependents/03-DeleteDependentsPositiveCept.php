@@ -2,7 +2,7 @@
 $I = new FunctionalTester($scenario);
 
 $I->am('HRis User');
-$I->wantTo('Update Dependent. [Positive Test]');
+$I->wantTo('Delete Dependent. [Positive Test]');
 
 # Authorize User
 $I->amOnPage('/auth/login');
@@ -20,16 +20,14 @@ $I->seeCurrentUrlEquals('/profile/personal-details');
 $I->click('Dependents');
 $I->seeCurrentUrlEquals('/profile/dependents');
 
-# Update record
-$I->see('Test  Suite');
+# Delete record
+$I->see('Tested  Suited');
 $id = $I->grabAttributeFrom('button[title=Edit]', 'id');
 $I->click("button[title=Edit][id=$id]");
-$I->fillField('first_name', 'Tested');
-$I->fillField('last_name', 'Suited');
+$id = $I->grabAttributeFrom('button[title=Delete]', 'id');
+$token = $I->grabAttributeFrom('input[name=_token]', 'value');
+$I->click("button[title=Delete][id=$id]");
 $I->fillField('input[name=dependent_id]', $id);
-$I->fillField('input[name=_method]', 'PATCH');
-$I->click('Save changes');
 
-$I->seeCurrentUrlEquals('/profile/dependents');
-$I->see('Record successfully updated.');
-$I->see('Tested  Suited');
+$I->sendAjaxPostRequest('/ajax/profile/dependents', ['id' => $id, '_token' => $token, '_method' => 'DELETE']); // POST
+$I->dontSee('Tested  Suited');

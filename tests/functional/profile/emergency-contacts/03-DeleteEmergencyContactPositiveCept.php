@@ -2,7 +2,7 @@
 $I = new FunctionalTester($scenario);
 
 $I->am('HRis User');
-$I->wantTo('Update Emergency Contact. [Positive Test]');
+$I->wantTo('Delete Emergency Contact. [Positive Test]');
 
 # Authorize User
 $I->amOnPage('/auth/login');
@@ -20,13 +20,13 @@ $I->seeCurrentUrlEquals('/profile/personal-details');
 $I->click('Emergency Contacts');
 $I->seeCurrentUrlEquals('/profile/emergency-contacts');
 
-# Add new record
-$I->see('Test  Suite');
-$I->click('button[title=Edit]');
-$I->fillField('first_name', 'Tested');
-$I->fillField('last_name', 'Suited');
-$I->click('Save changes');
-
-$I->seeCurrentUrlEquals('/profile/emergency-contacts');
-$I->see('Record successfully updated.');
+# Delete record
 $I->see('Tested  Suited');
+$id = $I->grabAttributeFrom('button[title=Delete]', 'id');
+$token = $I->grabAttributeFrom('input[name=_token]', 'value');
+$I->click("button[title=Delete][id=$id]");
+$I->fillField('input[name=emergency_contact_id]', $id);
+
+$I->sendAjaxPostRequest('/ajax/profile/emergency-contacts', ['id' => $id, '_token' => $token, '_method' => 'DELETE']); // POST
+
+$I->dontSee('Tested  Suited');
