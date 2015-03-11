@@ -27,9 +27,8 @@ $I->seeCurrentUrlEquals('/profile/job/edit');
 $I->see('Test Suite');
 $id = $I->grabAttributeFrom('button[title=Delete]', 'id');
 $token = $I->grabAttributeFrom('input[name=_token]', 'value');
-//$I->click("button[title=Delete][id=$id]");
-$I->sendAjaxPostRequest('/ajax/profile/job/edit', ['id' => $id, '_token' => $token, '_method' => 'DELETE']); // POST
 
+$I->sendAjaxPostRequest('/ajax/profile/job/edit', ['id' => $id, '_token' => $token, '_method' => 'DELETE']); // POST
 $I->dontSee('Test Suite');
 
 

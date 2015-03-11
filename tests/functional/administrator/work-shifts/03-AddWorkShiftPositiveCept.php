@@ -2,7 +2,7 @@
 $I = new FunctionalTester($scenario);
 
 $I->am('HRis User');
-$I->wantTo('Add Pay Grades. [Positive Test]');
+$I->wantTo('Add Work Shift. [Positive Test]');
 
 # Authorize User
 $I->amOnPage('/auth/login');
@@ -13,7 +13,7 @@ $I->click('Login');
 # Dashboard
 $I->seeCurrentUrlEquals('/dashboard');
 
-# Job Title
+# Work Shifts
 $I->click('Work Shifts');
 $I->seeCurrentUrlEquals('/admin/job/work-shifts');
 
