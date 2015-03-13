@@ -17,6 +17,7 @@ $I->seeCurrentUrlEquals('/dashboard');
 $I->click('Profile');
 $I->seeCurrentUrlEquals('/profile/personal-details');
 
+# Emergency Contacts
 $I->click('Emergency Contacts');
 $I->seeCurrentUrlEquals('/profile/emergency-contacts');
 
@@ -24,9 +25,7 @@ $I->seeCurrentUrlEquals('/profile/emergency-contacts');
 $I->see('Tested  Suited');
 $id = $I->grabAttributeFrom('button[title=Delete]', 'id');
 $token = $I->grabAttributeFrom('input[name=_token]', 'value');
-$I->click("button[title=Delete][id=$id]");
 $I->fillField('input[name=emergency_contact_id]', $id);
 
 $I->sendAjaxPostRequest('/ajax/profile/emergency-contacts', ['id' => $id, '_token' => $token, '_method' => 'DELETE']); // POST
-
 $I->dontSee('Tested  Suited');

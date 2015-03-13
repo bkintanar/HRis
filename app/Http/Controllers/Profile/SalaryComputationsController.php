@@ -12,6 +12,8 @@ use Redirect;
 /**
  * Class SalaryComputationsController
  * @package HRis\Http\Controllers\Profile
+ *
+ * @Middleware("auth")
  */
 class SalaryComputationsController extends Controller {
 

@@ -2,7 +2,7 @@
 $I = new FunctionalTester($scenario);
 
 $I->am('HRis User');
-$I->wantTo('Add Dependent. [Positive Test]');
+$I->wantTo('Add Pay Grades. [Positive Test]');
 
 # Authorize User
 $I->amOnPage('/auth/login');
@@ -13,20 +13,17 @@ $I->click('Login');
 # Dashboard
 $I->seeCurrentUrlEquals('/dashboard');
 
-# Profile
-$I->click('Profile');
-$I->seeCurrentUrlEquals('/profile/personal-details');
-
-# Dependents
-$I->click('Dependents');
-$I->seeCurrentUrlEquals('/profile/dependents');
+# Pay Grades
+$I->click('Pay Grades');
+$I->seeCurrentUrlEquals('/admin/job/pay-grades');
 
 # Add new record
 $I->see('Add a new row');
-$I->fillField('first_name', 'Test');
-$I->fillField('last_name', 'Suite');
+$I->fillField('name', 'Test');
+$I->fillField('min_salary', '010000');
+$I->fillField('max_salary', '020000');
 $I->click('Save changes');
 
-$I->seeCurrentUrlEquals('/profile/dependents');
+$I->seeCurrentUrlEquals('/admin/job/pay-grades');
 $I->see('Record successfully added.');
-$I->see('Test  Suite');
+

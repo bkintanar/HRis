@@ -17,6 +17,7 @@ $I->seeCurrentUrlEquals('/dashboard');
 $I->click('Profile');
 $I->seeCurrentUrlEquals('/profile/personal-details');
 
+# Emergency Contacts
 $I->click('Emergency Contacts');
 $I->seeCurrentUrlEquals('/profile/emergency-contacts');
 

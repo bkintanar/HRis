@@ -2,7 +2,7 @@
 $I = new FunctionalTester($scenario);
 
 $I->am('HRis User');
-$I->wantTo('Add Job Title. [Negative Test]');
+$I->wantTo('Add Termination Reason. [Positive Test]');
 
 # Authorize User
 $I->amOnPage('/auth/login');
@@ -13,16 +13,16 @@ $I->click('Login');
 # Dashboard
 $I->seeCurrentUrlEquals('/dashboard');
 
-# Job Title
-$I->click('Job Titles');
-$I->seeCurrentUrlEquals('/admin/job/titles');
+# Termination Reasons
+$I->click('Termination Reasons');
+$I->seeCurrentUrlEquals('/pim/configuration/termination-reasons');
 
 # Add new record
 $I->see('Add a new row');
-$I->fillField('name', '');
-$I->fillField('description', 'Description Test: ' . Carbon::now()->toDateTimeString());
+$I->fillField('name', 'Test');
 $I->click('Save changes');
 
-$I->expect('the form is not submitted');
+$I->seeCurrentUrlEquals('/pim/configuration/termination-reasons');
 $I->see('Record successfully added.');
+$I->see('Test');
 

@@ -24,7 +24,8 @@ $I->seeCurrentUrlEquals('/profile/work-shifts');
 # Add new record
 $I->click('Modify');
 $I->seeCurrentUrlEquals('/profile/work-shifts/edit');
-$I->selectOption('form select[name=work_shift_id]', 'Admin');
+$I->selectOption('form select[name=work_shift_id]', 'tested');
+$I->fillField('effective_date', Carbon::now()->toDateString());
 $I->click('Save changes');
 
 $I->seeCurrentUrlEquals('/profile/work-shifts');
