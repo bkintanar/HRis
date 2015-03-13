@@ -25,7 +25,6 @@ $I->seeCurrentUrlEquals('/profile/qualifications');
 $I->see('Tested');
 $id = $I->grabAttributeFrom('button[title=Edit]', 'id');
 $token = $I->grabAttributeFrom('input[name=_token]', 'value');
-$I->click("button[title=Delete][id=$id]");
 $I->fillField('input[name=work_experience_id]', $id);
 
 $I->sendAjaxPostRequest('/ajax/profile/qualifications/work-experience', ['id' => $id, '_token' => $token, '_method' => 'DELETE']); // POST

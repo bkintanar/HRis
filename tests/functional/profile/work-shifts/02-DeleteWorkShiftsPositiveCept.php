@@ -21,11 +21,11 @@ $I->click('Work Shifts');
 $I->seeCurrentUrlEquals('/profile/work-shifts');
 
 # Delete Work Shifts record
-$I->click('<td>Modify</td>');
+$I->click('Modify');
 $I->seeCurrentUrlEquals('/profile/work-shifts/edit');
-$I->see('Admin');
+$I->see('tested');
 $id = $I->grabAttributeFrom('button[title=Delete]', 'id');
 $token = $I->grabAttributeFrom('input[name=_token]', 'value');
 
 $I->sendAjaxPostRequest('/ajax/profile/work-shifts/edit', ['id' => $id, '_token' => $token, '_method' => 'DELETE']); // POST
-$I->dontSee('<td>Modify</td>');
+$I->dontSee('tested');

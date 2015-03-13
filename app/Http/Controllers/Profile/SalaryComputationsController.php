@@ -9,6 +9,9 @@ use HRis\Http\Requests\Profile\SalaryRequest;
 use HRis\Services\Salary;
 use Redirect;
 
+/**
+ * @Middleware("auth")
+ */
 class SalaryComputationsController extends Controller {
 
     public function __construct(Sentry $auth, Employee $employee, EmployeeSalaryComponent $employee_salary_component, Salary $salary_services)

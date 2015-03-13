@@ -2,7 +2,7 @@
 $I = new FunctionalTester($scenario);
 
 $I->am('HRis User');
-$I->wantTo('Add Pay Grades. [Positive Test]');
+$I->wantTo('Update Pay Grades. [Positive Test]');
 
 # Authorize User
 $I->amOnPage('/auth/login');
@@ -13,17 +13,20 @@ $I->click('Login');
 # Dashboard
 $I->seeCurrentUrlEquals('/dashboard');
 
-# Job Title
+# Pay Grades
 $I->click('Pay Grades');
 $I->seeCurrentUrlEquals('/admin/job/pay-grades');
 
 # Add new record
-$I->see('Add a new row');
-$I->fillField('name', 'Test');
-$I->fillField('min_salary', '010000');
-$I->fillField('max_salary', '020000');
+$I->see('Test');
+$id = $I->grabAttributeFrom('button[title=Edit]', 'id');
+$I->fillField('input[name=pay_grade_id]', $id);
+$I->fillField('input[name=_method]', 'PATCH');
+$I->fillField('name', 'Tested');
+$I->fillField('min_salary', '015000');
+$I->fillField('max_salary', '025000');
 $I->click('Save changes');
 
 $I->seeCurrentUrlEquals('/admin/job/pay-grades');
-$I->see('Record successfully added.');
+$I->see('Record successfully updated.');
 

@@ -17,6 +17,7 @@ $I->seeCurrentUrlEquals('/dashboard');
 $I->click('Profile');
 $I->seeCurrentUrlEquals('/profile/personal-details');
 
+# Dependents
 $I->click('Dependents');
 $I->seeCurrentUrlEquals('/profile/dependents');
 

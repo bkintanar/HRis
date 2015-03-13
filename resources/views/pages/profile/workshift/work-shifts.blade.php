@@ -15,6 +15,7 @@
                                 <th>Work Shift</th>
                                 <th>In</th>
                                 <th>Out</th>
+                                <th>Effective Date</th>
                                 <th class="action">Action</th>
                             </tr>
                         </thead>
@@ -25,6 +26,7 @@
                                     <td>{{ $workShift->WorkShift->name or ''}}</td>
                                     <td>{{ $workShift->WorkShift->from_time or '' }}</td>
                                     <td>{{ $workShift->WorkShift->to_time or '' }}</td>
+                                    <td>{{ $workShift->effective_date or '' }}</td>
                                     <td class="action">
                                         <button rel="delete" id="{{$workShift->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button">
                                             <i class="fa fa-trash"></i>
