@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Config;
 
 /**
  * Class EmployeeWorkShift
@@ -62,8 +63,8 @@ class EmployeeWorkShift extends Model {
     {
         $employee_work_shift = self::whereEmployeeId($this->employee_id)->where('effective_date', '<=', $start_date)->orderBy('id', 'desc')->first();
 
-        // TODO: Add these to config
-        $from_datetime = Carbon::parse($start_date . ' ' . $employee_work_shift->workShift->from_time)->subHour(1);
+        $from_time_allowance = Config::get('company.from_time_allowance');
+        $from_datetime = Carbon::parse($start_date . ' ' . $employee_work_shift->workShift->from_time)->subHour($from_time_allowance);
         $to_datetime = Carbon::parse($start_date . ' ' . $employee_work_shift->workShift->from_time)->addHours($employee_work_shift->workShift->duration + 1)->subSecond(1);
 
         return ['from_datetime' => $from_datetime, 'to_datetime' => $to_datetime];
