@@ -2,6 +2,7 @@
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Request;
 
 /**
@@ -18,14 +19,53 @@ class Navlink extends Model {
     protected $table = 'navlinks';
 
     /**
+     * @param $_link
      * @return string
      */
-    public static function generate()
+    protected static function breadcrumb($_link)
+    {
+        $str = '';
+        $subLinks = explode('/', $_link);
+        $numSubLinks = count($subLinks);
+
+        $idx = 0;
+        $href = '/';
+        foreach ($subLinks as $sublink)
+        {
+            $href .= $sublink;
+            $exception = ['pim'];
+            if (++ $idx === $numSubLinks)
+            {
+                $str .= '<li class="active"><strong>' . ucwords(str_replace('-', ' ', in_array($sublink, $exception) ? strtoupper($sublink) : $sublink)) . '</strong></li>';
+            }
+            else
+            {
+                $employee_id_prefix = Config::get('company.employee_id_prefix');
+                if (substr($sublink, 0, strlen($employee_id_prefix)) == $employee_id_prefix)
+                {
+                    $str .= '<li>' . '<a href="' . $href . '">' . ucwords(in_array($sublink, $exception) ? strtoupper($sublink) : $sublink) . '</a></li>';
+                }
+                else
+                {
+                    $str .= '<li>' . '<a href="' . $href . '">' . ucwords(str_replace('-', ' ', in_array($sublink, $exception) ? strtoupper($sublink) : $sublink)) . '</a></li>';
+                }
+            }
+
+            $href .= '/';
+        }
+
+        return $str;
+    }
+
+    /**
+     * @return string
+     */
+    protected static function generate()
     {
         $sentry = Sentry::getUser();
         $result = '';
 
-        $_parent_links = Navlink::whereParentId(0)->get();
+        $_parent_links = self::whereParentId(0)->get();
 
         foreach ($_parent_links as $_parent_link)
         {
@@ -33,9 +73,9 @@ class Navlink extends Model {
 
             if ($sentry->hasAccess($href . '.view'))
             {
-                $children = Navlink::whereParentId($_parent_link->id)->get();
+                $children = self::whereParentId($_parent_link->id)->get();
 
-                $item = Navlink::generateNavLinkItem($_parent_link, $children);
+                $item = self::generateNavLinkItem($_parent_link, $children);
 
                 $result .= $item;
             }
@@ -49,13 +89,15 @@ class Navlink extends Model {
      * @param $children
      * @return string
      */
-    public static function generateNavLinkItem($link, $children)
+    protected static function generateNavLinkItem($link, $children)
     {
         $sentry = Sentry::getUser();
 
+        $special_link_ids = self::getSpecialNavLinkIds();
+
         $item = '<li';
 
-        if (Navlink::isURLActive($link->href))
+        if (self::isURLActive($link->href))
         {
             $item .= ' class="active">' . PHP_EOL;
         }
@@ -64,8 +106,7 @@ class Navlink extends Model {
             $item .= '>' . PHP_EOL;
         }
 
-        // TODO: Don't hard code [2, 15]
-        if (count($children) && ! in_array($link->id, [2, 15]))
+        if (count($children) && ! in_array($link->id, $special_link_ids))
         {
             $item .= '<a href="#">' . PHP_EOL;
         }
@@ -88,8 +129,7 @@ class Navlink extends Model {
             $item .= $link->name . PHP_EOL;
         }
 
-        // TODO: Don't hard code [2, 15]
-        if (count($children) && ! in_array($link->id, [2, 15]))
+        if (count($children) && ! in_array($link->id, $special_link_ids))
         {
             $item .= '<span class="fa arrow"></span>' . PHP_EOL;
         }
@@ -97,10 +137,9 @@ class Navlink extends Model {
 
         $item .= '</a>' . PHP_EOL;
 
-        // TODO: Don't hard code [2, 15]
-        if (count($children) && ! in_array($link->id, [2, 15]))
+        if (count($children) && ! in_array($link->id, $special_link_ids))
         {
-            if (Navlink::whereId($children[0]->parent_id)->pluck('parent_id') > 0)
+            if (self::whereId($children[0]->parent_id)->pluck('parent_id') > 0)
             {
                 $item .= '<ul class="nav nav-third-level">' . PHP_EOL;
             }
@@ -115,8 +154,8 @@ class Navlink extends Model {
 
                 if ($sentry->hasAccess($href . '.view'))
                 {
-                    $childrenOfChild = Navlink::whereParentId($child->id)->get();
-                    $item .= Navlink::generateNavLinkItem($child, $childrenOfChild);
+                    $childrenOfChild = self::whereParentId($child->id)->get();
+                    $item .= self::generateNavLinkItem($child, $childrenOfChild);
                 }
             }
 
@@ -130,10 +169,21 @@ class Navlink extends Model {
     }
 
     /**
+     * These so called special navigation links are links in which are shown on the navigation
+     * bar but we hide their child links.
+     */
+    protected static function getSpecialNavLinkIds()
+    {
+        $special_nav_link_ids = self::select('id')->whereIn('name', ['Profile', 'Employee List'])->get(['id']);
+
+        return array_flatten($special_nav_link_ids->toArray());
+    }
+
+    /**
      * @param $href
      * @return bool
      */
-    public static function isURLActive($href)
+    protected static function isURLActive($href)
     {
         $request = Request::capture();
 
@@ -146,67 +196,149 @@ class Navlink extends Model {
     }
 
     /**
-     * @param $_link
+     * @param $id
      * @return string
      */
-    public static function breadcrumb($_link)
+    protected static function permissionTable($id)
     {
-        $str = '';
+        $parents = self::whereParentId(0)->get();
 
-
-        $subLinks = explode('/', $_link);
-
-        $numSubLinks = count($subLinks);
-        $idx = 0;
-        $href = '/';
-        foreach ($subLinks as $sublink)
+        $result = '';
+        foreach ($parents as $parent)
         {
-            $href .= $sublink;
-            $exception = ['pim'];
-            if (++ $idx === $numSubLinks)
-            {
-                $str .= '<li class="active"><strong>' . ucwords(str_replace('-', ' ', in_array($sublink, $exception) ? strtoupper($sublink) : $sublink)) . '</strong></li>';
-            }
-            else
-            {
-                // TODO: Store 'GWO-' to config. Employee ID prefixes should not be hard coded.
-                if (substr($sublink, 0, 4) == 'GWO-')
-                {
-                    $str .= '<li>' . '<a href="' . $href . '">' . ucwords(in_array($sublink, $exception) ? strtoupper($sublink) : $sublink) . '</a></li>';
-                }
-                else
-                {
-                    $str .= '<li>' . '<a href="' . $href . '">' . ucwords(str_replace('-', ' ', in_array($sublink, $exception) ? strtoupper($sublink) : $sublink)) . '</a></li>';
-                }
-            }
-
-            $href .= '/';
+            $result .= self::permissionTab($parent, $id);
         }
 
-        return $str;
+        return $result;
+    }
+
+    /**
+     * @param $parent
+     * @param $id
+     * @return string
+     */
+    protected static function permissionTab($parent, $id)
+    {
+        $children = self::whereParentId($parent->id)->get();
+
+        $result = '<div id="tab-' . $parent->id . '" class="tab-pane' . ($parent->id == PROFILE_IDS ? ' active' : '') . '">';
+        $result .= '<div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="no-pdng ta-left">Permission Name</th>
+                                    <th></th>
+                                    <th class="no-pdng fix-width">View</th>
+                                    <th class="no-pdng fix-width">Update</th>
+                                    <th class="no-pdng fix-width">Delete</th>
+                                    <th class="no-pdng fix-width">Create</th>
+                                </tr>
+                            </thead>
+                            <tbody class="thin-table">';
+
+        $result .= self::generatePermissions($children, $id);
+
+        $result .= '</tbody>
+                    </table>
+                     <input class="btn btn-primary" type="submit" value="Save changes">
+              </div>
+            </div>';
+
+        return $result;
+    }
+
+    /**
+     * @param $children
+     * @param $id
+     * @param bool $indent
+     * @param bool $double
+     * @return string
+     */
+    protected static function generatePermissions($children, $id, $indent = false, $double = false)
+    {
+        $result = '';
+        foreach ($children as $child)
+        {
+            $result .= '<tr><td class="' . ($indent == true ? 'indent' : '') . ($double == true ? '-double' : '') . ' ta-left">' . $child->name . '</td>';
+            $result .= '<td></td>';
+
+            $result .= self::generateCheckbox($child, $id, PERMISSION_VIEW);
+            $result .= self::generateCheckbox($child, $id, PERMISSION_UPDATE);
+            $result .= self::generateCheckbox($child, $id, PERMISSION_DELETE);
+            $result .= self::generateCheckbox($child, $id, PERMISSION_CREATE);
+
+            $result .= '</tr>';
+
+            $childrenOfChild = self::whereParentId($child->id)->get();
+
+            if (count($childrenOfChild))
+            {
+                $result .= self::generatePermissions($childrenOfChild, $id, true, $indent == true ? true : false);
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param $link
+     * @param $id
+     * @param $permission
+     * @return string
+     */
+    protected static function generateCheckbox($link, $id, $permission)
+    {
+        if ($link->permission & $permission)
+        {
+            switch ($permission)
+            {
+                case PERMISSION_VIEW:
+                    $mode = '.view';
+                    break;
+                case PERMISSION_UPDATE:
+                    $mode = '.update';
+                    break;
+                case PERMISSION_DELETE:
+                    $mode = '.delete';
+                    break;
+                case PERMISSION_CREATE:
+                    $mode = '.create';
+                    break;
+            }
+
+            $permission_name = str_replace('/', '.', $link->href) . $mode;
+
+            $user = User::whereId($id)->first();
+
+            $checked = ($user->hasAccess($permission_name)) ? 'checked' : '';
+
+            return '<td><input type="checkbox" class="i-checks" ' . $checked . ' name="permissions[' . $permission_name . ']"></td>';
+        }
+
+        return '<td></td>';
     }
 
     /**
      * @param bool $pim
      * @return string
      */
-    public static function profileLinks($pim = false)
+    protected static function profileLinks($pim = false)
     {
         $sentry = Sentry::getUser();
 
         $nav = '<div class="col-lg-12 top-nav-b"><div class="btn-group top-nav-li"><ul>';
 
-        $navigations = Navlink::whereParentId(- 1)->get();
+        $navigations = self::whereParentId(- 1)->get();
 
         foreach ($navigations as $navigation)
         {
-            $format = Navlink::formatHref($navigation, $pim);
+            $format = self::formatHref($navigation, $pim);
 
             if ( ! $sentry->hasAccess($format['link'] . '.view')) continue;
 
             $nav .= '<li';
 
-            if (Navlink::isURLActive($format['href']))
+            if (self::isURLActive($format['href']))
             {
                 $nav .= ' class="active">';
             }
@@ -238,7 +370,7 @@ class Navlink extends Model {
      * @param $pim
      * @return array
      */
-    private static function formatHref($navigation, $pim)
+    protected static function formatHref($navigation, $pim)
     {
         if ($pim)
         {
@@ -253,129 +385,6 @@ class Navlink extends Model {
         }
 
         return ['href' => $href, 'link' => $link];
-    }
-
-    /**
-     * @param $id
-     * @return string
-     */
-    public static function permissionTable($id)
-    {
-        $parents = Navlink::whereParentId(0)->get();
-
-        $result = '';
-        foreach ($parents as $parent)
-        {
-            $result .= Navlink::permissionTab($parent, $id);
-        }
-
-        return $result;
-    }
-
-    /**
-     * @param $parent
-     * @param $id
-     * @return string
-     */
-    public static function permissionTab($parent, $id)
-    {
-        $children = Navlink::whereParentId($parent->id)->get();
-
-        $result = '<div id="tab-' . $parent->id . '" class="tab-pane' . ($parent->id == PROFILE_IDS ? ' active' : '') . '">';
-        $result .= '<div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th class="no-pdng ta-left">Permission Name</th>
-                                    <th></th>
-                                    <th class="no-pdng fix-width">View</th>
-                                    <th class="no-pdng fix-width">Update</th>
-                                    <th class="no-pdng fix-width">Delete</th>
-                                    <th class="no-pdng fix-width">Create</th>
-                                </tr>
-                            </thead>
-                            <tbody class="thin-table">';
-
-        $result .= Navlink::generatePermissions($children, $id);
-
-        $result .= '</tbody>
-                    </table>
-                     <input class="btn btn-primary" type="submit" value="Save changes">
-              </div>
-            </div>';
-
-        return $result;
-    }
-
-    /**
-     * @param $children
-     * @param $id
-     * @param bool $indent
-     * @param bool $double
-     * @return string
-     */
-    private static function generatePermissions($children, $id, $indent = false, $double = false)
-    {
-        $result = '';
-        foreach ($children as $child)
-        {
-            $result .= '<tr><td class="' . ($indent == true ? 'indent' : '') . ($double == true ? '-double' : '') . ' ta-left">' . $child->name . '</td>';
-            $result .= '<td></td>';
-
-            $result .= Navlink::generateCheckbox($child, $id, PERMISSION_VIEW);
-            $result .= Navlink::generateCheckbox($child, $id, PERMISSION_UPDATE);
-            $result .= Navlink::generateCheckbox($child, $id, PERMISSION_DELETE);
-            $result .= Navlink::generateCheckbox($child, $id, PERMISSION_CREATE);
-
-            $result .= '</tr>';
-
-            $childrenOfChild = Navlink::whereParentId($child->id)->get();
-
-            if (count($childrenOfChild))
-            {
-                $result .= Navlink::generatePermissions($childrenOfChild, $id, true, $indent == true ? true : false);
-            }
-        }
-
-        return $result;
-    }
-
-    /**
-     * @param $link
-     * @param $id
-     * @param $permission
-     * @return string
-     */
-    private static function generateCheckbox($link, $id, $permission)
-    {
-        if ($link->permission & $permission)
-        {
-            switch ($permission)
-            {
-                case PERMISSION_VIEW:
-                    $mode = '.view';
-                    break;
-                case PERMISSION_UPDATE:
-                    $mode = '.update';
-                    break;
-                case PERMISSION_DELETE:
-                    $mode = '.delete';
-                    break;
-                case PERMISSION_CREATE:
-                    $mode = '.create';
-                    break;
-            }
-
-            $permission_name = str_replace('/', '.', $link->href) . $mode;
-
-            $user = User::whereId($id)->first();
-
-            $checked = ($user->hasAccess($permission_name)) ? 'checked' : '';
-
-            return '<td><input type="checkbox" class="i-checks" ' . $checked . ' name="permissions[' . $permission_name . ']"></td>';
-        }
-
-        return '<td></td>';
     }
 
 }

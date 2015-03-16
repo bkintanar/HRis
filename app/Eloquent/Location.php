@@ -22,4 +22,4 @@ class Location extends Model {
      */
     protected $table = 'locations';
 
-} 
+}

@@ -23,18 +23,33 @@ class EmployeeListController extends Controller {
     protected $employee;
 
     /**
+     * @var EmployeeSalaryComponent
+     */
+    protected $employee_salary_component;
+
+    /**
+     * @var Pagination
+     */
+    protected $pagination;
+    
+    /**
+     * @var SalaryComponent
+     */
+    protected $salary_component;
+
+    /**
+     * @var
+     */
+    private $columns;
+
+    /**
      * @param Sentry $auth
      * @param Employee $employee
      * @param EmployeeSalaryComponent $employee_salary_component
      * @param SalaryComponent $salary_component
      * @param Pagination $pagination
      */
-    public function __construct(
-        Sentry $auth,
-        Employee $employee,
-        EmployeeSalaryComponent $employee_salary_component,
-        SalaryComponent $salary_component,
-        Pagination $pagination)
+    public function __construct(Sentry $auth, Employee $employee, EmployeeSalaryComponent $employee_salary_component, SalaryComponent $salary_component, Pagination $pagination)
     {
         parent::__construct($auth);
 
@@ -42,6 +57,15 @@ class EmployeeListController extends Controller {
         $this->employee_salary_component = $employee_salary_component;
         $this->salary_component = $salary_component;
         $this->pagination = $pagination;
+
+        $this->setColumns();
+    }
+
+    /**
+     *
+     */
+    private function setColumns()
+    {
         $this->columns = [
             'employees.id'             => 'Id',
             'employees.first_name'     => 'First Name',
@@ -69,13 +93,31 @@ class EmployeeListController extends Controller {
 
         $this->data['employees'] = $employees;
         $this->data['settings'] = ['path' => $request->path(), 'sort' => $sort, 'direction' => $direction];
-        $this->data['columns'] = $this->columns;
+        $this->data['columns'] = $this->getColumns();
         $this->data['pim'] = true;
         $this->data['pageTitle'] = 'Employee Information';
 
         return $this->template('pages.pim.employee-list.view');
     }
 
+    /**
+     * @return mixed
+     */
+    private function getColumns()
+    {
+        return $this->columns;
+    }
+
+    /**
+     * Show the PIM - Index - redirects to pim/employee-list
+     *
+     * @Get("pim")
+     * @param PIMRequest $request
+     */
+    public function pim(PIMRequest $request)
+    {
+        return Redirect::to($request->path() . '/employee-list');
+    }
 
     /**
      * Show the PIM - Employee with the given Id.
@@ -93,17 +135,6 @@ class EmployeeListController extends Controller {
         }
 
         return Response::make(View::make('errors.404'), 404);
-    }
-
-    /**
-     * Show the PIM - Index - redirects to pim/employee-list
-     *
-     * @Get("pim")
-     * @param PIMRequest $request
-     */
-    public function pim(PIMRequest $request)
-    {
-        return Redirect::to($request->path() . '/employee-list');
     }
 
     /**

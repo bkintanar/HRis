@@ -8,7 +8,7 @@
 
         <ul class="pagination">
             <li class="paginate_button @if($currentPage == 1) disabled @endif">
-                <a href="{{ $prevPageUrl . $sortPage . $directionPage }}"> prev </a>
+                <a href="{{ $prevPageUrl . $sortPage . $directionPage }}"> Previous </a>
             </li>
             @for($i = 1; $i <= $totalPages; $i++)
                 <li class="paginate_button @if($currentPage == $i) active @endif">
@@ -16,7 +16,7 @@
                 </li>
             @endfor
             <li class="paginate_button @if($currentPage == $totalPages) disabled @endif">
-                <a href="{{ $nextPageUrl . $sortPage . $directionPage }}"> next </a>
+                <a href="{{ $nextPageUrl . $sortPage . $directionPage }}"> Next </a>
             </li>
         </ul>
 

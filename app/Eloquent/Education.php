@@ -15,6 +15,8 @@ class Education extends Model {
     public $timestamps = false;
 
     /**
+     * Additional fields to treat as Carbon instances.
+     *
      * @var array
      */
     protected $dates = ['from_date', 'to_date'];
