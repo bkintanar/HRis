@@ -9,10 +9,16 @@ use Illuminate\Database\Eloquent\Model;
 class Attendance extends Model {
 
     /**
+     * Additional fields to treat as Carbon instances.
+     *
+     * @var array
+     */
+    protected $dates = ['work_date'];
+
+    /**
      * @var bool
      */
     public $timestamps = false;
-
     /**
      * The attributes that are mass assignable.
      *
