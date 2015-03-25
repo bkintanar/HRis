@@ -24,7 +24,7 @@ $I->seeCurrentUrlEquals('/profile/job');
 # Delete Job record
 $I->click('Modify');
 $I->seeCurrentUrlEquals('/profile/job/edit');
-$I->see('Test Suite');
+$I->see('Sr Web Designer');
 $id = $I->grabAttributeFrom('button[title=Delete]', 'id');
 $token = $I->grabAttributeFrom('input[name=_token]', 'value');
 

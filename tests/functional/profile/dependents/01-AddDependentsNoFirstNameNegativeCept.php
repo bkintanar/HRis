@@ -2,7 +2,7 @@
 $I = new FunctionalTester($scenario);
 
 $I->am('HRis User');
-$I->wantTo('Update Salary Details. [Positive Test]');
+$I->wantTo('Add Dependent. [Positive Test]');
 
 # Authorize User
 $I->amOnPage('/auth/login');
@@ -17,14 +17,14 @@ $I->seeCurrentUrlEquals('/dashboard');
 $I->click('Profile');
 $I->seeCurrentUrlEquals('/profile/personal-details');
 
-# Salary
-$I->click('Salary');
-$I->seeCurrentUrlEquals('/profile/salary');
-$I->click('Modify');
-$I->seeCurrentUrlEquals('/profile/salary/edit');
+# Dependents
+$I->click('Dependents');
+$I->seeCurrentUrlEquals('/profile/dependents');
 
-//$I->see('input[id=salary]');
+# Add new record
+$I->see('Add a new row');
+$I->fillField('middle_name', 'Middle');
+$I->fillField('last_name', 'Suite');
+$I->click('Save changes');
 
-$id = $I->grabAttributeFrom('input[id=salary]', 'type');
-$I->see('xs '.$id);
-
+$I->see('My Dependents');
