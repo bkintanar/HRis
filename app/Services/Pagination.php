@@ -53,4 +53,4 @@ class Pagination {
         return \View::make('partials.pagination', $data);
     }
 
-} 
+}
