@@ -1,7 +1,7 @@
 @extends('master.adm-login-master')
 
 @section('content')
-    <div class="middle-box text-center loginscreen  animated fadeInDown">
+    <div class="middle-box text-center loginscreen animated fadeInDown">
         <div>
             <div>
 

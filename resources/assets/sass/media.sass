@@ -5,7 +5,7 @@
     min-height: 1200px
 
   .navbar-static-side
-    z-index: 101
+    z-index: 2001
     position: absolute
     width: $sidebar-width
 
@@ -23,7 +23,7 @@
 
   .body-small .navbar-static-side
     display: none
-    z-index: 101
+    z-index: 2001
     position: absolute
     width: 70px
 
@@ -52,12 +52,18 @@
 
   .fixed-sidebar.body-small .navbar-static-side
     display: none
-    z-index: 101
+    z-index: 2001
     position: fixed
     width: $sidebar-width
 
   .fixed-sidebar.body-small.mini-navbar .navbar-static-side
     display: block
+
+  .ibox-tools
+    float: none
+    text-align: right
+    display: block
+
 
 @media (max-width: 350px)
 
@@ -85,3 +91,12 @@
 
   .nav.navbar-top-links li.dropdown
     display: none
+
+  .ibox-tools
+    float: none
+    text-align: left
+    display: inline-block
+
+
+
+

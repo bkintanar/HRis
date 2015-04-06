@@ -30,21 +30,27 @@
                     </div>
 
                     <div class="modal-body">
-                        <!--Cropbox-->
-                        <div class="imageBox">
-                            <div class="thumbBox"></div>
-                            <div class="spinner" style="display: none">Loading...</div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="image-crop">
+                                    <img src='/img/profile/{!! isset($employee->avatar) ? $employee->avatar : "default/0.png" !!}'>
+                                </div>
+                            </div>
                         </div>
-                        <div class="action" id="cus-input">
-                            <input type="file" id="file" style="float:left; width: 270px">
-                            <input type="button" class="btn btn-danger btn-xs" id="btnZoomOut" value="-">&nbsp;
-                            <input type="button" class="btn btn-warning btn-xs" id="btnZoomIn" value="+">&nbsp;
-                            <input type="button" class="btn btn-primary btn-xs" id="btnCrop" value="Crop">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="btn-group">
+                                    <label title="Upload image file" for="inputImage" class="btn btn-primary btn-xs">
+                                        <input type="file" accept="image/*" name="file" id="inputImage" class="hide">
+                                        Upload new image
+                                    </label>
+                                    <button class="btn btn-danger btn-xs" id="zoomOut" type="button">-</button>
+                                    <button class="btn btn-warning btn-xs" id="zoomIn" type="button">+</button>
+                                    <button class="btn btn-white btn-xs" id="crop" type="button">Crop</button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="cropped">
-
-                        </div>
-                        <!--//Cropbox-->
+                        <!--//Cropper-->
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -61,6 +67,7 @@
     {!! Html::style('/css/plugins/iCheck/custom.css') !!}
     {!! Html::style('/css/plugins/datepicker/datepicker3.css') !!}
     {!! Html::style('/css/plugins/chosen/chosen.css') !!}
+    {!! Html::style('/css/plugins/cropper/cropper.min.css') !!}
 
 @stop
 
@@ -73,8 +80,8 @@
     {!! Html::script('/js/plugins/iCheck/icheck.min.js') !!}
     <!-- Chosen -->
     {!! Html::script('/js/plugins/chosen/chosen.jquery.js') !!}
-    <!-- Cropbox -->
-    {!! Html::script('/js/plugins/cropbox/cropbox.js') !!}
+    <!-- Cropper -->
+    {!! Html::script('/js/plugins/cropper/cropper.min.js') !!}
 
     <script>
         function checkEmployeeId (){
@@ -113,50 +120,72 @@
                 autoclose: true
             });
 
-            //Cropbox
-            $(window).load(function() {
-                var options =
-                {
-                    thumbBox: '.thumbBox',
-                    spinner: '.spinner',
-                    imgSrc: '/img/profile/{!! isset($employee->avatar) ? $employee->avatar : "default/0.png" !!}'
+            // Cropper
+            var $image = $(".image-crop > img");
+            $($image).cropper({
+                aspectRatio: 1,
+                preview: ".img-preview",
+                done: function(data) {
+                    // Output the result data for cropping image.
                 }
-                var cropper = $('.imageBox').cropbox(options);
-                $('#file').on('change', function(){
-                    var reader = new FileReader();
-                    reader.onload = function(e) {
-                        options.imgSrc = e.target.result;
-                        cropper = $('.imageBox').cropbox(options);
+            });
+
+            var $inputImage = $("#inputImage");
+            if (window.FileReader) {
+                $inputImage.change(function() {
+                    var fileReader = new FileReader(),
+                             files = this.files,
+                             file;
+
+                    if (!files.length) {
+                        return;
                     }
-                    reader.readAsDataURL(this.files[0]);
-                    this.files = [];
-                })
-                $('#btnCrop').on('click', function(){
-                    var img = cropper.getDataURL();
-                    $.ajax({
-                        "type": "POST",
-                        "url": "/ajax/upload-profile-image",
-                        "data": { 
-                            "employeeId": {!! $employee->id !!},
-                            "imageData": img,
-                            "_token": $('input[name=_token]').val()
-                        }
-                    }).done(function(o) {
 
-                        $('#avatarModal').modal('toggle');
+                    file = files[0];
 
-                        @if ($employee->id == $loggedUser->employee->id)
+                    if (/^image\/\w+$/.test(file.type)) {
+                        fileReader.readAsDataURL(file);
+                        fileReader.onload = function () {
+                            $inputImage.val("");
+                            $image.cropper("reset", true).cropper("replace", this.result);
+                        };
+                    } else {
+                        showMessage("Please choose an image file.");
+                    }
+                });
+            } else {
+                $inputImage.addClass("hide");
+            }
+
+            $("#crop").click(function() {
+                $.ajax({
+                    "type": "POST",
+                    "url": "/ajax/upload-profile-image",
+                    "data": {
+                        "employeeId": {!! $employee->id !!},
+                    "imageData": $image.cropper("getDataURL"),
+                    "_token": $('input[name=_token]').val()
+                    }
+                }).done(function(o) {
+
+                    $('#avatarModal').modal('toggle');
+
+                    // If changing own photo, change photo in the navigation as well
+                    @if ($employee->id == $loggedUser->employee->id)
                         $('#profile-image-nav').delay(1000).attr('src', '/img/profile/' + o);
-                        @endif
-                        $('#profile-image').delay(1000).attr('src', '/img/profile/' + o);
-                    });
-                })
-                $('#btnZoomIn').on('click', function(){
-                    cropper.zoomIn();
-                })
-                $('#btnZoomOut').on('click', function(){
-                    cropper.zoomOut();
-                })
+                    @endif
+
+                    // Change the employee's photo with the uploaded one
+                    $('#profile-image').delay(1000).attr('src', '/img/profile/' + o);
+                });
+            });
+
+            $("#zoomIn").click(function() {
+                $image.cropper("zoom", 0.1);
+            });
+
+            $("#zoomOut").click(function() {
+                $image.cropper("zoom", -0.1);
             });
 
             // Chosen

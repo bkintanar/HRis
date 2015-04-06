@@ -254,7 +254,7 @@
 .chat-element, .media-body
   overflow: hidden
 
-.media-body
+.chat-element .media-body
   display: block
 
 .chat-element > .pull-left
@@ -355,6 +355,42 @@ a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.acti
   margin-bottom: -1px
   padding: 10px 15px
   position: relative
+
+.elements-list .list-group-item
+  border-left: none
+  border-right: none
+  padding: 15px 25px
+
+
+
+.elements-list .list-group-item:first-child
+  border-left: none
+  border-right: none
+  border-top: none !important
+
+.elements-list .list-group
+  margin-bottom: 0
+
+
+.elements-list a
+  color: inherit
+
+
+.elements-list .list-group-item.active,
+.elements-list .list-group-item:hover
+  background: $gray
+  color: inherit
+  border-color: $border-color
+  border-radius: 0
+
+
+.elements-list li.active
+  transition: none
+
+
+.element-detail-box
+  padding: 25px
+
 
 /* FLOT CHART  */
 
@@ -531,24 +567,31 @@ table.dataTable thead .sorting:after
 
 /* PEACE */
 
+.pace
+  -webkit-pointer-events: none
+  pointer-events: none
+  -webkit-user-select: none
+  -moz-user-select: none
+  user-select: none
+
+
+.pace-inactive
+  display: none
+
+
 .pace .pace-progress
   background: $navy
   position: fixed
   z-index: 2000
-  top: 0px
-  left: $sidebar-width
+  top: 0
+  right: 100%
+  width: 100%
   height: 2px
 
-  -webkit-transition: width 1s
-  -moz-transition: width 1s
-  -o-transition: width 1s
-  transition: width 1s
-
-.body-small .pace .pace-progress
-  left: 0px
 
 .pace-inactive
   display: none
+
 
 /* WIDGETS */
 
@@ -670,7 +713,7 @@ table.dataTable thead .sorting:after
   width: 100%
 
 .form-control:focus, .single-line:focus
-  border-color: $navy
+  border-color: $navy !important
 
 .has-success .form-control
   border-color: $navy
@@ -1218,10 +1261,10 @@ label.error
   margin: auto 0.5em auto -1.5em
 
 #toast-container > .toast-warning:before
-  content: "\f003"
+  content: "\f0e7"
 
 #toast-container > .toast-error:before
-  content: "\f001"
+  content: "\f071"
 
 #toast-container > .toast-info:before
   content: "\f005"
@@ -1633,4 +1676,3 @@ a.forum-item-title:hover
 
   .center-orientation .cssanimations .vertical-timeline-content.is-hidden
     visibility: hidden
-
