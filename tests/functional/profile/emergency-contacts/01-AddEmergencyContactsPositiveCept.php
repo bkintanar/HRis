@@ -2,7 +2,7 @@
 $I = new FunctionalTester($scenario);
 
 $I->am('HRis User');
-$I->wantTo('Add Work Shifts. [Positive Test]');
+$I->wantTo('Add Emergency Contact. [Positive Test]');
 
 # Authorize User
 $I->amOnPage('/auth/login');
@@ -17,16 +17,17 @@ $I->seeCurrentUrlEquals('/dashboard');
 $I->click('Profile');
 $I->seeCurrentUrlEquals('/profile/personal-details');
 
-# Qualifications
-$I->click('Work Shifts');
-$I->seeCurrentUrlEquals('/profile/work-shifts');
+# Emergency Contacts
+$I->click('Emergency Contacts');
+$I->seeCurrentUrlEquals('/profile/emergency-contacts');
 
 # Add new record
-$I->click('Modify');
-$I->seeCurrentUrlEquals('/profile/work-shifts/edit');
-$I->selectOption('form select[name=work_shift_id]', 'Admin');
+$I->see('Add a new row');
+$I->fillField('first_name', 'Test');
+$I->fillField('last_name', 'Suite');
 $I->click('Save changes');
 
-$I->seeCurrentUrlEquals('/profile/work-shifts');
-$I->see('Record successfully updated.');
+$I->seeCurrentUrlEquals('/profile/emergency-contacts');
+$I->see('Record successfully added.');
+$I->see('Test  Suite');
 

@@ -9,6 +9,9 @@ use HRis\Http\Requests\Profile\SalaryRequest;
 use HRis\Services\Salary;
 use Redirect;
 
+/**
+ * @Middleware("auth")
+ */
 class SalaryComputationsController extends Controller {
 
     public function __construct(Sentry $auth, Employee $employee, EmployeeSalaryComponent $employee_salary_component, Salary $salary_services)
@@ -60,7 +63,7 @@ class SalaryComputationsController extends Controller {
      */
     public function showSalaryEditForm(SalaryRequest $request, $employee_id = null)
     {
-        $employee = $this->employee->getEmployeeSalaryDetails($employee_id, $this->loggedUser->id);
+        $employee = $this->employee->getEmployeeSalaryDetails($employee_id, $this->loggedUser->employee->id);
 
         $salary = $this->salary_services->getSalaryDetails($employee);
 

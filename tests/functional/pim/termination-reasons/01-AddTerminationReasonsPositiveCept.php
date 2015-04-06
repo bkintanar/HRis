@@ -2,7 +2,7 @@
 $I = new FunctionalTester($scenario);
 
 $I->am('HRis User');
-$I->wantTo('Add Emergency Contact. [Positive Test]');
+$I->wantTo('Add Termination Reason. [Positive Test]');
 
 # Authorize User
 $I->amOnPage('/auth/login');
@@ -13,20 +13,16 @@ $I->click('Login');
 # Dashboard
 $I->seeCurrentUrlEquals('/dashboard');
 
-# Profile
-$I->click('Profile');
-$I->seeCurrentUrlEquals('/profile/personal-details');
-
-$I->click('Emergency Contacts');
-$I->seeCurrentUrlEquals('/profile/emergency-contacts');
+# Termination Reasons
+$I->click('Termination Reasons');
+$I->seeCurrentUrlEquals('/pim/configuration/termination-reasons');
 
 # Add new record
 $I->see('Add a new row');
-$I->fillField('first_name', 'Test');
-$I->fillField('last_name', 'Suite');
+$I->fillField('name', 'Test');
 $I->click('Save changes');
 
-$I->seeCurrentUrlEquals('/profile/emergency-contacts');
+$I->seeCurrentUrlEquals('/pim/configuration/termination-reasons');
 $I->see('Record successfully added.');
-$I->see('Test  Suite');
+$I->see('Test');
 

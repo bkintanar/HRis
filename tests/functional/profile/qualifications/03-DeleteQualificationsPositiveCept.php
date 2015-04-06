@@ -2,7 +2,7 @@
 $I = new FunctionalTester($scenario);
 
 $I->am('HRis User');
-$I->wantTo('Add Qualifications. [Positive Test]');
+$I->wantTo('Delete Qualifications(Work Experience). [Positive Test]');
 
 # Authorize User
 $I->amOnPage('/auth/login');
@@ -21,12 +21,11 @@ $I->seeCurrentUrlEquals('/profile/personal-details');
 $I->click('Qualifications');
 $I->seeCurrentUrlEquals('/profile/qualifications');
 
-# Add new record
-$I->see('Add a new row');
-$I->fillField('company', 'Test');
-$I->fillField('job_title', 'Suite');
-$I->click('Save changes');
+# Delete record
+$I->see('Tested');
+$id = $I->grabAttributeFrom('button[title=Edit]', 'id');
+$token = $I->grabAttributeFrom('input[name=_token]', 'value');
+$I->fillField('input[name=work_experience_id]', $id);
 
-$I->seeCurrentUrlEquals('/profile/qualifications');
-$I->see('Record successfully added.');
-
+$I->sendAjaxPostRequest('/ajax/profile/qualifications/work-experience', ['id' => $id, '_token' => $token, '_method' => 'DELETE']); // POST
+$I->dontSee('Tested');

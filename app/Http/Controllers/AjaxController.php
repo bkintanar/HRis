@@ -784,8 +784,8 @@ class AjaxController extends Controller {
     /**
      * Delete the profile work-shift details.
      *
-     * @Delete("ajax/profile/work-shift/edit")
-     * @Delete("ajax/pim/employee-list/{id}/work-shift/edit")
+     * @Delete("ajax/profile/work-shifts/edit")
+     * @Delete("ajax/pim/employee-list/{id}/work-shifts/edit")
      *
      * @param WorkShiftRequest $request
      */

@@ -11,8 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 use Input;
 
 /**
- * Class WorkShiftController
- * @package HRis\Http\Controllers\Profile
+ * @Middleware("auth")
  */
 class WorkShiftController extends Controller {
 
