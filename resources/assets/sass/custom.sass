@@ -40,7 +40,7 @@
 	background: url(../img/bgblur_03.jpg)
 
 .greenpro-bg 
-	background: url(../img/bgblur_profile-bg.jpg)
+	background: url(../img/bgblur_profile-bg.jpg) no-repeat center center / cover
 
 .grad-red .col-sm-6 h2, .grad-red .col-sm-6 ol, .greenpro-bg .col-sm-6 h2, .greenpro-bg .col-sm-6 ol  
 	color: #fff
@@ -263,3 +263,81 @@ th.fix-width
 
 .logo-wrapper img
   width: 100%
+
+/** Login Page ---------- */
+.loginscreen.middle-box
+	margin: auto !important
+
+/** Avatar -------------- */
+.image-crop
+	max-height: 300px;
+
+.image-crop *
+	margin: auto
+
+.modal-close
+	font-size: 13px
+	float: left
+	border: 0
+	background: transparent
+	text-decoration: underline
+	color: #1ab394
+	outline: none
+	-webkit-box-shadow: 0 0 0
+	-moz-box-shadow: 0 0 0
+	box-shadow: 0 0 0
+
+.cropper-container[style]
+	left: 0 !important
+
+.btn-zoom	
+	text-align: center
+	margin: 20px auto
+
+.btn-zoom button
+	display: inline-block
+	vertical-align: top
+	width: 80px
+	margin-bottom: 5px
+	font-size: 14px
+	outline: none
+	-webkit-box-shadow: 0 0 0
+	-moz-box-shadow: 0 0 0
+	box-shadow: 0 0 0
+
+/** Mini Sidebar -------------- */
+
+.nav-header
+	border: 0 !important
+
+#side-menu>li
+	border-left: 4px solid #2F4050
+
+#side-menu>li:hover
+	border-left: 4px solid #293846	
+
+
+#side-menu>li.active,
+#side-menu>li.active:hover
+	border-left: 4px solid #19aa8d		
+
+.fixed-sidebar.mini-navbar #side-menu li a .nav-label
+	display: none
+
+.fixed-sidebar.mini-navbar #page-wrapper,
+.fixed-sidebar.mini-navbar .footer.fixed
+	margin-left: 85px !important	
+ 
+.fixed-sidebar.mini-navbar .navbar-static-side
+	width: 85px !important
+	background: #2F4050;
+
+.fixed-sidebar.mini-navbar .nav-second-level li
+	margin: auto;
+
+.fixed-sidebar.mini-navbar .nav-second-level li a	
+	padding: 10px 10px 10px 25px
+	font-size: 0 !important
+	
+.fixed-sidebar.mini-navbar .nav-second-level li a i.fa	
+	font-size: 15px	

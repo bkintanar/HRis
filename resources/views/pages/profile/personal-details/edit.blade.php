@@ -31,25 +31,35 @@
 
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="image-crop">
                                     <img src='/img/profile/{!! isset($employee->avatar) ? $employee->avatar : "default/0.png" !!}'>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="btn-group">
-                                    <label title="Upload image file" for="inputImage" class="btn btn-primary btn-xs">
-                                        <input type="file" accept="image/*" name="file" id="inputImage" class="hide">
-                                        Upload new image
-                                    </label>
-                                    <button class="btn btn-danger btn-xs" id="zoomOut" type="button">-</button>
-                                    <button class="btn btn-warning btn-xs" id="zoomIn" type="button">+</button>
-                                    <button class="btn btn-white btn-xs" id="crop" type="button">Crop</button>
+                            <div class="col-md-12">
+                                <div class="btn-zoom">
+                                <button class="btn btn-danger btn-xs" id="zoomOut" type="button">-</button>
+                                <button class="btn btn-warning btn-xs" id="zoomIn" type="button">+</button>
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="button" class="modal-close btn-sm" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Cancel</span></button>
+
+                                <label title="Upload image file" for="inputImage" class="btn btn-white btn-sm">
+                                    <input type="file" accept="image/*" name="file" id="inputImage" class="hide">
+                                    Upload new image
+                                </label>
+                                
+                                <button class="btn btn-primary btn-sm" id="crop" type="button">Crop And Save</button>
+
+                            </div>
+                        </div>
+                    </div>
                         <!--//Cropper-->
                     </div>
                 </div><!-- /.modal-content -->
@@ -123,11 +133,14 @@
             // Cropper
             var $image = $(".image-crop > img");
             $($image).cropper({
-                aspectRatio: 1,
-                preview: ".img-preview",
-                done: function(data) {
-                    // Output the result data for cropping image.
-                }
+              aspectRatio: 1,
+              strict: false,
+              guides: false,
+              highlight: false,
+              dragCrop: false,
+              movable: false,
+              resizable: false,
+              zoom: 0.2,
             });
 
             var $inputImage = $("#inputImage");
