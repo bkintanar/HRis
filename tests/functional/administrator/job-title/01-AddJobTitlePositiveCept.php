@@ -2,7 +2,7 @@
 $I = new FunctionalTester($scenario);
 
 $I->am('HRis User');
-$I->wantTo('Add Job Title. [Negative Test]');
+$I->wantTo('Add Job Title. [Positive Test]');
 
 # Authorize User
 $I->amOnPage('/auth/login');
@@ -19,10 +19,10 @@ $I->seeCurrentUrlEquals('/admin/job/titles');
 
 # Add new record
 $I->see('Add a new row');
-$I->fillField('name', '');
-$I->fillField('description', 'Description Test: ' . Carbon::now()->toDateTimeString());
+$I->fillField('name', 'Test');
+$I->fillField('description', 'Description Test: ' . Carbon::now()->toDateString());
 $I->click('Save changes');
 
 $I->seeCurrentUrlEquals('/admin/job/titles');
-$I->cantSee('Record successfully added.');
+$I->see('Record successfully added.');
 

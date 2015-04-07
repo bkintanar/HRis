@@ -23,11 +23,8 @@ $I->seeCurrentUrlEquals('/profile/dependents');
 
 # Add new record
 $I->see('Add a new row');
-$I->fillField('first_name', 'Test');
+$I->fillField('middle_name', 'Middle');
 $I->fillField('last_name', 'Suite');
 $I->click('Save changes');
-$I->amOnRoute('Save changes');
 
-$I->seeCurrentUrlEquals('/profile/dependents');
-$I->see('Record successfully added.');
-$I->see('Test  Suite');
+$I->see('My Dependents');

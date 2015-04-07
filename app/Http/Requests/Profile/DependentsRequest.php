@@ -16,7 +16,11 @@ class DependentsRequest extends Request {
     {
         if (Request::isMethod('post') || Request::isMethod('patch'))
         {
-            return ['first_name', 'relationship_id', 'birth_date'];
+            return [
+                'first_name' => 'required',
+                'relationship_id',
+                'birth_date'
+            ];
         }
 
         return [];

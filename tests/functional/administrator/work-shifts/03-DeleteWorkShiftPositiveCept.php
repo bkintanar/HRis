@@ -2,7 +2,7 @@
 $I = new FunctionalTester($scenario);
 
 $I->am('HRis User');
-$I->wantTo('Add Pay Grades. [Positive Test]');
+$I->wantTo('Delete Work Shift. [Positive Test]');
 
 # Authorize User
 $I->amOnPage('/auth/login');
@@ -13,17 +13,16 @@ $I->click('Login');
 # Dashboard
 $I->seeCurrentUrlEquals('/dashboard');
 
-# Job Title
+# Work Shifts
 $I->click('Work Shifts');
 $I->seeCurrentUrlEquals('/admin/job/work-shifts');
 
 # Add new record
-$I->see('Add a new row');
-$I->fillField('name', 'test');
-$I->fillField('from_time', '01:00:00');
-$I->fillField('to_time', '24:00:00');
-$I->click('Save changes');
+$I->see('tested');
+$id = $I->grabAttributeFrom('button[title=Edit]', 'id');
+$token = $I->grabAttributeFrom('input[name=_token]', 'value');
 
-$I->seeCurrentUrlEquals('/admin/job/work-shifts');
-$I->see('Record successfully added.');
+$I->sendAjaxPostRequest('/ajax/delete-work-shift', ['id' => $id, '_token' => $token, '_method' => 'DELETE']); // POST
+$I->dontSee('Tested');
+
 

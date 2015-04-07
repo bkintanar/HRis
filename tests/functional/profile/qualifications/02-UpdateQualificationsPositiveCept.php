@@ -2,7 +2,7 @@
 $I = new FunctionalTester($scenario);
 
 $I->am('HRis User');
-$I->wantTo('Update Dependent. [Positive Test]');
+$I->wantTo('Update Qualifications(Work Experience). [Positive Test]');
 
 # Authorize User
 $I->amOnPage('/auth/login');
@@ -17,20 +17,23 @@ $I->seeCurrentUrlEquals('/dashboard');
 $I->click('Profile');
 $I->seeCurrentUrlEquals('/profile/personal-details');
 
-# Dependents
-$I->click('Dependents');
-$I->seeCurrentUrlEquals('/profile/dependents');
+# Qualifications
+$I->click('Qualifications');
+$I->seeCurrentUrlEquals('/profile/qualifications');
 
-# Update record
-$I->see('Test  Suite');
+# Update new record
+$I->see('Test');
+$I->see('Suite');
 $id = $I->grabAttributeFrom('button[title=Edit]', 'id');
 $I->click("button[title=Edit][id=$id]");
-$I->fillField('first_name', 'Tested');
-$I->fillField('last_name', 'Suited');
-$I->fillField('input[name=dependent_id]', $id);
+$I->fillField('company', 'Tested');
+$I->fillField('job_title', 'Suited');
+$I->fillField('input[name=work_experience_id]', $id);
 $I->fillField('input[name=_method]', 'PATCH');
 $I->click('Save changes');
 
-$I->seeCurrentUrlEquals('/profile/dependents');
+$I->seeCurrentUrlEquals('/profile/qualifications');
 $I->see('Record successfully updated.');
-$I->see('Tested  Suited');
+$I->see('Tested');
+$I->see('Suited');
+

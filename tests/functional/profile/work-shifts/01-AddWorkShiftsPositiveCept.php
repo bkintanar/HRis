@@ -2,7 +2,7 @@
 $I = new FunctionalTester($scenario);
 
 $I->am('HRis User');
-$I->wantTo('Update My Salary Details. [Positive Test]');
+$I->wantTo('Add Work Shifts. [Positive Test]');
 
 # Authorize User
 $I->amOnPage('/auth/login');
@@ -17,16 +17,17 @@ $I->seeCurrentUrlEquals('/dashboard');
 $I->click('Profile');
 $I->seeCurrentUrlEquals('/profile/personal-details');
 
-# Salary
-$I->click('Salary');
-$I->seeCurrentUrlEquals('/profile/salary');
+# Qualifications
+$I->click('Work Shifts');
+$I->seeCurrentUrlEquals('/profile/work-shifts');
 
-# Modify record
-$I->amOnPage('/profile/salary/edit');
-$I->fillField('Monthly_Basic["value"]', '50000.00');
+# Add new record
+$I->click('Modify');
+$I->seeCurrentUrlEquals('/profile/work-shifts/edit');
+$I->selectOption('form select[name=work_shift_id]', 'tested');
+$I->fillField('effective_date', Carbon::now()->toDateString());
 $I->click('Save changes');
 
-$I->seeCurrentUrlEquals('/profile/salary');
+$I->seeCurrentUrlEquals('/profile/work-shifts');
 $I->see('Record successfully updated.');
-
 

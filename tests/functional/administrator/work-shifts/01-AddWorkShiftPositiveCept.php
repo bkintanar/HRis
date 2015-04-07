@@ -2,7 +2,7 @@
 $I = new FunctionalTester($scenario);
 
 $I->am('HRis User');
-$I->wantTo('Add Dependent. [Positive Test]');
+$I->wantTo('Add Work Shift. [Positive Test]');
 
 # Authorize User
 $I->amOnPage('/auth/login');
@@ -13,19 +13,17 @@ $I->click('Login');
 # Dashboard
 $I->seeCurrentUrlEquals('/dashboard');
 
-# Profile
-$I->click('Profile');
-$I->seeCurrentUrlEquals('/profile/personal-details');
-
-$I->click('Dependents');
-$I->seeCurrentUrlEquals('/profile/dependents');
+# Work Shifts
+$I->click('Work Shifts');
+$I->seeCurrentUrlEquals('/admin/job/work-shifts');
 
 # Add new record
 $I->see('Add a new row');
-$I->fillField('first_name', 'Test');
-$I->fillField('last_name', 'Suite');
+$I->fillField('name', 'test');
+$I->fillField('from_time', '01:00:00');
+$I->fillField('to_time', '24:00:00');
 $I->click('Save changes');
 
-$I->seeCurrentUrlEquals('/profile/dependents');
+$I->seeCurrentUrlEquals('/admin/job/work-shifts');
 $I->see('Record successfully added.');
-$I->see('Test  Suite');
+
