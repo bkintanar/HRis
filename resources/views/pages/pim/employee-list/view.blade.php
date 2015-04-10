@@ -39,8 +39,10 @@
                                     <td>{{ isset($employee->job) ? $employee->job : '' }}</td>
                                     <td><span class="label {{ isset($employee->class) ? $employee->class : '' }}">{{ isset($employee->status) ? $employee->status : '' }}</span></td>
                                     <td>
-                                        <button rel="edit" id="{{$employee->id}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-paste"></i></button>
-                                        <button rel="delete" id="{{$employee->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-trash"></i></button>
+                                        <button rel="edit" id="{{$employee->id}}" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom"
+data-toggle="tooltip" data-placement="bottom" title="Edit" type="button"><i class="fa fa-paste"></i></button>
+                                        <button rel="delete" id="{{$employee->id}}" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom"
+data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i class="fa fa-trash"></i></button>
                                     </td>
                                 </tr>
                                 @endforeach
