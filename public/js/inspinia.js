@@ -14,8 +14,7 @@ $(document).ready(function () {
         $('body').removeClass('body-small')
     }
 
-    // MetsiMenu
-    $('#side-menu').metisMenu();
+    
 
     // Collapse ibox function
     $('.collapse-link').click( function() {
@@ -87,8 +86,17 @@ $(document).ready(function () {
     $('.navbar-minimalize').click(function () {
         $("body").toggleClass("mini-navbar");
         SmoothlyMenu();
-
+        //sidemenu_init();
     });
+
+    // MetsiMenu
+    sidemenu_init();
+
+    function sidemenu_init(){
+        if ( !$('body').hasClass('mini-navbar') ) { 
+            $('#side-menu').metisMenu();
+        }
+    }
 
     // Tooltips demo
     $('.tooltip-demo').tooltip({
