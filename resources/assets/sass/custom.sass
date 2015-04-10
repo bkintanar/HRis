@@ -1,4 +1,7 @@
 /*custom CSS*/
+body
+	background-color: $gray
+
 .input-full-width 
 	width: 100%
 
@@ -37,10 +40,10 @@
 	margin-right: 6px
 
 .grad-red 
-	background: url(../img/bgblur_03.jpg)
+	background: $navy
 
 .greenpro-bg 
-	background: url(../img/bgblur_profile-bg.jpg) no-repeat center center / cover
+	background: $navy
 
 .grad-red .col-sm-6 h2, .grad-red .col-sm-6 ol, .greenpro-bg .col-sm-6 h2, .greenpro-bg .col-sm-6 ol  
 	color: #fff
@@ -99,6 +102,7 @@
 	width: 361px
 	margin: 0 auto
 	padding: 10px 0
+
 
 /*Crop-Box-CSS*/
 .imageBox
@@ -171,7 +175,7 @@
     z-index: 9
 
 .top-nav-li ul li:active 
-    background: #18a689
+    background: $navy
 
 .top-nav-li ul li:last-child 
     border-right: none
@@ -193,7 +197,7 @@
 
 .top-nav-li .active 
 	color: #fff
-	background: #18a689
+	background: $navy
 
 .top-nav-li .active a
   color: #fff !important
@@ -264,6 +268,15 @@ th.fix-width
 .logo-wrapper img
   width: 100%
 
+
+/** Custom ---------- */
+
+.badge-success, .label-success	
+	background-color: $green
+
+.count-info .label
+	background-color: $red
+
 /** Login Page ---------- */
 .loginscreen.middle-box
 	margin: auto !important
@@ -305,6 +318,9 @@ th.fix-width
 	-moz-box-shadow: 0 0 0
 	box-shadow: 0 0 0
 
+.fixed-sidebar .navbar-static-side	
+	background-color: $nav-bg
+
 /** Mini Sidebar -------------- */
 
 .nav-header
@@ -319,17 +335,58 @@ th.fix-width
 
 #side-menu>li.active,
 #side-menu>li.active:hover
-	border-left: 4px solid #19aa8d		
+	border-left: 4px solid $navy	
+
+ 
+.fixed-sidebar.mini-navbar .nav-second-level 
+	li
+		border-left: 4px solid #2F4050
+
+		a
+			padding: 14px 20px 14px 25px
+
+		&:hover 
+			border-left-color: $navy	
+
+		&:last-child
+			margin-bottom: auto
 
 .fixed-sidebar.mini-navbar #side-menu li a .nav-label
 	display: none
 
-.fixed-sidebar.mini-navbar #page-wrapper,
+.fixed-sidebar.mini-navbar li:hover .nav-second-level, .fixed-sidebar.mini-navbar .nav-second-level li:hover .nav-third-level 
+	display: block
+
+.fixed-sidebar.mini-navbar .nav-second-level, .fixed-sidebar.mini-navbar .nav-third-level
+	position: absolute !important
+	left: 100% !important
+	top: 0px
+	background-color: #2f4050
+	font-size: 12px
+	min-width: 180px
+	display: none
+
+.fixed-sidebar.mini-navbar .nav-second-level li a, .fixed-sidebar.mini-navbar .nav-third-level li a
+	padding: 14px 20px 14px 25px !important
+	-webkit-border-radius: 0 !important
+	-moz-border-radius: 0 !important
+	border-radius: 0 !important
+
+.fixed-sidebar.mini-navbar .nav-second-level li a:focus, .fixed-sidebar.mini-navbar .nav-third-level li a:focus
+	background: transparent !important
+
+.fixed-sidebar.mini-navbar .nav li:hover
+	border-left: 4px solid $navy !important	 
+
+.fixed-sidebar.mini-navbar span.fa.arrow, .fixed-sidebar.mini-navbar .nav-second-level li a .fa, .fixed-sidebar.mini-navbar .nav-third-level li a .fa
+	display: none !important	
+
+.fixed-sidebar.mini-navbar #page-wrapper, 
 .fixed-sidebar.mini-navbar .footer.fixed
-	margin-left: 85px !important	
+	margin-left: 70px !important	
  
 .fixed-sidebar.mini-navbar .navbar-static-side
-	width: 85px !important
+	width: 70px !important
 	background: #2F4050;
 
 .fixed-sidebar.mini-navbar .nav-second-level li
@@ -337,7 +394,15 @@ th.fix-width
 
 .fixed-sidebar.mini-navbar .nav-second-level li a	
 	padding: 10px 10px 10px 25px
-	font-size: 0 !important
 	
 .fixed-sidebar.mini-navbar .nav-second-level li a i.fa	
 	font-size: 15px	
+
+
+/** Selectbox -------------- */
+
+.chosen-container-single 
+	.chosen-single 
+		div
+			height: 18px !important
+			top: 5px !important 
