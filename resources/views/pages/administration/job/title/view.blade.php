@@ -40,10 +40,10 @@
                                         <td>{{ $jobTitle->description }}</td>
                                         <td>
                                             @if($loggedUser->hasAccess('admin.job.titles.update'))
-                                            <button rel="edit" id="{{$jobTitle->id}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-paste"></i></button>
+                                            <button rel="edit" id="{{$jobTitle->id}}" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" title="Edit" type="button"><i class="fa fa-paste"></i></button>
                                             @endif
                                             @if($loggedUser->hasAccess('admin.job.titles.delete'))
-                                            <button rel="delete" id="{{$jobTitle->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-trash"></i></button>
+                                            <button rel="delete" id="{{$jobTitle->id}}" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i class="fa fa-trash"></i></button>
                                             @endif
                                         </td>
                                     </tr>
