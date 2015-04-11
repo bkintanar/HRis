@@ -38,10 +38,10 @@
                                         <td>{{ $terminationReason->name }}</td>
                                         <td>
                                             @if($loggedUser->hasAccess('pim.configuration.termination-reasons.update'))
-                                            <button rel="edit" id="{{$terminationReason->id}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-paste"></i></button>
+                                            <button rel="edit" id="{{$terminationReason->id}}" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" title="Edit" type="button"><i class="fa fa-paste"></i></button>
                                             @endif
                                             @if($loggedUser->hasAccess('pim.configuration.termination-reasons.delete'))
-                                            <button rel="delete" id="{{$terminationReason->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-trash"></i></button>
+                                            <button rel="delete" id="{{$terminationReason->id}}" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i class="fa fa-trash"></i></button>
                                             @endif
                                         </td>
                                     </tr>

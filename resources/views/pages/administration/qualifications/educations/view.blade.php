@@ -38,10 +38,10 @@
                                         <td>{{ $education->name }}</td>
                                         <td>
                                             @if($loggedUser->hasAccess('admin.qualifications.educations.update'))
-                                            <button rel="edit" id="{{$education->id}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-paste"></i></button>
+                                            <button rel="edit" id="{{$education->id}}" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" title="Edit" type="button"><i class="fa fa-paste"></i></button>
                                             @endif
                                             @if($loggedUser->hasAccess('admin.qualifications.educations.delete'))
-                                            <button rel="delete" id="{{$education->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-trash"></i></button>
+                                            <button rel="delete" id="{{$education->id}}" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i class="fa fa-trash"></i></button>
                                             @endif
                                         </td>
                                     </tr>

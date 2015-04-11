@@ -2,6 +2,9 @@
 body
 	background-color: $gray
 
+a
+	outline: none !important	
+
 .input-full-width 
 	width: 100%
 
@@ -40,10 +43,10 @@ body
 	margin-right: 6px
 
 .grad-red 
-	background: $green
+	background: $navy
 
 .greenpro-bg 
-	background: $navy
+	background: $green
 
 .grad-red .col-sm-6 h2, .grad-red .col-sm-6 ol, .greenpro-bg .col-sm-6 h2, .greenpro-bg .col-sm-6 ol  
 	color: #fff
@@ -61,21 +64,12 @@ body
 
 .profile-img 
 	display: block
-	margin-top: 8px
-	margin-bottom: -30px
-	float: right
-	margin-right: 21px
+	clear: both
+	overflow: hidden
 
 .profile-img img 
-	float: right
 	height: 79px
 	width: 79px
-
-.profile-details 
-	float: right
-	text-align: right
-	margin-right: 14px
-	margin-top: 10px
 
 .profile-details h2, .profile-details h2  
 	padding: 0
@@ -155,52 +149,45 @@ body
 	-moz-border-radius: 3px
 	border-radius: 3px
 	background: #fff
-	display: inline-block
 	z-index: 10
 	overflow: hidden
 
-.top-nav-li ul li 
-    display: table-cell
-    padding: 0
-    margin: 0
-    border-right: 1px solid #EAEAEA
-    border-top: 1px solid #EAEAEA
-    border-bottom: 1px solid #EAEAEA
+	li 
+	    display: inline-block
+	    padding: 0
+	    margin: 0
+	    border-right: 1px solid #EAEAEA
+	    border-top: 1px solid #EAEAEA
+	    border-bottom: 1px solid #EAEAEA
 
-.top-nav-li ul li:hover 
-    border-top: 1px solid #DFDFDF
-    border-bottom: 1px solid #DFDFDF
-    border-right: 1px solid #DFDFDF
-    overflow: hidden
-    z-index: 9
+	    &:hover
+	    	border-top-color: #DFDFDF
+	    	border-right-color: #DFDFDF
+	    	border-bottom-color: #DFDFDF
 
-.top-nav-li ul li:active 
-    background: $navy
+	    &:active
+	    	background: $green
+	    	color: #fff !important
 
-.top-nav-li ul li:last-child 
-    border-right: none
+    		a
+    			color: #fff !important
 
-.top-nav-li ul li a 
-    color: #676a6c
-    padding: 6px 8px
-    display: inline-block
-    z-index: 9999
+	    &:last-child
+	    	border-right: 0
 
-.top-nav-li ul li a:hover 
-    border: 1px solid #EAEAEA
+	    	a
+	    		border-right: 0
 
-.top-nav-li ul li a:active 
-        color: #fff
+	    &.active
+	    	background: $green
+	    	a
+	    		color: #fff !important		
 
-.top-nav-li ul li a:last-child 
-    border: none
-
-.top-nav-li .active 
-	color: #fff
-	background: $navy
-
-.top-nav-li .active a
-  color: #fff !important
+	    a
+	    	color: #676a6c
+		    padding: 6px 8px
+		    display: inline-block
+		    z-index: 9999	
 
 tbody.thin-table td
   padding: 3px 0 !important
@@ -271,11 +258,71 @@ th.fix-width
 
 /** Custom ---------- */
 
-.badge-success, .label-success	
+.badge-success, 
+.label-success	
 	background-color: $green
 
 .count-info .label
 	background-color: $red
+	line-height: 12px;
+	padding: 2px 5px;
+	position: absolute;
+	right: 2px;
+	top: 14px;
+	font-size: 9px;
+	left: auto;
+	border-radius: 10px;
+	min-width: 21px;
+
+.btn-primary
+	background: $green !important
+	border-color: $green !important
+
+.btn-ghost
+	
+	span
+		width: 20px
+		height: 2px
+		background: $dark-light
+		margin: 4px 0
+		display: block	
+		text-align: right
+		-webkit-transition: all 0.3s linear
+		transition: all 0.3s linear
+	
+	&.mini		
+		span
+			&:nth-child(2)
+				width: 25px
+
+			&:last-child
+				width: 15px	
+
+.btn-group-xs>.btn, 
+.btn-xs	
+	padding: 5px 10px	
+
+.badge-success, 
+.label-success,
+.badge-danger, 
+.label-danger	
+	font-size: 11px	
+
+.tooltip
+	&.bottom
+		.tooltip-arrow
+			border-bottom-color: $dark !important
+
+		.tooltip-inner
+			background: $dark !important
+			padding: 5px 10px
+
+button[rel="edit"],
+button[rel="delete"]
+	background: transparent !important
+	border: transparent !important
+	color: $navy !important
+	font-size: 15px !important		
 
 /** Login Page ---------- */
 .loginscreen.middle-box
@@ -307,96 +354,101 @@ th.fix-width
 	text-align: center
 	margin: 20px auto
 
-.btn-zoom button
-	display: inline-block
-	vertical-align: top
-	width: 80px
-	margin-bottom: 5px
-	font-size: 14px
-	outline: none
-	-webkit-box-shadow: 0 0 0
-	-moz-box-shadow: 0 0 0
-	box-shadow: 0 0 0
-
-.fixed-sidebar .navbar-static-side	
-	background-color: $nav-bg
+	button
+		display: inline-block
+		vertical-align: top
+		width: 80px
+		margin-bottom: 5px
+		font-size: 14px
+		outline: none
+		-webkit-box-shadow: 0 0 0
+		-moz-box-shadow: 0 0 0
+		box-shadow: 0 0 0
 
 /** Mini Sidebar -------------- */
 
 .nav-header
 	border: 0 !important
+	background-color: transparent !important
 
-#side-menu>li
-	border-left: 4px solid #2F4050
+.navbar-static-side
+	overflow: auto;	
+	background-color: $dark	
 
-#side-menu>li:hover
-	border-left: 4px solid #293846	
+#side-menu
+	
+	&>li:not(.nav-header)
+		border-left: 4px solid $dark
 
+		&:hover, 
+		&:focus, 
+		&.active, 
+		&.active:hover,
+		&.active:focus
+			border-left: 4px solid $green !important	
+			background-color: $dark-light !important
 
-#side-menu>li.active,
-#side-menu>li.active:hover
-	border-left: 4px solid $navy	
+		&:nth-last-child(1), 
+		&:nth-last-child(2)
+			&:hover, &.active, &.active:hover
+				border-left: 4px solid $navy !important
 
- 
-.fixed-sidebar.mini-navbar .nav-second-level 
-	li
-		border-left: 4px solid #2F4050
+	li	
+		border-left: 4px solid transparent !important
 
 		a
-			padding: 14px 20px 14px 25px
+			background: transparent	
 
-		&:hover 
-			border-left-color: $navy	
+		.nav-second-level, .nav-third-level
+			li
+				border-color: transparent !important
 
-		&:last-child
-			margin-bottom: auto
+				a
+					padding: 10px 20px 10px 25px
+					
+				&:last-child
+					margin-bottom: auto
 
-.fixed-sidebar.mini-navbar #side-menu li a .nav-label
-	display: none
+				&.active
+					background: transparent !important	
+	.nav-header
+		border-color: transparent !important
+				
+.fixed-sidebar.mini-navbar 
 
-.fixed-sidebar.mini-navbar li:hover .nav-second-level, .fixed-sidebar.mini-navbar .nav-second-level li:hover .nav-third-level 
-	display: block
+	#side-menu
+		li
+			a
+				.nav-label, 
+				.fa.arrow
+					display: none !important
 
-.fixed-sidebar.mini-navbar .nav-second-level, .fixed-sidebar.mini-navbar .nav-third-level
-	position: absolute !important
-	left: 100% !important
-	top: 0px
-	background-color: #2f4050
-	font-size: 12px
-	min-width: 180px
-	display: none
+		.nav-second-level, 
+		.nav-third-level
 
-.fixed-sidebar.mini-navbar .nav-second-level li a, .fixed-sidebar.mini-navbar .nav-third-level li a
-	padding: 14px 20px 14px 25px !important
-	-webkit-border-radius: 0 !important
-	-moz-border-radius: 0 !important
-	border-radius: 0 !important
+			li
+				margin: auto
 
-.fixed-sidebar.mini-navbar .nav-second-level li a:focus, .fixed-sidebar.mini-navbar .nav-third-level li a:focus
-	background: transparent !important
+				&:hover, &.active
+					border-left: 4px solid $green
+					background-color: $dark-light !important
 
-.fixed-sidebar.mini-navbar .nav li:hover
-	border-left: 4px solid $navy !important	 
+				a
+					padding: 14px 20px 14px 25px !important
+					-webkit-border-radius: 0 !important
+					-moz-border-radius: 0 !important
+					border-radius: 0 !important
 
-.fixed-sidebar.mini-navbar span.fa.arrow, .fixed-sidebar.mini-navbar .nav-second-level li a .fa, .fixed-sidebar.mini-navbar .nav-third-level li a .fa
-	display: none !important	
+					&:focus
+						background: transparent !important
 
-.fixed-sidebar.mini-navbar #page-wrapper, 
-.fixed-sidebar.mini-navbar .footer.fixed
-	margin-left: 70px !important	
- 
-.fixed-sidebar.mini-navbar .navbar-static-side
-	width: 70px !important
-	background: #2F4050;
+	#page-wrapper,
+	.footer.fixed
+		margin-left: 70px !important
 
-.fixed-sidebar.mini-navbar .nav-second-level li
-	margin: auto;
-
-.fixed-sidebar.mini-navbar .nav-second-level li a	
-	padding: 10px 10px 10px 25px
-	
-.fixed-sidebar.mini-navbar .nav-second-level li a i.fa	
-	font-size: 15px	
+	.navbar-static-side
+		width: 70px !important	
+		overflow: visible;						
 
 
 /** Selectbox -------------- */
@@ -406,3 +458,110 @@ th.fix-width
 		div
 			height: 18px !important
 			top: 5px !important 
+
+
+@media screen and (min-width: 270px)
+	.navbar-top-links
+		.dropdown-menu
+			li
+				&.divider
+					clear: both
+					overflow: hidden
+				a
+					padding: 3px 14px 3px 3px
+
+				.dropdown-messages-box
+					min-height: 50px	
+
+		.dropdown-alerts,
+		.dropdown-messages
+			margin: auto
+
+			.media-body
+				small.pull-right	
+					padding-left: 10px
+
+	.chosen-container
+		max-width: 100%
+
+	.ibox-title
+		position: relative
+
+		.ibox-tools
+			position: absolute
+			right: 0 
+			top: 0
+
+			a
+				display: block
+				width: 40px
+				height: 40px
+				margin: auto
+				text-align: center
+				line-height: 40px
+
+	.profile-img
+		float: left
+		padding-top: 20px		
+
+		img, .profile-details
+			float: left	
+			text-align: left
+
+		.profile-details
+			margin-left: 6px
+  			margin-top: 0	
+
+		span.label
+			border: 1px solid #fff
+			position: relative
+			top: 5px
+
+	.fixed-sidebar.mini-navbar 
+
+		#side-menu
+			li
+				.nav-second-level, 
+				.nav-third-level
+
+					a
+						font-size: 0
+
+						.fa
+							display: block
+							font-size: 14px
+
+						span.fa.arrow
+							display: none !important
+
+	div[style*="width:50%"]
+		width: 100%	!important					
+							
+@media screen and (min-width: 768px)	
+	.profile-img
+		float: right
+
+	.fixed-sidebar.mini-navbar 
+
+		#side-menu
+			li
+				&:hover
+					&>ul
+						display: block				
+
+			.nav-second-level, 
+			.nav-third-level
+				position: absolute !important
+				left: 100% !important
+				top: 0px
+				background-color: $dark 
+				font-size: 12px
+				min-width: 180px
+				display: none
+
+				a
+					font-size: 12px !important
+					font-weight: normal
+
+					.fa
+						display: none !important

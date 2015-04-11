@@ -14,7 +14,8 @@ $(document).ready(function () {
         $('body').removeClass('body-small')
     }
 
-    
+    // Tooltips
+    $('[data-toggle="tooltip"]').tooltip()
 
     // Collapse ibox function
     $('.collapse-link').click( function() {
@@ -85,6 +86,7 @@ $(document).ready(function () {
     // Minimalize menu
     $('.navbar-minimalize').click(function () {
         $("body").toggleClass("mini-navbar");
+        $(this).toggleClass('mini');
         SmoothlyMenu();
         //sidemenu_init();
     });
