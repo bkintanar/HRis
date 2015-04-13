@@ -321,6 +321,7 @@ button[rel="delete"]
 	border: transparent !important
 	color: $navy !important
 	font-size: 15px !important		
+	padding: 5px
 
 /** Login Page ---------- */
 .loginscreen.middle-box
@@ -446,7 +447,8 @@ button[rel="delete"]
 
 	.navbar-static-side
 		width: 70px !important	
-		overflow: visible;						
+		overflow: auto;
+		-webkit-overflow-scrolling: touch						
 
 
 /** Selectbox -------------- */
@@ -464,7 +466,15 @@ button[rel="delete"]
 		padding: 10px 15px;
 		font-size: 13px
 
+	.page-heading
+		padding: 0 10px 40px	
+
 	.navbar-top-links
+		li
+			a
+				padding-left: 8px
+				padding-right: 8px
+
 		.dropdown-menu
 			li
 				&.divider
@@ -474,7 +484,8 @@ button[rel="delete"]
 					padding: 3px 14px 3px 3px
 
 				.dropdown-messages-box
-					min-height: 50px	
+					min-height: 50px
+
 
 		.dropdown-alerts,
 		.dropdown-messages
@@ -483,6 +494,13 @@ button[rel="delete"]
 			.media-body
 				small.pull-right	
 					padding-left: 10px
+
+
+		.dropdown-alerts
+			margin-left: -100px	
+
+		.dropdown-messages
+			margin-left: -60px							
 
 	.chosen-container
 		max-width: 100%
@@ -505,15 +523,22 @@ button[rel="delete"]
 
 	.profile-img
 		float: left
-		padding-top: 20px		
+		padding-top: 20px	
+		position: relative
+		overflow: visible
+		width: 100%	
 
-		img, .profile-details
+		img, 
+		.profile-details
 			float: left	
 			text-align: left
 
 		.profile-details
+			position: absolute
+			padding-left: 80px
 			margin-left: 6px
   			margin-top: 0	
+  			
 
 		span.label
 			border: 1px solid #fff
@@ -552,7 +577,7 @@ button[rel="delete"]
 					display: block
 					width: 100%
 					text-align: left
-					padding: 8px 19.3px	
+					padding: 8px 15px	
 
 @media screen and (min-width: 500px)
 	.top-nav-li
@@ -571,6 +596,12 @@ button[rel="delete"]
 
 	.profile-img
 		float: right
+		
+	.navbar-top-links
+
+		.dropdown-alerts,
+		.dropdown-messages	
+			margin: auto
 
 	.fixed-sidebar.mini-navbar 
 
@@ -597,12 +628,28 @@ button[rel="delete"]
 					.fa
 						display: none !important
 
-@media screen and (min-width: 992px)
+	.page-heading
+		padding: 0 10px 20px						
+
+	.profile-img
+		float: left
+		padding-top: 20px	
+		position: relative
+		overflow: hidden
+		width: auto	
+
+		.profile-details
+			position: relative
+			padding-left: 0					
+
+@media screen and (min-width: 1200px)
 
 	.top-nav-li
 		display: block
 
 		ul
+			display: inline-block
+
 			li
 				display: inline-block
 				width: auto
