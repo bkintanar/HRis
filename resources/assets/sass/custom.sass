@@ -470,6 +470,11 @@ button[rel="delete"]
 		padding: 0 10px 40px	
 
 	.navbar-top-links
+		li
+			a
+				padding-left: 8px
+				padding-right: 8px
+
 		.dropdown-menu
 			li
 				&.divider
@@ -479,7 +484,8 @@ button[rel="delete"]
 					padding: 3px 14px 3px 3px
 
 				.dropdown-messages-box
-					min-height: 50px	
+					min-height: 50px
+
 
 		.dropdown-alerts,
 		.dropdown-messages
@@ -488,6 +494,13 @@ button[rel="delete"]
 			.media-body
 				small.pull-right	
 					padding-left: 10px
+
+
+		.dropdown-alerts
+			margin-left: -100px	
+
+		.dropdown-messages
+			margin-left: -60px							
 
 	.chosen-container
 		max-width: 100%
@@ -564,7 +577,7 @@ button[rel="delete"]
 					display: block
 					width: 100%
 					text-align: left
-					padding: 8px 19.3px	
+					padding: 8px 15px	
 
 @media screen and (min-width: 500px)
 	.top-nav-li
@@ -583,6 +596,12 @@ button[rel="delete"]
 
 	.profile-img
 		float: right
+		
+	.navbar-top-links
+
+		.dropdown-alerts,
+		.dropdown-messages	
+			margin: auto
 
 	.fixed-sidebar.mini-navbar 
 
