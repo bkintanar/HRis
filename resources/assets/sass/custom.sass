@@ -157,8 +157,6 @@ a
 	    padding: 0
 	    margin: 0
 	    border-right: 1px solid #EAEAEA
-	    border-top: 1px solid #EAEAEA
-	    border-bottom: 1px solid #EAEAEA
 
 	    &:hover
 	    	border-top-color: #DFDFDF
@@ -535,9 +533,34 @@ button[rel="delete"]
 							display: none !important
 
 	div[style*="width:50%"]
-		width: 100%	!important					
+		width: 100%	!important
+
+	.top-nav-li
+		display: block
+
+		ul
+			li
+				display: block
+				border-bottom: 1px solid #EAEAEA
+
+				a
+					display: block
+					width: 100%
+					text-align: left
+					padding: 10px 19.3px	
+
+@media screen and (min-width: 500px)
+	.top-nav-li
+		display: block
+
+		ul
+			li
+				display: inline-block
+				width: 49.999%
+
 							
-@media screen and (min-width: 768px)	
+@media screen and (min-width: 768px)
+
 	.profile-img
 		float: right
 
@@ -565,3 +588,14 @@ button[rel="delete"]
 
 					.fa
 						display: none !important
+
+@media screen and (min-width: 992px)
+
+	.top-nav-li
+		display: block
+
+		ul
+			li
+				display: inline-block
+				width: auto
+				border-bottom: 0						
