@@ -464,6 +464,9 @@ button[rel="delete"]
 		padding: 10px 15px;
 		font-size: 13px
 
+	.page-heading
+		padding: 0 10px 40px	
+
 	.navbar-top-links
 		.dropdown-menu
 			li
@@ -505,15 +508,22 @@ button[rel="delete"]
 
 	.profile-img
 		float: left
-		padding-top: 20px		
+		padding-top: 20px	
+		position: relative
+		overflow: visible
+		width: 100%	
 
-		img, .profile-details
+		img, 
+		.profile-details
 			float: left	
 			text-align: left
 
 		.profile-details
+			position: absolute
+			padding-left: 80px
 			margin-left: 6px
   			margin-top: 0	
+  			
 
 		span.label
 			border: 1px solid #fff
@@ -597,7 +607,21 @@ button[rel="delete"]
 					.fa
 						display: none !important
 
-@media screen and (min-width: 992px)
+	.page-heading
+		padding: 0 10px 20px						
+
+	.profile-img
+		float: left
+		padding-top: 20px	
+		position: relative
+		overflow: hidden
+		width: auto	
+
+		.profile-details
+			position: relative
+			padding-left: 0					
+
+@media screen and (min-width: 1200px)
 
 	.top-nav-li
 		display: block
