@@ -1,4 +1,6 @@
-<?php namespace HRis\Http\Controllers\Profile;
+<?php
+
+namespace HRis\Http\Controllers\Profile;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use Exception;
@@ -9,9 +11,13 @@ use HRis\Http\Requests\Profile\DependentsRequest;
 use Illuminate\Support\Facades\Redirect;
 
 /**
+ * Class DependentsController
+ * @package HRis\Http\Controllers\Profile
+ *
  * @Middleware("auth")
  */
-class DependentsController extends Controller {
+class DependentsController extends Controller
+{
 
     /**
      * @var Dependent
@@ -49,10 +55,9 @@ class DependentsController extends Controller {
      */
     public function index(DependentsRequest $request, $employee_id = null)
     {
-        $employee = $this->employee->getEmployeeById($employee_id, $this->loggedUser->id);
+        $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
-        if ( ! $employee)
-        {
+        if ( ! $employee) {
             return Response::make(View::make('errors.404'), 404);
         }
 
@@ -76,13 +81,10 @@ class DependentsController extends Controller {
      */
     public function store(DependentsRequest $request)
     {
-        try
-        {
+        try {
             $this->dependent->create($request->all());
-
-        } catch (Exception $e)
-        {
-            return Redirect::to($request->path())->with('danger', 'Unable to add record to the database.');
+        } catch (Exception $e) {
+            return Redirect::to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
 
         return Redirect::to($request->path())->with('success', 'Record successfully added.');
@@ -100,17 +102,14 @@ class DependentsController extends Controller {
     {
         $dependent = $this->dependent->whereId($request->get('dependent_id'))->first();
 
-        if ( ! $dependent)
-        {
+        if ( ! $dependent) {
             return Redirect::to($request->path())->with('danger', 'Unable to retrieve record from database.');
         }
 
-        try
-        {
+        try {
             $dependent->update($request->all());
 
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return Redirect::to($request->path())->with('danger', 'Unable to update record.');
         }
 
@@ -126,18 +125,15 @@ class DependentsController extends Controller {
      */
     public function deleteDependent(DependentsRequest $request)
     {
-        if ($request->ajax())
-        {
+        if ($request->ajax()) {
             $dependentId = $request->get('id');
 
-            try
-            {
+            try {
                 $this->dependent->whereId($dependentId)->delete();
 
                 print('success');
 
-            } catch (Exception $e)
-            {
+            } catch (Exception $e) {
                 print('failed');
             }
         }
@@ -153,18 +149,15 @@ class DependentsController extends Controller {
      */
     public function getDependent(DependentsRequest $request)
     {
-        if ($request->ajax())
-        {
+        if ($request->ajax()) {
             $dependentId = $request->get('id');
 
-            try
-            {
+            try {
                 $dependent = $this->dependent->whereId($dependentId)->first();
 
                 print(json_encode($dependent));
 
-            } catch (Exception $e)
-            {
+            } catch (Exception $e) {
                 print('failed');
             }
 

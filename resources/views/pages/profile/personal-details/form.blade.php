@@ -99,7 +99,7 @@
         </div>
     </div>
     @else
-        @if($loggedUser->hasAccess(\Request::segment(1).'.personal-details.update'))
+        @if($logged_user->hasAccess(\Request::segment(1).'.personal-details.update'))
         <div class="form-group">
             <div class="col-sm-4 col-sm-offset-2">
                 {!! Html::link(\Request::path().'/edit', 'Modify', ['class' => 'btn btn-primary btn-xs']) !!}

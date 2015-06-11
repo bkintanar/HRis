@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="ibox-content">
-                    @if($loggedUser->hasAccess('pim.configuration.termination-reasons.create'))
+                    @if($logged_user->hasAccess('pim.configuration.termination-reasons.create'))
                     <div class="">
                         <a id="addTerminationReasons" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
                     </div>
@@ -37,10 +37,10 @@
                                         <td>{{ $terminationReason->id }}</td>
                                         <td>{{ $terminationReason->name }}</td>
                                         <td>
-                                            @if($loggedUser->hasAccess('pim.configuration.termination-reasons.update'))
+                                            @if($logged_user->hasAccess('pim.configuration.termination-reasons.update'))
                                             <button rel="edit" id="{{$terminationReason->id}}" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" title="Edit" type="button"><i class="fa fa-paste"></i></button>
                                             @endif
-                                            @if($loggedUser->hasAccess('pim.configuration.termination-reasons.delete'))
+                                            @if($logged_user->hasAccess('pim.configuration.termination-reasons.delete'))
                                             <button rel="delete" id="{{$terminationReason->id}}" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i class="fa fa-trash"></i></button>
                                             @endif
                                         </td>

@@ -1,7 +1,13 @@
-<?php namespace App\Events;
+<?php
 
-abstract class Event {
+namespace HRis\Events;
+
+/**
+ * Class Event
+ * @package HRis\Events
+ */
+abstract class Event
+{
 
     //
-
 }

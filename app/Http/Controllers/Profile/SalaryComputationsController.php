@@ -1,4 +1,6 @@
-<?php namespace HRis\Http\Controllers\Profile;
+<?php
+
+namespace HRis\Http\Controllers\Profile;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use HRis\Eloquent\Employee;
@@ -15,16 +17,21 @@ use Redirect;
  *
  * @Middleware("auth")
  */
-class SalaryComputationsController extends Controller {
+class SalaryComputationsController extends Controller
+{
 
     /**
      * @param Sentry $auth
      * @param Employee $employee
-     * @param EmployeeSalaryComponents $employee_salary_components
+     * @param EmployeeSalaryComponent $employee_salary_component
      * @param Salary $salary_services
      */
-    public function __construct(Sentry $auth, Employee $employee, EmployeeSalaryComponents $employee_salary_components, Salary $salary_services)
-    {
+    public function __construct(
+        Sentry $auth,
+        Employee $employee,
+        EmployeeSalaryComponent $employee_salary_component,
+        Salary $salary_services
+    ) {
         parent::__construct($auth);
 
         $this->employee = $employee;
@@ -43,7 +50,7 @@ class SalaryComputationsController extends Controller {
      */
     public function salary(SalaryRequest $request, $employee_id = null)
     {
-        $employee = $this->employee->getEmployeeSalaryDetails($employee_id, $this->loggedUser->employee->id);
+        $employee = $this->employee->getEmployeeSalaryDetails($employee_id, $this->logged_user->employee->id);
 
         $salary = $this->salary_services->getSalaryDetails($employee);
 
@@ -70,7 +77,7 @@ class SalaryComputationsController extends Controller {
      */
     public function showSalaryEditForm(SalaryRequest $request, $employee_id = null)
     {
-        $employee = $this->employee->getEmployeeSalaryDetails($employee_id, $this->loggedUser->employee->id);
+        $employee = $this->employee->getEmployeeSalaryDetails($employee_id, $this->logged_user->employee->id);
 
         $employee_status = 'ME_S';
         $dependents = count($employee->dependents);
@@ -105,29 +112,23 @@ class SalaryComputationsController extends Controller {
         $id = $request->get('employee_id');
         $fields = $request->except('_method', '_token', 'employee_id');
 
-        foreach ($fields as $value)
-        {
+        foreach ($fields as $value) {
             $value['employee_id'] = $id;
-            if ($value['effective_date'] == 0)
-            {
+            if ($value['effective_date'] == 0) {
                 $value['effective_date'] = date('Y-m-d');
             }
 
-            try
-            {
-                $employee_salary_component = $this->employee_salary_component->getCurrentComponentValue($id, $value['component_id']);
-                if ($employee_salary_component->value != 0 && $employee_salary_component->value != $value['value'])
-                {
+            try {
+                $employee_salary_component = $this->employee_salary_component->getCurrentComponentValue($id,
+                    $value['component_id']);
+                if ($employee_salary_component->value != 0 && $employee_salary_component->value != $value['value']) {
                     $this->employee_salary_component->create($value);
-                }
-                else
-                {
+                } else {
                     $employee_salary_component->value = $value['value'];
                     $employee_salary_component->effective_date = $value['effective_date'];
                     $employee_salary_component->save();
                 }
-            } catch (Exception $e)
-            {
+            } catch (Exception $e) {
                 return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
             }
         }

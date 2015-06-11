@@ -1,4 +1,6 @@
-<?php namespace HRis\Providers;
+<?php
+
+namespace HRis\Providers;
 
 /**
  * Part of the Sentry package.
@@ -31,7 +33,12 @@ use Cartalyst\Sentry\Throttling\Eloquent\Provider as ThrottleProvider;
 use Cartalyst\Sentry\Users\Eloquent\Provider as UserProvider;
 use Illuminate\Support\ServiceProvider;
 
-class SentryServiceProvider extends ServiceProvider {
+/**
+ * Class SentryServiceProvider
+ * @package HRis\Providers
+ */
+class SentryServiceProvider extends ServiceProvider
+{
 
     /**
      * Register the service provider.
@@ -56,12 +63,10 @@ class SentryServiceProvider extends ServiceProvider {
      */
     protected function registerHasher()
     {
-        $this->app['sentry.hasher'] = $this->app->share(function ($app)
-        {
+        $this->app['sentry.hasher'] = $this->app->share(function ($app) {
             $hasher = $app['config']['sentry.hasher'];
 
-            switch ($hasher)
-            {
+            switch ($hasher) {
                 case 'native':
                     return new NativeHasher;
                     break;
@@ -90,8 +95,7 @@ class SentryServiceProvider extends ServiceProvider {
      */
     protected function registerUserProvider()
     {
-        $this->app['sentry.user'] = $this->app->share(function ($app)
-        {
+        $this->app['sentry.user'] = $this->app->share(function ($app) {
             $model = $app['config']['sentry.users.model'];
 
             // We will never be accessing a user in Sentry without accessing
@@ -99,8 +103,7 @@ class SentryServiceProvider extends ServiceProvider {
             // model's login attribute here. If you are manually using the
             // attribute outside of Sentry, you will need to ensure you are
             // overriding at runtime.
-            if (method_exists($model, 'setLoginAttributeName'))
-            {
+            if (method_exists($model, 'setLoginAttributeName')) {
                 $loginAttribute = $app['config']['sentry.users.login_attribute'];
 
                 forward_static_call_array(
@@ -110,8 +113,7 @@ class SentryServiceProvider extends ServiceProvider {
             }
 
             // Define the Group model to use for relationships.
-            if (method_exists($model, 'setGroupModel'))
-            {
+            if (method_exists($model, 'setGroupModel')) {
                 $groupModel = $app['config']['sentry.groups.model'];
 
                 forward_static_call_array(
@@ -121,8 +123,7 @@ class SentryServiceProvider extends ServiceProvider {
             }
 
             // Define the user group pivot table name to use for relationships.
-            if (method_exists($model, 'setUserGroupsPivot'))
-            {
+            if (method_exists($model, 'setUserGroupsPivot')) {
                 $pivotTable = $app['config']['sentry.user_groups_pivot_table'];
 
                 forward_static_call_array(
@@ -142,13 +143,11 @@ class SentryServiceProvider extends ServiceProvider {
      */
     protected function registerGroupProvider()
     {
-        $this->app['sentry.group'] = $this->app->share(function ($app)
-        {
+        $this->app['sentry.group'] = $this->app->share(function ($app) {
             $model = $app['config']['sentry.groups.model'];
 
             // Define the User model to use for relationships.
-            if (method_exists($model, 'setUserModel'))
-            {
+            if (method_exists($model, 'setUserModel')) {
                 $userModel = $app['config']['sentry.users.model'];
 
                 forward_static_call_array(
@@ -158,8 +157,7 @@ class SentryServiceProvider extends ServiceProvider {
             }
 
             // Define the user group pivot table name to use for relationships.
-            if (method_exists($model, 'setUserGroupsPivot'))
-            {
+            if (method_exists($model, 'setUserGroupsPivot')) {
                 $pivotTable = $app['config']['sentry.user_groups_pivot_table'];
 
                 forward_static_call_array(
@@ -179,19 +177,16 @@ class SentryServiceProvider extends ServiceProvider {
      */
     protected function registerThrottleProvider()
     {
-        $this->app['sentry.throttle'] = $this->app->share(function ($app)
-        {
+        $this->app['sentry.throttle'] = $this->app->share(function ($app) {
             $model = $app['config']['sentry.throttling.model'];
 
             $throttleProvider = new ThrottleProvider($app['sentry.user'], $model);
 
-            if ($app['config']['sentry.throttling.enabled'] === false)
-            {
+            if ($app['config']['sentry.throttling.enabled'] === false) {
                 $throttleProvider->disable();
             }
 
-            if (method_exists($model, 'setAttemptLimit'))
-            {
+            if (method_exists($model, 'setAttemptLimit')) {
                 $attemptLimit = $app['config']['sentry.throttling.attempt_limit'];
 
                 forward_static_call_array(
@@ -199,8 +194,7 @@ class SentryServiceProvider extends ServiceProvider {
                     [$attemptLimit]
                 );
             }
-            if (method_exists($model, 'setSuspensionTime'))
-            {
+            if (method_exists($model, 'setSuspensionTime')) {
                 $suspensionTime = $app['config']['sentry.throttling.suspension_time'];
 
                 forward_static_call_array(
@@ -210,8 +204,7 @@ class SentryServiceProvider extends ServiceProvider {
             }
 
             // Define the User model to use for relationships.
-            if (method_exists($model, 'setUserModel'))
-            {
+            if (method_exists($model, 'setUserModel')) {
                 $userModel = $app['config']['sentry.users.model'];
 
                 forward_static_call_array(
@@ -231,8 +224,7 @@ class SentryServiceProvider extends ServiceProvider {
      */
     protected function registerSession()
     {
-        $this->app['sentry.session'] = $this->app->share(function ($app)
-        {
+        $this->app['sentry.session'] = $this->app->share(function ($app) {
             $key = $app['config']['sentry.cookie.key'];
 
             return new IlluminateSession($app['session.store'], $key);
@@ -246,8 +238,7 @@ class SentryServiceProvider extends ServiceProvider {
      */
     protected function registerCookie()
     {
-        $this->app['sentry.cookie'] = $this->app->share(function ($app)
-        {
+        $this->app['sentry.cookie'] = $this->app->share(function ($app) {
             $key = $app['config']['sentry.cookie.key'];
 
             /**
@@ -257,8 +248,7 @@ class SentryServiceProvider extends ServiceProvider {
 
             $strategy = 'request';
 
-            if (preg_match('/^4\.0\.\d*$/D', $app::VERSION))
-            {
+            if (preg_match('/^4\.0\.\d*$/D', $app::VERSION)) {
                 $strategy = 'jar';
             }
 
@@ -274,8 +264,7 @@ class SentryServiceProvider extends ServiceProvider {
      */
     protected function registerSentry()
     {
-        $this->app['sentry'] = $this->app->share(function ($app)
-        {
+        $this->app['sentry'] = $this->app->share(function ($app) {
             return new Sentry(
                 $app['sentry.user'],
                 $app['sentry.group'],

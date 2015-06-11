@@ -1,11 +1,18 @@
-<?php namespace HRis\Http\Requests\PIM;
+<?php
+
+namespace HRis\Http\Requests\PIM;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use HRis\Http\Requests\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 
-class PIMRequest extends Request {
+/**
+ * Class PIMRequest
+ * @package HRis\Http\Requests\PIM
+ */
+class PIMRequest extends Request
+{
 
     /**
      * Get the validation rules that apply to the request.
@@ -14,8 +21,7 @@ class PIMRequest extends Request {
      */
     public function rules()
     {
-        if (Request::isMethod('post'))
-        {
+        if (Request::isMethod('post')) {
             return [];
         }
 
@@ -35,17 +41,19 @@ class PIMRequest extends Request {
         $permission = str_replace('/', '.', Request::path());
 
         // View
-        if (Request::isMethod('get'))
-        {
+        if (Request::isMethod('get')) {
             return ($user->hasAccess($permission . '.view'));
-        }
-        // Create
-        else if (Request::isMethod('post'))
-        {
-            return ($user->hasAccess($permission . '.create'));
+        } // Create
+        else {
+            if (Request::isMethod('post')) {
+                return ($user->hasAccess($permission . '.create'));
+            }
         }
     }
 
+    /**
+     * @return mixed
+     */
     public function forbiddenResponse()
     {
         return Response::make(View::make('errors.403'), 403);

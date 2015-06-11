@@ -1,15 +1,20 @@
-<?php namespace HRis\Eloquent;
+<?php
+
+namespace HRis\Eloquent;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class EmployeeSalaryComponents
- * @package HRis
+ * Class EmployeeSalaryComponent
+ * @package HRis\Eloquent
  */
-class EmployeeSalaryComponents extends Model {
+class EmployeeSalaryComponent extends Model
+{
 
     /**
+     * Indicates if the model should be timestamped.
+     *
      * @var bool
      */
     public $timestamps = false;

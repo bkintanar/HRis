@@ -1,5 +1,5 @@
 suites:
     main:
-        namespace: App
-        psr4_prefix: App
+        namespace: HRis
+        psr4_prefix: HRis
         src_path: app

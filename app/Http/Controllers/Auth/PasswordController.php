@@ -1,10 +1,17 @@
-<?php namespace HRis\Http\Controllers\Auth;
+<?php
+
+namespace HRis\Http\Controllers\Auth;
 
 use HRis\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\PasswordBroker;
 
-class PasswordController extends Controller {
+/**
+ * Class PasswordController
+ * @package HRis\Http\Controllers\Auth
+ */
+class PasswordController extends Controller
+{
 
     /*
     |--------------------------------------------------------------------------
@@ -24,7 +31,6 @@ class PasswordController extends Controller {
      *
      * @param  \Illuminate\Contracts\Auth\Guard $auth
      * @param  \Illuminate\Contracts\Auth\PasswordBroker $passwords
-     * @return void
      */
     public function __construct(Guard $auth, PasswordBroker $passwords)
     {

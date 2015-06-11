@@ -1,16 +1,21 @@
-<?php namespace HRis\Eloquent;
+<?php
+
+namespace HRis\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Nationality
- * @package HRis
+ * @package HRis\Eloquent
  */
-class Nationality extends Model {
+class Nationality extends Model
+{
 
     use HasPlaceholder;
 
     /**
+     * Indicates if the model should be timestamped.
+     *
      * @var bool
      */
     public $timestamps = false;

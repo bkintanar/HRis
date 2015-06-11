@@ -1,10 +1,13 @@
-<?php namespace HRis\Eloquent;
+<?php
+
+namespace HRis\Eloquent;
 
 /**
  * Class HasPlaceholder
  * @package HRis\Eloquent
  */
-trait HasPlaceholder {
+trait HasPlaceholder
+{
 
     /**
      * @param $name
@@ -16,10 +19,9 @@ trait HasPlaceholder {
     {
         $default = [0 => '--- Select ---'];
 
-        $model = parent::lists($name, $id);
+        $model = parent::lists($name, $id)->all();
 
-        if ($parent_id > 0)
-        {
+        if ($parent_id > 0) {
             // Builder Object
             $model = parent::whereId($parent_id)->lists($name, $id);
         }

@@ -1,12 +1,15 @@
-<?php namespace HRis\Eloquent;
+<?php
+
+namespace HRis\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Department
- * @package HRis
+ * @package HRis\Eloquent
  */
-class Department extends Model {
+class Department extends Model
+{
 
     use HasPlaceholder;
 

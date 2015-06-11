@@ -1,4 +1,6 @@
-<?php namespace HRis\Http\Controllers\Time\Attendance;
+<?php
+
+namespace HRis\Http\Controllers\Time\Attendance;
 
 use Carbon\Carbon;
 use DateInterval;
@@ -10,9 +12,13 @@ use HRis\Http\Requests;
 use Illuminate\Support\Facades\Input;
 
 /**
+ * Class EmployeeRecordsController
+ * @package HRis\Http\Controllers\Time\Attendance
+ *
  * @Middleware("auth")
  */
-class EmployeeRecordsController extends Controller {
+class EmployeeRecordsController extends Controller
+{
 
     /**
      * @Get("time/attendance/employee-records")
@@ -23,8 +29,7 @@ class EmployeeRecordsController extends Controller {
      */
     public function index($date = null)
     {
-        if (is_null($date))
-        {
+        if (is_null($date)) {
             $date = Carbon::now()->toDateString();
         }
         $this->data['date'] = $date;
@@ -55,12 +60,11 @@ class EmployeeRecordsController extends Controller {
         );
 
         $month = [];
-        foreach ($period as $row)
-        {
-            $attendance = Attendance::where('work_date', '>=', $row->toDateString())->where('work_date', '<=', $row->toDateString())->whereEmployeeId(Input::get('employee_id'))->first();
+        foreach ($period as $row) {
+            $attendance = Attendance::where('work_date', '>=', $row->toDateString())->where('work_date', '<=',
+                $row->toDateString())->whereEmployeeId(Input::get('employee_id'))->first();
 
-            if ($attendance == null)
-            {
+            if ($attendance == null) {
                 $month[$row->toDateString()] = null;
 
                 continue;

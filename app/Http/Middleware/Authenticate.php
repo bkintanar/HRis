@@ -1,9 +1,16 @@
-<?php namespace HRis\Http\Middleware;
+<?php
+
+namespace HRis\Http\Middleware;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use Closure;
 
-class Authenticate {
+/**
+ * Class Authenticate
+ * @package HRis\Http\Middleware
+ */
+class Authenticate
+{
 
     /**
      * The Sentry implementation.
@@ -33,14 +40,10 @@ class Authenticate {
     {
         $auth = $this->auth;
 
-        if ( ! $auth::check())
-        {
-            if ($request->ajax())
-            {
+        if ( ! $auth::check()) {
+            if ($request->ajax()) {
                 return response('Unauthorized.', 401);
-            }
-            else
-            {
+            } else {
                 return redirect()->guest('auth/login');
             }
         }

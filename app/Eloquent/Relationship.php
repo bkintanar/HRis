@@ -1,12 +1,15 @@
-<?php namespace HRis\Eloquent;
+<?php
+
+namespace HRis\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Relationship
- * @package HRis
+ * @package HRis\Eloquent
  */
-class Relationship extends Model {
+class Relationship extends Model
+{
 
     use HasPlaceholder;
 

@@ -4,16 +4,16 @@
                     <li class="nav-header">
 
                         <div class="dropdown profile-element"> <span>
-                            @if($loggedUser->employee->avatar != '')
-                            <img alt="image" id="profile-image-nav" class="img-circle" src="/img/profile/{{$loggedUser->employee->avatar}}">
+                            @if($logged_user->employee->avatar != '')
+                            <img alt="image" id="profile-image-nav" class="img-circle" src="/img/profile/{{$logged_user->employee->avatar}}">
                             @else
-                            <img alt="image" id="profile-image-nav" class="img-circle" src="/img/profile/default/{{$loggedUser->employee->jobHistory()->job_title_id }}{{$loggedUser->employee->gender}}.png">
+                            <img alt="image" id="profile-image-nav" class="img-circle" src="/img/profile/default/{{$logged_user->employee->jobHistory()->job_title_id }}{{$logged_user->employee->gender}}.png">
                             @endif
                              </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{ $loggedUser->employee->first_name }} {{ $loggedUser->employee->last_name }}</strong>
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{ $logged_user->employee->first_name }} {{ $logged_user->employee->last_name }}</strong>
                                 </span> <span class="text-muted text-xs block">
-                                    {{ $loggedUser->employee->jobHistory() ? $loggedUser->employee->jobHistory()->jobTitle->name : 'N/A' }}
+                                    {{ $logged_user->employee->jobHistory() ? $logged_user->employee->jobHistory()->jobTitle->name : 'N/A' }}
                                 <b class="caret"></b></span> </span> </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                 <li><a href="/profile">Profile</a></li>

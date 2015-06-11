@@ -1,9 +1,16 @@
-<?php namespace HRis\Console;
+<?php
+
+namespace HRis\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
-class Kernel extends ConsoleKernel {
+/**
+ * Class Kernel
+ * @package HRis\Console
+ */
+class Kernel extends ConsoleKernel
+{
 
     /**
      * The Artisan commands provided by your application.
@@ -11,10 +18,11 @@ class Kernel extends ConsoleKernel {
      * @var array
      */
     protected $commands = [
-        'HRis\Console\Commands\ImportTimeLog',
-        'HRis\Console\Commands\ImportEmployeeList',
-        'HRis\Console\Commands\UpdateFaceId',
-        'HRis\Console\Commands\GenerateAttendance',
+        \HRis\Console\Commands\ImportTimeLog::class,
+        \HRis\Console\Commands\ImportEmployeeList::class,
+        \HRis\Console\Commands\UpdateFaceId::class,
+        \HRis\Console\Commands\GenerateAttendance::class,
+        \HRis\Console\Commands\Inspire::class,
     ];
 
     /**
@@ -28,5 +36,4 @@ class Kernel extends ConsoleKernel {
         $schedule->command('inspire')
             ->hourly();
     }
-
 }

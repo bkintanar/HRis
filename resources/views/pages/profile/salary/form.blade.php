@@ -28,7 +28,7 @@
                         {!! Html::link(str_replace('/edit', '', \Request::path()), 'Cancel', ['class' => 'btn btn-white btn-xs']) !!}
                         {!! Form::submit('Save changes', ['class' => 'btn btn-primary btn-xs', 'name' => 'submitForm']) !!}
                     @else
-                        @if($loggedUser->hasAccess(\Request::segment(1).'.salary.update'))
+                        @if($logged_user->hasAccess(\Request::segment(1).'.salary.update'))
                             {!! Html::link(\Request::path() . '/edit', 'Modify', ['class' => 'btn btn-primary btn-xs']) !!}
                         @endif
                     @endif

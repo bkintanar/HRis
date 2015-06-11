@@ -1,4 +1,6 @@
-<?php namespace HRis\Eloquent;
+<?php
+
+namespace HRis\Eloquent;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -6,11 +8,14 @@ use Illuminate\Support\Facades\Config;
 
 /**
  * Class EmployeeWorkShift
- * @package HRis
+ * @package HRis\Eloquent
  */
-class EmployeeWorkShift extends Model {
+class EmployeeWorkShift extends Model
+{
 
     /**
+     * Indicates if the model should be timestamped.
+     *
      * @var bool
      */
     public $timestamps = false;
@@ -61,7 +66,8 @@ class EmployeeWorkShift extends Model {
      */
     public function getWorkShiftRange($start_date)
     {
-        $employee_work_shift = self::whereEmployeeId($this->employee_id)->where('effective_date', '<=', $start_date)->orderBy('id', 'desc')->first();
+        $employee_work_shift = self::whereEmployeeId($this->employee_id)->where('effective_date', '<=',
+            $start_date)->orderBy('id', 'desc')->first();
 
         $from_time_allowance = Config::get('company.from_time_allowance');
         $from_datetime = Carbon::parse($start_date . ' ' . $employee_work_shift->workShift->from_time)->subHour($from_time_allowance);

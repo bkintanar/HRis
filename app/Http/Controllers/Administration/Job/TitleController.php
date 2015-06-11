@@ -1,4 +1,6 @@
-<?php namespace HRis\Http\Controllers\Administration\Job;
+<?php
+
+namespace HRis\Http\Controllers\Administration\Job;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use HRis\Eloquent\JobTitle;
@@ -7,9 +9,13 @@ use HRis\Http\Requests\Administration\JobTitleRequest;
 use Illuminate\Support\Facades\Redirect;
 
 /**
+ * Class TitleController
+ * @package HRis\Http\Controllers\Administration\Job
+ *
  * @Middleware("auth")
  */
-class TitleController extends Controller {
+class TitleController extends Controller
+{
 
     /**
      * @var JobTitle
@@ -54,13 +60,11 @@ class TitleController extends Controller {
      */
     public function store(JobTitleRequest $request)
     {
-        try
-        {
+        try {
             $this->job_title->create($request->all());
 
-        } catch (Exception $e)
-        {
-            return Redirect::to($request->path())->with('danger', 'Unable to add record to the database.');
+        } catch (Exception $e) {
+            return Redirect::to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
 
         return Redirect::to($request->path())->with('success', 'Record successfully added.');
@@ -77,18 +81,15 @@ class TitleController extends Controller {
     {
         $job_title = $this->job_title->whereId($request->get('job_title_id'))->first();
 
-        if ( ! $job_title)
-        {
-            return Redirect::to($request->path())->with('danger', 'Unable to retrieve record from database.');
+        if ( ! $job_title) {
+            return Redirect::to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
-        try
-        {
+        try {
             $job_title->update($request->all());
 
-        } catch (Exception $e)
-        {
-            return Redirect::to($request->path())->with('danger', 'Unable to update record.');
+        } catch (Exception $e) {
+            return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
         return Redirect::to($request->path())->with('success', 'Record successfully updated.');

@@ -1,4 +1,6 @@
-<?php namespace HRis\Http\Controllers\Profile;
+<?php
+
+namespace HRis\Http\Controllers\Profile;
 
 use Carbon\Carbon;
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
@@ -11,9 +13,13 @@ use Illuminate\Support\Facades\Redirect;
 use Input;
 
 /**
+ * Class WorkShiftController
+ * @package HRis\Http\Controllers\Profile
+ *
  * @Middleware("auth")
  */
-class WorkShiftController extends Controller {
+class WorkShiftController extends Controller
+{
 
     /**
      * @param Sentry $auth
@@ -41,7 +47,7 @@ class WorkShiftController extends Controller {
      */
     public function index(WorkShiftRequest $request, $employee_id = null)
     {
-        $employee = $this->employee->getEmployeeById($employee_id, $this->loggedUser->id);
+        $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
         $this->data['employee'] = $employee;
         $this->data['workshift_history'] = $employee->employeeWorkShift;
@@ -65,12 +71,11 @@ class WorkShiftController extends Controller {
      */
     public function show(WorkShiftRequest $request, $employee_id = null)
     {
-        if (Input::get('success'))
-        {
+        if (Input::get('success')) {
             return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
         }
 
-        $employee = $this->employee->getEmployeeById($employee_id, $this->loggedUser->id);
+        $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
         $this->data['employee'] = $employee;
         $this->data['workshift_history'] = $employee->employeeWorkShift;
@@ -100,8 +105,7 @@ class WorkShiftController extends Controller {
         $current_work_shift = $employee_work_shift->getCurrentEmployeeWorkShift($work_shift_fillables, $employee_id);
         $work_shift_request_fields = $request->only($work_shift_fillables);
 
-        if ($current_work_shift != $work_shift_request_fields)
-        {
+        if ($current_work_shift != $work_shift_request_fields) {
             $work_shift_request_fields['effective_date'] = Carbon::now()->toDateString();
             $employee_work_shift->create($work_shift_request_fields);
         }

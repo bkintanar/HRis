@@ -1,10 +1,17 @@
-<?php namespace HRis\Http\Middleware;
+<?php
+
+namespace HRis\Http\Middleware;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use Closure;
 use Illuminate\Http\RedirectResponse;
 
-class RedirectIfAuthenticated {
+/**
+ * Class RedirectIfAuthenticated
+ * @package HRis\Http\Middleware
+ */
+class RedirectIfAuthenticated
+{
 
     /**
      * The Sentry implementation.
@@ -17,7 +24,6 @@ class RedirectIfAuthenticated {
      * Create a new filter instance.
      *
      * @param  Sentry $auth
-     * @return void
      */
     public function __construct(Sentry $auth)
     {
@@ -35,8 +41,7 @@ class RedirectIfAuthenticated {
     {
         $auth = $this->auth;
 
-        if ($auth::check())
-        {
+        if ($auth::check()) {
             return new RedirectResponse(url('/home'));
         }
 

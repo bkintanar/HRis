@@ -1,11 +1,18 @@
-<?php namespace HRis\Http\Requests\Profile;
+<?php
+
+namespace HRis\Http\Requests\Profile;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use HRis\Http\Requests\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 
-class SalaryRequest extends Request {
+/**
+ * Class SalaryRequest
+ * @package HRis\Http\Requests\Profile
+ */
+class SalaryRequest extends Request
+{
 
     /**
      * Get the validation rules that apply to the request.
@@ -14,8 +21,7 @@ class SalaryRequest extends Request {
      */
     public function rules()
     {
-        if (Request::isMethod('post'))
-        {
+        if (Request::isMethod('post')) {
             return [];
         }
 
@@ -35,20 +41,23 @@ class SalaryRequest extends Request {
         $permission = Request::is('*pim/*') ? 'pim.salary' : 'profile.salary';
 
         // Update
-        if (Request::isMethod('patch') || Request::is('*/edit'))
-        {
+        if (Request::isMethod('patch') || Request::is('*/edit')) {
             return ($user->hasAccess($permission . '.update'));
         } // View
-        else if (Request::isMethod('get'))
-        {
-            return ($user->hasAccess($permission . '.view'));
-        }
-        else if (Request::isMethod('delete'))
-        {
-            return ($user->hasAccess($permission . '.delete'));
+        else {
+            if (Request::isMethod('get')) {
+                return ($user->hasAccess($permission . '.view'));
+            } else {
+                if (Request::isMethod('delete')) {
+                    return ($user->hasAccess($permission . '.delete'));
+                }
+            }
         }
     }
 
+    /**
+     * @return mixed
+     */
     public function forbiddenResponse()
     {
         return Response::make(View::make('errors.403'), 403);

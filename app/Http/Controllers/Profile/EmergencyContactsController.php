@@ -1,4 +1,6 @@
-<?php namespace HRis\Http\Controllers\Profile;
+<?php
+
+namespace HRis\Http\Controllers\Profile;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use Exception;
@@ -9,9 +11,13 @@ use HRis\Http\Requests\Profile\EmergencyContactsRequest;
 use Illuminate\Support\Facades\Redirect;
 
 /**
+ * Class EmergencyContactsController
+ * @package HRis\Http\Controllers\Profile
+ *
  * @Middleware("auth")
  */
-class EmergencyContactsController extends Controller {
+class EmergencyContactsController extends Controller
+{
 
     /**
      * @var Employee
@@ -49,10 +55,9 @@ class EmergencyContactsController extends Controller {
      */
     public function index(EmergencyContactsRequest $request, $employee_id = null)
     {
-        $employee = $this->employee->getEmployeeById($employee_id, $this->loggedUser->id);
+        $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
-        if ( ! $employee)
-        {
+        if ( ! $employee) {
             return Response::make(View::make('errors.404'), 404);
         }
 
@@ -77,13 +82,11 @@ class EmergencyContactsController extends Controller {
      */
     public function store(EmergencyContactsRequest $request)
     {
-        try
-        {
+        try {
             $this->emergencyContact->create($request->all());
 
-        } catch (Exception $e)
-        {
-            return Redirect::to($request->path())->with('danger', 'Unable to add record to the database.');
+        } catch (Exception $e) {
+            return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
         return Redirect::to($request->path())->with('success', 'Record successfully added.');
@@ -101,75 +104,18 @@ class EmergencyContactsController extends Controller {
     {
         $emergencyContact = $this->emergencyContact->whereId($request->get('emergency_contact_id'))->first();
 
-        if ( ! $emergencyContact)
-        {
-            return Redirect::to($request->path())->with('danger', 'Unable to retrieve record from database.');
+        if ( ! $emergencyContact) {
+            return Redirect::to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
-        try
-        {
+        try {
             $emergencyContact->update($request->all());
 
-        } catch (Exception $e)
-        {
-            return Redirect::to($request->path())->with('danger', 'Unable to update record.');
+        } catch (Exception $e) {
+            return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
         return Redirect::to($request->path())->with('success', 'Record successfully updated.');
-    }
-
-    /**
-     * Delete the profile emergency contact.
-     *
-     * @Delete("ajax/profile/emergency-contacts")
-     * @Delete("ajax/pim/employee-list/{id}/emergency-contacts")
-     *
-     * @param EmergencyContactsRequest $request
-     */
-    public function delete(EmergencyContactsRequest $request)
-    {
-        if ($request->ajax())
-        {
-            $emergencyContactId = $request->get('id');
-
-            try
-            {
-                $this->emergencyContact->whereId($emergencyContactId)->delete();
-
-                print('success');
-
-            } catch (Exception $e)
-            {
-                print('failed');
-            }
-        }
-    }
-
-    /**
-     * Get the profile emergency contact.
-     *
-     * @Get("ajax/profile/emergency-contacts")
-     * @Get("ajax/pim/employee-list/{id}/emergency-contacts")
-     *
-     * @param EmergencyContactsRequest $request
-     */
-    public function show(EmergencyContactsRequest $request)
-    {
-        if ($request->ajax())
-        {
-            $emergencyContactId = $request->get('id');
-
-            try
-            {
-                $emergencyContact = $this->emergencyContact->whereId($emergencyContactId)->first();
-
-                print(json_encode($emergencyContact));
-
-            } catch (Exception $e)
-            {
-                print('failed');
-            }
-        }
     }
 
     /**

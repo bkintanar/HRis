@@ -1,8 +1,15 @@
-<?php namespace HRis\Http\Requests\Auth;
+<?php
+
+namespace HRis\Http\Requests\Auth;
 
 use HRis\Http\Requests\Request;
 
-class LoginRequest extends Request {
+/**
+ * Class LoginRequest
+ * @package HRis\Http\Requests\Auth
+ */
+class LoginRequest extends Request
+{
 
     /**
      * Determine if the user is authorized to make this request.

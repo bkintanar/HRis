@@ -1,4 +1,6 @@
-<?php namespace HRis\Eloquent;
+<?php
+
+namespace HRis\Eloquent;
 
 use Cartalyst\Sentry\Users\Eloquent\User as SentryUser;
 use Illuminate\Auth\Authenticatable;
@@ -8,9 +10,10 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 /**
  * Class User
- * @package HRis
+ * @package HRis\Eloquent
  */
-class User extends SentryUser implements AuthenticatableContract, CanResetPasswordContract {
+class User extends SentryUser implements AuthenticatableContract, CanResetPasswordContract
+{
 
     use Authenticatable, CanResetPassword;
 
@@ -43,8 +46,7 @@ class User extends SentryUser implements AuthenticatableContract, CanResetPasswo
     {
         $groups = $this->getGroups();
 
-        if (empty($groups))
-        {
+        if (empty($groups)) {
             throw new Exception('User not in group.');
         }
 

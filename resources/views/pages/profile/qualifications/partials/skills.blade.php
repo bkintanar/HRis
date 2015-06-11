@@ -11,7 +11,7 @@
             </div>
 
             <div class="ibox-content">
-                @if($loggedUser->hasAccess(\Request::segment(1).'.qualifications.skills.create'))
+                @if($logged_user->hasAccess(\Request::segment(1).'.qualifications.skills.create'))
                 <div class="">
                     <a id="addSkill" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
                 </div>
@@ -33,10 +33,10 @@
                                     <td>{{ HRis\Eloquent\Skill::whereId($skill->id)->pluck('name') }}</td>
                                     <td>{{ HRis\Eloquent\EmployeeSkill::whereSkillId($skill->id)->whereEmployeeId($employee->id)->pluck('years_of_experience') }}</td>
                                     <td>
-                                        @if($loggedUser->hasAccess(\Request::segment(1).'.qualifications.skills.update'))
+                                        @if($logged_user->hasAccess(\Request::segment(1).'.qualifications.skills.update'))
                                         <button rel="editSkill" id="{{HRis\Eloquent\EmployeeSkill::whereSkillId($skill->id)->whereEmployeeId($employee->id)->pluck('id')}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-paste"></i></button>
                                         @endif
-                                        @if($loggedUser->hasAccess(\Request::segment(1).'.qualifications.skills.delete'))
+                                        @if($logged_user->hasAccess(\Request::segment(1).'.qualifications.skills.delete'))
                                         <button rel="deleteSkill" id="{{HRis\Eloquent\EmployeeSkill::whereSkillId($skill->id)->whereEmployeeId($employee->id)->pluck('id')}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-trash"></i></button>
                                         @endif
                                     </td>

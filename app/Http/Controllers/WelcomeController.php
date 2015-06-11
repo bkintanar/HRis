@@ -1,6 +1,13 @@
-<?php namespace HRis\Http\Controllers;
+<?php
 
-class WelcomeController extends Controller {
+namespace HRis\Http\Controllers;
+
+/**
+ * Class WelcomeController
+ * @package HRis\Http\Controllers
+ */
+class WelcomeController extends Controller
+{
 
     /*
     |--------------------------------------------------------------------------
@@ -16,7 +23,6 @@ class WelcomeController extends Controller {
     /**
      * Create a new controller instance.
      *
-     * @return void
      */
     public function __construct()
     {

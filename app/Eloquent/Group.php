@@ -1,12 +1,22 @@
-<?php namespace HRis\Eloquent;
+<?php
+
+namespace HRis\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Group
- * @package HRis
+ * @package HRis\Eloquent
  */
-class Group extends Model {
+class Group extends Model
+{
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 
     /**
      * @var bool
@@ -20,9 +30,6 @@ class Group extends Model {
      */
     protected $table = 'groups';
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
     public function users()
     {
         return $this->belongsToMany('HRis\Eloquent\Group', 'users_groups', 'group_id', 'user_id');

@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-                    @if($loggedUser->hasAccess(\Request::segment(1).'.dependents.create'))
+                    @if($logged_user->hasAccess(\Request::segment(1).'.dependents.create'))
                     <div class="">
                         <a id="addDependent" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
                     </div>
@@ -39,10 +39,10 @@
                                         <td>{{ HRis\Eloquent\Relationship::whereId($dependent->relationship_id)->pluck('name') }}</td>
                                         <td>{{ $dependent->birth_date }}</td>
                                         <td>
-                                            @if($loggedUser->hasAccess(\Request::segment(1).'.dependents.update'))
+                                            @if($logged_user->hasAccess(\Request::segment(1).'.dependents.update'))
                                             <button rel="edit" id="{{$dependent->id}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-paste"></i></button>
                                             @endif
-                                            @if($loggedUser->hasAccess(\Request::segment(1).'.dependents.delete'))
+                                            @if($logged_user->hasAccess(\Request::segment(1).'.dependents.delete'))
                                             <button rel="delete" id="{{$dependent->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-trash"></i></button>
                                             @endif
                                         </td>

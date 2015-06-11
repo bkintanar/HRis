@@ -1,4 +1,6 @@
-<?php namespace HRis\Http\Controllers\Profile;
+<?php
+
+namespace HRis\Http\Controllers\Profile;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use HRis\Eloquent\Employee;
@@ -10,9 +12,13 @@ use Illuminate\Support\Facades\Redirect;
 use Input;
 
 /**
+ * Class JobController
+ * @package HRis\Http\Controllers\Profile
+ *
  * @Middleware("auth")
  */
-class JobController extends Controller {
+class JobController extends Controller
+{
 
     /**
      * @var Employee
@@ -30,8 +36,12 @@ class JobController extends Controller {
      * @param JobHistory $job_history
      * @param EmployeeWorkShift $employee_work_shift
      */
-    public function __construct(Sentry $auth, Employee $employee, JobHistory $job_history, EmployeeWorkShift $employee_work_shift)
-    {
+    public function __construct(
+        Sentry $auth,
+        Employee $employee,
+        JobHistory $job_history,
+        EmployeeWorkShift $employee_work_shift
+    ) {
         parent::__construct($auth);
 
         $this->employee = $employee;
@@ -52,7 +62,7 @@ class JobController extends Controller {
      */
     public function index(JobRequest $request, $employee_id = null)
     {
-        $employee = $this->employee->getEmployeeById($employee_id, $this->loggedUser->id);
+        $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
         $this->data['employee'] = $employee;
         $this->data['job_histories'] = $employee->orderedJobHistories();
@@ -77,12 +87,11 @@ class JobController extends Controller {
      */
     public function show(JobRequest $request, $employee_id = null)
     {
-        if (Input::get('success'))
-        {
+        if (Input::get('success')) {
             return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
         }
 
-        $employee = $this->employee->getEmployeeById($employee_id, $this->loggedUser->id);
+        $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
         $this->data['employee'] = $employee;
         $this->data['job_histories'] = $employee->orderedJobHistories();
@@ -111,8 +120,7 @@ class JobController extends Controller {
         $current_employee_job = $job_history->getCurrentEmployeeJob($job_history_fillables, $employee_id);
         $job_request_fields = $request->only($job_history_fillables);
 
-        if ($current_employee_job != $job_request_fields)
-        {
+        if ($current_employee_job != $job_request_fields) {
             $job_history->create($job_request_fields);
         }
 

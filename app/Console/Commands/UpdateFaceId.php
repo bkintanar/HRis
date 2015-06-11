@@ -1,25 +1,32 @@
-<?php namespace HRis\Console\Commands;
+<?php
+
+namespace HRis\Console\Commands;
 
 use HRis\Eloquent\Employee;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use League\Csv\Reader;
 
-class UpdateFaceId extends Command {
+/**
+ * Class UpdateFaceId
+ * @package HRis\Console\Commands
+ */
+class UpdateFaceId extends Command
+{
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Update Face ID column in the employee table.';
+    protected $description = 'Update Face ID column in the employee table';
 
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'update:face_id';
+    protected $name = 'hris:update-face-id';
 
     /**
      * Execute the console command.
@@ -33,16 +40,14 @@ class UpdateFaceId extends Command {
         $csv->setOffset(1);
         $data = $csv->query();
 
-        foreach ($data as $lineIndex => $row)
-        {
+        foreach ($data as $lineIndex => $row) {
 //            if($row[0] >  509)
 //            print_r($row);
 ////            die;
 ////            $this->info($row);
             $employee = Employee::whereEmployeeId($row[1])->first();
 
-            if ($employee)
-            {
+            if ($employee) {
                 $employee->face_id = $row[0];
                 $employee->save();
 

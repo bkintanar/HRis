@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="ibox-content">
-                    @if($loggedUser->hasAccess('admin.job.work-shifts.create'))
+                    @if($logged_user->hasAccess('admin.job.work-shifts.create'))
                     <div class="">
                         <a id="addJobTitle" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
                     </div>
@@ -39,10 +39,10 @@
                                         <td>{{ $workShift->name }}</td>
                                         <td>{{ $workShift->duration }} hours</td>
                                         <td>
-                                            @if($loggedUser->hasAccess('admin.job.work-shifts.update'))
+                                            @if($logged_user->hasAccess('admin.job.work-shifts.update'))
                                             <button rel="edit" id="{{$workShift->id}}" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" title="Edit" type="button"><i class="fa fa-paste"></i></button>
                                             @endif
-                                            @if($loggedUser->hasAccess('admin.job.work-shifts.delete'))
+                                            @if($logged_user->hasAccess('admin.job.work-shifts.delete'))
                                             <button rel="delete" id="{{$workShift->id}}" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i class="fa fa-trash"></i></button>
                                             @endif
                                         </td>

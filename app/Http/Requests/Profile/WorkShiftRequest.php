@@ -1,4 +1,6 @@
-<?php namespace HRis\Http\Requests\Profile;
+<?php
+
+namespace HRis\Http\Requests\Profile;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use HRis\Http\Requests\Request;
@@ -9,7 +11,8 @@ use Illuminate\Support\Facades\View;
  * Class WorkShiftRequest
  * @package HRis\Http\Requests\Profile
  */
-class WorkShiftRequest extends Request {
+class WorkShiftRequest extends Request
+{
 
     /**
      * Get the validation rules that apply to the request.
@@ -18,8 +21,7 @@ class WorkShiftRequest extends Request {
      */
     public function rules()
     {
-        if (Request::isMethod('post'))
-        {
+        if (Request::isMethod('post')) {
             return [];
         }
 
@@ -39,17 +41,17 @@ class WorkShiftRequest extends Request {
         $permission = Request::is('*pim/*') ? 'pim.work-shift' : 'profile.work-shift';
 
         // Update
-        if (Request::isMethod('patch') || Request::is('*/edit'))
-        {
+        if (Request::isMethod('patch') || Request::is('*/edit')) {
             return ($user->hasAccess($permission . '.update'));
         } // View
-        else if (Request::isMethod('get'))
-        {
-            return ($user->hasAccess($permission . '.view'));
-        }
-        else if (Request::isMethod('delete'))
-        {
-            return ($user->hasAccess($permission . '.delete'));
+        else {
+            if (Request::isMethod('get')) {
+                return ($user->hasAccess($permission . '.view'));
+            } else {
+                if (Request::isMethod('delete')) {
+                    return ($user->hasAccess($permission . '.delete'));
+                }
+            }
         }
     }
 

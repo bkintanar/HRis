@@ -1,4 +1,6 @@
-<?php namespace HRis\Console\Commands;
+<?php
+
+namespace HRis\Console\Commands;
 
 use Carbon\Carbon;
 use HRis\Eloquent\Attendance;
@@ -6,7 +8,12 @@ use HRis\Eloquent\Employee;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
-class GenerateAttendance extends Command {
+/**
+ * Class GenerateAttendance
+ * @package HRis\Console\Commands
+ */
+class GenerateAttendance extends Command
+{
 
     /**
      * The console command description.
@@ -20,7 +27,7 @@ class GenerateAttendance extends Command {
      *
      * @var string
      */
-    protected $name = 'generate:attendance';
+    protected $name = 'hris:generate-attendance';
 
     /**
      * Execute the console command.
@@ -31,12 +38,10 @@ class GenerateAttendance extends Command {
     {
         $employee_ids = [2, 3, 4, 5, 6, 7, 8, 10, 11, 19];
 
-        foreach ($employee_ids as $employee_id)
-        {
+        foreach ($employee_ids as $employee_id) {
             $start = Carbon::parse('2015-01-01');
             $end = Carbon::parse('2015-01-31');
-            while ($start <= $end)
-            {
+            while ($start <= $end) {
 
                 $employee = Employee::whereId($employee_id)->first();
 
@@ -44,8 +49,7 @@ class GenerateAttendance extends Command {
 
                 $next_day = $employee->getTimeLog(Carbon::parse($start)->addDay()->toDateString());
 
-                if (($next_day['in_time'] == null and $next_day['out_time'] == null) or ($timelog['in_time'] == null and $timelog['out_time'] == null))
-                {
+                if (($next_day['in_time'] == null and $next_day['out_time'] == null) or ($timelog['in_time'] == null and $timelog['out_time'] == null)) {
                     $start = $start->addDay(1);
 
                     continue;
