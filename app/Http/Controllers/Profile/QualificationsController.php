@@ -1,4 +1,6 @@
-<?php namespace HRis\Http\Controllers\Profile;
+<?php
+
+namespace HRis\Http\Controllers\Profile;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use Exception;
@@ -14,9 +16,13 @@ use HRis\Http\Requests\Profile\QualificationsWorkExperienceRequest;
 use Illuminate\Support\Facades\Redirect;
 
 /**
+ * Class QualificationsController
+ * @package HRis\Http\Controllers\Profile
+ *
  * @Middleware("auth")
  */
-class QualificationsController extends Controller {
+class QualificationsController extends Controller
+{
 
     /**
      * @var Employee
@@ -47,10 +53,9 @@ class QualificationsController extends Controller {
      */
     public function index(QualificationsRequest $request, $employee_id = null)
     {
-        $employee = $this->employee->getEmployeeById($employee_id, $this->loggedUser->id);
+        $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
-        if ( ! $employee)
-        {
+        if ( ! $employee) {
             return Response::make(View::make('errors.404'), 404);
         }
 
@@ -77,17 +82,17 @@ class QualificationsController extends Controller {
      */
     public function storeWorkExperience(QualificationsWorkExperienceRequest $request, WorkExperience $workExperience)
     {
-        try
-        {
+        try {
             $workExperience->create($request->all());
 
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
 //            dd($e->getMessage());
-            return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('danger', UNABLE_ADD_MESSAGE);
+            return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('danger',
+                UNABLE_ADD_MESSAGE);
         }
 
-        return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('success', SUCCESS_ADD_MESSAGE);
+        return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('success',
+            SUCCESS_ADD_MESSAGE);
     }
 
     /**
@@ -103,22 +108,22 @@ class QualificationsController extends Controller {
     {
         $workExperience = $workExperience->whereId($request->get('work_experience_id'))->first();
 
-        if ( ! $workExperience)
-        {
-            return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('danger', UNABLE_RETRIEVE_MESSAGE);
+        if ( ! $workExperience) {
+            return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('danger',
+                UNABLE_RETRIEVE_MESSAGE);
         }
 
-        try
-        {
+        try {
             $workExperience->update($request->all());
 
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
 //            dd($e->getMessage());
-            return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('danger', UNABLE_UPDATE_MESSAGE);
+            return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('danger',
+                UNABLE_UPDATE_MESSAGE);
         }
 
-        return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('success', SUCCESS_UPDATE_MESSAGE);
+        return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('success',
+            SUCCESS_UPDATE_MESSAGE);
 
     }
 
@@ -133,12 +138,10 @@ class QualificationsController extends Controller {
      */
     public function storeEducation(QualificationsEducationRequest $request, Education $education)
     {
-        try
-        {
+        try {
             $education->create($request->all());
 
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return Redirect::to(str_replace('/educations', '', $request->path()))->with('danger', UNABLE_ADD_MESSAGE);
         }
 
@@ -158,18 +161,17 @@ class QualificationsController extends Controller {
     {
         $education = $education->whereId($request->get('education_id'))->first();
 
-        if ( ! $education)
-        {
-            return Redirect::to(str_replace('/educations', '', $request->path()))->with('danger', UNABLE_RETRIEVE_MESSAGE);
+        if ( ! $education) {
+            return Redirect::to(str_replace('/educations', '', $request->path()))->with('danger',
+                UNABLE_RETRIEVE_MESSAGE);
         }
 
-        try
-        {
+        try {
             $education->update($request->all());
 
-        } catch (Exception $e)
-        {
-            return Redirect::to(str_replace('/educations', '', $request->path()))->with('danger', UNABLE_UPDATE_MESSAGE);
+        } catch (Exception $e) {
+            return Redirect::to(str_replace('/educations', '', $request->path()))->with('danger',
+                UNABLE_UPDATE_MESSAGE);
         }
 
         return Redirect::to(str_replace('/educations', '', $request->path()))->with('success', SUCCESS_UPDATE_MESSAGE);
@@ -185,8 +187,7 @@ class QualificationsController extends Controller {
      */
     public function storeSkill(QualificationsSkillRequest $request)
     {
-        try
-        {
+        try {
             $employee = $this->employee->whereId($request->get('id'))->first();
 
             $skill_id = $request->get('skill_id');
@@ -198,8 +199,7 @@ class QualificationsController extends Controller {
                 'comment'             => $comment
             ]);
 
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return Redirect::to(str_replace('/skills', '', $request->path()))->with('danger', UNABLE_ADD_MESSAGE);
         }
 
@@ -219,21 +219,18 @@ class QualificationsController extends Controller {
     {
         $employeeSkill = $employeeSkill->whereId($request->get('employee_skill_id'))->first();
 
-        if ( ! $employeeSkill)
-        {
+        if ( ! $employeeSkill) {
             return Redirect::to(str_replace('/skills', '', $request->path()))->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
-        try
-        {
+        try {
             $employeeSkill->skill_id = $request->get('skill_id');
             $employeeSkill->years_of_experience = $request->get('years_of_experience') ? : null;
             $employeeSkill->comment = $request->get('skill_comment') ? : null;
 
             $employeeSkill->save();
 
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return Redirect::to(str_replace('/skills', '', $request->path()))->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 

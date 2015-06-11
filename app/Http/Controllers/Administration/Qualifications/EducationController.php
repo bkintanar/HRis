@@ -1,4 +1,6 @@
-<?php namespace HRis\Http\Controllers\Administration\Qualifications;
+<?php
+
+namespace HRis\Http\Controllers\Administration\Qualifications;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use HRis\Eloquent\EducationLevel;
@@ -7,9 +9,13 @@ use HRis\Http\Requests\Administration\EducationRequest;
 use Illuminate\Support\Facades\Redirect;
 
 /**
+ * Class EducationController
+ * @package HRis\Http\Controllers\Administration\Qualifications
+ *
  * @Middleware("auth")
  */
-class EducationController extends Controller {
+class EducationController extends Controller
+{
 
     /**
      * @var EducationLevel
@@ -54,12 +60,10 @@ class EducationController extends Controller {
      */
     public function store(EducationRequest $request)
     {
-        try
-        {
+        try {
             $this->education->create($request->all());
 
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return Redirect::to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
 
@@ -77,17 +81,14 @@ class EducationController extends Controller {
     {
         $education = $this->education->whereId($request->get('education_id'))->first();
 
-        if ( ! $education)
-        {
+        if ( ! $education) {
             return Redirect::to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
-        try
-        {
+        try {
             $education->update($request->all());
 
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 

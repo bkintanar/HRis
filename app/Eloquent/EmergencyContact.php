@@ -1,14 +1,19 @@
-<?php namespace HRis\Eloquent;
+<?php
+
+namespace HRis\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class EmergencyContact
- * @package HRis
+ * @package HRis\Eloquent
  */
-class EmergencyContact extends Model {
+class EmergencyContact extends Model
+{
 
     /**
+     * Indicates if the model should be timestamped.
+     *
      * @var bool
      */
     public $timestamps = false;

@@ -1,4 +1,6 @@
-<?php namespace HRis\Http\Controllers\Administration\Qualifications;
+<?php
+
+namespace HRis\Http\Controllers\Administration\Qualifications;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use HRis\Eloquent\Skill;
@@ -7,9 +9,13 @@ use HRis\Http\Requests\Administration\SkillRequest;
 use Illuminate\Support\Facades\Redirect;
 
 /**
+ * Class SkillController
+ * @package HRis\Http\Controllers\Administration\Qualifications
+ *
  * @Middleware("auth")
  */
-class SkillController extends Controller {
+class SkillController extends Controller
+{
 
     /**
      * @var Skill
@@ -53,12 +59,10 @@ class SkillController extends Controller {
      */
     public function store(SkillRequest $request)
     {
-        try
-        {
+        try {
             $this->skill->create($request->all());
 
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return Redirect::to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
 
@@ -76,17 +80,14 @@ class SkillController extends Controller {
     {
         $skill = $this->skill->whereId($request->get('skill_id'))->first();
 
-        if ( ! $skill)
-        {
+        if ( ! $skill) {
             return Redirect::to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
-        try
-        {
+        try {
             $skill->update($request->all());
 
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 

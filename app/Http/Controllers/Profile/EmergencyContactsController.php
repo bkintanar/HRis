@@ -1,4 +1,6 @@
-<?php namespace HRis\Http\Controllers\Profile;
+<?php
+
+namespace HRis\Http\Controllers\Profile;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use Exception;
@@ -9,9 +11,13 @@ use HRis\Http\Requests\Profile\EmergencyContactsRequest;
 use Illuminate\Support\Facades\Redirect;
 
 /**
+ * Class EmergencyContactsController
+ * @package HRis\Http\Controllers\Profile
+ *
  * @Middleware("auth")
  */
-class EmergencyContactsController extends Controller {
+class EmergencyContactsController extends Controller
+{
 
     /**
      * @var Employee
@@ -49,10 +55,9 @@ class EmergencyContactsController extends Controller {
      */
     public function index(EmergencyContactsRequest $request, $employee_id = null)
     {
-        $employee = $this->employee->getEmployeeById($employee_id, $this->loggedUser->id);
+        $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
-        if ( ! $employee)
-        {
+        if ( ! $employee) {
             return Response::make(View::make('errors.404'), 404);
         }
 
@@ -77,12 +82,10 @@ class EmergencyContactsController extends Controller {
      */
     public function store(EmergencyContactsRequest $request)
     {
-        try
-        {
+        try {
             $this->emergencyContact->create($request->all());
 
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
@@ -101,17 +104,14 @@ class EmergencyContactsController extends Controller {
     {
         $emergencyContact = $this->emergencyContact->whereId($request->get('emergency_contact_id'))->first();
 
-        if ( ! $emergencyContact)
-        {
+        if ( ! $emergencyContact) {
             return Redirect::to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
-        try
-        {
+        try {
             $emergencyContact->update($request->all());
 
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
@@ -128,18 +128,15 @@ class EmergencyContactsController extends Controller {
      */
     public function delete(EmergencyContactsRequest $request)
     {
-        if ($request->ajax())
-        {
+        if ($request->ajax()) {
             $emergencyContactId = $request->get('id');
 
-            try
-            {
+            try {
                 $this->emergencyContact->whereId($emergencyContactId)->delete();
 
                 print('success');
 
-            } catch (Exception $e)
-            {
+            } catch (Exception $e) {
                 print('failed');
             }
         }
@@ -155,18 +152,15 @@ class EmergencyContactsController extends Controller {
      */
     public function show(EmergencyContactsRequest $request)
     {
-        if ($request->ajax())
-        {
+        if ($request->ajax()) {
             $emergencyContactId = $request->get('id');
 
-            try
-            {
+            try {
                 $emergencyContact = $this->emergencyContact->whereId($emergencyContactId)->first();
 
                 print(json_encode($emergencyContact));
 
-            } catch (Exception $e)
-            {
+            } catch (Exception $e) {
                 print('failed');
             }
         }

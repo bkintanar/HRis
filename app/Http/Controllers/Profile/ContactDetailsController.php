@@ -1,4 +1,6 @@
-<?php namespace HRis\Http\Controllers\Profile;
+<?php
+
+namespace HRis\Http\Controllers\Profile;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use Exception;
@@ -10,9 +12,13 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 
 /**
+ * Class ContactDetailsController
+ * @package HRis\Http\Controllers\Profile
+ *
  * @Middleware("auth")
  */
-class ContactDetailsController extends Controller {
+class ContactDetailsController extends Controller
+{
 
     /**
      * @var Employee
@@ -43,10 +49,9 @@ class ContactDetailsController extends Controller {
      */
     public function index(ContactDetailsRequest $request, $employee_id = null)
     {
-        $employee = $this->employee->getEmployeeById($employee_id, $this->loggedUser->id);
+        $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
-        if ( ! $employee)
-        {
+        if ( ! $employee) {
             return Response::make(View::make('errors.404'), 404);
         }
 
@@ -72,10 +77,9 @@ class ContactDetailsController extends Controller {
      */
     public function show(ContactDetailsRequest $request, $employee_id = null)
     {
-        $employee = $this->employee->getEmployeeById($employee_id, $this->loggedUser->id);
+        $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
-        if ( ! $employee)
-        {
+        if ( ! $employee) {
             return Response::make(View::make('errors.404'), 404);
         }
 
@@ -102,17 +106,14 @@ class ContactDetailsController extends Controller {
 
         $employee = $this->employee->whereId($id)->first();
 
-        if ( ! $employee)
-        {
+        if ( ! $employee) {
             return Redirect::to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
-        try
-        {
+        try {
             $employee->update($request->all());
 
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 

@@ -1,5 +1,6 @@
-<?php namespace HRis\Services;
+<?php
 
+namespace HRis\Services;
 
 use Request;
 
@@ -7,7 +8,8 @@ use Request;
  * Class Pagination
  * @package HRis\Services
  */
-class Pagination {
+class Pagination
+{
 
     /**
      * @param $column
@@ -20,8 +22,7 @@ class Pagination {
         $fullUrl = Request::fullUrl();
         $direction = $settings['direction'];
 
-        if (strpos($fullUrl, $column) !== false)
-        {
+        if (strpos($fullUrl, $column) !== false) {
             $direction = $direction == 'asc' ? 'desc' : 'asc';
         }
 

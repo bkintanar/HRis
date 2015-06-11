@@ -1,14 +1,19 @@
-<?php namespace HRis\Eloquent;
+<?php
+
+namespace HRis\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class TaxComputation
- * @package HRis
+ * @package HRis\Eloquent
  */
-class TaxComputation extends Model {
+class TaxComputation extends Model
+{
 
     /**
+     * Indicates if the model should be timestamped.
+     *
      * @var bool
      */
     public $timestamps = false;

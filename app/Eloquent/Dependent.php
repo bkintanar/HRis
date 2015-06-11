@@ -1,15 +1,20 @@
-<?php namespace HRis\Eloquent;
+<?php
+
+namespace HRis\Eloquent;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Dependent
- * @package HRis
+ * @package HRis\Eloquent
  */
-class Dependent extends Model {
+class Dependent extends Model
+{
 
     /**
+     * Indicates if the model should be timestamped.
+     *
      * @var bool
      */
     public $timestamps = false;

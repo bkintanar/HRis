@@ -1,4 +1,6 @@
-<?php namespace HRis\Http\Controllers\PIM\Configuration;
+<?php
+
+namespace HRis\Http\Controllers\PIM\Configuration;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use HRis\Eloquent\Employee;
@@ -8,9 +10,13 @@ use HRis\Http\Requests\PIM\TerminationReasonsRequest;
 use Illuminate\Support\Facades\Redirect;
 
 /**
+ * Class TerminationReasonsController
+ * @package HRis\Http\Controllers\PIM\Configuration
+ *
  * @Middleware("auth")
  */
-class TerminationReasonsController extends Controller {
+class TerminationReasonsController extends Controller
+{
 
     /**
      * @var Employee
@@ -45,7 +51,7 @@ class TerminationReasonsController extends Controller {
      */
     public function index(TerminationReasonsRequest $request)
     {
-        $this->data['employee'] = $this->employee->whereUserId($this->loggedUser->id)->first();
+        $this->data['employee'] = $this->employee->whereUserId($this->logged_user->id)->first();
         $this->data['terminationReasons'] = $this->termination_reason->get();
         $this->data['pageTitle'] = 'Termination Reasons';
 
@@ -61,12 +67,10 @@ class TerminationReasonsController extends Controller {
      */
     public function store(TerminationReasonsRequest $request)
     {
-        try
-        {
+        try {
             $this->termination_reason->create($request->all());
 
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return Redirect::to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
 
@@ -84,17 +88,14 @@ class TerminationReasonsController extends Controller {
     {
         $termination_reason = $this->termination_reason->whereId($request->get('termination_reason_id'))->first();
 
-        if ( ! $termination_reason)
-        {
+        if ( ! $termination_reason) {
             return Redirect::to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
-        try
-        {
+        try {
             $termination_reason->update($request->all());
 
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 

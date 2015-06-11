@@ -1,4 +1,6 @@
-<?php namespace HRis\Console\Commands;
+<?php
+
+namespace HRis\Console\Commands;
 
 use Carbon\Carbon;
 use HRis\Eloquent\City;
@@ -8,21 +10,26 @@ use HRis\Eloquent\SalaryComponent;
 use Illuminate\Console\Command;
 use League\Csv\Reader;
 
-class ImportEmployeeList extends Command {
+/**
+ * Class ImportEmployeeList
+ * @package HRis\Console\Commands
+ */
+class ImportEmployeeList extends Command
+{
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Import employee list from a given CSV file.';
+    protected $description = 'Import employee list from a given CSV file';
 
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'import:employee';
+    protected $name = 'hris:import-employee';
 
     /**
      * Execute the console command.
@@ -36,8 +43,7 @@ class ImportEmployeeList extends Command {
         $csv->setOffset(2);
         $data = $csv->query();
 
-        foreach ($data as $lineIndex => $row)
-        {
+        foreach ($data as $lineIndex => $row) {
             $data = [];
             $data['employee_id'] = $row[0];
             $data['joined_date'] = Carbon::parse($row[1])->toDateString();
@@ -59,12 +65,10 @@ class ImportEmployeeList extends Command {
 
             $new_employee = Employee::create($data);
             $components = SalaryComponent::all();
-            foreach ($components as $value)
-            {
+            foreach ($components as $value) {
                 $salary_components = ['employee_id' => $new_employee->id, 'component_id' => $value->id, 'value' => 0];
                 EmployeeSalaryComponent::create($salary_components);
             }
-//            dd($data);
         }
     }
 

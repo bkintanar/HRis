@@ -1,13 +1,19 @@
-<?php namespace HRis\Http\Controllers;
+<?php
+
+namespace HRis\Http\Controllers;
 
 use HRis\Eloquent\Employee;
 use HRis\Eloquent\TimeLog;
 use Illuminate\Support\Facades\Redirect;
 
 /**
+ * Class HomeController
+ * @package HRis\Http\Controllers
+ *
  * @Middleware("auth")
  */
-class HomeController extends Controller {
+class HomeController extends Controller
+{
 
     /*
     |--------------------------------------------------------------------------
@@ -50,7 +56,8 @@ class HomeController extends Controller {
 
         $employee = Employee::whereId(3)->first();
 
-        $timelog = TimeLog::where('swipe_date', '>=', '2015-01-01')->where('swipe_date', '<=', '2015-01-31')->whereFaceId($employee->face_id)->get();
+        $timelog = TimeLog::where('swipe_date', '>=', '2015-01-01')->where('swipe_date', '<=',
+            '2015-01-31')->whereFaceId($employee->face_id)->get();
 
         dd($timelog);
 

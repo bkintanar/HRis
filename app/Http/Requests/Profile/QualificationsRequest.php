@@ -1,9 +1,16 @@
-<?php namespace HRis\Http\Requests\Profile;
+<?php
+
+namespace HRis\Http\Requests\Profile;
 
 use HRis\Http\Requests\Request;
 use Illuminate\Support\Facades\View;
 
-class QualificationsRequest extends Request {
+/**
+ * Class QualificationsRequest
+ * @package HRis\Http\Requests\Profile
+ */
+class QualificationsRequest extends Request
+{
 
     /**
      * Determine if the user is authorized to make this request.
@@ -15,6 +22,9 @@ class QualificationsRequest extends Request {
         return true;
     }
 
+    /**
+     * @return mixed
+     */
     public function forbiddenResponse()
     {
         return Response::make(View::make('errors.403'), 403);

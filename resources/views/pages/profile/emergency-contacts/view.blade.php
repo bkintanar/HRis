@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-                    @if($loggedUser->hasAccess(\Request::segment(1).'.emergency-contacts.create'))
+                    @if($logged_user->hasAccess(\Request::segment(1).'.emergency-contacts.create'))
                     <div class="">
                         <a id="addEmergencyContact" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
                     </div>
@@ -41,10 +41,10 @@
                                         <td>{{ $emergencyContact->home_phone }}</td>
                                         <td>{{ $emergencyContact->mobile_phone }}</td>
                                         <td>
-                                            @if($loggedUser->hasAccess(\Request::segment(1).'.emergency-contacts.update'))
+                                            @if($logged_user->hasAccess(\Request::segment(1).'.emergency-contacts.update'))
                                             <button rel="edit" id="{{$emergencyContact->id}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-paste"></i></button>
                                             @endif
-                                            @if($loggedUser->hasAccess(\Request::segment(1).'.emergency-contacts.delete'))
+                                            @if($logged_user->hasAccess(\Request::segment(1).'.emergency-contacts.delete'))
                                             <button rel="delete" id="{{$emergencyContact->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-trash"></i></button>
                                             @endif
                                         </td>

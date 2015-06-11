@@ -1,4 +1,6 @@
-<?php namespace HRis\Http\Controllers\Administration\Job;
+<?php
+
+namespace HRis\Http\Controllers\Administration\Job;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use HRis\Eloquent\EmploymentStatus;
@@ -7,9 +9,13 @@ use HRis\Http\Requests\Administration\EmploymentStatusRequest;
 use Illuminate\Support\Facades\Redirect;
 
 /**
+ * Class EmploymentStatusController
+ * @package HRis\Http\Controllers\Administration\Job
+ *
  * @Middleware("auth")
  */
-class EmploymentStatusController extends Controller {
+class EmploymentStatusController extends Controller
+{
 
     /**
      * @var EmploymentStatus
@@ -55,12 +61,10 @@ class EmploymentStatusController extends Controller {
      */
     public function store(EmploymentStatusRequest $request)
     {
-        try
-        {
+        try {
             $this->employment_status->create($request->all());
 
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return Redirect::to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
 
@@ -78,17 +82,14 @@ class EmploymentStatusController extends Controller {
     {
         $employment_status = $this->employment_status->whereId($request->get('employment_status_id'))->first();
 
-        if ( ! $employment_status)
-        {
+        if ( ! $employment_status) {
             return Redirect::to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
-        try
-        {
+        try {
             $employment_status->update($request->all());
 
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 

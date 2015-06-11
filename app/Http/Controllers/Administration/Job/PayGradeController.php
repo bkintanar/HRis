@@ -1,4 +1,6 @@
-<?php namespace HRis\Http\Controllers\Administration\Job;
+<?php
+
+namespace HRis\Http\Controllers\Administration\Job;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use HRis\Eloquent\PayGrade;
@@ -7,10 +9,18 @@ use HRis\Http\Requests\Administration\PayGradeRequest;
 use Illuminate\Support\Facades\Redirect;
 
 /**
+ * Class PayGradeController
+ * @package HRis\Http\Controllers\Administration\Job
+ *
  * @Middleware("auth")
  */
-class PayGradeController extends Controller {
+class PayGradeController extends Controller
+{
 
+    /**
+     * @param Sentry $auth
+     * @param PayGrade $pay_grade
+     */
     public function __construct(Sentry $auth, PayGrade $pay_grade)
     {
         parent::__construct($auth);
@@ -45,12 +55,10 @@ class PayGradeController extends Controller {
      */
     public function store(PayGradeRequest $request)
     {
-        try
-        {
+        try {
             $this->pay_grade->create($request->all());
 
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return Redirect::to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
 
@@ -68,17 +76,14 @@ class PayGradeController extends Controller {
     {
         $pay_grade = $this->pay_grade->whereId($request->get('pay_grade_id'))->first();
 
-        if ( ! $pay_grade)
-        {
+        if ( ! $pay_grade) {
             return Redirect::to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
-        try
-        {
+        try {
             $pay_grade->update($request->all());
 
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 

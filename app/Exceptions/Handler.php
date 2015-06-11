@@ -1,12 +1,16 @@
-<?php namespace HRis\Exceptions;
+<?php
+
+namespace HRis\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Http\Response;
-use Whoops\Handler\PrettyPageHandler;
-use Whoops\Run;
 
-class Handler extends ExceptionHandler {
+/**
+ * Class Handler
+ * @package HRis\Exceptions
+ */
+class Handler extends ExceptionHandler
+{
 
     /**
      * A list of the exception types that should not be reported.
@@ -14,8 +18,20 @@ class Handler extends ExceptionHandler {
      * @var array
      */
     protected $dontReport = [
-        'Symfony\Component\HttpKernel\Exception\HttpException'
+        \Symfony\Component\HttpKernel\Exception\HttpException::class,
     ];
+
+    /**
+     * Render an exception into an HTTP response.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Exception $e
+     * @return \Illuminate\Http\Response
+     */
+    public function render($request, Exception $e)
+    {
+        return parent::render($request, $e);
+    }
 
     /**
      * Report or log an exception.
@@ -29,46 +45,4 @@ class Handler extends ExceptionHandler {
     {
         return parent::report($e);
     }
-
-    /**
-     * Render an exception into an HTTP response.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Exception $e
-     * @return Response
-     */
-    public function render($request, Exception $e)
-    {
-        if ($this->isHttpException($e))
-        {
-            return $this->renderHttpException($e);
-        }
-
-
-        if (config('app.debug'))
-        {
-            return $this->renderExceptionWithWhoops($e);
-        }
-
-        return parent::render($request, $e);
-    }
-
-    /**
-     * Render an exception using Whoops.
-     *
-     * @param  \Exception $e
-     * @return Response
-     */
-    protected function renderExceptionWithWhoops(Exception $e)
-    {
-        $whoops = new Run;
-        $whoops->pushHandler(new PrettyPageHandler());
-
-        return new Response(
-            $whoops->handleException($e),
-            $e->getStatusCode(),
-            $e->getHeaders()
-        );
-    }
-
 }

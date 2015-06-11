@@ -1,4 +1,6 @@
-<?php namespace HRis\Http\Controllers\PIM;
+<?php
+
+namespace HRis\Http\Controllers\PIM;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use HRis\Eloquent\Employee;
@@ -13,9 +15,13 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 
 /**
+ * Class EmployeeListController
+ * @package HRis\Http\Controllers\PIM
+ *
  * @Middleware("auth")
  */
-class EmployeeListController extends Controller {
+class EmployeeListController extends Controller
+{
 
     /**
      * @var Employee
@@ -31,7 +37,7 @@ class EmployeeListController extends Controller {
      * @var Pagination
      */
     protected $pagination;
-    
+
     /**
      * @var SalaryComponent
      */
@@ -49,8 +55,13 @@ class EmployeeListController extends Controller {
      * @param SalaryComponent $salary_component
      * @param Pagination $pagination
      */
-    public function __construct(Sentry $auth, Employee $employee, EmployeeSalaryComponent $employee_salary_component, SalaryComponent $salary_component, Pagination $pagination)
-    {
+    public function __construct(
+        Sentry $auth,
+        Employee $employee,
+        EmployeeSalaryComponent $employee_salary_component,
+        SalaryComponent $salary_component,
+        Pagination $pagination
+    ) {
         parent::__construct($auth);
 
         $this->employee = $employee;
@@ -129,8 +140,7 @@ class EmployeeListController extends Controller {
     {
         $employee = $this->employee->whereId($employee_id)->first();
 
-        if ($employee)
-        {
+        if ($employee) {
             return Redirect::to(Request::path() . '/personal-details');
         }
 
@@ -146,17 +156,14 @@ class EmployeeListController extends Controller {
      */
     public function store(PIMRequest $request)
     {
-        try
-        {
+        try {
             $new_employee = $this->employee->create($request->all());
             $components = $this->salary_component->all();
-            foreach ($components as $value)
-            {
+            foreach ($components as $value) {
                 $salary_components = ['employee_id' => $new_employee->id, 'component_id' => $value->id, 'value' => 0];
                 $this->employee_salary_component->create($salary_components);
             }
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return Redirect::to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
 

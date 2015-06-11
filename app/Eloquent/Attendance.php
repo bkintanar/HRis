@@ -1,12 +1,22 @@
-<?php namespace HRis\Eloquent;
+<?php
+
+namespace HRis\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Attendance
- * @package HRis
+ * @package HRis\Eloquent
  */
-class Attendance extends Model {
+class Attendance extends Model
+{
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 
     /**
      * Additional fields to treat as Carbon instances.
@@ -15,10 +25,6 @@ class Attendance extends Model {
      */
     protected $dates = ['work_date'];
 
-    /**
-     * @var bool
-     */
-    public $timestamps = false;
     /**
      * The attributes that are mass assignable.
      *
@@ -30,6 +36,7 @@ class Attendance extends Model {
         'in_time',
         'out_time'
     ];
+    
     /**
      * The database table used by the model.
      *

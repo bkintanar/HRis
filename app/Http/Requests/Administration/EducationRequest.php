@@ -1,11 +1,18 @@
-<?php namespace HRis\Http\Requests\Administration;
+<?php
+
+namespace HRis\Http\Requests\Administration;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use HRis\Http\Requests\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 
-class EducationRequest extends Request {
+/**
+ * Class EducationRequest
+ * @package HRis\Http\Requests\Administration
+ */
+class EducationRequest extends Request
+{
 
     /**
      * Get the validation rules that apply to the request.
@@ -14,8 +21,7 @@ class EducationRequest extends Request {
      */
     public function rules()
     {
-        if (Request::isMethod('post') || Request::isMethod('patch'))
-        {
+        if (Request::isMethod('post') || Request::isMethod('patch')) {
             return ['name'];
         }
 
@@ -35,24 +41,29 @@ class EducationRequest extends Request {
         $permission = 'admin.qualifications.skills';
 
         // Create
-        if (Request::isMethod('post'))
-        {
+        if (Request::isMethod('post')) {
             return ($user->hasAccess($permission . '.create'));
         } // Delete
-        else if (Request::isMethod('delete'))
-        {
-            return ($user->hasAccess($permission . '.delete'));
-        } // View
-        else if (Request::isMethod('get'))
-        {
-            return ($user->hasAccess($permission . '.view'));
-        } // Update
-        else if (Request::isMethod('patch'))
-        {
-            return ($user->hasAccess($permission . '.update'));
+        else {
+            if (Request::isMethod('delete')) {
+                return ($user->hasAccess($permission . '.delete'));
+            } // View
+            else {
+                if (Request::isMethod('get')) {
+                    return ($user->hasAccess($permission . '.view'));
+                } // Update
+                else {
+                    if (Request::isMethod('patch')) {
+                        return ($user->hasAccess($permission . '.update'));
+                    }
+                }
+            }
         }
     }
 
+    /**
+     * @return mixed
+     */
     public function forbiddenResponse()
     {
         return Response::make(View::make('errors.403'), 403);

@@ -1,4 +1,6 @@
-<?php namespace HRis\Http\Controllers\Administration\Job;
+<?php
+
+namespace HRis\Http\Controllers\Administration\Job;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use HRis\Eloquent\WorkShift;
@@ -7,9 +9,13 @@ use HRis\Http\Requests\Administration\WorkShiftRequest;
 use Illuminate\Support\Facades\Redirect;
 
 /**
+ * Class WorkShiftController
+ * @package HRis\Http\Controllers\Administration\Job
+ *
  * @Middleware("auth")
  */
-class WorkShiftController extends Controller {
+class WorkShiftController extends Controller
+{
 
     /**
      * @var WorkShift
@@ -54,12 +60,10 @@ class WorkShiftController extends Controller {
      */
     public function store(WorkShiftRequest $request)
     {
-        try
-        {
+        try {
             $this->work_shift->create($request->all());
 
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return Redirect::to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
 
@@ -77,17 +81,14 @@ class WorkShiftController extends Controller {
     {
         $work_shift = $this->work_shift->whereId($request->get('work_shift_id'))->first();
 
-        if ( ! $work_shift)
-        {
+        if ( ! $work_shift) {
             return Redirect::to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
-        try
-        {
+        try {
             $work_shift->update($request->all());
 
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 

@@ -1,7 +1,9 @@
-<?php namespace HRis\Http\Controllers;
+<?php
+
+namespace HRis\Http\Controllers;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
-use Illuminate\Foundation\Bus\DispatchesCommands;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
@@ -9,14 +11,15 @@ use Illuminate\Routing\Controller as BaseController;
  * Class Controller
  * @package HRis\Http\Controllers
  */
-abstract class Controller extends BaseController {
+abstract class Controller extends BaseController
+{
 
-    use DispatchesCommands, ValidatesRequests;
+    use DispatchesJobs, ValidatesRequests;
 
     /**
      * @var
      */
-    public $loggedUser;
+    public $logged_user;
 
     /**
      * @var array
@@ -35,9 +38,8 @@ abstract class Controller extends BaseController {
     {
         $this->auth = $auth;
 
-        if ($auth::check())
-        {
-            $this->data['loggedUser'] = $this->loggedUser = $this->auth = $auth::getUser();
+        if ($auth::check()) {
+            $this->data['logged_user'] = $this->logged_user = $this->auth = $auth::getUser();
         }
     }
 

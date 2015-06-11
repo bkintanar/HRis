@@ -1,17 +1,22 @@
-<?php namespace HRis\Eloquent;
+<?php
+
+namespace HRis\Eloquent;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Employee
- * @package HRis
+ * @package HRis\Eloquent
  */
-class Employee extends Model {
+class Employee extends Model
+{
 
     use HasPlaceholder;
 
     /**
+     * Indicates if the model should be timestamped.
+     *
      * @var bool
      */
     public $timestamps = false;
@@ -117,12 +122,13 @@ class Employee extends Model {
      */
     public function getEmployeeById($employee_id, $user_id)
     {
-        if ($employee_id)
-        {
-            return self::whereEmployeeId($employee_id)->with('user', 'country', 'province', 'city', 'jobHistories', 'dependents', 'employeeWorkShift')->first();
+        if ($employee_id) {
+            return self::whereEmployeeId($employee_id)->with('user', 'country', 'province', 'city', 'jobHistories',
+                'dependents', 'employeeWorkShift')->first();
         }
 
-        return self::whereUserId($user_id)->with('user', 'country', 'province', 'city', 'jobHistories', 'dependents', 'employeeWorkShift')->first();
+        return self::whereUserId($user_id)->with('user', 'country', 'province', 'city', 'jobHistories', 'dependents',
+            'employeeWorkShift')->first();
     }
 
     /**
@@ -133,7 +139,9 @@ class Employee extends Model {
      */
     public function getEmployeeList($paginate = true, $sort = 'employees.id', $direction = 'asc')
     {
-        $employees = $this->select('employees.id', 'employees.employee_id', 'employees.first_name', 'employees.last_name', 'job_titles.name as job', 'employment_statuses.name as status', 'employment_statuses.class');
+        $employees = $this->select('employees.id', 'employees.employee_id', 'employees.first_name',
+            'employees.last_name', 'job_titles.name as job', 'employment_statuses.name as status',
+            'employment_statuses.class');
         $employees->leftJoin(
             \DB::raw('(SELECT `employee_id`, `job_title_id`, `employment_status_id`, `effective_date` FROM `job_histories` AS `jh` WHERE `effective_date` = (SELECT MAX(`effective_date`) FROM `job_histories` AS `jh2` WHERE `jh`.`employee_id` = `jh2`.`employee_id`) group by `employee_id` ) AS `jh`'),
             'employees.id', '=', 'jh.employee_id');
@@ -141,8 +149,7 @@ class Employee extends Model {
         $employees->leftJoin('employment_statuses', 'jh.employment_status_id', '=', 'employment_statuses.id');
         $employees->orderBy($sort, $direction);
 
-        if ($paginate)
-        {
+        if ($paginate) {
             return $employees->paginate(DATAS_PER_PAGE);
         }
 
@@ -156,8 +163,7 @@ class Employee extends Model {
      */
     public function getEmployeeSalaryDetails($employee_id, $user_employee_id)
     {
-        if ($employee_id)
-        {
+        if ($employee_id) {
             return self::whereEmployeeId($employee_id)->with('employeeSalaryComponent', 'dependents')->first();
         }
 
@@ -181,36 +187,31 @@ class Employee extends Model {
         $work_shift = $this->employeeWorkShift()->first();
 
         $wstp = $work_shift->getWorkShiftRange($start_date);
-        $time_in = $this->timelogs()->whereSwipeDate($wstp['from_datetime']->toDateString())->where('swipe_time', '>=', $wstp['from_datetime']->toTimeString())->first();
-        $time_out = $this->timelogs()->whereSwipeDate($wstp['to_datetime']->toDateString())->where('swipe_time', '<=', $wstp['to_datetime']->toTimeString())->orderBy('id', 'desc')->first();
+        $time_in = $this->timelogs()->whereSwipeDate($wstp['from_datetime']->toDateString())->where('swipe_time', '>=',
+            $wstp['from_datetime']->toTimeString())->first();
+        $time_out = $this->timelogs()->whereSwipeDate($wstp['to_datetime']->toDateString())->where('swipe_time', '<=',
+            $wstp['to_datetime']->toTimeString())->orderBy('id', 'desc')->first();
 
         // If employee logs out more than one hour after the work shift schedule check for extended time
-        if ($time_out == null && $time_in != null)
-        {
-            $time_out = $this->timelogs()->where('swipe_datetime', '<=', $wstp['to_datetime']->addHours(4)->toDateTimeString())->orderBy('id', 'desc')->first();
+        if ($time_out == null && $time_in != null) {
+            $time_out = $this->timelogs()->where('swipe_datetime', '<=',
+                $wstp['to_datetime']->addHours(4)->toDateTimeString())->orderBy('id', 'desc')->first();
 
-            if ($time_out != null and $wstp['from_datetime']->addHours(24)->toDateTimeString() < $time_out->swipe_datetime)
-            {
+            if ($time_out != null and $wstp['from_datetime']->addHours(24)->toDateTimeString() < $time_out->swipe_datetime) {
                 $time_out = null;
             }
 
-            if ($time_in->id == $time_out->id)
-            {
+            if ($time_in->id == $time_out->id) {
                 $time_out = null;
             }
         }
 
         // Checks for failure to Login or Logout
-        if ($time_out && $time_in)
-        {
-            if ($time_out->swipe_time == $time_in->swipe_time)
-            {
-                if ($time_out->swipe_datetime >= $wstp['to_datetime']->subHour(1)->toDateTimeString() and $time_out->swipe_datetime <= $wstp['to_datetime']->addHours(4)->toDateTimeString())
-                {
+        if ($time_out && $time_in) {
+            if ($time_out->swipe_time == $time_in->swipe_time) {
+                if ($time_out->swipe_datetime >= $wstp['to_datetime']->subHour(1)->toDateTimeString() and $time_out->swipe_datetime <= $wstp['to_datetime']->addHours(4)->toDateTimeString()) {
                     $time_in = null;
-                }
-                else
-                {
+                } else {
                     $time_out = null;
                 }
             }
@@ -261,7 +262,8 @@ class Employee extends Model {
      */
     public function orderedJobHistories()
     {
-        return $this->jobHistories()->with('jobTitle', 'department', 'workShift', 'location')->orderBy('job_histories.id', 'desc')->get();
+        return $this->jobHistories()->with('jobTitle', 'department', 'workShift',
+            'location')->orderBy('job_histories.id', 'desc')->get();
     }
 
     /**

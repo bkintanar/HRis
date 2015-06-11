@@ -1,15 +1,20 @@
-<?php namespace HRis\Eloquent;
+<?php
+
+namespace HRis\Eloquent;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class JobHistory
- * @package HRis
+ * @package HRis\Eloquent
  */
-class JobHistory extends Model {
+class JobHistory extends Model
+{
 
     /**
+     * Indicates if the model should be timestamped.
+     *
      * @var bool
      */
     public $timestamps = false;

@@ -1,4 +1,6 @@
-<?php namespace HRis\Http\Controllers\Administration;
+<?php
+
+namespace HRis\Http\Controllers\Administration;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use HRis\Eloquent\Nationality;
@@ -7,9 +9,13 @@ use HRis\Http\Requests\Administration\NationalityRequest;
 use Illuminate\Support\Facades\Redirect;
 
 /**
+ * Class NationalityController
+ * @package HRis\Http\Controllers\Administration
+ *
  * @Middleware("auth")
  */
-class NationalityController extends Controller {
+class NationalityController extends Controller
+{
 
     /**
      * @param Sentry $auth
@@ -48,12 +54,10 @@ class NationalityController extends Controller {
      */
     public function store(NationalityRequest $request)
     {
-        try
-        {
+        try {
             $this->nationality->create($request->all());
 
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return Redirect::to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
 
@@ -71,16 +75,13 @@ class NationalityController extends Controller {
     {
         $nationality = $this->nationality->whereId($request->get('nationality_id'))->first();
 
-        if ( ! $nationality)
-        {
+        if ( ! $nationality) {
             return Redirect::to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
-        try
-        {
+        try {
             $nationality->update($request->all());
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 

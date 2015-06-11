@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="ibox-content">
-                    @if($loggedUser->hasAccess('admin.job.pay-grades.create'))
+                    @if($logged_user->hasAccess('admin.job.pay-grades.create'))
                     <div class="">
                         <a id="addPayGrade" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
                     </div>
@@ -41,10 +41,10 @@
                                         <td>{{ number_format($payGrade->min_salary, 2, '.', ',') }}</td>
                                         <td>{{ number_format($payGrade->max_salary, 2, '.', ',') }}</td>
                                         <td>
-                                            @if($loggedUser->hasAccess('admin.job.pay-grades.update'))
+                                            @if($logged_user->hasAccess('admin.job.pay-grades.update'))
                                             <button rel="edit" id="{{$payGrade->id}}" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" title="Edit" type="button"><i class="fa fa-paste"></i></button>
                                             @endif
-                                            @if($loggedUser->hasAccess('admin.job.pay-grades.delete'))
+                                            @if($logged_user->hasAccess('admin.job.pay-grades.delete'))
                                             <button rel="delete" id="{{$payGrade->id}}" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i class="fa fa-trash"></i></button>
                                             @endif
                                         </td>

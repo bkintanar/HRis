@@ -184,7 +184,7 @@
                     $('#avatarModal').modal('toggle');
 
                     // If changing own photo, change photo in the navigation as well
-                    @if ($employee->id == $loggedUser->employee->id)
+                    @if ($employee->id == $logged_user->employee->id)
                         $('#profile-image-nav').delay(1000).attr('src', '/img/profile/' + o);
                     @endif
 

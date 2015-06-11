@@ -1,4 +1,6 @@
-<?php namespace HRis\Http\Controllers\Administration;
+<?php
+
+namespace HRis\Http\Controllers\Administration;
 
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use HRis\Eloquent\User;
@@ -7,12 +9,23 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 
 /**
+ * Class UserManagementController
+ * @package HRis\Http\Controllers\Administration
+ *
  * @Middleware("auth")
  */
-class UserManagementController extends Controller {
+class UserManagementController extends Controller
+{
 
+    /**
+     * @var User
+     */
     protected $user;
 
+    /**
+     * @param Sentry $auth
+     * @param User $user
+     */
     public function __construct(Sentry $auth, User $user)
     {
         parent::__construct($auth);
@@ -55,8 +68,7 @@ class UserManagementController extends Controller {
      */
     public function userDetails($user_id)
     {
-        if ($user_id)
-        {
+        if ($user_id) {
             $user = $this->user->whereId($user_id)->first();
         }
 
@@ -74,8 +86,7 @@ class UserManagementController extends Controller {
      */
     public function userPermissions($user_id)
     {
-        if ($user_id)
-        {
+        if ($user_id) {
             $user = $this->user->whereId($user_id)->first();
         }
 

@@ -1,14 +1,19 @@
-<?php namespace HRis\Eloquent;
+<?php
+
+namespace HRis\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class SSSContribution
- * @package HRis
+ * @package HRis\Eloquent
  */
-class SSSContribution extends Model {
+class SSSContribution extends Model
+{
 
     /**
+     * Indicates if the model should be timestamped.
+     *
      * @var bool
      */
     public $timestamps = false;

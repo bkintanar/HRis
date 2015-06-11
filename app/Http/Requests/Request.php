@@ -1,8 +1,15 @@
-<?php namespace HRis\Http\Requests;
+<?php
+
+namespace HRis\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-abstract class Request extends FormRequest {
+/**
+ * Class Request
+ * @package HRis\Http\Requests
+ */
+abstract class Request extends FormRequest
+{
 
     //
 

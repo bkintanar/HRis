@@ -1,10 +1,17 @@
-<?php namespace HRis\Services;
+<?php
+
+namespace HRis\Services;
 
 use HRis\Eloquent\User;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 use Validator;
 
-class Registrar implements RegistrarContract {
+/**
+ * Class Registrar
+ * @package HRis\Services
+ */
+class Registrar implements RegistrarContract
+{
 
     /**
      * Get a validator for an incoming registration request.
