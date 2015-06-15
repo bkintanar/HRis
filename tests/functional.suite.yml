@@ -10,7 +10,7 @@ modules:
 
     config:
         PhpBrowser:
-            url: http://bkintanar.hris-test.liberty/
+            url: http://hris.loc/
 
         Laravel5:
             environment_file: .env.testing

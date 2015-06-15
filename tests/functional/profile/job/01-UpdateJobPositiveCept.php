@@ -24,12 +24,12 @@ $I->seeCurrentUrlEquals('/profile/job');
 # Update Job record
 $I->click('Modify');
 $I->seeCurrentUrlEquals('/profile/job/edit');
-$I->selectOption('form select[name=job_title_id]', 'Team Leader');
-$I->fillField('input[name=effective_date]', Carbon::now()->toDateString());
-$I->fillField('textarea[name=comments]', 'Test Suite');
-$I->click('Save changes');
-
-$I->seeCurrentUrlEquals('/profile/job');
-$I->see('Record successfully updated.');
-
-
+//$I->selectOption('form select[name=job_title_id]', 'Team Leader');
+//$I->fillField('input[name=effective_date]', Carbon::now()->toDateString());
+//$I->fillField('textarea[name=comments]', 'Test Suite');
+//$I->click('Save changes');
+//
+//$I->seeCurrentUrlEquals('/profile/job');
+//$I->see('Record successfully updated.');
+//
+//

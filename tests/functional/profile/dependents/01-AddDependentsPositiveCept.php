@@ -26,7 +26,6 @@ $I->see('Add a new row');
 $I->fillField('first_name', 'Test');
 $I->fillField('last_name', 'Suite');
 $I->click('Save changes');
-$I->amOnRoute('Save changes');
 
 $I->seeCurrentUrlEquals('/profile/dependents');
 $I->see('Record successfully added.');
