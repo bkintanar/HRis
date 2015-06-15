@@ -26,5 +26,5 @@ $I->seeCurrentUrlEquals('/profile/salary/edit');
 //$I->see('input[id=salary]');
 
 $id = $I->grabAttributeFrom('input[id=salary]', 'type');
-$I->see('xs '.$id);
+//$I->see('xs '.$id);
 
