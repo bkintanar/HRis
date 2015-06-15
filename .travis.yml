@@ -10,7 +10,7 @@ before_script:
     - cp .env.testing .env
     - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS hris;" -uroot; fi
     - composer self-update
-    - composer install --dev --prefer-source --no-interaction
+    - composer install --prefer-source --no-interaction
     - chmod -R 777 storage
     - php artisan migrate --env=testing --no-interaction -vvv
     - php artisan db:seed --env=testing --no-interaction -vvv

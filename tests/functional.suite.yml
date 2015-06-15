@@ -9,8 +9,6 @@ modules:
     enabled: [FunctionalHelper, Laravel5, PhpBrowser]
 
     config:
-        PhpBrowser:
-            url: http://hris.loc/
 
         Laravel5:
             environment_file: .env.testing
