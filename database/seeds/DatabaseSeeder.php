@@ -14,26 +14,26 @@ class DatabaseSeeder extends Seeder {
     {
         Model::unguard();
 
-//        $this->call('UsersTableSeeder');
-//        $this->call('UsersGroupsTableSeeder');
-//        $this->call('TerminationReasonsTableSeeder');
-//        $this->call('RelationshipsTableSeeder');
-//        $this->call('ProvincesTableSeeder');
+        $this->call('UsersTableSeeder');
+        $this->call('UsersGroupsTableSeeder');
+        $this->call('TerminationReasonsTableSeeder');
+        $this->call('RelationshipsTableSeeder');
+        $this->call('ProvincesTableSeeder');
         $this->call('NavlinksTableSeeder');
-//        $this->call('NationalitiesTableSeeder');
-//        $this->call('MaritalStatusesTableSeeder');
-//        $this->call('JobTitlesTableSeeder');
-//        $this->call('GroupsTableSeeder');
-//        $this->call('EmploymentStatusesTableSeeder');
-//        $this->call('DepartmentsTableSeeder');
-//        $this->call('CountriesTableSeeder');
-//        $this->call('CitiesTableSeeder');
-//        $this->call('LocationsTableSeeder');
-//        $this->call('WorkShiftsTableSeeder');
-//        $this->call('TaxComputationsTableSeeder');
-//        $this->call('SSSContributionsTableSeeder');
-//        $this->call('SalaryComponentsTableSeeder');
-//        $this->call('EmployeeSalaryComponentsTableSeeder');
+        $this->call('NationalitiesTableSeeder');
+        $this->call('MaritalStatusesTableSeeder');
+        $this->call('JobTitlesTableSeeder');
+        $this->call('GroupsTableSeeder');
+        $this->call('EmploymentStatusesTableSeeder');
+        $this->call('DepartmentsTableSeeder');
+        $this->call('CountriesTableSeeder');
+        $this->call('CitiesTableSeeder');
+        $this->call('LocationsTableSeeder');
+        $this->call('WorkShiftsTableSeeder');
+        $this->call('TaxComputationsTableSeeder');
+        $this->call('SSSContributionsTableSeeder');
+        $this->call('SalaryComponentsTableSeeder');
+        $this->call('EmployeeSalaryComponentsTableSeeder');
     }
 
 }
