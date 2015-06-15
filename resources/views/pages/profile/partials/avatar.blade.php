@@ -16,6 +16,6 @@
         @else
             <h4><span class="label {{ $employee->jobHistory()->employmentStatus->class or '' }}">{{ $employee->jobHistory()->employmentStatus->name or '' }}</span></h4>
         @endif
-       </div>
+        </div>
     </div>
 </div>
