@@ -138,8 +138,8 @@
               guides: false,
               highlight: false,
               dragCrop: false,
-              movable: false,
-              resizable: false,
+              movable: true,
+              resizable: true,
               zoom: 0.2,
             });
 

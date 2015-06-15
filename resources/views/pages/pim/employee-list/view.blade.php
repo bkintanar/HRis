@@ -1,7 +1,6 @@
 @extends(\Request::is('*pim/*') ? 'master.adm-master' : 'master.default')
 
 @section('content')
-
 <div class="row">
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
@@ -23,7 +22,7 @@
                         <thead>
                             <tr>
                                 @foreach($columns as $key => $column)
-                                    <th>{!! HRis\Services\Pagination::getSortLinks($key, $column, $settings) !!}</th>
+                                <th>{!! HRis\Services\Pagination::getSortLinks($key, $column, $settings) !!}</th>
                                 @endforeach
                                 <th class="fix-width">Action</th>
                             </tr>
@@ -39,10 +38,8 @@
                                     <td>{{ isset($employee->job) ? $employee->job : '' }}</td>
                                     <td><span class="label {{ isset($employee->class) ? $employee->class : '' }}">{{ isset($employee->status) ? $employee->status : '' }}</span></td>
                                     <td>
-                                        <button rel="edit" id="{{$employee->id}}" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom"
-data-toggle="tooltip" data-placement="bottom" title="Edit" type="button"><i class="fa fa-paste"></i></button>
-                                        <button rel="delete" id="{{$employee->id}}" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom"
-data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i class="fa fa-trash"></i></button>
+                                        <button rel="edit" id="{{$employee->id}}" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" data-toggle="tooltip" data-placement="bottom" title="Edit" type="button"><i class="fa fa-paste"></i></button>
+                                        <button rel="delete" id="{{$employee->id}}" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i class="fa fa-trash"></i></button>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -54,12 +51,12 @@ data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i cl
                         </tbody>
                     </table>
                 </div>
-
-                    {!! HRis\Services\Pagination::setupPagination($employees, $settings) !!}
-
+                {!! HRis\Services\Pagination::setupPagination($employees, $settings) !!}
             </div>
         </div>
-    </div><!-- Modal -->
+
+    </div>
+</div><!-- Modal -->
     <div class="modal fade" id="employeeModal" tabindex="-1">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -138,6 +135,10 @@ data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i cl
 @section('custom_css')
     {!! Html::style('/css/plugins/iCheck/custom.css') !!}
     {!! Html::style('/css/plugins/chosen/chosen.css') !!}
+
+    <!-- Data Tables -->
+    {!! Html::style('/css/plugins/dataTables/dataTables.bootstrap.css') !!}
+    {!! Html::style('/css/plugins/dataTables/dataTables.responsive.css') !!}
 @stop
 
 @section('custom_js')

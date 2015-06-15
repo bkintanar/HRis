@@ -22,4 +22,14 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 
         return $app;
     }
+
+    public function logMeIn()
+    {
+        $this->visit('/')
+            ->type('bertrand@verticalops.com', 'email')
+            ->type('retardko', 'password')
+            ->press('Login')
+            ->see('Dashboard')
+            ->onPage('dashboard');
+    }
 }
