@@ -61,7 +61,7 @@ class Navlink extends Model
      */
     protected static function generate()
     {
-        $sentry = Sentry::getUser();
+        $user = Sentry::getUser();
         $result = '';
 
         $_parent_links = self::whereParentId(0)->get();
@@ -69,7 +69,7 @@ class Navlink extends Model
         foreach ($_parent_links as $_parent_link) {
             $href = str_replace('/', '.', $_parent_link->href);
 
-            if ($sentry->hasAccess($href . '.view')) {
+            if ($user->hasAccess($href . '.view')) {
                 $children = self::whereParentId($_parent_link->id)->get();
 
                 $item = self::generateNavLinkItem($_parent_link, $children);
@@ -88,7 +88,7 @@ class Navlink extends Model
      */
     protected static function generateNavLinkItem($link, $children)
     {
-        $sentry = Sentry::getUser();
+        $user = Sentry::getUser();
 
         $special_link_ids = self::getSpecialNavLinkIds();
 
@@ -133,7 +133,7 @@ class Navlink extends Model
             foreach ($children as $child) {
                 $href = str_replace('/', '.', $child->href);
 
-                if ($sentry->hasAccess($href . '.view')) {
+                if ($user->hasAccess($href . '.view')) {
                     $childrenOfChild = self::whereParentId($child->id)->get();
                     $item .= self::generateNavLinkItem($child, $childrenOfChild);
                 }
@@ -167,7 +167,7 @@ class Navlink extends Model
     {
         $request = Request::capture();
 
-        if ($request->is('*' . $href . '*')) {
+        if ($request->is($href . '*')) {
             return true;
         }
 
@@ -298,7 +298,7 @@ class Navlink extends Model
      */
     protected static function profileLinks($pim = false)
     {
-        $sentry = Sentry::getUser();
+        $user = Sentry::getUser();
 
         $nav = '<div class="col-lg-12 top-nav-b"><div class="btn-group top-nav-li"><ul>';
 
@@ -307,7 +307,7 @@ class Navlink extends Model
         foreach ($navigations as $navigation) {
             $format = self::formatHref($navigation, $pim);
 
-            if ( ! $sentry->hasAccess($format['link'] . '.view')) {
+            if ( ! $user->hasAccess($format['link'] . '.view')) {
                 continue;
             }
 
