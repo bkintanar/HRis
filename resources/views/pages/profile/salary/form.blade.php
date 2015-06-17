@@ -1,4 +1,4 @@
-{!! Form::model($employee, ['method' => 'PATCH', 'url' => str_replace('/edit', '', \Request::path()), 'class' => 'form-horizontal', 'id' => 'form5432']) !!}
+{!! Form::model($employee, ['method' => 'PATCH', 'url' => str_replace('/edit', '', Request::path()), 'class' => 'form-horizontal', 'id' => 'form5432']) !!}
     {!! Form::hidden('employee_id', $employee->id) !!}
 
     @include('pages.profile.salary.form-earnings')
@@ -24,11 +24,11 @@
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-2">
                     @if ($disabled == '')
-                        {!! Html::link(str_replace('/edit', '', \Request::path()), 'Cancel', ['class' => 'btn btn-white btn-xs']) !!}
+                        {!! Html::link(str_replace('/edit', '', Request::path()), 'Cancel', ['class' => 'btn btn-white btn-xs']) !!}
                         {!! Form::submit('Save changes', ['class' => 'btn btn-primary btn-xs', 'name' => 'submitForm']) !!}
                     @else
-                        @if($logged_user->hasAccess(\Request::segment(1).'.salary.update'))
-                            {!! Html::link(\Request::path() . '/edit', 'Modify', ['class' => 'btn btn-primary btn-xs']) !!}
+                        @if($logged_user->hasAccess(Request::segment(1).'.salary.update'))
+                            {!! Html::link(Request::path() . '/edit', 'Modify', ['class' => 'btn btn-primary btn-xs']) !!}
                         @endif
                     @endif
                     </div>
