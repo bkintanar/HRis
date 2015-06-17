@@ -32,7 +32,7 @@
                                 @foreach($educations as $education)
                                 <tr class="educationsList" id="education_{{$education->id}}">
                                     <td>{{ HRis\Eloquent\EducationLevel::whereId($education->education_level_id)->pluck('name') }}</td>
-                                    <td>{{ $education->from_date }} - {{ $education->to_date }}</td>
+                                    <td>{{ $education->from_date->format('F j, Y') }} - {{ $education->to_date->format('F j, Y') }}</td>
                                     <td>{{ $education->gpa_score }}</td>
                                     <td>
                                         @if($logged_user->hasAccess(Request::segment(1).'.qualifications.educations.update'))

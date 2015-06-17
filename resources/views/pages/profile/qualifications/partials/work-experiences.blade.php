@@ -35,8 +35,8 @@
                                 <tr class="workExperiencesList" id="workExperience_{{$workExperience->id}}">
                                     <td>{{ $workExperience->company }}</td>
                                     <td>{{ $workExperience->job_title }}</td>
-                                    <td>{{ $workExperience->from_date }}</td>
-                                    <td>{{ $workExperience->to_date }}</td>
+                                    <td>{{ $workExperience->from_date->format('F j, Y') }}</td>
+                                    <td>{{ $workExperience->to_date->format('F j, Y') }}</td>
                                     <td>{{ $workExperience->comment }}</td>
                                     <td>
                                         @if($logged_user->hasAccess(Request::segment(1).'.qualifications.work-experiences.update'))

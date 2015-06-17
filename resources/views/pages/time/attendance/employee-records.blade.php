@@ -24,7 +24,7 @@
                         {!! Form::label('work_date', 'Work Date', ['class' => 'col-md-2 control-label']) !!}
                         <div class="col-sm-4" id="datepicker_work_date">
                             <div class="input-group date">
-                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>{!! Form::text('work_date', $work_date ? : \Carbon::now()->format('F Y'), ['class' => 'form-control']) !!}
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>{!! Form::text('work_date', $work_date ? : Carbon::now()->format('F Y'), ['class' => 'form-control']) !!}
                             </div>
                         </div>
 

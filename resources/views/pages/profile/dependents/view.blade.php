@@ -37,7 +37,7 @@
                                     <tr class="dependentsList" id="dependent_{{$dependent->id}}">
                                         <td>{{ $dependent->first_name }} {{$dependent->middle_name}} {{ $dependent->last_name }}</td>
                                         <td>{{ HRis\Eloquent\Relationship::whereId($dependent->relationship_id)->pluck('name') }}</td>
-                                        <td>{{ $dependent->birth_date }}</td>
+                                        <td>{{ $dependent->birth_date->format('F j, Y') }}</td>
                                         <td>
                                             @if($logged_user->hasAccess(Request::segment(1).'.dependents.update'))
                                             <button rel="edit" id="{{$dependent->id}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-paste"></i></button>

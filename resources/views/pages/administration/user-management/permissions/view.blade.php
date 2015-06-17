@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
 
-            
+
 
             <div class="col-lg-12">
                 <div class="col-lg-12 top-nav-b">
@@ -46,12 +46,12 @@
 
                                  <div class="form-group content-holder ">
 
-                                    <a href="#" class="btn btn-primary expand-content-link col-sm-offset-2 ad-p-btn" id="showtable">Advanced Permissions</a>   
+                                    <a href="#" class="btn btn-primary expand-content-link col-sm-offset-2 ad-p-btn" id="showtable">Advanced Permissions</a>
 
                                     <div class="panel blank-panel hidden-content"  id="advance_p">
 
                                         <div class="panel-heading">
-                                            
+
                                             <div class="panel-options">
                                                 <ul class="nav nav-tabs">
                                                     <li class="active"><a data-toggle="tab" href="#tab-2"> <i class="fa fa-user"></i>Profile</a></li>
@@ -65,15 +65,15 @@
 
                                         <div class="panel-body">
 
-                                            {!! Form::open(['method' => 'POST', 'url' => str_replace('/edit', '', \Request::path()), 'class' => 'form-horizontal']) !!}
+                                            {!! Form::open(['method' => 'POST', 'url' => str_replace('/edit', '', Request::path()), 'class' => 'form-horizontal']) !!}
                                             <div class="tab-content">
                                                 {!! HRis\Eloquent\Navlink::permissionTable($user->id) !!}
                                             </div>
                                             {!! Form::close() !!}
 
                                         </div>
-                                    </div> 
-                                </div> 
+                                    </div>
+                                </div>
 
 
                                      <div class="hr-line-dashed"></div>
@@ -121,10 +121,10 @@
         });
 */
 
-        $(document).ready(function() { 
+        $(document).ready(function() {
           $(".expand-content-link").click(function() {
                 $(".content-holder").find(".hidden-content", this).toggle();
-                return false;   
+                return false;
             });
         });
 
