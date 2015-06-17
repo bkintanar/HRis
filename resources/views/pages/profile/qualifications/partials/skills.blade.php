@@ -11,7 +11,7 @@
             </div>
 
             <div class="ibox-content">
-                @if($logged_user->hasAccess(\Request::segment(1).'.qualifications.skills.create'))
+                @if($logged_user->hasAccess(Request::segment(1).'.qualifications.skills.create'))
                 <div class="">
                     <a id="addSkill" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
                 </div>
@@ -33,10 +33,10 @@
                                     <td>{{ HRis\Eloquent\Skill::whereId($skill->id)->pluck('name') }}</td>
                                     <td>{{ HRis\Eloquent\EmployeeSkill::whereSkillId($skill->id)->whereEmployeeId($employee->id)->pluck('years_of_experience') }}</td>
                                     <td>
-                                        @if($logged_user->hasAccess(\Request::segment(1).'.qualifications.skills.update'))
+                                        @if($logged_user->hasAccess(Request::segment(1).'.qualifications.skills.update'))
                                         <button rel="editSkill" id="{{HRis\Eloquent\EmployeeSkill::whereSkillId($skill->id)->whereEmployeeId($employee->id)->pluck('id')}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-paste"></i></button>
                                         @endif
-                                        @if($logged_user->hasAccess(\Request::segment(1).'.qualifications.skills.delete'))
+                                        @if($logged_user->hasAccess(Request::segment(1).'.qualifications.skills.delete'))
                                         <button rel="deleteSkill" id="{{HRis\Eloquent\EmployeeSkill::whereSkillId($skill->id)->whereEmployeeId($employee->id)->pluck('id')}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-trash"></i></button>
                                         @endif
                                     </td>
@@ -65,7 +65,7 @@
 
                 <div class="modal-body">
                     <!--Add form-->
-                    {!! Form::open(['method' => 'POST', 'url' => str_replace('/edit', '', \Request::path()).'/skills', 'class' => 'form-horizontal']) !!}
+                    {!! Form::open(['method' => 'POST', 'url' => str_replace('/edit', '', Request::path()).'/skills', 'class' => 'form-horizontal']) !!}
                         {!! Form::hidden('id', $employee->id) !!}
                         {!! Form::hidden('employee_skill_id', '', ['id' => 'employee_skill_id']) !!}
                         {!! Form::hidden('_method', 'POST', ['id' => 'skillForm']) !!}

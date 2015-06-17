@@ -1,4 +1,4 @@
-@extends(\Request::is('*pim/*') ? 'master.adm-master' : 'master.default')
+@extends(Request::is('*pim/*') ? 'master.adm-master' : 'master.default')
 
 @section('content')
     @include('partials.notification')
@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-                    @if($logged_user->hasAccess(\Request::segment(1).'.dependents.create'))
+                    @if($logged_user->hasAccess(Request::segment(1).'.dependents.create'))
                     <div class="">
                         <a id="addDependent" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
                     </div>
@@ -39,10 +39,10 @@
                                         <td>{{ HRis\Eloquent\Relationship::whereId($dependent->relationship_id)->pluck('name') }}</td>
                                         <td>{{ $dependent->birth_date }}</td>
                                         <td>
-                                            @if($logged_user->hasAccess(\Request::segment(1).'.dependents.update'))
+                                            @if($logged_user->hasAccess(Request::segment(1).'.dependents.update'))
                                             <button rel="edit" id="{{$dependent->id}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-paste"></i></button>
                                             @endif
-                                            @if($logged_user->hasAccess(\Request::segment(1).'.dependents.delete'))
+                                            @if($logged_user->hasAccess(Request::segment(1).'.dependents.delete'))
                                             <button rel="delete" id="{{$dependent->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-trash"></i></button>
                                             @endif
                                         </td>
@@ -71,7 +71,7 @@
 
                     <div class="modal-body">
                         <!--Add form-->
-                        {!! Form::open(['method' => 'POST', 'url' => str_replace('/edit', '', \Request::path()), 'class' => 'form-horizontal']) !!}
+                        {!! Form::open(['method' => 'POST', 'url' => str_replace('/edit', '', Request::path()), 'class' => 'form-horizontal']) !!}
                             {!! Form::hidden('employee_id', $employee->id) !!}
                             {!! Form::hidden('dependent_id', '', ['id' => 'dependent_id']) !!}
                             {!! Form::hidden('_method', 'POST', ['id' => 'dependentForm']) !!}
@@ -149,7 +149,7 @@
             {
                 $.ajax({
                     type: "GET",
-                    url: '/ajax/' + '{{\Request::path()}}',
+                    url: '/ajax/' + '{{Request::path()}}',
                     data: { id: dataId }
                 }).done(function( response ) {
 
@@ -175,7 +175,7 @@
             {
                 $.ajax({
                     type: "DELETE",
-                    url: '/ajax/' + '{{\Request::path()}}',
+                    url: '/ajax/' + '{{Request::path()}}',
                     data: { id: dataId, _token: $('input[name=_token]').val() }
                 }).done(function( response ) {
 

@@ -11,7 +11,7 @@
             </div>
 
             <div class="ibox-content">
-                @if($logged_user->hasAccess(\Request::segment(1).'.qualifications.work-experiences.create'))
+                @if($logged_user->hasAccess(Request::segment(1).'.qualifications.work-experiences.create'))
                 <div class="">
                     <a id="addWorkExperience" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
                 </div>
@@ -39,10 +39,10 @@
                                     <td>{{ $workExperience->to_date }}</td>
                                     <td>{{ $workExperience->comment }}</td>
                                     <td>
-                                        @if($logged_user->hasAccess(\Request::segment(1).'.qualifications.work-experiences.update'))
+                                        @if($logged_user->hasAccess(Request::segment(1).'.qualifications.work-experiences.update'))
                                         <button rel="editWorkExperience" id="{{$workExperience->id}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-paste"></i></button>
                                         @endif
-                                        @if($logged_user->hasAccess(\Request::segment(1).'.qualifications.work-experiences.delete'))
+                                        @if($logged_user->hasAccess(Request::segment(1).'.qualifications.work-experiences.delete'))
                                         <button rel="deleteWorkExperience" id="{{$workExperience->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-trash"></i></button>
                                         @endif
                                     </td>
@@ -71,7 +71,7 @@
 
                 <div class="modal-body">
                     <!--Add form-->
-                    {!! Form::open(['method' => 'POST', 'url' => str_replace('/edit', '', \Request::path()).'/work-experiences', 'class' => 'form-horizontal']) !!}
+                    {!! Form::open(['method' => 'POST', 'url' => str_replace('/edit', '', Request::path()).'/work-experiences', 'class' => 'form-horizontal']) !!}
                         {!! Form::hidden('employee_id', $employee->id) !!}
                         {!! Form::hidden('work_experience_id', '', ['id' => 'work_experience_id']) !!}
                         {!! Form::hidden('_method', 'POST', ['id' => 'workExperienceForm']) !!}

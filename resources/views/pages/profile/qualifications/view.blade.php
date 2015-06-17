@@ -1,19 +1,19 @@
-@extends(\Request::is('*pim/*') ? 'master.adm-master' : 'master.default')
+@extends(Request::is('*pim/*') ? 'master.adm-master' : 'master.default')
 
 @section('content')
     @include('partials.notification')
         {!! HRis\Eloquent\Navlink::profileLinks($pim) !!}
 
-@if ($logged_user->hasAccess(\Request::segment(1).'.qualifications.work-experiences.view'))
+@if ($logged_user->hasAccess(Request::segment(1).'.qualifications.work-experiences.view'))
     @include ('pages.profile.qualifications.partials.work-experiences')
 @endif
-@if ($logged_user->hasAccess(\Request::segment(1).'.qualifications.educations.view'))
+@if ($logged_user->hasAccess(Request::segment(1).'.qualifications.educations.view'))
     @include ('pages.profile.qualifications.partials.educations')
 @endif
-@if ($logged_user->hasAccess(\Request::segment(1).'.qualifications.skills.view'))
+@if ($logged_user->hasAccess(Request::segment(1).'.qualifications.skills.view'))
     @include ('pages.profile.qualifications.partials.skills')
 @endif
-@if ($logged_user->hasAccess(\Request::segment(1).'.qualifications.languages.view'))
+@if ($logged_user->hasAccess(Request::segment(1).'.qualifications.languages.view'))
 {{--    @include ('pages.profile.qualifications.partials.languages')--}}
 @endif
 
@@ -45,7 +45,7 @@
             {
                 $.ajax({
                     type: "GET",
-                    url: '/ajax/{{\Request::path()}}/work-experience',
+                    url: '/ajax/{{Request::path()}}/work-experience',
                     data: { id: dataId }
                 }).done(function( response ) {
 
@@ -69,7 +69,7 @@
             {
                 $.ajax({
                     type: "GET",
-                    url: '/ajax/{{\Request::path()}}/education',
+                    url: '/ajax/{{Request::path()}}/education',
                     data: { id: dataId }
                 }).done(function( response ) {
 
@@ -96,7 +96,7 @@
             {
                 $.ajax({
                     type: "GET",
-                    url: '/ajax/{{\Request::path()}}/skill',
+                    url: '/ajax/{{Request::path()}}/skill',
                     data: { id: dataId }
                 }).done(function( response ) {
 
@@ -121,7 +121,7 @@
             {
                 $.ajax({
                     type: "DELETE",
-                    url: '/ajax/{{\Request::path()}}/work-experience',
+                    url: '/ajax/{{Request::path()}}/work-experience',
                     data: { id: dataId, _token: $('input[name=_token]').val() }
                 }).done(function( response ) {
 
@@ -147,7 +147,7 @@
             {
                 $.ajax({
                     type: "DELETE",
-                    url: '/ajax/{{\Request::path()}}/education',
+                    url: '/ajax/{{Request::path()}}/education',
                     data: { id: dataId, _token: $('input[name=_token]').val() }
                 }).done(function( response ) {
 
@@ -173,7 +173,7 @@
             {
                 $.ajax({
                     type: "DELETE",
-                    url: '/ajax/{{\Request::path()}}/skill',
+                    url: '/ajax/{{Request::path()}}/skill',
                     data: { id: dataId, _token: $('input[name=_token]').val() }
                 }).done(function( response ) {
 

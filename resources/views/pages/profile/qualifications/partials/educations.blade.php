@@ -11,7 +11,7 @@
             </div>
 
             <div class="ibox-content">
-                @if($logged_user->hasAccess(\Request::segment(1).'.qualifications.educations.create'))
+                @if($logged_user->hasAccess(Request::segment(1).'.qualifications.educations.create'))
                 <div class="">
                     <a id="addEducation" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
                 </div>
@@ -35,10 +35,10 @@
                                     <td>{{ $education->from_date }} - {{ $education->to_date }}</td>
                                     <td>{{ $education->gpa_score }}</td>
                                     <td>
-                                        @if($logged_user->hasAccess(\Request::segment(1).'.qualifications.educations.update'))
+                                        @if($logged_user->hasAccess(Request::segment(1).'.qualifications.educations.update'))
                                         <button rel="editEducation" id="{{$education->id}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-paste"></i></button>
                                         @endif
-                                        @if($logged_user->hasAccess(\Request::segment(1).'.qualifications.educations.delete'))
+                                        @if($logged_user->hasAccess(Request::segment(1).'.qualifications.educations.delete'))
                                         <button rel="deleteEducation" id="{{$education->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-trash"></i></button>
                                         @endif
                                     </td>
@@ -67,7 +67,7 @@
 
                 <div class="modal-body">
                     <!--Add form-->
-                    {!! Form::open(['method' => 'POST', 'url' => str_replace('/edit', '', \Request::path()).'/educations', 'class' => 'form-horizontal']) !!}
+                    {!! Form::open(['method' => 'POST', 'url' => str_replace('/edit', '', Request::path()).'/educations', 'class' => 'form-horizontal']) !!}
                         {!! Form::hidden('employee_id', $employee->id) !!}
                         {!! Form::hidden('education_id', '', ['id' => 'education_id']) !!}
                         {!! Form::hidden('_method', 'POST', ['id' => 'educationForm']) !!}

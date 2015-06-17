@@ -70,7 +70,7 @@
 
                     <div class="modal-body">
                         <!--Add form-->
-                        {!! Form::open(['method' => 'POST', 'url' => \Request::path(), 'class' => 'form-horizontal']) !!}
+                        {!! Form::open(['method' => 'POST', 'url' => Request::path(), 'class' => 'form-horizontal']) !!}
                             {!! Form::hidden('job_title_id', '', ['id' => 'job_title_id']) !!}
                             {!! Form::hidden('_method', 'POST', ['id' => 'jobTitleForm']) !!}
 

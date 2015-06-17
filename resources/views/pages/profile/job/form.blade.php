@@ -1,4 +1,4 @@
-{!! Form::model($employee, ['method' => 'PATCH', 'url' => str_replace('/edit', '', \Request::path()), 'class' => 'form-horizontal']) !!}
+{!! Form::model($employee, ['method' => 'PATCH', 'url' => str_replace('/edit', '', Request::path()), 'class' => 'form-horizontal']) !!}
     {!! Form::hidden('employee_id', $employee->id) !!}
 
     <!-- End - Employment Commencement -->
@@ -83,15 +83,15 @@
     @if ($disabled == '')
     <div class="form-group">
         <div class="col-sm-4 col-sm-offset-2">
-            {!! Html::link(str_replace('/edit', '', \Request::path()), 'Cancel', ['class' => 'btn btn-white btn-xs']) !!}
+            {!! Html::link(str_replace('/edit', '', Request::path()), 'Cancel', ['class' => 'btn btn-white btn-xs']) !!}
             {!! Form::submit('Save changes', ['class' => 'btn btn-primary btn-xs', 'id' => 'save-button']) !!}
         </div>
     </div>
     @else
-        @if($logged_user->hasAccess(\Request::segment(1).'.job.update'))
+        @if($logged_user->hasAccess(Request::segment(1).'.job.update'))
         <div class="form-group">
             <div class="col-sm-4 col-sm-offset-2">
-                {!! Html::link(\Request::path() . '/edit', 'Modify', ['class' => 'btn btn-primary btn-xs']) !!}
+                {!! Html::link(Request::path() . '/edit', 'Modify', ['class' => 'btn btn-primary btn-xs']) !!}
             </div>
         </div>
         @endif

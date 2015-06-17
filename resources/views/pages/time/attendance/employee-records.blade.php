@@ -14,7 +14,7 @@
                 </div>
 
                 <div class="ibox-content">
-                    {!! Form::open(['method' => 'POST', 'url' => \Request::path(), 'class' => 'form-horizontal']) !!}
+                    {!! Form::open(['method' => 'POST', 'url' => Request::path(), 'class' => 'form-horizontal']) !!}
                     <div class="form-group">
                         {!! Form::label('employee_name', 'Employee Name', ['class' => 'col-md-2 control-label']) !!}
                         <div class="col-md-4">
@@ -33,7 +33,7 @@
                     <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <div class="col-sm-4 col-sm-offset-2">
-                                {!! Html::link(\Request::path(), 'Cancel', ['class' => 'btn btn-white btn-xs']) !!}
+                                {!! Html::link(Request::path(), 'Cancel', ['class' => 'btn btn-white btn-xs']) !!}
                                 {!! Form::submit('Search', ['class' => 'btn btn-primary btn-xs']) !!}
                             </div>
                         </div>
