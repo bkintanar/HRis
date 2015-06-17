@@ -72,7 +72,7 @@
 
                     <div class="modal-body">
                         <!--Add form-->
-                        {!! Form::open(['method' => 'POST', 'url' => \Request::path(), 'class' => 'form-horizontal']) !!}
+                        {!! Form::open(['method' => 'POST', 'url' => Request::path(), 'class' => 'form-horizontal']) !!}
                             {!! Form::hidden('pay_grade_id', '', ['id' => 'pay_grade_id']) !!}
                             {!! Form::hidden('_method', 'POST', ['id' => 'payGradeForm']) !!}
 

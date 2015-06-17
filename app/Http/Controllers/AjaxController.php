@@ -53,9 +53,9 @@ class AjaxController extends Controller
      */
     public function updateAddress()
     {
-        if (\Request::ajax()) {
+        if (Request::ajax()) {
 
-            $provinceId = \Request::get('province_id');
+            $provinceId = Request::get('province_id');
             $cities = City::whereProvinceId($provinceId)->lists('name', 'id');
 
             $json = '';

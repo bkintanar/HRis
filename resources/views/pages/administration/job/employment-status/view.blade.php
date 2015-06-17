@@ -68,7 +68,7 @@
 
                     <div class="modal-body">
                         <!--Add form-->
-                        {!! Form::open(['method' => 'POST', 'url' => \Request::path(), 'class' => 'form-horizontal']) !!}
+                        {!! Form::open(['method' => 'POST', 'url' => Request::path(), 'class' => 'form-horizontal']) !!}
                             {!! Form::hidden('employment_status_id', '', ['id' => 'employment_status_id']) !!}
                             {!! Form::hidden('_method', 'POST', ['id' => 'employmentStatusForm']) !!}
 

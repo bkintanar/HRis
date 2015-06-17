@@ -1,4 +1,4 @@
-@extends(\Request::is('*pim/*') ? 'master.adm-master' : 'master.default')
+@extends(Request::is('*pim/*') ? 'master.adm-master' : 'master.default')
 
 @section('content')
     @include('partials.notification')

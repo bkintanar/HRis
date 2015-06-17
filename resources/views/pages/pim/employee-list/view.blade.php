@@ -1,4 +1,4 @@
-@extends(\Request::is('*pim/*') ? 'master.adm-master' : 'master.default')
+@extends(Request::is('*pim/*') ? 'master.adm-master' : 'master.default')
 
 @section('content')
 <div class="row">
@@ -68,7 +68,7 @@
 
                     <div class="modal-body">
                         <!--Add form-->
-                        {!! Form::open(['method' => 'POST', 'url' => str_replace('/edit', '', \Request::path()), 'class' => 'form-horizontal']) !!}
+                        {!! Form::open(['method' => 'POST', 'url' => str_replace('/edit', '', Request::path()), 'class' => 'form-horizontal']) !!}
                             {!! Form::hidden('_method', 'POST', ['id' => 'employeeForm']) !!}
 
                             <div class="form-group">

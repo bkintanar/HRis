@@ -1,4 +1,4 @@
-@extends(\Request::is('*pim/*') ? 'master.adm-master' : 'master.default')
+@extends(Request::is('*pim/*') ? 'master.adm-master' : 'master.default')
 
 @section('content')
     @include('partials.notification')
@@ -49,7 +49,7 @@
             var datas = { salary: $('#salary').val(), status: '{{$tax_status}}', deductions: getValues('deductions'), sss: $('#sss').val(), type: type }
                 $.ajax({
                     type: "GET",
-                    url: '/ajax/' + '{{\Request::path()}}',
+                    url: '/ajax/' + '{{Request::path()}}',
                     data: datas
                 }).done(function( response ) {
                     var values = jQuery.parseJSON(response);

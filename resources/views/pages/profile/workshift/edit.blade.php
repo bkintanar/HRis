@@ -1,4 +1,4 @@
-@extends(\Request::is('*pim/*') ? 'master.adm-master' : 'master.default')
+@extends(Request::is('*pim/*') ? 'master.adm-master' : 'master.default')
 
 @section('content')
 @include('partials.notification')
@@ -106,7 +106,7 @@
 
                 $.ajax({
                     type: "DELETE",
-                    url: '/ajax/' + '{{\Request::path()}}',
+                    url: '/ajax/' + '{{Request::path()}}',
                     data: { id: dataId, _token: $('input[name=_token]').val() }
                 }).done(function( response ) {
 

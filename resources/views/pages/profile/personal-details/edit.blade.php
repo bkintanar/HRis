@@ -1,4 +1,4 @@
-@extends(\Request::is('*pim/*') ? 'master.adm-master' : 'master.default')
+@extends(Request::is('*pim/*') ? 'master.adm-master' : 'master.default')
 
 @section('content')
     <div class="row">
@@ -54,7 +54,7 @@
                                     <input type="file" accept="image/*" name="file" id="inputImage" class="hide">
                                     Upload new image
                                 </label>
-                                
+
                                 <button class="btn btn-primary btn-sm" id="crop" type="button">Crop And Save</button>
 
                             </div>
