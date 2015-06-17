@@ -174,7 +174,7 @@ class NavlinksTableSeeder extends Seeder {
                     'name'       => 'User Management',
                     'href'       => 'admin/user-management',
                     'icon'       => 'fa-suitcase',
-                    'parent_id'  => 16,
+                    'parent_id'  => 17,
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ],
@@ -192,7 +192,7 @@ class NavlinksTableSeeder extends Seeder {
                     'name'       => 'Job Titles',
                     'href'       => 'admin/job/titles',
                     'icon'       => 'fa-certificate',
-                    'parent_id'  => 17,
+                    'parent_id'  => 19,
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ],
@@ -201,7 +201,7 @@ class NavlinksTableSeeder extends Seeder {
                     'name'       => 'Pay Grades',
                     'href'       => 'admin/job/pay-grades',
                     'icon'       => 'fa-bullseye',
-                    'parent_id'  => 17,
+                    'parent_id'  => 19,
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ],
@@ -210,7 +210,7 @@ class NavlinksTableSeeder extends Seeder {
                     'name'       => 'Employment Status',
                     'href'       => 'admin/job/employment-status',
                     'icon'       => 'fa-info-circle',
-                    'parent_id'  => 17,
+                    'parent_id'  => 19,
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ],
@@ -219,7 +219,7 @@ class NavlinksTableSeeder extends Seeder {
                     'name'       => 'Job Categories',
                     'href'       => 'admin/job/categories',
                     'icon'       => 'fa-sitemap',
-                    'parent_id'  => 17,
+                    'parent_id'  => 19,
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ],
@@ -228,7 +228,7 @@ class NavlinksTableSeeder extends Seeder {
                     'name'       => 'Work Shifts',
                     'href'       => 'admin/job/work-shifts',
                     'icon'       => 'fa-clock-o ',
-                    'parent_id'  => 17,
+                    'parent_id'  => 19,
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ],
@@ -237,7 +237,7 @@ class NavlinksTableSeeder extends Seeder {
                     'name'       => 'Qualifications',
                     'href'       => 'admin/qualifications',
                     'icon'       => 'fa-check-square-o',
-                    'parent_id'  => 16,
+                    'parent_id'  => 17,
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ],
