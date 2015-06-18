@@ -17,7 +17,7 @@
                 <div class="ibox-content">
                     @if($logged_user->hasAccess('admin.job.employment-status.create'))
                     <div class="">
-                        <a id="addEmploymentStatus" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
+                        <a id="add_employment_status" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
                     </div>
                     @endif
                     <div class="table-responsive">
@@ -30,10 +30,10 @@
                                 </tr>
                             </thead>
 
-                            <tbody id="employmentStatusesBody">
+                            <tbody id="employment_statuses_body">
                                 @if(count($employmentStatuses))
                                     @foreach($employmentStatuses as $employmentStatus)
-                                    <tr class="employmentStatusesList" id="employmentStatus_{{$employmentStatus->id}}">
+                                    <tr class="employment_statuses_list" id="employment_status_{{$employmentStatus->id}}">
                                         <td>{{ $employmentStatus->id }}</td>
                                         <td><span class="label {{ $employmentStatus->class }}">{{ $employmentStatus->name }}</span></td>
                                         <td>
@@ -57,20 +57,20 @@
                 </div>
             </div>
         </div><!-- Modal -->
-        <div class="modal fade" id="employmentStatusModal" tabindex="-1">
+        <div class="modal fade" id="employment_status_modal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button class="close" data-dismiss="modal" type="button">&times;</button>
 
-                        <h4 class="modal-title" id="myModalLabel">Employment Status Details</h4>
+                        <h4 class="modal-title" id="my_modal_label">Employment Status Details</h4>
                     </div>
 
                     <div class="modal-body">
                         <!--Add form-->
                         {!! Form::open(['method' => 'POST', 'url' => Request::path(), 'class' => 'form-horizontal']) !!}
                             {!! Form::hidden('employment_status_id', '', ['id' => 'employment_status_id']) !!}
-                            {!! Form::hidden('_method', 'POST', ['id' => 'employmentStatusForm']) !!}
+                            {!! Form::hidden('_method', 'POST', ['id' => 'employment_status_form']) !!}
 
                             <div class="form-group">
                                 {!! Form::label('name', 'Name', ['class' => 'col-md-3 control-label']) !!}
@@ -121,8 +121,8 @@
                     $('#name').val(employment_status.name);
                     $('#class').val(employment_status.class);
 
-                    $("#employmentStatusForm").attr("value", "PATCH");
-                    $('#employmentStatusModal').modal('toggle');
+                    $("#employment_status_form").attr("value", "PATCH");
+                    $('#employment_status_modal').modal('toggle');
                 });
             }
 
@@ -138,10 +138,10 @@
                     {
                         $('#notification-info').show();
                         $("#notification-info").delay(5000).fadeOut();
-                        $('#employmentStatus_' + dataId).remove();
+                        $('#employment_status_' + dataId).remove();
 
-                        if($('.employmentStatusesList').length == 0){
-                            $('#employmentStatusesBody').append('<tr><td colspan="3">No employment status listed</td></tr>');
+                        if($('.employment_statuses_list').length == 0){
+                            $('#employment_statuses_body').append('<tr><td colspan="3">No employment status listed</td></tr>');
                         }
                     }
                     else
@@ -163,13 +163,13 @@
                 }
             });
 
-            $('#addEmploymentStatus').click(function () {
+            $('#add_employment_status').click(function () {
 
                 $('#name').val('');
                 $('#class').val('');
 
-                $("#employmentStatusForm").attr("value", "POST");
-                $('#employmentStatusModal').modal('toggle');
+                $("#employment_status_form").attr("value", "POST");
+                $('#employment_status_modal').modal('toggle');
             });
         });
     </script>

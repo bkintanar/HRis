@@ -17,7 +17,7 @@
                 <div class="ibox-content">
                     @if($logged_user->hasAccess(Request::segment(1).'.dependents.create'))
                     <div class="">
-                        <a id="addDependent" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
+                        <a id="add_dependent" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
                     </div>
                     @endif
                     <div class="table-responsive">
@@ -31,10 +31,10 @@
                                 </tr>
                             </thead>
 
-                            <tbody id="dependentsBody">
-                                @if(count($dependents))
-                                    @foreach($dependents as $dependent)
-                                    <tr class="dependentsList" id="dependent_{{$dependent->id}}">
+                            <tbody id="dependents_body">
+                                @if(count($employee->dependents))
+                                    @foreach($employee->dependents as $dependent)
+                                    <tr class="dependents_list" id="dependent_{{$dependent->id}}">
                                         <td>{{ $dependent->first_name }} {{$dependent->middle_name}} {{ $dependent->last_name }}</td>
                                         <td>{{ HRis\Eloquent\Relationship::whereId($dependent->relationship_id)->pluck('name') }}</td>
                                         <td>{{ $dependent->birth_date->format('F j, Y') }}</td>
@@ -60,7 +60,7 @@
             </div>
         </div><!-- Modal -->
 
-        <div class="modal fade" id="dependentModal" tabindex="-1">
+        <div class="modal fade" id="dependent_modal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -74,7 +74,7 @@
                         {!! Form::open(['method' => 'POST', 'url' => str_replace('/edit', '', Request::path()), 'class' => 'form-horizontal']) !!}
                             {!! Form::hidden('employee_id', $employee->id) !!}
                             {!! Form::hidden('dependent_id', '', ['id' => 'dependent_id']) !!}
-                            {!! Form::hidden('_method', 'POST', ['id' => 'dependentForm']) !!}
+                            {!! Form::hidden('_method', 'POST', ['id' => 'dependent_form']) !!}
 
                             <div class="form-group">
                                 {!! Form::label('first_name', 'First Name', ['class' => 'col-md-3 control-label']) !!}
@@ -166,8 +166,8 @@
 
                     $('.chosen-select').trigger("chosen:updated");
 
-                    $("#dependentForm").attr("value", "PATCH");
-                    $('#dependentModal').modal('toggle');
+                    $("#dependent_form").attr("value", "PATCH");
+                    $('#dependent_modal').modal('toggle');
                 });
             }
 
@@ -185,8 +185,8 @@
                         $("#notification-info").delay(5000).fadeOut();
                         $('#dependent_' + dataId).remove();
 
-                        if($('.dependentsList').length == 0){
-                            $('#dependentsBody').append('<tr><td colspan="4">No dependents listed</td></tr>');
+                        if($('.dependents_list').length == 0){
+                            $('#dependents_body').append('<tr><td colspan="4">No dependents listed</td></tr>');
                         }
                     }
                     else
@@ -211,7 +211,7 @@
             // Chosen
             $('.chosen-select').chosen({width:'100%'});
 
-            $('#addDependent').click(function () {
+            $('#add_dependent').click(function () {
 
                 $('#first_name').val('');
                 $('#middle_name').val('');
@@ -221,8 +221,8 @@
 
                 $('.chosen-select').trigger("chosen:updated");
 
-                $("#dependentForm").attr("value", "POST");
-                $('#dependentModal').modal('toggle');
+                $("#dependent_form").attr("value", "POST");
+                $('#dependent_modal').modal('toggle');
             });
 
             // Date picker
