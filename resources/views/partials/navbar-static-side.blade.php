@@ -29,7 +29,7 @@
 
                     </li>
 
-                    {!! HRis\Eloquent\Navlink::generate() !!}
+                    {!! Navlink::generate() !!}
 
                 </ul>
 
