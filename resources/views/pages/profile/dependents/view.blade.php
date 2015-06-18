@@ -103,7 +103,7 @@
                             </div>
                             <div class="form-group">
                                 {!! Form::label('birth_date', 'Birth Date', ['class' => 'col-md-3 control-label']) !!}
-                                <div class="col-md-9">
+                                <div class="col-md-9" id="datepicker">
                                     <div class="input-group date">
                                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>{!! Form::text('birth_date', null, ['class' => 'form-control', 'data-mask' => '9999-99-99']) !!}
                                     </div>
@@ -226,7 +226,7 @@
             });
 
             // Date picker
-            $('#datepicker_birth_date .input-group.date').datepicker({
+            $('#datepicker .input-group.date').datepicker({
                 todayBtn: "linked",
                 format: 'yyyy-mm-dd',
                 keyboardNavigation: false,
