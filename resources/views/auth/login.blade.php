@@ -10,11 +10,11 @@
                 </div>
 
             </div>
-            <h3>Welcome to HRis</h3>
+            <h3>{{ trans('app.welcome_to_hris') }}</h3>
 
             @if($errors->any())
                 <div class="alert alert-danger">
-                    {{$errors->first()}}<br>
+                    {{ $errors->first() }}<br>
                 </div>
             @endif
 
@@ -24,13 +24,13 @@
                     <input type="email" class="form-control" placeholder="your-name@verticalops.com" name="email" required="">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Password" name="password" required="">
+                    <input type="password" class="form-control" placeholder="{{ trans('app.password') }}" name="password" required="">
                 </div>
                 <button type="submit" onclick="submit();" class="btn btn-primary block full-width m-b">Login</button>
 
-                <a href="#"><small>Forgot password?</small></a>
-                <p class="text-muted text-center"><small>Do not have an account?</small></p>
-                <a class="btn btn-sm btn-white btn-block" href="register.html">Create an account</a>
+                <a href="#"><small>{{ trans('app.forgot_password?') }}</small></a>
+                <p class="text-muted text-center"><small>{{ trans('app.do_you_have_an_account?') }}</small></p>
+                <a class="btn btn-sm btn-white btn-block" href="register.html">{{ trans('app.create_an_account') }}</a>
             </form>
             <p class="m-t"> <small>b3 Studios &copy; 2014</small> </p>
         </div>
