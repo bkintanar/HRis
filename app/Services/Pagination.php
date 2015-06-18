@@ -39,12 +39,30 @@ class Pagination
         $path = '/' . $settings['path'] . '/?page=';
         $sort = '&sort=' . $settings['sort'];
         $direction = '&direction=' . $settings['direction'];
+
+        if ($data->lastPage() > 10)
+        {
+            if ($data->currentPage() < 10)
+            {
+                $start_page = 1;
+            }
+            else {
+                if ($data->currentPage() + 4 <= $data->lastPage())
+                {
+
+                }
+            }
+        }
+        $end_page = $data->lastPage();
+
         $data = [
             'currentPage'     => $data->currentPage(),
             'prevPageUrl'     => $path . ($data->currentPage() == 1 ? 1 : $data->currentPage() - 1),
             'nextPageUrl'     => $data->nextPageUrl(),
             'totalPages'      => $data->lastPage(),
             'total'           => $data->total(),
+            'start_page'      => $start_page,
+            'end_page'        => $end_page,
             'pathPage'        => $path,
             'sortPage'        => $sort,
             'directionPage'   => $direction,
