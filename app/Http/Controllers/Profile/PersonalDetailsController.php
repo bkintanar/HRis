@@ -21,7 +21,7 @@ class PersonalDetailsController extends Controller
 {
 
     /**
-     * @var
+     * @var Employee
      */
     protected $employee;
 
