@@ -148,16 +148,17 @@ return [
         Collective\Html\HtmlServiceProvider::class,
 
         /*
-         * Application Service Providers...
+         * HRis Service Providers...
          */
         HRis\Providers\AppServiceProvider::class,
         HRis\Providers\EventServiceProvider::class,
         HRis\Providers\RouteServiceProvider::class,
-//        HRis\Providers\BusServiceProvider::class,
-//        HRis\Providers\ConfigServiceProvider::class,
         HRis\Providers\AnnotationsServiceProvider::class,
         HRis\Providers\SentryServiceProvider::class,
-//        Barryvdh\Debugbar\ServiceProvider::class,
+
+        /*
+         * Vendor Service Providers...
+         */
         Overtrue\LaravelLang\TranslationServiceProvider::class,
         Barryvdh\TranslationManager\ManagerServiceProvider::class,
         JsLocalization\JsLocalizationServiceProvider::class,
@@ -212,8 +213,12 @@ return [
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
         'Sentry'    => Cartalyst\Sentry\Facades\Laravel\Sentry::class,
-//        'Debugbar'  => Barryvdh\Debugbar\Facade::class,
         'Carbon'    => Carbon\Carbon::class,
+
+        /*
+         * HRis Class Aliases...
+         */
+        'Navlink'   => HRis\Eloquent\Navlink::class,
 
     ],
 
