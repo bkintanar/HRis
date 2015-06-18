@@ -22,6 +22,16 @@ class WorkShiftController extends Controller
 {
 
     /**
+     * @var Employee
+     */
+    protected $employee;
+
+    /**
+     * @var EmployeeWorkShift
+     */
+    protected $employee_work_shift;
+
+    /**
      * @param Sentry $auth
      * @param Employee $employee
      * @param EmployeeWorkShift $employee_work_shift
