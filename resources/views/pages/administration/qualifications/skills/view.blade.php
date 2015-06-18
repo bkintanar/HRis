@@ -17,7 +17,7 @@
                 <div class="ibox-content">
                     @if($logged_user->hasAccess('admin.qualifications.skills.create'))
                     <div class="">
-                        <a id="addSkill" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
+                        <a id="add_skill" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
                     </div>
                     @endif
                     <div class="table-responsive">
@@ -30,10 +30,10 @@
                                 </tr>
                             </thead>
 
-                            <tbody id="skillsBody">
+                            <tbody id="skills_body">
                                 @if(count($skills))
                                     @foreach($skills as $skill)
-                                    <tr class="skillsList" id="skill_{{$skill->id}}">
+                                    <tr class="skills_list" id="skill_{{$skill->id}}">
                                         <td>{{ $skill->id }}</td>
                                         <td>{{ $skill->name }}</td>
                                         <td>
@@ -57,20 +57,20 @@
                 </div>
             </div>
         </div><!-- Modal -->
-        <div class="modal fade" id="skillModal" tabindex="-1">
+        <div class="modal fade" id="skill_modal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button class="close" data-dismiss="modal" type="button">&times;</button>
 
-                        <h4 class="modal-title" id="myModalLabel">Skill Details</h4>
+                        <h4 class="modal-title" id="my_modal_label">Skill Details</h4>
                     </div>
 
                     <div class="modal-body">
                         <!--Add form-->
                         {!! Form::open(['method' => 'POST', 'url' => Request::path(), 'class' => 'form-horizontal']) !!}
                             {!! Form::hidden('skill_id', '', ['id' => 'skill_id']) !!}
-                            {!! Form::hidden('_method', 'POST', ['id' => 'skillForm']) !!}
+                            {!! Form::hidden('_method', 'POST', ['id' => 'skill_form']) !!}
 
                             <div class="form-group">
                                 {!! Form::label('name', 'Name', ['class' => 'col-md-3 control-label']) !!}
@@ -113,8 +113,8 @@
                     $('#skill_id').val(employment_status.id);
                     $('#name').val(employment_status.name);
 
-                    $("#skillForm").attr("value", "PATCH");
-                    $('#skillModal').modal('toggle');
+                    $("#skill_form").attr("value", "PATCH");
+                    $('#skill_modal').modal('toggle');
                 });
             }
 
@@ -132,8 +132,8 @@
                         $("#notification-info").delay(5000).fadeOut();
                         $('#skill_' + dataId).remove();
 
-                        if($('.skillsList').length == 0){
-                            $('#skillsBody').append('<tr><td colspan="3">No skills listed</td></tr>');
+                        if($('.skills_list').length == 0){
+                            $('#skills_body').append('<tr><td colspan="3">No skills listed</td></tr>');
                         }
                     }
                     else
@@ -155,12 +155,12 @@
                 }
             });
 
-            $('#addSkill').click(function () {
+            $('#add_skill').click(function () {
 
                 $('#name').val('');
 
-                $("#skillForm").attr("value", "POST");
-                $('#skillModal').modal('toggle');
+                $("#skill_form").attr("value", "POST");
+                $('#skill_modal').modal('toggle');
             });
         });
     </script>

@@ -16,7 +16,7 @@
 
                 <div class="ibox-content">
                     <div class="">
-                        <a id="addNationality" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
+                        <a id="add_nationality" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-striped">
@@ -52,20 +52,20 @@
             </div>
         </div><!-- Modal -->
 
-        <div class="modal fade" id="nationalityModal" tabindex="-1">
+        <div class="modal fade" id="nationality_modal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button class="close" data-dismiss="modal" type="button">&times;</button>
 
-                        <h4 class="modal-title" id="myModalLabel">Nationalities Details</h4>
+                        <h4 class="modal-title" id="my_modal_label">Nationalities Details</h4>
                     </div>
 
                     <div class="modal-body">
                         <!--Add form-->
                         {!! Form::open(['method' => 'POST', 'url' => Request::path(), 'class' => 'form-horizontal']) !!}
                             {!! Form::hidden('nationality_id', '', ['id' => 'nationality_id']) !!}
-                            {!! Form::hidden('_method', 'POST', ['id' => 'nationalityForm']) !!}
+                            {!! Form::hidden('_method', 'POST', ['id' => 'nationality_form']) !!}
                             <div class="form-group">
                                 <div class="row">
                                     {!! Form::label('name', 'Name', ['class' => 'col-md-3 control-label']) !!}
@@ -109,8 +109,8 @@
                     $('#nationality_id').val(nationality.id);
                     $('#name').val(nationality.name);
 
-                    $("#nationalityForm").attr("value", "PATCH");
-                    $('#nationalityModal').modal('toggle');
+                    $("#nationality_form").attr("value", "PATCH");
+                    $('#nationality_modal').modal('toggle');
                 });
             }
 
@@ -128,8 +128,8 @@
                         $("#notification-info").delay(5000).fadeOut();
                         $('#nationality_' + dataId).remove();
 
-                        if($('.nationalitiesList').length == 0){
-                            $('#nationalitiesBody').append('<tr><td colspan="3">No termination reasons listed</td></tr>');
+                        if($('.nationalities_list').length == 0){
+                            $('#nationalities_body').append('<tr><td colspan="3">No termination reasons listed</td></tr>');
                         }
                     }
                     else
@@ -151,12 +151,12 @@
                 }
             });
 
-            $('#addNationality').click(function () {
+            $('#add_nationality').click(function () {
 
                 $('#name').val('');
 
-                $("#nationalityForm").attr("value", "POST");
-                $('#nationalityModal').modal('toggle');
+                $("#nationality_form").attr("value", "POST");
+                $('#nationality_modal').modal('toggle');
             });
         });
     </script>

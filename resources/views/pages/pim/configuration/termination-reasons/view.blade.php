@@ -17,7 +17,7 @@
                 <div class="ibox-content">
                     @if($logged_user->hasAccess('pim.configuration.termination-reasons.create'))
                     <div class="">
-                        <a id="addTerminationReasons" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
+                        <a id="add_termination_reasons" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
                     </div>
                     @endif
                     <div class="table-responsive">
@@ -30,10 +30,10 @@
                                 </tr>
                             </thead>
 
-                            <tbody id="terminationReasonsBody">
+                            <tbody id="termination_reasons_body">
                                 @if(count($terminationReasons))
                                     @foreach($terminationReasons as $terminationReason)
-                                    <tr class="terminationReasonsList" id="termination_reason_{{$terminationReason->id}}">
+                                    <tr class="termination_reasons_list" id="termination_reason_{{$terminationReason->id}}">
                                         <td>{{ $terminationReason->id }}</td>
                                         <td>{{ $terminationReason->name }}</td>
                                         <td>
@@ -58,20 +58,20 @@
             </div>
         </div><!-- Modal -->
 
-        <div class="modal fade" id="terminationReasonModal" tabindex="-1">
+        <div class="modal fade" id="termination_reason_modal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button class="close" data-dismiss="modal" type="button">&times;</button>
 
-                        <h4 class="modal-title" id="myModalLabel">Termination Reasons Details</h4>
+                        <h4 class="modal-title" id="my_modal_label">Termination Reasons Details</h4>
                     </div>
 
                     <div class="modal-body">
                         <!--Add form-->
                         {!! Form::open(['method' => 'POST', 'url' => '/pim/configuration/termination-reasons', 'class' => 'form-horizontal']) !!}
                             {!! Form::hidden('termination_reason_id', '', ['id' => 'termination_reason_id']) !!}
-                            {!! Form::hidden('_method', 'POST', ['id' => 'terminationReasonForm']) !!}
+                            {!! Form::hidden('_method', 'POST', ['id' => 'termination_reason_form']) !!}
 
                             <div class="form-group">
                                 {!! Form::label('name', 'Name', ['class' => 'col-md-3 control-label']) !!}
@@ -116,8 +116,8 @@
                     $('#termination_reason_id').val(termination_reason.id);
                     $('#name').val(termination_reason.name);
 
-                    $("#terminationReasonForm").attr("value", "PATCH");
-                    $('#terminationReasonModal').modal('toggle');
+                    $("#termination_reason_form").attr("value", "PATCH");
+                    $('#termination_reason_modal').modal('toggle');
                 });
             }
 
@@ -135,8 +135,8 @@
                         $("#notification-info").delay(5000).fadeOut();
                         $('#termination_reason_' + dataId).remove();
 
-                        if($('.terminationReasonsList').length == 0){
-                            $('#terminationReasonsBody').append('<tr><td colspan="3">No termination reasons listed</td></tr>');
+                        if($('.termination_reasons_list').length == 0){
+                            $('#termination_reasons_body').append('<tr><td colspan="3">No termination reasons listed</td></tr>');
                         }
                     }
                     else
@@ -158,12 +158,12 @@
                 }
             });
 
-            $('#addTerminationReasons').click(function () {
+            $('#add_termination_reasons').click(function () {
 
                 $('#name').val('');
 
-                $("#terminationReasonForm").attr("value", "POST");
-                $('#terminationReasonModal').modal('toggle');
+                $("#termination_reason_form").attr("value", "POST");
+                $('#termination_reason_modal').modal('toggle');
             });
         });
     </script>

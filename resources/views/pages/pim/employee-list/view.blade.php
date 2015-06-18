@@ -15,7 +15,7 @@
 
             <div class="ibox-content">
                 <div class="">
-                    <a id="addEmployee" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
+                    <a id="add_employee" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-striped">
@@ -57,7 +57,7 @@
 
     </div>
 </div><!-- Modal -->
-    <div class="modal fade" id="employeeModal" tabindex="-1">
+    <div class="modal fade" id="employee_modal" tabindex="-1">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -150,14 +150,14 @@
     <script>
         $(document).ready(function () {
 
-            $('#employeeModal').on('shown.bs.modal', function () {
+            $('#employee_modal').on('shown.bs.modal', function () {
                 $('.chosen-select').chosen();
             });
 
 
-            $('#addEmployee').click(function () {
+            $('#add_employee').click(function () {
 
-                $('#employeeModal').modal('toggle');
+                $('#employee_modal').modal('toggle');
 
                 $('.i-checks').iCheck({
                     checkboxClass: 'icheckbox_square-green',

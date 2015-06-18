@@ -17,7 +17,7 @@
                 <div class="ibox-content">
                     @if($logged_user->hasAccess('admin.qualifications.educations.create'))
                     <div class="">
-                        <a id="addEducation" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
+                        <a id="add_education" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
                     </div>
                     @endif
                     <div class="table-responsive">
@@ -30,10 +30,10 @@
                                 </tr>
                             </thead>
 
-                            <tbody id="educationsBody">
+                            <tbody id="educations_body">
                                 @if(count($educations))
                                     @foreach($educations as $education)
-                                    <tr class="educationsList" id="education_{{$education->id}}">
+                                    <tr class="educations_list" id="education_{{$education->id}}">
                                         <td>{{ $education->id }}</td>
                                         <td>{{ $education->name }}</td>
                                         <td>
@@ -57,20 +57,20 @@
                 </div>
             </div>
         </div><!-- Modal -->
-        <div class="modal fade" id="educationModal" tabindex="-1">
+        <div class="modal fade" id="education_modal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button class="close" data-dismiss="modal" type="button">&times;</button>
 
-                        <h4 class="modal-title" id="myModalLabel">Education Details</h4>
+                        <h4 class="modal-title" id="my_modal_label">Education Details</h4>
                     </div>
 
                     <div class="modal-body">
                         <!--Add form-->
                         {!! Form::open(['method' => 'POST', 'url' => Request::path(), 'class' => 'form-horizontal']) !!}
                             {!! Form::hidden('education_id', '', ['id' => 'education_id']) !!}
-                            {!! Form::hidden('_method', 'POST', ['id' => 'educationForm']) !!}
+                            {!! Form::hidden('_method', 'POST', ['id' => 'education_form']) !!}
 
                             <div class="form-group">
                                 {!! Form::label('name', 'Name', ['class' => 'col-md-3 control-label']) !!}
@@ -113,8 +113,8 @@
                     $('#education_id').val(employment_status.id);
                     $('#name').val(employment_status.name);
 
-                    $("#educationForm").attr("value", "PATCH");
-                    $('#educationModal').modal('toggle');
+                    $("#education_form").attr("value", "PATCH");
+                    $('#education_modal').modal('toggle');
                 });
             }
 
@@ -132,8 +132,8 @@
                         $("#notification-info").delay(5000).fadeOut();
                         $('#education_' + dataId).remove();
 
-                        if($('.educationsList').length == 0){
-                            $('#educationsBody').append('<tr><td colspan="3">No educations listed</td></tr>');
+                        if($('.educations_list').length == 0){
+                            $('#educations_body').append('<tr><td colspan="3">No educations listed</td></tr>');
                         }
                     }
                     else
@@ -155,12 +155,12 @@
                 }
             });
 
-            $('#addEducation').click(function () {
+            $('#add_education').click(function () {
 
                 $('#name').val('');
 
-                $("#educationForm").attr("value", "POST");
-                $('#educationModal').modal('toggle');
+                $("#education_form").attr("value", "POST");
+                $('#education_modal').modal('toggle');
             });
         });
     </script>

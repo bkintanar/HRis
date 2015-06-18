@@ -17,7 +17,7 @@
                 <div class="ibox-content">
                     @if($logged_user->hasAccess('admin.job.pay-grades.create'))
                     <div class="">
-                        <a id="addPayGrade" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
+                        <a id="add_pay_grade" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
                     </div>
                     @endif
                     <div class="table-responsive">
@@ -32,10 +32,10 @@
                                 </tr>
                             </thead>
 
-                            <tbody id="payGradesBody">
+                            <tbody id="pay_grades_body">
                                 @if(count($payGrades))
                                     @foreach($payGrades as $payGrade)
-                                    <tr class="payGradesList" id="payGrade_{{$payGrade->id}}">
+                                    <tr class="pay_grades_list" id="pay_grade_{{$payGrade->id}}">
                                         <td>{{ $payGrade->id }}</td>
                                         <td>{{ $payGrade->name }}</td>
                                         <td>{{ number_format($payGrade->min_salary, 2, '.', ',') }}</td>
@@ -61,20 +61,20 @@
                 </div>
             </div>
         </div><!-- Modal -->
-        <div class="modal fade" id="payGradeModal" tabindex="-1">
+        <div class="modal fade" id="pay_grade_modal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button class="close" data-dismiss="modal" type="button">&times;</button>
 
-                        <h4 class="modal-title" id="myModalLabel">Pay Grade Details</h4>
+                        <h4 class="modal-title" id="my_modal_label">Pay Grade Details</h4>
                     </div>
 
                     <div class="modal-body">
                         <!--Add form-->
                         {!! Form::open(['method' => 'POST', 'url' => Request::path(), 'class' => 'form-horizontal']) !!}
                             {!! Form::hidden('pay_grade_id', '', ['id' => 'pay_grade_id']) !!}
-                            {!! Form::hidden('_method', 'POST', ['id' => 'payGradeForm']) !!}
+                            {!! Form::hidden('_method', 'POST', ['id' => 'pay_grade_form']) !!}
 
                             <div class="form-group">
                                 {!! Form::label('name', 'Name', ['class' => 'col-md-3 control-label']) !!}
@@ -136,8 +136,8 @@
                     $('#min_salary').val(pay_grade.min_salary);
                     $('#max_salary').val(pay_grade.max_salary);
 
-                    $("#payGradeForm").attr("value", "PATCH");
-                    $('#payGradeModal').modal('toggle');
+                    $("#pay_grade_form").attr("value", "PATCH");
+                    $('#pay_grade_modal').modal('toggle');
                 });
             }
 
@@ -153,10 +153,10 @@
                     {
                         $('#notification-info').show();
                         $("#notification-info").delay(5000).fadeOut();
-                        $('#payGrade_' + dataId).remove();
+                        $('#pay_grade_' + dataId).remove();
 
-                        if($('.payGradesList').length == 0){
-                            $('#payGradesBody').append('<tr><td colspan="5">No pay grades listed</td></tr>');
+                        if($('.pay_grades_list').length == 0){
+                            $('#pay_grades_body').append('<tr><td colspan="5">No pay grades listed</td></tr>');
                         }
                     }
                     else
@@ -178,14 +178,14 @@
                 }
             });
 
-            $('#addPayGrade').click(function () {
+            $('#add_pay_grade').click(function () {
 
                 $('#name').val('');
                 $('#min_salary').val('');
                 $('#max_salary').val('');
 
-                $("#payGradeForm").attr("value", "POST");
-                $('#payGradeModal').modal('toggle');
+                $("#pay_grade_form").attr("value", "POST");
+                $('#pay_grade_modal').modal('toggle');
             });
         });
     </script>

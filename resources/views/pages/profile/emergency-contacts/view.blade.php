@@ -17,7 +17,7 @@
                 <div class="ibox-content">
                     @if($logged_user->hasAccess(Request::segment(1).'.emergency-contacts.create'))
                     <div class="">
-                        <a id="addEmergencyContact" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
+                        <a id="add_emergency_contact" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
                     </div>
                     @endif
                     <div class="table-responsive">
@@ -32,10 +32,10 @@
                                 </tr>
                             </thead>
 
-                            <tbody id="emergencyContactsBody">
+                            <tbody id="emergency_contacts_body">
                                 @if(count($emergencyContacts))
                                     @foreach($emergencyContacts as $emergencyContact)
-                                    <tr class="emergencyContactsList" id="emergencyContact_{{$emergencyContact->id}}">
+                                    <tr class="emergency_contacts_list" id="emergency_contact_{{$emergencyContact->id}}">
                                         <td>{{ $emergencyContact->first_name }} {{$emergencyContact->middle_name}} {{ $emergencyContact->last_name }}</td>
                                         <td>{{ HRis\Eloquent\Relationship::whereId($emergencyContact->relationship_id)->pluck('name') }}</td>
                                         <td>{{ $emergencyContact->home_phone }}</td>
@@ -62,7 +62,7 @@
             </div>
         </div><!-- Modal -->
 
-        <div class="modal fade" id="emergencyContactModal" tabindex="-1">
+        <div class="modal fade" id="emergency_contact_modal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -76,7 +76,7 @@
                         {!! Form::open(['method' => 'POST', 'url' => str_replace('/edit', '', Request::path()), 'class' => 'form-horizontal']) !!}
                             {!! Form::hidden('employee_id', $employee->id) !!}
                             {!! Form::hidden('emergency_contact_id', '', ['id' => 'emergency_contact_id']) !!}
-                            {!! Form::hidden('_method', 'POST', ['id' => 'emergencyContactForm']) !!}
+                            {!! Form::hidden('_method', 'POST', ['id' => 'emergency_contact_form']) !!}
                             <div class="form-group">
                                 {!! Form::label('first_name', 'Full Name', ['class' => 'col-md-3 control-label']) !!}
                                 <div class="col-md-9">
@@ -173,8 +173,8 @@
 
                     $('.chosen-select').trigger("chosen:updated");
 
-                    $("#emergencyContactForm").attr("value", "PATCH");
-                    $('#emergencyContactModal').modal('toggle');
+                    $("#emergency_contact_form").attr("value", "PATCH");
+                    $('#emergency_contact_modal').modal('toggle');
                 });
             }
 
@@ -190,10 +190,10 @@
                     {
                         $('#notification-info').show();
                         $("#notification-info").delay(5000).fadeOut();
-                        $('#emergencyContact_' + dataId).remove();
+                        $('#emergency_contact_' + dataId).remove();
 
-                        if($('.emergencyContactsList').length == 0){
-                            $('#emergencyContactsBody').append('<tr><td colspan="5">No emergency contacts listed</td></tr>');
+                        if($('.emergency_contacts_list').length == 0){
+                            $('#emergency_contacts_body').append('<tr><td colspan="5">No emergency contacts listed</td></tr>');
                         }
                     }
                     else
@@ -218,7 +218,7 @@
             // Chosen
             $('.chosen-select').chosen({width:'100%'});
 
-            $('#addEmergencyContact').click(function () {
+            $('#add_emergency_contact').click(function () {
 
                 $('#first_name').val('');
                 $('#middle_name').val('');
@@ -229,8 +229,8 @@
 
                 $('.chosen-select').trigger("chosen:updated");
 
-                $("#emergencyContactForm").attr("value", "POST");
-                $('#emergencyContactModal').modal('toggle');
+                $("#emergency_contact_form").attr("value", "POST");
+                $('#emergency_contact_modal').modal('toggle');
             });
         });
     </script>
