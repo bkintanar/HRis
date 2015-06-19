@@ -52,7 +52,11 @@ class TerminationReasonsController extends Controller
     public function index(TerminationReasonsRequest $request)
     {
         $this->data['employee'] = $this->employee->whereUserId($this->logged_user->id)->first();
-        $this->data['terminationReasons'] = $this->termination_reason->get();
+
+        $termination_reasons = $this->termination_reason->get();
+
+        $this->data['table'] = $this->setupDataTable($termination_reasons);
+
         $this->data['pageTitle'] = 'Termination Reasons';
 
         return $this->template('pages.pim.configuration.termination-reasons.view');
@@ -99,6 +103,22 @@ class TerminationReasonsController extends Controller
             return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGEW);
+        return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
+    }
+
+    /**
+     * @return array
+     */
+    public function setupDataTable($termination_reasons)
+    {
+        $table = [];
+
+        $table['title'] = 'Termination Reasons';
+        $table['permission'] = 'pim.configuration.termination-reasons';
+        $table['headers'] = ['Id', 'Name'];
+        $table['model'] = ['singular' => 'termination_reason', 'plural' => 'termination_reasons', 'dashed' => 'termination-reasons'];
+        $table['items'] = $termination_reasons;
+
+        return $table;
     }
 }

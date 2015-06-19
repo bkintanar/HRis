@@ -9,6 +9,7 @@ use HRis\Eloquent\Employee;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\DependentsRequest;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request;
 
 /**
  * Class DependentsController
@@ -173,7 +174,8 @@ class DependentsController extends Controller
         $table = [];
 
         $table['title'] = 'Assigned Dependents';
-        $table['headers'] = ['Full Name', 'Relationship', 'Birth Date',];
+        $table['permission'] = str_replace('pim', 'profile', Request::segment(1)) . '.dependents';
+        $table['headers'] = ['Full Name', 'Relationship', 'Birth Date'];
         $table['model'] = ['singular' => 'dependent', 'plural' => 'dependents', 'dashed' => 'dependents'];
         $table['items'] = $dependents;
 

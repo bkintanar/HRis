@@ -44,7 +44,9 @@ class TitleController extends Controller
     public function index(JobTitleRequest $request)
     {
         // TODO: fix me
-        $this->data['jobTitles'] = JobTitle::where('id', '>', 0)->get();
+        $job_titles = JobTitle::where('id', '>', 0)->get();
+
+        $this->data['table'] = $this->setupDataTable($job_titles);
 
         $this->data['pageTitle'] = 'Job Titles';
 
@@ -93,5 +95,21 @@ class TitleController extends Controller
         }
 
         return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
+    }
+
+    /**
+     * @return array
+     */
+    public function setupDataTable($job_titles)
+    {
+        $table = [];
+
+        $table['title'] = 'Job Titles';
+        $table['permission'] = 'admin.job.titles';
+        $table['headers'] = ['Id', 'Job Title', 'Job Description'];
+        $table['model'] = ['singular' => 'job_title', 'plural' => 'job_titles', 'dashed' => 'job-titles'];
+        $table['items'] = $job_titles;
+
+        return $table;
     }
 }

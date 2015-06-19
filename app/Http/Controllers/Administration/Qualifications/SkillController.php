@@ -43,7 +43,9 @@ class SkillController extends Controller
      */
     public function index(SkillRequest $request)
     {
-        $this->data['skills'] = Skill::where('id', '>', 0)->get();
+        $skills = Skill::where('id', '>', 0)->get();
+
+        $this->data['table'] = $this->setupDataTable($skills);
 
         $this->data['pageTitle'] = 'Skills';
 
@@ -92,5 +94,21 @@ class SkillController extends Controller
         }
 
         return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
+    }
+
+    /**
+     * @return array
+     */
+    public function setupDataTable($skills)
+    {
+        $table = [];
+
+        $table['title'] = 'Skills';
+        $table['permission'] = 'admin.qualifications.skills';
+        $table['headers'] = ['Id', 'Name'];
+        $table['model'] = ['singular' => 'skill', 'plural' => 'skills', 'dashed' => 'skills'];
+        $table['items'] = $skills;
+
+        return $table;
     }
 }
