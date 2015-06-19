@@ -23,9 +23,9 @@
                             {!! Form::hidden('_method', 'POST', ['id' => 'work_shift_form']) !!}
 
                             <div class="form-group">
-                                {!! Form::label('class', 'Class', ['class' => 'col-md-3 control-label']) !!}
+                                {!! Form::label('class', 'Name', ['class' => 'col-md-3 control-label']) !!}
                                 <div class="col-md-9">
-                                    {!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
+                                    {!! Form::text('name', null, ['class' => 'form-control', 'required', 'id' => 'name']) !!}
                                 </div>
                             </div>
 

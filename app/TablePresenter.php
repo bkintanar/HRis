@@ -20,7 +20,7 @@ class TablePresenter
         $data['logged_user'] = $logged_user;
         $data['table'] = $table;
 
-        $data['data_table'] = view('partials.tables.' . $table['permission'])->with($data)->render();
+        $data['data_table'] = view('partials.tables.' . str_replace('admin.', 'administration.', $table['permission']))->with($data)->render();
 
         return view('partials.table')->with($data)->render();
     }
