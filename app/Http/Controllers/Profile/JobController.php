@@ -9,6 +9,7 @@ use HRis\Eloquent\JobHistory;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\JobRequest;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request;
 use Input;
 
 /**
@@ -144,6 +145,7 @@ class JobController extends Controller
         $table = [];
 
         $table['title'] = 'Job History';
+        $table['permission'] = str_replace('pim', 'profile', Request::segment(1)) . '.job-histories';
         $table['headers'] = ['Job Title', 'Department', 'Effective Date', 'Employment Status', 'Location', 'Comments',];
         $table['model'] = ['singular' => 'job_history', 'plural' => 'job_histories', 'dashed' => 'job-histories'];
         $table['items'] = $job_histories;

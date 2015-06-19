@@ -9,6 +9,7 @@ use HRis\Eloquent\Employee;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\EmergencyContactsRequest;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request;
 
 /**
  * Class EmergencyContactsController
@@ -181,6 +182,7 @@ class EmergencyContactsController extends Controller
         $table = [];
 
         $table['title'] = 'In case of Emergency';
+        $table['permission'] = str_replace('pim', 'profile', Request::segment(1)) . '.emergency-contacts';
         $table['headers'] = ['Full Name', 'Relationship', 'Home Telephone', 'Mobile',];
         $table['model'] = [
             'singular' => 'emergency_contact',

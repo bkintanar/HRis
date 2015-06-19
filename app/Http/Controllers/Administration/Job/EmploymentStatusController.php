@@ -45,7 +45,10 @@ class EmploymentStatusController extends Controller
     public function index(EmploymentStatusRequest $request)
     {
         // TODO:: fix me
-        $this->data['employmentStatuses'] = $this->employment_status->where('id', '>', 0)->get();
+        $employment_status = $this->employment_status->where('id', '>', 0)->get();
+
+        $this->data['table'] = $this->setupDataTable($employment_status);
+
 
         $this->data['pageTitle'] = 'Employment Status';
 
@@ -94,5 +97,21 @@ class EmploymentStatusController extends Controller
         }
 
         return Redirect::to($request->path())->with('success', 'Record successfully updated.');
+    }
+
+    /**
+     * @return array
+     */
+    public function setupDataTable($employment_statuses)
+    {
+        $table = [];
+
+        $table['title'] = 'Employment Status';
+        $table['permission'] = 'admin.job.employment-status';
+        $table['headers'] = ['Id', 'Name'];
+        $table['model'] = ['singular' => 'employment_status', 'plural' => 'employment_statuses', 'dashed' => 'employment-statuses'];
+        $table['items'] = $employment_statuses;
+
+        return $table;
     }
 }

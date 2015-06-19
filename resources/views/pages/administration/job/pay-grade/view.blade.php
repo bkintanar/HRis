@@ -3,64 +3,10 @@
 @section('content')
     @include('partials.notification')
     <div class="row">
-        <div class="col-lg-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Pay Grades</h5>
-                    <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                    </div>
-                </div>
 
-                <div class="ibox-content">
-                    @if($logged_user->hasAccess('admin.job.pay-grades.create'))
-                    <div class="">
-                        <a id="add_pay_grade" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
-                    </div>
-                    @endif
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Pay Grade</th>
-                                    <th>Minimum Salary</th>
-                                    <th>Maximum Salary</th>
-                                    <th class="fix-width">Action</th>
-                                </tr>
-                            </thead>
+        {!! HRis\TablePresenter::display($logged_user, $table) !!}
 
-                            <tbody id="pay_grades_body">
-                                @if(count($payGrades))
-                                    @foreach($payGrades as $pay_grade)
-                                    <tr class="pay_grades_list" id="pay_grade_{{$pay_grade->id}}">
-                                        <td>{{ $pay_grade->id }}</td>
-                                        <td>{{ $pay_grade->name }}</td>
-                                        <td>{{ number_format($pay_grade->min_salary, 2, '.', ',') }}</td>
-                                        <td>{{ number_format($pay_grade->max_salary, 2, '.', ',') }}</td>
-                                        <td>
-                                            @if($logged_user->hasAccess('admin.job.pay-grades.update'))
-                                            <button rel="edit" id="{{$pay_grade->id}}" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" title="Edit" type="button"><i class="fa fa-edit"></i></button>
-                                            @endif
-                                            @if($logged_user->hasAccess('admin.job.pay-grades.delete'))
-                                            <button rel="delete" id="{{$pay_grade->id}}" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i class="fa fa-times"></i></button>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                @else
-                                    <tr>
-                                        <td colspan="5">No pay grades listed</td>
-                                    </tr>
-                                @endif
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div><!-- Modal -->
+        <!-- Modal -->
         <div class="modal fade" id="pay_grade_modal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">

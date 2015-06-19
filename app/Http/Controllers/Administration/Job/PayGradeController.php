@@ -39,7 +39,10 @@ class PayGradeController extends Controller
     public function index(PayGradeRequest $request)
     {
         // TODO: fix me
-        $this->data['payGrades'] = PayGrade::all();
+        $pay_grades = PayGrade::all();
+
+        $this->data['table'] = $this->setupDataTable($pay_grades);
+
 
         $this->data['pageTitle'] = 'Pay Grades';
 
@@ -88,5 +91,21 @@ class PayGradeController extends Controller
         }
 
         return Redirect::to($request->path())->with('success', 'Record successfully updated.');
+    }
+
+    /**
+     * @return array
+     */
+    public function setupDataTable($pay_grades)
+    {
+        $table = [];
+
+        $table['title'] = 'Pay Grades';
+        $table['permission'] = 'admin.job.pay-grades';
+        $table['headers'] = ['Id', 'Pay Grade', 'Minimum Salary', 'Maximum Salary'];
+        $table['model'] = ['singular' => 'pay_grade', 'plural' => 'pay_grades', 'dashed' => 'pay-grades'];
+        $table['items'] = $pay_grades;
+
+        return $table;
     }
 }

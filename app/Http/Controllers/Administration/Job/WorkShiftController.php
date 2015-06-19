@@ -44,7 +44,9 @@ class WorkShiftController extends Controller
     public function index(WorkShiftRequest $request)
     {
         // TODO: fix me
-        $this->data['workShifts'] = WorkShift::where('id', '>', 0)->get();
+        $work_shifts = WorkShift::where('id', '>', 0)->get();
+
+        $this->data['table'] = $this->setupDataTable($work_shifts);
 
         $this->data['pageTitle'] = 'Work Shifts';
 
@@ -93,5 +95,21 @@ class WorkShiftController extends Controller
         }
 
         return Redirect::to($request->path())->with('success', 'Record successfully updated.');
+    }
+
+    /**
+     * @return array
+     */
+    public function setupDataTable($work_shifts)
+    {
+        $table = [];
+
+        $table['title'] = 'Work Shifts';
+        $table['permission'] = 'admin.job.work-shifts';
+        $table['headers'] = ['Id', 'Work Shift', 'Duration'];
+        $table['model'] = ['singular' => 'work_shift', 'plural' => 'work_shifts', 'dashed' => 'work-shifts'];
+        $table['items'] = $work_shifts;
+
+        return $table;
     }
 }

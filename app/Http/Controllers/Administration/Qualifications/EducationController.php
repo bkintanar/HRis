@@ -44,7 +44,9 @@ class EducationController extends Controller
      */
     public function index(EducationRequest $request)
     {
-        $this->data['educations'] = EducationLevel::where('id', '>', 0)->get();
+        $educations = EducationLevel::where('id', '>', 0)->get();
+
+        $this->data['table'] = $this->setupDataTable($educations);
 
         $this->data['pageTitle'] = 'Educations';
 
@@ -93,5 +95,21 @@ class EducationController extends Controller
         }
 
         return Redirect::to($request->path())->with('success', 'Record successfully updated.');
+    }
+
+    /**
+     * @return array
+     */
+    public function setupDataTable($educations)
+    {
+        $table = [];
+
+        $table['title'] = 'Education';
+        $table['permission'] = 'admin.qualifications.educations';
+        $table['headers'] = ['Id', 'Name'];
+        $table['model'] = ['singular' => 'education', 'plural' => 'educations', 'dashed' => 'educations'];
+        $table['items'] = $educations;
+
+        return $table;
     }
 }

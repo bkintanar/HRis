@@ -15,6 +15,6 @@
 @endforeach
 @else
 <tr>
-    <td colspan="{{ count($headers) +1 }}">No job histories listed</td>
+    <td colspan="{{ count($table['headers']) +1 }}">No job histories listed</td>
 </tr>
 @endif

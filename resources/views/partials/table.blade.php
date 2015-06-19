@@ -10,7 +10,7 @@
         </div>
         <div class="ibox-content">
 
-            @if($table['model']['dashed'] != 'job-histories' && $logged_user->hasAccess(Request::segment(1).'.' . $table['model']['dashed']))
+            @if($table['model']['dashed'] != 'job-histories' && $logged_user->hasAccess($table['permission'] . '.create'))
                 <div class="">
                     <a id="add_{{ $table['model']['singular'] }}" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
                 </div>

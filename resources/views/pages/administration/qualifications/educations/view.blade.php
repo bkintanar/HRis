@@ -3,60 +3,10 @@
 @section('content')
     @include('partials.notification')
     <div class="row">
-        <div class="col-lg-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Education</h5>
-                    <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                    </div>
-                </div>
 
-                <div class="ibox-content">
-                    @if($logged_user->hasAccess('admin.qualifications.educations.create'))
-                    <div class="">
-                        <a id="add_education" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
-                    </div>
-                    @endif
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Name</th>
-                                    <th class="fix-width">Action</th>
-                                </tr>
-                            </thead>
+        {!! HRis\TablePresenter::display($logged_user, $table) !!}
 
-                            <tbody id="educations_body">
-                                @if(count($educations))
-                                    @foreach($educations as $education)
-                                    <tr class="educations_list" id="education_{{$education->id}}">
-                                        <td>{{ $education->id }}</td>
-                                        <td>{{ $education->name }}</td>
-                                        <td>
-                                            @if($logged_user->hasAccess('admin.qualifications.educations.update'))
-                                            <button rel="edit" id="{{$education->id}}" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" title="Edit" type="button"><i class="fa fa-edit"></i></button>
-                                            @endif
-                                            @if($logged_user->hasAccess('admin.qualifications.educations.delete'))
-                                            <button rel="delete" id="{{$education->id}}" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i class="fa fa-times"></i></button>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                @else
-                                    <tr>
-                                        <td colspan="3">No educations listed</td>
-                                    </tr>
-                                @endif
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div><!-- Modal -->
+        <!-- Modal -->
         <div class="modal fade" id="education_modal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">

@@ -3,60 +3,10 @@
 @section('content')
     @include('partials.notification')
     <div class="row">
-        <div class="col-lg-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Termination Reasons</h5>
-                    <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                    </div>
-                </div>
 
-                <div class="ibox-content">
-                    @if($logged_user->hasAccess('pim.configuration.termination-reasons.create'))
-                    <div class="">
-                        <a id="add_termination_reasons" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
-                    </div>
-                    @endif
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Name</th>
-                                    <th class="fix-width">Action</th>
-                                </tr>
-                            </thead>
+        {!! HRis\TablePresenter::display($logged_user, $table) !!}
 
-                            <tbody id="termination_reasons_body">
-                                @if(count($terminationReasons))
-                                    @foreach($terminationReasons as $termination_reason)
-                                    <tr class="termination_reasons_list" id="termination_reason_{{$termination_reason->id}}">
-                                        <td>{{ $termination_reason->id }}</td>
-                                        <td>{{ $termination_reason->name }}</td>
-                                        <td>
-                                            @if($logged_user->hasAccess('pim.configuration.termination-reasons.update'))
-                                            <button rel="edit" id="{{$termination_reason->id}}" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" title="Edit" type="button"><i class="fa fa-edit"></i></button>
-                                            @endif
-                                            @if($logged_user->hasAccess('pim.configuration.termination-reasons.delete'))
-                                            <button rel="delete" id="{{$termination_reason->id}}" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i class="fa fa-times"></i></button>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                @else
-                                    <tr>
-                                        <td colspan="3">No termination reasons listed</td>
-                                    </tr>
-                                @endif
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div><!-- Modal -->
+        <!-- Modal -->
 
         <div class="modal fade" id="termination_reason_modal" tabindex="-1">
             <div class="modal-dialog">
@@ -158,8 +108,7 @@
                 }
             });
 
-            $('#add_termination_reasons').click(function () {
-
+            $('#add_termination_reason').click(function () {
                 $('#name').val('');
 
                 $("#termination_reason_form").attr("value", "POST");
