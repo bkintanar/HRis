@@ -32,16 +32,16 @@
 
                             <tbody id="employment_statuses_body">
                                 @if(count($employmentStatuses))
-                                    @foreach($employmentStatuses as $employmentStatus)
-                                    <tr class="employment_statuses_list" id="employment_status_{{$employmentStatus->id}}">
-                                        <td>{{ $employmentStatus->id }}</td>
-                                        <td><span class="label {{ $employmentStatus->class }}">{{ $employmentStatus->name }}</span></td>
+                                    @foreach($employmentStatuses as $employment_status)
+                                    <tr class="employment_statuses_list" id="employment_status_{{$employment_status->id}}">
+                                        <td>{{ $employment_status->id }}</td>
+                                        <td><span class="label {{ $employment_status->class }}">{{ $employment_status->name }}</span></td>
                                         <td>
                                             @if($logged_user->hasAccess('admin.job.employment-status.update'))
-                                            <button rel="edit" id="{{$employmentStatus->id}}" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" title="Edit" type="button"><i class="fa fa-paste"></i></button>
+                                            <button rel="edit" id="{{$employment_status->id}}" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" title="Edit" type="button"><i class="fa fa-edit"></i></button>
                                             @endif
                                             @if($logged_user->hasAccess('admin.job.employment-status.delete'))
-                                            <button rel="delete" id="{{$employmentStatus->id}}" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i class="fa fa-trash"></i></button>
+                                            <button rel="delete" id="{{$employment_status->id}}" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i class="fa fa-times"></i></button>
                                             @endif
                                         </td>
                                     </tr>

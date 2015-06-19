@@ -78,8 +78,8 @@
                                         <td>  </td>
                                         <td>  </td>
                                         <td>
-                                            <button rel="edit" id="" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-paste"></i></button>
-                                            <button rel="delete" id="" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-trash"></i></button>
+                                            <button rel="edit" id="" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-edit"></i></button>
+                                            <button rel="delete" id="" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-times"></i></button>
                                         </td>
                                     </tr>
                                     @else
@@ -89,8 +89,8 @@
                                         <td> {{ $row->in_time ? Carbon::parse($row->in_time)->format('h:i A') : '-- No Login --' }} </td>
                                         <td> {{ $row->out_time ? Carbon::parse($row->out_time)->format('h:i A') : '-- No Logout --' }} </td>
                                         <td>
-                                            <button rel="edit" id="{{$row->id}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-paste"></i></button>
-                                            <button rel="delete" id="{{$row->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-trash"></i></button>
+                                            <button rel="edit" id="{{$row->id}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-edit"></i></button>
+                                            <button rel="delete" id="{{$row->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-times"></i></button>
                                         </td>
                                     </tr>
                                     @endif

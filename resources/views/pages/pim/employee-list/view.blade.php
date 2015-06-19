@@ -38,8 +38,8 @@
                                     <td>{{ isset($employee->job) ? $employee->job : '' }}</td>
                                     <td><span class="label {{ isset($employee->class) ? $employee->class : '' }}">{{ isset($employee->status) ? $employee->status : '' }}</span></td>
                                     <td>
-                                        <button rel="edit" id="{{$employee->id}}" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" data-toggle="tooltip" data-placement="bottom" title="Edit" type="button"><i class="fa fa-paste"></i></button>
-                                        <button rel="delete" id="{{$employee->id}}" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i class="fa fa-trash"></i></button>
+                                        <button rel="edit" id="{{$employee->id}}" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" data-toggle="tooltip" data-placement="bottom" title="Edit" type="button"><i class="fa fa-edit"></i></button>
+                                        <button rel="delete" id="{{$employee->id}}" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i class="fa fa-times"></i></button>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -63,7 +63,7 @@
                     <div class="modal-header">
                         <button class="close" data-dismiss="modal" type="button">&times;</button>
 
-                        <h4 class="modal-title" id="myModalLabel">Add New Employee</h4>
+                        <h4 class="modal-title" id="my_modal_label">Add New Employee</h4>
                     </div>
 
                     <div class="modal-body">

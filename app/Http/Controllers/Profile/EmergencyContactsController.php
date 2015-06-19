@@ -65,6 +65,7 @@ class EmergencyContactsController extends Controller
 
         $this->data['emergencyContacts'] = $this->emergencyContact->whereEmployeeId($employee->id)->get();
 
+        $this->data['table'] = $this->setupDataTable();
         $this->data['disabled'] = 'disabled';
         $this->data['pim'] = $request->is('*pim/*') ? : false;
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Emergency Contacts' : 'My Emergency Contacts';
@@ -164,5 +165,19 @@ class EmergencyContactsController extends Controller
                 print('failed');
             }
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function setupDataTable()
+    {
+        $table = [];
+
+        $table['title'] = 'In case of Emergency';
+        $table['headers'] = ['Full Name', 'Relationship', 'Home Telephone', 'Mobile',];
+        $table['model'] = ['singular' => 'emergency_contact', 'plural' => 'emergency_contacts'];
+
+        return $table;
     }
 }

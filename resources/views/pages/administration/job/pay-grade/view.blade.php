@@ -34,18 +34,18 @@
 
                             <tbody id="pay_grades_body">
                                 @if(count($payGrades))
-                                    @foreach($payGrades as $payGrade)
-                                    <tr class="pay_grades_list" id="pay_grade_{{$payGrade->id}}">
-                                        <td>{{ $payGrade->id }}</td>
-                                        <td>{{ $payGrade->name }}</td>
-                                        <td>{{ number_format($payGrade->min_salary, 2, '.', ',') }}</td>
-                                        <td>{{ number_format($payGrade->max_salary, 2, '.', ',') }}</td>
+                                    @foreach($payGrades as $pay_grade)
+                                    <tr class="pay_grades_list" id="pay_grade_{{$pay_grade->id}}">
+                                        <td>{{ $pay_grade->id }}</td>
+                                        <td>{{ $pay_grade->name }}</td>
+                                        <td>{{ number_format($pay_grade->min_salary, 2, '.', ',') }}</td>
+                                        <td>{{ number_format($pay_grade->max_salary, 2, '.', ',') }}</td>
                                         <td>
                                             @if($logged_user->hasAccess('admin.job.pay-grades.update'))
-                                            <button rel="edit" id="{{$payGrade->id}}" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" title="Edit" type="button"><i class="fa fa-paste"></i></button>
+                                            <button rel="edit" id="{{$pay_grade->id}}" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" title="Edit" type="button"><i class="fa fa-edit"></i></button>
                                             @endif
                                             @if($logged_user->hasAccess('admin.job.pay-grades.delete'))
-                                            <button rel="delete" id="{{$payGrade->id}}" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i class="fa fa-trash"></i></button>
+                                            <button rel="delete" id="{{$pay_grade->id}}" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i class="fa fa-times"></i></button>
                                             @endif
                                         </td>
                                     </tr>

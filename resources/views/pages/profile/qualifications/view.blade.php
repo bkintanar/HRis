@@ -49,19 +49,19 @@
                     data: { id: dataId }
                 }).done(function( response ) {
 
-                    var workExperience = jQuery.parseJSON(response);
+                    var work_experience = jQuery.parseJSON(response);
 
                     // Set fields
 
-                    $('#work_experience_id').val(workExperience.id);
-                    $('#company').val(workExperience.company);
-                    $('#job_title').val(workExperience.job_title);
-                    $('#work_experience_from_date').val(workExperience.from_date);
-                    $('#work_experience_to_date').val(workExperience.to_date);
-                    $('#comment').val(workExperience.comment);
+                    $('#work_experience_id').val(work_experience.id);
+                    $('#company').val(work_experience.company);
+                    $('#job_title').val(work_experience.job_title);
+                    $('#work_experience_from_date').val(work_experience.from_date);
+                    $('#work_experience_to_date').val(work_experience.to_date);
+                    $('#comment').val(work_experience.comment);
 
-                    $("#workExperienceForm").attr("value", "PATCH");
-                    $('#workExperienceModal').modal('toggle');
+                    $("#work_experience_form").attr("value", "PATCH");
+                    $('#work_experience_modal').modal('toggle');
                 });
             }
 
@@ -87,8 +87,8 @@
 
                     $('.chosen-select').trigger("chosen:updated");
 
-                    $("#educationForm").attr("value", "PATCH");
-                    $('#educationModal').modal('toggle');
+                    $("#education_form").attr("value", "PATCH");
+                    $('#education_modal').modal('toggle');
                 });
             }
 
@@ -112,8 +112,8 @@
 
                     $('.chosen-select').trigger("chosen:updated");
 
-                    $("#skillForm").attr("value", "PATCH");
-                    $('#skillModal').modal('toggle');
+                    $("#skill_form").attr("value", "PATCH");
+                    $('#skill_modal').modal('toggle');
                 });
             }
 
@@ -129,11 +129,11 @@
                     {
                         $('#notification-info').show();
                         $("#notification-info").delay(5000).fadeOut();
-                        $('#workExperience_' + dataId).remove();
+                        $('#work_experience_' + dataId).remove();
 
-                        if($('.workExperiencesList').length == 0)
+                        if($('.work_experiences_list').length == 0)
                         {
-                            $('#workExperiencesBody').append('<tr><td colspan="6">No work experiences listed</td></tr>');
+                            $('#work_experiences_body').append('<tr><td colspan="6">No work experiences listed</td></tr>');
                         }
                     }
                     else
@@ -157,9 +157,9 @@
                         $("#notification-info").delay(5000).fadeOut();
                         $('#education_' + dataId).remove();
 
-                        if($('.educationsList').length == 0)
+                        if($('.educations_list').length == 0)
                         {
-                            $('#educationsBody').append('<tr><td colspan="4">No educations listed</td></tr>');
+                            $('#educations_body').append('<tr><td colspan="4">No educations listed</td></tr>');
                         }
                     }
                     else
@@ -183,9 +183,9 @@
                         $("#notification-info").delay(5000).fadeOut();
                         $('#employee_skill_' + dataId).remove();
 
-                        if($('.skillsList').length == 0)
+                        if($('.skills_list').length == 0)
                         {
-                            $('#skillsBody').append('<tr><td colspan="3">No skills listed</td></tr>');
+                            $('#skills_body').append('<tr><td colspan="3">No skills listed</td></tr>');
                         }
                     }
                     else
@@ -200,17 +200,17 @@
                 var action = $(this).attr('rel');
 
                 switch (action) {
-                    case 'editWorkExperience'   : editWorkExperience($(this).attr('id'));
+                    case 'edit_work_experience'   : editWorkExperience($(this).attr('id'));
                         break;
-                    case 'deleteWorkExperience' : deleteWorkExperience($(this).attr('id'));
+                    case 'delete_work_experience' : deleteWorkExperience($(this).attr('id'));
                         break;
-                    case 'editEducation'   : editEducation($(this).attr('id'));
+                    case 'edit_education'   : editEducation($(this).attr('id'));
                         break;
-                    case 'deleteEducation' : deleteEducation($(this).attr('id'));
+                    case 'delete_education' : deleteEducation($(this).attr('id'));
                         break;
-                    case 'editSkill'   : editSkill($(this).attr('id'));
+                    case 'edit_skill'   : editSkill($(this).attr('id'));
                         break;
-                    case 'deleteSkill' : deleteSkill($(this).attr('id'));
+                    case 'delete_skill' : deleteSkill($(this).attr('id'));
                         break;
                 }
             });
@@ -218,7 +218,7 @@
             // Chosen
             $('.chosen-select').chosen({width:'100%'});
 
-            $('#addWorkExperience').click(function () {
+            $('#add_work_experience').click(function () {
 
                 $('#work_experience_id').val('');
                 $('#company').val('');
@@ -227,11 +227,11 @@
                 $('#work_experience_to_date').val('');
                 $('#comment').val('');
 
-                $("#workExperienceForm").attr("value", "POST");
-                $('#workExperienceModal').modal('toggle');
+                $("#work_experience_form").attr("value", "POST");
+                $('#work_experience_modal').modal('toggle');
             });
 
-            $('#addEducation').click(function () {
+            $('#add_education').click(function () {
 
                 $('#education_id').val('');
                 $('#education_level_id').val(0);
@@ -243,11 +243,11 @@
 
                 $('.chosen-select').trigger("chosen:updated");
 
-                $("#educationForm").attr("value", "POST");
-                $('#educationModal').modal('toggle');
+                $("#education_form").attr("value", "POST");
+                $('#education_modal').modal('toggle');
             });
 
-            $('#addSkill').click(function () {
+            $('#add_skill').click(function () {
 
                 $('#skill_id').val(0);
                 $('#years_of_experience').val('');
@@ -255,18 +255,18 @@
 
                 $('.chosen-select').trigger("chosen:updated");
 
-                $("#skillForm").attr("value", "POST");
-                $('#skillModal').modal('toggle');
+                $("#skill_form").attr("value", "POST");
+                $('#skill_modal').modal('toggle');
             });
 
             // Date picker
-            $('#workExperienceDateRange .input-daterange').datepicker({
+            $('#work_experience_date_range .input-daterange').datepicker({
                 format: 'yyyy-mm-dd',
                 keyboardNavigation: false,
                 forceParse: false,
                 autoclose: true
             });
-            $('#educationDateRange .input-daterange').datepicker({
+            $('#education_date_range .input-daterange').datepicker({
                 format: 'yyyy-mm-dd',
                 keyboardNavigation: false,
                 forceParse: false,

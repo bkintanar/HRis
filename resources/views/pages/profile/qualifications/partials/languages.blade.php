@@ -12,7 +12,7 @@
 
             <div class="ibox-content">
                 <div class="">
-                    <a id="addLanguage" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
+                    <a id="add_language" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-striped">
@@ -34,8 +34,8 @@
                                 <td>{{ $qualification->home_phone }}</td>
                                 <td>{{ $qualification->mobile_phone }}</td>
                                 <td>
-                                    <button rel="edit" id="{{$qualification->id}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-paste"></i></button>
-                                    <button rel="delete" id="{{$qualification->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-trash"></i></button>
+                                    <button rel="edit" id="{{$qualification->id}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-edit"></i></button>
+                                    <button rel="delete" id="{{$qualification->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-times"></i></button>
                                 </td>
                             </tr>
                             @endforeach
@@ -46,13 +46,13 @@
         </div>
     </div><!-- Modal -->
 
-    <div class="modal fade" id="qualificationModal" tabindex="-1">
+    <div class="modal fade" id="qualification_modal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button class="close" data-dismiss="modal" type="button">&times;</button>
 
-                    <h4 class="modal-title" id="myModalLabel">Language Details</h4>
+                    <h4 class="modal-title" id="my_model_label">Language Details</h4>
                 </div>
 
                 <div class="modal-body">

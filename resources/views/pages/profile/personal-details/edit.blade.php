@@ -20,7 +20,7 @@
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="avatarModal" tabindex="-1">
+        <div class="modal fade" id="avatar_modal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -181,7 +181,7 @@
                     }
                 }).done(function(o) {
 
-                    $('#avatarModal').modal('toggle');
+                    $('#avatar_modal').modal('toggle');
 
                     // If changing own photo, change photo in the navigation as well
                     @if ($employee->id == $logged_user->employee->id)
@@ -204,9 +204,9 @@
             // Chosen
             $('.chosen-select').chosen({width:'100%'});
 
-            $('#addAvatar').click(function () {
+            $('#add_avatar').click(function () {
 
-                $('#avatarModal').modal('toggle');
+                $('#avatar_modal').modal('toggle');
             });
         });
     </script>
