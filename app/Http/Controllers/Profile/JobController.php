@@ -65,7 +65,10 @@ class JobController extends Controller
         $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
         $this->data['employee'] = $employee;
-        $this->data['job_histories'] = $employee->orderedJobHistories();
+
+        $job_histories = $employee->orderedJobHistories();
+
+        $this->data['table'] = $this->setupDataTable($job_histories);
 
         $this->data['disabled'] = 'disabled';
         $this->data['pim'] = $request->is('*pim/*') ? : false;
@@ -94,7 +97,10 @@ class JobController extends Controller
         $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
         $this->data['employee'] = $employee;
-        $this->data['job_histories'] = $employee->orderedJobHistories();
+
+        $job_histories = $employee->orderedJobHistories();
+
+        $this->data['table'] = $this->setupDataTable($job_histories);
 
         $this->data['disabled'] = '';
         $this->data['pim'] = $request->is('*pim/*') ? : false;
@@ -128,5 +134,20 @@ class JobController extends Controller
             ->update($request->only('joined_date', 'probation_end_date', 'permanency_date'));
 
         return Redirect::to($request->path())->with('success', 'Record successfully updated.');
+    }
+
+    /**
+     * @return array
+     */
+    public function setupDataTable($job_histories)
+    {
+        $table = [];
+
+        $table['title'] = 'Job History';
+        $table['headers'] = ['Job Title', 'Department', 'Effective Date', 'Employment Status', 'Location', 'Comments',];
+        $table['model'] = ['singular' => 'job_history', 'plural' => 'job_histories', 'dashed' => 'job-histories'];
+        $table['items'] = $job_histories;
+
+        return $table;
     }
 }

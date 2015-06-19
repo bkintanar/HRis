@@ -19,7 +19,7 @@
             </div>
         </div>
     </div>
-    @include('pages.profile.job.job-history')
+    {!! HRis\TablePresenter::display($logged_user, $table) !!}
 </div>
 
 @stop

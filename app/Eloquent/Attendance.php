@@ -30,13 +30,8 @@ class Attendance extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'employee_id',
-        'work_date',
-        'in_time',
-        'out_time'
-    ];
-    
+    protected $fillable = ['employee_id', 'work_date', 'in_time', 'out_time'];
+
     /**
      * The database table used by the model.
      *

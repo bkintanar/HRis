@@ -63,8 +63,9 @@ class DependentsController extends Controller
 
         $this->data['employee'] = $employee;
 
-        $this->data['dependents'] = $this->dependent->whereEmployeeId($employee->employee_id)->get();
+        $dependents = $this->dependent->whereEmployeeId($employee->id)->get();
 
+        $this->data['table'] = $this->setupDataTable($dependents);
         $this->data['pim'] = $request->is('*pim/*') ? : false;
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Dependents' : 'My Dependents';
 
@@ -162,5 +163,20 @@ class DependentsController extends Controller
             }
 
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function setupDataTable($dependents)
+    {
+        $table = [];
+
+        $table['title'] = 'Assigned Dependents';
+        $table['headers'] = ['Full Name', 'Relationship', 'Birth Date',];
+        $table['model'] = ['singular' => 'dependent', 'plural' => 'dependents', 'dashed' => 'dependents'];
+        $table['items'] = $dependents;
+
+        return $table;
     }
 }

@@ -24,31 +24,31 @@ class AnnotationsServiceProvider extends ServiceProvider
      * @var array
      */
     protected $scanRoutes = [
-        'HRis\Http\Controllers\Administration\Job\EmploymentStatusController',
-        'HRis\Http\Controllers\Administration\Job\PayGradeController',
-        'HRis\Http\Controllers\Administration\Job\TitleController',
-        'HRis\Http\Controllers\Administration\Job\WorkShiftController',
-        'HRis\Http\Controllers\Administration\NationalityController',
-        'HRis\Http\Controllers\Administration\Qualifications\EducationController',
-        'HRis\Http\Controllers\Administration\Qualifications\SkillController',
-        'HRis\Http\Controllers\Administration\UserManagementController',
-        'HRis\Http\Controllers\AjaxController',
-        'HRis\Http\Controllers\Auth\AuthController',
-        'HRis\Http\Controllers\Auth\PasswordController',
-        'HRis\Http\Controllers\HomeController',
-        'HRis\Http\Controllers\PIM\Configuration\TerminationReasonsController',
-        'HRis\Http\Controllers\PIM\EmployeeListController',
-        'HRis\Http\Controllers\Profile\ContactDetailsController',
-        'HRis\Http\Controllers\Profile\DependentsController',
-        'HRis\Http\Controllers\Profile\EmergencyContactsController',
-        'HRis\Http\Controllers\Profile\JobController',
-        'HRis\Http\Controllers\Profile\MainController',
-        'HRis\Http\Controllers\Profile\PersonalDetailsController',
-//        'HRis\Http\Controllers\Profile\PermissionController',
-        'HRis\Http\Controllers\Profile\SalaryComputationsController',
-        'HRis\Http\Controllers\Profile\QualificationsController',
-        'HRis\Http\Controllers\Profile\WorkShiftController',
-        'HRis\Http\Controllers\Time\Attendance\EmployeeRecordsController',
+        HRis\Http\Controllers\Administration\Job\EmploymentStatusController::class,
+        HRis\Http\Controllers\Administration\Job\PayGradeController::class,
+        HRis\Http\Controllers\Administration\Job\TitleController::class,
+        HRis\Http\Controllers\Administration\Job\WorkShiftController::class,
+        HRis\Http\Controllers\Administration\NationalityController::class,
+        HRis\Http\Controllers\Administration\Qualifications\EducationController::class,
+        HRis\Http\Controllers\Administration\Qualifications\SkillController::class,
+        HRis\Http\Controllers\Administration\UserManagementController::class,
+        HRis\Http\Controllers\AjaxController::class,
+        HRis\Http\Controllers\Auth\AuthController::class,
+        HRis\Http\Controllers\Auth\PasswordController::class,
+        HRis\Http\Controllers\HomeController::class,
+        HRis\Http\Controllers\PIM\Configuration\TerminationReasonsController::class,
+        HRis\Http\Controllers\PIM\EmployeeListController::class,
+        HRis\Http\Controllers\Profile\ContactDetailsController::class,
+        HRis\Http\Controllers\Profile\DependentsController::class,
+        HRis\Http\Controllers\Profile\EmergencyContactsController::class,
+        HRis\Http\Controllers\Profile\JobController::class,
+        HRis\Http\Controllers\Profile\MainController::class,
+        HRis\Http\Controllers\Profile\PersonalDetailsController::class,
+        HRis\Http\Controllers\Profile\PermissionController::class,
+        HRis\Http\Controllers\Profile\SalaryComputationsController::class,
+        HRis\Http\Controllers\Profile\QualificationsController::class,
+        HRis\Http\Controllers\Profile\WorkShiftController::class,
+        HRis\Http\Controllers\Time\Attendance\EmployeeRecordsController::class,
     ];
 
     /**
@@ -56,6 +56,6 @@ class AnnotationsServiceProvider extends ServiceProvider
      *
      * @var bool
      */
-    protected $scanWhenLocal = true;
+    protected $scanEverything = true;
 
 }
