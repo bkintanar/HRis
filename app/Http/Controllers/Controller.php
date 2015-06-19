@@ -51,9 +51,4 @@ abstract class Controller extends BaseController
     {
         return view($blade, $this->data);
     }
-
-    public function setupDataTable()
-    {
-
-    }
 }

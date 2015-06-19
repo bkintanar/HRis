@@ -43,10 +43,10 @@ class EmergencyContactsController extends Controller
     }
 
     /**
-     * Show the Profile - Emergency Contacts.
+     * Show the Profile - Emergency Contacts
      *
-     * @Get("profile/emergency-contacts")
      * @Get("pim/employee-list/{id}/emergency-contacts")
+     * @Get("profile/emergency-contacts")
      *
      * @param EmergencyContactsRequest $request
      * @param null $employee_id
@@ -63,9 +63,9 @@ class EmergencyContactsController extends Controller
 
         $this->data['employee'] = $employee;
 
-        $this->data['emergencyContacts'] = $this->emergencyContact->whereEmployeeId($employee->id)->get();
+        $emergency_contacts = $this->emergencyContact->whereEmployeeId($employee->id)->get();
 
-        $this->data['table'] = $this->setupDataTable();
+        $this->data['table'] = $this->setupDataTable($emergency_contacts);
         $this->data['disabled'] = 'disabled';
         $this->data['pim'] = $request->is('*pim/*') ? : false;
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Emergency Contacts' : 'My Emergency Contacts';
@@ -170,13 +170,18 @@ class EmergencyContactsController extends Controller
     /**
      * @return array
      */
-    public function setupDataTable()
+    public function setupDataTable($emergency_contacts)
     {
         $table = [];
 
         $table['title'] = 'In case of Emergency';
         $table['headers'] = ['Full Name', 'Relationship', 'Home Telephone', 'Mobile',];
-        $table['model'] = ['singular' => 'emergency_contact', 'plural' => 'emergency_contacts'];
+        $table['model'] = [
+            'singular' => 'emergency_contact',
+            'plural'   => 'emergency_contacts',
+            'dashed'   => 'emergency-contacts'
+        ];
+        $table['items'] = $emergency_contacts;
 
         return $table;
     }

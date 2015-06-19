@@ -4,7 +4,9 @@
     @include('partials.notification')
     <div class="row">
             {!! Navlink::profileLinks($pim) !!}
-        @include('partials.table', $table)
+
+            {!! HRis\TablePresenter::display($logged_user, $table) !!}
+
         <!-- Modal -->
         <div class="modal fade" id="emergency_contact_modal" tabindex="-1">
             <div class="modal-dialog">

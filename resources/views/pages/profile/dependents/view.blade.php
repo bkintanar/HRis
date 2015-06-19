@@ -4,62 +4,10 @@
     @include('partials.notification')
     <div class="row">
             {!! Navlink::profileLinks($pim) !!}
-        <div class="col-lg-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Assigned Dependents</h5>
-                    <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="ibox-content">
-                    @if($logged_user->hasAccess(Request::segment(1).'.dependents.create'))
-                    <div class="">
-                        <a id="add_dependent" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
-                    </div>
-                    @endif
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Full Name</th>
-                                    <th>Relationship</th>
-                                    <th>Birth Date</th>
-                                    <th class="fix-width">Action</th>
-                                </tr>
-                            </thead>
 
-                            <tbody id="dependents_body">
-                                @if(count($employee->dependents))
-                                    @foreach($employee->dependents as $dependent)
-                                    <tr class="dependents_list" id="dependent_{{$dependent->id}}">
-                                        <td>{{ $dependent->first_name }} {{$dependent->middle_name}} {{ $dependent->last_name }}</td>
-                                        <td>{{ HRis\Eloquent\Relationship::whereId($dependent->relationship_id)->pluck('name') }}</td>
-                                        <td>{{ $dependent->birth_date->format('F j, Y') }}</td>
-                                        <td>
-                                            @if($logged_user->hasAccess(Request::segment(1).'.dependents.update'))
-                                            <button rel="edit" id="{{$dependent->id}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-edit"></i></button>
-                                            @endif
-                                            @if($logged_user->hasAccess(Request::segment(1).'.dependents.delete'))
-                                            <button rel="delete" id="{{$dependent->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-times"></i></button>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                @else
-                                    <tr>
-                                        <td colspan="4">No dependents listed</td>
-                                    </tr>
-                                @endif
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div><!-- Modal -->
+            {!! HRis\TablePresenter::display($logged_user, $table) !!}
 
+        <!-- Modal -->
         <div class="modal fade" id="dependent_modal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">

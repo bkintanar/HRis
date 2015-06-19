@@ -40,15 +40,11 @@ class Pagination
         $sort = '&sort=' . $settings['sort'];
         $direction = '&direction=' . $settings['direction'];
 
-        if ($data->lastPage() > 10)
-        {
-            if ($data->currentPage() < 10)
-            {
+        if ($data->lastPage() > 10) {
+            if ($data->currentPage() < 10) {
                 $start_page = 1;
-            }
-            else {
-                if ($data->currentPage() + 4 <= $data->lastPage())
-                {
+            } else {
+                if ($data->currentPage() + 4 <= $data->lastPage()) {
 
                 }
             }
