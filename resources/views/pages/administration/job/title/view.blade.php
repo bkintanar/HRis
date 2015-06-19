@@ -17,7 +17,7 @@
                 <div class="ibox-content">
                     @if($logged_user->hasAccess('admin.job.titles.create'))
                     <div class="">
-                        <a id="addJobTitle" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
+                        <a id="add_job_title" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
                     </div>
                     @endif
                     <div class="table-responsive">
@@ -31,19 +31,19 @@
                                 </tr>
                             </thead>
 
-                            <tbody id="jobTitlesBody">
+                            <tbody id="job_titles_body">
                                 @if(count($jobTitles))
-                                    @foreach($jobTitles as $jobTitle)
-                                    <tr class="jobTitlesList" id="jobTitle_{{$jobTitle->id}}">
-                                        <td>{{ $jobTitle->id }}</td>
-                                        <td>{{ $jobTitle->name }}</td>
-                                        <td>{{ $jobTitle->description }}</td>
+                                    @foreach($jobTitles as $job_title)
+                                    <tr class="job_titles_list" id="job_title_{{$job_title->id}}">
+                                        <td>{{ $job_title->id }}</td>
+                                        <td>{{ $job_title->name }}</td>
+                                        <td>{{ $job_title->description }}</td>
                                         <td>
                                             @if($logged_user->hasAccess('admin.job.titles.update'))
-                                            <button rel="edit" id="{{$jobTitle->id}}" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" title="Edit" type="button"><i class="fa fa-paste"></i></button>
+                                            <button rel="edit" id="{{$job_title->id}}" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" title="Edit" type="button"><i class="fa fa-edit"></i></button>
                                             @endif
                                             @if($logged_user->hasAccess('admin.job.titles.delete'))
-                                            <button rel="delete" id="{{$jobTitle->id}}" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i class="fa fa-trash"></i></button>
+                                            <button rel="delete" id="{{$job_title->id}}" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i class="fa fa-times"></i></button>
                                             @endif
                                         </td>
                                     </tr>
@@ -59,20 +59,20 @@
                 </div>
             </div>
         </div><!-- Modal -->
-        <div class="modal fade" id="jobTitleModal" tabindex="-1">
+        <div class="modal fade" id="job_title_modal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button class="close" data-dismiss="modal" type="button">&times;</button>
 
-                        <h4 class="modal-title" id="myModalLabel">Job Title Details</h4>
+                        <h4 class="modal-title" id="my_modal_label">Job Title Details</h4>
                     </div>
 
                     <div class="modal-body">
                         <!--Add form-->
                         {!! Form::open(['method' => 'POST', 'url' => Request::path(), 'class' => 'form-horizontal']) !!}
                             {!! Form::hidden('job_title_id', '', ['id' => 'job_title_id']) !!}
-                            {!! Form::hidden('_method', 'POST', ['id' => 'jobTitleForm']) !!}
+                            {!! Form::hidden('_method', 'POST', ['id' => 'job_title_form']) !!}
 
                             <div class="form-group">
                                 {!! Form::label('name', 'Name', ['class' => 'col-md-3 control-label']) !!}
@@ -123,8 +123,8 @@
                     $('#name').val(job_title.name);
                     $('#description').val(job_title.description);
 
-                    $("#jobTitleForm").attr("value", "PATCH");
-                    $('#jobTitleModal').modal('toggle');
+                    $("#job_title_form").attr("value", "PATCH");
+                    $('#job_title_modal').modal('toggle');
                 });
             }
 
@@ -140,10 +140,10 @@
                     {
                         $('#notification-info').show();
                         $("#notification-info").delay(5000).fadeOut();
-                        $('#jobTitle_' + dataId).remove();
+                        $('#job_title_' + dataId).remove();
 
-                        if($('.jobTitlesList').length == 0){
-                            $('#jobTitlesBody').append('<tr><td colspan="4">No job titles listed</td></tr>');
+                        if($('.job_titles_list').length == 0){
+                            $('#job_titles_body').append('<tr><td colspan="4">No job titles listed</td></tr>');
                         }
                     }
                     else
@@ -165,13 +165,13 @@
                 }
             });
 
-            $('#addJobTitle').click(function () {
+            $('#add_job_title').click(function () {
 
                 $('#name').val('');
                 $('#description').val('');
 
-                $("#jobTitleForm").attr("value", "POST");
-                $('#jobTitleModal').modal('toggle');
+                $("#job_title_form").attr("value", "POST");
+                $('#job_title_modal').modal('toggle');
             });
         });
     </script>

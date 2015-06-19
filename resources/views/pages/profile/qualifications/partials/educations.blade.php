@@ -13,7 +13,7 @@
             <div class="ibox-content">
                 @if($logged_user->hasAccess(Request::segment(1).'.qualifications.educations.create'))
                 <div class="">
-                    <a id="addEducation" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
+                    <a id="add_education" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
                 </div>
                 @endif
                 <div class="table-responsive">
@@ -27,19 +27,19 @@
                             </tr>
                         </thead>
 
-                        <tbody id="educationsBody">
+                        <tbody id="educations_body">
                             @if(count($educations))
                                 @foreach($educations as $education)
-                                <tr class="educationsList" id="education_{{$education->id}}">
+                                <tr class="educations_list" id="education_{{$education->id}}">
                                     <td>{{ HRis\Eloquent\EducationLevel::whereId($education->education_level_id)->pluck('name') }}</td>
                                     <td>{{ $education->from_date->format('F j, Y') }} - {{ $education->to_date->format('F j, Y') }}</td>
                                     <td>{{ $education->gpa_score }}</td>
                                     <td>
                                         @if($logged_user->hasAccess(Request::segment(1).'.qualifications.educations.update'))
-                                        <button rel="editEducation" id="{{$education->id}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-paste"></i></button>
+                                        <button rel="edit_education" id="{{$education->id}}" class="btn btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-edit"></i></button>
                                         @endif
                                         @if($logged_user->hasAccess(Request::segment(1).'.qualifications.educations.delete'))
-                                        <button rel="deleteEducation" id="{{$education->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-trash"></i></button>
+                                        <button rel="delete_education" id="{{$education->id}}" class="btn btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-times"></i></button>
                                         @endif
                                     </td>
                                 </tr>
@@ -56,13 +56,13 @@
         </div>
     </div><!-- Modal -->
 
-    <div class="modal fade" id="educationModal" tabindex="-1">
+    <div class="modal fade" id="education_modal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button class="close" data-dismiss="modal" type="button">&times;</button>
 
-                    <h4 class="modal-title" id="myModalLabel">Education Details</h4>
+                    <h4 class="modal-title" id="my_model_label">Education Details</h4>
                 </div>
 
                 <div class="modal-body">
@@ -70,7 +70,7 @@
                     {!! Form::open(['method' => 'POST', 'url' => str_replace('/edit', '', Request::path()).'/educations', 'class' => 'form-horizontal']) !!}
                         {!! Form::hidden('employee_id', $employee->id) !!}
                         {!! Form::hidden('education_id', '', ['id' => 'education_id']) !!}
-                        {!! Form::hidden('_method', 'POST', ['id' => 'educationForm']) !!}
+                        {!! Form::hidden('_method', 'POST', ['id' => 'education_form']) !!}
 
                         <div class="form-group">
                             {!! Form::label('level', 'Level', ['class' => 'col-md-3 control-label']) !!}

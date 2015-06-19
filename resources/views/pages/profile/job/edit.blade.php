@@ -46,7 +46,7 @@
 
         function deleteAction()
         {
-            if($('.JobHistoryList').length < 2){
+            if($('.job_history_list').length < 2){
                 $('.action').remove();
             }
         }

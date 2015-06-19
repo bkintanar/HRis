@@ -13,7 +13,7 @@
             <div class="ibox-content">
                 @if($logged_user->hasAccess(Request::segment(1).'.qualifications.skills.create'))
                 <div class="">
-                    <a id="addSkill" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
+                    <a id="add_skill" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
                 </div>
                 @endif
                 <div class="table-responsive">
@@ -26,18 +26,18 @@
                             </tr>
                         </thead>
 
-                        <tbody id="skillsBody">
+                        <tbody id="skills_body">
                             @if(count($skills))
                                 @foreach($skills as $skill)
-                                <tr class="skillsList" id="employee_skill_{{HRis\Eloquent\EmployeeSkill::whereSkillId($skill->id)->whereEmployeeId($employee->id)->pluck('id')}}">
+                                <tr class="skills_list" id="employee_skill_{{HRis\Eloquent\EmployeeSkill::whereSkillId($skill->id)->whereEmployeeId($employee->id)->pluck('id')}}">
                                     <td>{{ HRis\Eloquent\Skill::whereId($skill->id)->pluck('name') }}</td>
                                     <td>{{ HRis\Eloquent\EmployeeSkill::whereSkillId($skill->id)->whereEmployeeId($employee->id)->pluck('years_of_experience') }}</td>
                                     <td>
                                         @if($logged_user->hasAccess(Request::segment(1).'.qualifications.skills.update'))
-                                        <button rel="editSkill" id="{{HRis\Eloquent\EmployeeSkill::whereSkillId($skill->id)->whereEmployeeId($employee->id)->pluck('id')}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-paste"></i></button>
+                                        <button rel="edit_skill" id="{{HRis\Eloquent\EmployeeSkill::whereSkillId($skill->id)->whereEmployeeId($employee->id)->pluck('id')}}" class="btn btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-edit"></i></button>
                                         @endif
                                         @if($logged_user->hasAccess(Request::segment(1).'.qualifications.skills.delete'))
-                                        <button rel="deleteSkill" id="{{HRis\Eloquent\EmployeeSkill::whereSkillId($skill->id)->whereEmployeeId($employee->id)->pluck('id')}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-trash"></i></button>
+                                        <button rel="delete_skill" id="{{HRis\Eloquent\EmployeeSkill::whereSkillId($skill->id)->whereEmployeeId($employee->id)->pluck('id')}}" class="btn btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-times"></i></button>
                                         @endif
                                     </td>
                                 </tr>
@@ -54,13 +54,13 @@
         </div>
     </div><!-- Modal -->
 
-    <div class="modal fade" id="skillModal" tabindex="-1">
+    <div class="modal fade" id="skill_modal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button class="close" data-dismiss="modal" type="button">&times;</button>
 
-                    <h4 class="modal-title" id="myModalLabel">Skill Details</h4>
+                    <h4 class="modal-title" id="my_model_label">Skill Details</h4>
                 </div>
 
                 <div class="modal-body">

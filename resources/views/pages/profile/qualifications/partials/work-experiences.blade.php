@@ -13,7 +13,7 @@
             <div class="ibox-content">
                 @if($logged_user->hasAccess(Request::segment(1).'.qualifications.work-experiences.create'))
                 <div class="">
-                    <a id="addWorkExperience" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
+                    <a id="add_work_experience" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
                 </div>
                 @endif
                 <div class="table-responsive">
@@ -29,21 +29,21 @@
                             </tr>
                         </thead>
 
-                        <tbody id="workExperiencesBody">
+                        <tbody id="work_experiences_body">
                             @if(count($workExperiences))
-                                @foreach($workExperiences as $workExperience)
-                                <tr class="workExperiencesList" id="workExperience_{{$workExperience->id}}">
-                                    <td>{{ $workExperience->company }}</td>
-                                    <td>{{ $workExperience->job_title }}</td>
-                                    <td>{{ $workExperience->from_date->format('F j, Y') }}</td>
-                                    <td>{{ $workExperience->to_date->format('F j, Y') }}</td>
-                                    <td>{{ $workExperience->comment }}</td>
+                                @foreach($workExperiences as $work_experience)
+                                <tr class="work_experiences_list" id="work_experience_{{$work_experience->id}}">
+                                    <td>{{ $work_experience->company }}</td>
+                                    <td>{{ $work_experience->job_title }}</td>
+                                    <td>{{ $work_experience->from_date->format('F j, Y') }}</td>
+                                    <td>{{ $work_experience->to_date->format('F j, Y') }}</td>
+                                    <td>{{ $work_experience->comment }}</td>
                                     <td>
                                         @if($logged_user->hasAccess(Request::segment(1).'.qualifications.work-experiences.update'))
-                                        <button rel="editWorkExperience" id="{{$workExperience->id}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-paste"></i></button>
+                                        <button rel="edit_work_experience" id="{{$work_experience->id}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-edit"></i></button>
                                         @endif
                                         @if($logged_user->hasAccess(Request::segment(1).'.qualifications.work-experiences.delete'))
-                                        <button rel="deleteWorkExperience" id="{{$workExperience->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-trash"></i></button>
+                                        <button rel="delete_work_experience" id="{{$work_experience->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-trash"></i></button>
                                         @endif
                                     </td>
                                 </tr>
@@ -60,13 +60,13 @@
         </div>
     </div><!-- Modal -->
 
-    <div class="modal fade" id="workExperienceModal" tabindex="-1">
+    <div class="modal fade" id="work_experience_modal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button class="close" data-dismiss="modal" type="button">&times;</button>
 
-                    <h4 class="modal-title" id="myModalLabel">Work Experience Details</h4>
+                    <h4 class="modal-title" id="my_modal_label">Work Experience Details</h4>
                 </div>
 
                 <div class="modal-body">
@@ -74,7 +74,7 @@
                     {!! Form::open(['method' => 'POST', 'url' => str_replace('/edit', '', Request::path()).'/work-experiences', 'class' => 'form-horizontal']) !!}
                         {!! Form::hidden('employee_id', $employee->id) !!}
                         {!! Form::hidden('work_experience_id', '', ['id' => 'work_experience_id']) !!}
-                        {!! Form::hidden('_method', 'POST', ['id' => 'workExperienceForm']) !!}
+                        {!! Form::hidden('_method', 'POST', ['id' => 'work_experience_form']) !!}
                         <div class="form-group">
                             {!! Form::label('company', 'Company', ['class' => 'col-md-3 control-label']) !!}
                             <div class="col-md-9">
@@ -90,7 +90,7 @@
                         </div>
 
                         <div class="form-group">
-                            {!! Form::label('workExperienceDateRange', 'Year', ['class' => 'col-md-3 control-label']) !!}
+                            {!! Form::label('work_experience_date_range', 'Year', ['class' => 'col-md-3 control-label']) !!}
                             <div class="col-md-9">
                                 <div class="input-daterange input-group input-full-width" id="datepicker">
                                     {!! Form::text('from_date', null, ['class' => 'input-sm form-control', 'data-mask' => '9999-99-99', 'id' => 'work_experience_from_date']) !!}

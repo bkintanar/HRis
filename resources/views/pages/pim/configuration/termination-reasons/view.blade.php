@@ -32,16 +32,16 @@
 
                             <tbody id="termination_reasons_body">
                                 @if(count($terminationReasons))
-                                    @foreach($terminationReasons as $terminationReason)
-                                    <tr class="termination_reasons_list" id="termination_reason_{{$terminationReason->id}}">
-                                        <td>{{ $terminationReason->id }}</td>
-                                        <td>{{ $terminationReason->name }}</td>
+                                    @foreach($terminationReasons as $termination_reason)
+                                    <tr class="termination_reasons_list" id="termination_reason_{{$termination_reason->id}}">
+                                        <td>{{ $termination_reason->id }}</td>
+                                        <td>{{ $termination_reason->name }}</td>
                                         <td>
                                             @if($logged_user->hasAccess('pim.configuration.termination-reasons.update'))
-                                            <button rel="edit" id="{{$terminationReason->id}}" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" title="Edit" type="button"><i class="fa fa-paste"></i></button>
+                                            <button rel="edit" id="{{$termination_reason->id}}" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" title="Edit" type="button"><i class="fa fa-edit"></i></button>
                                             @endif
                                             @if($logged_user->hasAccess('pim.configuration.termination-reasons.delete'))
-                                            <button rel="delete" id="{{$terminationReason->id}}" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i class="fa fa-trash"></i></button>
+                                            <button rel="delete" id="{{$termination_reason->id}}" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i class="fa fa-times"></i></button>
                                             @endif
                                         </td>
                                     </tr>

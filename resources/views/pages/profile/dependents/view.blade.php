@@ -40,10 +40,10 @@
                                         <td>{{ $dependent->birth_date->format('F j, Y') }}</td>
                                         <td>
                                             @if($logged_user->hasAccess(Request::segment(1).'.dependents.update'))
-                                            <button rel="edit" id="{{$dependent->id}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-paste"></i></button>
+                                            <button rel="edit" id="{{$dependent->id}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-edit"></i></button>
                                             @endif
                                             @if($logged_user->hasAccess(Request::segment(1).'.dependents.delete'))
-                                            <button rel="delete" id="{{$dependent->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-trash"></i></button>
+                                            <button rel="delete" id="{{$dependent->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-times"></i></button>
                                             @endif
                                         </td>
                                     </tr>
@@ -66,7 +66,7 @@
                     <div class="modal-header">
                         <button class="close" data-dismiss="modal" type="button">&times;</button>
 
-                        <h4 class="modal-title" id="myModalLabel">Dependent Details</h4>
+                        <h4 class="modal-title" id="my_modal_label">Dependent Details</h4>
                     </div>
 
                     <div class="modal-body">

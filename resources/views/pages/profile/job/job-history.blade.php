@@ -21,10 +21,10 @@
                                 <th class="action">Action</th>
                             </tr>
                         </thead>
-                        <tbody id="JobHistoryBody">
+                        <tbody id="job_history_body">
                         @if(count($job_histories))
                             @foreach($job_histories as $job_history)
-                                <tr class="JobHistoryList" id="jobHistory_{{$job_history->id}}">
+                                <tr class="job_history_list" id="job_history_{{$job_history->id}}">
                                     <td>{{ $job_history->jobTitle->name or ''}}</td>
                                     <td>{{ $job_history->department->name or '' }}</td>
                                     <td>{{ $job_history->effective_date ? $job_history->effective_date->format('F j, Y') : '' }}</td>
@@ -32,7 +32,7 @@
                                     <td>{{ $job_history->location->name or '' }}</td>
                                     <td>{{ $job_history->comments }}</td>
                                     <td class="action">
-                                        <button rel="delete" id="{{$job_history->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-trash"></i></button>
+                                        <button rel="delete" id="{{$job_history->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-times"></i></button>
                                     </td>
                                 </tr>
                             @endforeach

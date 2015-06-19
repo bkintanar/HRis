@@ -17,7 +17,7 @@
                 <div class="ibox-content">
                     @if($logged_user->hasAccess('admin.job.work-shifts.create'))
                     <div class="">
-                        <a id="addJobTitle" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
+                        <a id="add_job_title" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
                     </div>
                     @endif
                     <div class="table-responsive">
@@ -31,19 +31,19 @@
                                 </tr>
                             </thead>
 
-                            <tbody id="workShiftsBody">
+                            <tbody id="work_shifts_body">
                                 @if(count($workShifts))
-                                    @foreach($workShifts as $workShift)
-                                    <tr class="workShiftsList" id="workShift_{{$workShift->id}}">
-                                        <td>{{ $workShift->id }}</td>
-                                        <td>{{ $workShift->name }}</td>
-                                        <td>{{ $workShift->duration }} hours</td>
+                                    @foreach($workShifts as $work_shift)
+                                    <tr class="work_shifts_list" id="work_shift_{{$work_shift->id}}">
+                                        <td>{{ $work_shift->id }}</td>
+                                        <td>{{ $work_shift->name }}</td>
+                                        <td>{{ $work_shift->duration }} hours</td>
                                         <td>
                                             @if($logged_user->hasAccess('admin.job.work-shifts.update'))
-                                            <button rel="edit" id="{{$workShift->id}}" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" title="Edit" type="button"><i class="fa fa-paste"></i></button>
+                                            <button rel="edit" id="{{$work_shift->id}}" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" title="Edit" type="button"><i class="fa fa-edit"></i></button>
                                             @endif
                                             @if($logged_user->hasAccess('admin.job.work-shifts.delete'))
-                                            <button rel="delete" id="{{$workShift->id}}" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i class="fa fa-trash"></i></button>
+                                            <button rel="delete" id="{{$work_shift->id}}" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i class="fa fa-times"></i></button>
                                             @endif
                                         </td>
                                     </tr>
@@ -59,20 +59,20 @@
                 </div>
             </div>
         </div><!-- Modal -->
-        <div class="modal fade" id="workShiftModal" tabindex="-1">
+        <div class="modal fade" id="work_shift_modal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button class="close" data-dismiss="modal" type="button">&times;</button>
 
-                        <h4 class="modal-title" id="myModalLabel">Work Shift Details</h4>
+                        <h4 class="modal-title" id="my_modal_label">Work Shift Details</h4>
                     </div>
 
                     <div class="modal-body">
                         <!--Add form-->
                         {!! Form::open(['method' => 'POST', 'url' => Request::path(), 'class' => 'form-horizontal']) !!}
                             {!! Form::hidden('work_shift_id', '', ['id' => 'work_shift_id']) !!}
-                            {!! Form::hidden('_method', 'POST', ['id' => 'workShiftForm']) !!}
+                            {!! Form::hidden('_method', 'POST', ['id' => 'work_shift_form']) !!}
 
                             <div class="form-group">
                                 {!! Form::label('class', 'Class', ['class' => 'col-md-3 control-label']) !!}
@@ -82,7 +82,7 @@
                             </div>
 
                             <div class="form-group">
-                                {!! Form::label('workShiftDateRange', 'Work Hours', ['class' => 'col-md-3 control-label']) !!}
+                                {!! Form::label('work_shift_date_range', 'Work Hours', ['class' => 'col-md-3 control-label']) !!}
                                 <div class="col-md-9">
                                     <div class='input-group input-daterange input-full-width' id='timepicker'>
                                         {!! Form::text('from_time', null, ['class' => 'input-sm form-control', 'data-mask' => '99:99:00', 'id' => 'from_time']) !!}
@@ -150,8 +150,8 @@
                     $('#to_time').val(work_shift.to_time);
                     $('#duration').val(work_shift.duration);
 
-                    $("#workShiftForm").attr("value", "PATCH");
-                    $('#workShiftModal').modal('toggle');
+                    $("#work_shift_form").attr("value", "PATCH");
+                    $('#work_shift_modal').modal('toggle');
                 });
             }
 
@@ -167,10 +167,10 @@
                     {
                         $('#notification-info').show();
                         $("#notification-info").delay(5000).fadeOut();
-                        $('#workShift_' + dataId).remove();
+                        $('#work_shift_' + dataId).remove();
 
-                        if($('.workShiftsList').length == 0){
-                            $('#workShiftsBody').append('<tr><td colspan="4">No work shifts listed</td></tr>');
+                        if($('.work_shifts_list').length == 0){
+                            $('#work_shifts_body').append('<tr><td colspan="4">No work shifts listed</td></tr>');
                         }
                     }
                     else
@@ -192,15 +192,15 @@
                 }
             });
 
-            $('#addJobTitle').click(function () {
+            $('#add_job_title').click(function () {
 
                 $('#name').val('');
                 $('#from_time').val('');
                 $('#to_time').val('');
                 $('#duration').val('');
 
-                $("#workShiftForm").attr("value", "POST");
-                $('#workShiftModal').modal('toggle');
+                $("#work_shift_form").attr("value", "POST");
+                $('#work_shift_modal').modal('toggle');
             });
 
             // Time picker

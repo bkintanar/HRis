@@ -29,7 +29,7 @@
                                     <td>{{ $workShift->effective_date or '' }}</td>
                                     <td class="action">
                                         <button rel="delete" id="{{$workShift->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button">
-                                            <i class="fa fa-trash"></i>
+                                            <i class="fa fa-times"></i>
                                         </button>
                                     </td>
                                 </tr>

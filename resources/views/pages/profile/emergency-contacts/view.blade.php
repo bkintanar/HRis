@@ -4,71 +4,15 @@
     @include('partials.notification')
     <div class="row">
             {!! Navlink::profileLinks($pim) !!}
-        <div class="col-lg-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>In case of Emergency</h5>
-                    <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="ibox-content">
-                    @if($logged_user->hasAccess(Request::segment(1).'.emergency-contacts.create'))
-                    <div class="">
-                        <a id="add_emergency_contact" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
-                    </div>
-                    @endif
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Full Name</th>
-                                    <th>Relationship</th>
-                                    <th>Home Telephone</th>
-                                    <th>Mobile</th>
-                                    <th class="fix-width">Action</th>
-                                </tr>
-                            </thead>
-
-                            <tbody id="emergency_contacts_body">
-                                @if(count($emergencyContacts))
-                                    @foreach($emergencyContacts as $emergencyContact)
-                                    <tr class="emergency_contacts_list" id="emergency_contact_{{$emergencyContact->id}}">
-                                        <td>{{ $emergencyContact->first_name }} {{$emergencyContact->middle_name}} {{ $emergencyContact->last_name }}</td>
-                                        <td>{{ HRis\Eloquent\Relationship::whereId($emergencyContact->relationship_id)->pluck('name') }}</td>
-                                        <td>{{ $emergencyContact->home_phone }}</td>
-                                        <td>{{ $emergencyContact->mobile_phone }}</td>
-                                        <td>
-                                            @if($logged_user->hasAccess(Request::segment(1).'.emergency-contacts.update'))
-                                            <button rel="edit" id="{{$emergencyContact->id}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-paste"></i></button>
-                                            @endif
-                                            @if($logged_user->hasAccess(Request::segment(1).'.emergency-contacts.delete'))
-                                            <button rel="delete" id="{{$emergencyContact->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-trash"></i></button>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                @else
-                                    <tr>
-                                        <td colspan="5">No emergency contacts listed</td>
-                                    </tr>
-                                @endif
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div><!-- Modal -->
-
+        @include('partials.table', $table)
+        <!-- Modal -->
         <div class="modal fade" id="emergency_contact_modal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button class="close" data-dismiss="modal" type="button">&times;</button>
 
-                        <h4 class="modal-title" id="myModalLabel">Emergency Contact Details</h4>
+                        <h4 class="modal-title" id="my_modal_label">Emergency Contact Details</h4>
                     </div>
 
                     <div class="modal-body">
@@ -159,17 +103,17 @@
                     data: { id: dataId }
                 }).done(function( response ) {
 
-                    var emergencyContact = jQuery.parseJSON(response);
+                    var emergency_contact = jQuery.parseJSON(response);
 
                     // Set fields
 
-                    $('#emergency_contact_id').val(emergencyContact.id);
-                    $('#first_name').val(emergencyContact.first_name);
-                    $('#middle_name').val(emergencyContact.middle_name);
-                    $('#last_name').val(emergencyContact.last_name);
-                    $('#relationship_id').val(emergencyContact.relationship_id);
-                    $('#home_phone').val(emergencyContact.home_phone);
-                    $('#mobile_phone').val(emergencyContact.mobile_phone);
+                    $('#emergency_contact_id').val(emergency_contact.id);
+                    $('#first_name').val(emergency_contact.first_name);
+                    $('#middle_name').val(emergency_contact.middle_name);
+                    $('#last_name').val(emergency_contact.last_name);
+                    $('#relationship_id').val(emergency_contact.relationship_id);
+                    $('#home_phone').val(emergency_contact.home_phone);
+                    $('#mobile_phone').val(emergency_contact.mobile_phone);
 
                     $('.chosen-select').trigger("chosen:updated");
 
