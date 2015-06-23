@@ -4,7 +4,7 @@
     @include('partials.notification')
     <div class="row">
 
-        {!! HRis\TablePresenter::display($logged_user, $table) !!}
+        {!! TablePresenter::display($logged_user, $table) !!}
 
         <!-- Modal -->
         <div class="modal fade" id="education_modal" tabindex="-1">

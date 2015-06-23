@@ -219,6 +219,7 @@ return [
          * HRis Class Aliases...
          */
         'Navlink'   => HRis\Eloquent\Navlink::class,
+        'TablePresenter' => HRis\Http\Presenters\TablePresenter::class,
 
     ],
 

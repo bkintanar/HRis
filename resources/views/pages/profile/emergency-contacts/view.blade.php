@@ -5,7 +5,7 @@
     <div class="row">
             {!! Navlink::profileLinks($pim) !!}
 
-            {!! HRis\TablePresenter::display($logged_user, $table) !!}
+            {!! TablePresenter::display($logged_user, $table) !!}
 
         <!-- Modal -->
         <div class="modal fade" id="emergency_contact_modal" tabindex="-1">
