@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-        {!! HRis\TablePresenter::display($logged_user, $table) !!}
+        {!! TablePresenter::display($logged_user, $table) !!}
     </div>
 @stop
 

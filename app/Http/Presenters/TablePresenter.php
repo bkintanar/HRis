@@ -1,10 +1,10 @@
 <?php
 
-namespace HRis;
+namespace HRis\Http\Presenters;
 
 /**
  * Class TablePresenter
- * @package HRis
+ * @package HRis\Http\Presenters
  */
 class TablePresenter
 {
