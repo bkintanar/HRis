@@ -35,8 +35,10 @@
                                     <td><a href="/pim/employee-list/{{ $employee->employee_id }}/personal-details">{{ $employee->employee_id }}</a></td>
                                     <td>{{ $employee->first_name }}</td>
                                     <td>{{ $employee->last_name }}</td>
-                                    <td>{{ isset($employee->job) ? $employee->job : '' }}</td>
-                                    <td><span class="label {{ isset($employee->class) ? $employee->class : '' }}">{{ isset($employee->status) ? $employee->status : '' }}</span></td>
+                                    <td>{{ $employee->jobHistory()->jobTitle->name or '' }}</td>
+                                    <td>
+                                        <span class="label {{ $employee->class or '' }}">{{ $employee->status or '' }}</span>
+                                    </td>
                                     <td>
                                         <button rel="edit" id="{{$employee->id}}" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" data-toggle="tooltip" data-placement="bottom" title="Edit" type="button"><i class="fa fa-edit"></i></button>
                                         <button rel="delete" id="{{$employee->id}}" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i class="fa fa-times"></i></button>

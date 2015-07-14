@@ -2,7 +2,7 @@
 
 namespace HRis\Http\Controllers\Administration\Qualifications;
 
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Eloquent\EducationLevel;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Administration\EducationRequest;
@@ -23,10 +23,10 @@ class EducationController extends Controller
     protected $education;
 
     /**
-     * @param Sentry $auth
+     * @param Sentinel $auth
      * @param EducationLevel $education
      */
-    public function __construct(Sentry $auth, EducationLevel $education)
+    public function __construct(Sentinel $auth, EducationLevel $education)
     {
         parent::__construct($auth);
 
@@ -51,6 +51,22 @@ class EducationController extends Controller
         $this->data['pageTitle'] = 'Educations';
 
         return $this->template('pages.administration.qualifications.educations.view');
+    }
+
+    /**
+     * @return array
+     */
+    public function setupDataTable($educations)
+    {
+        $table = [];
+
+        $table['title'] = 'Education';
+        $table['permission'] = 'admin.qualifications.educations';
+        $table['headers'] = ['Id', 'Name'];
+        $table['model'] = ['singular' => 'education', 'plural' => 'educations', 'dashed' => 'educations'];
+        $table['items'] = $educations;
+
+        return $table;
     }
 
     /**
@@ -95,21 +111,5 @@ class EducationController extends Controller
         }
 
         return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
-    }
-
-    /**
-     * @return array
-     */
-    public function setupDataTable($educations)
-    {
-        $table = [];
-
-        $table['title'] = 'Education';
-        $table['permission'] = 'admin.qualifications.educations';
-        $table['headers'] = ['Id', 'Name'];
-        $table['model'] = ['singular' => 'education', 'plural' => 'educations', 'dashed' => 'educations'];
-        $table['items'] = $educations;
-
-        return $table;
     }
 }

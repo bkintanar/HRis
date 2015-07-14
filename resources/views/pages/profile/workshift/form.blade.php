@@ -28,7 +28,7 @@
         </div>
     </div>
     @else
-        @if($logged_user->hasAccess(Request::segment(1).'.work-shift.update'))
+        @if($logged_user->hasAccess(Request::segment(1).'.work-shifts.update'))
         <div class="form-group">
             <div class="col-sm-4 col-sm-offset-2">
                 {!! Html::link(Request::path() . '/edit', 'Modify', ['class' => 'btn btn-primary btn-xs']) !!}

@@ -2,7 +2,7 @@
 
 namespace HRis\Http\Controllers\PIM;
 
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Eloquent\Employee;
 use HRis\Eloquent\EmployeeSalaryComponent;
 use HRis\Eloquent\SalaryComponent;
@@ -49,14 +49,14 @@ class EmployeeListController extends Controller
     private $columns;
 
     /**
-     * @param Sentry $auth
+     * @param Sentinel $auth
      * @param Employee $employee
      * @param EmployeeSalaryComponent $employee_salary_component
      * @param SalaryComponent $salary_component
      * @param Pagination $pagination
      */
     public function __construct(
-        Sentry $auth,
+        Sentinel $auth,
         Employee $employee,
         EmployeeSalaryComponent $employee_salary_component,
         SalaryComponent $salary_component,

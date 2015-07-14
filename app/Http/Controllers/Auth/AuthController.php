@@ -2,7 +2,7 @@
 
 namespace HRis\Http\Controllers\Auth;
 
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Exception;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Auth\LoginRequest;
@@ -54,6 +54,9 @@ class AuthController extends Controller
             $user = $auth::authenticate($request->only('email', 'password'), false);
 
             if ($user) {
+
+                $auth::login($user);
+
                 return Redirect::intended('/dashboard');
             }
         } catch (PDOException $e) {
@@ -77,7 +80,7 @@ class AuthController extends Controller
      */
     public function getLogout()
     {
-        Sentry::logout();
+        Sentinel::logout();
 
         return redirect('/');
     }

@@ -57,7 +57,7 @@ class Pagination
             'nextPageUrl'     => $data->nextPageUrl(),
             'totalPages'      => $data->lastPage(),
             'total'           => $data->total(),
-            'start_page'      => $start_page,
+            'start_page' => 1,
             'end_page'        => $end_page,
             'pathPage'        => $path,
             'sortPage'        => $sort,

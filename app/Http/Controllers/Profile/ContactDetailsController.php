@@ -2,7 +2,7 @@
 
 namespace HRis\Http\Controllers\Profile;
 
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Exception;
 use HRis\Eloquent\Employee;
 use HRis\Http\Controllers\Controller;
@@ -26,10 +26,10 @@ class ContactDetailsController extends Controller
     protected $employee;
 
     /**
-     * @param Sentry $auth
+     * @param Sentinel $auth
      * @param Employee $employee
      */
-    public function __construct(Sentry $auth, Employee $employee)
+    public function __construct(Sentinel $auth, Employee $employee)
     {
         parent::__construct($auth);
 

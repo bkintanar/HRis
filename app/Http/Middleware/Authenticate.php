@@ -2,7 +2,7 @@
 
 namespace HRis\Http\Middleware;
 
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Closure;
 
 /**
@@ -13,18 +13,18 @@ class Authenticate
 {
 
     /**
-     * The Sentry implementation.
+     * The Sentinel implementation.
      *
-     * @var Sentry
+     * @var Sentinel
      */
     protected $auth;
 
     /**
      * Create a new filter instance.
      *
-     * @param  Sentry $auth
+     * @param  Sentinel $auth
      */
-    public function __construct(Sentry $auth)
+    public function __construct(Sentinel $auth)
     {
         $this->auth = $auth;
     }

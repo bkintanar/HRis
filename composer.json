@@ -7,7 +7,7 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
-        "cartalyst/sentry": "2.1.*dev",
+        "cartalyst/sentinel": "2.0.*",
         "laravelcollective/annotations": "dev-master",
         "laravelcollective/html": "dev-master",
         "overtrue/laravel-lang": "~1.0",

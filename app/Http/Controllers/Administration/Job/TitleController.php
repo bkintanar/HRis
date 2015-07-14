@@ -2,7 +2,7 @@
 
 namespace HRis\Http\Controllers\Administration\Job;
 
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Eloquent\JobTitle;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Administration\JobTitleRequest;
@@ -23,10 +23,10 @@ class TitleController extends Controller
     protected $job_title;
 
     /**
-     * @param Sentry $auth
+     * @param Sentinel $auth
      * @param JobTitle $job_title
      */
-    public function __construct(Sentry $auth, JobTitle $job_title)
+    public function __construct(Sentinel $auth, JobTitle $job_title)
     {
         parent::__construct($auth);
 
@@ -51,6 +51,22 @@ class TitleController extends Controller
         $this->data['pageTitle'] = 'Job Titles';
 
         return $this->template('pages.administration.job.title.view');
+    }
+
+    /**
+     * @return array
+     */
+    public function setupDataTable($job_titles)
+    {
+        $table = [];
+
+        $table['title'] = 'Job Titles';
+        $table['permission'] = 'admin.job.titles';
+        $table['headers'] = ['Id', 'Job Title', 'Job Description'];
+        $table['model'] = ['singular' => 'job_title', 'plural' => 'job_titles', 'dashed' => 'job-titles'];
+        $table['items'] = $job_titles;
+
+        return $table;
     }
 
     /**
@@ -95,21 +111,5 @@ class TitleController extends Controller
         }
 
         return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
-    }
-
-    /**
-     * @return array
-     */
-    public function setupDataTable($job_titles)
-    {
-        $table = [];
-
-        $table['title'] = 'Job Titles';
-        $table['permission'] = 'admin.job.titles';
-        $table['headers'] = ['Id', 'Job Title', 'Job Description'];
-        $table['model'] = ['singular' => 'job_title', 'plural' => 'job_titles', 'dashed' => 'job-titles'];
-        $table['items'] = $job_titles;
-
-        return $table;
     }
 }

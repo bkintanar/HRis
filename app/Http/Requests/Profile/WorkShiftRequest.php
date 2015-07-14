@@ -2,7 +2,7 @@
 
 namespace HRis\Http\Requests\Profile;
 
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Http\Requests\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
@@ -31,14 +31,14 @@ class WorkShiftRequest extends Request
     /**
      * Determine if the user is authorized to make this request.
      *
-     * @param Sentry $user
+     * @param Sentinel $user
      * @return bool
      */
-    public function authorize(Sentry $user)
+    public function authorize(Sentinel $user)
     {
         $user = $user::getUser();
 
-        $permission = Request::is('*pim/*') ? 'pim.work-shift' : 'profile.work-shift';
+        $permission = Request::is('*pim/*') ? 'pim.work-shifts' : 'profile.work-shifts';
 
         // Update
         if (Request::isMethod('patch') || Request::is('*/edit')) {
