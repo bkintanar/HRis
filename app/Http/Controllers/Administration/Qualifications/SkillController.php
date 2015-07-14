@@ -2,7 +2,7 @@
 
 namespace HRis\Http\Controllers\Administration\Qualifications;
 
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Eloquent\Skill;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Administration\SkillRequest;
@@ -23,10 +23,10 @@ class SkillController extends Controller
     protected $skill;
 
     /**
-     * @param Sentry $auth
+     * @param Sentinel $auth
      * @param Skill $skill
      */
-    public function __construct(Sentry $auth, Skill $skill)
+    public function __construct(Sentinel $auth, Skill $skill)
     {
         parent::__construct($auth);
 
@@ -50,6 +50,22 @@ class SkillController extends Controller
         $this->data['pageTitle'] = 'Skills';
 
         return $this->template('pages.administration.qualifications.skills.view');
+    }
+
+    /**
+     * @return array
+     */
+    public function setupDataTable($skills)
+    {
+        $table = [];
+
+        $table['title'] = 'Skills';
+        $table['permission'] = 'admin.qualifications.skills';
+        $table['headers'] = ['Id', 'Name'];
+        $table['model'] = ['singular' => 'skill', 'plural' => 'skills', 'dashed' => 'skills'];
+        $table['items'] = $skills;
+
+        return $table;
     }
 
     /**
@@ -94,21 +110,5 @@ class SkillController extends Controller
         }
 
         return Redirect::to($request->path())->with('success', 'Record successfully updated.');
-    }
-
-    /**
-     * @return array
-     */
-    public function setupDataTable($skills)
-    {
-        $table = [];
-
-        $table['title'] = 'Skills';
-        $table['permission'] = 'admin.qualifications.skills';
-        $table['headers'] = ['Id', 'Name'];
-        $table['model'] = ['singular' => 'skill', 'plural' => 'skills', 'dashed' => 'skills'];
-        $table['items'] = $skills;
-
-        return $table;
     }
 }

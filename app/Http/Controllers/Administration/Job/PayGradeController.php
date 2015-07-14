@@ -2,7 +2,7 @@
 
 namespace HRis\Http\Controllers\Administration\Job;
 
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Eloquent\PayGrade;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Administration\PayGradeRequest;
@@ -18,10 +18,10 @@ class PayGradeController extends Controller
 {
 
     /**
-     * @param Sentry $auth
+     * @param Sentinel $auth
      * @param PayGrade $pay_grade
      */
-    public function __construct(Sentry $auth, PayGrade $pay_grade)
+    public function __construct(Sentinel $auth, PayGrade $pay_grade)
     {
         parent::__construct($auth);
 
@@ -47,6 +47,22 @@ class PayGradeController extends Controller
         $this->data['pageTitle'] = 'Pay Grades';
 
         return $this->template('pages.administration.job.pay-grade.view');
+    }
+
+    /**
+     * @return array
+     */
+    public function setupDataTable($pay_grades)
+    {
+        $table = [];
+
+        $table['title'] = 'Pay Grades';
+        $table['permission'] = 'admin.job.pay-grades';
+        $table['headers'] = ['Id', 'Pay Grade', 'Minimum Salary', 'Maximum Salary'];
+        $table['model'] = ['singular' => 'pay_grade', 'plural' => 'pay_grades', 'dashed' => 'pay-grades'];
+        $table['items'] = $pay_grades;
+
+        return $table;
     }
 
     /**
@@ -91,21 +107,5 @@ class PayGradeController extends Controller
         }
 
         return Redirect::to($request->path())->with('success', 'Record successfully updated.');
-    }
-
-    /**
-     * @return array
-     */
-    public function setupDataTable($pay_grades)
-    {
-        $table = [];
-
-        $table['title'] = 'Pay Grades';
-        $table['permission'] = 'admin.job.pay-grades';
-        $table['headers'] = ['Id', 'Pay Grade', 'Minimum Salary', 'Maximum Salary'];
-        $table['model'] = ['singular' => 'pay_grade', 'plural' => 'pay_grades', 'dashed' => 'pay-grades'];
-        $table['items'] = $pay_grades;
-
-        return $table;
     }
 }

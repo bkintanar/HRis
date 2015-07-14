@@ -2,7 +2,7 @@
 
 namespace HRis\Http\Controllers;
 
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
@@ -32,9 +32,9 @@ abstract class Controller extends BaseController
     public $auth;
 
     /**
-     * @param Sentry $auth
+     * @param Sentinel $auth
      */
-    public function __construct(Sentry $auth)
+    public function __construct(Sentinel $auth)
     {
         $this->auth = $auth;
 

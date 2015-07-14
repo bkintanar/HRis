@@ -2,7 +2,7 @@
 
 namespace HRis\Eloquent;
 
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Request;
@@ -61,7 +61,7 @@ class Navlink extends Model
      */
     protected static function generate()
     {
-        $user = Sentry::getUser();
+        $user = Sentinel::getUser();
         $result = '';
 
         $_parent_links = self::whereParentId(0)->get();
@@ -88,7 +88,7 @@ class Navlink extends Model
      */
     protected static function generateNavLinkItem($link, $children)
     {
-        $user = Sentry::getUser();
+        $user = Sentinel::getUser();
 
         $special_link_ids = self::getSpecialNavLinkIds();
 
@@ -298,7 +298,7 @@ class Navlink extends Model
      */
     protected static function profileLinks($pim = false)
     {
-        $user = Sentry::getUser();
+        $user = Sentinel::getUser();
 
         $nav = '<div class="col-lg-12 top-nav-b"><div class="btn-group top-nav-li"><ul>';
 

@@ -2,7 +2,7 @@
 
 namespace HRis\Http\Controllers\Administration\Job;
 
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Eloquent\WorkShift;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Administration\WorkShiftRequest;
@@ -23,10 +23,10 @@ class WorkShiftController extends Controller
     protected $work_shift;
 
     /**
-     * @param Sentry $auth
+     * @param Sentinel $auth
      * @param WorkShift $work_shift
      */
-    public function __construct(Sentry $auth, WorkShift $work_shift)
+    public function __construct(Sentinel $auth, WorkShift $work_shift)
     {
         parent::__construct($auth);
 
@@ -51,6 +51,22 @@ class WorkShiftController extends Controller
         $this->data['pageTitle'] = 'Work Shifts';
 
         return $this->template('pages.administration.job.work-shift.view');
+    }
+
+    /**
+     * @return array
+     */
+    public function setupDataTable($work_shifts)
+    {
+        $table = [];
+
+        $table['title'] = 'Work Shifts';
+        $table['permission'] = 'admin.job.work-shifts';
+        $table['headers'] = ['Id', 'Work Shift', 'Duration'];
+        $table['model'] = ['singular' => 'work_shift', 'plural' => 'work_shifts', 'dashed' => 'work-shifts'];
+        $table['items'] = $work_shifts;
+
+        return $table;
     }
 
     /**
@@ -95,21 +111,5 @@ class WorkShiftController extends Controller
         }
 
         return Redirect::to($request->path())->with('success', 'Record successfully updated.');
-    }
-
-    /**
-     * @return array
-     */
-    public function setupDataTable($work_shifts)
-    {
-        $table = [];
-
-        $table['title'] = 'Work Shifts';
-        $table['permission'] = 'admin.job.work-shifts';
-        $table['headers'] = ['Id', 'Work Shift', 'Duration'];
-        $table['model'] = ['singular' => 'work_shift', 'plural' => 'work_shifts', 'dashed' => 'work-shifts'];
-        $table['items'] = $work_shifts;
-
-        return $table;
     }
 }

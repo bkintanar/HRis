@@ -2,7 +2,7 @@
 
 namespace HRis\Http\Controllers\Profile;
 
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Eloquent\Employee;
 use HRis\Eloquent\EmployeeWorkShift;
 use HRis\Eloquent\JobHistory;
@@ -32,13 +32,13 @@ class JobController extends Controller
     protected $job_history;
 
     /**
-     * @param Sentry $auth
+     * @param Sentinel $auth
      * @param Employee $employee
      * @param JobHistory $job_history
      * @param EmployeeWorkShift $employee_work_shift
      */
     public function __construct(
-        Sentry $auth,
+        Sentinel $auth,
         Employee $employee,
         JobHistory $job_history,
         EmployeeWorkShift $employee_work_shift
@@ -76,6 +76,22 @@ class JobController extends Controller
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Job Details' : 'My Job Details';
 
         return $this->template('pages.profile.job.view');
+    }
+
+    /**
+     * @return array
+     */
+    public function setupDataTable($job_histories)
+    {
+        $table = [];
+
+        $table['title'] = 'Job History';
+        $table['permission'] = str_replace('pim', 'profile', Request::segment(1)) . '.job-histories';
+        $table['headers'] = ['Job Title', 'Department', 'Effective Date', 'Employment Status', 'Location', 'Comments',];
+        $table['model'] = ['singular' => 'job_history', 'plural' => 'job_histories', 'dashed' => 'job-histories'];
+        $table['items'] = $job_histories;
+
+        return $table;
     }
 
     /**
@@ -135,21 +151,5 @@ class JobController extends Controller
             ->update($request->only('joined_date', 'probation_end_date', 'permanency_date'));
 
         return Redirect::to($request->path())->with('success', 'Record successfully updated.');
-    }
-
-    /**
-     * @return array
-     */
-    public function setupDataTable($job_histories)
-    {
-        $table = [];
-
-        $table['title'] = 'Job History';
-        $table['permission'] = str_replace('pim', 'profile', Request::segment(1)) . '.job-histories';
-        $table['headers'] = ['Job Title', 'Department', 'Effective Date', 'Employment Status', 'Location', 'Comments',];
-        $table['model'] = ['singular' => 'job_history', 'plural' => 'job_histories', 'dashed' => 'job-histories'];
-        $table['items'] = $job_histories;
-
-        return $table;
     }
 }

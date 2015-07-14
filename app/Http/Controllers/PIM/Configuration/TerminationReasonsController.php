@@ -2,7 +2,7 @@
 
 namespace HRis\Http\Controllers\PIM\Configuration;
 
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Eloquent\Employee;
 use HRis\Eloquent\TerminationReason;
 use HRis\Http\Controllers\Controller;
@@ -29,11 +29,11 @@ class TerminationReasonsController extends Controller
     protected $termination_reason;
 
     /**
-     * @param Sentry $auth
+     * @param Sentinel $auth
      * @param Employee $employee
      * @param TerminationReason $termination_reason
      */
-    public function __construct(Sentry $auth, Employee $employee, TerminationReason $termination_reason)
+    public function __construct(Sentinel $auth, Employee $employee, TerminationReason $termination_reason)
     {
         parent::__construct($auth);
 
@@ -60,6 +60,26 @@ class TerminationReasonsController extends Controller
         $this->data['pageTitle'] = 'Termination Reasons';
 
         return $this->template('pages.pim.configuration.termination-reasons.view');
+    }
+
+    /**
+     * @return array
+     */
+    public function setupDataTable($termination_reasons)
+    {
+        $table = [];
+
+        $table['title'] = 'Termination Reasons';
+        $table['permission'] = 'pim.configuration.termination-reasons';
+        $table['headers'] = ['Id', 'Name'];
+        $table['model'] = [
+            'singular' => 'termination_reason',
+            'plural'   => 'termination_reasons',
+            'dashed'   => 'termination-reasons'
+        ];
+        $table['items'] = $termination_reasons;
+
+        return $table;
     }
 
     /**
@@ -104,21 +124,5 @@ class TerminationReasonsController extends Controller
         }
 
         return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
-    }
-
-    /**
-     * @return array
-     */
-    public function setupDataTable($termination_reasons)
-    {
-        $table = [];
-
-        $table['title'] = 'Termination Reasons';
-        $table['permission'] = 'pim.configuration.termination-reasons';
-        $table['headers'] = ['Id', 'Name'];
-        $table['model'] = ['singular' => 'termination_reason', 'plural' => 'termination_reasons', 'dashed' => 'termination-reasons'];
-        $table['items'] = $termination_reasons;
-
-        return $table;
     }
 }

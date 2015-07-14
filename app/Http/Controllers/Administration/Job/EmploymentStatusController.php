@@ -2,7 +2,7 @@
 
 namespace HRis\Http\Controllers\Administration\Job;
 
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Eloquent\EmploymentStatus;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Administration\EmploymentStatusRequest;
@@ -23,10 +23,10 @@ class EmploymentStatusController extends Controller
     protected $employment_status;
 
     /**
-     * @param Sentry $auth
+     * @param Sentinel $auth
      * @param EmploymentStatus $employment_status
      */
-    public function __construct(Sentry $auth, EmploymentStatus $employment_status)
+    public function __construct(Sentinel $auth, EmploymentStatus $employment_status)
     {
         parent::__construct($auth);
 
@@ -53,6 +53,26 @@ class EmploymentStatusController extends Controller
         $this->data['pageTitle'] = 'Employment Status';
 
         return $this->template('pages.administration.job.employment-status.view');
+    }
+
+    /**
+     * @return array
+     */
+    public function setupDataTable($employment_statuses)
+    {
+        $table = [];
+
+        $table['title'] = 'Employment Status';
+        $table['permission'] = 'admin.job.employment-status';
+        $table['headers'] = ['Id', 'Name'];
+        $table['model'] = [
+            'singular' => 'employment_status',
+            'plural'   => 'employment_statuses',
+            'dashed'   => 'employment-statuses'
+        ];
+        $table['items'] = $employment_statuses;
+
+        return $table;
     }
 
     /**
@@ -97,21 +117,5 @@ class EmploymentStatusController extends Controller
         }
 
         return Redirect::to($request->path())->with('success', 'Record successfully updated.');
-    }
-
-    /**
-     * @return array
-     */
-    public function setupDataTable($employment_statuses)
-    {
-        $table = [];
-
-        $table['title'] = 'Employment Status';
-        $table['permission'] = 'admin.job.employment-status';
-        $table['headers'] = ['Id', 'Name'];
-        $table['model'] = ['singular' => 'employment_status', 'plural' => 'employment_statuses', 'dashed' => 'employment-statuses'];
-        $table['items'] = $employment_statuses;
-
-        return $table;
     }
 }

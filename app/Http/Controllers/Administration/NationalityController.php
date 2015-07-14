@@ -2,7 +2,7 @@
 
 namespace HRis\Http\Controllers\Administration;
 
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Eloquent\Nationality;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Administration\NationalityRequest;
@@ -18,10 +18,10 @@ class NationalityController extends Controller
 {
 
     /**
-     * @param Sentry $auth
+     * @param Sentinel $auth
      * @param Nationality $nationality
      */
-    public function __construct(Sentry $auth, Nationality $nationality)
+    public function __construct(Sentinel $auth, Nationality $nationality)
     {
         parent::__construct($auth);
 

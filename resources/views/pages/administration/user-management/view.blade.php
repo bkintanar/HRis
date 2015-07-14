@@ -38,7 +38,7 @@
                                     <td><a href="/admin/user-management/{{ $user->id }}">{{ $user->id }}</a></td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->employee->first_name }} {{ $user->employee->last_name }}</td>
-                                    <td>{{ $user->group()->name }}</td>
+                                    <td>{{ $user->role()->name }}</td>
                                     <td>{{ $user->activated ? 'Active' : 'Inactive' }}</td>
                                     <td>
                                         <button rel="edit" id="{{$user->id}}" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" title="Edit" type="button"><i class="fa fa-edit"></i></button>

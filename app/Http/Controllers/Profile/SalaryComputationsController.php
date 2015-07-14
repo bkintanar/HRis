@@ -2,7 +2,7 @@
 
 namespace HRis\Http\Controllers\Profile;
 
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Eloquent\Employee;
 use HRis\Eloquent\EmployeeSalaryComponents;
 use HRis\Http\Controllers\Controller;
@@ -21,13 +21,13 @@ class SalaryComputationsController extends Controller
 {
 
     /**
-     * @param Sentry $auth
+     * @param Sentinel $auth
      * @param Employee $employee
      * @param EmployeeSalaryComponent $employee_salary_component
      * @param Salary $salary_services
      */
     public function __construct(
-        Sentry $auth,
+        Sentinel $auth,
         Employee $employee,
         EmployeeSalaryComponent $employee_salary_component,
         Salary $salary_services

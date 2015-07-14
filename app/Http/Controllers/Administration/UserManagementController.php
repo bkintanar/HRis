@@ -2,7 +2,7 @@
 
 namespace HRis\Http\Controllers\Administration;
 
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Eloquent\User;
 use HRis\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
@@ -23,10 +23,10 @@ class UserManagementController extends Controller
     protected $user;
 
     /**
-     * @param Sentry $auth
+     * @param Sentinel $auth
      * @param User $user
      */
-    public function __construct(Sentry $auth, User $user)
+    public function __construct(Sentinel $auth, User $user)
     {
         parent::__construct($auth);
 

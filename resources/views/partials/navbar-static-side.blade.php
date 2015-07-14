@@ -4,7 +4,7 @@
                     <li class="nav-header">
 
                         <div class="dropdown profile-element"> <span>
-                            @if($logged_user->employee->avatar != '')
+                            @if(!is_null ($logged_user->employee->avatar))
                             <img alt="image" id="profile-image-nav" class="img-circle" src="/img/profile/{{$logged_user->employee->avatar}}">
                             @else
                             <img alt="image" id="profile-image-nav" class="img-circle" src="/img/profile/default/{{$logged_user->employee->jobHistory()->job_title_id }}{{$logged_user->employee->gender}}.png">

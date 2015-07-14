@@ -2,7 +2,7 @@
 
 namespace HRis\Http\Controllers\Profile;
 
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Exception;
 use HRis\Eloquent\Dependent;
 use HRis\Eloquent\Employee;
@@ -31,11 +31,11 @@ class DependentsController extends Controller
     protected $employee;
 
     /**
-     * @param Sentry $auth
+     * @param Sentinel $auth
      * @param Employee $employee
      * @param Dependent $dependent
      */
-    public function __construct(Sentry $auth, Employee $employee, Dependent $dependent)
+    public function __construct(Sentinel $auth, Employee $employee, Dependent $dependent)
     {
         parent::__construct($auth);
 
@@ -71,6 +71,22 @@ class DependentsController extends Controller
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Dependents' : 'My Dependents';
 
         return $this->template('pages.profile.dependents.view');
+    }
+
+    /**
+     * @return array
+     */
+    public function setupDataTable($dependents)
+    {
+        $table = [];
+
+        $table['title'] = 'Assigned Dependents';
+        $table['permission'] = str_replace('pim', 'profile', Request::segment(1)) . '.dependents';
+        $table['headers'] = ['Full Name', 'Relationship', 'Birth Date'];
+        $table['model'] = ['singular' => 'dependent', 'plural' => 'dependents', 'dashed' => 'dependents'];
+        $table['items'] = $dependents;
+
+        return $table;
     }
 
     /**
@@ -164,21 +180,5 @@ class DependentsController extends Controller
             }
 
         }
-    }
-
-    /**
-     * @return array
-     */
-    public function setupDataTable($dependents)
-    {
-        $table = [];
-
-        $table['title'] = 'Assigned Dependents';
-        $table['permission'] = str_replace('pim', 'profile', Request::segment(1)) . '.dependents';
-        $table['headers'] = ['Full Name', 'Relationship', 'Birth Date'];
-        $table['model'] = ['singular' => 'dependent', 'plural' => 'dependents', 'dashed' => 'dependents'];
-        $table['items'] = $dependents;
-
-        return $table;
     }
 }

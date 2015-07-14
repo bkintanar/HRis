@@ -2,7 +2,7 @@
 
 namespace HRis\Http\Controllers\Profile;
 
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Exception;
 use HRis\Eloquent\EmergencyContact;
 use HRis\Eloquent\Employee;
@@ -31,11 +31,11 @@ class EmergencyContactsController extends Controller
     protected $emergencyContact;
 
     /**
-     * @param Sentry $auth
+     * @param Sentinel $auth
      * @param Employee $employee
      * @param EmergencyContact $emergencyContact
      */
-    public function __construct(Sentry $auth, Employee $employee, EmergencyContact $emergencyContact)
+    public function __construct(Sentinel $auth, Employee $employee, EmergencyContact $emergencyContact)
     {
         parent::__construct($auth);
 
@@ -72,6 +72,26 @@ class EmergencyContactsController extends Controller
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Emergency Contacts' : 'My Emergency Contacts';
 
         return $this->template('pages.profile.emergency-contacts.view');
+    }
+
+    /**
+     * @return array
+     */
+    public function setupDataTable($emergency_contacts)
+    {
+        $table = [];
+
+        $table['title'] = 'In case of Emergency';
+        $table['permission'] = str_replace('pim', 'profile', Request::segment(1)) . '.emergency-contacts';
+        $table['headers'] = ['Full Name', 'Relationship', 'Home Telephone', 'Mobile',];
+        $table['model'] = [
+            'singular' => 'emergency_contact',
+            'plural'   => 'emergency_contacts',
+            'dashed'   => 'emergency-contacts'
+        ];
+        $table['items'] = $emergency_contacts;
+
+        return $table;
     }
 
     /**
@@ -172,25 +192,5 @@ class EmergencyContactsController extends Controller
                 print('failed');
             }
         }
-    }
-
-    /**
-     * @return array
-     */
-    public function setupDataTable($emergency_contacts)
-    {
-        $table = [];
-
-        $table['title'] = 'In case of Emergency';
-        $table['permission'] = str_replace('pim', 'profile', Request::segment(1)) . '.emergency-contacts';
-        $table['headers'] = ['Full Name', 'Relationship', 'Home Telephone', 'Mobile',];
-        $table['model'] = [
-            'singular' => 'emergency_contact',
-            'plural'   => 'emergency_contacts',
-            'dashed'   => 'emergency-contacts'
-        ];
-        $table['items'] = $emergency_contacts;
-
-        return $table;
     }
 }

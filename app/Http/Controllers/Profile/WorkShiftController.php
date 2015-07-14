@@ -3,7 +3,7 @@
 namespace HRis\Http\Controllers\Profile;
 
 use Carbon\Carbon;
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Eloquent\Employee;
 use HRis\Eloquent\EmployeeWorkShift;
 use HRis\Http\Controllers\Controller;
@@ -32,11 +32,11 @@ class WorkShiftController extends Controller
     protected $employee_work_shift;
 
     /**
-     * @param Sentry $auth
+     * @param Sentinel $auth
      * @param Employee $employee
      * @param EmployeeWorkShift $employee_work_shift
      */
-    public function __construct(Sentry $auth, Employee $employee, EmployeeWorkShift $employee_work_shift)
+    public function __construct(Sentinel $auth, Employee $employee, EmployeeWorkShift $employee_work_shift)
     {
         parent::__construct($auth);
 

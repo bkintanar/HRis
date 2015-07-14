@@ -224,7 +224,7 @@ class Employee extends Model {
      */
     public function jobHistory()
     {
-        return $this->jobHistories()->with('workShift')->orderBy('job_histories.id', 'desc')->first();
+        return $this->jobHistories()->with('workShift', 'jobTitle')->orderBy('job_histories.id', 'desc')->first();
     }
 
     /**
