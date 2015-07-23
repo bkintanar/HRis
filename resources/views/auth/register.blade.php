@@ -20,6 +20,7 @@
 
 			<form class="m-t" role="form" action="/auth/register" method="post" onSubmit="return check(this)">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
+
 				<div class="form-group">
 					<input type="text" class="form-control" placeholder="First Name" name="first_name" required="">
 				</div>
@@ -30,18 +31,24 @@
 					<input type="email" class="form-control" placeholder="your-name@email.com" name="email" required="">
 				</div>
 				<div class="form-group">
-					<input type="password" class="form-control" placeholder="{{ trans('app.password') }}" name="password" required="">
+					<input type="password" class="form-control" placeholder="{{ trans('app.password') }}"
+						   name="password" required="">
 				</div>
 				<div class="form-group">
-					<input type="password" class="form-control" placeholder="{{ trans('app.password_confirmation') }}" name="password_confirmation" required="">
+					<input type="password" class="form-control" placeholder="{{ trans('app.password_confirmation') }}"
+						   name="password_confirmation" required="">
 				</div>
 				<button type="submit" onclick="submit();" class="btn btn-primary block full-width m-b">Register</button>
 
 				{{--<a href="#"><small>{{ trans('app.forgot_password?') }}</small></a>--}}
-				<p class="text-muted text-center"><small>{{ trans('app.already_have_an_account?') }}</small></p>
+				<p class="text-muted text-center">
+					<small>{{ trans('app.already_have_an_account?') }}</small>
+				</p>
 				<a class="btn btn-sm btn-white btn-block" href="/auth/login">{{ trans('app.login') }}</a>
 			</form>
-			<p class="m-t"> <small>b3 Studios &copy; 2014</small> </p>
+			<p class="m-t">
+				<small>b3 Studios &copy; 2014</small>
+			</p>
 		</div>
 	</div>
 @stop
