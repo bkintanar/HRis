@@ -6,6 +6,7 @@ use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Exception;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Auth\LoginRequest;
+use HRis\Http\Requests\Auth\RegisterRequest;
 use Illuminate\Support\Facades\Redirect;
 
 /**
@@ -35,7 +36,23 @@ class AuthController extends Controller
      */
     public function getLogin()
     {
-        return view('auth.login');
+        $this->data['page_title'] = 'Login';
+
+        return view('auth.login', $this->data);
+    }
+
+    /**
+     * Show the application register form.
+     *
+     * @Get("auth/register")
+     *
+     * @return Response
+     */
+    public function getRegister()
+    {
+        $this->data['page_title'] = 'Register';
+
+        return view('auth.register', $this->data);
     }
 
     /**
@@ -69,6 +86,17 @@ class AuthController extends Controller
             ]);
 
         }
+    }
+
+    /**
+     * Handle a register request to the application.
+     * @Post("auth/register")
+     *
+     * @param RegisterRequest $request
+     */
+    public function postRegister(RegisterRequest $request)
+    {
+        dd();
     }
 
     /**

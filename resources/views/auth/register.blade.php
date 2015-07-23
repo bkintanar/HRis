@@ -1,65 +1,47 @@
-@extends('app')
+@extends('master.adm-login-master')
 
 @section('content')
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-			<div class="panel panel-default">
-				<div class="panel-heading">Register</div>
-				<div class="panel-body">
-					@if (count($errors) > 0)
-						<div class="alert alert-danger">
-							<strong>Whoops!</strong> There were some problems with your input.<br><br>
-							<ul>
-								@foreach ($errors->all() as $error)
-									<li>{{ $error }}</li>
-								@endforeach
-							</ul>
-						</div>
-					@endif
+	<div class="middle-box text-center loginscreen animated fadeInDown">
+		<div>
+			<div>
 
-					<form class="form-horizontal" role="form" method="POST" action="/auth/register">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-						<div class="form-group">
-							<label class="col-md-4 control-label">Name</label>
-							<div class="col-md-6">
-								<input type="text" class="form-control" name="name" value="{{ old('name') }}">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-md-4 control-label">E-Mail Address</label>
-							<div class="col-md-6">
-								<input type="email" class="form-control" name="email" value="{{ old('email') }}">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-md-4 control-label">Password</label>
-							<div class="col-md-6">
-								<input type="password" class="form-control" name="password">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-md-4 control-label">Confirm Password</label>
-							<div class="col-md-6">
-								<input type="password" class="form-control" name="password_confirmation">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="col-md-6 col-md-offset-4">
-								<button type="submit" class="btn btn-primary">
-									Register
-								</button>
-							</div>
-						</div>
-					</form>
+				<div class="logo-wrapper">
+					<img src="/img/hris-logo-desaturated.png">
 				</div>
+
 			</div>
+			<h3>{{ trans('app.register_to_hris') }}</h3>
+
+			@if($errors->any())
+				<div class="alert alert-danger">
+					{{ $errors->first() }}<br>
+				</div>
+			@endif
+
+			<form class="m-t" role="form" action="/auth/register" method="post" onSubmit="return check(this)">
+				<input type="hidden" name="_token" value="{{ csrf_token() }}">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="First Name" name="first_name" required="">
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Last Name" name="last_name" required="">
+				</div>
+				<div class="form-group">
+					<input type="email" class="form-control" placeholder="your-name@email.com" name="email" required="">
+				</div>
+				<div class="form-group">
+					<input type="password" class="form-control" placeholder="{{ trans('app.password') }}" name="password" required="">
+				</div>
+				<div class="form-group">
+					<input type="password" class="form-control" placeholder="{{ trans('app.password_confirmation') }}" name="password_confirmation" required="">
+				</div>
+				<button type="submit" onclick="submit();" class="btn btn-primary block full-width m-b">Register</button>
+
+				{{--<a href="#"><small>{{ trans('app.forgot_password?') }}</small></a>--}}
+				<p class="text-muted text-center"><small>{{ trans('app.already_have_an_account?') }}</small></p>
+				<a class="btn btn-sm btn-white btn-block" href="/auth/login">{{ trans('app.login') }}</a>
+			</form>
+			<p class="m-t"> <small>b3 Studios &copy; 2014</small> </p>
 		</div>
 	</div>
-</div>
-@endsection
+@stop

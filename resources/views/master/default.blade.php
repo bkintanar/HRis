@@ -14,6 +14,9 @@
     @yield('custom_css')
     {!! Html::style('/css/animate.css') !!}
     {!! Html::style('/min-css/style.min.css') !!}
+
+    <link rel="icon" href="/favicon.png" type="image/png">
+
 </head>
 
 <body class="pace-done fixed-sidebar">
