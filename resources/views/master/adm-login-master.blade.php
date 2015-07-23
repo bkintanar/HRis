@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>HRis | Login</title>
+    <title>HRis | {{ $page_title }}</title>
 
     @include('partials.copyleft')
 
@@ -14,6 +14,8 @@
 
     {!! Html::style('/css/animate.css') !!}
     {!! Html::style('/min-css/style.min.css') !!}
+
+    <link rel="icon" href="/favicon.png" type="image/png">
 
 </head>
 
