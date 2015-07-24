@@ -12,6 +12,12 @@
             </div>
             <h3>{{ trans('app.welcome_to_hris') }}</h3>
 
+            @if (session('activation'))
+                <div class="alert alert-success">
+                    {{ session('activation') }}
+                </div>
+            @endif
+
             @if($errors->any())
                 <div class="alert alert-danger">
                     {{ $errors->first() }}<br>
