@@ -2,11 +2,15 @@
 
 namespace HRis\Http\Controllers\Auth;
 
+use Cartalyst\Sentinel\Laravel\Facades\Activation;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
-use Exception;
+use HRis\Eloquent\Employee;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Auth\LoginRequest;
 use HRis\Http\Requests\Auth\RegisterRequest;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 
 /**
@@ -61,42 +65,126 @@ class AuthController extends Controller
      * @Post("auth/login")
      *
      * @param  LoginRequest $request
+     *
      * @return Response
      */
     public function postLogin(LoginRequest $request)
     {
         $auth = $this->auth;
 
+
         try {
             $user = $auth::authenticate($request->only('email', 'password'), false);
 
-            if ($user) {
+            if ( ! $user) {
 
-                $auth::login($user);
-
-                return Redirect::intended('/dashboard');
+                return redirect('/auth/login')->withInput($request->only('email'))->withErrors([
+                    'email' => 'These credentials do not match our records.',
+                ]);
             }
+
+            $auth::login($user);
+
+            return redirect()->intended('/dashboard');
+
         } catch (PDOException $e) {
             return redirect('/auth/login')->withInput($request->only('email'))->withErrors([
                 'email' => $e->getMessage(),
             ]);
-        } catch (Exception $e) {
-            return redirect('/auth/login')->withInput($request->only('email'))->withErrors([
-                'email' => 'These credentials do not match our records.',
-            ]);
-
         }
     }
 
     /**
+     * Handle the activation request to the application.
+     *
+     * @Get("auth/activate/{user_id}/{activation_code}")
+     *
+     * @param $user_id
+     * @param $activation_code
+     *
+     * @return Redirect
+     */
+    public function getActivateUser($user_id, $activation_code)
+    {
+        $auth = $this->auth;
+
+        $user = $auth::findById($user_id);
+
+        // User not found
+        if ( ! $user) {
+            App::abort(404, 'user_not_found');
+        }
+
+        if (Activation::complete($user, $activation_code)) {
+            $auth::login($user);
+
+            return redirect('/');
+        } else {
+
+            App::abort(404, 'activation_code_invalid');
+        }
+
+
+    }
+
+    /**
      * Handle a register request to the application.
+     *
      * @Post("auth/register")
      *
      * @param RegisterRequest $request
      */
     public function postRegister(RegisterRequest $request)
     {
-        dd();
+        $auth = $this->auth;
+
+        $email = $request->get('email');
+
+        $credentials = [
+            'email'    => $email,
+            'password' => $request->get('password'),
+        ];
+
+
+        $user = $auth::register($credentials);
+
+        $role = $auth::findRoleBySlug('ess');
+
+        $role->users()->attach($user);
+
+        $activation = Activation::create($user);
+
+        $email_data = [
+            'first_name'      => $request->get('first_name'),
+            'last_name'       => $request->get('last_name'),
+            'user_id'         => $user->id,
+            'email'           => $email,
+            'activation_code' => $activation->code,
+        ];
+
+        // Add to queue the user activation email.
+        Mail::queue('emails.activate-user', $email_data, function ($message) use ($email) {
+            $message->from(env('MAIL_ADDRESS', 'mail@example.com'), env('MAIL_NAME', 'Wizard Mailer'));
+            $message->to($email);
+            $message->subject(trans('app.account_activation'));
+        });
+
+        $employee_data = [
+            'employee_id' => Config::get('company.employee_id_prefix') . $user->id,
+            'user_id'     => $user->id,
+            'first_name'  => $request->get('first_name'),
+            'last_name'   => $request->get('last_name'),
+            'gender'      => 'M',
+            'work_email'  => $request->get('email'),
+        ];
+
+        $employee = new Employee($employee_data);
+
+        $employee->save();
+
+        $activation_message = 'Please check your email address (' . $email . ') to activate your account.';
+
+        return redirect('/auth/login')->with('activation', $activation_message);
     }
 
     /**
