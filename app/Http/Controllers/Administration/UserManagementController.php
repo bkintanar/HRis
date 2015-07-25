@@ -5,7 +5,6 @@ namespace HRis\Http\Controllers\Administration;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Eloquent\User;
 use HRis\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 
 /**
@@ -59,7 +58,7 @@ class UserManagementController extends Controller
     public function viewUser()
     {
         // TODO: Check if {id} exist
-        return Redirect::to(Request::path() . '/details');
+        return redirect()->to(Request::path() . '/details');
     }
 
     /**

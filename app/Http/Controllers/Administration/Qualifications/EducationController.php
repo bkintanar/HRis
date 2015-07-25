@@ -6,7 +6,6 @@ use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Eloquent\EducationLevel;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Administration\EducationRequest;
-use Illuminate\Support\Facades\Redirect;
 
 /**
  * Class EducationController
@@ -82,10 +81,10 @@ class EducationController extends Controller
             $this->education->create($request->all());
 
         } catch (Exception $e) {
-            return Redirect::to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
+            return redirect()->to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', 'Record successfully added.');
+        return redirect()->to($request->path())->with('success', SUCCESS_ADD_MESSAGE);
     }
 
     /**
@@ -100,16 +99,16 @@ class EducationController extends Controller
         $education = $this->education->whereId($request->get('education_id'))->first();
 
         if ( ! $education) {
-            return Redirect::to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
+            return redirect()->to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
         try {
             $education->update($request->all());
 
         } catch (Exception $e) {
-            return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
+            return redirect()->to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', 'Record successfully updated.');
+        return redirect()->to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
     }
 }

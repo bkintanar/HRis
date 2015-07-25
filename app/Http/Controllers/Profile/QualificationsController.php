@@ -13,7 +13,6 @@ use HRis\Http\Requests\Profile\QualificationsEducationRequest;
 use HRis\Http\Requests\Profile\QualificationsRequest;
 use HRis\Http\Requests\Profile\QualificationsSkillRequest;
 use HRis\Http\Requests\Profile\QualificationsWorkExperienceRequest;
-use Illuminate\Support\Facades\Redirect;
 
 /**
  * Class QualificationsController
@@ -87,11 +86,11 @@ class QualificationsController extends Controller
 
         } catch (Exception $e) {
 //            dd($e->getMessage());
-            return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('danger',
+            return redirect()->to(str_replace('/work-experiences', '', $request->path()))->with('danger',
                 UNABLE_ADD_MESSAGE);
         }
 
-        return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('success',
+        return redirect()->to(str_replace('/work-experiences', '', $request->path()))->with('success',
             SUCCESS_ADD_MESSAGE);
     }
 
@@ -109,7 +108,7 @@ class QualificationsController extends Controller
         $workExperience = $workExperience->whereId($request->get('work_experience_id'))->first();
 
         if ( ! $workExperience) {
-            return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('danger',
+            return redirect()->to(str_replace('/work-experiences', '', $request->path()))->with('danger',
                 UNABLE_RETRIEVE_MESSAGE);
         }
 
@@ -118,11 +117,11 @@ class QualificationsController extends Controller
 
         } catch (Exception $e) {
 //            dd($e->getMessage());
-            return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('danger',
+            return redirect()->to(str_replace('/work-experiences', '', $request->path()))->with('danger',
                 UNABLE_UPDATE_MESSAGE);
         }
 
-        return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('success',
+        return redirect()->to(str_replace('/work-experiences', '', $request->path()))->with('success',
             SUCCESS_UPDATE_MESSAGE);
 
         return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('success', 'Record successfully updated.');
@@ -143,10 +142,10 @@ class QualificationsController extends Controller
             $education->create($request->all());
 
         } catch (Exception $e) {
-            return Redirect::to(str_replace('/educations', '', $request->path()))->with('danger', UNABLE_ADD_MESSAGE);
+            return redirect()->to(str_replace('/educations', '', $request->path()))->with('danger', UNABLE_ADD_MESSAGE);
         }
 
-        return Redirect::to(str_replace('/educations', '', $request->path()))->with('success', 'Record successfully added.');
+        return redirect()->to(str_replace('/educations', '', $request->path()))->with('success', SUCCESS_ADD_MESSAGE);
     }
 
     /**
@@ -163,7 +162,7 @@ class QualificationsController extends Controller
         $education = $education->whereId($request->get('education_id'))->first();
 
         if ( ! $education) {
-            return Redirect::to(str_replace('/educations', '', $request->path()))->with('danger',
+            return redirect()->to(str_replace('/educations', '', $request->path()))->with('danger',
                 UNABLE_RETRIEVE_MESSAGE);
         }
 
@@ -171,11 +170,12 @@ class QualificationsController extends Controller
             $education->update($request->all());
 
         } catch (Exception $e) {
-            return Redirect::to(str_replace('/educations', '', $request->path()))->with('danger',
+            return redirect()->to(str_replace('/educations', '', $request->path()))->with('danger',
                 UNABLE_UPDATE_MESSAGE);
         }
 
-        return Redirect::to(str_replace('/educations', '', $request->path()))->with('success', 'Record successfully updated.');
+        return redirect()->to(str_replace('/educations', '', $request->path()))->with('success',
+            SUCCESS_UPDATE_MESSAGE);
     }
 
     /**
@@ -201,10 +201,10 @@ class QualificationsController extends Controller
             ]);
 
         } catch (Exception $e) {
-            return Redirect::to(str_replace('/skills', '', $request->path()))->with('danger', UNABLE_ADD_MESSAGE);
+            return redirect()->to(str_replace('/skills', '', $request->path()))->with('danger', UNABLE_ADD_MESSAGE);
         }
 
-        return Redirect::to(str_replace('/skills', '', $request->path()))->with('success', 'Record successfully added.');
+        return redirect()->to(str_replace('/skills', '', $request->path()))->with('success', SUCCESS_ADD_MESSAGE);
     }
 
     /**
@@ -221,7 +221,8 @@ class QualificationsController extends Controller
         $employeeSkill = $employeeSkill->whereId($request->get('employee_skill_id'))->first();
 
         if ( ! $employeeSkill) {
-            return Redirect::to(str_replace('/skills', '', $request->path()))->with('danger', UNABLE_RETRIEVE_MESSAGE);
+            return redirect()->to(str_replace('/skills', '', $request->path()))->with('danger',
+                UNABLE_RETRIEVE_MESSAGE);
         }
 
         try {
@@ -232,9 +233,9 @@ class QualificationsController extends Controller
             $employeeSkill->save();
 
         } catch (Exception $e) {
-            return Redirect::to(str_replace('/skills', '', $request->path()))->with('danger', UNABLE_UPDATE_MESSAGE);
+            return redirect()->to(str_replace('/skills', '', $request->path()))->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
-        return Redirect::to(str_replace('/skills', '', $request->path()))->with('success', 'Record successfully updated.');
+        return redirect()->to(str_replace('/skills', '', $request->path()))->with('success', SUCCESS_UPDATE_MESSAGE);
     }
 }

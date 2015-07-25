@@ -6,7 +6,6 @@ use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Eloquent\JobTitle;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Administration\JobTitleRequest;
-use Illuminate\Support\Facades\Redirect;
 
 /**
  * Class TitleController
@@ -82,10 +81,10 @@ class TitleController extends Controller
             $this->job_title->create($request->all());
 
         } catch (Exception $e) {
-            return Redirect::to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
+            return redirect()->to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', 'Record successfully added.');
+        return redirect()->to($request->path())->with('success', SUCCESS_ADD_MESSAGE);
     }
 
     /**
@@ -100,16 +99,16 @@ class TitleController extends Controller
         $job_title = $this->job_title->whereId($request->get('job_title_id'))->first();
 
         if ( ! $job_title) {
-            return Redirect::to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
+            return redirect()->to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
         try {
             $job_title->update($request->all());
 
         } catch (Exception $e) {
-            return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
+            return redirect()->to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', 'Record successfully updated.');
+        return redirect()->to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
     }
 }

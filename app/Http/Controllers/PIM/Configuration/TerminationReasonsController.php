@@ -7,7 +7,6 @@ use HRis\Eloquent\Employee;
 use HRis\Eloquent\TerminationReason;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\PIM\TerminationReasonsRequest;
-use Illuminate\Support\Facades\Redirect;
 
 /**
  * Class TerminationReasonsController
@@ -95,10 +94,10 @@ class TerminationReasonsController extends Controller
             $this->termination_reason->create($request->all());
 
         } catch (Exception $e) {
-            return Redirect::to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
+            return redirect()->to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', 'Record successfully added.');
+        return redirect()->to($request->path())->with('success', SUCCESS_ADD_MESSAGE);
     }
 
     /**
@@ -113,16 +112,16 @@ class TerminationReasonsController extends Controller
         $termination_reason = $this->termination_reason->whereId($request->get('termination_reason_id'))->first();
 
         if ( ! $termination_reason) {
-            return Redirect::to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
+            return redirect()->to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
         try {
             $termination_reason->update($request->all());
 
         } catch (Exception $e) {
-            return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
+            return redirect()->to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
+        return redirect()->to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
     }
 }

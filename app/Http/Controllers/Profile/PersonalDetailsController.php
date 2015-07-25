@@ -8,7 +8,6 @@ use HRis\Eloquent\Employee;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\PersonalDetailsRequest;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 
@@ -117,7 +116,7 @@ class PersonalDetailsController extends Controller
         $employee = $this->employee->whereId($id)->first();
 
         if (!$employee) {
-            return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
+            return redirect()->to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
         // If user is trying to update the employee_id to a used employee_id.
@@ -132,16 +131,16 @@ class PersonalDetailsController extends Controller
                 $path = implode('/', $path);
             }
 
-            return Redirect::to($path)->with('danger', 'Employee Id already in use.');
+            return redirect()->to($path)->with('danger', EMPLOYEE_ID_IN_MESSAGE);
         }
 
         try {
             $employee->update($request->all());
 
         } catch (Exception $e) {
-            return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
+            return redirect()->to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', 'Record successfully updated.');
+        return redirect()->to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
     }
 }

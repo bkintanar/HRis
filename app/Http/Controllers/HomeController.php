@@ -4,7 +4,6 @@ namespace HRis\Http\Controllers;
 
 use HRis\Eloquent\Employee;
 use HRis\Eloquent\TimeLog;
-use Illuminate\Support\Facades\Redirect;
 
 /**
  * Class HomeController
@@ -44,7 +43,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return Redirect::to('/dashboard');
+        return redirect()->to('/dashboard');
     }
 
     /**

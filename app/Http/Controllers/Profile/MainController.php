@@ -3,7 +3,6 @@
 namespace HRis\Http\Controllers\Profile;
 
 use HRis\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Redirect;
 
 /**
  * Class MainController
@@ -19,6 +18,6 @@ class MainController extends Controller
      */
     public function index()
     {
-        return Redirect::to('profile/personal-details');
+        return redirect()->to('profile/personal-details');
     }
 }

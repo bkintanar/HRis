@@ -6,7 +6,6 @@ use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Eloquent\Skill;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Administration\SkillRequest;
-use Illuminate\Support\Facades\Redirect;
 
 /**
  * Class SkillController
@@ -81,10 +80,10 @@ class SkillController extends Controller
             $this->skill->create($request->all());
 
         } catch (Exception $e) {
-            return Redirect::to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
+            return redirect()->to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', 'Record successfully added.');
+        return redirect()->to($request->path())->with('success', SUCCESS_ADD_MESSAGE);
     }
 
     /**
@@ -99,16 +98,16 @@ class SkillController extends Controller
         $skill = $this->skill->whereId($request->get('skill_id'))->first();
 
         if ( ! $skill) {
-            return Redirect::to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
+            return redirect()->to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
         try {
             $skill->update($request->all());
 
         } catch (Exception $e) {
-            return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
+            return redirect()->to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', 'Record successfully updated.');
+        return redirect()->to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
     }
 }

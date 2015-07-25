@@ -9,7 +9,6 @@ use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests;
 use HRis\Http\Requests\Profile\SalaryRequest;
 use HRis\Services\Salary;
-use Redirect;
 
 /**
  * Class SalaryComputationsController
@@ -129,11 +128,11 @@ class SalaryComputationsController extends Controller
                     $employee_salary_component->save();
                 }
             } catch (Exception $e) {
-                return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
+                return redirect()->to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
             }
         }
 
-        return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
+        return redirect()->to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
 
     }
 
