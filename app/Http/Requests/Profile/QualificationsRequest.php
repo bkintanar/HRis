@@ -3,7 +3,6 @@
 namespace HRis\Http\Requests\Profile;
 
 use HRis\Http\Requests\Request;
-use Illuminate\Support\Facades\View;
 
 /**
  * Class QualificationsRequest
