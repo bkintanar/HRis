@@ -9,7 +9,6 @@ use HRis\Http\Requests\PIM\PIMRequest;
 use HRis\Services\Pagination;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\View;
 
 /**
  * @Middleware("auth")

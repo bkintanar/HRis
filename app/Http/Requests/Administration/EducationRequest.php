@@ -4,7 +4,6 @@ namespace HRis\Http\Requests\Administration;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Http\Requests\Request;
-use Illuminate\Support\Facades\View;
 
 /**
  * Class EducationRequest
@@ -67,5 +66,4 @@ class EducationRequest extends Request
     {
         return response()->make(view()->make('errors.403'), 403);
     }
-
 }
