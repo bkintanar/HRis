@@ -10,7 +10,6 @@ use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\PIM\PIMRequest;
 use HRis\Services\Pagination;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 
 /**
@@ -143,7 +142,7 @@ class EmployeeListController extends Controller
             return redirect()->to(Request::path() . '/personal-details');
         }
 
-        return Response::make(View::make('errors.404'), 404);
+        return response()->make(View::make('errors.404'), 404);
     }
 
     /**

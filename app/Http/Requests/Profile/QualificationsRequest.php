@@ -27,7 +27,7 @@ class QualificationsRequest extends Request
      */
     public function forbiddenResponse()
     {
-        return Response::make(View::make('errors.403'), 403);
+        return response()->make(View::make('errors.403'), 403);
     }
 
     /**
