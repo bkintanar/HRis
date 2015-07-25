@@ -61,7 +61,7 @@ class QualificationsWorkExperienceRequest extends Request
      */
     public function forbiddenResponse()
     {
-        return response()->make(View::make('errors.403'), 403);
+        return response()->make(view()->make('errors.403'), 403);
     }
 
 }

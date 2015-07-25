@@ -86,7 +86,7 @@ class EmployeeListController extends Controller {
             return Redirect::to(Request::path() . '/personal-details');
         }
 
-        return response()->make(View::make('errors.404'), 404);
+        return response()->make(view()->make('errors.404'), 404);
     }
 
     /**

@@ -19,7 +19,7 @@ class Pagination {
             'total_displayed' => ($data->currentPage() == $data->lastPage()) ? ($data->currentPage() - 1) * DATAS_PER_PAGE + $data->count() : $data->currentPage() * $data->count(),
          ];
 
-        return \View::make('partials.pagination', $data);
+        return view()->make('partials.pagination', $data);
     }
 
 }
