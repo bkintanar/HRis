@@ -50,7 +50,7 @@ class ContactDetailsController extends Controller
         $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
         if ( ! $employee) {
-            return response()->make(View::make('errors.404'), 404);
+            return response()->make(view()->make('errors.404'), 404);
         }
 
         $this->data['employee'] = $employee;
@@ -78,7 +78,7 @@ class ContactDetailsController extends Controller
         $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
         if ( ! $employee) {
-            return response()->make(View::make('errors.404'), 404);
+            return response()->make(view()->make('errors.404'), 404);
         }
 
         $this->data['employee'] = $employee;
