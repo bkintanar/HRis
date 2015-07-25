@@ -7,7 +7,6 @@ use Exception;
 use HRis\Eloquent\Employee;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\ContactDetailsRequest;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 
 /**
@@ -51,7 +50,7 @@ class ContactDetailsController extends Controller
         $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
         if ( ! $employee) {
-            return Response::make(View::make('errors.404'), 404);
+            return response()->make(View::make('errors.404'), 404);
         }
 
         $this->data['employee'] = $employee;
@@ -79,7 +78,7 @@ class ContactDetailsController extends Controller
         $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
         if ( ! $employee) {
-            return Response::make(View::make('errors.404'), 404);
+            return response()->make(View::make('errors.404'), 404);
         }
 
         $this->data['employee'] = $employee;

@@ -8,7 +8,6 @@ use HRis\Eloquent\Employee;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\PersonalDetailsRequest;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 
 /**
@@ -58,7 +57,7 @@ class PersonalDetailsController extends Controller
         $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
         if (!$employee) {
-            return Response::make(View::make('errors.404'), 404);
+            return response()->make(View::make('errors.404'), 404);
         }
 
         $this->data['employee'] = $employee;
@@ -87,7 +86,7 @@ class PersonalDetailsController extends Controller
         $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
         if (!$employee) {
-            return Response::make(View::make('errors.404'), 404);
+            return response()->make(View::make('errors.404'), 404);
         }
 
         $this->data['employee'] = $employee;
