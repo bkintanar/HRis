@@ -7,7 +7,6 @@ use Exception;
 use HRis\Eloquent\Employee;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\ContactDetailsRequest;
-use Illuminate\Support\Facades\View;
 
 /**
  * Class ContactDetailsController
