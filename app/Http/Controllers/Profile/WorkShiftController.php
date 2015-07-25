@@ -9,7 +9,6 @@ use HRis\Eloquent\EmployeeWorkShift;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests;
 use HRis\Http\Requests\Profile\WorkShiftRequest;
-use Illuminate\Support\Facades\Redirect;
 use Input;
 
 /**
@@ -82,7 +81,7 @@ class WorkShiftController extends Controller
     public function show(WorkShiftRequest $request, $employee_id = null)
     {
         if (Input::get('success')) {
-            return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
+            return redirect()->to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
         }
 
         $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
@@ -120,7 +119,7 @@ class WorkShiftController extends Controller
             $employee_work_shift->create($work_shift_request_fields);
         }
 
-        return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
+        return redirect()->to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
     }
 
     /**

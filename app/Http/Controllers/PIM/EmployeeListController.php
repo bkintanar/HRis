@@ -9,10 +9,8 @@ use HRis\Eloquent\SalaryComponent;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\PIM\PIMRequest;
 use HRis\Services\Pagination;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\View;
 
 /**
  * Class EmployeeListController
@@ -68,6 +66,7 @@ class EmployeeListController extends Controller
         $this->employee_salary_component = $employee_salary_component;
         $this->salary_component = $salary_component;
         $this->pagination = $pagination;
+        $this->employee_id_prefix = Config::get('company.employee_id_prefix');
 
         $this->setColumns();
     }
@@ -103,6 +102,7 @@ class EmployeeListController extends Controller
         $employees = $this->employee->getEmployeeList(true, $sort, $direction);
 
         $this->data['employees'] = $employees;
+        $this->data['employee_id_prefix'] = $this->employee_id_prefix;
         $this->data['settings'] = ['path' => $request->path(), 'sort' => $sort, 'direction' => $direction];
         $this->data['columns'] = $this->getColumns();
         $this->data['pim'] = true;
@@ -124,10 +124,11 @@ class EmployeeListController extends Controller
      *
      * @Get("pim")
      * @param PIMRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function pim(PIMRequest $request)
     {
-        return Redirect::to($request->path() . '/employee-list');
+        return redirect()->to($request->path() . '/employee-list');
     }
 
     /**
@@ -135,16 +136,18 @@ class EmployeeListController extends Controller
      *
      * @Get("pim/employee-list/{id}")
      * @param $employee_id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
     public function show($employee_id)
     {
         $employee = $this->employee->whereId($employee_id)->first();
 
         if ($employee) {
-            return Redirect::to(Request::path() . '/personal-details');
+
+            return redirect()->to(Request::path() . '/personal-details');
         }
 
-        return Response::make(View::make('errors.404'), 404);
+        return response()->make(view()->make('errors.404'), 404);
     }
 
     /**
@@ -153,20 +156,26 @@ class EmployeeListController extends Controller
      * @Post("pim/employee-list")
      *
      * @param PIMRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(PIMRequest $request)
     {
         try {
+
             $new_employee = $this->employee->create($request->all());
             $components = $this->salary_component->all();
+
             foreach ($components as $value) {
+
                 $salary_components = ['employee_id' => $new_employee->id, 'component_id' => $value->id, 'value' => 0];
                 $this->employee_salary_component->create($salary_components);
             }
         } catch (Exception $e) {
-            return Redirect::to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
+
+            return redirect()->to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', SUCCESS_ADD_MESSAGE);
+        return redirect()->to($request->path())->with('success', SUCCESS_ADD_MESSAGE);
     }
 }

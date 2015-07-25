@@ -8,7 +8,6 @@ use HRis\Eloquent\EmployeeWorkShift;
 use HRis\Eloquent\JobHistory;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\JobRequest;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 use Input;
 
@@ -108,7 +107,7 @@ class JobController extends Controller
     public function show(JobRequest $request, $employee_id = null)
     {
         if (Input::get('success')) {
-            return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
+            return redirect()->to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
         }
 
         $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
@@ -150,6 +149,6 @@ class JobController extends Controller
         $this->employee->whereId($employee_id)
             ->update($request->only('joined_date', 'probation_end_date', 'permanency_date'));
 
-        return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
+        return redirect()->to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
     }
 }

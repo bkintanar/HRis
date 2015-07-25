@@ -7,9 +7,7 @@ use Exception;
 use HRis\Eloquent\Employee;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\PersonalDetailsRequest;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Config;
 
 /**
  * Class PersonalDetailsController
@@ -26,6 +24,11 @@ class PersonalDetailsController extends Controller
     protected $employee;
 
     /**
+     * @var
+     */
+    protected $employee_id_prefix;
+
+    /**
      * @param Sentinel $auth
      * @param Employee $employee
      */
@@ -34,6 +37,7 @@ class PersonalDetailsController extends Controller
         parent::__construct($auth);
 
         $this->employee = $employee;
+        $this->employee_id_prefix = Config::get('company.employee_id_prefix');
     }
 
     /**
@@ -51,14 +55,15 @@ class PersonalDetailsController extends Controller
     {
         $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
-        if ( ! $employee) {
-            return Response::make(View::make('errors.404'), 404);
+        if (!$employee) {
+            return response()->make(view()->make('errors.404'), 404);
         }
 
         $this->data['employee'] = $employee;
+        $this->data['employee_id_prefix'] = $this->employee_id_prefix;
 
         $this->data['disabled'] = 'disabled';
-        $this->data['pim'] = $request->is('*pim/*') ? : false;
+        $this->data['pim'] = $request->is('*pim/*') ?: false;
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Personal Details' : 'My Personal Details';
 
         return $this->template('pages.profile.personal-details.view');
@@ -79,14 +84,15 @@ class PersonalDetailsController extends Controller
     {
         $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
-        if ( ! $employee) {
-            return Response::make(View::make('errors.404'), 404);
+        if (!$employee) {
+            return response()->make(view()->make('errors.404'), 404);
         }
 
         $this->data['employee'] = $employee;
+        $this->data['employee_id_prefix'] = $this->employee_id_prefix;
 
         $this->data['disabled'] = '';
-        $this->data['pim'] = $request->is('*pim/*') ? : false;
+        $this->data['pim'] = $request->is('*pim/*') ?: false;
         $this->data['pageTitle'] = $this->data['pim'] ? 'Edit Employee Contact Details' : 'Edit My Contact Details';
 
         return $this->template('pages.profile.personal-details.edit');
@@ -107,13 +113,13 @@ class PersonalDetailsController extends Controller
 
         $employee = $this->employee->whereId($id)->first();
 
-        if ( ! $employee) {
-            return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
+        if (!$employee) {
+            return redirect()->to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
         // If user is trying to update the employee_id to a used employee_id.
         $original_employee_id = $this->employee->whereEmployeeId($employee_id)->pluck('id');
-        if ($id != $original_employee_id && ! is_null($original_employee_id)) {
+        if ($id != $original_employee_id && !is_null($original_employee_id)) {
             $path = $request->path();
 
             // pim/employee-list/{id}/personal-details
@@ -123,16 +129,16 @@ class PersonalDetailsController extends Controller
                 $path = implode('/', $path);
             }
 
-            return Redirect::to($path)->with('danger', EMPLOYEE_ID_IN_MESSAGE);
+            return redirect()->to($path)->with('danger', EMPLOYEE_ID_IN_MESSAGE);
         }
 
         try {
             $employee->update($request->all());
 
         } catch (Exception $e) {
-            return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
+            return redirect()->to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
+        return redirect()->to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
     }
 }

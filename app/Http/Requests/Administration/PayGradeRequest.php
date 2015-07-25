@@ -4,8 +4,6 @@ namespace HRis\Http\Requests\Administration;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Http\Requests\Request;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\View;
 
 /**
  * Class PayGradeRequest
@@ -66,7 +64,7 @@ class PayGradeRequest extends Request
      */
     public function forbiddenResponse()
     {
-        return Response::make(View::make('errors.403'), 403);
+        return response()->make(view()->make('errors.403'), 403);
     }
 
 }

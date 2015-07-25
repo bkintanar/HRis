@@ -32,7 +32,7 @@ class CreateJobHistoriesTable extends Migration {
             $table->integer('work_shift_id')->nullable();
             $table->integer('location_id')->nullable();
             $table->date('effective_date')->nullable();
-            $table->text('comments');
+            $table->text('comments')->nullable();
         });
     }
 }

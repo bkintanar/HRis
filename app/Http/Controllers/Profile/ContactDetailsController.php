@@ -7,9 +7,6 @@ use Exception;
 use HRis\Eloquent\Employee;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\ContactDetailsRequest;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\View;
 
 /**
  * Class ContactDetailsController
@@ -52,7 +49,7 @@ class ContactDetailsController extends Controller
         $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
         if ( ! $employee) {
-            return Response::make(View::make('errors.404'), 404);
+            return response()->make(view()->make('errors.404'), 404);
         }
 
         $this->data['employee'] = $employee;
@@ -80,7 +77,7 @@ class ContactDetailsController extends Controller
         $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
         if ( ! $employee) {
-            return Response::make(View::make('errors.404'), 404);
+            return response()->make(view()->make('errors.404'), 404);
         }
 
         $this->data['employee'] = $employee;
@@ -107,16 +104,16 @@ class ContactDetailsController extends Controller
         $employee = $this->employee->whereId($id)->first();
 
         if ( ! $employee) {
-            return Redirect::to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
+            return redirect()->to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
         try {
             $employee->update($request->all());
 
         } catch (Exception $e) {
-            return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
+            return redirect()->to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
+        return redirect()->to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
     }
 }

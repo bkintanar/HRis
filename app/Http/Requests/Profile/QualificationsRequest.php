@@ -3,7 +3,6 @@
 namespace HRis\Http\Requests\Profile;
 
 use HRis\Http\Requests\Request;
-use Illuminate\Support\Facades\View;
 
 /**
  * Class QualificationsRequest
@@ -27,7 +26,7 @@ class QualificationsRequest extends Request
      */
     public function forbiddenResponse()
     {
-        return Response::make(View::make('errors.403'), 403);
+        return response()->make(view()->make('errors.403'), 403);
     }
 
     /**
