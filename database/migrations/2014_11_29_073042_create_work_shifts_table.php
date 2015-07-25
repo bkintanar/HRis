@@ -29,7 +29,7 @@ class CreateWorkShiftsTable extends Migration {
             $table->time('from_time');
             $table->time('to_time');
             $table->integer('duration');
-            $table->integer('extension');
+            $table->integer('extension')->nullable();
         });
     }
 
