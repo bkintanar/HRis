@@ -23,7 +23,7 @@
     <div class="form-group">
         {!! Form::label('employee_id', 'Employee Id', ['class' => 'col-md-2 control-label']) !!}
         <div class="col-sm-4">
-            {!! Form::text('employee_id', null, ['class' => 'form-control', 'data-mask' => 'GWO-9999', 'required' => 'required', $disabled]) !!}
+            {!! Form::text('employee_id', null, ['class' => 'form-control', 'data-mask' => $employee_id_prefix . '9999', 'required' => 'required', $disabled]) !!}
         </div>
         {!! Form::label('face_id', 'Face Id', ['class' => 'col-md-2 control-label']) !!}
         <div class="col-sm-4">

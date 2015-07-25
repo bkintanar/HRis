@@ -18,7 +18,7 @@ class EmployeesTableSeeder extends Seeder
             [
                 [
                     'id'                  => 1,
-                    'employee_id'         => 'GWO-0001',
+                    'employee_id' => 'HRis-0001',
                     'user_id'             => 1,
                     'marital_status_id'   => 2,
                     'nationality_id'      => 62,
@@ -49,7 +49,7 @@ class EmployeesTableSeeder extends Seeder
                 ],
                 [
                     'id'                  => 2,
-                    'employee_id'         => 'GWO-0002',
+                    'employee_id' => 'HRis-0002',
                     'user_id'             => 2,
                     'marital_status_id'   => 1,
                     'nationality_id'      => 62,
