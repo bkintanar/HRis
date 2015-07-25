@@ -8,7 +8,6 @@ use HRis\Eloquent\EmergencyContact;
 use HRis\Eloquent\Employee;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\EmergencyContactsRequest;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 
 /**
@@ -108,10 +107,10 @@ class EmergencyContactsController extends Controller
             $this->emergencyContact->create($request->all());
 
         } catch (Exception $e) {
-            return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
+            return redirect()->to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', SUCCESS_ADD_MESSAGE);
+        return redirect()->to($request->path())->with('success', SUCCESS_ADD_MESSAGE);
     }
 
     /**
@@ -127,17 +126,17 @@ class EmergencyContactsController extends Controller
         $emergencyContact = $this->emergencyContact->whereId($request->get('emergency_contact_id'))->first();
 
         if ( ! $emergencyContact) {
-            return Redirect::to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
+            return redirect()->to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
         try {
             $emergencyContact->update($request->all());
 
         } catch (Exception $e) {
-            return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
+            return redirect()->to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
+        return redirect()->to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
     }
 
     /**

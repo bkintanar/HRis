@@ -8,7 +8,6 @@ use HRis\Eloquent\Dependent;
 use HRis\Eloquent\Employee;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\DependentsRequest;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 
 /**
@@ -102,10 +101,10 @@ class DependentsController extends Controller
         try {
             $this->dependent->create($request->all());
         } catch (Exception $e) {
-            return Redirect::to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
+            return redirect()->to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', SUCCESS_ADD_MESSAGE);
+        return redirect()->to($request->path())->with('success', SUCCESS_ADD_MESSAGE);
     }
 
     /**
@@ -121,17 +120,17 @@ class DependentsController extends Controller
         $dependent = $this->dependent->whereId($request->get('dependent_id'))->first();
 
         if ( ! $dependent) {
-            return Redirect::to($request->path())->with('danger', 'Unable to retrieve record from database.');
+            return redirect()->to($request->path())->with('danger', 'Unable to retrieve record from database.');
         }
 
         try {
             $dependent->update($request->all());
 
         } catch (Exception $e) {
-            return Redirect::to($request->path())->with('danger', 'Unable to update record.');
+            return redirect()->to($request->path())->with('danger', 'Unable to update record.');
         }
 
-        return Redirect::to($request->path())->with('success', 'Record successfully updated.');
+        return redirect()->to($request->path())->with('success', 'Record successfully updated.');
     }
 
     /**

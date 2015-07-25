@@ -6,7 +6,6 @@ use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Eloquent\EmploymentStatus;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Administration\EmploymentStatusRequest;
-use Illuminate\Support\Facades\Redirect;
 
 /**
  * Class EmploymentStatusController
@@ -88,10 +87,10 @@ class EmploymentStatusController extends Controller
             $this->employment_status->create($request->all());
 
         } catch (Exception $e) {
-            return Redirect::to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
+            return redirect()->to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', SUCCESS_ADD_MESSAGE);
+        return redirect()->to($request->path())->with('success', SUCCESS_ADD_MESSAGE);
     }
 
     /**
@@ -106,16 +105,16 @@ class EmploymentStatusController extends Controller
         $employment_status = $this->employment_status->whereId($request->get('employment_status_id'))->first();
 
         if ( ! $employment_status) {
-            return Redirect::to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
+            return redirect()->to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
         try {
             $employment_status->update($request->all());
 
         } catch (Exception $e) {
-            return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
+            return redirect()->to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
+        return redirect()->to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
     }
 }

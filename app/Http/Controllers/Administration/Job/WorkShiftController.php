@@ -6,7 +6,6 @@ use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Eloquent\WorkShift;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Administration\WorkShiftRequest;
-use Illuminate\Support\Facades\Redirect;
 
 /**
  * Class WorkShiftController
@@ -82,10 +81,10 @@ class WorkShiftController extends Controller
             $this->work_shift->create($request->all());
 
         } catch (Exception $e) {
-            return Redirect::to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
+            return redirect()->to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', SUCCESS_ADD_MESSAGE);
+        return redirect()->to($request->path())->with('success', SUCCESS_ADD_MESSAGE);
     }
 
     /**
@@ -100,16 +99,16 @@ class WorkShiftController extends Controller
         $work_shift = $this->work_shift->whereId($request->get('work_shift_id'))->first();
 
         if ( ! $work_shift) {
-            return Redirect::to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
+            return redirect()->to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
         try {
             $work_shift->update($request->all());
 
         } catch (Exception $e) {
-            return Redirect::to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
+            return redirect()->to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
+        return redirect()->to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
     }
 }

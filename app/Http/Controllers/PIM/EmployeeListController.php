@@ -9,7 +9,6 @@ use HRis\Eloquent\SalaryComponent;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\PIM\PIMRequest;
 use HRis\Services\Pagination;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
@@ -127,7 +126,7 @@ class EmployeeListController extends Controller
      */
     public function pim(PIMRequest $request)
     {
-        return Redirect::to($request->path() . '/employee-list');
+        return redirect()->to($request->path() . '/employee-list');
     }
 
     /**
@@ -141,7 +140,7 @@ class EmployeeListController extends Controller
         $employee = $this->employee->whereId($employee_id)->first();
 
         if ($employee) {
-            return Redirect::to(Request::path() . '/personal-details');
+            return redirect()->to(Request::path() . '/personal-details');
         }
 
         return Response::make(View::make('errors.404'), 404);
@@ -164,9 +163,9 @@ class EmployeeListController extends Controller
                 $this->employee_salary_component->create($salary_components);
             }
         } catch (Exception $e) {
-            return Redirect::to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
+            return redirect()->to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
 
-        return Redirect::to($request->path())->with('success', SUCCESS_ADD_MESSAGE);
+        return redirect()->to($request->path())->with('success', SUCCESS_ADD_MESSAGE);
     }
 }
