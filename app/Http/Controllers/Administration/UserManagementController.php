@@ -62,8 +62,10 @@ class UserManagementController extends Controller
     }
 
     /**
-     *
      * @Get("admin/user-management/{id}/details")
+     *
+     * @param $user_id
+     * @return \Illuminate\View\View
      */
     public function userDetails($user_id)
     {
@@ -80,8 +82,10 @@ class UserManagementController extends Controller
     }
 
     /**
-     *
      * @Get("admin/user-management/{id}/permissions")
+     *
+     * @param $user_id
+     * @return \Illuminate\View\View
      */
     public function userPermissions($user_id)
     {

@@ -46,7 +46,6 @@ class WorkShiftController extends Controller
         $work_shifts = WorkShift::where('id', '>', 0)->get();
 
         $this->data['table'] = $this->setupDataTable($work_shifts);
-
         $this->data['pageTitle'] = 'Work Shifts';
 
         return $this->template('pages.administration.job.work-shift.view');
@@ -74,12 +73,12 @@ class WorkShiftController extends Controller
      * @Post("admin/job/work-shifts")
      *
      * @param WorkShiftRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(WorkShiftRequest $request)
     {
         try {
             $this->work_shift->create($request->all());
-
         } catch (Exception $e) {
             return redirect()->to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
@@ -93,6 +92,7 @@ class WorkShiftController extends Controller
      * @Patch("admin/job/work-shifts")
      *
      * @param WorkShiftRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(WorkShiftRequest $request)
     {
@@ -104,7 +104,6 @@ class WorkShiftController extends Controller
 
         try {
             $work_shift->update($request->all());
-
         } catch (Exception $e) {
             return redirect()->to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }

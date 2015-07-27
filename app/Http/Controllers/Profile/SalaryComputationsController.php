@@ -102,6 +102,7 @@ class SalaryComputationsController extends Controller
      * @Patch("pim/employee-list/{id}/salary")
      *
      * @param SalaryRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(SalaryRequest $request)
     {
@@ -130,7 +131,5 @@ class SalaryComputationsController extends Controller
         }
 
         return redirect()->to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
-
     }
-
 }

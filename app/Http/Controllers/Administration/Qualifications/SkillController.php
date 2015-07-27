@@ -45,7 +45,6 @@ class SkillController extends Controller
         $skills = Skill::where('id', '>', 0)->get();
 
         $this->data['table'] = $this->setupDataTable($skills);
-
         $this->data['pageTitle'] = 'Skills';
 
         return $this->template('pages.administration.qualifications.skills.view');
@@ -73,12 +72,12 @@ class SkillController extends Controller
      * @Post("admin/qualifications/skills")
      *
      * @param SkillRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(SkillRequest $request)
     {
         try {
             $this->skill->create($request->all());
-
         } catch (Exception $e) {
             return redirect()->to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
@@ -92,6 +91,7 @@ class SkillController extends Controller
      * @Patch("admin/qualifications/skills")
      *
      * @param SkillRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(SkillRequest $request)
     {
@@ -103,7 +103,6 @@ class SkillController extends Controller
 
         try {
             $skill->update($request->all());
-
         } catch (Exception $e) {
             return redirect()->to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
