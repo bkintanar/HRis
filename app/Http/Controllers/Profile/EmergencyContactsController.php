@@ -50,7 +50,6 @@ class EmergencyContactsController extends Controller
      *
      * @param EmergencyContactsRequest $request
      * @param null $employee_id
-     *
      * @return \Illuminate\View\View
      */
     public function index(EmergencyContactsRequest $request, $employee_id = null)
@@ -65,9 +64,9 @@ class EmergencyContactsController extends Controller
 
         $emergency_contacts = $this->emergencyContact->whereEmployeeId($employee->id)->get();
 
-        $this->data['table'] = $this->setupDataTable($emergency_contacts);
         $this->data['disabled'] = 'disabled';
         $this->data['pim'] = $request->is('*pim/*') ? : false;
+        $this->data['table'] = $this->setupDataTable($emergency_contacts);
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Emergency Contacts' : 'My Emergency Contacts';
 
         return $this->template('pages.profile.emergency-contacts.view');
@@ -100,12 +99,12 @@ class EmergencyContactsController extends Controller
      * @Post("pim/employee-list/{id}/emergency-contacts")
      *
      * @param EmergencyContactsRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(EmergencyContactsRequest $request)
     {
         try {
             $this->emergencyContact->create($request->all());
-
         } catch (Exception $e) {
             return redirect()->to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
@@ -120,6 +119,7 @@ class EmergencyContactsController extends Controller
      * @Patch("pim/employee-list/{id}/emergency-contacts")
      *
      * @param EmergencyContactsRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(EmergencyContactsRequest $request)
     {
@@ -131,7 +131,6 @@ class EmergencyContactsController extends Controller
 
         try {
             $emergencyContact->update($request->all());
-
         } catch (Exception $e) {
             return redirect()->to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }

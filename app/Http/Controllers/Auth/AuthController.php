@@ -11,7 +11,6 @@ use HRis\Http\Requests\Auth\RegisterRequest;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Redirect;
 
 /**
  * Class AuthController
@@ -65,7 +64,6 @@ class AuthController extends Controller
      * @Post("auth/login")
      *
      * @param  LoginRequest $request
-     *
      * @return Response
      */
     public function postLogin(LoginRequest $request)
@@ -77,7 +75,6 @@ class AuthController extends Controller
             $user = $auth::authenticate($request->only('email', 'password'), false);
 
             if ( ! $user) {
-
                 return redirect('/auth/login')->withInput($request->only('email'))->withErrors([
                     'email' => 'These credentials do not match our records.',
                 ]);
@@ -86,7 +83,6 @@ class AuthController extends Controller
             $auth::login($user);
 
             return redirect()->intended('/dashboard');
-
         } catch (PDOException $e) {
             return redirect('/auth/login')->withInput($request->only('email'))->withErrors([
                 'email' => $e->getMessage(),
@@ -101,7 +97,6 @@ class AuthController extends Controller
      *
      * @param $user_id
      * @param $activation_code
-     *
      * @return Redirect
      */
     public function getActivateUser($user_id, $activation_code)
@@ -117,10 +112,8 @@ class AuthController extends Controller
 
         if (Activation::complete($user, $activation_code)) {
             $auth::login($user);
-
             return redirect('/');
         } else {
-
             App::abort(404, 'activation_code_invalid');
         }
 
@@ -133,6 +126,7 @@ class AuthController extends Controller
      * @Post("auth/register")
      *
      * @param RegisterRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function postRegister(RegisterRequest $request)
     {

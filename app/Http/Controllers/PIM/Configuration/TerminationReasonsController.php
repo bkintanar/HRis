@@ -55,7 +55,6 @@ class TerminationReasonsController extends Controller
         $termination_reasons = $this->termination_reason->get();
 
         $this->data['table'] = $this->setupDataTable($termination_reasons);
-
         $this->data['pageTitle'] = 'Termination Reasons';
 
         return $this->template('pages.pim.configuration.termination-reasons.view');
@@ -87,12 +86,12 @@ class TerminationReasonsController extends Controller
      * @Post("pim/configuration/termination-reasons")
      *
      * @param TerminationReasonsRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(TerminationReasonsRequest $request)
     {
         try {
             $this->termination_reason->create($request->all());
-
         } catch (Exception $e) {
             return redirect()->to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
@@ -106,6 +105,7 @@ class TerminationReasonsController extends Controller
      * @Patch("pim/configuration/termination-reasons")
      *
      * @param TerminationReasonsRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(TerminationReasonsRequest $request)
     {
@@ -117,7 +117,6 @@ class TerminationReasonsController extends Controller
 
         try {
             $termination_reason->update($request->all());
-
         } catch (Exception $e) {
             return redirect()->to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }

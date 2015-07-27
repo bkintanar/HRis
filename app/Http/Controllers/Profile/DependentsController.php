@@ -50,7 +50,6 @@ class DependentsController extends Controller
      *
      * @param DependentsRequest $request
      * @param null $employee_id
-     *
      * @return \Illuminate\View\View
      */
     public function index(DependentsRequest $request, $employee_id = null)
@@ -65,8 +64,8 @@ class DependentsController extends Controller
 
         $dependents = $this->dependent->whereEmployeeId($employee->id)->get();
 
-        $this->data['table'] = $this->setupDataTable($dependents);
         $this->data['pim'] = $request->is('*pim/*') ? : false;
+        $this->data['table'] = $this->setupDataTable($dependents);
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Dependents' : 'My Dependents';
 
         return $this->template('pages.profile.dependents.view');
@@ -95,6 +94,7 @@ class DependentsController extends Controller
      * @Post("pim/employee-list/{id}/dependents")
      *
      * @param DependentsRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(DependentsRequest $request)
     {
@@ -114,6 +114,7 @@ class DependentsController extends Controller
      * @Patch("pim/employee-list/{id}/dependents")
      *
      * @param DependentsRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(DependentsRequest $request)
     {
@@ -125,7 +126,6 @@ class DependentsController extends Controller
 
         try {
             $dependent->update($request->all());
-
         } catch (Exception $e) {
             return redirect()->to($request->path())->with('danger', 'Unable to update record.');
         }
@@ -138,6 +138,7 @@ class DependentsController extends Controller
      *
      * @Delete("ajax/profile/dependents")
      * @Delete("ajax/pim/employee-list/{id}/dependents")
+     *
      * @param DependentsRequest $request
      */
     public function deleteDependent(DependentsRequest $request)
@@ -149,7 +150,6 @@ class DependentsController extends Controller
                 $this->dependent->whereId($dependentId)->delete();
 
                 print('success');
-
             } catch (Exception $e) {
                 print('failed');
             }
@@ -173,7 +173,6 @@ class DependentsController extends Controller
                 $dependent = $this->dependent->whereId($dependentId)->first();
 
                 print(json_encode($dependent));
-
             } catch (Exception $e) {
                 print('failed');
             }

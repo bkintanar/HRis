@@ -57,7 +57,6 @@ class JobController extends Controller
      *
      * @param JobRequest $request
      * @param null $employee_id
-     *
      * @return \Illuminate\View\View
      */
     public function index(JobRequest $request, $employee_id = null)
@@ -68,10 +67,9 @@ class JobController extends Controller
 
         $job_histories = $employee->orderedJobHistories();
 
-        $this->data['table'] = $this->setupDataTable($job_histories);
-
         $this->data['disabled'] = 'disabled';
         $this->data['pim'] = $request->is('*pim/*') ? : false;
+        $this->data['table'] = $this->setupDataTable($job_histories);
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Job Details' : 'My Job Details';
 
         return $this->template('pages.profile.job.view');
@@ -101,7 +99,6 @@ class JobController extends Controller
      *
      * @param JobRequest $request
      * @param null $employee_id
-     *
      * @return \Illuminate\View\View
      */
     public function show(JobRequest $request, $employee_id = null)
@@ -116,10 +113,9 @@ class JobController extends Controller
 
         $job_histories = $employee->orderedJobHistories();
 
-        $this->data['table'] = $this->setupDataTable($job_histories);
-
         $this->data['disabled'] = '';
         $this->data['pim'] = $request->is('*pim/*') ? : false;
+        $this->data['table'] = $this->setupDataTable($job_histories);
         $this->data['pageTitle'] = $this->data['pim'] ? 'Edit Employee Job Details' : 'Edit My Job Details';
 
         return $this->template('pages.profile.job.edit');
@@ -132,6 +128,7 @@ class JobController extends Controller
      * @Patch("pim/employee-list/{id}/job")
      *
      * @param JobRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(JobRequest $request)
     {
