@@ -50,12 +50,12 @@ class NationalityController extends Controller
      * @Post("admin/nationalities")
      *
      * @param NationalityRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(NationalityRequest $request)
     {
         try {
             $this->nationality->create($request->all());
-
         } catch (Exception $e) {
             return redirect()->to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
@@ -69,6 +69,7 @@ class NationalityController extends Controller
      * @Patch("admin/nationalities")
      *
      * @param NationalityRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(NationalityRequest $request)
     {

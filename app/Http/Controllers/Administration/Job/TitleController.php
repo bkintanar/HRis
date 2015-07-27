@@ -46,7 +46,6 @@ class TitleController extends Controller
         $job_titles = JobTitle::where('id', '>', 0)->get();
 
         $this->data['table'] = $this->setupDataTable($job_titles);
-
         $this->data['pageTitle'] = 'Job Titles';
 
         return $this->template('pages.administration.job.title.view');
@@ -74,12 +73,12 @@ class TitleController extends Controller
      * @Post("admin/job/titles")
      *
      * @param JobTitleRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(JobTitleRequest $request)
     {
         try {
             $this->job_title->create($request->all());
-
         } catch (Exception $e) {
             return redirect()->to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
@@ -93,6 +92,7 @@ class TitleController extends Controller
      * @Patch("admin/job/titles")
      *
      * @param JobTitleRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(JobTitleRequest $request)
     {
@@ -104,7 +104,6 @@ class TitleController extends Controller
 
         try {
             $job_title->update($request->all());
-
         } catch (Exception $e) {
             return redirect()->to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }

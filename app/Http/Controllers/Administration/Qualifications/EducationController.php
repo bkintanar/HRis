@@ -38,7 +38,6 @@ class EducationController extends Controller
      * @Get("admin/qualifications/educations")
      *
      * @param EducationRequest $request
-     *
      * @return \Illuminate\View\View
      */
     public function index(EducationRequest $request)
@@ -46,7 +45,6 @@ class EducationController extends Controller
         $educations = EducationLevel::where('id', '>', 0)->get();
 
         $this->data['table'] = $this->setupDataTable($educations);
-
         $this->data['pageTitle'] = 'Educations';
 
         return $this->template('pages.administration.qualifications.educations.view');
@@ -74,12 +72,12 @@ class EducationController extends Controller
      * @Post("admin/qualifications/educations")
      *
      * @param EducationRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(EducationRequest $request)
     {
         try {
             $this->education->create($request->all());
-
         } catch (Exception $e) {
             return redirect()->to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
@@ -93,6 +91,7 @@ class EducationController extends Controller
      * @Patch("admin/qualifications/educations")
      *
      * @param EducationRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(EducationRequest $request)
     {
@@ -104,7 +103,6 @@ class EducationController extends Controller
 
         try {
             $education->update($request->all());
-
         } catch (Exception $e) {
             return redirect()->to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }

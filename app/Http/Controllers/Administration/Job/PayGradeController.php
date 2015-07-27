@@ -41,8 +41,6 @@ class PayGradeController extends Controller
         $pay_grades = PayGrade::all();
 
         $this->data['table'] = $this->setupDataTable($pay_grades);
-
-
         $this->data['pageTitle'] = 'Pay Grades';
 
         return $this->template('pages.administration.job.pay-grade.view');
@@ -70,12 +68,12 @@ class PayGradeController extends Controller
      * @Post("admin/job/pay-grades")
      *
      * @param PayGradeRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(PayGradeRequest $request)
     {
         try {
             $this->pay_grade->create($request->all());
-
         } catch (Exception $e) {
             return redirect()->to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
@@ -89,6 +87,7 @@ class PayGradeController extends Controller
      * @Patch("admin/job/pay-grades")
      *
      * @param PayGradeRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(PayGradeRequest $request)
     {
@@ -100,7 +99,6 @@ class PayGradeController extends Controller
 
         try {
             $pay_grade->update($request->all());
-
         } catch (Exception $e) {
             return redirect()->to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }

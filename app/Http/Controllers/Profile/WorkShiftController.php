@@ -51,7 +51,6 @@ class WorkShiftController extends Controller
      *
      * @param WorkShiftRequest $request
      * @param null $employee_id
-     *
      * @return \Illuminate\View\View
      */
     public function index(WorkShiftRequest $request, $employee_id = null)

@@ -38,7 +38,6 @@ class EmploymentStatusController extends Controller
      * @Get("admin/job/employment-status")
      *
      * @param EmploymentStatusRequest $request
-     *
      * @return \Illuminate\View\View
      */
     public function index(EmploymentStatusRequest $request)
@@ -47,8 +46,6 @@ class EmploymentStatusController extends Controller
         $employment_status = $this->employment_status->where('id', '>', 0)->get();
 
         $this->data['table'] = $this->setupDataTable($employment_status);
-
-
         $this->data['pageTitle'] = 'Employment Status';
 
         return $this->template('pages.administration.job.employment-status.view');
@@ -80,12 +77,12 @@ class EmploymentStatusController extends Controller
      * @Post("admin/job/employment-status")
      *
      * @param EmploymentStatusRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(EmploymentStatusRequest $request)
     {
         try {
             $this->employment_status->create($request->all());
-
         } catch (Exception $e) {
             return redirect()->to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
@@ -99,6 +96,7 @@ class EmploymentStatusController extends Controller
      * @Patch("admin/job/employment-status")
      *
      * @param EmploymentStatusRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(EmploymentStatusRequest $request)
     {
@@ -110,7 +108,6 @@ class EmploymentStatusController extends Controller
 
         try {
             $employment_status->update($request->all());
-
         } catch (Exception $e) {
             return redirect()->to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }

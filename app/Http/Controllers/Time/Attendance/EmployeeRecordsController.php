@@ -32,6 +32,7 @@ class EmployeeRecordsController extends Controller
         if (is_null($date)) {
             $date = Carbon::now()->toDateString();
         }
+
         $this->data['date'] = $date;
         $this->data['work_date'] = null;
         $this->data['employee'] = Employee::whereId(1)->first();
@@ -53,11 +54,7 @@ class EmployeeRecordsController extends Controller
         $start_date = Carbon::parse($work_date);
         $end_date = Carbon::parse($work_date)->endOfMonth();
 
-        $period = new DatePeriod(
-            $start_date,
-            new DateInterval('P1D'),
-            $end_date
-        );
+        $period = new DatePeriod($start_date, new DateInterval('P1D'), $end_date);
 
         $month = [];
         foreach ($period as $row) {
@@ -66,13 +63,11 @@ class EmployeeRecordsController extends Controller
 
             if ($attendance == null) {
                 $month[$row->toDateString()] = null;
-
                 continue;
             }
 
             $month[$row->toDateString()] = $attendance;
         }
-
 
         $this->data['employee_id'] = Input::get('employee_id');
         $this->data['work_date'] = $work_date;

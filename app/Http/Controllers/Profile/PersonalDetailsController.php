@@ -48,7 +48,6 @@ class PersonalDetailsController extends Controller
      *
      * @param PersonalDetailsRequest $request
      * @param null $employee_id
-     *
      * @return \Illuminate\View\View
      */
     public function index(PersonalDetailsRequest $request, $employee_id = null)
@@ -77,7 +76,6 @@ class PersonalDetailsController extends Controller
      *
      * @param PersonalDetailsRequest $request
      * @param null $employee_id
-     *
      * @return \Illuminate\View\View
      */
     public function show(PersonalDetailsRequest $request, $employee_id = null)
@@ -105,6 +103,7 @@ class PersonalDetailsController extends Controller
      * @Patch("pim/employee-list/{id}/personal-details")
      *
      * @param PersonalDetailsRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(PersonalDetailsRequest $request)
     {
@@ -134,7 +133,6 @@ class PersonalDetailsController extends Controller
 
         try {
             $employee->update($request->all());
-
         } catch (Exception $e) {
             return redirect()->to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }

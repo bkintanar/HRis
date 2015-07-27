@@ -91,7 +91,6 @@ class EmployeeListController extends Controller
      * @Get("pim/employee-list")
      *
      * @param PIMRequest $request
-     *
      * @return \Illuminate\View\View
      */
     public function index(PIMRequest $request)
@@ -123,6 +122,7 @@ class EmployeeListController extends Controller
      * Show the PIM - Index - redirects to pim/employee-list
      *
      * @Get("pim")
+     *
      * @param PIMRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -135,6 +135,7 @@ class EmployeeListController extends Controller
      * Show the PIM - Employee with the given Id.
      *
      * @Get("pim/employee-list/{id}")
+     *
      * @param $employee_id
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
@@ -143,7 +144,6 @@ class EmployeeListController extends Controller
         $employee = $this->employee->whereId($employee_id)->first();
 
         if ($employee) {
-
             return redirect()->to(Request::path() . '/personal-details');
         }
 
@@ -156,23 +156,19 @@ class EmployeeListController extends Controller
      * @Post("pim/employee-list")
      *
      * @param PIMRequest $request
-     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(PIMRequest $request)
     {
         try {
-
             $new_employee = $this->employee->create($request->all());
             $components = $this->salary_component->all();
 
             foreach ($components as $value) {
-
                 $salary_components = ['employee_id' => $new_employee->id, 'component_id' => $value->id, 'value' => 0];
                 $this->employee_salary_component->create($salary_components);
             }
         } catch (Exception $e) {
-
             return redirect()->to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
 
