@@ -9,11 +9,8 @@
 
     @include('partials.copyleft')
 
-    {!! Html::style('/css/bootstrap.min.css') !!}
-    {!! Html::style('/font-awesome/css/font-awesome.css') !!}
+    {!! Html::style(elixir('css/all.css')) !!}
     @yield('custom_css')
-    {!! Html::style('/css/animate.css') !!}
-    {!! Html::style('/min-css/style.min.css') !!}
 
     <link rel="icon" href="/favicon.png" type="image/png">
 
@@ -51,17 +48,9 @@
     </div>
 
     <!-- Mainly scripts -->
-    {!! Html::script('/js/jquery-2.1.1.js') !!}
-    {!! Html::script('/js/bootstrap.min.js') !!}
-    {!! Html::script('/js/plugins/metisMenu/jquery.metisMenu.js') !!}
-    {!! Html::script('/js/plugins/slimscroll/jquery.slimscroll.min.js') !!}
-
-    <!-- Custom and plugin javascript -->
-    {!! Html::script('/js/inspinia.js') !!}
-    {!! Html::script('/js/plugins/pace/pace.min.js') !!}
-
+    {!! Html::script(elixir('js/all.js')) !!}
+    
     @yield('custom_js')
-
 
 </body>
 
