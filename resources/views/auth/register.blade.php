@@ -47,7 +47,7 @@
 				<a class="btn btn-sm btn-white btn-block" href="/auth/login">{{ trans('app.login') }}</a>
 			</form>
 			<p class="m-t">
-				<small>b3 Studios &copy; 2014</small>
+				<small>{{ trans('app.company_name') }} &copy; 2014</small>
 			</p>
 		</div>
 	</div>

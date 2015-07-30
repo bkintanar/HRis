@@ -27,7 +27,7 @@
             <form class="m-t" role="form" action="/auth/login" method="post" onSubmit="return check(this)">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group">
-                    <input type="email" class="form-control" placeholder="your-name@email.com" name="email" required="">
+                    <input type="email" class="form-control" placeholder="Email" name="email" required="">
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" placeholder="{{ trans('app.password') }}" name="password" required="">
@@ -38,7 +38,7 @@
                 <p class="text-muted text-center"><small>{{ trans('app.do_you_have_an_account?') }}</small></p>
                 <a class="btn btn-sm btn-white btn-block" href="/auth/register">{{ trans('app.create_an_account') }}</a>
             </form>
-            <p class="m-t"> <small>b3 Studios &copy; 2014</small> </p>
+            <p class="m-t"> <small>{{ trans('app.company_name') }} &copy; 2014</small> </p>
         </div>
     </div>
 @stop
