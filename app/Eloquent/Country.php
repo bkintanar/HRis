@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Country extends Model
 {
-
     use HasPlaceholder;
 
     /**
@@ -19,5 +18,4 @@ class Country extends Model
      * @var string
      */
     protected $table = 'countries';
-
 }

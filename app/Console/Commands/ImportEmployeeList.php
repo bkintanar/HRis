@@ -16,7 +16,6 @@ use League\Csv\Reader;
  */
 class ImportEmployeeList extends Command
 {
-
     /**
      * The console command description.
      *
@@ -71,5 +70,4 @@ class ImportEmployeeList extends Command
             }
         }
     }
-
 }

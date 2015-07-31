@@ -4,7 +4,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class EmploymentStatusTest extends \TestCase
 {
-
     use DatabaseTransactions;
 
     /**

@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
-class DepartmentsTableSeeder extends Seeder {
-
+class DepartmentsTableSeeder extends Seeder
+{
     /**
      * Run the database seeds.
      *
@@ -23,5 +23,4 @@ class DepartmentsTableSeeder extends Seeder {
             ]
         );
     }
-
 }

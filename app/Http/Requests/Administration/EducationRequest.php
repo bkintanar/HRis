@@ -11,7 +11,6 @@ use HRis\Http\Requests\Request;
  */
 class EducationRequest extends Request
 {
-
     /**
      * Get the validation rules that apply to the request.
      *

@@ -3,8 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateSssContributionsTable extends Migration {
-
+class CreateSssContributionsTable extends Migration
+{
     /**
      * Reverse the migrations.
      *
@@ -22,8 +22,7 @@ class CreateSssContributionsTable extends Migration {
      */
     public function up()
     {
-        Schema::create('sss_contributions', function (Blueprint $table)
-        {
+        Schema::create('sss_contributions', function (Blueprint $table) {
             $table->increments('id');
             $table->decimal('range_compensation_from', 10, 2);
             $table->decimal('range_compensation_to', 10, 2);
@@ -37,5 +36,4 @@ class CreateSssContributionsTable extends Migration {
             $table->decimal('total_contribution_total', 10, 2);
         });
     }
-
 }

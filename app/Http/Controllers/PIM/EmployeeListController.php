@@ -20,7 +20,6 @@ use Illuminate\Support\Facades\Request;
  */
 class EmployeeListController extends Controller
 {
-
     /**
      * @var Employee
      */

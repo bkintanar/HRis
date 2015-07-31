@@ -11,7 +11,6 @@ use Closure;
  */
 class Authenticate
 {
-
     /**
      * The Sentinel implementation.
      *
@@ -40,7 +39,7 @@ class Authenticate
     {
         $auth = $this->auth;
 
-        if ( ! $auth::check()) {
+        if (! $auth::check()) {
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
@@ -50,5 +49,4 @@ class Authenticate
 
         return $next($request);
     }
-
 }

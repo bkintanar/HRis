@@ -29,4 +29,3 @@ $I->click('Save changes');
 $I->seeCurrentUrlEquals('/admin/job/employment-status');
 $I->see('Record successfully updated.');
 $I->see('Tested');
-

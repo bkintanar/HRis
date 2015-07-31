@@ -3,8 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateTerminationReasonsTable extends Migration {
-
+class CreateTerminationReasonsTable extends Migration
+{
     /**
      * Reverse the migrations.
      *
@@ -22,11 +22,9 @@ class CreateTerminationReasonsTable extends Migration {
      */
     public function up()
     {
-        Schema::create('termination_reasons', function (Blueprint $table)
-        {
+        Schema::create('termination_reasons', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
         });
     }
-
 }

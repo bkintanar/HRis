@@ -3,8 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateAttendanceTable extends Migration {
-
+class CreateAttendanceTable extends Migration
+{
     /**
      * Reverse the migrations.
      *
@@ -22,8 +22,7 @@ class CreateAttendanceTable extends Migration {
      */
     public function up()
     {
-        Schema::create('attendance', function (Blueprint $table)
-        {
+        Schema::create('attendance', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('employee_id');
             $table->date('work_date');
@@ -32,5 +31,4 @@ class CreateAttendanceTable extends Migration {
             $table->string('remarks')->nullable();
         });
     }
-
 }

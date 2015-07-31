@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Mail;
  */
 class AuthController extends Controller
 {
-
     /*
     |--------------------------------------------------------------------------
     | Registration & Login Controller
@@ -74,7 +73,7 @@ class AuthController extends Controller
         try {
             $user = $auth::authenticate($request->only('email', 'password'), false);
 
-            if ( ! $user) {
+            if (! $user) {
                 return redirect('/auth/login')->withInput($request->only('email'))->withErrors([
                     'email' => 'These credentials do not match our records.',
                 ]);
@@ -106,7 +105,7 @@ class AuthController extends Controller
         $user = $auth::findById($user_id);
 
         // User not found
-        if ( ! $user) {
+        if (! $user) {
             App::abort(404, 'user_not_found');
         }
 
@@ -116,8 +115,6 @@ class AuthController extends Controller
         } else {
             App::abort(404, 'activation_code_invalid');
         }
-
-
     }
 
     /**

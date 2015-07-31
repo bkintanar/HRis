@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Log;
  */
 class GenerateAttendance extends Command
 {
-
     /**
      * The console command description.
      *
@@ -42,7 +41,6 @@ class GenerateAttendance extends Command
             $start = Carbon::parse('2015-01-01');
             $end = Carbon::parse('2015-01-31');
             while ($start <= $end) {
-
                 $employee = Employee::whereId($employee_id)->first();
 
                 $timelog = $employee->getTimeLog($start->toDateString());
@@ -71,5 +69,4 @@ class GenerateAttendance extends Command
             }
         }
     }
-
 }

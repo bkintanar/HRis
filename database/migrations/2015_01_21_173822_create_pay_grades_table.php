@@ -3,8 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreatePayGradesTable extends Migration {
-
+class CreatePayGradesTable extends Migration
+{
     /**
      * Reverse the migrations.
      *
@@ -22,13 +22,11 @@ class CreatePayGradesTable extends Migration {
      */
     public function up()
     {
-        Schema::create('pay_grades', function (Blueprint $table)
-        {
+        Schema::create('pay_grades', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->integer('min_salary');
             $table->integer('max_salary');
         });
     }
-
 }

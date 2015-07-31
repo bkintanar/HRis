@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class PayGrade extends Model
 {
-
     /**
      * Indicates if the model should be timestamped.
      *
@@ -31,5 +30,4 @@ class PayGrade extends Model
      * @var string
      */
     protected $table = 'pay_grades';
-
 }

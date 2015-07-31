@@ -15,7 +15,6 @@ use HRis\Http\Requests\Administration\SkillRequest;
  */
 class SkillController extends Controller
 {
-
     /**
      * @var Skill
      */
@@ -97,7 +96,7 @@ class SkillController extends Controller
     {
         $skill = $this->skill->whereId($request->get('skill_id'))->first();
 
-        if ( ! $skill) {
+        if (! $skill) {
             return redirect()->to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 

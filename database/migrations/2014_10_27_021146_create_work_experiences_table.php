@@ -3,8 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateWorkExperiencesTable extends Migration {
-
+class CreateWorkExperiencesTable extends Migration
+{
     /**
      * Reverse the migrations.
      *
@@ -22,8 +22,7 @@ class CreateWorkExperiencesTable extends Migration {
      */
     public function up()
     {
-        Schema::create('work_experiences', function (Blueprint $table)
-        {
+        Schema::create('work_experiences', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('employee_id');
             $table->string('company');
@@ -33,5 +32,4 @@ class CreateWorkExperiencesTable extends Migration {
             $table->string('comment');
         });
     }
-
 }

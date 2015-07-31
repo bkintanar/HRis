@@ -15,7 +15,6 @@ use HRis\Eloquent\TaxComputation;
  */
 class Salary
 {
-
     /**
      * @param TaxComputation $tax_computation
      * @param Dependent $dependent
@@ -41,7 +40,7 @@ class Salary
      * @param $employee
      * @return array
      */
-    function getSalaryDetails($employee)
+    public function getSalaryDetails($employee)
     {
         $mode = Config::get('salary.semi_monthly');
         $employee_salary_components = $employee->employeeSalaryComponent;
@@ -85,7 +84,5 @@ class Salary
         }
 
         return ['total_tax' => round($totalTax, 2), 'employee_status' => $employee_status, 'salary' => $salary];
-
     }
-
 }

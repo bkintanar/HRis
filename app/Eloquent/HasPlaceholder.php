@@ -8,14 +8,13 @@ namespace HRis\Eloquent;
  */
 trait HasPlaceholder
 {
-
     /**
      * @param $name
      * @param $id
      * @param $parent_id
      * @return mixed
      */
-    static function listsWithPlaceholder($name, $id, $parent_id = null)
+    public static function listsWithPlaceholder($name, $id, $parent_id = null)
     {
         $default = [0 => '--- Select ---'];
 

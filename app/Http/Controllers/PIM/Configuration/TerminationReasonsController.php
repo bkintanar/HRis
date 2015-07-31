@@ -16,7 +16,6 @@ use HRis\Http\Requests\PIM\TerminationReasonsRequest;
  */
 class TerminationReasonsController extends Controller
 {
-
     /**
      * @var Employee
      */
@@ -111,7 +110,7 @@ class TerminationReasonsController extends Controller
     {
         $termination_reason = $this->termination_reason->whereId($request->get('termination_reason_id'))->first();
 
-        if ( ! $termination_reason) {
+        if (! $termination_reason) {
             return redirect()->to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
