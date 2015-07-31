@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Skill extends Model
 {
-
     use HasPlaceholder;
 
     /**
@@ -41,5 +40,4 @@ class Skill extends Model
     {
         return $this->belongsToMany('HRis\Eloquent\Employee');
     }
-
 }

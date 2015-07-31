@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Group extends Model
 {
-
     /**
      * Indicates if the model should be timestamped.
      *

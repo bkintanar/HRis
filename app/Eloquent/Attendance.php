@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Attendance extends Model
 {
-
     /**
      * Indicates if the model should be timestamped.
      *

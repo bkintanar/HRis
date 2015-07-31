@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
-class CountriesTableSeeder extends Seeder {
-
+class CountriesTableSeeder extends Seeder
+{
     /**
      * Run the database seeds.
      *
@@ -275,5 +275,4 @@ class CountriesTableSeeder extends Seeder {
             ]
         );
     }
-
 }

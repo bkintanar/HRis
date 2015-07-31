@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Dependent extends Model
 {
-
     /**
      * Indicates if the model should be timestamped.
      *
@@ -54,5 +53,4 @@ class Dependent extends Model
     {
         $this->attributes['birth_date'] = Carbon::parse($birth_date) ? : null;
     }
-
 }

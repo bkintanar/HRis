@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Lang;
  */
 class Translate
 {
-
     /**
      * @param $text
      * @return mixed

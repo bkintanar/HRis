@@ -14,7 +14,6 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
  */
 class User extends SentinelUser implements AuthenticatableContract, CanResetPasswordContract
 {
-
     use Authenticatable, CanResetPassword;
 
     /**
@@ -60,5 +59,4 @@ class User extends SentinelUser implements AuthenticatableContract, CanResetPass
     {
         return $this->hasOne('HRis\Eloquent\Employee');
     }
-
 }

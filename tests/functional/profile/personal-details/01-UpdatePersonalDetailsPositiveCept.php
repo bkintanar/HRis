@@ -25,5 +25,3 @@ $I->click('Save changes');
 
 $I->seeCurrentUrlEquals('/profile/personal-details');
 $I->see('Record successfully updated.');
-
-

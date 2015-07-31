@@ -15,7 +15,6 @@ use HRis\Http\Requests\Administration\NationalityRequest;
  */
 class NationalityController extends Controller
 {
-
     /**
      * @param Sentinel $auth
      * @param Nationality $nationality
@@ -75,7 +74,7 @@ class NationalityController extends Controller
     {
         $nationality = $this->nationality->whereId($request->get('nationality_id'))->first();
 
-        if ( ! $nationality) {
+        if (! $nationality) {
             return redirect()->to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 

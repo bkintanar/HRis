@@ -39,7 +39,6 @@ use Illuminate\Support\ServiceProvider;
  */
 class SentryServiceProvider extends ServiceProvider
 {
-
     /**
      * Register the service provider.
      *
@@ -275,5 +274,4 @@ class SentryServiceProvider extends ServiceProvider
             );
         });
     }
-
 }

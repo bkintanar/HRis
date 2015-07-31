@@ -14,7 +14,6 @@ use League\Csv\Reader;
  */
 class ImportTimeLog extends Command
 {
-
     /**
      * The console command description.
      *
@@ -42,7 +41,6 @@ class ImportTimeLog extends Command
         $data = $csv->query();
 
         foreach ($data as $lineIndex => $row) {
-
             $times = array_slice($row, 4, count($row) - 1);
 
             foreach ($times as $time) {
@@ -63,5 +61,4 @@ class ImportTimeLog extends Command
             }
         }
     }
-
 }

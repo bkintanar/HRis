@@ -4,7 +4,6 @@ use Illuminate\Database\Seeder;
 
 class JobHistoriesTableSeeder extends Seeder
 {
-
     /**
      * Run the database seeds.
      *
@@ -39,5 +38,4 @@ class JobHistoriesTableSeeder extends Seeder
             ]
         );
     }
-
 }

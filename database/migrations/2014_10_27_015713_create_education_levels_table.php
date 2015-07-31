@@ -3,8 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateEducationLevelsTable extends Migration {
-
+class CreateEducationLevelsTable extends Migration
+{
     /**
      * Reverse the migrations.
      *
@@ -22,11 +22,9 @@ class CreateEducationLevelsTable extends Migration {
      */
     public function up()
     {
-        Schema::create('education_levels', function (Blueprint $table)
-        {
+        Schema::create('education_levels', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
         });
     }
-
 }

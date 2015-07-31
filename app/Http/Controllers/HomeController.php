@@ -13,7 +13,6 @@ use HRis\Eloquent\TimeLog;
  */
 class HomeController extends Controller
 {
-
     /*
     |--------------------------------------------------------------------------
     | Home Controller

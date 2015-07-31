@@ -10,7 +10,6 @@ use HRis\Http\Requests\Request;
  */
 class RegisterRequest extends Request
 {
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -35,5 +34,4 @@ class RegisterRequest extends Request
             'password'   => 'required|min:6|confirmed',
         ];
     }
-
 }

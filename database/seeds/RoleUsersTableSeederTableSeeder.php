@@ -4,7 +4,6 @@ use Illuminate\Database\Seeder;
 
 class RoleUsersTableSeeder extends Seeder
 {
-
     /**
      * Run the database seeds.
      *
@@ -21,5 +20,4 @@ class RoleUsersTableSeeder extends Seeder
             ]
         );
     }
-
 }
