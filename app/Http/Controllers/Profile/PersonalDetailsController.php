@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Config;
  */
 class PersonalDetailsController extends Controller
 {
-
     /**
      * @var Employee
      */

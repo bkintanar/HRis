@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class SalaryComponent extends Model
 {
-
     /**
      * Indicates if the model should be timestamped.
      *
@@ -28,16 +27,14 @@ class SalaryComponent extends Model
     /**
      * @return array
      */
-    function getSalaryAndSSS()
+    public function getSalaryAndSSS()
     {
         $salaryComponents = self::where('name', 'LIKE', '%Basic%')
             ->orWhere('name', 'LIKE', '%SSS%')
             ->orderBy('id', 'asc')
             ->get(['id'])
             ->take(2);
-
-        return ['monthlyBasic' => $salaryComponents->first()->id, 'SSS' => $salaryComponents->last()->id];
         
+        return ['monthlyBasic' => $salaryComponent->first()->id, 'SSS' => $salaryComponent->last()->id];
     }
-
 }

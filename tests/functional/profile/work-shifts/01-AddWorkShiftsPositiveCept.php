@@ -30,4 +30,3 @@ $I->click('Save changes');
 
 $I->seeCurrentUrlEquals('/profile/work-shifts');
 $I->see('Record successfully updated.');
-

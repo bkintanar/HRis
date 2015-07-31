@@ -15,7 +15,6 @@ use HRis\Http\Requests\Administration\EmploymentStatusRequest;
  */
 class EmploymentStatusController extends Controller
 {
-
     /**
      * @var EmploymentStatus
      */
@@ -102,7 +101,7 @@ class EmploymentStatusController extends Controller
     {
         $employment_status = $this->employment_status->whereId($request->get('employment_status_id'))->first();
 
-        if ( ! $employment_status) {
+        if (! $employment_status) {
             return redirect()->to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 

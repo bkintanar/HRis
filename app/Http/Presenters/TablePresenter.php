@@ -8,7 +8,6 @@ namespace HRis\Http\Presenters;
  */
 class TablePresenter
 {
-
     /**
      * @param $logged_user
      * @param $table
@@ -16,7 +15,6 @@ class TablePresenter
      */
     public static function display($logged_user, $table)
     {
-
         $data['logged_user'] = $logged_user;
         $data['table'] = $table;
 

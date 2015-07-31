@@ -12,7 +12,6 @@ use Illuminate\Http\RedirectResponse;
  */
 class RedirectIfAuthenticated
 {
-
     /**
      * The Sentinel implementation.
      *
@@ -47,5 +46,4 @@ class RedirectIfAuthenticated
 
         return $next($request);
     }
-
 }

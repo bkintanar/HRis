@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
-class TerminationReasonsTableSeeder extends Seeder {
-
+class TerminationReasonsTableSeeder extends Seeder
+{
     /**
      * Run the database seeds.
      *
@@ -28,5 +28,4 @@ class TerminationReasonsTableSeeder extends Seeder {
             ]
         );
     }
-
 }

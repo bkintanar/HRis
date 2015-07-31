@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class City extends Model
 {
-
     use HasPlaceholder;
 
     /**
@@ -19,5 +18,4 @@ class City extends Model
      * @var string
      */
     protected $table = 'cities';
-
 }

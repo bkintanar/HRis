@@ -3,8 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateDependentsTable extends Migration {
-
+class CreateDependentsTable extends Migration
+{
     /**
      * Reverse the migrations.
      *
@@ -22,8 +22,7 @@ class CreateDependentsTable extends Migration {
      */
     public function up()
     {
-        Schema::create('dependents', function (Blueprint $table)
-        {
+        Schema::create('dependents', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('employee_id');
             $table->string('first_name');

@@ -3,8 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateEmployeeSalaryComponents extends Migration {
-
+class CreateEmployeeSalaryComponentsTable extends Migration
+{
     /**
      * Reverse the migrations.
      *
@@ -22,8 +22,7 @@ class CreateEmployeeSalaryComponents extends Migration {
      */
     public function up()
     {
-        Schema::create('employee_salary_components', function (Blueprint $table)
-        {
+        Schema::create('employee_salary_components', function (Blueprint $table) {
             $table->increments('id');
             $table->string('employee_id');
             $table->integer('component_id');
@@ -31,5 +30,4 @@ class CreateEmployeeSalaryComponents extends Migration {
             $table->date('effective_date')->nullable();
         });
     }
-
 }

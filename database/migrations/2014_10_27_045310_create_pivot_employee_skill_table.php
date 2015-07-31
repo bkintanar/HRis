@@ -3,8 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreatePivotEmployeeSkillTable extends Migration {
-
+class CreatePivotEmployeeSkillTable extends Migration
+{
     /**
      * Reverse the migrations.
      *
@@ -22,8 +22,7 @@ class CreatePivotEmployeeSkillTable extends Migration {
      */
     public function up()
     {
-        Schema::create('employee_skill', function (Blueprint $table)
-        {
+        Schema::create('employee_skill', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('employee_id')->unsigned()->index();
             $table->integer('skill_id')->unsigned()->index();
@@ -33,5 +32,4 @@ class CreatePivotEmployeeSkillTable extends Migration {
             $table->foreign('skill_id')->references('id')->on('skills')->onDelete('cascade');
         });
     }
-
 }

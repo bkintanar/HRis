@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Dependent extends Model
 {
-
     /**
      * Indicates if the model should be timestamped.
      *

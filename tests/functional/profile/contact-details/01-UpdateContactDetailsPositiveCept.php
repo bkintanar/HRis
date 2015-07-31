@@ -28,5 +28,3 @@ $I->click('Save changes');
 
 $I->seeCurrentUrlEquals('/profile/contact-details');
 $I->see('Record successfully updated.');
-
-

@@ -18,7 +18,6 @@ use HRis\Services\Salary;
  */
 class SalaryComputationsController extends Controller
 {
-
     /**
      * @param Sentinel $auth
      * @param Employee $employee
@@ -95,7 +94,6 @@ class SalaryComputationsController extends Controller
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Salary Details' : 'My Salary Details';
 
         return $this->template('pages.profile.salary.edit');
-
     }
 
     /**

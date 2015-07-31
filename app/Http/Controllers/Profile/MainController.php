@@ -12,7 +12,6 @@ use HRis\Http\Controllers\Controller;
  */
 class MainController extends Controller
 {
-
     /**
      * @Get("profile")
      */

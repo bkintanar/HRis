@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class AlterJobHistoriesTable extends Migration {
-
+class AlterJobHistoriesTable extends Migration
+{
     /**
      * Reverse the migrations.
      *
@@ -13,8 +13,7 @@ class AlterJobHistoriesTable extends Migration {
     {
         Schema::table(
             'job_histories',
-            function ($table)
-            {
+            function ($table) {
                 $table->integer('work_shift_id');
             }
         );
@@ -29,11 +28,9 @@ class AlterJobHistoriesTable extends Migration {
     {
         Schema::table(
             'job_histories',
-            function ($table)
-            {
+            function ($table) {
                 $table->dropColumn('work_shift_id');
             }
         );
     }
-
 }

@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
-class EmployeeSalaryComponentsSeeder extends Seeder {
-
+class EmployeeSalaryComponentsTableSeeder extends Seeder
+{
     /**
      * Run the database seeds.
      *
@@ -73,7 +73,5 @@ class EmployeeSalaryComponentsSeeder extends Seeder {
                 ],
             ]
         );
-
     }
-
-} 
+}

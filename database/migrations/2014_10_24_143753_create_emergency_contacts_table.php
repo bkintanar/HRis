@@ -3,8 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateEmergencyContactsTable extends Migration {
-
+class CreateEmergencyContactsTable extends Migration
+{
     /**
      * Reverse the migrations.
      *
@@ -22,8 +22,7 @@ class CreateEmergencyContactsTable extends Migration {
      */
     public function up()
     {
-        Schema::create('emergency_contacts', function (Blueprint $table)
-        {
+        Schema::create('emergency_contacts', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('employee_id');
             $table->string('first_name');
@@ -34,5 +33,4 @@ class CreateEmergencyContactsTable extends Migration {
             $table->string('mobile_phone');
         });
     }
-
 }

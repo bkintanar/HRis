@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
-class LocationTableSeeder extends Seeder {
-
+class LocationsTableSeeder extends Seeder
+{
     /**
      * Run the database seeds.
      *

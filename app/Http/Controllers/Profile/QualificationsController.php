@@ -22,7 +22,6 @@ use HRis\Http\Requests\Profile\QualificationsWorkExperienceRequest;
  */
 class QualificationsController extends Controller
 {
-
     /**
      * @var Employee
      */
@@ -53,7 +52,7 @@ class QualificationsController extends Controller
     {
         $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
-        if ( ! $employee) {
+        if (! $employee) {
             return response()->make(view()->make('errors.404'), 404);
         }
 
@@ -106,7 +105,7 @@ class QualificationsController extends Controller
     {
         $workExperience = $workExperience->whereId($request->get('work_experience_id'))->first();
 
-        if ( ! $workExperience) {
+        if (! $workExperience) {
             return redirect()->to(str_replace('/work-experiences', '', $request->path()))->with('danger',
                 UNABLE_RETRIEVE_MESSAGE);
         }
@@ -120,8 +119,7 @@ class QualificationsController extends Controller
 
         return redirect()->to(str_replace('/work-experiences', '', $request->path()))->with('success',
             SUCCESS_UPDATE_MESSAGE);
-
-        return Redirect::to(str_replace('/work-experiences', '', $request->path()))->with('success', 'Record successfully updated.');
+        
     }
 
     /**
@@ -159,7 +157,7 @@ class QualificationsController extends Controller
     {
         $education = $education->whereId($request->get('education_id'))->first();
 
-        if ( ! $education) {
+        if (! $education) {
             return redirect()->to(str_replace('/educations', '', $request->path()))->with('danger',
                 UNABLE_RETRIEVE_MESSAGE);
         }
@@ -218,7 +216,7 @@ class QualificationsController extends Controller
     {
         $employeeSkill = $employeeSkill->whereId($request->get('employee_skill_id'))->first();
 
-        if ( ! $employeeSkill) {
+        if (! $employeeSkill) {
             return redirect()->to(str_replace('/skills', '', $request->path()))->with('danger',
                 UNABLE_RETRIEVE_MESSAGE);
         }

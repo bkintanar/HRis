@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class TerminationReason extends Model
 {
-
     /**
      * Indicates if the model should be timestamped.
      *
@@ -31,5 +30,4 @@ class TerminationReason extends Model
      * @var string
      */
     protected $table = 'termination_reasons';
-
 }

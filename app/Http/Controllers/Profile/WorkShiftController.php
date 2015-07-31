@@ -19,7 +19,6 @@ use Input;
  */
 class WorkShiftController extends Controller
 {
-
     /**
      * @var Employee
      */
@@ -131,5 +130,4 @@ class WorkShiftController extends Controller
     {
         //
     }
-
 }

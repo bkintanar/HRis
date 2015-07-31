@@ -11,7 +11,6 @@ use HRis\Http\Requests\Request;
  */
 class JobRequest extends Request
 {
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -60,5 +59,4 @@ class JobRequest extends Request
     {
         return response()->make(view()->make('errors.403'), 403);
     }
-
 }

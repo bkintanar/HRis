@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class EmployeeSalaryComponent extends Model
 {
-
     /**
      * Indicates if the model should be timestamped.
      *
@@ -50,7 +49,7 @@ class EmployeeSalaryComponent extends Model
      * @param $component_id
      * @return array
      */
-    function getCurrentComponentValue($employee_id, $component_id)
+    public function getCurrentComponentValue($employee_id, $component_id)
     {
         return $this->whereEmployeeId($employee_id)
             ->whereComponentId($component_id)
@@ -73,5 +72,4 @@ class EmployeeSalaryComponent extends Model
     {
         $this->attributes['effective_date'] = Carbon::parse($effective_date) ? : null;
     }
-
 }

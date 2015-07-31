@@ -45,7 +45,6 @@ use Illuminate\Support\Facades\Request;
  */
 class AjaxController extends Controller
 {
-
     /**
      * Show the profile personal details form.
      *
@@ -54,7 +53,6 @@ class AjaxController extends Controller
     public function updateAddress()
     {
         if (Request::ajax()) {
-
             $provinceId = Request::get('province_id');
             $cities = City::whereProvinceId($provinceId)->lists('name', 'id');
 
@@ -90,7 +88,6 @@ class AjaxController extends Controller
             } catch (Exception $e) {
                 print('failed');
             }
-
         }
     }
 
@@ -114,7 +111,6 @@ class AjaxController extends Controller
             } catch (Exception $e) {
                 print('failed');
             }
-
         }
     }
 
@@ -138,7 +134,6 @@ class AjaxController extends Controller
             } catch (Exception $e) {
                 print('failed');
             }
-
         }
     }
 
@@ -162,7 +157,6 @@ class AjaxController extends Controller
             } catch (Exception $e) {
                 print('failed');
             }
-
         }
     }
 
@@ -186,7 +180,6 @@ class AjaxController extends Controller
             } catch (Exception $e) {
                 print('failed');
             }
-
         }
     }
 
@@ -210,7 +203,6 @@ class AjaxController extends Controller
             } catch (Exception $e) {
                 print('failed');
             }
-
         }
     }
 
@@ -240,7 +232,6 @@ class AjaxController extends Controller
             } catch (Exception $e) {
                 print('failed');
             }
-
         }
     }
 
@@ -263,7 +254,6 @@ class AjaxController extends Controller
             } catch (Exception $e) {
                 print('failed');
             }
-
         }
     }
 
@@ -286,7 +276,6 @@ class AjaxController extends Controller
             } catch (Exception $e) {
                 print('failed');
             }
-
         }
     }
 
@@ -309,7 +298,6 @@ class AjaxController extends Controller
             } catch (Exception $e) {
                 print('failed');
             }
-
         }
     }
 
@@ -332,7 +320,6 @@ class AjaxController extends Controller
             } catch (Exception $e) {
                 print('failed');
             }
-
         }
     }
 
@@ -355,7 +342,6 @@ class AjaxController extends Controller
             } catch (Exception $e) {
                 print('failed');
             }
-
         }
     }
 
@@ -378,7 +364,6 @@ class AjaxController extends Controller
             } catch (Exception $e) {
                 print('failed');
             }
-
         }
     }
 
@@ -401,7 +386,6 @@ class AjaxController extends Controller
             } catch (Exception $e) {
                 print('failed');
             }
-
         }
     }
 
@@ -424,7 +408,6 @@ class AjaxController extends Controller
             } catch (Exception $e) {
                 print('failed');
             }
-
         }
     }
 
@@ -447,7 +430,6 @@ class AjaxController extends Controller
             } catch (Exception $e) {
                 print('failed');
             }
-
         }
     }
 
@@ -470,7 +452,6 @@ class AjaxController extends Controller
             } catch (Exception $e) {
                 print('failed');
             }
-
         }
     }
 
@@ -493,7 +474,6 @@ class AjaxController extends Controller
             } catch (Exception $e) {
                 print('failed');
             }
-
         }
     }
 
@@ -516,7 +496,6 @@ class AjaxController extends Controller
             } catch (Exception $e) {
                 print('failed');
             }
-
         }
     }
 
@@ -539,7 +518,6 @@ class AjaxController extends Controller
             } catch (Exception $e) {
                 print('failed');
             }
-
         }
     }
 
@@ -562,7 +540,6 @@ class AjaxController extends Controller
             } catch (Exception $e) {
                 print('failed');
             }
-
         }
     }
 
@@ -585,7 +562,6 @@ class AjaxController extends Controller
             } catch (Exception $e) {
                 print('failed');
             }
-
         }
     }
 
@@ -608,7 +584,6 @@ class AjaxController extends Controller
             } catch (Exception $e) {
                 print('failed');
             }
-
         }
     }
 
@@ -632,7 +607,6 @@ class AjaxController extends Controller
             } catch (Exception $e) {
                 print('failed');
             }
-
         }
     }
 
@@ -679,9 +653,7 @@ class AjaxController extends Controller
                 $return = json_encode(['tax' => $totalTax, 'sss' => $sss]);
 
                 print($return);
-
             } catch (Exception $e) {
-
             }
         }
     }
@@ -706,7 +678,6 @@ class AjaxController extends Controller
             } catch (Exception $e) {
                 print('failed');
             }
-
         }
     }
 }
