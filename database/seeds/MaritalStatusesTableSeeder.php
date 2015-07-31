@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
-class MaritalStatusesTableSeeder extends Seeder {
-
+class MaritalStatusesTableSeeder extends Seeder
+{
     /**
      * Run the database seeds.
      *
@@ -21,5 +21,4 @@ class MaritalStatusesTableSeeder extends Seeder {
             ]
         );
     }
-
 }

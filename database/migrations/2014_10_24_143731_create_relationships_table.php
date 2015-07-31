@@ -3,8 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateRelationshipsTable extends Migration {
-
+class CreateRelationshipsTable extends Migration
+{
     /**
      * Reverse the migrations.
      *
@@ -22,11 +22,9 @@ class CreateRelationshipsTable extends Migration {
      */
     public function up()
     {
-        Schema::create('relationships', function (Blueprint $table)
-        {
+        Schema::create('relationships', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
         });
     }
-
 }

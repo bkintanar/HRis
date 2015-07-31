@@ -25,4 +25,3 @@ $I->click('Save changes');
 
 $I->seeCurrentUrlEquals('/admin/job/titles');
 $I->see('Record successfully added.');
-

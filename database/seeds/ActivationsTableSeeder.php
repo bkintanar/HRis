@@ -4,7 +4,6 @@ use Illuminate\Database\Seeder;
 
 class ActivationsTableSeeder extends Seeder
 {
-
     /**
      * Run the database seeds.
      *
@@ -37,5 +36,4 @@ class ActivationsTableSeeder extends Seeder
             ]
         );
     }
-
 }

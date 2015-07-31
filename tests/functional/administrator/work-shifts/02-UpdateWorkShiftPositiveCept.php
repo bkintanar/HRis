@@ -29,4 +29,3 @@ $I->click('Save changes');
 
 $I->seeCurrentUrlEquals('/admin/job/work-shifts');
 $I->see('Record successfully updated.');
-

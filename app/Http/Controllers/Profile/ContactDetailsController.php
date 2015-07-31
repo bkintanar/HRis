@@ -16,7 +16,6 @@ use HRis\Http\Requests\Profile\ContactDetailsRequest;
  */
 class ContactDetailsController extends Controller
 {
-
     /**
      * @var Employee
      */
@@ -47,7 +46,7 @@ class ContactDetailsController extends Controller
     {
         $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
-        if ( ! $employee) {
+        if (! $employee) {
             return response()->make(view()->make('errors.404'), 404);
         }
 
@@ -74,7 +73,7 @@ class ContactDetailsController extends Controller
     {
         $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
-        if ( ! $employee) {
+        if (! $employee) {
             return response()->make(view()->make('errors.404'), 404);
         }
 
@@ -102,7 +101,7 @@ class ContactDetailsController extends Controller
 
         $employee = $this->employee->whereId($id)->first();
 
-        if ( ! $employee) {
+        if (! $employee) {
             return redirect()->to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 

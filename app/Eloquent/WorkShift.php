@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class WorkShift extends Model
 {
-
     use HasPlaceholder;
 
     /**
@@ -33,5 +32,4 @@ class WorkShift extends Model
      * @var string
      */
     protected $table = 'work_shifts';
-
 }

@@ -36,4 +36,3 @@ $I->seeCurrentUrlEquals('/profile/qualifications');
 $I->see('Record successfully updated.');
 $I->see('Tested');
 $I->see('Suited');
-

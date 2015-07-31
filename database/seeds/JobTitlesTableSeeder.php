@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
-class JobTitlesTableSeeder extends Seeder {
-
+class JobTitlesTableSeeder extends Seeder
+{
     /**
      * Run the database seeds.
      *
@@ -39,5 +39,4 @@ class JobTitlesTableSeeder extends Seeder {
             ]
         );
     }
-
 }

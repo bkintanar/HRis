@@ -25,4 +25,3 @@ $I->click('Save changes');
 $I->seeCurrentUrlEquals('/pim/configuration/termination-reasons');
 $I->see('Record successfully added.');
 $I->see('Test');
-

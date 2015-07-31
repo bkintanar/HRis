@@ -10,7 +10,6 @@ use HRis\Http\Requests\Request;
  */
 class LoginRequest extends Request
 {
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -33,5 +32,4 @@ class LoginRequest extends Request
             'password' => 'required',
         ];
     }
-
 }

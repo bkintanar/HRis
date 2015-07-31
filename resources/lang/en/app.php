@@ -21,4 +21,8 @@ return [
     'there_where_some_problems_with_your_input' => 'There were some problems with your input.',
     'email_address'            => 'E-Mail Address',
     'send_password_reset_link' => 'Send Password Reset Link',
+    /**
+     * General Settings
+     */
+    'company_name'             => 'b3 Studios',
 ];

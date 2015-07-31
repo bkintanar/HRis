@@ -26,4 +26,3 @@ $I->click('Save changes');
 
 $I->seeCurrentUrlEquals('/admin/job/pay-grades');
 $I->see('Record successfully added.');
-

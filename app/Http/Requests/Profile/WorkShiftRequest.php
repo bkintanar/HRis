@@ -11,7 +11,6 @@ use HRis\Http\Requests\Request;
  */
 class WorkShiftRequest extends Request
 {
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -60,6 +59,4 @@ class WorkShiftRequest extends Request
     {
         return response()->make(view()->make('errors.403'), 403);
     }
-
-
-} 
+}

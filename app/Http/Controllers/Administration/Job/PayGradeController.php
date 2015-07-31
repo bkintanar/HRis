@@ -15,7 +15,6 @@ use HRis\Http\Requests\Administration\PayGradeRequest;
  */
 class PayGradeController extends Controller
 {
-
     /**
      * @param Sentinel $auth
      * @param PayGrade $pay_grade
@@ -93,7 +92,7 @@ class PayGradeController extends Controller
     {
         $pay_grade = $this->pay_grade->whereId($request->get('pay_grade_id'))->first();
 
-        if ( ! $pay_grade) {
+        if (! $pay_grade) {
             return redirect()->to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 

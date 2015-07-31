@@ -10,7 +10,6 @@ use HRis\Http\Requests\Request;
  */
 class QualificationsRequest extends Request
 {
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -38,5 +37,4 @@ class QualificationsRequest extends Request
     {
         return [];
     }
-
 }

@@ -15,7 +15,6 @@ use HRis\Http\Requests\Administration\JobTitleRequest;
  */
 class TitleController extends Controller
 {
-
     /**
      * @var JobTitle
      */
@@ -98,7 +97,7 @@ class TitleController extends Controller
     {
         $job_title = $this->job_title->whereId($request->get('job_title_id'))->first();
 
-        if ( ! $job_title) {
+        if (! $job_title) {
             return redirect()->to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 

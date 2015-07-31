@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class EmergencyContact extends Model
 {
-
     /**
      * Indicates if the model should be timestamped.
      *
@@ -39,5 +38,4 @@ class EmergencyContact extends Model
      * @var string
      */
     protected $table = 'emergency_contacts';
-
 }

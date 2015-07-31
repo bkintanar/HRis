@@ -3,8 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateJobHistoriesTable extends Migration {
-
+class CreateJobHistoriesTable extends Migration
+{
     /**
      * Reverse the migrations.
      *
@@ -22,8 +22,7 @@ class CreateJobHistoriesTable extends Migration {
      */
     public function up()
     {
-        Schema::create('job_histories', function (Blueprint $table)
-        {
+        Schema::create('job_histories', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('employee_id');
             $table->integer('job_title_id')->nullable();

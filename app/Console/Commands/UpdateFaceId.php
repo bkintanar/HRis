@@ -13,7 +13,6 @@ use League\Csv\Reader;
  */
 class UpdateFaceId extends Command
 {
-
     /**
      * The console command description.
      *
@@ -41,7 +40,7 @@ class UpdateFaceId extends Command
         $data = $csv->query();
 
         foreach ($data as $lineIndex => $row) {
-//            if($row[0] >  509)
+            //            if($row[0] >  509)
 //            print_r($row);
 ////            die;
 ////            $this->info($row);
@@ -56,5 +55,4 @@ class UpdateFaceId extends Command
             }
         }
     }
-
 }

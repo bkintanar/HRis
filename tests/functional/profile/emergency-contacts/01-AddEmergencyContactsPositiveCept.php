@@ -30,4 +30,3 @@ $I->click('Save changes');
 $I->seeCurrentUrlEquals('/profile/emergency-contacts');
 $I->see('Record successfully added.');
 $I->see('Test  Suite');
-

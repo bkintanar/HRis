@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Education extends Model
 {
-
     /**
      * Indicates if the model should be timestamped.
      *
@@ -71,5 +70,4 @@ class Education extends Model
     {
         $this->attributes['to_date'] = Carbon::parse($to_date) ? : null;
     }
-
 }

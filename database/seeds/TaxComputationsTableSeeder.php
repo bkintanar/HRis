@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
-class TaxComputationsTableSeeder extends Seeder {
-
+class TaxComputationsTableSeeder extends Seeder
+{
     /**
      * Run the database seeds.
      *
@@ -98,5 +98,4 @@ class TaxComputationsTableSeeder extends Seeder {
             ]
         );
     }
-
 }
