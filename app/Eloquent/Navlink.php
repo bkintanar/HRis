@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Request;
  */
 class Navlink extends Model
 {
-
     /**
      * The database table used by the model.
      *
@@ -307,7 +306,7 @@ class Navlink extends Model
         foreach ($navigations as $navigation) {
             $format = self::formatHref($navigation, $pim);
 
-            if ( ! $user->hasAccess($format['link'] . '.view')) {
+            if (! $user->hasAccess($format['link'] . '.view')) {
                 continue;
             }
 
@@ -334,7 +333,6 @@ class Navlink extends Model
 //        $tidy = str_replace(['<body>', '</body>'], '', $tidy->body()->value);
 
         return $nav;
-
     }
 
     /**
@@ -355,5 +353,4 @@ class Navlink extends Model
 
         return ['href' => $href, 'link' => $link];
     }
-
 }

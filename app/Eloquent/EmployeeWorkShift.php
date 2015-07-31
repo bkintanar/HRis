@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Config;
  */
 class EmployeeWorkShift extends Model
 {
-
     /**
      * Indicates if the model should be timestamped.
      *

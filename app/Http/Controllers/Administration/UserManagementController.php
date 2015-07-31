@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Request;
  */
 class UserManagementController extends Controller
 {
-
     /**
      * @var User
      */

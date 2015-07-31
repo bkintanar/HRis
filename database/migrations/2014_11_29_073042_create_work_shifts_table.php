@@ -3,8 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateWorkShiftsTable extends Migration {
-
+class CreateWorkShiftsTable extends Migration
+{
     /**
      * Reverse the migrations.
      *
@@ -22,8 +22,7 @@ class CreateWorkShiftsTable extends Migration {
      */
     public function up()
     {
-        Schema::create('work_shifts', function (Blueprint $table)
-        {
+        Schema::create('work_shifts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->time('from_time');
@@ -32,5 +31,4 @@ class CreateWorkShiftsTable extends Migration {
             $table->integer('extension')->nullable();
         });
     }
-
 }

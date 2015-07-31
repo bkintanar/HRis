@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Request;
  */
 class EmergencyContactsController extends Controller
 {
-
     /**
      * @var Employee
      */
@@ -56,7 +55,7 @@ class EmergencyContactsController extends Controller
     {
         $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
-        if ( ! $employee) {
+        if (! $employee) {
             return response()->make(view()->make('errors.404'), 404);
         }
 
@@ -125,7 +124,7 @@ class EmergencyContactsController extends Controller
     {
         $emergencyContact = $this->emergencyContact->whereId($request->get('emergency_contact_id'))->first();
 
-        if ( ! $emergencyContact) {
+        if (! $emergencyContact) {
             return redirect()->to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
@@ -155,7 +154,6 @@ class EmergencyContactsController extends Controller
                 $this->emergencyContact->whereId($emergencyContactId)->delete();
 
                 print('success');
-
             } catch (Exception $e) {
                 print('failed');
             }
@@ -179,7 +177,6 @@ class EmergencyContactsController extends Controller
                 $emergencyContact = $this->emergencyContact->whereId($emergencyContactId)->first();
 
                 print(json_encode($emergencyContact));
-
             } catch (Exception $e) {
                 print('failed');
             }

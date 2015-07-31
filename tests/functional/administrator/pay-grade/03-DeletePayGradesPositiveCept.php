@@ -24,4 +24,3 @@ $token = $I->grabAttributeFrom('input[name=_token]', 'value');
 
 $I->sendAjaxPostRequest('/ajax/delete-pay-grade', ['id' => $id, '_token' => $token, '_method' => 'DELETE']); // POST
 $I->dontSee('Tested');
-

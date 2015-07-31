@@ -12,7 +12,6 @@ use Validator;
  */
 class Registrar implements RegistrarContract
 {
-
     /**
      * Get a validator for an incoming registration request.
      *
@@ -42,5 +41,4 @@ class Registrar implements RegistrarContract
             'password' => bcrypt($data['password']),
         ]);
     }
-
 }

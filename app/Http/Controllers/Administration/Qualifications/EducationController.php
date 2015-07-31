@@ -15,7 +15,6 @@ use HRis\Http\Requests\Administration\EducationRequest;
  */
 class EducationController extends Controller
 {
-
     /**
      * @var EducationLevel
      */
@@ -97,7 +96,7 @@ class EducationController extends Controller
     {
         $education = $this->education->whereId($request->get('education_id'))->first();
 
-        if ( ! $education) {
+        if (! $education) {
             return redirect()->to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 

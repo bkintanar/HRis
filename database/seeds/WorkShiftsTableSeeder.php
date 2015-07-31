@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
-class WorkShiftsTableSeeder extends Seeder {
-
+class WorkShiftsTableSeeder extends Seeder
+{
     /**
      * Run the database seeds.
      *

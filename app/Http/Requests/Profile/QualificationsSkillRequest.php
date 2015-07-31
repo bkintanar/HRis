@@ -11,7 +11,6 @@ use HRis\Http\Requests\Request;
  */
 class QualificationsSkillRequest extends Request
 {
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -62,5 +61,4 @@ class QualificationsSkillRequest extends Request
     {
         return response()->make(view()->make('errors.403'), 403);
     }
-
 }

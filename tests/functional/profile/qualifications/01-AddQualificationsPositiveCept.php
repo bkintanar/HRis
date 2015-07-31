@@ -29,4 +29,3 @@ $I->click('Save changes');
 
 $I->seeCurrentUrlEquals('/profile/qualifications');
 $I->see('Record successfully added.');
-

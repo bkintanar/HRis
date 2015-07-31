@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
-class RelationshipsTableSeeder extends Seeder {
-
+class RelationshipsTableSeeder extends Seeder
+{
     /**
      * Run the database seeds.
      *
@@ -27,5 +27,4 @@ class RelationshipsTableSeeder extends Seeder {
             ]
         );
     }
-
 }

@@ -11,7 +11,6 @@ use HRis\Http\Requests\Request;
  */
 class ContactDetailsRequest extends Request
 {
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -56,5 +55,4 @@ class ContactDetailsRequest extends Request
     {
         return response()->make(view()->make('errors.403'), 403);
     }
-
 }

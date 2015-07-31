@@ -15,7 +15,6 @@ use HRis\Http\Requests\Administration\WorkShiftRequest;
  */
 class WorkShiftController extends Controller
 {
-
     /**
      * @var WorkShift
      */
@@ -98,7 +97,7 @@ class WorkShiftController extends Controller
     {
         $work_shift = $this->work_shift->whereId($request->get('work_shift_id'))->first();
 
-        if ( ! $work_shift) {
+        if (! $work_shift) {
             return redirect()->to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 

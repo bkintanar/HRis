@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
-class NationalitiesTableSeeder extends Seeder {
-
+class NationalitiesTableSeeder extends Seeder
+{
     /**
      * Run the database seeds.
      *
@@ -211,5 +211,4 @@ class NationalitiesTableSeeder extends Seeder {
             ]
         );
     }
-
 }

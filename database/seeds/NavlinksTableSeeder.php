@@ -3,8 +3,8 @@
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
-class NavlinksTableSeeder extends Seeder {
-
+class NavlinksTableSeeder extends Seeder
+{
     /**
      * Run the database seeds.
      *
@@ -316,5 +316,4 @@ class NavlinksTableSeeder extends Seeder {
             ]
         );
     }
-
 }

@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Input;
  */
 class EmployeeRecordsController extends Controller
 {
-
     /**
      * @Get("time/attendance/employee-records")
      * @Get("time/attendance/employee-records/{date}")

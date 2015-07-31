@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Employee extends Model
 {
-
     use HasPlaceholder;
 
     /**
@@ -385,5 +384,4 @@ class Employee extends Model
     {
         return $this->hasMany('HRis\Eloquent\WorkExperience');
     }
-
 }

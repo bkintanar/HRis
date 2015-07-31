@@ -10,7 +10,6 @@ use Request;
  */
 class Pagination
 {
-
     /**
      * @param $column
      * @param $name
@@ -45,7 +44,6 @@ class Pagination
                 $start_page = 1;
             } else {
                 if ($data->currentPage() + 4 <= $data->lastPage()) {
-
                 }
             }
         }
@@ -67,5 +65,4 @@ class Pagination
 
         return view()->make('partials.pagination', $data);
     }
-
 }

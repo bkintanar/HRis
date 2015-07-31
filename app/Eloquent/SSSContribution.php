@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class SSSContribution extends Model
 {
-
     /**
      * Indicates if the model should be timestamped.
      *

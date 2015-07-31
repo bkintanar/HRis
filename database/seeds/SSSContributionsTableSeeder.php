@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
-class SSSContributionsTableSeeder extends Seeder {
-
+class SSSContributionsTableSeeder extends Seeder
+{
     /**
      * Run the database seeds.
      *
@@ -390,5 +390,4 @@ class SSSContributionsTableSeeder extends Seeder {
             ]
         );
     }
-
 }

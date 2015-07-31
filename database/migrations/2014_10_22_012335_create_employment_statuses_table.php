@@ -3,8 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateEmploymentStatusesTable extends Migration {
-
+class CreateEmploymentStatusesTable extends Migration
+{
     /**
      * Reverse the migrations.
      *
@@ -22,12 +22,10 @@ class CreateEmploymentStatusesTable extends Migration {
      */
     public function up()
     {
-        Schema::create('employment_statuses', function (Blueprint $table)
-        {
+        Schema::create('employment_statuses', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('class');
         });
     }
-
 }

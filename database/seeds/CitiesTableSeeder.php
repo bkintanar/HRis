@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
-class CitiesTableSeeder extends Seeder {
-
+class CitiesTableSeeder extends Seeder
+{
     /**
      * Run the database seeds.
      *
@@ -1019,5 +1019,4 @@ class CitiesTableSeeder extends Seeder {
             ]
         );
     }
-
 }

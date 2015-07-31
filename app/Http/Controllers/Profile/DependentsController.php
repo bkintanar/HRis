@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Request;
  */
 class DependentsController extends Controller
 {
-
     /**
      * @var Dependent
      */
@@ -56,7 +55,7 @@ class DependentsController extends Controller
     {
         $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
-        if ( ! $employee) {
+        if (! $employee) {
             return response()->make(view()->make('errors.404'), 404);
         }
 
@@ -120,7 +119,7 @@ class DependentsController extends Controller
     {
         $dependent = $this->dependent->whereId($request->get('dependent_id'))->first();
 
-        if ( ! $dependent) {
+        if (! $dependent) {
             return redirect()->to($request->path())->with('danger', 'Unable to retrieve record from database.');
         }
 
@@ -176,7 +175,6 @@ class DependentsController extends Controller
             } catch (Exception $e) {
                 print('failed');
             }
-
         }
     }
 }

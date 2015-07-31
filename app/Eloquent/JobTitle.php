@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class JobTitle extends Model
 {
-
     use HasPlaceholder;
 
     /**
@@ -33,5 +32,4 @@ class JobTitle extends Model
      * @var string
      */
     protected $table = 'job_titles';
-
 }
