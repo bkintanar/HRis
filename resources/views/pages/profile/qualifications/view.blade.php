@@ -24,7 +24,6 @@
 @section('custom_css')
 
     {!! Html::style('/css/plugins/datepicker/datepicker3.css') !!}
-    {!! Html::style('/css/plugins/chosen/chosen.css') !!}
 
 @stop
 
