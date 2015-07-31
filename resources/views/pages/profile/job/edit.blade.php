@@ -27,7 +27,6 @@
 @section('custom_css')
 
     {!! Html::style('/css/plugins/iCheck/custom.css') !!}
-    {!! Html::style('/css/plugins/chosen/chosen.css') !!}
     {!! Html::style('/css/plugins/datepicker/datepicker3.css') !!}
 
 @stop
