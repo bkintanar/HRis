@@ -1,8 +1,8 @@
 {
   "name": "HRis",
   "dependencies": {
-    "bootstrap-chosen": "~1.0.1",
     "bootstrap": "~3.3.5",
-    "font-awesome": "~4.4.0"
+    "font-awesome": "~4.4.0",
+    "bootstrap-chosen": "~1.0.1"
   }
 }
