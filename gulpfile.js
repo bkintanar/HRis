@@ -2,6 +2,7 @@ var elixir = require('laravel-elixir');
 
 var paths = {
     'bower_components': './resources/assets/bower_components',
+    'fonts': './resources/fonts',
     'build': './public/build',
     'plugins': './public/js/plugins',
     'scripts': './public/js',
@@ -27,8 +28,7 @@ elixir(function(mix) {
      * Styles
      */
     mix.less([
-        '../bower_components/bootstrap/less/bootstrap.less',
-    	'../bower_components/font-awesome/less/font-awesome.less'
+        'dependencies.less'
     ])
     .sass([
         'style.sass'
@@ -62,5 +62,6 @@ elixir(function(mix) {
      */
     mix.copy(paths.bower_components + '/font-awesome/fonts', paths.build + '/fonts')
        .copy(paths.bower_components + '/bootstrap/fonts', paths.build + '/fonts')
+       .copy(paths.fonts + '/OpenSans', paths.build + '/fonts/OpenSans')
        .copy(paths.styles + '/patterns', paths.build + '/css/patterns');
 });
