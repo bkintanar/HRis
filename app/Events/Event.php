@@ -8,6 +8,5 @@ namespace HRis\Events;
  */
 abstract class Event
 {
-
     //
 }

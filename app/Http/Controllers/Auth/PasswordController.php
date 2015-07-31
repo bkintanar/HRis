@@ -12,7 +12,6 @@ use Illuminate\Contracts\Auth\PasswordBroker;
  */
 class PasswordController extends Controller
 {
-
     /*
     |--------------------------------------------------------------------------
     | Password Reset Controller
@@ -39,5 +38,4 @@ class PasswordController extends Controller
 
         $this->middleware('guest');
     }
-
 }

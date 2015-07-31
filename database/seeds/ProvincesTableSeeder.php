@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
-class ProvincesTableSeeder extends Seeder {
-
+class ProvincesTableSeeder extends Seeder
+{
     /**
      * Run the database seeds.
      *
@@ -99,5 +99,4 @@ class ProvincesTableSeeder extends Seeder {
             ]
         );
     }
-
 }

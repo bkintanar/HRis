@@ -8,11 +8,7 @@
 
     <title>HRis | 404 Error</title>
 
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/font-awesome/css/font-awesome.css" rel="stylesheet">
-
-    <link href="/css/animate.css" rel="stylesheet">
-    <link href="/min-css/style.min.css" rel="stylesheet">
+    {!! Html::style('/output/all.css') !!}
 
 </head>
 
@@ -35,8 +31,7 @@
     </div>
 
     <!-- Mainly scripts -->
-    <script src="/js/jquery-1.10.2.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
+    {!! Html::style('/output/all.js') !!}
 
 </body>
 

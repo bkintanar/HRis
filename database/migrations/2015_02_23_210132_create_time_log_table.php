@@ -3,8 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateTimeLogTable extends Migration {
-
+class CreateTimeLogTable extends Migration
+{
     /**
      * Reverse the migrations.
      *
@@ -22,8 +22,7 @@ class CreateTimeLogTable extends Migration {
      */
     public function up()
     {
-        Schema::create('time_log', function (Blueprint $table)
-        {
+        Schema::create('time_log', function (Blueprint $table) {
             $table->increments('id');
             $table->string('face_id');
             $table->date('swipe_date');
@@ -31,5 +30,4 @@ class CreateTimeLogTable extends Migration {
             $table->datetime('swipe_datetime');
         });
     }
-
 }

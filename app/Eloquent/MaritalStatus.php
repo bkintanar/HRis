@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class MaritalStatus extends Model
 {
-
     use HasPlaceholder;
 
     /**
@@ -19,5 +18,4 @@ class MaritalStatus extends Model
      * @var string
      */
     protected $table = 'marital_statuses';
-
 }

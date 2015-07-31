@@ -3,8 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateTaxComputations extends Migration {
-
+class CreateTaxComputations extends Migration
+{
     /**
      * Reverse the migrations.
      *
@@ -22,8 +22,7 @@ class CreateTaxComputations extends Migration {
      */
     public function up()
     {
-        Schema::create('tax_computations', function (Blueprint $table)
-        {
+        Schema::create('tax_computations', function (Blueprint $table) {
             $table->increments('id');
             $table->decimal('ME_S', 10, 2);
             $table->decimal('ME1_S1', 10, 2);
@@ -34,5 +33,4 @@ class CreateTaxComputations extends Migration {
             $table->decimal('exemption', 10, 2);
         });
     }
-
 }

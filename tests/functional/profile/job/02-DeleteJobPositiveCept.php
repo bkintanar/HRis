@@ -30,5 +30,3 @@ $token = $I->grabAttributeFrom('input[name=_token]', 'value');
 
 $I->sendAjaxPostRequest('/ajax/profile/job/edit', ['id' => $id, '_token' => $token, '_method' => 'DELETE']); // POST
 $I->dontSee('Test Suite');
-
-

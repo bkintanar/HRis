@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class WorkExperience extends Model
 {
-
     /**
      * Indicates if the model should be timestamped.
      *
@@ -63,5 +62,4 @@ class WorkExperience extends Model
     {
         $this->attributes['to_date'] = Carbon::parse($to_date) ? : null;
     }
-
 }

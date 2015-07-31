@@ -19,7 +19,6 @@ use Input;
  */
 class JobController extends Controller
 {
-
     /**
      * @var Employee
      */

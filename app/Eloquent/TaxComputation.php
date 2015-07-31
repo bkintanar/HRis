@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class TaxComputation extends Model
 {
-
     /**
      * Indicates if the model should be timestamped.
      *
@@ -36,5 +35,4 @@ class TaxComputation extends Model
             ->orderBy($status, 'desc')
             ->first([$status, 'percentage_over', 'exemption']);
     }
-
 }

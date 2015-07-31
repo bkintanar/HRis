@@ -3,8 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateProvincesTable extends Migration {
-
+class CreateProvincesTable extends Migration
+{
     /**
      * Reverse the migrations.
      *
@@ -22,12 +22,10 @@ class CreateProvincesTable extends Migration {
      */
     public function up()
     {
-        Schema::create('provinces', function (Blueprint $table)
-        {
+        Schema::create('provinces', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('country_id');
             $table->string('name');
         });
     }
-
 }

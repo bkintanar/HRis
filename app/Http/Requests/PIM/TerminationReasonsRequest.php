@@ -11,7 +11,6 @@ use HRis\Http\Requests\Request;
  */
 class TerminationReasonsRequest extends Request
 {
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -66,5 +65,4 @@ class TerminationReasonsRequest extends Request
     {
         return response()->make(view()->make('errors.403'), 403);
     }
-
 }
