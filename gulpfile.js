@@ -34,8 +34,7 @@ elixir(function(mix) {
         'style.sass'
     ])
     .styles([
-        'bootstrap.css',
-        'font-awesome.css',
+    	'dependencies.css',
         'animate.css',
         'style.css'
     ], null, paths.styles);
@@ -62,6 +61,6 @@ elixir(function(mix) {
      */
     mix.copy(paths.bower_components + '/font-awesome/fonts', paths.build + '/fonts')
        .copy(paths.bower_components + '/bootstrap/fonts', paths.build + '/fonts')
-       .copy(paths.fonts + '/OpenSans', paths.build + '/fonts/OpenSans')
+       .copy(paths.fonts + '/OpenSans', paths.build + '/fonts')
        .copy(paths.styles + '/patterns', paths.build + '/css/patterns');
 });
