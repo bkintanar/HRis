@@ -23,12 +23,6 @@
 
 @stop
 
-@section('custom_css')
-
-    {!! Html::style('/css/plugins/chosen/chosen.css') !!}
-
-@stop
-
 @section('custom_js')
     <!-- Input Mask-->
     {!! Html::script('/js/plugins/jasny/jasny-bootstrap.min.js') !!}

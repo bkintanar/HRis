@@ -136,7 +136,6 @@
 
 @section('custom_css')
     {!! Html::style('/css/plugins/iCheck/custom.css') !!}
-    {!! Html::style('/css/plugins/chosen/chosen.css') !!}
 
     <!-- Data Tables -->
     {!! Html::style('/css/plugins/dataTables/dataTables.bootstrap.css') !!}
