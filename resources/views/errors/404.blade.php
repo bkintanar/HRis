@@ -8,7 +8,7 @@
 
     <title>HRis | 404 Error</title>
 
-    {!! Html::style('/output/all.css') !!}
+    {!! Html::style(elixir('css/all.css')) !!}
 
 </head>
 
@@ -31,7 +31,7 @@
     </div>
 
     <!-- Mainly scripts -->
-    {!! Html::style('/output/all.js') !!}
+    {!! Html::style(elixir('js/all.js')) !!}
 
 </body>
 
