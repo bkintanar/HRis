@@ -59,7 +59,7 @@ class PersonalDetailsController extends Controller
 
         $this->data['employee'] = $employee;
         $this->data['employee_id_prefix'] = $this->employee_id_prefix;
-
+        
         $this->data['disabled'] = 'disabled';
         $this->data['pim'] = $request->is('*pim/*') ?: false;
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Personal Details' : 'My Personal Details';

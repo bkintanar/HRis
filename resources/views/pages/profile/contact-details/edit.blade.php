@@ -25,8 +25,6 @@
 
 @section('custom_css')
 
-    {!! Html::style('/css/plugins/chosen/chosen.css') !!}
-
 @stop
 
 @section('custom_js')
