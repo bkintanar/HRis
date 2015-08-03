@@ -35,8 +35,8 @@
                             @if(count($users))
                                 @foreach($users as $user)
                                 <tr id="user_{{$user->id}}">
-                                    <td><a href="/admin/user-management/{{ $user->id }}">{{ $user->id }}</a></td>
-                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->id }}</td>
+                                    <td><a href="/admin/user-management/{{ $user->id }}">{{ $user->email }}</a></td>
                                     <td>{{ $user->employee->first_name }} {{ $user->employee->last_name }}</td>
                                     <td>{{ $user->role()->name }}</td>
                                     <td>{{ $user->activated ? 'Active' : 'Inactive' }}</td>

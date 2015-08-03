@@ -79,7 +79,6 @@
 @stop
 
 @section('custom_js')
-
     <!-- Cropper -->
     {!! Html::script('/js/plugins/cropper/cropper.min.js') !!}
 

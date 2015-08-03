@@ -23,7 +23,6 @@
 @stop
 
 @section('custom_js')
-
     {!! Html::script('/js/notification.js') !!}
 
     <script>
