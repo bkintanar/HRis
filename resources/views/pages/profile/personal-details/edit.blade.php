@@ -74,21 +74,12 @@
 
 @section('custom_css')
 
-    {!! Html::style('/css/plugins/iCheck/custom.css') !!}
-    {!! Html::style('/css/plugins/datepicker/datepicker3.css') !!}
     {!! Html::style('/css/plugins/cropper/cropper.min.css') !!}
 
 @stop
 
 @section('custom_js')
-    <!-- Data picker -->
-    {!! Html::script('/js/plugins/datepicker/bootstrap-datepicker.js') !!}
-    <!-- Input Mask-->
-    {!! Html::script('/js/plugins/jasny/jasny-bootstrap.min.js') !!}
-    <!-- iCheck -->
-    {!! Html::script('/js/plugins/iCheck/icheck.min.js') !!}
-    <!-- Chosen -->
-    {!! Html::script('/js/plugins/chosen/chosen.jquery.js') !!}
+
     <!-- Cropper -->
     {!! Html::script('/js/plugins/cropper/cropper.min.js') !!}
 

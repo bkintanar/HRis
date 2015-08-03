@@ -109,21 +109,7 @@
     </div>
 @stop
 
-
-@section('custom_css')
-
-    {!! Html::style('/css/plugins/datepicker/datepicker3.css') !!}
-
-@stop
-
 @section('custom_js')
-
-    <!-- Data picker -->
-    {!! Html::script('/js/plugins/datepicker/bootstrap-datepicker.js') !!}
-    <!-- Input Mask-->
-    {!! Html::script('/js/plugins/jasny/jasny-bootstrap.min.js') !!}
-    <!-- Chosen -->
-    {!! Html::script('/js/plugins/chosen/chosen.jquery.js') !!}
 
     <script>
         $(document).ready(function () {
