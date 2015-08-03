@@ -72,8 +72,6 @@
     {!! Html::script('/js/plugins/moment/moment.js') !!}
     <!-- Data picker -->
     {!! Html::script('/js/plugins/datetimepicker/datetimepicker.js') !!}
-    <!-- Input Mask-->
-    {!! Html::script('/js/plugins/jasny/jasny-bootstrap.min.js') !!}
 
     {!! Html::script('/js/notification.js') !!}
 

@@ -57,9 +57,6 @@
 
 @section('custom_js')
 
-    <!-- Input Mask -->
-    {!! Html::script('/js/plugins/jasny/jasny-bootstrap.min.js') !!}
-
     {!! Html::script('/js/notification.js') !!}
 
     <script>

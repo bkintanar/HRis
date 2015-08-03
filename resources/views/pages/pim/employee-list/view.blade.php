@@ -135,7 +135,6 @@
 @stop
 
 @section('custom_css')
-    {!! Html::style('/css/plugins/iCheck/custom.css') !!}
 
     <!-- Data Tables -->
     {!! Html::style('/css/plugins/dataTables/dataTables.bootstrap.css') !!}
@@ -143,10 +142,6 @@
 @stop
 
 @section('custom_js')
-    <!-- iCheck -->
-    {!! Html::script('/js/plugins/iCheck/icheck.min.js') !!}
-    <!-- Chosen -->
-    {!! Html::script('/js/plugins/chosen/chosen.jquery.js') !!}
 
     <script>
         $(document).ready(function () {
