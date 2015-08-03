@@ -36,7 +36,8 @@ elixir(function(mix) {
     .styles([
     	'dependencies.css',
         'animate.css',
-        'style.css'
+        'style.css',
+        'plugins/iCheck/custom.css'
     ], null, paths.styles);
 
     /**
@@ -45,6 +46,11 @@ elixir(function(mix) {
     mix.scripts([
         paths.bower_components + '/jquery/dist/jquery.min.js',
         paths.bower_components + '/bootstrap/dist/js/bootstrap.min.js',
+        paths.bower_components + '/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
+        paths.bower_components + '/jasny-bootstrap/dist/js/jasny-bootstrap.min.js',
+        paths.bower_components + '/chosen/chosen.jquery.min.js',
+        paths.bower_components + '/iCheck/icheck.min.js',
+        //paths.bower_components + '/cropper/dist/cropper.min.js',
         paths.plugins + '/metisMenu/jquery.metisMenu.js',
         paths.plugins + '/slimscroll/jquery.slimscroll.min.js',
         paths.plugins + '/pace/pace.min.js',
@@ -61,6 +67,9 @@ elixir(function(mix) {
      */
     mix.copy(paths.bower_components + '/font-awesome/fonts', paths.build + '/fonts')
        .copy(paths.bower_components + '/bootstrap/fonts', paths.build + '/fonts')
+       .copy(paths.bower_components + '/chosen/*.png', paths.build + '/css')
+       .copy(paths.bower_components + '/cropper/src/img/bg.png', paths.build + '/img/')
+       .copy(paths.styles + '/plugins/iCheck/*.png', paths.build + '/css')
        .copy(paths.fonts + '/OpenSans', paths.build + '/fonts')
        .copy(paths.styles + '/patterns', paths.build + '/css/patterns');
 });

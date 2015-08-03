@@ -9,14 +9,6 @@
 @stop
 
 @section('custom_js')
-    <!-- Input Mask-->
-    {!! Html::script('/js/plugins/jasny/jasny-bootstrap.min.js') !!}
-    <!-- iCheck -->
-    {!! Html::script('/js/plugins/iCheck/icheck.min.js') !!}
-    <!-- Chosen -->
-    {!! Html::script('/js/plugins/chosen/chosen.jquery.js') !!}
-    <!-- Date Picker -->
-    {!! Html::script('js/plugins/datepicker/bootstrap-datepicker.js') !!}
 
     <script>
 

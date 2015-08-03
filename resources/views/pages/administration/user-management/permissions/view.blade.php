@@ -94,15 +94,7 @@
 
 @stop
 
-@section('custom_css')
-
-    {!! Html::style('/css/plugins/iCheck/custom.css') !!}
-
-@stop
-
 @section('custom_js')
-    <!-- iCheck -->
-    {!! Html::script('/js/plugins/iCheck/icheck.min.js') !!}
     <script>
         $(document).ready(function () {
             // iCheck
