@@ -74,15 +74,14 @@
 
 @section('custom_css')
 
-    {!! Html::style('/css/plugins/iCheck/custom.css') !!}
-    {!! Html::style('/css/plugins/datepicker/datepicker3.css') !!}
     {!! Html::style('/css/plugins/cropper/cropper.min.css') !!}
 
 @stop
 
 @section('custom_js')
-    @parent
-    
+    <!-- Cropper -->
+    {!! Html::script('/js/plugins/cropper/cropper.min.js') !!}
+
     <script>
         function checkEmployeeId (){
 

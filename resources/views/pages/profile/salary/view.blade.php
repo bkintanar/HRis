@@ -9,10 +9,6 @@
 @stop
 
 @section('custom_js')
-    <!-- Input Mask-->
-    {!! Html::script('/js/plugins/jasny/jasny-bootstrap.min.js') !!}
-    <!-- Chosen -->
-    {!! Html::script('/js/plugins/chosen/chosen.jquery.js') !!}
 
     {!! Html::script('/js/notification.js') !!}
 
