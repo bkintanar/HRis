@@ -26,9 +26,9 @@ class CreateEmployeesTable extends Migration
             $table->increments('id');
             $table->string('employee_id');
             $table->integer('face_id')->nullable();
-            $table->integer('user_id')->nullable();
-            $table->integer('marital_status_id')->nullable();
-            $table->integer('nationality_id')->nullable();
+            $table->unsignedInteger('user_id')->nullable();
+            $table->unsignedInteger('marital_status_id')->nullable();
+            $table->unsignedInteger('nationality_id')->nullable();
             $table->string('first_name')->nullable();
             $table->string('middle_name')->nullable();
             $table->string('last_name')->nullable();
@@ -37,9 +37,9 @@ class CreateEmployeesTable extends Migration
             $table->char('gender', 1)->nullable();
             $table->string('address_1')->nullable();
             $table->string('address_2')->nullable();
-            $table->integer('address_city_id')->nullable();
-            $table->integer('address_province_id')->nullable();
-            $table->integer('address_country_id')->nullable();
+            $table->unsignedInteger('address_city_id')->nullable();
+            $table->unsignedInteger('address_province_id')->nullable();
+            $table->unsignedInteger('address_country_id')->nullable();
             $table->string('address_postal_code')->nullable();
             $table->string('home_phone')->nullable();
             $table->string('mobile_phone')->nullable();
@@ -64,6 +64,13 @@ class CreateEmployeesTable extends Migration
             $table->index('user_id');
             $table->index('marital_status_id');
             $table->index('nationality_id');
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('marital_status_id')->references('id')->on('marital_statuses')->onDelete('cascade');
+            $table->foreign('nationality_id')->references('id')->on('nationalities')->onDelete('cascade');
+            $table->foreign('address_city_id')->references('id')->on('cities')->onDelete('cascade');
+            $table->foreign('address_province_id')->references('id')->on('provinces')->onDelete('cascade');
+            $table->foreign('address_country_id')->references('id')->on('countries')->onDelete('cascade');
         });
     }
 }

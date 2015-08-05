@@ -24,13 +24,17 @@ class CreateEmergencyContactsTable extends Migration
     {
         Schema::create('emergency_contacts', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('employee_id');
+            $table->unsignedInteger('employee_id');
             $table->string('first_name');
             $table->string('middle_name')->nullable();
             $table->string('last_name');
-            $table->integer('relationship_id');
+            $table->unsignedInteger('relationship_id');
             $table->string('home_phone');
             $table->string('mobile_phone');
+
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
+            $table->foreign('relationship_id')->references('id')->on('relationships')->onDelete('cascade');
+
         });
     }
 }

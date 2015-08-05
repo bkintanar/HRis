@@ -11,7 +11,7 @@ class WorkShiftsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('work_shifts')->truncate();
+        DB::table('work_shifts')->delete();
 
         DB::table('work_shifts')->insert(
             [

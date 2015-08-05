@@ -11,7 +11,7 @@ class LocationsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('locations')->truncate();
+        DB::table('locations')->delete();
 
         DB::table('locations')->insert(
             [
