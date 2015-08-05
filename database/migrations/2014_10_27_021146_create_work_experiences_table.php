@@ -24,12 +24,14 @@ class CreateWorkExperiencesTable extends Migration
     {
         Schema::create('work_experiences', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('employee_id');
+            $table->unsignedInteger('employee_id');
             $table->string('company');
             $table->string('job_title');
             $table->date('from_date')->nullable();
             $table->date('to_date')->nullable();
             $table->string('comment');
+
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
         });
     }
 }

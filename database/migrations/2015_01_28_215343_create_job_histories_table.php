@@ -24,14 +24,21 @@ class CreateJobHistoriesTable extends Migration
     {
         Schema::create('job_histories', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('employee_id');
-            $table->integer('job_title_id')->nullable();
-            $table->integer('department_id')->nullable();
-            $table->integer('employment_status_id')->nullable();
-            $table->integer('work_shift_id')->nullable();
-            $table->integer('location_id')->nullable();
+            $table->unsignedInteger('employee_id');
+            $table->unsignedInteger('job_title_id')->nullable();
+            $table->unsignedInteger('department_id')->nullable();
+            $table->unsignedInteger('employment_status_id')->nullable();
+            $table->unsignedInteger('work_shift_id')->nullable();
+            $table->unsignedInteger('location_id')->nullable();
             $table->date('effective_date')->nullable();
             $table->text('comments')->nullable();
+
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
+            $table->foreign('job_title_id')->references('id')->on('job_titles')->onDelete('cascade');
+            $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
+            $table->foreign('employment_status_id')->references('id')->on('employment_statuses')->onDelete('cascade');
+            $table->foreign('work_shift_id')->references('id')->on('work_shifts')->onDelete('cascade');
+            $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
         });
     }
 }
