@@ -36,10 +36,14 @@
                                     <td>{{ $education->gpa_score }}</td>
                                     <td>
                                         @if($logged_user->hasAccess(Request::segment(1).'.qualifications.educations.update'))
-                                        <button rel="edit_education" id="{{$education->id}}" class="btn btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-edit"></i></button>
+                                            <button rel="edit_education" id="{{$education->id}}"
+                                                    class="btn btn-xs btn-warning" name="edit" title="Edit"
+                                                    type="button"><i class="fa fa-edit"></i></button>
                                         @endif
                                         @if($logged_user->hasAccess(Request::segment(1).'.qualifications.educations.delete'))
-                                        <button rel="delete_education" id="{{$education->id}}" class="btn btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-times"></i></button>
+                                            <button rel="delete_education" id="{{$education->id}}"
+                                                    class="btn btn-xs btn-danger" name="delete" title="Delete"
+                                                    type="button"><i class="fa fa-times"></i></button>
                                         @endif
                                     </td>
                                 </tr>

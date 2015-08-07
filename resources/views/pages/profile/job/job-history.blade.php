@@ -32,7 +32,7 @@
                                     <td>{{ $job_history->location->name or '' }}</td>
                                     <td>{{ $job_history->comments }}</td>
                                     <td class="action">
-                                        <button rel="delete" id="{{$job_history->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-times"></i></button>
+                                        <button rel="delete" id="{{$job_history->id}}" class="btn btn-primary btn-xs btn-danger" name="delete" title="Delete" type="button"><i class="fa fa-times"></i></button>
                                     </td>
                                 </tr>
                             @endforeach

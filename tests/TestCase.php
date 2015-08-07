@@ -26,7 +26,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
     public function logMeIn()
     {
         $this->visit('/')
-             ->type('bertrand@verticalops.com', 'email')
+            ->type('bertrand.kintanar@gmail.com', 'email')
              ->type('retardko', 'password')
              ->press('Login')
              ->see('Dashboard')

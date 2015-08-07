@@ -40,10 +40,14 @@
                                     <td>{{ $work_experience->comment }}</td>
                                     <td>
                                         @if($logged_user->hasAccess(Request::segment(1).'.qualifications.work-experiences.update'))
-                                        <button rel="edit_work_experience" id="{{$work_experience->id}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-edit"></i></button>
+                                            <button rel="edit_work_experience" id="{{$work_experience->id}}"
+                                                    class="btn btn-primary btn-xs btn-warning" name="edit" title="Edit"
+                                                    type="button"><i class="fa fa-edit"></i></button>
                                         @endif
                                         @if($logged_user->hasAccess(Request::segment(1).'.qualifications.work-experiences.delete'))
-                                        <button rel="delete_work_experience" id="{{$work_experience->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-trash"></i></button>
+                                            <button rel="delete_work_experience" id="{{$work_experience->id}}"
+                                                    class="btn btn-primary btn-xs btn-danger" name="delete"
+                                                    title="Delete" type="button"><i class="fa fa-trash"></i></button>
                                         @endif
                                     </td>
                                 </tr>
