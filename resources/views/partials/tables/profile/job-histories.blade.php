@@ -9,7 +9,8 @@
     <td>{{ $item->location->name or '' }}</td>
     <td>{{ $item->comments }}</td>
     <td>
-        <button rel="delete" id="{{$item->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-times"></i></button>
+        <button rel="delete" id="{{$item->id}}" class="btn btn-primary btn-xs btn-danger" name="delete" title="Delete"
+                type="button"><i class="fa fa-times"></i></button>
     </td>
 </tr>
 @endforeach

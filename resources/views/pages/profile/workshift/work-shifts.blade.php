@@ -28,7 +28,9 @@
                                     <td>{{ $workShift->WorkShift->to_time or '' }}</td>
                                     <td>{{ $workShift->effective_date or '' }}</td>
                                     <td class="action">
-                                        <button rel="delete" id="{{$workShift->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button">
+                                        <button rel="delete" id="{{$workShift->id}}"
+                                                class="btn btn-primary btn-xs btn-danger" name="delete" title="Delete"
+                                                type="button">
                                             <i class="fa fa-times"></i>
                                         </button>
                                     </td>

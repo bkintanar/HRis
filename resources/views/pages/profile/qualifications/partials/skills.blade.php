@@ -34,10 +34,16 @@
                                     <td>{{ HRis\Eloquent\EmployeeSkill::whereSkillId($skill->id)->whereEmployeeId($employee->id)->pluck('years_of_experience') }}</td>
                                     <td>
                                         @if($logged_user->hasAccess(Request::segment(1).'.qualifications.skills.update'))
-                                        <button rel="edit_skill" id="{{HRis\Eloquent\EmployeeSkill::whereSkillId($skill->id)->whereEmployeeId($employee->id)->pluck('id')}}" class="btn btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-edit"></i></button>
+                                            <button rel="edit_skill"
+                                                    id="{{HRis\Eloquent\EmployeeSkill::whereSkillId($skill->id)->whereEmployeeId($employee->id)->pluck('id')}}"
+                                                    class="btn btn-xs btn-warning" name="edit" title="Edit"
+                                                    type="button"><i class="fa fa-edit"></i></button>
                                         @endif
                                         @if($logged_user->hasAccess(Request::segment(1).'.qualifications.skills.delete'))
-                                        <button rel="delete_skill" id="{{HRis\Eloquent\EmployeeSkill::whereSkillId($skill->id)->whereEmployeeId($employee->id)->pluck('id')}}" class="btn btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-times"></i></button>
+                                            <button rel="delete_skill"
+                                                    id="{{HRis\Eloquent\EmployeeSkill::whereSkillId($skill->id)->whereEmployeeId($employee->id)->pluck('id')}}"
+                                                    class="btn btn-xs btn-danger" name="delete" title="Delete"
+                                                    type="button"><i class="fa fa-times"></i></button>
                                         @endif
                                     </td>
                                 </tr>

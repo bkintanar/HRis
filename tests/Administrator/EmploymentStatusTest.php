@@ -23,7 +23,23 @@ class EmploymentStatusTest extends \TestCase
             ->press('Save changes', '#submit');
 
         $this->onPage('/admin/job/employment-status')
-            ->see('Record successfully added.');
+            ->see('Record successfully added.')
+            ->see('Test');
+    }
+
+    public function testDeleteEmploymentStatusPositive()
+    {
+        $this->testUpdateEmploymentStatusPositive();
+
+        $id = $this->onPage('/admin/job/employment-status')
+            ->see('Tested')->filterByNameOrId("edit", 'button')->last()->attr('id');
+
+        $_token = $this->onPage('/admin/job/employment-status')
+            ->see('Tested')->filterByNameOrId("_token", 'input')->attr('value');
+
+        $this->post('/ajax/delete-employment-status', ['id' => $id, '_token' => $_token, '_method' => 'DELETE']);
+
+        $this->dontSee('Tested');
     }
 
     public function testUpdateEmploymentStatusPositive()
@@ -41,24 +57,5 @@ class EmploymentStatusTest extends \TestCase
         $this->onPage('/admin/job/employment-status')
             ->see('Record successfully updated.')
             ->see('Tested');
-    }
-
-    public function testDeleteEmploymentStatusPositive()
-    {
-        $this->testUpdateEmploymentStatusPositive();
-
-        $this->onPage('/admin/job/employment-status')
-            ->see('Tested');
-
-        /*
-
-# Add new record
-$I->see('Tested');
-$id = $I->grabAttributeFrom('button[title=Edit]', 'id');
-$token = $I->grabAttributeFrom('input[name=_token]', 'value');
-
-$I->sendAjaxPostRequest('/ajax/delete-employment-status', ['id' => $id, '_token' => $token, '_method' => 'DELETE']); // POST
-$I->dontSee('Tested');
-        */
     }
 }

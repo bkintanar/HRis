@@ -34,8 +34,12 @@
                                 <td>{{ $qualification->home_phone }}</td>
                                 <td>{{ $qualification->mobile_phone }}</td>
                                 <td>
-                                    <button rel="edit" id="{{$qualification->id}}" class="btn btn-primary btn-xs btn-warning" title="Edit" type="button"><i class="fa fa-edit"></i></button>
-                                    <button rel="delete" id="{{$qualification->id}}" class="btn btn-primary btn-xs btn-danger" title="Delete" type="button"><i class="fa fa-times"></i></button>
+                                    <button rel="edit" id="{{$qualification->id}}"
+                                            class="btn btn-primary btn-xs btn-warning" name="edit" title="Edit"
+                                            type="button"><i class="fa fa-edit"></i></button>
+                                    <button rel="delete" id="{{$qualification->id}}"
+                                            class="btn btn-primary btn-xs btn-danger" name="delete" title="Delete"
+                                            type="button"><i class="fa fa-times"></i></button>
                                 </td>
                             </tr>
                             @endforeach
