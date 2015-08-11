@@ -90,7 +90,7 @@ class PersonalDetailsController extends Controller
 
         $this->data['disabled'] = '';
         $this->data['pim'] = $request->is('*pim/*') ?: false;
-        $this->data['pageTitle'] = $this->data['pim'] ? 'Edit Employee Contact Details' : 'Edit My Contact Details';
+        $this->data['pageTitle'] = $this->data['pim'] ? 'Edit Employee Personal Details' : 'Edit My Personal Details';
 
         return $this->template('pages.profile.personal-details.edit');
     }

@@ -186,6 +186,8 @@ class Navlink extends Model
             $result .= self::permissionTab($parent, $id);
         }
 
+//        dd($result);
+
         return $result;
     }
 
@@ -196,7 +198,11 @@ class Navlink extends Model
      */
     protected static function permissionTab($parent, $id)
     {
-        $children = self::whereParentId($parent->id)->get();
+        if ($parent->name == 'Profile') {
+            $children = self::where('parent_id', - 1)->get();
+        } else {
+            $children = self::whereParentId($parent->id)->get();
+        }
 
         $result = '<div id="tab-' . $parent->id . '" class="tab-pane' . ($parent->id == PROFILE_IDS ? ' active' : '') . '">';
         $result .= '<div class="table-responsive">
@@ -306,7 +312,7 @@ class Navlink extends Model
         foreach ($navigations as $navigation) {
             $format = self::formatHref($navigation, $pim);
 
-            if (! $user->hasAccess($format['link'] . '.view')) {
+            if ( ! $user->hasAccess($format['link'] . '.view')) {
                 continue;
             }
 
