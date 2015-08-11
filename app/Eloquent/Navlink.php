@@ -205,6 +205,8 @@ class Navlink extends Model
             $result .= self::permissionTab($parent, $id);
         }
 
+//        dd($result);
+
         return $result;
     }
 
