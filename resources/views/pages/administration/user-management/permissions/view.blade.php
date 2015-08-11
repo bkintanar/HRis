@@ -55,9 +55,14 @@
                                             <div class="panel-options">
                                                 <ul class="nav nav-tabs">
                                                     <li class="active"><a data-toggle="tab" href="#tab-2"> <i class="fa fa-user"></i>Profile</a></li>
-                                                    <li class=""><a data-toggle="tab" href="#tab-10"><i class="fa fa-pie-chart"></i>Performance</a></li>
-                                                    <li class=""><a data-toggle="tab" href="#tab-13"><i class="fa fa-tasks"></i>PIM</a></li>
-                                                    <li class=""><a data-toggle="tab" href="#tab-15"><i class="fa fa-certificate"></i>Admin</a></li>
+                                                    <li class=""><a data-toggle="tab" href="#tab-11"><i
+                                                                    class="fa fa-bar-chart-o"></i>Performance</a></li>
+                                                    <li class=""><a data-toggle="tab" href="#tab-14"><i
+                                                                    class="fa fa-clock-o"></i>Time</a></li>
+                                                    <li class=""><a data-toggle="tab" href="#tab-15"><i
+                                                                    class="fa fa-cogs"></i>PIM</a></li>
+                                                    <li class=""><a data-toggle="tab" href="#tab-17"><i
+                                                                    class="fa fa-group"></i>Admin</a></li>
                                                 </ul>
                                             </div>
 
@@ -104,21 +109,21 @@
             });
         });
 
-/*
+
         $("#advance_p").hide();
         $(document).ready(function(){
           $("#showtable").click(function(){
             $("#advance_p").toggle();
           });
         });
-*/
 
-        $(document).ready(function() {
-          $(".expand-content-link").click(function() {
-                $(".content-holder").find(".hidden-content", this).toggle();
-                return false;
-            });
-        });
+
+        //        $(document).ready(function() {
+        //          $(".expand-content-link").click(function() {
+        //                $(".content-holder").find(".hidden-content", this).toggle();
+        //                return false;
+        //            });
+        //        });
 
     </script>
 
