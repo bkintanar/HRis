@@ -153,7 +153,6 @@ return [
         HRis\Providers\EventServiceProvider::class,
         HRis\Providers\RouteServiceProvider::class,
         HRis\Providers\AnnotationsServiceProvider::class,
-        HRis\Providers\SentryServiceProvider::class,
 
         /*
          * Vendor Service Providers...
