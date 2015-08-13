@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Http\Controllers;
 
 /**
@@ -22,6 +31,7 @@ class WelcomeController extends Controller
     /**
      * Create a new controller instance.
      *
+     * @author Bertrand Kintanar
      */
     public function __construct()
     {
@@ -32,6 +42,7 @@ class WelcomeController extends Controller
      * Show the application welcome screen to the user.
      *
      * @return Response
+     * @author Bertrand Kintanar
      */
     public function index()
     {

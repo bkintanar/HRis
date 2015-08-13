@@ -1,4 +1,4 @@
-@extends(Request::is('*pim/*') ? 'master.adm-master' : 'master.default')
+@extends('master.adm-master')
 
 @section('content')
     @include('partials.notification')
@@ -19,7 +19,7 @@
 
                     <div class="modal-body">
                         <!--Add form-->
-                        {!! Form::open(['method' => 'POST', 'url' => '/pim/configuration/termination-reasons', 'class' => 'form-horizontal']) !!}
+                        {!! Form::open(['method' => 'POST', 'url' => Request::path(), 'class' => 'form-horizontal']) !!}
                             {!! Form::hidden('termination_reason_id', '', ['id' => 'termination_reason_id']) !!}
                             {!! Form::hidden('_method', 'POST', ['id' => 'termination_reason_form']) !!}
 

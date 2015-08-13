@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Http\Controllers\Profile;
 
 use HRis\Http\Controllers\Controller;
@@ -14,6 +23,8 @@ class MainController extends Controller
 {
     /**
      * @Get("profile")
+     *
+     * @author Bertrand Kintanar
      */
     public function index()
     {

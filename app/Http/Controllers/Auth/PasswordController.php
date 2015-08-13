@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Http\Controllers\Auth;
 
 use HRis\Http\Controllers\Controller;
@@ -30,6 +39,7 @@ class PasswordController extends Controller
      *
      * @param  \Illuminate\Contracts\Auth\Guard $auth
      * @param  \Illuminate\Contracts\Auth\PasswordBroker $passwords
+     * @author Bertrand Kintanar
      */
     public function __construct(Guard $auth, PasswordBroker $passwords)
     {

@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Http\Controllers\Administration\Job;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -23,6 +32,7 @@ class EmploymentStatusController extends Controller
     /**
      * @param Sentinel $auth
      * @param EmploymentStatus $employment_status
+     * @author Bertrand Kintanar
      */
     public function __construct(Sentinel $auth, EmploymentStatus $employment_status)
     {
@@ -38,6 +48,7 @@ class EmploymentStatusController extends Controller
      *
      * @param EmploymentStatusRequest $request
      * @return \Illuminate\View\View
+     * @author Bertrand Kintanar
      */
     public function index(EmploymentStatusRequest $request)
     {
@@ -51,7 +62,9 @@ class EmploymentStatusController extends Controller
     }
 
     /**
+     * @param $employment_statuses
      * @return array
+     * @author Bertrand Kintanar
      */
     public function setupDataTable($employment_statuses)
     {
@@ -77,6 +90,7 @@ class EmploymentStatusController extends Controller
      *
      * @param EmploymentStatusRequest $request
      * @return \Illuminate\Http\RedirectResponse
+     * @author Bertrand Kintanar
      */
     public function store(EmploymentStatusRequest $request)
     {
@@ -96,6 +110,7 @@ class EmploymentStatusController extends Controller
      *
      * @param EmploymentStatusRequest $request
      * @return \Illuminate\Http\RedirectResponse
+     * @author Bertrand Kintanar
      */
     public function update(EmploymentStatusRequest $request)
     {

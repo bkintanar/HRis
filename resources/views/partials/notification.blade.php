@@ -1,4 +1,4 @@
-    @if (\Session::has('success'))
+@if (\Session::has('success'))
     <div id="notification-success" class="alert alert-success alert-dismissable">
         <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
         {{\Session::get('success')}}

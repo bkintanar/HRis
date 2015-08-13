@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Http\Controllers\Profile;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -32,6 +41,7 @@ class DependentsController extends Controller
      * @param Sentinel $auth
      * @param Employee $employee
      * @param Dependent $dependent
+     * @author Bertrand Kintanar
      */
     public function __construct(Sentinel $auth, Employee $employee, Dependent $dependent)
     {
@@ -50,6 +60,7 @@ class DependentsController extends Controller
      * @param DependentsRequest $request
      * @param null $employee_id
      * @return \Illuminate\View\View
+     * @author Bertrand Kintanar
      */
     public function index(DependentsRequest $request, $employee_id = null)
     {
@@ -71,7 +82,9 @@ class DependentsController extends Controller
     }
 
     /**
+     * @param $dependents
      * @return array
+     * @author Bertrand Kintanar
      */
     public function setupDataTable($dependents)
     {
@@ -94,6 +107,7 @@ class DependentsController extends Controller
      *
      * @param DependentsRequest $request
      * @return \Illuminate\Http\RedirectResponse
+     * @author Bertrand Kintanar
      */
     public function store(DependentsRequest $request)
     {
@@ -114,6 +128,7 @@ class DependentsController extends Controller
      *
      * @param DependentsRequest $request
      * @return \Illuminate\Http\RedirectResponse
+     * @author Bertrand Kintanar
      */
     public function update(DependentsRequest $request)
     {
@@ -139,6 +154,7 @@ class DependentsController extends Controller
      * @Delete("ajax/pim/employee-list/{id}/dependents")
      *
      * @param DependentsRequest $request
+     * @author Bertrand Kintanar
      */
     public function deleteDependent(DependentsRequest $request)
     {
@@ -162,6 +178,7 @@ class DependentsController extends Controller
      * @Get("ajax/pim/employee-list/{id}/dependents")
      *
      * @param DependentsRequest $request
+     * @author Bertrand Kintanar
      */
     public function getDependent(DependentsRequest $request)
     {

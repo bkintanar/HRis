@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Eloquent;
 
 use Cartalyst\Sentinel\Users\EloquentUser as SentinelUser;
@@ -40,6 +49,7 @@ class User extends SentinelUser implements AuthenticatableContract, CanResetPass
     /**
      * @return mixed
      * @throws Exception
+     * @author Bertrand Kintanar
      */
     public function role()
     {
@@ -54,6 +64,7 @@ class User extends SentinelUser implements AuthenticatableContract, CanResetPass
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @author Bertrand Kintanar
      */
     public function employee()
     {

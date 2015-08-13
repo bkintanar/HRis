@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Http\Controllers\Auth;
 
 use Cartalyst\Sentinel\Laravel\Facades\Activation;
@@ -35,6 +44,7 @@ class AuthController extends Controller
      * @Get("auth/login")
      *
      * @return Response
+     * @author Bertrand Kintanar
      */
     public function getLogin()
     {
@@ -49,6 +59,7 @@ class AuthController extends Controller
      * @Get("auth/register")
      *
      * @return Response
+     * @author Bertrand Kintanar
      */
     public function getRegister()
     {
@@ -64,6 +75,7 @@ class AuthController extends Controller
      *
      * @param  LoginRequest $request
      * @return Response
+     * @author Bertrand Kintanar
      */
     public function postLogin(LoginRequest $request)
     {
@@ -97,6 +109,7 @@ class AuthController extends Controller
      * @param $user_id
      * @param $activation_code
      * @return Redirect
+     * @author Bertrand Kintanar
      */
     public function getActivateUser($user_id, $activation_code)
     {
@@ -124,6 +137,7 @@ class AuthController extends Controller
      *
      * @param RegisterRequest $request
      * @return \Illuminate\Http\RedirectResponse
+     * @author Bertrand Kintanar
      */
     public function postRegister(RegisterRequest $request)
     {
@@ -184,6 +198,7 @@ class AuthController extends Controller
      * @Get("auth/logout")
      *
      * @return Response
+     * @author Bertrand Kintanar
      */
     public function getLogout()
     {

@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Http\Controllers\Time\Attendance;
 
 use Carbon\Carbon;
@@ -25,6 +34,7 @@ class EmployeeRecordsController extends Controller
      *
      * @param null $date
      * @return \Illuminate\View\View
+     * @author Bertrand Kintanar
      */
     public function index($date = null)
     {
@@ -45,6 +55,8 @@ class EmployeeRecordsController extends Controller
 
     /**
      * @Post("time/attendance/employee-records")
+     *
+     * @author Bertrand Kintanar
      */
     public function show()
     {

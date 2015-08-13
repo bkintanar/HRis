@@ -1,15 +1,25 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
+/**
+ * Class EmploymentStatusTest
+ */
 class EmploymentStatusTest extends \TestCase
 {
     use DatabaseTransactions;
 
     /**
-     * A basic functional test example.
-     *
-     * @return void
+     * @author Bertrand Kintanar
      */
     public function testAddEmploymentStatusPositive()
     {
@@ -27,6 +37,9 @@ class EmploymentStatusTest extends \TestCase
             ->see('Test');
     }
 
+    /**
+     * @author Bertrand Kintanar
+     */
     public function testDeleteEmploymentStatusPositive()
     {
         $this->testUpdateEmploymentStatusPositive();
@@ -42,6 +55,9 @@ class EmploymentStatusTest extends \TestCase
         $this->dontSee('Tested');
     }
 
+    /**
+     * @author Bertrand Kintanar
+     */
     public function testUpdateEmploymentStatusPositive()
     {
         $this->logMeIn();

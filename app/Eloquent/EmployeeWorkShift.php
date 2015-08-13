@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Eloquent;
 
 use Carbon\Carbon;
@@ -47,7 +56,8 @@ class EmployeeWorkShift extends Model
     /**
      * @param null $fillables
      * @param $employee_id
-     * @return mixed
+     * @return null
+     * @author Bertrand Kintanar
      */
     public function getCurrentEmployeeWorkShift($fillables = null, $employee_id)
     {
@@ -62,6 +72,7 @@ class EmployeeWorkShift extends Model
     /**
      * @param $start_date
      * @return array
+     * @author Bertrand Kintanar
      */
     public function getWorkShiftRange($start_date)
     {
@@ -77,6 +88,7 @@ class EmployeeWorkShift extends Model
 
     /**
      * @param $effective_date
+     * @author Bertrand Kintanar
      */
     public function setEffectiveDateAttribute($effective_date)
     {
@@ -85,6 +97,7 @@ class EmployeeWorkShift extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @author Bertrand Kintanar
      */
     public function workShift()
     {

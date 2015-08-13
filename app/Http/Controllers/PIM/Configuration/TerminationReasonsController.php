@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Http\Controllers\PIM\Configuration;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -30,6 +39,7 @@ class TerminationReasonsController extends Controller
      * @param Sentinel $auth
      * @param Employee $employee
      * @param TerminationReason $termination_reason
+     * @author Bertrand Kintanar
      */
     public function __construct(Sentinel $auth, Employee $employee, TerminationReason $termination_reason)
     {
@@ -46,6 +56,7 @@ class TerminationReasonsController extends Controller
      *
      * @param TerminationReasonsRequest $request
      * @return \Illuminate\View\View
+     * @author Bertrand Kintanar
      */
     public function index(TerminationReasonsRequest $request)
     {
@@ -60,7 +71,9 @@ class TerminationReasonsController extends Controller
     }
 
     /**
+     * @param $termination_reasons
      * @return array
+     * @author Bertrand Kintanar
      */
     public function setupDataTable($termination_reasons)
     {
@@ -86,6 +99,7 @@ class TerminationReasonsController extends Controller
      *
      * @param TerminationReasonsRequest $request
      * @return \Illuminate\Http\RedirectResponse
+     * @author Bertrand Kintanar
      */
     public function store(TerminationReasonsRequest $request)
     {
@@ -105,6 +119,7 @@ class TerminationReasonsController extends Controller
      *
      * @param TerminationReasonsRequest $request
      * @return \Illuminate\Http\RedirectResponse
+     * @author Bertrand Kintanar
      */
     public function update(TerminationReasonsRequest $request)
     {

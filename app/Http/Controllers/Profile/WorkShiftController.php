@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Http\Controllers\Profile;
 
 use Carbon\Carbon;
@@ -33,6 +42,7 @@ class WorkShiftController extends Controller
      * @param Sentinel $auth
      * @param Employee $employee
      * @param EmployeeWorkShift $employee_work_shift
+     * @author Bertrand Kintanar
      */
     public function __construct(Sentinel $auth, Employee $employee, EmployeeWorkShift $employee_work_shift)
     {
@@ -51,6 +61,7 @@ class WorkShiftController extends Controller
      * @param WorkShiftRequest $request
      * @param null $employee_id
      * @return \Illuminate\View\View
+     * @author Bertrand Kintanar
      */
     public function index(WorkShiftRequest $request, $employee_id = null)
     {
@@ -75,6 +86,7 @@ class WorkShiftController extends Controller
      * @param  WorkShiftRequest $request
      * @param null $employee_id
      * @return Response
+     * @author Bertrand Kintanar
      */
     public function show(WorkShiftRequest $request, $employee_id = null)
     {
@@ -102,6 +114,7 @@ class WorkShiftController extends Controller
      *
      * @param  WorkShiftRequest $request
      * @return Response
+     * @author Bertrand Kintanar
      */
     public function update(WorkShiftRequest $request)
     {
@@ -125,6 +138,7 @@ class WorkShiftController extends Controller
      *
      * @param  int $id
      * @return Response
+     * @author Bertrand Kintanar
      */
     public function destroy($id)
     {

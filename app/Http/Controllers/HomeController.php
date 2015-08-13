@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Http\Controllers;
 
 use HRis\Eloquent\Employee;
@@ -27,6 +36,7 @@ class HomeController extends Controller
     /**
      * @Get("/dashboard")
      *
+     * @author Bertrand Kintanar
      */
     public function dashboard()
     {
@@ -39,6 +49,8 @@ class HomeController extends Controller
      * Show the application dashboard to the user.
      *
      * @Get("/")
+     *
+     * @author Bertrand Kintanar
      */
     public function index()
     {
@@ -47,6 +59,7 @@ class HomeController extends Controller
 
     /**
      * @Get("sandbox")
+     * @author Bertrand Kintanar
      */
     public function sandbox()
     {

@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Http\Controllers\Administration;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -23,6 +32,7 @@ class UserManagementController extends Controller
     /**
      * @param Sentinel $auth
      * @param User $user
+     * @author Bertrand Kintanar
      */
     public function __construct(Sentinel $auth, User $user)
     {
@@ -37,6 +47,7 @@ class UserManagementController extends Controller
      * @Get("admin/user-management")
      *
      * @return \Illuminate\View\View
+     * @author Bertrand Kintanar
      */
     public function index()
     {
@@ -53,6 +64,8 @@ class UserManagementController extends Controller
      * Show the Administration - User with the given Id.
      *
      * @Get("admin/user-management/{id}")
+     *
+     * @author Bertrand Kintanar
      */
     public function viewUser()
     {
@@ -65,6 +78,7 @@ class UserManagementController extends Controller
      *
      * @param $user_id
      * @return \Illuminate\View\View
+     * @author Bertrand Kintanar
      */
     public function userDetails($user_id)
     {
@@ -85,6 +99,7 @@ class UserManagementController extends Controller
      *
      * @param $user_id
      * @return \Illuminate\View\View
+     * @author Bertrand Kintanar
      */
     public function userPermissions($user_id)
     {

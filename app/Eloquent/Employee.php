@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Eloquent;
 
 use Carbon\Carbon;
@@ -72,6 +81,7 @@ class Employee extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @author Bertrand Kintanar
      */
     public function city()
     {
@@ -80,6 +90,7 @@ class Employee extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @author Bertrand Kintanar
      */
     public function country()
     {
@@ -88,6 +99,7 @@ class Employee extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @author Bertrand Kintanar
      */
     public function dependents()
     {
@@ -96,6 +108,7 @@ class Employee extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @author Bertrand Kintanar
      */
     public function educations()
     {
@@ -103,7 +116,8 @@ class Employee extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return mixed
+     * @author Jim Callanta
      */
     public function employeeSalaryComponent()
     {
@@ -117,7 +131,8 @@ class Employee extends Model
     /**
      * @param $employee_id
      * @param $user_id
-     * @return \HRis\Eloquent\Employee
+     * @return mixed
+     * @author Bertrand Kintanar
      */
     public function getEmployeeById($employee_id, $user_id)
     {
@@ -131,10 +146,11 @@ class Employee extends Model
     }
 
     /**
-     * @param bool $paginate
+     * @param bool|true $paginate
      * @param string $sort
      * @param string $direction
      * @return mixed
+     * @author Bertrand Kintanar
      */
     public function getEmployeeList($paginate = true, $sort = 'employees.id', $direction = 'asc')
     {
@@ -159,6 +175,7 @@ class Employee extends Model
      * @param $employee_id
      * @param $user_employee_id
      * @return mixed
+     * @author Jim Callanta
      */
     public function getEmployeeSalaryDetails($employee_id, $user_employee_id)
     {
@@ -171,6 +188,7 @@ class Employee extends Model
 
     /**
      * @return string
+     * @author Bertrand Kintanar
      */
     public function getFullNameAttribute()
     {
@@ -180,6 +198,7 @@ class Employee extends Model
     /**
      * @param $start_date
      * @return array
+     * @author Bertrand Kintanar
      */
     public function getTimeLog($start_date)
     {
@@ -224,6 +243,7 @@ class Employee extends Model
 
     /**
      * @return mixed
+     * @author Bertrand Kintanar
      */
     public function employeeWorkShift()
     {
@@ -234,6 +254,7 @@ class Employee extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @author Bertrand Kintanar
      */
     public function timelogs()
     {
@@ -242,6 +263,7 @@ class Employee extends Model
 
     /**
      * @return mixed
+     * @author Bertrand Kintanar
      */
     public function jobHistory()
     {
@@ -250,6 +272,7 @@ class Employee extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @author Bertrand Kintanar
      */
     public function jobHistories()
     {
@@ -258,6 +281,7 @@ class Employee extends Model
 
     /**
      * @return mixed
+     * @author Bertrand Kintanar
      */
     public function orderedJobHistories()
     {
@@ -267,6 +291,7 @@ class Employee extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @author Bertrand Kintanar
      */
     public function province()
     {
@@ -275,6 +300,7 @@ class Employee extends Model
 
     /**
      * @param $birth_date
+     * @author Bertrand Kintanar
      */
     public function setBirthDateAttribute($birth_date)
     {
@@ -283,6 +309,7 @@ class Employee extends Model
 
     /**
      * @param $employee_id
+     * @author Bertrand Kintanar
      */
     public function setEmployeeIdAttribute($employee_id)
     {
@@ -291,6 +318,7 @@ class Employee extends Model
 
     /**
      * @param $face_id
+     * @author Bertrand Kintanar
      */
     public function setFaceIdAttribute($face_id)
     {
@@ -299,6 +327,7 @@ class Employee extends Model
 
     /**
      * @param $hdmf_pagibig
+     * @author Bertrand Kintanar
      */
     public function setHdmfPagibigAttribute($hdmf_pagibig)
     {
@@ -307,6 +336,7 @@ class Employee extends Model
 
     /**
      * @param $joined_date
+     * @author Bertrand Kintanar
      */
     public function setJoinedDateAttribute($joined_date)
     {
@@ -315,6 +345,7 @@ class Employee extends Model
 
     /**
      * @param $marital_status_id
+     * @author Bertrand Kintanar
      */
     public function setMaritalStatusIdAttribute($marital_status_id)
     {
@@ -323,6 +354,7 @@ class Employee extends Model
 
     /**
      * @param $permanency_date
+     * @author Bertrand Kintanar
      */
     public function setPermanencyDateAttribute($permanency_date)
     {
@@ -331,6 +363,7 @@ class Employee extends Model
 
     /**
      * @param $philhealth
+     * @author Bertrand Kintanar
      */
     public function setPhilHealthAttribute($philhealth)
     {
@@ -339,6 +372,7 @@ class Employee extends Model
 
     /**
      * @param $probation_end_date
+     * @author Bertrand Kintanar
      */
     public function setProbationEndDateAttribute($probation_end_date)
     {
@@ -347,6 +381,7 @@ class Employee extends Model
 
     /**
      * @param $resign_date
+     * @author Bertrand Kintanar
      */
     public function setResignDateAttribute($resign_date)
     {
@@ -355,6 +390,7 @@ class Employee extends Model
 
     /**
      * @param $user_id
+     * @author Bertrand Kintanar
      */
     public function setUserIdAttribute($user_id)
     {
@@ -363,6 +399,7 @@ class Employee extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @author Bertrand Kintanar
      */
     public function skills()
     {
@@ -371,6 +408,7 @@ class Employee extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @author Bertrand Kintanar
      */
     public function user()
     {
@@ -379,6 +417,7 @@ class Employee extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @author Bertrand Kintanar
      */
     public function workExperiences()
     {

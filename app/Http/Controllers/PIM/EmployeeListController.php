@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Http\Controllers\PIM;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -51,6 +60,7 @@ class EmployeeListController extends Controller
      * @param EmployeeSalaryComponent $employee_salary_component
      * @param SalaryComponent $salary_component
      * @param Pagination $pagination
+     * @author Bertrand Kintanar
      */
     public function __construct(
         Sentinel $auth,
@@ -71,7 +81,7 @@ class EmployeeListController extends Controller
     }
 
     /**
-     *
+     * @author Bertrand Kintanar
      */
     private function setColumns()
     {
@@ -91,6 +101,7 @@ class EmployeeListController extends Controller
      *
      * @param PIMRequest $request
      * @return \Illuminate\View\View
+     * @author Bertrand Kintanar
      */
     public function index(PIMRequest $request)
     {
@@ -111,6 +122,7 @@ class EmployeeListController extends Controller
 
     /**
      * @return mixed
+     * @author Bertrand Kintanar
      */
     private function getColumns()
     {
@@ -124,6 +136,7 @@ class EmployeeListController extends Controller
      *
      * @param PIMRequest $request
      * @return \Illuminate\Http\RedirectResponse
+     * @author Bertrand Kintanar
      */
     public function pim(PIMRequest $request)
     {
@@ -137,6 +150,7 @@ class EmployeeListController extends Controller
      *
      * @param $employee_id
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
+     * @author Bertrand Kintanar
      */
     public function show($employee_id)
     {
@@ -156,6 +170,7 @@ class EmployeeListController extends Controller
      *
      * @param PIMRequest $request
      * @return \Illuminate\Http\RedirectResponse
+     * @author Bertrand Kintanar
      */
     public function store(PIMRequest $request)
     {

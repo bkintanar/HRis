@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Http\Controllers;
 
 use Config;
@@ -49,6 +58,8 @@ class AjaxController extends Controller
      * Show the profile personal details form.
      *
      * @Get("ajax/update-address")
+     *
+     * @author Bertrand Kintanar
      */
     public function updateAddress()
     {
@@ -75,6 +86,7 @@ class AjaxController extends Controller
      * @Get("ajax/pim/employee-list/{id}/qualifications/work-experience")
      *
      * @param QualificationsWorkExperienceRequest $request
+     * @author Bertrand Kintanar
      */
     public function getWorkExperience(QualificationsWorkExperienceRequest $request)
     {
@@ -98,6 +110,7 @@ class AjaxController extends Controller
      * @Delete("ajax/pim/employee-list/{id}/qualifications/work-experience")
      *
      * @param QualificationsWorkExperienceRequest $request
+     * @author Bertrand Kintanar
      */
     public function deleteWorkExperience(QualificationsWorkExperienceRequest $request)
     {
@@ -121,6 +134,7 @@ class AjaxController extends Controller
      * @Get("ajax/pim/employee-list/{id}/qualifications/education")
      *
      * @param QualificationsEducationRequest $request
+     * @author Bertrand Kintanar
      */
     public function getEducation(QualificationsEducationRequest $request)
     {
@@ -144,6 +158,7 @@ class AjaxController extends Controller
      * @Delete("ajax/pim/employee-list/{id}/qualifications/education")
      *
      * @param QualificationsEducationRequest $request
+     * @author Bertrand Kintanar
      */
     public function deleteEduction(QualificationsEducationRequest $request)
     {
@@ -167,6 +182,7 @@ class AjaxController extends Controller
      * @Get("ajax/pim/employee-list/{id}/qualifications/skill")
      *
      * @param QualificationsSkillRequest $request
+     * @author Bertrand Kintanar
      */
     public function getSkill(QualificationsSkillRequest $request)
     {
@@ -190,6 +206,7 @@ class AjaxController extends Controller
      * @Delete("ajax/pim/employee-list/{id}/qualifications/skill")
      *
      * @param QualificationsSkillRequest $request
+     * @author Bertrand Kintanar
      */
     public function deleteSkill(QualificationsSkillRequest $request)
     {
@@ -210,6 +227,7 @@ class AjaxController extends Controller
      * Delete the profile qualifications skill.
      *
      * @Post("ajax/upload-profile-image")
+     * @author Bertrand Kintanar
      */
     public function uploadProfileImage()
     {
@@ -241,6 +259,7 @@ class AjaxController extends Controller
      * @Get("ajax/get-termination-reason")
      *
      * @param TerminationReasonsRequest $request
+     * @author Bertrand Kintanar
      */
     public function getTerminationReason(TerminationReasonsRequest $request)
     {
@@ -263,6 +282,7 @@ class AjaxController extends Controller
      * @Delete("ajax/delete-termination-reason")
      *
      * @param TerminationReasonsRequest $request
+     * @author Bertrand Kintanar
      */
     public function deleteTerminationReason(TerminationReasonsRequest $request)
     {
@@ -285,6 +305,7 @@ class AjaxController extends Controller
      * @Get("ajax/get-job-title")
      *
      * @param JobTitleRequest $request
+     * @author Bertrand Kintanar
      */
     public function getJobTitle(JobTitleRequest $request)
     {
@@ -307,6 +328,7 @@ class AjaxController extends Controller
      * @Delete("ajax/delete-job-title")
      *
      * @param JobTitleRequest $request
+     * @author Bertrand Kintanar
      */
     public function deleteJobTitle(JobTitleRequest $request)
     {
@@ -329,6 +351,7 @@ class AjaxController extends Controller
      * @Get("ajax/get-employment-status")
      *
      * @param EmploymentStatusRequest $request
+     * @author Bertrand Kintanar
      */
     public function getEmploymentStatus(EmploymentStatusRequest $request)
     {
@@ -351,6 +374,7 @@ class AjaxController extends Controller
      * @Delete("ajax/delete-employment-status")
      *
      * @param EmploymentStatusRequest $request
+     * @author Bertrand Kintanar
      */
     public function deleteEmploymentStatus(EmploymentStatusRequest $request)
     {
@@ -373,6 +397,7 @@ class AjaxController extends Controller
      * @Get("ajax/get-nationality")
      *
      * @param NationalityRequest $request
+     * @author Bertrand Kintanar
      */
     public function getNationality(NationalityRequest $request)
     {
@@ -395,6 +420,7 @@ class AjaxController extends Controller
      * @Delete("ajax/delete-nationality")
      *
      * @param NationalityRequest $request
+     * @author Bertrand Kintanar
      */
     public function deleteNationality(NationalityRequest $request)
     {
@@ -417,6 +443,7 @@ class AjaxController extends Controller
      * @Get("ajax/get-work-shift")
      *
      * @param WorkShiftRequest $request
+     * @author Bertrand Kintanar
      */
     public function getWorkShift(WorkShiftRequest $request)
     {
@@ -439,6 +466,7 @@ class AjaxController extends Controller
      * @Delete("ajax/delete-work-shift")
      *
      * @param WorkShiftRequest $request
+     * @author Bertrand Kintanar
      */
     public function deleteWorkShift(WorkShiftRequest $request)
     {
@@ -461,6 +489,7 @@ class AjaxController extends Controller
      * @Get("ajax/get-pay-grade")
      *
      * @param PayGradeRequest $request
+     * @author Bertrand Kintanar
      */
     public function getPayGrade(PayGradeRequest $request)
     {
@@ -483,6 +512,7 @@ class AjaxController extends Controller
      * @Delete("ajax/delete-pay-grade")
      *
      * @param PayGradeRequest $request
+     * @author Bertrand Kintanar
      */
     public function deletePayGrade(PayGradeRequest $request)
     {
@@ -505,6 +535,7 @@ class AjaxController extends Controller
      * @Get("ajax/get-skill")
      *
      * @param SkillRequest $request
+     * @author Bertrand Kintanar
      */
     public function getAdminSkill(SkillRequest $request)
     {
@@ -527,6 +558,7 @@ class AjaxController extends Controller
      * @Delete("ajax/delete-skill")
      *
      * @param SkillRequest $request
+     * @author Bertrand Kintanar
      */
     public function deleteAdminSkill(SkillRequest $request)
     {
@@ -549,6 +581,7 @@ class AjaxController extends Controller
      * @Get("ajax/get-education")
      *
      * @param EducationRequest $request
+     * @author Bertrand Kintanar
      */
     public function getAdminEducation(EducationRequest $request)
     {
@@ -571,6 +604,7 @@ class AjaxController extends Controller
      * @Delete("ajax/delete-education")
      *
      * @param EducationRequest $request
+     * @author Bertrand Kintanar
      */
     public function deleteAdminEducation(EducationRequest $request)
     {
@@ -594,6 +628,7 @@ class AjaxController extends Controller
      * @Delete("ajax/pim/employee-list/{id}/job/edit")
      *
      * @param JobRequest $request
+     * @author Bertrand Kintanar
      */
     public function deleteJobHistory(JobRequest $request)
     {
@@ -619,6 +654,7 @@ class AjaxController extends Controller
      * @Get("ajax/pim/employee-list/{id}/salary/edit")
      *
      * @param SalaryRequest $request
+     * @author Jim Callanta
      */
     public function updateSalary(SalaryRequest $request)
     {
@@ -664,6 +700,7 @@ class AjaxController extends Controller
      * @Delete("ajax/pim/employee-list/{id}/work-shifts/edit")
      *
      * @param WorkShiftRequest $request
+     * @author Bertrand Kintanar
      */
     public function deleteWorkShiftData(WorkShiftRequest $request)
     {

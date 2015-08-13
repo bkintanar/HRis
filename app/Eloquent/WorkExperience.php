@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Eloquent;
 
 use Carbon\Carbon;
@@ -41,6 +50,7 @@ class WorkExperience extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @author Bertrand Kintanar
      */
     public function employee()
     {
@@ -49,6 +59,7 @@ class WorkExperience extends Model
 
     /**
      * @param $from_date
+     * @author Bertrand Kintanar
      */
     public function setFromDateAttribute($from_date)
     {
@@ -57,6 +68,7 @@ class WorkExperience extends Model
 
     /**
      * @param $to_date
+     * @author Bertrand Kintanar
      */
     public function setToDateAttribute($to_date)
     {

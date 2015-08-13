@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
@@ -33,6 +42,7 @@ class TimeLog extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @author Bertrand Kintanar
      */
     public function employee()
     {

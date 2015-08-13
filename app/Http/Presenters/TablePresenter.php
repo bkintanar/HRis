@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Http\Presenters;
 
 /**
@@ -12,6 +21,7 @@ class TablePresenter
      * @param $logged_user
      * @param $table
      * @return string
+     * @author Bertrand Kintanar
      */
     public static function display($logged_user, $table)
     {

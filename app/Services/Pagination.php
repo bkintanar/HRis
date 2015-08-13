@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Services;
 
 use Request;
@@ -15,6 +24,7 @@ class Pagination
      * @param $name
      * @param $settings
      * @return string
+     * @author Jim Callanta
      */
     public static function getSortLinks($column, $name, $settings)
     {
@@ -32,6 +42,7 @@ class Pagination
      * @param $data
      * @param $settings
      * @return mixed
+     * @author Jim Callanta
      */
     public static function setupPagination($data, $settings)
     {
