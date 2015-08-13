@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Http\Controllers\Profile;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -23,6 +32,7 @@ class SalaryComputationsController extends Controller
      * @param Employee $employee
      * @param EmployeeSalaryComponent $employee_salary_component
      * @param Salary $salary_services
+     * @author Bertrand Kintanar
      */
     public function __construct(
         Sentinel $auth,
@@ -45,6 +55,7 @@ class SalaryComputationsController extends Controller
      *
      * @param SalaryRequest $request
      * @return Response
+     * @author Bertrand Kintanar
      */
     public function salary(SalaryRequest $request, $employee_id = null)
     {
@@ -72,6 +83,7 @@ class SalaryComputationsController extends Controller
      * @param SalaryRequest $request
      * @param null $employee_id
      * @return \Illuminate\View\View
+     * @author Bertrand Kintanar
      */
     public function showSalaryEditForm(SalaryRequest $request, $employee_id = null)
     {
@@ -104,6 +116,7 @@ class SalaryComputationsController extends Controller
      *
      * @param SalaryRequest $request
      * @return \Illuminate\Http\RedirectResponse
+     * @author Bertrand Kintanar
      */
     public function update(SalaryRequest $request)
     {

@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
@@ -9,6 +18,7 @@ class CreateSalaryComponentsTable extends Migration
      * Reverse the migrations.
      *
      * @return void
+     * @author Jim Callanta
      */
     public function down()
     {
@@ -19,6 +29,7 @@ class CreateSalaryComponentsTable extends Migration
      * Run the migrations.
      *
      * @return void
+     * @author Jim Callanta
      */
     public function up()
     {

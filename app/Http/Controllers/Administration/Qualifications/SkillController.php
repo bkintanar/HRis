@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Http\Controllers\Administration\Qualifications;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -23,6 +32,7 @@ class SkillController extends Controller
     /**
      * @param Sentinel $auth
      * @param Skill $skill
+     * @author Bertrand Kintanar
      */
     public function __construct(Sentinel $auth, Skill $skill)
     {
@@ -38,6 +48,7 @@ class SkillController extends Controller
      *
      * @param SkillRequest $request
      * @return \Illuminate\View\View
+     * @author Bertrand Kintanar
      */
     public function index(SkillRequest $request)
     {
@@ -50,7 +61,9 @@ class SkillController extends Controller
     }
 
     /**
+     * @param $skills
      * @return array
+     * @author Bertrand Kintanar
      */
     public function setupDataTable($skills)
     {
@@ -72,6 +85,7 @@ class SkillController extends Controller
      *
      * @param SkillRequest $request
      * @return \Illuminate\Http\RedirectResponse
+     * @author Bertrand Kintanar
      */
     public function store(SkillRequest $request)
     {
@@ -91,6 +105,7 @@ class SkillController extends Controller
      *
      * @param SkillRequest $request
      * @return \Illuminate\Http\RedirectResponse
+     * @author Bertrand Kintanar
      */
     public function update(SkillRequest $request)
     {

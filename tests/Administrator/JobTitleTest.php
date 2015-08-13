@@ -1,11 +1,26 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
+/**
+ * Class JobTitleTest
+ */
 class JobTitleTest extends \TestCase
 {
     use DatabaseTransactions;
 
+    /**
+     * @author Bertrand Kintanar
+     */
     public function testAddJobTitlePositive()
     {
         $this->logMeIn();
@@ -22,6 +37,9 @@ class JobTitleTest extends \TestCase
             ->see('Test');
     }
 
+    /**
+     * @author Bertrand Kintanar
+     */
     public function testDeleteJobTitlePositive()
     {
         $this->testUpdateJobTitlePositive();
@@ -37,6 +55,9 @@ class JobTitleTest extends \TestCase
         $this->dontSee('Tested');
     }
 
+    /**
+     * @author Bertrand Kintanar
+     */
     public function testUpdateJobTitlePositive()
     {
         $this->logMeIn();

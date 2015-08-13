@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis;
 
 use Illuminate\Support\Facades\Lang;
@@ -13,6 +22,7 @@ class Translate
     /**
      * @param $text
      * @return mixed
+     * @author Bertrand Kintanar
      */
     public static function error($text)
     {

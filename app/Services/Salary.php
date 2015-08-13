@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Services;
 
 use Config;
@@ -17,8 +26,10 @@ class Salary
     /**
      * @param TaxComputations $tax_computations
      * @param Dependent $dependent
-     * @param SSSContributions $sss_contribution
-     * @param SalaryComponents $salary_components
+     * @param SSSContribution $sss_contribution
+     * @param SalaryComponent $salary_component
+     * @param EmployeeSalaryComponent $employee_salary_component
+     * @author Jim Callanta
      */
     public function __construct(
         TaxComputation $tax_computation,
@@ -36,6 +47,7 @@ class Salary
     /**
      * @param $employee
      * @return array
+     * @author Jim Callanta
      */
     public function getSalaryDetails($employee)
     {

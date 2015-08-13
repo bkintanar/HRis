@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Http\Controllers;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -8,8 +17,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
 /**
- * Class Controller
- * @package HRis\Http\Controllers
+ * Class Controller.
  */
 abstract class Controller extends BaseController
 {
@@ -32,6 +40,7 @@ abstract class Controller extends BaseController
 
     /**
      * @param Sentinel $auth
+     * @author Bertrand Kintanar
      */
     public function __construct(Sentinel $auth)
     {
@@ -45,6 +54,7 @@ abstract class Controller extends BaseController
     /**
      * @param $blade
      * @return \Illuminate\View\View
+     * @author Bertrand Kintanar
      */
     public function template($blade)
     {

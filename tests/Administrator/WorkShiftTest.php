@@ -1,11 +1,26 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
+/**
+ * Class WorkShiftTest
+ */
 class WorkShiftTest extends \TestCase
 {
     use DatabaseTransactions;
 
+    /**
+     * @author Bertrand Kintanar
+     */
     public function testAddWorkShiftPositive()
     {
         $this->logMeIn();
@@ -23,6 +38,9 @@ class WorkShiftTest extends \TestCase
             ->see('Test');
     }
 
+    /**
+     * @author Bertrand Kintanar
+     */
     public function testDeleteWorkShiftPositive()
     {
         $this->testUpdateWorkShiftPositive();
@@ -38,6 +56,9 @@ class WorkShiftTest extends \TestCase
         $this->dontSee('Tested');
     }
 
+    /**
+     * @author Bertrand Kintanar
+     */
     public function testUpdateWorkShiftPositive()
     {
         $this->logMeIn();

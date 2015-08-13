@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Http\Middleware;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -22,6 +31,7 @@ class Authenticate
      * Create a new filter instance.
      *
      * @param  Sentinel $auth
+     * @author Bertrand Kintanar
      */
     public function __construct(Sentinel $auth)
     {
@@ -34,6 +44,7 @@ class Authenticate
      * @param  \Illuminate\Http\Request $request
      * @param  \Closure $next
      * @return mixed
+     * @author Bertrand Kintanar
      */
     public function handle($request, Closure $next)
     {

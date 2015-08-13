@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Console\Commands;
 
 use HRis\Eloquent\Employee;
@@ -30,7 +39,7 @@ class UpdateFaceId extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @author Bertrand Kintanar
      */
     public function handle()
     {
@@ -40,10 +49,6 @@ class UpdateFaceId extends Command
         $data = $csv->query();
 
         foreach ($data as $lineIndex => $row) {
-            //            if($row[0] >  509)
-//            print_r($row);
-////            die;
-////            $this->info($row);
             $employee = Employee::whereEmployeeId($row[1])->first();
 
             if ($employee) {

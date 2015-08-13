@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Eloquent;
 
 use Carbon\Carbon;
@@ -49,6 +58,7 @@ class JobHistory extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @author Bertrand Kintanar
      */
     public function department()
     {
@@ -57,6 +67,7 @@ class JobHistory extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @author Bertrand Kintanar
      */
     public function employmentStatus()
     {
@@ -66,7 +77,8 @@ class JobHistory extends Model
     /**
      * @param null $fillables
      * @param $employee_id
-     * @return mixed
+     * @return null
+     * @author Bertrand Kintanar
      */
     public function getCurrentEmployeeJob($fillables = null, $employee_id)
     {
@@ -80,6 +92,7 @@ class JobHistory extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @author Bertrand Kintanar
      */
     public function jobTitle()
     {
@@ -88,6 +101,7 @@ class JobHistory extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @author Bertrand Kintanar
      */
     public function location()
     {
@@ -96,6 +110,7 @@ class JobHistory extends Model
 
     /**
      * @param $effective_date
+     * @author Bertrand Kintanar
      */
     public function setEffectiveDateAttribute($effective_date)
     {
@@ -104,6 +119,7 @@ class JobHistory extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @author Bertrand Kintanar
      */
     public function workShift()
     {

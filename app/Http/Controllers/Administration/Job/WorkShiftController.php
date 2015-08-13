@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Http\Controllers\Administration\Job;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -23,6 +32,7 @@ class WorkShiftController extends Controller
     /**
      * @param Sentinel $auth
      * @param WorkShift $work_shift
+     * @author Bertrand Kintanar
      */
     public function __construct(Sentinel $auth, WorkShift $work_shift)
     {
@@ -38,6 +48,7 @@ class WorkShiftController extends Controller
      *
      * @param WorkShiftRequest $request
      * @return \Illuminate\View\View
+     * @author Bertrand Kintanar
      */
     public function index(WorkShiftRequest $request)
     {
@@ -51,7 +62,9 @@ class WorkShiftController extends Controller
     }
 
     /**
+     * @param $work_shifts
      * @return array
+     * @author Bertrand Kintanar
      */
     public function setupDataTable($work_shifts)
     {
@@ -73,6 +86,7 @@ class WorkShiftController extends Controller
      *
      * @param WorkShiftRequest $request
      * @return \Illuminate\Http\RedirectResponse
+     * @author Bertrand Kintanar
      */
     public function store(WorkShiftRequest $request)
     {
@@ -92,6 +106,7 @@ class WorkShiftController extends Controller
      *
      * @param WorkShiftRequest $request
      * @return \Illuminate\Http\RedirectResponse
+     * @author Bertrand Kintanar
      */
     public function update(WorkShiftRequest $request)
     {

@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Console\Commands;
 
 use Carbon\Carbon;
@@ -31,7 +40,7 @@ class ImportTimeLog extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @author Bertrand Kintanar
      */
     public function handle()
     {

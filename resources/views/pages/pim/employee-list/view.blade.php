@@ -1,4 +1,4 @@
-@extends(Request::is('*pim/*') ? 'master.adm-master' : 'master.default')
+@extends('master.adm-master')
 
 @section('content')
 

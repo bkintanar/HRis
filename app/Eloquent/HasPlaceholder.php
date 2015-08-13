@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Eloquent;
 
 /**
@@ -8,11 +17,15 @@ namespace HRis\Eloquent;
  */
 trait HasPlaceholder
 {
+
     /**
+     * This trait is needed if a model needs a placeholder.
+     *
      * @param $name
      * @param $id
-     * @param $parent_id
-     * @return mixed
+     * @param null $parent_id
+     * @return array
+     * @author Bertrand Kintanar
      */
     public static function listsWithPlaceholder($name, $id, $parent_id = null)
     {

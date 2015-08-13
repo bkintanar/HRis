@@ -1,11 +1,26 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
+/**
+ * Class PayGradeTest
+ */
 class PayGradeTest extends \TestCase
 {
     use DatabaseTransactions;
 
+    /**
+     * @author Bertrand Kintanar
+     */
     public function testDeletePayGradePositive()
     {
         $this->testUpdatePayGradePositive();
@@ -21,6 +36,9 @@ class PayGradeTest extends \TestCase
         $this->dontSee('Tested');
     }
 
+    /**
+     * @author Bertrand Kintanar
+     */
     public function testUpdatePayGradePositive()
     {
         $this->testAddPayGradePositive();
@@ -41,6 +59,9 @@ class PayGradeTest extends \TestCase
             ->see('Tested');
     }
 
+    /**
+     * @author Bertrand Kintanar
+     */
     public function testAddPayGradePositive()
     {
         $this->logMeIn();

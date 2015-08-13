@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Http\Controllers\Profile;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -47,6 +56,7 @@ class QualificationsController extends Controller
      * @param QualificationsRequest $request
      * @param null $employee_id
      * @return \Illuminate\View\View
+     * @author Bertrand Kintanar
      */
     public function index(QualificationsRequest $request, $employee_id = null)
     {
@@ -77,6 +87,7 @@ class QualificationsController extends Controller
      * @param QualificationsWorkExperienceRequest $request
      * @param WorkExperience $workExperience
      * @return \Illuminate\Http\RedirectResponse
+     * @author Bertrand Kintanar
      */
     public function storeWorkExperience(QualificationsWorkExperienceRequest $request, WorkExperience $workExperience)
     {
@@ -100,6 +111,7 @@ class QualificationsController extends Controller
      * @param QualificationsWorkExperienceRequest $request
      * @param WorkExperience $workExperience
      * @return \Illuminate\Http\RedirectResponse
+     * @author Bertrand Kintanar
      */
     public function updateWorkExperience(QualificationsWorkExperienceRequest $request, WorkExperience $workExperience)
     {
@@ -131,6 +143,7 @@ class QualificationsController extends Controller
      * @param QualificationsEducationRequest $request
      * @param Education $education
      * @return \Illuminate\Http\RedirectResponse
+     * @author Bertrand Kintanar
      */
     public function storeEducation(QualificationsEducationRequest $request, Education $education)
     {
@@ -152,6 +165,7 @@ class QualificationsController extends Controller
      * @param QualificationsEducationRequest $request
      * @param Education $education
      * @return \Illuminate\Http\RedirectResponse
+     * @author Bertrand Kintanar
      */
     public function updateEducation(QualificationsEducationRequest $request, Education $education)
     {
@@ -181,6 +195,7 @@ class QualificationsController extends Controller
      *
      * @param QualificationsSkillRequest $request
      * @return \Illuminate\Http\RedirectResponse
+     * @author Bertrand Kintanar
      */
     public function storeSkill(QualificationsSkillRequest $request)
     {
@@ -211,6 +226,7 @@ class QualificationsController extends Controller
      * @param QualificationsSkillRequest $request
      * @param EmployeeSkill $employeeSkill
      * @return \Illuminate\Http\RedirectResponse
+     * @author Bertrand Kintanar
      */
     public function updateSkill(QualificationsSkillRequest $request, EmployeeSkill $employeeSkill)
     {

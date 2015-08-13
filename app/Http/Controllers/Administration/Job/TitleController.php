@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Http\Controllers\Administration\Job;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -23,6 +32,7 @@ class TitleController extends Controller
     /**
      * @param Sentinel $auth
      * @param JobTitle $job_title
+     * @author Bertrand Kintanar
      */
     public function __construct(Sentinel $auth, JobTitle $job_title)
     {
@@ -38,6 +48,7 @@ class TitleController extends Controller
      *
      * @param JobTitleRequest $request
      * @return \Illuminate\View\View
+     * @author Bertrand Kintanar
      */
     public function index(JobTitleRequest $request)
     {
@@ -51,7 +62,9 @@ class TitleController extends Controller
     }
 
     /**
+     * @param $job_titles
      * @return array
+     * @author Bertrand Kintanar
      */
     public function setupDataTable($job_titles)
     {
@@ -73,6 +86,7 @@ class TitleController extends Controller
      *
      * @param JobTitleRequest $request
      * @return \Illuminate\Http\RedirectResponse
+     * @author Bertrand Kintanar
      */
     public function store(JobTitleRequest $request)
     {
@@ -92,6 +106,7 @@ class TitleController extends Controller
      *
      * @param JobTitleRequest $request
      * @return \Illuminate\Http\RedirectResponse
+     * @author Bertrand Kintanar
      */
     public function update(JobTitleRequest $request)
     {

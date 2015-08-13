@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Http\Controllers\Administration\Qualifications;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -23,6 +32,7 @@ class EducationController extends Controller
     /**
      * @param Sentinel $auth
      * @param EducationLevel $education
+     * @author Bertrand Kintanar
      */
     public function __construct(Sentinel $auth, EducationLevel $education)
     {
@@ -38,6 +48,7 @@ class EducationController extends Controller
      *
      * @param EducationRequest $request
      * @return \Illuminate\View\View
+     * @author Bertrand Kintanar
      */
     public function index(EducationRequest $request)
     {
@@ -50,7 +61,9 @@ class EducationController extends Controller
     }
 
     /**
+     * @param $educations
      * @return array
+     * @author Bertrand Kintanar
      */
     public function setupDataTable($educations)
     {
@@ -72,6 +85,7 @@ class EducationController extends Controller
      *
      * @param EducationRequest $request
      * @return \Illuminate\Http\RedirectResponse
+     * @author Bertrand Kintanar
      */
     public function store(EducationRequest $request)
     {
@@ -91,6 +105,7 @@ class EducationController extends Controller
      *
      * @param EducationRequest $request
      * @return \Illuminate\Http\RedirectResponse
+     * @author Bertrand Kintanar
      */
     public function update(EducationRequest $request)
     {

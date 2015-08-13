@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Http\Controllers\Administration\Job;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -18,6 +27,7 @@ class PayGradeController extends Controller
     /**
      * @param Sentinel $auth
      * @param PayGrade $pay_grade
+     * @author Bertrand Kintanar
      */
     public function __construct(Sentinel $auth, PayGrade $pay_grade)
     {
@@ -33,6 +43,7 @@ class PayGradeController extends Controller
      *
      * @param PayGradeRequest $request
      * @return \Illuminate\View\View
+     * @author Bertrand Kintanar
      */
     public function index(PayGradeRequest $request)
     {
@@ -46,7 +57,9 @@ class PayGradeController extends Controller
     }
 
     /**
+     * @param $pay_grades
      * @return array
+     * @author Bertrand Kintanar
      */
     public function setupDataTable($pay_grades)
     {
@@ -68,6 +81,7 @@ class PayGradeController extends Controller
      *
      * @param PayGradeRequest $request
      * @return \Illuminate\Http\RedirectResponse
+     * @author Bertrand Kintanar
      */
     public function store(PayGradeRequest $request)
     {
@@ -87,6 +101,7 @@ class PayGradeController extends Controller
      *
      * @param PayGradeRequest $request
      * @return \Illuminate\Http\RedirectResponse
+     * @author Bertrand Kintanar
      */
     public function update(PayGradeRequest $request)
     {

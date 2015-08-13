@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Eloquent;
 
 use Carbon\Carbon;
@@ -48,7 +57,10 @@ class Education extends Model
     protected $table = 'educations';
 
     /**
+     * An education object belongs to on employee
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @author Bertrand Kintanar
      */
     public function employee()
     {
@@ -56,7 +68,10 @@ class Education extends Model
     }
 
     /**
+     * Casts from_date attribute to Carbon
+     *
      * @param $from_date
+     * @author Bertrand Kintanar
      */
     public function setFromDateAttribute($from_date)
     {
@@ -65,6 +80,7 @@ class Education extends Model
 
     /**
      * @param $to_date
+     * @author Bertrand Kintanar
      */
     public function setToDateAttribute($to_date)
     {

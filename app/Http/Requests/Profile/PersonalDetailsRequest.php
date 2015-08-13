@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Http\Requests\Profile;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -15,6 +24,7 @@ class PersonalDetailsRequest extends Request
      * Get the validation rules that apply to the request.
      *
      * @return array
+     * @author Bertrand Kintanar
      */
     public function rules()
     {
@@ -35,6 +45,7 @@ class PersonalDetailsRequest extends Request
      *
      * @param Sentinel $user
      * @return bool
+     * @author Bertrand Kintanar
      */
     public function authorize(Sentinel $user)
     {
@@ -55,6 +66,7 @@ class PersonalDetailsRequest extends Request
 
     /**
      * @return mixed
+     * @author Bertrand Kintanar
      */
     public function forbiddenResponse()
     {

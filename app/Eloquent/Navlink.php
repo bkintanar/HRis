@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
 namespace HRis\Eloquent;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -23,6 +32,7 @@ class Navlink extends Model
     /**
      * @param $_link
      * @return string
+     * @author Bertrand Kintanar
      */
     protected static function breadcrumb($_link)
     {
@@ -57,6 +67,7 @@ class Navlink extends Model
 
     /**
      * @return string
+     * @author Bertrand Kintanar
      */
     protected static function generate()
     {
@@ -84,6 +95,7 @@ class Navlink extends Model
      * @param $link
      * @param $children
      * @return string
+     * @author Bertrand Kintanar
      */
     protected static function generateNavLinkItem($link, $children)
     {
@@ -150,6 +162,9 @@ class Navlink extends Model
     /**
      * These so called special navigation links are links in which are shown on the navigation
      * bar but we hide their child links.
+     *
+     * @return array
+     * @author Bertrand Kintanar
      */
     protected static function getSpecialNavLinkIds()
     {
@@ -159,8 +174,11 @@ class Navlink extends Model
     }
 
     /**
+     * Checks if the href is active.
+     *
      * @param $href
      * @return bool
+     * @author Bertrand Kintanar
      */
     protected static function isURLActive($href)
     {
@@ -176,6 +194,7 @@ class Navlink extends Model
     /**
      * @param $id
      * @return string
+     * @author Bertrand Kintanar
      */
     protected static function permissionTable($id)
     {
@@ -186,8 +205,6 @@ class Navlink extends Model
             $result .= self::permissionTab($parent, $id);
         }
 
-//        dd($result);
-
         return $result;
     }
 
@@ -195,6 +212,7 @@ class Navlink extends Model
      * @param $parent
      * @param $id
      * @return string
+     * @author Bertrand Kintanar
      */
     protected static function permissionTab($parent, $id)
     {
@@ -233,9 +251,10 @@ class Navlink extends Model
     /**
      * @param $children
      * @param $id
-     * @param bool $indent
-     * @param bool $double
+     * @param bool|false $indent
+     * @param bool|false $double
      * @return string
+     * @author Bertrand Kintanar
      */
     protected static function generatePermissions($children, $id, $indent = false, $double = false)
     {
@@ -266,6 +285,7 @@ class Navlink extends Model
      * @param $id
      * @param $permission
      * @return string
+     * @author Bertrand Kintanar
      */
     protected static function generateCheckbox($link, $id, $permission)
     {
@@ -298,8 +318,9 @@ class Navlink extends Model
     }
 
     /**
-     * @param bool $pim
+     * @param bool|false $pim
      * @return string
+     * @author Bertrand Kintanar
      */
     protected static function profileLinks($pim = false)
     {
@@ -332,12 +353,6 @@ class Navlink extends Model
 
         $nav .= '</ul></div></div>';
 
-//        $tidy = new \Tidy;
-//
-//        $tidy->parseString($nav, ['indent' => true, 'wrap' => 200], 'utf8');
-////        $tidy->cleanRepair();
-//        $tidy = str_replace(['<body>', '</body>'], '', $tidy->body()->value);
-
         return $nav;
     }
 
@@ -345,6 +360,7 @@ class Navlink extends Model
      * @param $navigation
      * @param $pim
      * @return array
+     * @author Bertrand Kintanar
      */
     protected static function formatHref($navigation, $pim)
     {
