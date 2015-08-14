@@ -15,6 +15,8 @@ before_script:
     - chmod -R 777 bootstrap/cache
     - php artisan migrate --env=testing --no-interaction -vvv
     - php artisan db:seed --env=testing --no-interaction -vvv
-    - php artisan serve --port=8080 &
+    - npm install
+    - bower install
+    - gulp
 
 script: phpunit
