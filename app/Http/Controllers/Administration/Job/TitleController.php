@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Controllers\Administration\Job;
@@ -17,8 +16,7 @@ use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Administration\JobTitleRequest;
 
 /**
- * Class TitleController
- * @package HRis\Http\Controllers\Administration\Job
+ * Class TitleController.
  *
  * @Middleware("auth")
  */
@@ -32,6 +30,7 @@ class TitleController extends Controller
     /**
      * @param Sentinel $auth
      * @param JobTitle $job_title
+     *
      * @author Bertrand Kintanar
      */
     public function __construct(Sentinel $auth, JobTitle $job_title)
@@ -47,7 +46,9 @@ class TitleController extends Controller
      * @Get("admin/job/titles")
      *
      * @param JobTitleRequest $request
+     *
      * @return \Illuminate\View\View
+     *
      * @author Bertrand Kintanar
      */
     public function index(JobTitleRequest $request)
@@ -63,7 +64,9 @@ class TitleController extends Controller
 
     /**
      * @param $job_titles
+     *
      * @return array
+     *
      * @author Bertrand Kintanar
      */
     public function setupDataTable($job_titles)
@@ -85,7 +88,9 @@ class TitleController extends Controller
      * @Post("admin/job/titles")
      *
      * @param JobTitleRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function store(JobTitleRequest $request)
@@ -105,14 +110,16 @@ class TitleController extends Controller
      * @Patch("admin/job/titles")
      *
      * @param JobTitleRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function update(JobTitleRequest $request)
     {
         $job_title = $this->job_title->whereId($request->get('job_title_id'))->first();
 
-        if (! $job_title) {
+        if (!$job_title) {
             return redirect()->to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 

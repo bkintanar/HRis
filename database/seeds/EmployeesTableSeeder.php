@@ -6,9 +6,7 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
-
 use Illuminate\Database\Seeder;
 
 class EmployeesTableSeeder extends Seeder
@@ -17,6 +15,7 @@ class EmployeesTableSeeder extends Seeder
      * Run the database seeds.
      *
      * @return void
+     *
      * @author Bertrand Kintanar
      */
     public function run()
@@ -27,7 +26,7 @@ class EmployeesTableSeeder extends Seeder
             [
                 [
                     'id'                  => 1,
-                    'employee_id' => 'HRis-0001',
+                    'employee_id'         => 'HRis-0001',
                     'user_id'             => 1,
                     'marital_status_id'   => 2,
                     'nationality_id'      => 62,
@@ -54,11 +53,11 @@ class EmployeesTableSeeder extends Seeder
                     'joined_date'         => null,
                     'probation_end_date'  => null,
                     'permanency_date'     => null,
-                    'resign_date'         => null
+                    'resign_date'         => null,
                 ],
                 [
                     'id'                  => 2,
-                    'employee_id' => 'HRis-0002',
+                    'employee_id'         => 'HRis-0002',
                     'user_id'             => 2,
                     'marital_status_id'   => 1,
                     'nationality_id'      => 62,
@@ -85,7 +84,7 @@ class EmployeesTableSeeder extends Seeder
                     'joined_date'         => null,
                     'probation_end_date'  => null,
                     'permanency_date'     => null,
-                    'resign_date'         => null
+                    'resign_date'         => null,
                 ],
             ]
         );

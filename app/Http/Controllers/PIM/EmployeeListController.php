@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Controllers\PIM;
@@ -22,8 +21,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Request;
 
 /**
- * Class EmployeeListController
- * @package HRis\Http\Controllers\PIM
+ * Class EmployeeListController.
  *
  * @Middleware("auth")
  */
@@ -55,11 +53,12 @@ class EmployeeListController extends Controller
     private $columns;
 
     /**
-     * @param Sentinel $auth
-     * @param Employee $employee
+     * @param Sentinel                $auth
+     * @param Employee                $employee
      * @param EmployeeSalaryComponent $employee_salary_component
-     * @param SalaryComponent $salary_component
-     * @param Pagination $pagination
+     * @param SalaryComponent         $salary_component
+     * @param Pagination              $pagination
+     *
      * @author Bertrand Kintanar
      */
     public function __construct(
@@ -90,17 +89,19 @@ class EmployeeListController extends Controller
             'employees.first_name'     => 'First Name',
             'employees.last_name'      => 'Last Name',
             'job_titles.name'          => 'Job Title',
-            'employment_statuses.name' => 'Employment Status'
+            'employment_statuses.name' => 'Employment Status',
         ];
     }
 
     /**
-     * Show the PIM - Employee List
+     * Show the PIM - Employee List.
      *
      * @Get("pim/employee-list")
      *
      * @param PIMRequest $request
+     *
      * @return \Illuminate\View\View
+     *
      * @author Bertrand Kintanar
      */
     public function index(PIMRequest $request)
@@ -122,6 +123,7 @@ class EmployeeListController extends Controller
 
     /**
      * @return mixed
+     *
      * @author Bertrand Kintanar
      */
     private function getColumns()
@@ -130,17 +132,19 @@ class EmployeeListController extends Controller
     }
 
     /**
-     * Show the PIM - Index - redirects to pim/employee-list
+     * Show the PIM - Index - redirects to pim/employee-list.
      *
      * @Get("pim")
      *
      * @param PIMRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function pim(PIMRequest $request)
     {
-        return redirect()->to($request->path() . '/employee-list');
+        return redirect()->to($request->path().'/employee-list');
     }
 
     /**
@@ -149,7 +153,9 @@ class EmployeeListController extends Controller
      * @Get("pim/employee-list/{id}")
      *
      * @param $employee_id
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
+     *
      * @author Bertrand Kintanar
      */
     public function show($employee_id)
@@ -157,7 +163,7 @@ class EmployeeListController extends Controller
         $employee = $this->employee->whereId($employee_id)->first();
 
         if ($employee) {
-            return redirect()->to(Request::path() . '/personal-details');
+            return redirect()->to(Request::path().'/personal-details');
         }
 
         return response()->make(view()->make('errors.404'), 404);
@@ -169,7 +175,9 @@ class EmployeeListController extends Controller
      * @Post("pim/employee-list")
      *
      * @param PIMRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function store(PIMRequest $request)

@@ -6,14 +6,12 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Controllers;
 
 /**
- * Class WelcomeController
- * @package HRis\Http\Controllers
+ * Class WelcomeController.
  */
 class WelcomeController extends Controller
 {
@@ -42,6 +40,7 @@ class WelcomeController extends Controller
      * Show the application welcome screen to the user.
      *
      * @return Response
+     *
      * @author Bertrand Kintanar
      */
     public function index()

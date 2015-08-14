@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Controllers\Administration\Job;
@@ -17,8 +16,7 @@ use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Administration\PayGradeRequest;
 
 /**
- * Class PayGradeController
- * @package HRis\Http\Controllers\Administration\Job
+ * Class PayGradeController.
  *
  * @Middleware("auth")
  */
@@ -27,6 +25,7 @@ class PayGradeController extends Controller
     /**
      * @param Sentinel $auth
      * @param PayGrade $pay_grade
+     *
      * @author Bertrand Kintanar
      */
     public function __construct(Sentinel $auth, PayGrade $pay_grade)
@@ -42,7 +41,9 @@ class PayGradeController extends Controller
      * @Get("admin/job/pay-grades")
      *
      * @param PayGradeRequest $request
+     *
      * @return \Illuminate\View\View
+     *
      * @author Bertrand Kintanar
      */
     public function index(PayGradeRequest $request)
@@ -58,7 +59,9 @@ class PayGradeController extends Controller
 
     /**
      * @param $pay_grades
+     *
      * @return array
+     *
      * @author Bertrand Kintanar
      */
     public function setupDataTable($pay_grades)
@@ -80,7 +83,9 @@ class PayGradeController extends Controller
      * @Post("admin/job/pay-grades")
      *
      * @param PayGradeRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function store(PayGradeRequest $request)
@@ -100,14 +105,16 @@ class PayGradeController extends Controller
      * @Patch("admin/job/pay-grades")
      *
      * @param PayGradeRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function update(PayGradeRequest $request)
     {
         $pay_grade = $this->pay_grade->whereId($request->get('pay_grade_id'))->first();
 
-        if (! $pay_grade) {
+        if (!$pay_grade) {
             return redirect()->to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 

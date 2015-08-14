@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Controllers\PIM\Configuration;
@@ -18,8 +17,7 @@ use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\PIM\TerminationReasonsRequest;
 
 /**
- * Class TerminationReasonsController
- * @package HRis\Http\Controllers\PIM\Configuration
+ * Class TerminationReasonsController.
  *
  * @Middleware("auth")
  */
@@ -36,9 +34,10 @@ class TerminationReasonsController extends Controller
     protected $termination_reason;
 
     /**
-     * @param Sentinel $auth
-     * @param Employee $employee
+     * @param Sentinel          $auth
+     * @param Employee          $employee
      * @param TerminationReason $termination_reason
+     *
      * @author Bertrand Kintanar
      */
     public function __construct(Sentinel $auth, Employee $employee, TerminationReason $termination_reason)
@@ -55,7 +54,9 @@ class TerminationReasonsController extends Controller
      * @Get("pim/configuration/termination-reasons")
      *
      * @param TerminationReasonsRequest $request
+     *
      * @return \Illuminate\View\View
+     *
      * @author Bertrand Kintanar
      */
     public function index(TerminationReasonsRequest $request)
@@ -72,7 +73,9 @@ class TerminationReasonsController extends Controller
 
     /**
      * @param $termination_reasons
+     *
      * @return array
+     *
      * @author Bertrand Kintanar
      */
     public function setupDataTable($termination_reasons)
@@ -85,7 +88,7 @@ class TerminationReasonsController extends Controller
         $table['model'] = [
             'singular' => 'termination_reason',
             'plural'   => 'termination_reasons',
-            'dashed'   => 'termination-reasons'
+            'dashed'   => 'termination-reasons',
         ];
         $table['items'] = $termination_reasons;
 
@@ -98,7 +101,9 @@ class TerminationReasonsController extends Controller
      * @Post("pim/configuration/termination-reasons")
      *
      * @param TerminationReasonsRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function store(TerminationReasonsRequest $request)
@@ -118,14 +123,16 @@ class TerminationReasonsController extends Controller
      * @Patch("pim/configuration/termination-reasons")
      *
      * @param TerminationReasonsRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function update(TerminationReasonsRequest $request)
     {
         $termination_reason = $this->termination_reason->whereId($request->get('termination_reason_id'))->first();
 
-        if (! $termination_reason) {
+        if (!$termination_reason) {
             return redirect()->to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 

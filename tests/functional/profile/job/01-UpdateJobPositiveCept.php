@@ -1,4 +1,5 @@
 <?php
+
 $I = new FunctionalTester($scenario);
 
 $I->am('HRis User');
@@ -33,4 +34,3 @@ $I->seeCurrentUrlEquals('/profile/job/edit');
 //$I->see('Record successfully updated.');
 //
 //
-

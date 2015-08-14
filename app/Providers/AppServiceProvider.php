@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Providers;
@@ -14,8 +13,7 @@ namespace HRis\Providers;
 use Illuminate\Support\ServiceProvider;
 
 /**
- * Class AppServiceProvider
- * @package HRis\Providers
+ * Class AppServiceProvider.
  */
 class AppServiceProvider extends ServiceProvider
 {

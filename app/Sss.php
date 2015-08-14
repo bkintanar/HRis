@@ -1,13 +1,14 @@
-<?php namespace HRis;
+<?php
+
+namespace HRis;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class SSSContributions
- * @package HRis
+ * Class SSSContributions.
  */
-class SSSContributions extends Model {
-
+class Sss extends Model
+{
     /**
      * @var bool
      */
@@ -19,5 +20,4 @@ class SSSContributions extends Model {
      * @var string
      */
     protected $table = 'sss_contribution';
-
 }

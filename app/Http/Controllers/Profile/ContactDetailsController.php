@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Controllers\Profile;
@@ -18,8 +17,7 @@ use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\ContactDetailsRequest;
 
 /**
- * Class ContactDetailsController
- * @package HRis\Http\Controllers\Profile
+ * Class ContactDetailsController.
  *
  * @Middleware("auth")
  */
@@ -33,6 +31,7 @@ class ContactDetailsController extends Controller
     /**
      * @param Sentinel $auth
      * @param Employee $employee
+     *
      * @author Bertrand Kintanar
      */
     public function __construct(Sentinel $auth, Employee $employee)
@@ -49,22 +48,24 @@ class ContactDetailsController extends Controller
      * @Get("pim/employee-list/{id}/contact-details")
      *
      * @param ContactDetailsRequest $request
-     * @param null $employee_id
+     * @param null                  $employee_id
+     *
      * @return \Illuminate\View\View
+     *
      * @author Bertrand Kintanar
      */
     public function index(ContactDetailsRequest $request, $employee_id = null)
     {
         $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
-        if (! $employee) {
+        if (!$employee) {
             return response()->make(view()->make('errors.404'), 404);
         }
 
         $this->data['employee'] = $employee;
 
         $this->data['disabled'] = 'disabled';
-        $this->data['pim'] = $request->is('*pim/*') ? : false;
+        $this->data['pim'] = $request->is('*pim/*') ?: false;
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Contact Details' : 'My Contact Details';
 
         return $this->template('pages.profile.contact-details.view');
@@ -77,22 +78,24 @@ class ContactDetailsController extends Controller
      * @Get("pim/employee-list/{id}/contact-details/edit")
      *
      * @param ContactDetailsRequest $request
-     * @param null $employee_id
+     * @param null                  $employee_id
+     *
      * @return \Illuminate\View\View
+     *
      * @author Bertrand Kintanar
      */
     public function show(ContactDetailsRequest $request, $employee_id = null)
     {
         $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
-        if (! $employee) {
+        if (!$employee) {
             return response()->make(view()->make('errors.404'), 404);
         }
 
         $this->data['employee'] = $employee;
 
         $this->data['disabled'] = '';
-        $this->data['pim'] = $request->is('*pim/*') ? : false;
+        $this->data['pim'] = $request->is('*pim/*') ?: false;
         $this->data['pageTitle'] = $this->data['pim'] ? 'Edit Employee Contact Details' : 'Edit My Contact Details';
 
         return $this->template('pages.profile.contact-details.edit');
@@ -105,7 +108,9 @@ class ContactDetailsController extends Controller
      * @Patch("pim/employee-list/{id}/contact-details")
      *
      * @param ContactDetailsRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function update(ContactDetailsRequest $request)
@@ -114,7 +119,7 @@ class ContactDetailsController extends Controller
 
         $employee = $this->employee->whereId($id)->first();
 
-        if (! $employee) {
+        if (!$employee) {
             return redirect()->to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 

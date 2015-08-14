@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Controllers\Auth;
@@ -22,8 +21,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
 
 /**
- * Class AuthController
- * @package HRis\Http\Controllers\Auth
+ * Class AuthController.
  */
 class AuthController extends Controller
 {
@@ -44,6 +42,7 @@ class AuthController extends Controller
      * @Get("auth/login")
      *
      * @return Response
+     *
      * @author Bertrand Kintanar
      */
     public function getLogin()
@@ -59,6 +58,7 @@ class AuthController extends Controller
      * @Get("auth/register")
      *
      * @return Response
+     *
      * @author Bertrand Kintanar
      */
     public function getRegister()
@@ -73,19 +73,20 @@ class AuthController extends Controller
      *
      * @Post("auth/login")
      *
-     * @param  LoginRequest $request
+     * @param LoginRequest $request
+     *
      * @return Response
+     *
      * @author Bertrand Kintanar
      */
     public function postLogin(LoginRequest $request)
     {
         $auth = $this->auth;
 
-
         try {
             $user = $auth::authenticate($request->only('email', 'password'), false);
 
-            if (! $user) {
+            if (!$user) {
                 return redirect('/auth/login')->withInput($request->only('email'))->withErrors([
                     'email' => 'These credentials do not match our records.',
                 ]);
@@ -108,7 +109,9 @@ class AuthController extends Controller
      *
      * @param $user_id
      * @param $activation_code
+     *
      * @return Redirect
+     *
      * @author Bertrand Kintanar
      */
     public function getActivateUser($user_id, $activation_code)
@@ -118,12 +121,13 @@ class AuthController extends Controller
         $user = $auth::findById($user_id);
 
         // User not found
-        if (! $user) {
+        if (!$user) {
             App::abort(404, 'user_not_found');
         }
 
         if (Activation::complete($user, $activation_code)) {
             $auth::login($user);
+
             return redirect('/');
         } else {
             App::abort(404, 'activation_code_invalid');
@@ -136,7 +140,9 @@ class AuthController extends Controller
      * @Post("auth/register")
      *
      * @param RegisterRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function postRegister(RegisterRequest $request)
@@ -149,7 +155,6 @@ class AuthController extends Controller
             'email'    => $email,
             'password' => $request->get('password'),
         ];
-
 
         $user = $auth::register($credentials);
 
@@ -175,7 +180,7 @@ class AuthController extends Controller
         });
 
         $employee_data = [
-            'employee_id' => Config::get('company.employee_id_prefix') . $user->id,
+            'employee_id' => Config::get('company.employee_id_prefix').$user->id,
             'user_id'     => $user->id,
             'first_name'  => $request->get('first_name'),
             'last_name'   => $request->get('last_name'),
@@ -187,7 +192,7 @@ class AuthController extends Controller
 
         $employee->save();
 
-        $activation_message = 'Please check your email address (' . $email . ') to activate your account.';
+        $activation_message = 'Please check your email address ('.$email.') to activate your account.';
 
         return redirect('/auth/login')->with('activation', $activation_message);
     }
@@ -198,6 +203,7 @@ class AuthController extends Controller
      * @Get("auth/logout")
      *
      * @return Response
+     *
      * @author Bertrand Kintanar
      */
     public function getLogout()

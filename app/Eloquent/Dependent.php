@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Eloquent;
@@ -15,8 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Dependent
- * @package HRis\Eloquent
+ * Class Dependent.
  */
 class Dependent extends Model
 {
@@ -45,7 +43,7 @@ class Dependent extends Model
         'middle_name',
         'last_name',
         'relationship_id',
-        'birth_date'
+        'birth_date',
     ];
 
     /**
@@ -56,13 +54,14 @@ class Dependent extends Model
     protected $table = 'dependents';
 
     /**
-     * Casts birth_date attribute to Carbon
+     * Casts birth_date attribute to Carbon.
      *
      * @param $birth_date
+     *
      * @author Bertrand Kintanar
      */
     public function setBirthDateAttribute($birth_date)
     {
-        $this->attributes['birth_date'] = Carbon::parse($birth_date) ? : null;
+        $this->attributes['birth_date'] = Carbon::parse($birth_date) ?: null;
     }
 }

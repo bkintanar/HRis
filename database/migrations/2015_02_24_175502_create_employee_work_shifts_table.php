@@ -6,9 +6,7 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
@@ -18,6 +16,7 @@ class CreateEmployeeWorkShiftsTable extends Migration
      * Reverse the migrations.
      *
      * @return void
+     *
      * @author Bertrand Kintanar
      */
     public function down()
@@ -29,6 +28,7 @@ class CreateEmployeeWorkShiftsTable extends Migration
      * Run the migrations.
      *
      * @return void
+     *
      * @author Bertrand Kintanar
      */
     public function up()

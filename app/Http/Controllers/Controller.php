@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Controllers;
@@ -40,6 +39,7 @@ abstract class Controller extends BaseController
 
     /**
      * @param Sentinel $auth
+     *
      * @author Bertrand Kintanar
      */
     public function __construct(Sentinel $auth)
@@ -53,7 +53,9 @@ abstract class Controller extends BaseController
 
     /**
      * @param $blade
+     *
      * @return \Illuminate\View\View
+     *
      * @author Bertrand Kintanar
      */
     public function template($blade)

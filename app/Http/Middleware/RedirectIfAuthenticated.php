@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Middleware;
@@ -16,8 +15,7 @@ use Closure;
 use Illuminate\Http\RedirectResponse;
 
 /**
- * Class RedirectIfAuthenticated
- * @package HRis\Http\Middleware
+ * Class RedirectIfAuthenticated.
  */
 class RedirectIfAuthenticated
 {
@@ -31,7 +29,8 @@ class RedirectIfAuthenticated
     /**
      * Create a new filter instance.
      *
-     * @param  Sentinel $auth
+     * @param Sentinel $auth
+     *
      * @author Bertrand Kintanar
      */
     public function __construct(Sentinel $auth)
@@ -42,9 +41,11 @@ class RedirectIfAuthenticated
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
+     *
      * @return mixed
+     *
      * @author Bertrand Kintanar
      */
     public function handle($request, Closure $next)

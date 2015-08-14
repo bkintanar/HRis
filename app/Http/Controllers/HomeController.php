@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Controllers;
@@ -15,8 +14,7 @@ use HRis\Eloquent\Employee;
 use HRis\Eloquent\TimeLog;
 
 /**
- * Class HomeController
- * @package HRis\Http\Controllers
+ * Class HomeController.
  *
  * @Middleware("auth")
  */
@@ -59,6 +57,7 @@ class HomeController extends Controller
 
     /**
      * @Get("sandbox")
+     *
      * @author Bertrand Kintanar
      */
     public function sandbox()

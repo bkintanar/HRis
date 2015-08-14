@@ -6,9 +6,7 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
-
 use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
@@ -17,6 +15,7 @@ class UsersTableSeeder extends Seeder
      * Run the database seeds.
      *
      * @return void
+     *
      * @author Bertrand Kintanar
      */
     public function run()
@@ -31,7 +30,7 @@ class UsersTableSeeder extends Seeder
                     'password'     => Hash::make('retardko'),
                     'last_login'   => '2014-11-04 15:10:19',
                     'created_at'   => '2014-10-21 22:56:12',
-                    'updated_at'   => '2014-11-04 15:10:19'
+                    'updated_at'   => '2014-11-04 15:10:19',
                 ],
                 [
                     'id'           => 2,
@@ -39,7 +38,7 @@ class UsersTableSeeder extends Seeder
                     'password'     => Hash::make('retardko'),
                     'last_login'   => '2014-10-31 02:05:22',
                     'created_at'   => '2014-10-21 22:56:12',
-                    'updated_at'   => '2014-10-31 02:05:22'
+                    'updated_at'   => '2014-10-31 02:05:22',
                 ],
             ]
         );

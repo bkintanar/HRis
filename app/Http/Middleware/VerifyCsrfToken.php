@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Middleware;
@@ -14,8 +13,7 @@ namespace HRis\Http\Middleware;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
 
 /**
- * Class VerifyCsrfToken
- * @package HRis\Http\Middleware
+ * Class VerifyCsrfToken.
  */
 class VerifyCsrfToken extends BaseVerifier
 {

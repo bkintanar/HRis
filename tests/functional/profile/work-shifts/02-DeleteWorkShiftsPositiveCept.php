@@ -1,4 +1,5 @@
 <?php
+
 $I = new FunctionalTester($scenario);
 
 $I->am('HRis User');
@@ -29,4 +30,3 @@ $I->seeCurrentUrlEquals('/profile/work-shifts/edit');
 //
 //$I->sendAjaxPostRequest('/ajax/profile/work-shifts/edit', ['id' => $id, '_token' => $token, '_method' => 'DELETE']); // POST
 //$I->dontSee('tested');
-

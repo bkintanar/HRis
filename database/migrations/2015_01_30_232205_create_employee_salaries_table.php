@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class CreateEmployeeSalariesTable extends Migration {
-
+class CreateEmployeeSalariesTable extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -12,8 +12,7 @@ class CreateEmployeeSalariesTable extends Migration {
      */
     public function up()
     {
-        Schema::create('employee_salaries', function (Blueprint $table)
-        {
+        Schema::create('employee_salaries', function (Blueprint $table) {
             $table->increments('id');
             $table->string('employee_id');
             $table->decimal('salary', 10, 2);
@@ -30,5 +29,4 @@ class CreateEmployeeSalariesTable extends Migration {
     {
         Schema::drop('employee_salaries');
     }
-
 }

@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Controllers\Profile;
@@ -15,23 +14,22 @@ use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Eloquent\Employee;
 use HRis\Eloquent\EmployeeSalaryComponent;
 use HRis\Http\Controllers\Controller;
-use HRis\Http\Requests;
 use HRis\Http\Requests\Profile\SalaryRequest;
 use HRis\Services\Salary;
 
 /**
- * Class SalaryComputationsController
- * @package HRis\Http\Controllers\Profile
+ * Class SalaryComputationsController.
  *
  * @Middleware("auth")
  */
 class SalaryComputationsController extends Controller
 {
     /**
-     * @param Sentinel $auth
-     * @param Employee $employee
+     * @param Sentinel                $auth
+     * @param Employee                $employee
      * @param EmployeeSalaryComponent $employee_salary_component
-     * @param Salary $salary_services
+     * @param Salary                  $salary_services
+     *
      * @author Bertrand Kintanar
      */
     public function __construct(
@@ -54,8 +52,10 @@ class SalaryComputationsController extends Controller
      * @Get("pim/employee-list/{id}/salary")
      *
      * @param SalaryRequest $request
-     * @param null $employee_id
+     * @param null          $employee_id
+     *
      * @return Response
+     *
      * @author Bertrand Kintanar
      */
     public function salary(SalaryRequest $request, $employee_id = null)
@@ -82,8 +82,10 @@ class SalaryComputationsController extends Controller
      * @Get("pim/employee-list/{id}/salary/edit")
      *
      * @param SalaryRequest $request
-     * @param null $employee_id
+     * @param null          $employee_id
+     *
      * @return \Illuminate\View\View
+     *
      * @author Bertrand Kintanar
      */
     public function showSalaryEditForm(SalaryRequest $request, $employee_id = null)
@@ -111,7 +113,9 @@ class SalaryComputationsController extends Controller
      * @Patch("pim/employee-list/{id}/salary")
      *
      * @param SalaryRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function update(SalaryRequest $request)

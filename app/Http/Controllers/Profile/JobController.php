@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Controllers\Profile;
@@ -21,8 +20,7 @@ use Illuminate\Support\Facades\Request;
 use Input;
 
 /**
- * Class JobController
- * @package HRis\Http\Controllers\Profile
+ * Class JobController.
  *
  * @Middleware("auth")
  */
@@ -39,10 +37,11 @@ class JobController extends Controller
     protected $job_history;
 
     /**
-     * @param Sentinel $auth
-     * @param Employee $employee
-     * @param JobHistory $job_history
+     * @param Sentinel          $auth
+     * @param Employee          $employee
+     * @param JobHistory        $job_history
      * @param EmployeeWorkShift $employee_work_shift
+     *
      * @author Bertrand Kintanar
      */
     public function __construct(
@@ -65,8 +64,10 @@ class JobController extends Controller
      * @Get("pim/employee-list/{id}/job")
      *
      * @param JobRequest $request
-     * @param null $employee_id
+     * @param null       $employee_id
+     *
      * @return \Illuminate\View\View
+     *
      * @author Bertrand Kintanar
      */
     public function index(JobRequest $request, $employee_id = null)
@@ -78,7 +79,7 @@ class JobController extends Controller
         $job_histories = $employee->orderedJobHistories();
 
         $this->data['disabled'] = 'disabled';
-        $this->data['pim'] = $request->is('*pim/*') ? : false;
+        $this->data['pim'] = $request->is('*pim/*') ?: false;
         $this->data['table'] = $this->setupDataTable($job_histories);
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Job Details' : 'My Job Details';
 
@@ -87,7 +88,9 @@ class JobController extends Controller
 
     /**
      * @param $job_histories
+     *
      * @return array
+     *
      * @author Bertrand Kintanar
      */
     public function setupDataTable($job_histories)
@@ -95,8 +98,8 @@ class JobController extends Controller
         $table = [];
 
         $table['title'] = 'Job History';
-        $table['permission'] = str_replace('pim', 'profile', Request::segment(1)) . '.job-histories';
-        $table['headers'] = ['Job Title', 'Department', 'Effective Date', 'Employment Status', 'Location', 'Comments',];
+        $table['permission'] = str_replace('pim', 'profile', Request::segment(1)).'.job-histories';
+        $table['headers'] = ['Job Title', 'Department', 'Effective Date', 'Employment Status', 'Location', 'Comments'];
         $table['model'] = ['singular' => 'job_history', 'plural' => 'job_histories', 'dashed' => 'job-histories'];
         $table['items'] = $job_histories;
 
@@ -110,8 +113,10 @@ class JobController extends Controller
      * @Get("pim/employee-list/{id}/job/edit")
      *
      * @param JobRequest $request
-     * @param null $employee_id
+     * @param null       $employee_id
+     *
      * @return \Illuminate\View\View
+     *
      * @author Bertrand Kintanar
      */
     public function show(JobRequest $request, $employee_id = null)
@@ -127,7 +132,7 @@ class JobController extends Controller
         $job_histories = $employee->orderedJobHistories();
 
         $this->data['disabled'] = '';
-        $this->data['pim'] = $request->is('*pim/*') ? : false;
+        $this->data['pim'] = $request->is('*pim/*') ?: false;
         $this->data['table'] = $this->setupDataTable($job_histories);
         $this->data['pageTitle'] = $this->data['pim'] ? 'Edit Employee Job Details' : 'Edit My Job Details';
 
@@ -141,7 +146,9 @@ class JobController extends Controller
      * @Patch("pim/employee-list/{id}/job")
      *
      * @param JobRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function update(JobRequest $request)

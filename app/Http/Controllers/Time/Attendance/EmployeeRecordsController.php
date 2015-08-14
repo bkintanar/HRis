@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Controllers\Time\Attendance;
@@ -17,12 +16,10 @@ use DatePeriod;
 use HRis\Eloquent\Attendance;
 use HRis\Eloquent\Employee;
 use HRis\Http\Controllers\Controller;
-use HRis\Http\Requests;
 use Illuminate\Support\Facades\Input;
 
 /**
- * Class EmployeeRecordsController
- * @package HRis\Http\Controllers\Time\Attendance
+ * Class EmployeeRecordsController.
  *
  * @Middleware("auth")
  */
@@ -33,7 +30,9 @@ class EmployeeRecordsController extends Controller
      * @Get("time/attendance/employee-records/{date}")
      *
      * @param null $date
+     *
      * @return \Illuminate\View\View
+     *
      * @author Bertrand Kintanar
      */
     public function index($date = null)

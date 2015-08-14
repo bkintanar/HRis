@@ -6,9 +6,7 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
-
 use Illuminate\Database\Seeder;
 
 class TaxComputationsTableSeeder extends Seeder
@@ -17,6 +15,7 @@ class TaxComputationsTableSeeder extends Seeder
      * Run the database seeds.
      *
      * @return void
+     *
      * @author Bertrand Kintanar
      */
     public function run()
@@ -104,7 +103,7 @@ class TaxComputationsTableSeeder extends Seeder
                     'ME4_S4'          => 27083,
                     'percentage_over' => .32,
                     'exemption'       => 5208.33,
-                ]
+                ],
             ]
         );
     }

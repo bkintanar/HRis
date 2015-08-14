@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Controllers\Administration\Job;
@@ -17,8 +16,7 @@ use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Administration\EmploymentStatusRequest;
 
 /**
- * Class EmploymentStatusController
- * @package HRis\Http\Controllers\Administration\Job
+ * Class EmploymentStatusController.
  *
  * @Middleware("auth")
  */
@@ -30,8 +28,9 @@ class EmploymentStatusController extends Controller
     protected $employment_status;
 
     /**
-     * @param Sentinel $auth
+     * @param Sentinel         $auth
      * @param EmploymentStatus $employment_status
+     *
      * @author Bertrand Kintanar
      */
     public function __construct(Sentinel $auth, EmploymentStatus $employment_status)
@@ -47,7 +46,9 @@ class EmploymentStatusController extends Controller
      * @Get("admin/job/employment-status")
      *
      * @param EmploymentStatusRequest $request
+     *
      * @return \Illuminate\View\View
+     *
      * @author Bertrand Kintanar
      */
     public function index(EmploymentStatusRequest $request)
@@ -63,7 +64,9 @@ class EmploymentStatusController extends Controller
 
     /**
      * @param $employment_statuses
+     *
      * @return array
+     *
      * @author Bertrand Kintanar
      */
     public function setupDataTable($employment_statuses)
@@ -76,7 +79,7 @@ class EmploymentStatusController extends Controller
         $table['model'] = [
             'singular' => 'employment_status',
             'plural'   => 'employment_statuses',
-            'dashed'   => 'employment-statuses'
+            'dashed'   => 'employment-statuses',
         ];
         $table['items'] = $employment_statuses;
 
@@ -89,7 +92,9 @@ class EmploymentStatusController extends Controller
      * @Post("admin/job/employment-status")
      *
      * @param EmploymentStatusRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function store(EmploymentStatusRequest $request)
@@ -109,14 +114,16 @@ class EmploymentStatusController extends Controller
      * @Patch("admin/job/employment-status")
      *
      * @param EmploymentStatusRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function update(EmploymentStatusRequest $request)
     {
         $employment_status = $this->employment_status->whereId($request->get('employment_status_id'))->first();
 
-        if (! $employment_status) {
+        if (!$employment_status) {
             return redirect()->to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 

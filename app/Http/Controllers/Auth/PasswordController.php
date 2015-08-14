@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Controllers\Auth;
@@ -16,8 +15,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\PasswordBroker;
 
 /**
- * Class PasswordController
- * @package HRis\Http\Controllers\Auth
+ * Class PasswordController.
  */
 class PasswordController extends Controller
 {
@@ -37,8 +35,9 @@ class PasswordController extends Controller
     /**
      * Create a new password controller instance.
      *
-     * @param  \Illuminate\Contracts\Auth\Guard $auth
-     * @param  \Illuminate\Contracts\Auth\PasswordBroker $passwords
+     * @param \Illuminate\Contracts\Auth\Guard          $auth
+     * @param \Illuminate\Contracts\Auth\PasswordBroker $passwords
+     *
      * @author Bertrand Kintanar
      */
     public function __construct(Guard $auth, PasswordBroker $passwords)

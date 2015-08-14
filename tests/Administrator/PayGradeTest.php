@@ -6,13 +6,11 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
-
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 /**
- * Class PayGradeTest
+ * Class PayGradeTest.
  */
 class PayGradeTest extends \TestCase
 {
@@ -26,10 +24,10 @@ class PayGradeTest extends \TestCase
         $this->testUpdatePayGradePositive();
 
         $id = $this->onPage('/admin/job/pay-grades')
-            ->see('Tested')->filterByNameOrId("edit", 'button')->first()->attr('id');
+            ->see('Tested')->filterByNameOrId('edit', 'button')->first()->attr('id');
 
         $_token = $this->onPage('/admin/job/pay-grades')
-            ->see('Tested')->filterByNameOrId("_token", 'input')->attr('value');
+            ->see('Tested')->filterByNameOrId('_token', 'input')->attr('value');
 
         $this->post('/ajax/delete-pay-grade', ['id' => $id, '_token' => $_token, '_method' => 'DELETE']);
 
@@ -43,7 +41,7 @@ class PayGradeTest extends \TestCase
     {
         $this->testAddPayGradePositive();
 
-        $id = $this->onPage('/admin/job/pay-grades')->filterByNameOrId("edit", 'button')->first()->attr('id');
+        $id = $this->onPage('/admin/job/pay-grades')->filterByNameOrId('edit', 'button')->first()->attr('id');
 
         $this->click('Pay Grades')
             ->onPage('/admin/job/pay-grades')

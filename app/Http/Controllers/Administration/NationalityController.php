@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Controllers\Administration;
@@ -17,16 +16,16 @@ use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Administration\NationalityRequest;
 
 /**
- * Class NationalityController
- * @package HRis\Http\Controllers\Administration
+ * Class NationalityController.
  *
  * @Middleware("auth")
  */
 class NationalityController extends Controller
 {
     /**
-     * @param Sentinel $auth
+     * @param Sentinel    $auth
      * @param Nationality $nationality
+     *
      * @author Bertrand Kintanar
      */
     public function __construct(Sentinel $auth, Nationality $nationality)
@@ -37,11 +36,12 @@ class NationalityController extends Controller
     }
 
     /**
-     * Show the Administration - User Management
+     * Show the Administration - User Management.
      *
      * @Get("admin/nationalities")
      *
      * @return \Illuminate\View\View
+     *
      * @author Bertrand Kintanar
      */
     public function index()
@@ -60,7 +60,9 @@ class NationalityController extends Controller
      * @Post("admin/nationalities")
      *
      * @param NationalityRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function store(NationalityRequest $request)
@@ -80,14 +82,16 @@ class NationalityController extends Controller
      * @Patch("admin/nationalities")
      *
      * @param NationalityRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function update(NationalityRequest $request)
     {
         $nationality = $this->nationality->whereId($request->get('nationality_id'))->first();
 
-        if (! $nationality) {
+        if (!$nationality) {
             return redirect()->to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 

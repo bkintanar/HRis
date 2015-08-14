@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Eloquent;
@@ -14,10 +13,9 @@ namespace HRis\Eloquent;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class TaxComputation
- * @package HRis\Eloquent
+ * Class TaxComputation.
  */
-class TaxComputation extends Model
+class TaxComputations extends Model
 {
     /**
      * Indicates if the model should be timestamped.
@@ -36,7 +34,9 @@ class TaxComputation extends Model
     /**
      * @param $status
      * @param $taxableSalary
+     *
      * @return mixed
+     *
      * @author Jim Callanta
      */
     public static function getTaxRate($status, $taxableSalary)

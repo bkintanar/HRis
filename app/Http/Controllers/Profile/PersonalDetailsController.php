@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Controllers\Profile;
@@ -19,8 +18,7 @@ use HRis\Http\Requests\Profile\PersonalDetailsRequest;
 use Illuminate\Support\Facades\Config;
 
 /**
- * Class PersonalDetailsController
- * @package HRis\Http\Controllers\Profile
+ * Class PersonalDetailsController.
  *
  * @Middleware("auth")
  */
@@ -39,6 +37,7 @@ class PersonalDetailsController extends Controller
     /**
      * @param Sentinel $auth
      * @param Employee $employee
+     *
      * @author Bertrand Kintanar
      */
     public function __construct(Sentinel $auth, Employee $employee)
@@ -56,8 +55,10 @@ class PersonalDetailsController extends Controller
      * @Get("pim/employee-list/{id}/personal-details")
      *
      * @param PersonalDetailsRequest $request
-     * @param null $employee_id
+     * @param null                   $employee_id
+     *
      * @return \Illuminate\View\View
+     *
      * @author Bertrand Kintanar
      */
     public function index(PersonalDetailsRequest $request, $employee_id = null)
@@ -70,7 +71,7 @@ class PersonalDetailsController extends Controller
 
         $this->data['employee'] = $employee;
         $this->data['employee_id_prefix'] = $this->employee_id_prefix;
-        
+
         $this->data['disabled'] = 'disabled';
         $this->data['pim'] = $request->is('*pim/*') ?: false;
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Personal Details' : 'My Personal Details';
@@ -85,8 +86,10 @@ class PersonalDetailsController extends Controller
      * @Get("pim/employee-list/{id}/personal-details/edit")
      *
      * @param PersonalDetailsRequest $request
-     * @param null $employee_id
+     * @param null                   $employee_id
+     *
      * @return \Illuminate\View\View
+     *
      * @author Bertrand Kintanar
      */
     public function show(PersonalDetailsRequest $request, $employee_id = null)
@@ -114,7 +117,9 @@ class PersonalDetailsController extends Controller
      * @Patch("pim/employee-list/{id}/personal-details")
      *
      * @param PersonalDetailsRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function update(PersonalDetailsRequest $request)

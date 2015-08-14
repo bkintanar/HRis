@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Controllers\Profile;
@@ -24,8 +23,7 @@ use HRis\Http\Requests\Profile\QualificationsSkillRequest;
 use HRis\Http\Requests\Profile\QualificationsWorkExperienceRequest;
 
 /**
- * Class QualificationsController
- * @package HRis\Http\Controllers\Profile
+ * Class QualificationsController.
  *
  * @Middleware("auth")
  */
@@ -54,15 +52,17 @@ class QualificationsController extends Controller
      * @Get("pim/employee-list/{id}/qualifications")
      *
      * @param QualificationsRequest $request
-     * @param null $employee_id
+     * @param null                  $employee_id
+     *
      * @return \Illuminate\View\View
+     *
      * @author Bertrand Kintanar
      */
     public function index(QualificationsRequest $request, $employee_id = null)
     {
         $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
-        if (! $employee) {
+        if (!$employee) {
             return response()->make(view()->make('errors.404'), 404);
         }
 
@@ -72,7 +72,7 @@ class QualificationsController extends Controller
         $this->data['educations'] = $employee->educations;
         $this->data['skills'] = $employee->skills;
 
-        $this->data['pim'] = $request->is('*pim/*') ? : false;
+        $this->data['pim'] = $request->is('*pim/*') ?: false;
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Qualifications' : 'My Qualifications';
 
         return $this->template('pages.profile.qualifications.view');
@@ -85,8 +85,10 @@ class QualificationsController extends Controller
      * @Post("pim/employee-list/{id}/qualifications/work-experiences")
      *
      * @param QualificationsWorkExperienceRequest $request
-     * @param WorkExperience $workExperience
+     * @param WorkExperience                      $workExperience
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function storeWorkExperience(QualificationsWorkExperienceRequest $request, WorkExperience $workExperience)
@@ -109,15 +111,17 @@ class QualificationsController extends Controller
      * @Patch("pim/employee-list/{id}/qualifications/work-experiences")
      *
      * @param QualificationsWorkExperienceRequest $request
-     * @param WorkExperience $workExperience
+     * @param WorkExperience                      $workExperience
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function updateWorkExperience(QualificationsWorkExperienceRequest $request, WorkExperience $workExperience)
     {
         $workExperience = $workExperience->whereId($request->get('work_experience_id'))->first();
 
-        if (! $workExperience) {
+        if (!$workExperience) {
             return redirect()->to(str_replace('/work-experiences', '', $request->path()))->with('danger',
                 UNABLE_RETRIEVE_MESSAGE);
         }
@@ -140,8 +144,10 @@ class QualificationsController extends Controller
      * @Post("pim/employee-list/{id}/qualifications/educations")
      *
      * @param QualificationsEducationRequest $request
-     * @param Education $education
+     * @param Education                      $education
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function storeEducation(QualificationsEducationRequest $request, Education $education)
@@ -162,15 +168,17 @@ class QualificationsController extends Controller
      * @Patch("pim/employee-list/{id}/qualifications/educations")
      *
      * @param QualificationsEducationRequest $request
-     * @param Education $education
+     * @param Education                      $education
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function updateEducation(QualificationsEducationRequest $request, Education $education)
     {
         $education = $education->whereId($request->get('education_id'))->first();
 
-        if (! $education) {
+        if (!$education) {
             return redirect()->to(str_replace('/educations', '', $request->path()))->with('danger',
                 UNABLE_RETRIEVE_MESSAGE);
         }
@@ -193,7 +201,9 @@ class QualificationsController extends Controller
      * @Post("pim/employee-list/{id}/qualifications/skills")
      *
      * @param QualificationsSkillRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function storeSkill(QualificationsSkillRequest $request)
@@ -207,7 +217,7 @@ class QualificationsController extends Controller
 
             $employee->skills()->attach($skill_id, [
                 'years_of_experience' => $years_of_experience,
-                'comment'             => $comment
+                'comment'             => $comment,
             ]);
         } catch (Exception $e) {
             return redirect()->to(str_replace('/skills', '', $request->path()))->with('danger', UNABLE_ADD_MESSAGE);
@@ -223,23 +233,25 @@ class QualificationsController extends Controller
      * @Patch("pim/employee-list/{id}/qualifications/skills")
      *
      * @param QualificationsSkillRequest $request
-     * @param EmployeeSkill $employeeSkill
+     * @param EmployeeSkill              $employeeSkill
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function updateSkill(QualificationsSkillRequest $request, EmployeeSkill $employeeSkill)
     {
         $employeeSkill = $employeeSkill->whereId($request->get('employee_skill_id'))->first();
 
-        if (! $employeeSkill) {
+        if (!$employeeSkill) {
             return redirect()->to(str_replace('/skills', '', $request->path()))->with('danger',
                 UNABLE_RETRIEVE_MESSAGE);
         }
 
         try {
             $employeeSkill->skill_id = $request->get('skill_id');
-            $employeeSkill->years_of_experience = $request->get('years_of_experience') ? : null;
-            $employeeSkill->comment = $request->get('skill_comment') ? : null;
+            $employeeSkill->years_of_experience = $request->get('years_of_experience') ?: null;
+            $employeeSkill->comment = $request->get('skill_comment') ?: null;
 
             $employeeSkill->save();
         } catch (Exception $e) {

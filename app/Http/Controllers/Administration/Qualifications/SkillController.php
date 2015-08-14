@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Controllers\Administration\Qualifications;
@@ -17,8 +16,7 @@ use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Administration\SkillRequest;
 
 /**
- * Class SkillController
- * @package HRis\Http\Controllers\Administration\Qualifications
+ * Class SkillController.
  *
  * @Middleware("auth")
  */
@@ -31,7 +29,8 @@ class SkillController extends Controller
 
     /**
      * @param Sentinel $auth
-     * @param Skill $skill
+     * @param Skill    $skill
+     *
      * @author Bertrand Kintanar
      */
     public function __construct(Sentinel $auth, Skill $skill)
@@ -47,7 +46,9 @@ class SkillController extends Controller
      * @Get("admin/qualifications/skills")
      *
      * @param SkillRequest $request
+     *
      * @return \Illuminate\View\View
+     *
      * @author Bertrand Kintanar
      */
     public function index(SkillRequest $request)
@@ -62,7 +63,9 @@ class SkillController extends Controller
 
     /**
      * @param $skills
+     *
      * @return array
+     *
      * @author Bertrand Kintanar
      */
     public function setupDataTable($skills)
@@ -84,7 +87,9 @@ class SkillController extends Controller
      * @Post("admin/qualifications/skills")
      *
      * @param SkillRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function store(SkillRequest $request)
@@ -104,14 +109,16 @@ class SkillController extends Controller
      * @Patch("admin/qualifications/skills")
      *
      * @param SkillRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function update(SkillRequest $request)
     {
         $skill = $this->skill->whereId($request->get('skill_id'))->first();
 
-        if (! $skill) {
+        if (!$skill) {
             return redirect()->to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 

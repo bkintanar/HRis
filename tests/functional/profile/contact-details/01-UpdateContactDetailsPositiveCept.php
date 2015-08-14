@@ -1,4 +1,5 @@
 <?php
+
 $I = new FunctionalTester($scenario);
 
 $I->am('HRis User');

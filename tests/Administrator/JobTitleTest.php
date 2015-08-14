@@ -6,13 +6,11 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
-
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 /**
- * Class JobTitleTest
+ * Class JobTitleTest.
  */
 class JobTitleTest extends \TestCase
 {
@@ -45,10 +43,10 @@ class JobTitleTest extends \TestCase
         $this->testUpdateJobTitlePositive();
 
         $id = $this->onPage('/admin/job/titles')
-            ->see('Tested')->filterByNameOrId("edit", 'button')->first()->attr('id');
+            ->see('Tested')->filterByNameOrId('edit', 'button')->first()->attr('id');
 
         $_token = $this->onPage('/admin/job/titles')
-            ->see('Tested')->filterByNameOrId("_token", 'input')->attr('value');
+            ->see('Tested')->filterByNameOrId('_token', 'input')->attr('value');
 
         $this->post('/ajax/delete-job-title', ['id' => $id, '_token' => $_token, '_method' => 'DELETE']);
 
@@ -62,9 +60,8 @@ class JobTitleTest extends \TestCase
     {
         $this->logMeIn();
 
-        $id = $this->click('Job Titles')->onPage('/admin/job/titles')->filterByNameOrId("edit",
+        $id = $this->click('Job Titles')->onPage('/admin/job/titles')->filterByNameOrId('edit',
             'button')->first()->attr('id');
-
 
         $this->click('Job Titles')
             ->onPage('/admin/job/titles')

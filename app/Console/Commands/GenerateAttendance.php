@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Console\Commands;
@@ -18,8 +17,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
 /**
- * Class GenerateAttendance
- * @package HRis\Console\Commands
+ * Class GenerateAttendance.
  */
 class GenerateAttendance extends Command
 {
@@ -66,7 +64,7 @@ class GenerateAttendance extends Command
                     'employee_id' => $employee->id,
                     'work_date'   => $start->toDateString(),
                     'in_time'     => $timelog['in_time'],
-                    'out_time'    => $timelog['out_time']
+                    'out_time'    => $timelog['out_time'],
                 ];
 
                 $attendance = Attendance::updateOrCreate($data);

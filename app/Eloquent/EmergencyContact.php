@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Eloquent;
@@ -14,8 +13,7 @@ namespace HRis\Eloquent;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class EmergencyContact
- * @package HRis\Eloquent
+ * Class EmergencyContact.
  */
 class EmergencyContact extends Model
 {
@@ -38,7 +36,7 @@ class EmergencyContact extends Model
         'last_name',
         'relationship_id',
         'home_phone',
-        'mobile_phone'
+        'mobile_phone',
     ];
 
     /**

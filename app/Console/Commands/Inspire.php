@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Console\Commands;
@@ -15,8 +14,7 @@ use Illuminate\Console\Command;
 use Illuminate\Foundation\Inspiring;
 
 /**
- * Class Inspire
- * @package HRis\Console\Commands
+ * Class Inspire.
  */
 class Inspire extends Command
 {
@@ -40,6 +38,6 @@ class Inspire extends Command
      */
     public function handle()
     {
-        $this->comment(PHP_EOL . Inspiring::quote() . PHP_EOL);
+        $this->comment(PHP_EOL.Inspiring::quote().PHP_EOL);
     }
 }
