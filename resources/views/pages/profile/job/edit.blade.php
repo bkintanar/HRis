@@ -96,18 +96,7 @@
 
                     if (response == 'success')
                     {
-                        $('html').animate({scrollTop : 0},800);
-
-                        $('#notification-info').show();
-                        $("#notification-info").delay(5000).fadeOut();
-                        $('#jobHistory_' + dataId).remove();
-                        setInterval(function () {location.reload()}, 5000);
-
-                        if($('.JobHistoryList').length == 0){
-                          $('#JobHistoryBody').append('<tr><td colspan="5">No job history listed</td></tr>');
-                        }
-
-                        deleteAction();
+                        window.location = "?success=1";
                     }
                 });
 

@@ -10,6 +10,8 @@
 
 @section('custom_js')
 
+    {!! Html::script('/js/notification.js') !!}
+
     <script>
 
         function getValues(type)
@@ -27,36 +29,22 @@
             earnings = getValues('earnings') + '{{$salary}}';
             deductions = getValues('deductions') + parseFloat($('.tax').html());
 
+            console.log($('.tax').html());
+
             $('#total-earnings').html(parseFloat(earnings).toFixed(2));
             $('#total-deductions').html(parseFloat(deductions).toFixed(2));
             $('#total-salary').html(parseFloat(earnings - deductions).toFixed(2));
-        }
-
-        function updateSalary(type)
-        {
-            var datas = { salary: $('#salary').val(), status: '{{$tax_status}}', deductions: getValues('deductions'), sss: $('#sss').val(), type: type }
-                $.ajax({
-                    type: "GET",
-                    url: '/ajax/' + '{{\Request::path()}}',
-                    data: datas
-                }).done(function( response ) {
-                    var values = jQuery.parseJSON(response);
-                    $('#sss').val(parseFloat(values.sss).toFixed(2));
-                    $('.tax').html(parseFloat(values.tax).toFixed(2));
-                    display();
-                });
         }
 
         $(document).ready(function () {
 
             $('.chosen-select').chosen();
 
-            updateSalary();
+            display();
 
         });
 
     </script>
-
 @stop
 
 @section('action_area')

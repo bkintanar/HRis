@@ -163,12 +163,10 @@ class EmergencyContactsController extends Controller
      */
     public function delete(EmergencyContactsRequest $request)
     {
-        if ($request->ajax())
-        {
+        if ($request->ajax()) {
             $emergencyContactId = $request->get('id');
 
-            try
-            {
+            try {
                 $this->emergencyContact->whereId($emergencyContactId)->delete();
 
                 print('success');
@@ -189,12 +187,10 @@ class EmergencyContactsController extends Controller
      */
     public function show(EmergencyContactsRequest $request)
     {
-        if ($request->ajax())
-        {
+        if ($request->ajax()) {
             $emergencyContactId = $request->get('id');
 
-            try
-            {
+            try {
                 $emergencyContact = $this->emergencyContact->whereId($emergencyContactId)->first();
 
                 print(json_encode($emergencyContact));

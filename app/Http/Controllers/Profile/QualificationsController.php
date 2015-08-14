@@ -131,7 +131,6 @@ class QualificationsController extends Controller
 
         return redirect()->to(str_replace('/work-experiences', '', $request->path()))->with('success',
             SUCCESS_UPDATE_MESSAGE);
-        
     }
 
     /**

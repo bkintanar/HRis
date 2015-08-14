@@ -685,8 +685,7 @@ class AjaxController extends Controller
                 }
 
                 $totalTax = $taxes->exemption + ($over * $taxes->percentage_over);
-
-                $return = json_encode(['tax' => $totalTax, 'sss' => $sss]);
+                $return = json_encode(['tax' => $totalTax, 'sss' => $sss, 'salary' => $semiMonthly]);
 
                 print($return);
             } catch (Exception $e) {

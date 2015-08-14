@@ -27,11 +27,6 @@ class EmployeeSkill extends Model
     public $timestamps = false;
 
     /**
-     * @var bool
-     */
-    public $timestamps = false;
-
-    /**
      * The database table used by the model.
      *
      * @var string

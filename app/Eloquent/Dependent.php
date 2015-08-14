@@ -65,5 +65,4 @@ class Dependent extends Model
     {
         $this->attributes['birth_date'] = Carbon::parse($birth_date) ? : null;
     }
-
 }

@@ -90,12 +90,7 @@ class SalaryComputationsController extends Controller
     {
         $employee = $this->employee->getEmployeeSalaryDetails($employee_id, $this->logged_user->employee->id);
 
-        $employee_status = 'ME_S';
-        $dependents = count($employee->dependents);
-        if ($dependents)
-        {
-            $employee_status = 'ME' . $dependents . '_S' . $dependents;
-        }
+        $salary = $this->salary_services->getSalaryDetails($employee);
 
         $this->data['employee'] = $employee;
         $this->data['tax'] = $salary['total_tax'];

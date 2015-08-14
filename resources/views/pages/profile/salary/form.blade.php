@@ -4,7 +4,6 @@
     @include('pages.profile.salary.form-earnings')
     @include('pages.profile.salary.form-deductions')
 
-    <div class="hr-line-dashed"></div>
     <!-- End - Salary -->
 
     <div class="col-lg-12">
@@ -37,14 +36,5 @@
             </div>
         </div>
     </div>
-    @else
-        @if($loggedUser->hasAccess(\Request::segment(1).'.contact-details.update'))
-        <div class="form-group">
-            <div class="col-sm-4 col-sm-offset-2">
-                {!! Html::link(\Request::path() . '/edit', 'Modify', ['class' => 'btn btn-primary btn-xs']) !!}
-            </div>
-        </div>
-        @endif
-    @endif
 
 {!! Form::close() !!}

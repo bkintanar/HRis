@@ -57,7 +57,6 @@ class Salary
         $employee_salary_components = $employee->employeeSalaryComponent;
         $component_ids = $this->salary_component->getSalaryAndSSS();
         $deductions = 0;
-
         $salary = 0;
 
         foreach ($employee_salary_components as $employee_salary_component) {
@@ -94,7 +93,6 @@ class Salary
 
             $totalTax = $taxes->exemption + ($over * $taxes->percentage_over);
         }
-        $totalTax = $taxes->exemption + ($over * $taxes->percentage_over);
 
         return ['total_tax' => round($totalTax, 2), 'employee_status' => $employee_status, 'salary' => $salary];
     }

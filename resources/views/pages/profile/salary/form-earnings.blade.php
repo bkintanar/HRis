@@ -9,9 +9,8 @@
             </div>
         </div>
         <div class="ibox-content">
-            @foreach($employee->employeeSalaryComponents as $value)
+            @foreach($employee->employeeSalaryComponent as $value)
             @if($value->salaryComponent->type == 1)
-
                 <div class="form-group">
                     {!! Form::label($value->salaryComponent->name, $value->salaryComponent->name, ['class' => 'col-md-2 control-label']) !!}
                     <div class="col-md-4">

@@ -9,19 +9,19 @@
             </div>
         </div>
         <div class="ibox-content">
-            @foreach($employee->employeeSalaryComponents as $value)
+            @foreach($employee->employeeSalaryComponent as $value)
                 @if($value->salaryComponent->type == 2)
                 <div class="form-group">
                     {!! Form::label($value, $value->salaryComponent->name, ['class' => 'col-md-2 control-label']) !!}
                     <div class="col-md-4">
                     {!! Form::hidden($value->salaryComponent->name . '[component_id]', $value->component_id) !!}
                         @if($value->component_id == 2)
-                            {!! Form::text($value->salaryComponent->name . '[value]', $value->value, ['id' => 'sss', 'class' => 'form-control fields deductions', $disabled]) !!}
+                            {!! Form::text($value->salaryComponent->name . '[value]', $value->value, ['id' => 'sss', 'class' => 'form-control fields deductions', 'data-mask' => '99999.99', $disabled]) !!}
                             @if($disabled == '')
                                 <input type="button" value="Refresh" id="rfrsh-sss" class="btn btn-white btn-xs" />
                             @endif
                         @else
-                            {!! Form::text($value->salaryComponent->name . '[value]', $value->value, ['class' => 'form-control fields deductions', $disabled]) !!}
+                            {!! Form::text($value->salaryComponent->name . '[value]', $value->value, ['class' => 'form-control fields deductions', 'data-mask' => '99999.99', $disabled]) !!}
                         @endif
                     </div>
 
@@ -38,7 +38,7 @@
                 <div class="form-group">
                     {!! Form::label('tax', 'Tax', ['class' => 'col-md-2 control-label']) !!}
                     <div class="col-md-4">
-                    <p class="form-control tax"></p>
+                    <p class="form-control fields tax">{{$tax}}</p>
                     </div>
                 </div>
         </div>

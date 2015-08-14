@@ -1,7 +1,6 @@
 @extends('master.adm-master')
 
 @section('content')
-
 <div class="row">
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
@@ -16,17 +15,15 @@
 
             <div class="ibox-content">
                 <div class="">
-                    <a id="addEmployee" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
+                    <a id="add_employee" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th><a href="/{{$path}}?page=1&sort=id">Id</a></th>
-                                <th><a href="/{{$path}}?page=1&sort=first_name">First Name</a></th>
-                                <th><a href="/{{$path}}?page=1&sort=last_name">Last Name</a></th>
-                                <th><a href="/{{$path}}?page=1">Job Title</a></th>
-                                <th><a href="/{{$path}}?page=1">Employment Status</a></th>
+                                @foreach($columns as $key => $column)
+                                <th>{!! HRis\Services\Pagination::getSortLinks($key, $column, $settings) !!}</th>
+                                @endforeach
                                 <th class="fix-width">Action</th>
                             </tr>
                         </thead>
@@ -38,13 +35,13 @@
                                     <td><a href="/pim/employee-list/{{ $employee->employee_id }}/personal-details">{{ $employee->employee_id }}</a></td>
                                     <td>{{ $employee->first_name }}</td>
                                     <td>{{ $employee->last_name }}</td>
-                                    <td>{{ isset($employee->jobHistory()->job_title_id) ? $employee->jobHistory()->jobTitle->name : '' }}</td>
-                                    <td><span class="label {{ isset($employee->jobHistory()->employment_status_id) ? $employee->jobHistory()->employmentStatus->class : '' }}">{{ isset($employee->jobHistory()->employment_status_id) ? $employee->jobHistory()->employmentStatus->name : '' }}</span></td>
+                                    <td>{{ $employee->jobHistory()->jobTitle->name or '' }}</td>
                                     <td>
-                                        <button rel="edit" id="{{$employee->id}}" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom"
-data-toggle="tooltip" data-placement="bottom" title="Edit" type="button"><i class="fa fa-paste"></i></button>
-                                        <button rel="delete" id="{{$employee->id}}" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom"
-data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i class="fa fa-trash"></i></button>
+                                        <span class="label {{ $employee->class or '' }}">{{ $employee->status or '' }}</span>
+                                    </td>
+                                    <td>
+                                        <button rel="edit" id="{{$employee->id}}" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" data-toggle="tooltip" data-placement="bottom" title="Edit" type="button"><i class="fa fa-edit"></i></button>
+                                        <button rel="delete" id="{{$employee->id}}" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i class="fa fa-times"></i></button>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -56,19 +53,19 @@ data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i cl
                         </tbody>
                     </table>
                 </div>
-
-                    {!! HRis\Services\Pagination::setupPagination($employees, $path) !!}
-
+                {!! HRis\Services\Pagination::setupPagination($employees, $settings) !!}
             </div>
         </div>
-    </div><!-- Modal -->
-    <div class="modal fade" id="employeeModal" tabindex="-1">
+
+    </div>
+</div><!-- Modal -->
+    <div class="modal fade" id="employee_modal" tabindex="-1">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button class="close" data-dismiss="modal" type="button">&times;</button>
 
-                        <h4 class="modal-title" id="myModalLabel">Add New Employee</h4>
+                        <h4 class="modal-title" id="my_modal_label">Add New Employee</h4>
                     </div>
 
                     <div class="modal-body">
@@ -138,27 +135,25 @@ data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i cl
 @stop
 
 @section('custom_css')
-    {!! Html::style('/css/plugins/iCheck/custom.css') !!}
-    {!! Html::style('/css/plugins/chosen/chosen.css') !!}
+
+    <!-- Data Tables -->
+    {!! Html::style('/css/plugins/dataTables/dataTables.bootstrap.css') !!}
+    {!! Html::style('/css/plugins/dataTables/dataTables.responsive.css') !!}
 @stop
 
 @section('custom_js')
-    <!-- iCheck -->
-    {!! Html::script('/js/plugins/iCheck/icheck.min.js') !!}
-    <!-- Chosen -->
-    {!! Html::script('/js/plugins/chosen/chosen.jquery.js') !!}
 
     <script>
         $(document).ready(function () {
 
-            $('#employeeModal').on('shown.bs.modal', function () {
+            $('#employee_modal').on('shown.bs.modal', function () {
                 $('.chosen-select').chosen();
             });
 
 
-            $('#addEmployee').click(function () {
+            $('#add_employee').click(function () {
 
-                $('#employeeModal').modal('toggle');
+                $('#employee_modal').modal('toggle');
 
                 $('.i-checks').iCheck({
                     checkboxClass: 'icheckbox_square-green',
