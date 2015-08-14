@@ -16,6 +16,9 @@ before_script:
     - php artisan migrate --env=testing --no-interaction -vvv
     - php artisan db:seed --env=testing --no-interaction -vvv
     - npm install
+    - npm install -g bower
+    - npm install -g gulp
+    - npm install -g laravel-elixir
     - bower install
     - gulp
 
