@@ -257,8 +257,8 @@ class Navlink extends Model
     }
 
     /**
-     * @param $children
-     * @param $id
+     * @param            $children
+     * @param            $id
      * @param bool|false $indent
      * @param bool|false $double
      *

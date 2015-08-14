@@ -76,7 +76,7 @@ class JobHistory extends Model
 
     /**
      * @param null $fillables
-     * @param $employee_id
+     * @param      $employee_id
      *
      * @return null
      *

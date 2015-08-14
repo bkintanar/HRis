@@ -18,8 +18,8 @@ trait HasPlaceholder
     /**
      * This trait is needed if a model needs a placeholder.
      *
-     * @param $name
-     * @param $id
+     * @param      $name
+     * @param      $id
      * @param null $parent_id
      *
      * @return array
