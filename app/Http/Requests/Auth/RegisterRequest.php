@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Requests\Auth;
@@ -14,8 +13,7 @@ namespace HRis\Http\Requests\Auth;
 use HRis\Http\Requests\Request;
 
 /**
- * Class RegisterRequest
- * @package HRis\Http\Requests\Auth
+ * Class RegisterRequest.
  */
 class RegisterRequest extends Request
 {
@@ -23,6 +21,7 @@ class RegisterRequest extends Request
      * Determine if the user is authorized to make this request.
      *
      * @return bool
+     *
      * @author Bertrand Kintanar
      */
     public function authorize()
@@ -34,6 +33,7 @@ class RegisterRequest extends Request
      * Get the validation rules that apply to the request.
      *
      * @return array
+     *
      * @author Bertrand Kintanar
      */
     public function rules()

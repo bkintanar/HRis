@@ -6,13 +6,11 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
-
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 /**
- * Class WorkShiftTest
+ * Class WorkShiftTest.
  */
 class WorkShiftTest extends \TestCase
 {
@@ -46,10 +44,10 @@ class WorkShiftTest extends \TestCase
         $this->testUpdateWorkShiftPositive();
 
         $id = $this->onPage('/admin/job/work-shifts')
-            ->see('Tested')->filterByNameOrId("edit", 'button')->first()->attr('id');
+            ->see('Tested')->filterByNameOrId('edit', 'button')->first()->attr('id');
 
         $_token = $this->onPage('/admin/job/work-shifts')
-            ->see('Tested')->filterByNameOrId("_token", 'input')->attr('value');
+            ->see('Tested')->filterByNameOrId('_token', 'input')->attr('value');
 
         $this->post('/ajax/delete-work-shift', ['id' => $id, '_token' => $_token, '_method' => 'DELETE']);
 
@@ -63,7 +61,7 @@ class WorkShiftTest extends \TestCase
     {
         $this->logMeIn();
 
-        $id = $this->click('Work Shifts')->onPage('/admin/job/work-shifts')->filterByNameOrId("edit",
+        $id = $this->click('Work Shifts')->onPage('/admin/job/work-shifts')->filterByNameOrId('edit',
             'button')->first()->attr('id');
 
         $this->click('Work Shifts')

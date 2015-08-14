@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Console\Commands;
@@ -17,8 +16,7 @@ use Illuminate\Support\Facades\Log;
 use League\Csv\Reader;
 
 /**
- * Class UpdateFaceId
- * @package HRis\Console\Commands
+ * Class UpdateFaceId.
  */
 class UpdateFaceId extends Command
 {
@@ -43,7 +41,7 @@ class UpdateFaceId extends Command
      */
     public function handle()
     {
-        $csv = Reader::createFromPath(storage_path() . '/timelog.csv');
+        $csv = Reader::createFromPath(storage_path().'/timelog.csv');
 
         $csv->setOffset(1);
         $data = $csv->query();

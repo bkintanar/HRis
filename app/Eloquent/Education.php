@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Eloquent;
@@ -15,8 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Education
- * @package HRis\Eloquent
+ * Class Education.
  */
 class Education extends Model
 {
@@ -46,7 +44,7 @@ class Education extends Model
         'major_specialization',
         'from_date',
         'to_date',
-        'gpa_score'
+        'gpa_score',
     ];
 
     /**
@@ -57,9 +55,10 @@ class Education extends Model
     protected $table = 'educations';
 
     /**
-     * An education object belongs to on employee
+     * An education object belongs to on employee.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     *
      * @author Bertrand Kintanar
      */
     public function employee()
@@ -68,22 +67,24 @@ class Education extends Model
     }
 
     /**
-     * Casts from_date attribute to Carbon
+     * Casts from_date attribute to Carbon.
      *
      * @param $from_date
+     *
      * @author Bertrand Kintanar
      */
     public function setFromDateAttribute($from_date)
     {
-        $this->attributes['from_date'] = Carbon::parse($from_date) ? : null;
+        $this->attributes['from_date'] = Carbon::parse($from_date) ?: null;
     }
 
     /**
      * @param $to_date
+     *
      * @author Bertrand Kintanar
      */
     public function setToDateAttribute($to_date)
     {
-        $this->attributes['to_date'] = Carbon::parse($to_date) ? : null;
+        $this->attributes['to_date'] = Carbon::parse($to_date) ?: null;
     }
 }

@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Middleware;
@@ -16,22 +15,23 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
 
 /**
- * Class Localization
- * @package HRis\Http\Middleware
+ * Class Localization.
  */
 class Localization
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
+     *
      * @return mixed
+     *
      * @author Bertrand Kintanar
      */
     public function handle($request, Closure $next)
     {
-        if (! Session::has('locale')) {
+        if (!Session::has('locale')) {
             Session::put('locale', Config::get('app.locale'));
         }
 

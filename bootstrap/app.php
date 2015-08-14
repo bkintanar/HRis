@@ -41,9 +41,9 @@ $app->singleton(
     HRis\Exceptions\Handler::class
 );
 
-require_once('constants.php');
+require_once 'constants.php';
 
-if (! $app->runningInConsole()) {
+if (!$app->runningInConsole()) {
     $server = $_SERVER['HTTP_HOST'];
 
     if (strpos($server, 'hris-test.liberty')) {

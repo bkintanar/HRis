@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Services;
@@ -19,17 +18,17 @@ use HRis\Eloquent\SSSContribution;
 use HRis\Eloquent\TaxComputation;
 
 /**
- * Class Salary
- * @package HRis\Services
+ * Class Salary.
  */
 class Salary
 {
     /**
-     * @param TaxComputation $tax_computation
-     * @param Dependent $dependent
-     * @param SSSContribution $sss_contribution
-     * @param SalaryComponent $salary_component
+     * @param TaxComputation          $tax_computation
+     * @param Dependent               $dependent
+     * @param SSSContribution         $sss_contribution
+     * @param SalaryComponent         $salary_component
      * @param EmployeeSalaryComponent $employee_salary_component
+     *
      * @author Jim Callanta
      */
     public function __construct(
@@ -48,7 +47,9 @@ class Salary
 
     /**
      * @param $employee
+     *
      * @return array
+     *
      * @author Jim Callanta
      */
     public function getSalaryDetails($employee)
@@ -78,7 +79,7 @@ class Salary
             if ($dependents > 4) {
                 $dependents = 4;
             }
-            $employee_status = 'ME' . $dependents . '_S' . $dependents;
+            $employee_status = 'ME'.$dependents.'_S'.$dependents;
         }
 
         $taxableSalary = $salary - $deductions;

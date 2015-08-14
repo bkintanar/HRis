@@ -1,4 +1,5 @@
 <?php
+
 $I = new FunctionalTester($scenario);
 
 $I->am('HRis User');
@@ -27,4 +28,3 @@ $I->seeCurrentUrlEquals('/profile/salary/edit');
 
 $id = $I->grabAttributeFrom('input[id=salary]', 'type');
 //$I->see('xs '.$id);
-

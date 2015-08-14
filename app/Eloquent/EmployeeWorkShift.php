@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Eloquent;
@@ -16,8 +15,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Config;
 
 /**
- * Class EmployeeWorkShift
- * @package HRis\Eloquent
+ * Class EmployeeWorkShift.
  */
 class EmployeeWorkShift extends Model
 {
@@ -56,7 +54,9 @@ class EmployeeWorkShift extends Model
     /**
      * @param null $fillables
      * @param $employee_id
+     *
      * @return null
+     *
      * @author Bertrand Kintanar
      */
     public function getCurrentEmployeeWorkShift($fillables = null, $employee_id)
@@ -71,7 +71,9 @@ class EmployeeWorkShift extends Model
 
     /**
      * @param $start_date
+     *
      * @return array
+     *
      * @author Bertrand Kintanar
      */
     public function getWorkShiftRange($start_date)
@@ -80,23 +82,25 @@ class EmployeeWorkShift extends Model
             $start_date)->orderBy('id', 'desc')->first();
 
         $from_time_allowance = Config::get('company.from_time_allowance');
-        $from_datetime = Carbon::parse($start_date . ' ' . $employee_work_shift->workShift->from_time)->subHour($from_time_allowance);
-        $to_datetime = Carbon::parse($start_date . ' ' . $employee_work_shift->workShift->from_time)->addHours($employee_work_shift->workShift->duration + 1)->subSecond(1);
+        $from_datetime = Carbon::parse($start_date.' '.$employee_work_shift->workShift->from_time)->subHour($from_time_allowance);
+        $to_datetime = Carbon::parse($start_date.' '.$employee_work_shift->workShift->from_time)->addHours($employee_work_shift->workShift->duration + 1)->subSecond(1);
 
         return ['from_datetime' => $from_datetime, 'to_datetime' => $to_datetime];
     }
 
     /**
      * @param $effective_date
+     *
      * @author Bertrand Kintanar
      */
     public function setEffectiveDateAttribute($effective_date)
     {
-        $this->attributes['effective_date'] = Carbon::parse($effective_date) ? : null;
+        $this->attributes['effective_date'] = Carbon::parse($effective_date) ?: null;
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     *
      * @author Bertrand Kintanar
      */
     public function workShift()

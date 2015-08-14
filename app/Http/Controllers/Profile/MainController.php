@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Controllers\Profile;
@@ -14,8 +13,7 @@ namespace HRis\Http\Controllers\Profile;
 use HRis\Http\Controllers\Controller;
 
 /**
- * Class MainController
- * @package HRis\Http\Controllers\Profile
+ * Class MainController.
  *
  * @Middleware("auth")
  */

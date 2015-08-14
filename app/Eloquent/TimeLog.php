@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Eloquent;
@@ -14,8 +13,7 @@ namespace HRis\Eloquent;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class TimeLog
- * @package HRis\Eloquent
+ * Class TimeLog.
  */
 class TimeLog extends Model
 {
@@ -42,6 +40,7 @@ class TimeLog extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     *
      * @author Bertrand Kintanar
      */
     public function employee()

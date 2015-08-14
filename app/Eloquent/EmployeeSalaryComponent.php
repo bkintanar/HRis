@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Eloquent;
@@ -15,8 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class EmployeeSalaryComponent
- * @package HRis\Eloquent
+ * Class EmployeeSalaryComponent.
  */
 class EmployeeSalaryComponent extends Model
 {
@@ -43,7 +41,7 @@ class EmployeeSalaryComponent extends Model
         'component_id',
         'value',
         'employee_id',
-        'effective_date'
+        'effective_date',
     ];
 
     /**
@@ -56,7 +54,9 @@ class EmployeeSalaryComponent extends Model
     /**
      * @param $employee_id
      * @param $component_id
+     *
      * @return mixed
+     *
      * @author Jim Callanta
      */
     public function getCurrentComponentValue($employee_id, $component_id)
@@ -69,6 +69,7 @@ class EmployeeSalaryComponent extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     *
      * @author Jim Callanta
      */
     public function salaryComponent()
@@ -78,10 +79,11 @@ class EmployeeSalaryComponent extends Model
 
     /**
      * @param $effective_date
+     *
      * @author Jim Callanta
      */
     public function setEffectiveDateAttribute($effective_date)
     {
-        $this->attributes['effective_date'] = Carbon::parse($effective_date) ? : null;
+        $this->attributes['effective_date'] = Carbon::parse($effective_date) ?: null;
     }
 }

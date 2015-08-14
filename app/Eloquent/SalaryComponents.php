@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Eloquent;
@@ -14,10 +13,9 @@ namespace HRis\Eloquent;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class SalaryComponents
- * @package HRis\Eloquent
+ * Class SalaryComponents.
  */
-class SalaryComponent extends Model
+class SalaryComponents extends Model
 {
     /**
      * Indicates if the model should be timestamped.
@@ -35,6 +33,7 @@ class SalaryComponent extends Model
 
     /**
      * @return array
+     *
      * @author Jim Callanta
      */
     public function getSalaryAndSSS()
@@ -44,7 +43,7 @@ class SalaryComponent extends Model
             ->orderBy('id', 'asc')
             ->get(['id'])
             ->take(2);
-        
+
         return ['monthlyBasic' => $salaryComponent->first()->id, 'SSS' => $salaryComponent->last()->id];
     }
 }

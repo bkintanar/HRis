@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Controllers\Profile;
@@ -20,8 +19,7 @@ use HRis\Http\Requests\Profile\EmergencyContactsRequest;
 use Illuminate\Support\Facades\Request;
 
 /**
- * Class EmergencyContactsController
- * @package HRis\Http\Controllers\Profile
+ * Class EmergencyContactsController.
  *
  * @Middleware("auth")
  */
@@ -38,9 +36,10 @@ class EmergencyContactsController extends Controller
     protected $emergencyContact;
 
     /**
-     * @param Sentinel $auth
-     * @param Employee $employee
+     * @param Sentinel         $auth
+     * @param Employee         $employee
      * @param EmergencyContact $emergencyContact
+     *
      * @author Bertrand Kintanar
      */
     public function __construct(Sentinel $auth, Employee $employee, EmergencyContact $emergencyContact)
@@ -52,21 +51,23 @@ class EmergencyContactsController extends Controller
     }
 
     /**
-     * Show the Profile - Emergency Contacts
+     * Show the Profile - Emergency Contacts.
      *
      * @Get("pim/employee-list/{id}/emergency-contacts")
      * @Get("profile/emergency-contacts")
      *
      * @param EmergencyContactsRequest $request
-     * @param null $employee_id
+     * @param null                     $employee_id
+     *
      * @return \Illuminate\View\View
+     *
      * @author Bertrand Kintanar
      */
     public function index(EmergencyContactsRequest $request, $employee_id = null)
     {
         $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
-        if (! $employee) {
+        if (!$employee) {
             return response()->make(view()->make('errors.404'), 404);
         }
 
@@ -75,7 +76,7 @@ class EmergencyContactsController extends Controller
         $emergency_contacts = $this->emergencyContact->whereEmployeeId($employee->id)->get();
 
         $this->data['disabled'] = 'disabled';
-        $this->data['pim'] = $request->is('*pim/*') ? : false;
+        $this->data['pim'] = $request->is('*pim/*') ?: false;
         $this->data['table'] = $this->setupDataTable($emergency_contacts);
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Emergency Contacts' : 'My Emergency Contacts';
 
@@ -84,7 +85,9 @@ class EmergencyContactsController extends Controller
 
     /**
      * @param $emergency_contacts
+     *
      * @return array
+     *
      * @author Bertrand Kintanar
      */
     public function setupDataTable($emergency_contacts)
@@ -92,12 +95,12 @@ class EmergencyContactsController extends Controller
         $table = [];
 
         $table['title'] = 'In case of Emergency';
-        $table['permission'] = str_replace('pim', 'profile', Request::segment(1)) . '.emergency-contacts';
-        $table['headers'] = ['Full Name', 'Relationship', 'Home Telephone', 'Mobile',];
+        $table['permission'] = str_replace('pim', 'profile', Request::segment(1)).'.emergency-contacts';
+        $table['headers'] = ['Full Name', 'Relationship', 'Home Telephone', 'Mobile'];
         $table['model'] = [
             'singular' => 'emergency_contact',
             'plural'   => 'emergency_contacts',
-            'dashed'   => 'emergency-contacts'
+            'dashed'   => 'emergency-contacts',
         ];
         $table['items'] = $emergency_contacts;
 
@@ -111,7 +114,9 @@ class EmergencyContactsController extends Controller
      * @Post("pim/employee-list/{id}/emergency-contacts")
      *
      * @param EmergencyContactsRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function store(EmergencyContactsRequest $request)
@@ -132,14 +137,16 @@ class EmergencyContactsController extends Controller
      * @Patch("pim/employee-list/{id}/emergency-contacts")
      *
      * @param EmergencyContactsRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function update(EmergencyContactsRequest $request)
     {
         $emergencyContact = $this->emergencyContact->whereId($request->get('emergency_contact_id'))->first();
 
-        if (! $emergencyContact) {
+        if (!$emergencyContact) {
             return redirect()->to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
@@ -159,6 +166,7 @@ class EmergencyContactsController extends Controller
      * @Delete("ajax/pim/employee-list/{id}/emergency-contacts")
      *
      * @param EmergencyContactsRequest $request
+     *
      * @author Bertrand Kintanar
      */
     public function delete(EmergencyContactsRequest $request)
@@ -183,6 +191,7 @@ class EmergencyContactsController extends Controller
      * @Get("ajax/pim/employee-list/{id}/emergency-contacts")
      *
      * @param EmergencyContactsRequest $request
+     *
      * @author Bertrand Kintanar
      */
     public function show(EmergencyContactsRequest $request)

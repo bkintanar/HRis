@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Eloquent;
@@ -17,8 +16,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Request;
 
 /**
- * Class Navlink
- * @package HRis\Eloquent
+ * Class Navlink.
  */
 class Navlink extends Model
 {
@@ -31,7 +29,9 @@ class Navlink extends Model
 
     /**
      * @param $_link
+     *
      * @return string
+     *
      * @author Bertrand Kintanar
      */
     protected static function breadcrumb($_link)
@@ -45,17 +45,17 @@ class Navlink extends Model
         foreach ($subLinks as $sublink) {
             $href .= $sublink;
             $exception = ['pim'];
-            if (++ $idx === $numSubLinks) {
-                $str .= '<li class="active"><strong>' . ucwords(str_replace('-', ' ',
-                        in_array($sublink, $exception) ? strtoupper($sublink) : $sublink)) . '</strong></li>';
+            if (++$idx === $numSubLinks) {
+                $str .= '<li class="active"><strong>'.ucwords(str_replace('-', ' ',
+                        in_array($sublink, $exception) ? strtoupper($sublink) : $sublink)).'</strong></li>';
             } else {
                 $employee_id_prefix = Config::get('company.employee_id_prefix');
                 if (substr($sublink, 0, strlen($employee_id_prefix)) == $employee_id_prefix) {
-                    $str .= '<li>' . '<a href="' . $href . '">' . ucwords(in_array($sublink,
-                            $exception) ? strtoupper($sublink) : $sublink) . '</a></li>';
+                    $str .= '<li>'.'<a href="'.$href.'">'.ucwords(in_array($sublink,
+                            $exception) ? strtoupper($sublink) : $sublink).'</a></li>';
                 } else {
-                    $str .= '<li>' . '<a href="' . $href . '">' . ucwords(str_replace('-', ' ',
-                            in_array($sublink, $exception) ? strtoupper($sublink) : $sublink)) . '</a></li>';
+                    $str .= '<li>'.'<a href="'.$href.'">'.ucwords(str_replace('-', ' ',
+                            in_array($sublink, $exception) ? strtoupper($sublink) : $sublink)).'</a></li>';
                 }
             }
 
@@ -67,6 +67,7 @@ class Navlink extends Model
 
     /**
      * @return string
+     *
      * @author Bertrand Kintanar
      */
     protected static function generate()
@@ -79,7 +80,7 @@ class Navlink extends Model
         foreach ($_parent_links as $_parent_link) {
             $href = str_replace('/', '.', $_parent_link->href);
 
-            if ($user->hasAccess($href . '.view')) {
+            if ($user->hasAccess($href.'.view')) {
                 $children = self::whereParentId($_parent_link->id)->get();
 
                 $item = self::generateNavLinkItem($_parent_link, $children);
@@ -94,7 +95,9 @@ class Navlink extends Model
     /**
      * @param $link
      * @param $children
+     *
      * @return string
+     *
      * @author Bertrand Kintanar
      */
     protected static function generateNavLinkItem($link, $children)
@@ -106,55 +109,53 @@ class Navlink extends Model
         $item = '<li';
 
         if (self::isURLActive($link->href)) {
-            $item .= ' class="active">' . PHP_EOL;
+            $item .= ' class="active">'.PHP_EOL;
         } else {
-            $item .= '>' . PHP_EOL;
+            $item .= '>'.PHP_EOL;
         }
 
-        if (count($children) && ! in_array($link->id, $special_link_ids)) {
-            $item .= '<a href="#">' . PHP_EOL;
+        if (count($children) && !in_array($link->id, $special_link_ids)) {
+            $item .= '<a href="#">'.PHP_EOL;
         } else {
-            $item .= '<a href="/' . $link->href . '">' . PHP_EOL;
+            $item .= '<a href="/'.$link->href.'">'.PHP_EOL;
         }
 
         if ($link->icon != '') {
-            $item .= '<i class="fa ' . $link->icon . '"></i>' . PHP_EOL;
+            $item .= '<i class="fa '.$link->icon.'"></i>'.PHP_EOL;
         }
 
         if ($link->parent_id == 0) {
-            $item .= '<span class="nav-label">' . $link->name . '</span>' . PHP_EOL;
+            $item .= '<span class="nav-label">'.$link->name.'</span>'.PHP_EOL;
         } else {
-            $item .= $link->name . PHP_EOL;
+            $item .= $link->name.PHP_EOL;
         }
 
-        if (count($children) && ! in_array($link->id, $special_link_ids)) {
-            $item .= '<span class="fa arrow"></span>' . PHP_EOL;
+        if (count($children) && !in_array($link->id, $special_link_ids)) {
+            $item .= '<span class="fa arrow"></span>'.PHP_EOL;
         }
 
+        $item .= '</a>'.PHP_EOL;
 
-        $item .= '</a>' . PHP_EOL;
-
-        if (count($children) && ! in_array($link->id, $special_link_ids)) {
+        if (count($children) && !in_array($link->id, $special_link_ids)) {
             if (self::whereId($children[0]->parent_id)->pluck('parent_id') > 0) {
-                $item .= '<ul class="nav nav-third-level">' . PHP_EOL;
+                $item .= '<ul class="nav nav-third-level">'.PHP_EOL;
             } else {
-                $item .= '<ul class="nav nav-second-level">' . PHP_EOL;
+                $item .= '<ul class="nav nav-second-level">'.PHP_EOL;
             }
 
             foreach ($children as $child) {
                 $href = str_replace('/', '.', $child->href);
 
-                if ($user->hasAccess($href . '.view')) {
+                if ($user->hasAccess($href.'.view')) {
                     $childrenOfChild = self::whereParentId($child->id)->get();
                     $item .= self::generateNavLinkItem($child, $childrenOfChild);
                 }
             }
 
-            $item .= '</ul>' . PHP_EOL;
+            $item .= '</ul>'.PHP_EOL;
         }
 
-
-        $item .= '</li>' . PHP_EOL;
+        $item .= '</li>'.PHP_EOL;
 
         return $item;
     }
@@ -164,6 +165,7 @@ class Navlink extends Model
      * bar but we hide their child links.
      *
      * @return array
+     *
      * @author Bertrand Kintanar
      */
     protected static function getSpecialNavLinkIds()
@@ -177,14 +179,16 @@ class Navlink extends Model
      * Checks if the href is active.
      *
      * @param $href
+     *
      * @return bool
+     *
      * @author Bertrand Kintanar
      */
     protected static function isURLActive($href)
     {
         $request = Request::capture();
 
-        if ($request->is($href . '*')) {
+        if ($request->is($href.'*')) {
             return true;
         }
 
@@ -193,7 +197,9 @@ class Navlink extends Model
 
     /**
      * @param $id
+     *
      * @return string
+     *
      * @author Bertrand Kintanar
      */
     protected static function permissionTable($id)
@@ -211,18 +217,20 @@ class Navlink extends Model
     /**
      * @param $parent
      * @param $id
+     *
      * @return string
+     *
      * @author Bertrand Kintanar
      */
     protected static function permissionTab($parent, $id)
     {
         if ($parent->name == 'Profile') {
-            $children = self::where('parent_id', - 1)->get();
+            $children = self::where('parent_id', -1)->get();
         } else {
             $children = self::whereParentId($parent->id)->get();
         }
 
-        $result = '<div id="tab-' . $parent->id . '" class="tab-pane' . ($parent->id == PROFILE_IDS ? ' active' : '') . '">';
+        $result = '<div id="tab-'.$parent->id.'" class="tab-pane'.($parent->id == PROFILE_IDS ? ' active' : '').'">';
         $result .= '<div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
@@ -253,14 +261,16 @@ class Navlink extends Model
      * @param $id
      * @param bool|false $indent
      * @param bool|false $double
+     *
      * @return string
+     *
      * @author Bertrand Kintanar
      */
     protected static function generatePermissions($children, $id, $indent = false, $double = false)
     {
         $result = '';
         foreach ($children as $child) {
-            $result .= '<tr><td class="' . ($indent == true ? 'indent' : '') . ($double == true ? '-double' : '') . ' ta-left">' . $child->name . '</td>';
+            $result .= '<tr><td class="'.($indent == true ? 'indent' : '').($double == true ? '-double' : '').' ta-left">'.$child->name.'</td>';
             $result .= '<td></td>';
 
             $result .= self::generateCheckbox($child, $id, PERMISSION_VIEW);
@@ -284,7 +294,9 @@ class Navlink extends Model
      * @param $link
      * @param $id
      * @param $permission
+     *
      * @return string
+     *
      * @author Bertrand Kintanar
      */
     protected static function generateCheckbox($link, $id, $permission)
@@ -305,13 +317,13 @@ class Navlink extends Model
                     break;
             }
 
-            $permission_name = str_replace('/', '.', $link->href) . $mode;
+            $permission_name = str_replace('/', '.', $link->href).$mode;
 
             $user = User::whereId($id)->first();
 
             $checked = ($user->hasAccess($permission_name)) ? 'checked' : '';
 
-            return '<td><input type="checkbox" class="i-checks" ' . $checked . ' name="permissions[' . $permission_name . ']"></td>';
+            return '<td><input type="checkbox" class="i-checks" '.$checked.' name="permissions['.$permission_name.']"></td>';
         }
 
         return '<td></td>';
@@ -319,7 +331,9 @@ class Navlink extends Model
 
     /**
      * @param bool|false $pim
+     *
      * @return string
+     *
      * @author Bertrand Kintanar
      */
     protected static function profileLinks($pim = false)
@@ -328,12 +342,12 @@ class Navlink extends Model
 
         $nav = '<div class="col-lg-12 top-nav-b"><div class="btn-group top-nav-li"><ul>';
 
-        $navigations = self::whereParentId(- 1)->get();
+        $navigations = self::whereParentId(-1)->get();
 
         foreach ($navigations as $navigation) {
             $format = self::formatHref($navigation, $pim);
 
-            if ( ! $user->hasAccess($format['link'] . '.view')) {
+            if (!$user->hasAccess($format['link'].'.view')) {
                 continue;
             }
 
@@ -345,8 +359,8 @@ class Navlink extends Model
                 $nav .= '>';
             }
 
-            $nav .= '<a href="/' . $format['href'] . '">';
-            $nav .= '<i class="fa ' . $navigation->icon . ' m-right-a"></i>';
+            $nav .= '<a href="/'.$format['href'].'">';
+            $nav .= '<i class="fa '.$navigation->icon.' m-right-a"></i>';
             $nav .= $navigation->name;
             $nav .= '</a></li>';
         }
@@ -359,14 +373,16 @@ class Navlink extends Model
     /**
      * @param $navigation
      * @param $pim
+     *
      * @return array
+     *
      * @author Bertrand Kintanar
      */
     protected static function formatHref($navigation, $pim)
     {
         if ($pim) {
-            $href = str_replace('profile', 'pim/employee-list/' . Request::segment(3), $navigation->href);
-            $permission = str_replace('pim/employee-list/' . Request::segment(3), 'pim', $href);
+            $href = str_replace('profile', 'pim/employee-list/'.Request::segment(3), $navigation->href);
+            $permission = str_replace('pim/employee-list/'.Request::segment(3), 'pim', $href);
             $link = str_replace('/', '.', $permission);
         } else {
             $href = $navigation->href;

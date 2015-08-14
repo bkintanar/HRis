@@ -6,25 +6,24 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Eloquent;
 
 /**
- * Class HasPlaceholder
- * @package HRis\Eloquent
+ * Class HasPlaceholder.
  */
 trait HasPlaceholder
 {
-
     /**
      * This trait is needed if a model needs a placeholder.
      *
      * @param $name
      * @param $id
      * @param null $parent_id
+     *
      * @return array
+     *
      * @author Bertrand Kintanar
      */
     public static function listsWithPlaceholder($name, $id, $parent_id = null)

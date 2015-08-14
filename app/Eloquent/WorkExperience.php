@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Eloquent;
@@ -15,8 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class WorkExperience
- * @package HRis\Eloquent
+ * Class WorkExperience.
  */
 class WorkExperience extends Model
 {
@@ -50,6 +48,7 @@ class WorkExperience extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     *
      * @author Bertrand Kintanar
      */
     public function employee()
@@ -59,19 +58,21 @@ class WorkExperience extends Model
 
     /**
      * @param $from_date
+     *
      * @author Bertrand Kintanar
      */
     public function setFromDateAttribute($from_date)
     {
-        $this->attributes['from_date'] = Carbon::parse($from_date) ? : null;
+        $this->attributes['from_date'] = Carbon::parse($from_date) ?: null;
     }
 
     /**
      * @param $to_date
+     *
      * @author Bertrand Kintanar
      */
     public function setToDateAttribute($to_date)
     {
-        $this->attributes['to_date'] = Carbon::parse($to_date) ? : null;
+        $this->attributes['to_date'] = Carbon::parse($to_date) ?: null;
     }
 }

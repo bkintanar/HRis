@@ -6,9 +6,7 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
-
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 
@@ -18,6 +16,7 @@ class DatabaseSeeder extends Seeder
      * Run the database seeds.
      *
      * @return void
+     *
      * @author Bertrand Kintanar
      */
     public function run()

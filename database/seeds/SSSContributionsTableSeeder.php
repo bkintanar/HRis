@@ -6,9 +6,7 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
-
 use Illuminate\Database\Seeder;
 
 class SSSContributionsTableSeeder extends Seeder
@@ -17,6 +15,7 @@ class SSSContributionsTableSeeder extends Seeder
      * Run the database seeds.
      *
      * @return void
+     *
      * @author Bertrand Kintanar
      */
     public function run()
@@ -35,7 +34,7 @@ class SSSContributionsTableSeeder extends Seeder
                     'ec_er'                    => 10.00,
                     'total_contribution_er'    => 80.70,
                     'total_contribution_ee'    => 33.30,
-                    'total_contribution_total' => 114.00
+                    'total_contribution_total' => 114.00,
                 ],
                 [
                     'range_compensation_from'  => 1250.00,
@@ -47,7 +46,7 @@ class SSSContributionsTableSeeder extends Seeder
                     'ec_er'                    => 10.00,
                     'total_contribution_er'    => 116.00,
                     'total_contribution_ee'    => 50.00,
-                    'total_contribution_total' => 166.00
+                    'total_contribution_total' => 166.00,
                 ],
                 [
                     'range_compensation_from'  => 1750.00,
@@ -59,7 +58,7 @@ class SSSContributionsTableSeeder extends Seeder
                     'ec_er'                    => 10.00,
                     'total_contribution_er'    => 151.30,
                     'total_contribution_ee'    => 66.70,
-                    'total_contribution_total' => 218.00
+                    'total_contribution_total' => 218.00,
                 ],
                 [
                     'range_compensation_from'  => 2250.00,
@@ -71,7 +70,7 @@ class SSSContributionsTableSeeder extends Seeder
                     'ec_er'                    => 10.00,
                     'total_contribution_er'    => 186.70,
                     'total_contribution_ee'    => 83.30,
-                    'total_contribution_total' => 270.00
+                    'total_contribution_total' => 270.00,
                 ],
                 [
                     'range_compensation_from'  => 2750.00,
@@ -83,7 +82,7 @@ class SSSContributionsTableSeeder extends Seeder
                     'ec_er'                    => 10.00,
                     'total_contribution_er'    => 222.00,
                     'total_contribution_ee'    => 100.00,
-                    'total_contribution_total' => 322.00
+                    'total_contribution_total' => 322.00,
                 ],
                 [
                     'range_compensation_from'  => 3250.00,
@@ -95,7 +94,7 @@ class SSSContributionsTableSeeder extends Seeder
                     'ec_er'                    => 10.00,
                     'total_contribution_er'    => 257.30,
                     'total_contribution_ee'    => 116.70,
-                    'total_contribution_total' => 374.00
+                    'total_contribution_total' => 374.00,
                 ],
                 [
                     'range_compensation_from'  => 3750.00,
@@ -107,7 +106,7 @@ class SSSContributionsTableSeeder extends Seeder
                     'ec_er'                    => 10.00,
                     'total_contribution_er'    => 292.70,
                     'total_contribution_ee'    => 133.30,
-                    'total_contribution_total' => 426.00
+                    'total_contribution_total' => 426.00,
                 ],
                 [
                     'range_compensation_from'  => 4250.00,
@@ -119,7 +118,7 @@ class SSSContributionsTableSeeder extends Seeder
                     'ec_er'                    => 10.00,
                     'total_contribution_er'    => 328.00,
                     'total_contribution_ee'    => 150.00,
-                    'total_contribution_total' => 478.00
+                    'total_contribution_total' => 478.00,
                 ],
                 [
                     'range_compensation_from'  => 4750.00,
@@ -131,7 +130,7 @@ class SSSContributionsTableSeeder extends Seeder
                     'ec_er'                    => 10.00,
                     'total_contribution_er'    => 363.30,
                     'total_contribution_ee'    => 166.70,
-                    'total_contribution_total' => 530.00
+                    'total_contribution_total' => 530.00,
                 ],
                 [
                     'range_compensation_from'  => 5250.00,
@@ -143,7 +142,7 @@ class SSSContributionsTableSeeder extends Seeder
                     'ec_er'                    => 10.00,
                     'total_contribution_er'    => 398.70,
                     'total_contribution_ee'    => 183.30,
-                    'total_contribution_total' => 582.00
+                    'total_contribution_total' => 582.00,
                 ],
                 [
                     'range_compensation_from'  => 5750.00,
@@ -155,7 +154,7 @@ class SSSContributionsTableSeeder extends Seeder
                     'ec_er'                    => 10.00,
                     'total_contribution_er'    => 434.00,
                     'total_contribution_ee'    => 200.00,
-                    'total_contribution_total' => 634.00
+                    'total_contribution_total' => 634.00,
                 ],
                 [
                     'range_compensation_from'  => 6250.00,
@@ -167,7 +166,7 @@ class SSSContributionsTableSeeder extends Seeder
                     'ec_er'                    => 10.00,
                     'total_contribution_er'    => 469.30,
                     'total_contribution_ee'    => 216.70,
-                    'total_contribution_total' => 686.00
+                    'total_contribution_total' => 686.00,
                 ],
                 [
                     'range_compensation_from'  => 6750.00,
@@ -179,7 +178,7 @@ class SSSContributionsTableSeeder extends Seeder
                     'ec_er'                    => 10.00,
                     'total_contribution_er'    => 504.70,
                     'total_contribution_ee'    => 233.30,
-                    'total_contribution_total' => 738.00
+                    'total_contribution_total' => 738.00,
                 ],
                 [
                     'range_compensation_from'  => 7250.00,
@@ -191,7 +190,7 @@ class SSSContributionsTableSeeder extends Seeder
                     'ec_er'                    => 10.00,
                     'total_contribution_er'    => 540.00,
                     'total_contribution_ee'    => 250.00,
-                    'total_contribution_total' => 790.00
+                    'total_contribution_total' => 790.00,
                 ],
                 [
                     'range_compensation_from'  => 7750.00,
@@ -203,7 +202,7 @@ class SSSContributionsTableSeeder extends Seeder
                     'ec_er'                    => 10.00,
                     'total_contribution_er'    => 575.30,
                     'total_contribution_ee'    => 266.70,
-                    'total_contribution_total' => 842.00
+                    'total_contribution_total' => 842.00,
                 ],
                 [
                     'range_compensation_from'  => 8250.00,
@@ -215,7 +214,7 @@ class SSSContributionsTableSeeder extends Seeder
                     'ec_er'                    => 10.00,
                     'total_contribution_er'    => 610.70,
                     'total_contribution_ee'    => 283.30,
-                    'total_contribution_total' => 894.00
+                    'total_contribution_total' => 894.00,
                 ],
                 [
                     'range_compensation_from'  => 8750.00,
@@ -227,7 +226,7 @@ class SSSContributionsTableSeeder extends Seeder
                     'ec_er'                    => 10.00,
                     'total_contribution_er'    => 646.00,
                     'total_contribution_ee'    => 300.00,
-                    'total_contribution_total' => 946.00
+                    'total_contribution_total' => 946.00,
                 ],
                 [
                     'range_compensation_from'  => 9250.00,
@@ -239,7 +238,7 @@ class SSSContributionsTableSeeder extends Seeder
                     'ec_er'                    => 10.00,
                     'total_contribution_er'    => 681.30,
                     'total_contribution_ee'    => 316.70,
-                    'total_contribution_total' => 998.00
+                    'total_contribution_total' => 998.00,
                 ],
                 [
                     'range_compensation_from'  => 9750.00,
@@ -251,7 +250,7 @@ class SSSContributionsTableSeeder extends Seeder
                     'ec_er'                    => 10.00,
                     'total_contribution_er'    => 716.70,
                     'total_contribution_ee'    => 333.30,
-                    'total_contribution_total' => 1050.00
+                    'total_contribution_total' => 1050.00,
                 ],
                 [
                     'range_compensation_from'  => 10250.00,
@@ -263,7 +262,7 @@ class SSSContributionsTableSeeder extends Seeder
                     'ec_er'                    => 10.00,
                     'total_contribution_er'    => 752.00,
                     'total_contribution_ee'    => 350.00,
-                    'total_contribution_total' => 1102.00
+                    'total_contribution_total' => 1102.00,
                 ],
                 [
                     'range_compensation_from'  => 10750.00,
@@ -395,7 +394,7 @@ class SSSContributionsTableSeeder extends Seeder
                     'ec_er'                    => 30.00,
                     'total_contribution_er'    => 1208.70,
                     'total_contribution_ee'    => 581.30,
-                    'total_contribution_total' => 1790.00
+                    'total_contribution_total' => 1790.00,
                 ],
             ]
         );

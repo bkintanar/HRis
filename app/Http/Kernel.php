@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http;
@@ -14,8 +13,7 @@ namespace HRis\Http;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 /**
- * Class Kernel
- * @package HRis\Http
+ * Class Kernel.
  */
 class Kernel extends HttpKernel
 {

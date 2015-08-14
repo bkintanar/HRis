@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Requests\PIM;
@@ -15,8 +14,7 @@ use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Http\Requests\Request;
 
 /**
- * Class PIMRequest
- * @package HRis\Http\Requests\PIM
+ * Class PIMRequest.
  */
 class PIMRequest extends Request
 {
@@ -24,6 +22,7 @@ class PIMRequest extends Request
      * Get the validation rules that apply to the request.
      *
      * @return array
+     *
      * @author Bertrand Kintanar
      */
     public function rules()
@@ -39,7 +38,9 @@ class PIMRequest extends Request
      * Determine if the user is authorized to make this request.
      *
      * @param Sentinel $user
+     *
      * @return bool
+     *
      * @author Bertrand Kintanar
      */
     public function authorize(Sentinel $user)
@@ -50,17 +51,18 @@ class PIMRequest extends Request
 
         // View
         if (Request::isMethod('get')) {
-            return ($user->hasAccess($permission . '.view'));
+            return ($user->hasAccess($permission.'.view'));
         } // Create
         else {
             if (Request::isMethod('post')) {
-                return ($user->hasAccess($permission . '.create'));
+                return ($user->hasAccess($permission.'.create'));
             }
         }
     }
 
     /**
      * @return mixed
+     *
      * @author Bertrand Kintanar
      */
     public function forbiddenResponse()

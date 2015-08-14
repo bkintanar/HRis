@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Console\Commands;
@@ -20,8 +19,7 @@ use Illuminate\Console\Command;
 use League\Csv\Reader;
 
 /**
- * Class ImportEmployeeList
- * @package HRis\Console\Commands
+ * Class ImportEmployeeList.
  */
 class ImportEmployeeList extends Command
 {
@@ -46,7 +44,7 @@ class ImportEmployeeList extends Command
      */
     public function handle()
     {
-        $csv = Reader::createFromPath(storage_path() . '/employee.csv');
+        $csv = Reader::createFromPath(storage_path().'/employee.csv');
 
         $csv->setOffset(2);
         $data = $csv->query();
@@ -55,21 +53,21 @@ class ImportEmployeeList extends Command
             $data = [];
             $data['employee_id'] = $row[0];
             $data['joined_date'] = Carbon::parse($row[1])->toDateString();
-            $data['birth_date'] = Carbon::parse($row[23])->toDateString() ? : null;
+            $data['birth_date'] = Carbon::parse($row[23])->toDateString() ?: null;
             $data['first_name'] = utf8_encode($row[4]);
-            $data['middle_name'] = utf8_encode($row[5]) ? : null;
+            $data['middle_name'] = utf8_encode($row[5]) ?: null;
             $data['last_name'] = utf8_encode($row[6]);
-            $data['suffix_name'] = utf8_encode($row[7]) ? : null;
+            $data['suffix_name'] = utf8_encode($row[7]) ?: null;
             $data['address_1'] = utf8_encode($row[9]);
-            $data['address_city_id'] = City::whereName($row[10])->pluck('id') ? : null;
+            $data['address_city_id'] = City::whereName($row[10])->pluck('id') ?: null;
             $data['address_province_id'] = 25;
             $data['address_country_id'] = 185;
-            $data['address_postal_code'] = $row[11] ? : null;
-            $data['social_security'] = $row[15] ? : null;
-            $data['tax_identification'] = $row[16] ? : null;
-            $data['philhealth'] = $row[17] ? : null;
-            $data['hdmf_pagibig'] = $row[18] ? : null;
-            $data['mid_rtn'] = $row[19] ? : null;
+            $data['address_postal_code'] = $row[11] ?: null;
+            $data['social_security'] = $row[15] ?: null;
+            $data['tax_identification'] = $row[16] ?: null;
+            $data['philhealth'] = $row[17] ?: null;
+            $data['hdmf_pagibig'] = $row[18] ?: null;
+            $data['mid_rtn'] = $row[19] ?: null;
 
             $new_employee = Employee::create($data);
             $components = SalaryComponent::all();

@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Controllers\Profile;
@@ -20,8 +19,7 @@ use HRis\Http\Requests\Profile\DependentsRequest;
 use Illuminate\Support\Facades\Request;
 
 /**
- * Class DependentsController
- * @package HRis\Http\Controllers\Profile
+ * Class DependentsController.
  *
  * @Middleware("auth")
  */
@@ -38,9 +36,10 @@ class DependentsController extends Controller
     protected $employee;
 
     /**
-     * @param Sentinel $auth
-     * @param Employee $employee
+     * @param Sentinel  $auth
+     * @param Employee  $employee
      * @param Dependent $dependent
+     *
      * @author Bertrand Kintanar
      */
     public function __construct(Sentinel $auth, Employee $employee, Dependent $dependent)
@@ -58,15 +57,17 @@ class DependentsController extends Controller
      * @Get("pim/employee-list/{id}/dependents")
      *
      * @param DependentsRequest $request
-     * @param null $employee_id
+     * @param null              $employee_id
+     *
      * @return \Illuminate\View\View
+     *
      * @author Bertrand Kintanar
      */
     public function index(DependentsRequest $request, $employee_id = null)
     {
         $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
 
-        if (! $employee) {
+        if (!$employee) {
             return response()->make(view()->make('errors.404'), 404);
         }
 
@@ -74,7 +75,7 @@ class DependentsController extends Controller
 
         $dependents = $this->dependent->whereEmployeeId($employee->id)->get();
 
-        $this->data['pim'] = $request->is('*pim/*') ? : false;
+        $this->data['pim'] = $request->is('*pim/*') ?: false;
         $this->data['table'] = $this->setupDataTable($dependents);
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Dependents' : 'My Dependents';
 
@@ -83,7 +84,9 @@ class DependentsController extends Controller
 
     /**
      * @param $dependents
+     *
      * @return array
+     *
      * @author Bertrand Kintanar
      */
     public function setupDataTable($dependents)
@@ -91,7 +94,7 @@ class DependentsController extends Controller
         $table = [];
 
         $table['title'] = 'Assigned Dependents';
-        $table['permission'] = str_replace('pim', 'profile', Request::segment(1)) . '.dependents';
+        $table['permission'] = str_replace('pim', 'profile', Request::segment(1)).'.dependents';
         $table['headers'] = ['Full Name', 'Relationship', 'Birth Date'];
         $table['model'] = ['singular' => 'dependent', 'plural' => 'dependents', 'dashed' => 'dependents'];
         $table['items'] = $dependents;
@@ -106,7 +109,9 @@ class DependentsController extends Controller
      * @Post("pim/employee-list/{id}/dependents")
      *
      * @param DependentsRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function store(DependentsRequest $request)
@@ -127,14 +132,16 @@ class DependentsController extends Controller
      * @Patch("pim/employee-list/{id}/dependents")
      *
      * @param DependentsRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function update(DependentsRequest $request)
     {
         $dependent = $this->dependent->whereId($request->get('dependent_id'))->first();
 
-        if (! $dependent) {
+        if (!$dependent) {
             return redirect()->to($request->path())->with('danger', 'Unable to retrieve record from database.');
         }
 
@@ -154,6 +161,7 @@ class DependentsController extends Controller
      * @Delete("ajax/pim/employee-list/{id}/dependents")
      *
      * @param DependentsRequest $request
+     *
      * @author Bertrand Kintanar
      */
     public function deleteDependent(DependentsRequest $request)
@@ -178,6 +186,7 @@ class DependentsController extends Controller
      * @Get("ajax/pim/employee-list/{id}/dependents")
      *
      * @param DependentsRequest $request
+     *
      * @author Bertrand Kintanar
      */
     public function getDependent(DependentsRequest $request)

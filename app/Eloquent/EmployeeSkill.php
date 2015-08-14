@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Eloquent;
@@ -14,8 +13,7 @@ namespace HRis\Eloquent;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class EmployeeSkill
- * @package HRis\Eloquent
+ * Class EmployeeSkill.
  */
 class EmployeeSkill extends Model
 {

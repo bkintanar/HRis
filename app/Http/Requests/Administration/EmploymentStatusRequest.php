@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Requests\Administration;
@@ -15,8 +14,7 @@ use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Http\Requests\Request;
 
 /**
- * Class EmploymentStatusRequest
- * @package HRis\Http\Requests\Administration
+ * Class EmploymentStatusRequest.
  */
 class EmploymentStatusRequest extends Request
 {
@@ -24,6 +22,7 @@ class EmploymentStatusRequest extends Request
      * Get the validation rules that apply to the request.
      *
      * @return array
+     *
      * @author Bertrand Kintanar
      */
     public function rules()
@@ -39,7 +38,9 @@ class EmploymentStatusRequest extends Request
      * Determine if the user is authorized to make this request.
      *
      * @param Sentinel $user
+     *
      * @return bool
+     *
      * @author Bertrand Kintanar
      */
     public function authorize(Sentinel $user)
@@ -50,19 +51,19 @@ class EmploymentStatusRequest extends Request
 
         // Create
         if (Request::isMethod('post')) {
-            return ($user->hasAccess($permission . '.create'));
+            return ($user->hasAccess($permission.'.create'));
         } // Delete
         else {
             if (Request::isMethod('delete')) {
-                return ($user->hasAccess($permission . '.delete'));
+                return ($user->hasAccess($permission.'.delete'));
             } // View
             else {
                 if (Request::isMethod('get')) {
-                    return ($user->hasAccess($permission . '.view'));
+                    return ($user->hasAccess($permission.'.view'));
                 } // Update
                 else {
                     if (Request::isMethod('patch')) {
-                        return ($user->hasAccess($permission . '.update'));
+                        return ($user->hasAccess($permission.'.update'));
                     }
                 }
             }
@@ -71,6 +72,7 @@ class EmploymentStatusRequest extends Request
 
     /**
      * @return mixed
+     *
      * @author Bertrand Kintanar
      */
     public function forbiddenResponse()

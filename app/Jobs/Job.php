@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Jobs;
@@ -14,8 +13,7 @@ namespace HRis\Jobs;
 use Illuminate\Bus\Queueable;
 
 /**
- * Class Job
- * @package HRis\Jobs
+ * Class Job.
  */
 abstract class Job
 {

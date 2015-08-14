@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Controllers\Administration\Qualifications;
@@ -17,8 +16,7 @@ use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Administration\EducationRequest;
 
 /**
- * Class EducationController
- * @package HRis\Http\Controllers\Administration\Qualifications
+ * Class EducationController.
  *
  * @Middleware("auth")
  */
@@ -30,8 +28,9 @@ class EducationController extends Controller
     protected $education;
 
     /**
-     * @param Sentinel $auth
+     * @param Sentinel       $auth
      * @param EducationLevel $education
+     *
      * @author Bertrand Kintanar
      */
     public function __construct(Sentinel $auth, EducationLevel $education)
@@ -47,7 +46,9 @@ class EducationController extends Controller
      * @Get("admin/qualifications/educations")
      *
      * @param EducationRequest $request
+     *
      * @return \Illuminate\View\View
+     *
      * @author Bertrand Kintanar
      */
     public function index(EducationRequest $request)
@@ -62,7 +63,9 @@ class EducationController extends Controller
 
     /**
      * @param $educations
+     *
      * @return array
+     *
      * @author Bertrand Kintanar
      */
     public function setupDataTable($educations)
@@ -84,7 +87,9 @@ class EducationController extends Controller
      * @Post("admin/qualifications/educations")
      *
      * @param EducationRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function store(EducationRequest $request)
@@ -104,14 +109,16 @@ class EducationController extends Controller
      * @Patch("admin/qualifications/educations")
      *
      * @param EducationRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function update(EducationRequest $request)
     {
         $education = $this->education->whereId($request->get('education_id'))->first();
 
-        if (! $education) {
+        if (!$education) {
             return redirect()->to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 

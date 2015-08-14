@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Eloquent;
@@ -15,8 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class JobHistory
- * @package HRis\Eloquent
+ * Class JobHistory.
  */
 class JobHistory extends Model
 {
@@ -46,7 +44,7 @@ class JobHistory extends Model
         'department_id',
         'effective_date',
         'location_id',
-        'comments'
+        'comments',
     ];
 
     /**
@@ -58,6 +56,7 @@ class JobHistory extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     *
      * @author Bertrand Kintanar
      */
     public function department()
@@ -67,6 +66,7 @@ class JobHistory extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     *
      * @author Bertrand Kintanar
      */
     public function employmentStatus()
@@ -77,7 +77,9 @@ class JobHistory extends Model
     /**
      * @param null $fillables
      * @param $employee_id
+     *
      * @return null
+     *
      * @author Bertrand Kintanar
      */
     public function getCurrentEmployeeJob($fillables = null, $employee_id)
@@ -92,6 +94,7 @@ class JobHistory extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     *
      * @author Bertrand Kintanar
      */
     public function jobTitle()
@@ -101,6 +104,7 @@ class JobHistory extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     *
      * @author Bertrand Kintanar
      */
     public function location()
@@ -110,15 +114,17 @@ class JobHistory extends Model
 
     /**
      * @param $effective_date
+     *
      * @author Bertrand Kintanar
      */
     public function setEffectiveDateAttribute($effective_date)
     {
-        $this->attributes['effective_date'] = Carbon::parse($effective_date) ? : null;
+        $this->attributes['effective_date'] = Carbon::parse($effective_date) ?: null;
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     *
      * @author Bertrand Kintanar
      */
     public function workShift()

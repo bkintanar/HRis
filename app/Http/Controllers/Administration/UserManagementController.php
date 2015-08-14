@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Controllers\Administration;
@@ -17,8 +16,7 @@ use HRis\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Request;
 
 /**
- * Class UserManagementController
- * @package HRis\Http\Controllers\Administration
+ * Class UserManagementController.
  *
  * @Middleware("auth")
  */
@@ -31,7 +29,8 @@ class UserManagementController extends Controller
 
     /**
      * @param Sentinel $auth
-     * @param User $user
+     * @param User     $user
+     *
      * @author Bertrand Kintanar
      */
     public function __construct(Sentinel $auth, User $user)
@@ -42,11 +41,12 @@ class UserManagementController extends Controller
     }
 
     /**
-     * Show the Administration - User Management
+     * Show the Administration - User Management.
      *
      * @Get("admin/user-management")
      *
      * @return \Illuminate\View\View
+     *
      * @author Bertrand Kintanar
      */
     public function index()
@@ -59,7 +59,6 @@ class UserManagementController extends Controller
         return $this->template('pages.administration.user-management.view');
     }
 
-
     /**
      * Show the Administration - User with the given Id.
      *
@@ -70,14 +69,16 @@ class UserManagementController extends Controller
     public function viewUser()
     {
         // TODO: Check if {id} exist
-        return redirect()->to(Request::path() . '/details');
+        return redirect()->to(Request::path().'/details');
     }
 
     /**
      * @Get("admin/user-management/{id}/details")
      *
      * @param $user_id
+     *
      * @return \Illuminate\View\View
+     *
      * @author Bertrand Kintanar
      */
     public function userDetails($user_id)
@@ -98,7 +99,9 @@ class UserManagementController extends Controller
      * @Get("admin/user-management/{id}/permissions")
      *
      * @param $user_id
+     *
      * @return \Illuminate\View\View
+     *
      * @author Bertrand Kintanar
      */
     public function userPermissions($user_id)

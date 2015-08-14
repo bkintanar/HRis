@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Controllers\Administration\Job;
@@ -17,8 +16,7 @@ use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Administration\WorkShiftRequest;
 
 /**
- * Class WorkShiftController
- * @package HRis\Http\Controllers\Administration\Job
+ * Class WorkShiftController.
  *
  * @Middleware("auth")
  */
@@ -30,8 +28,9 @@ class WorkShiftController extends Controller
     protected $work_shift;
 
     /**
-     * @param Sentinel $auth
+     * @param Sentinel  $auth
      * @param WorkShift $work_shift
+     *
      * @author Bertrand Kintanar
      */
     public function __construct(Sentinel $auth, WorkShift $work_shift)
@@ -47,7 +46,9 @@ class WorkShiftController extends Controller
      * @Get("admin/job/work-shifts")
      *
      * @param WorkShiftRequest $request
+     *
      * @return \Illuminate\View\View
+     *
      * @author Bertrand Kintanar
      */
     public function index(WorkShiftRequest $request)
@@ -63,7 +64,9 @@ class WorkShiftController extends Controller
 
     /**
      * @param $work_shifts
+     *
      * @return array
+     *
      * @author Bertrand Kintanar
      */
     public function setupDataTable($work_shifts)
@@ -85,7 +88,9 @@ class WorkShiftController extends Controller
      * @Post("admin/job/work-shifts")
      *
      * @param WorkShiftRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function store(WorkShiftRequest $request)
@@ -105,14 +110,16 @@ class WorkShiftController extends Controller
      * @Patch("admin/job/work-shifts")
      *
      * @param WorkShiftRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @author Bertrand Kintanar
      */
     public function update(WorkShiftRequest $request)
     {
         $work_shift = $this->work_shift->whereId($request->get('work_shift_id'))->first();
 
-        if (! $work_shift) {
+        if (!$work_shift) {
             return redirect()->to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 

@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Console\Commands;
@@ -18,8 +17,7 @@ use Illuminate\Support\Facades\Log;
 use League\Csv\Reader;
 
 /**
- * Class ImportTimeLog
- * @package HRis\Console\Commands
+ * Class ImportTimeLog.
  */
 class ImportTimeLog extends Command
 {
@@ -44,7 +42,7 @@ class ImportTimeLog extends Command
      */
     public function handle()
     {
-        $csv = Reader::createFromPath(storage_path() . '/attendance.csv');
+        $csv = Reader::createFromPath(storage_path().'/attendance.csv');
 
         $csv->setOffset(1);
         $data = $csv->query();
@@ -61,7 +59,7 @@ class ImportTimeLog extends Command
                     'face_id'        => $row[0],
                     'swipe_date'     => $row[3],
                     'swipe_time'     => $time,
-                    'swipe_datetime' => Carbon::parse($row[3] . ' ' . $time)
+                    'swipe_datetime' => Carbon::parse($row[3].' '.$time),
                 ];
                 $timelog = TimeLog::create($data);
 

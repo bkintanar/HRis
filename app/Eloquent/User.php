@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Eloquent;
@@ -18,8 +17,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 /**
- * Class User
- * @package HRis\Eloquent
+ * Class User.
  */
 class User extends SentinelUser implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -47,8 +45,10 @@ class User extends SentinelUser implements AuthenticatableContract, CanResetPass
     protected $hidden = ['password', 'remember_token'];
 
     /**
-     * @return mixed
      * @throws Exception
+     *
+     * @return mixed
+     *
      * @author Bertrand Kintanar
      */
     public function role()
@@ -64,6 +64,7 @@ class User extends SentinelUser implements AuthenticatableContract, CanResetPass
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     *
      * @author Bertrand Kintanar
      */
     public function employee()

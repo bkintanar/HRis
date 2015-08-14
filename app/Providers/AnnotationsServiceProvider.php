@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Providers;
@@ -14,8 +13,7 @@ namespace HRis\Providers;
 use Collective\Annotations\AnnotationsServiceProvider as ServiceProvider;
 
 /**
- * Class AnnotationsServiceProvider
- * @package HRis\Providers
+ * Class AnnotationsServiceProvider.
  */
 class AnnotationsServiceProvider extends ServiceProvider
 {

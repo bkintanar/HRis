@@ -6,13 +6,11 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
-
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 /**
- * Class EmploymentStatusTest
+ * Class EmploymentStatusTest.
  */
 class EmploymentStatusTest extends \TestCase
 {
@@ -45,10 +43,10 @@ class EmploymentStatusTest extends \TestCase
         $this->testUpdateEmploymentStatusPositive();
 
         $id = $this->onPage('/admin/job/employment-status')
-            ->see('Tested')->filterByNameOrId("edit", 'button')->last()->attr('id');
+            ->see('Tested')->filterByNameOrId('edit', 'button')->last()->attr('id');
 
         $_token = $this->onPage('/admin/job/employment-status')
-            ->see('Tested')->filterByNameOrId("_token", 'input')->attr('value');
+            ->see('Tested')->filterByNameOrId('_token', 'input')->attr('value');
 
         $this->post('/ajax/delete-employment-status', ['id' => $id, '_token' => $_token, '_method' => 'DELETE']);
 

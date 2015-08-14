@@ -162,7 +162,6 @@ return [
         JsLocalization\JsLocalizationServiceProvider::class,
         Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
 
-
     ],
 
     /*
@@ -214,7 +213,7 @@ return [
         /*
          * HRis Class Aliases...
          */
-        'Navlink'    => HRis\Eloquent\Navlink::class,
+        'Navlink'        => HRis\Eloquent\Navlink::class,
         'TablePresenter' => HRis\Http\Presenters\TablePresenter::class,
         /*
          * Vendor Class Aliases...

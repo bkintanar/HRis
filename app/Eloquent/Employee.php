@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Eloquent;
@@ -15,8 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Employee
- * @package HRis\Eloquent
+ * Class Employee.
  */
 class Employee extends Model
 {
@@ -69,7 +67,7 @@ class Employee extends Model
         'joined_date',
         'probation_end_date',
         'permanency_date',
-        'resign_date'
+        'resign_date',
     ];
 
     /**
@@ -81,6 +79,7 @@ class Employee extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     *
      * @author Bertrand Kintanar
      */
     public function city()
@@ -90,6 +89,7 @@ class Employee extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     *
      * @author Bertrand Kintanar
      */
     public function country()
@@ -99,6 +99,7 @@ class Employee extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     *
      * @author Bertrand Kintanar
      */
     public function dependents()
@@ -108,6 +109,7 @@ class Employee extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     *
      * @author Bertrand Kintanar
      */
     public function educations()
@@ -117,6 +119,7 @@ class Employee extends Model
 
     /**
      * @return mixed
+     *
      * @author Jim Callanta
      */
     public function employeeSalaryComponent()
@@ -131,7 +134,9 @@ class Employee extends Model
     /**
      * @param $employee_id
      * @param $user_id
+     *
      * @return mixed
+     *
      * @author Bertrand Kintanar
      */
     public function getEmployeeById($employee_id, $user_id)
@@ -147,9 +152,11 @@ class Employee extends Model
 
     /**
      * @param bool|true $paginate
-     * @param string $sort
-     * @param string $direction
+     * @param string    $sort
+     * @param string    $direction
+     *
      * @return mixed
+     *
      * @author Bertrand Kintanar
      */
     public function getEmployeeList($paginate = true, $sort = 'employees.id', $direction = 'asc')
@@ -174,7 +181,9 @@ class Employee extends Model
     /**
      * @param $employee_id
      * @param $user_employee_id
+     *
      * @return mixed
+     *
      * @author Jim Callanta
      */
     public function getEmployeeSalaryDetails($employee_id, $user_employee_id)
@@ -188,16 +197,19 @@ class Employee extends Model
 
     /**
      * @return string
+     *
      * @author Bertrand Kintanar
      */
     public function getFullNameAttribute()
     {
-        return $this->first_name . ' ' . ($this->middle_name ? $this->middle_name . ' ' : '') . $this->last_name . ($this->suffix_name ? ' ' . $this->suffix_name : '');
+        return $this->first_name.' '.($this->middle_name ? $this->middle_name.' ' : '').$this->last_name.($this->suffix_name ? ' '.$this->suffix_name : '');
     }
 
     /**
      * @param $start_date
+     *
      * @return array
+     *
      * @author Bertrand Kintanar
      */
     public function getTimeLog($start_date)
@@ -237,12 +249,13 @@ class Employee extends Model
 
         return [
             'in_time'  => $time_in ? $time_in->swipe_time : null,
-            'out_time' => $time_out ? $time_out->swipe_time : null
+            'out_time' => $time_out ? $time_out->swipe_time : null,
         ];
     }
 
     /**
      * @return mixed
+     *
      * @author Bertrand Kintanar
      */
     public function employeeWorkShift()
@@ -254,6 +267,7 @@ class Employee extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     *
      * @author Bertrand Kintanar
      */
     public function timelogs()
@@ -263,6 +277,7 @@ class Employee extends Model
 
     /**
      * @return mixed
+     *
      * @author Bertrand Kintanar
      */
     public function jobHistory()
@@ -272,6 +287,7 @@ class Employee extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     *
      * @author Bertrand Kintanar
      */
     public function jobHistories()
@@ -281,6 +297,7 @@ class Employee extends Model
 
     /**
      * @return mixed
+     *
      * @author Bertrand Kintanar
      */
     public function orderedJobHistories()
@@ -291,6 +308,7 @@ class Employee extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     *
      * @author Bertrand Kintanar
      */
     public function province()
@@ -300,105 +318,117 @@ class Employee extends Model
 
     /**
      * @param $birth_date
+     *
      * @author Bertrand Kintanar
      */
     public function setBirthDateAttribute($birth_date)
     {
-        $this->attributes['birth_date'] = Carbon::parse($birth_date) ? : null;
+        $this->attributes['birth_date'] = Carbon::parse($birth_date) ?: null;
     }
 
     /**
      * @param $employee_id
+     *
      * @author Bertrand Kintanar
      */
     public function setEmployeeIdAttribute($employee_id)
     {
-        $this->attributes['employee_id'] = $employee_id ? : null;
+        $this->attributes['employee_id'] = $employee_id ?: null;
     }
 
     /**
      * @param $face_id
+     *
      * @author Bertrand Kintanar
      */
     public function setFaceIdAttribute($face_id)
     {
-        $this->attributes['face_id'] = $face_id ? : null;
+        $this->attributes['face_id'] = $face_id ?: null;
     }
 
     /**
      * @param $hdmf_pagibig
+     *
      * @author Bertrand Kintanar
      */
     public function setHdmfPagibigAttribute($hdmf_pagibig)
     {
-        $this->attributes['hdmf_pagibig'] = $hdmf_pagibig ? : null;
+        $this->attributes['hdmf_pagibig'] = $hdmf_pagibig ?: null;
     }
 
     /**
      * @param $joined_date
+     *
      * @author Bertrand Kintanar
      */
     public function setJoinedDateAttribute($joined_date)
     {
-        $this->attributes['joined_date'] = Carbon::parse($joined_date) ? : null;
+        $this->attributes['joined_date'] = Carbon::parse($joined_date) ?: null;
     }
 
     /**
      * @param $marital_status_id
+     *
      * @author Bertrand Kintanar
      */
     public function setMaritalStatusIdAttribute($marital_status_id)
     {
-        $this->attributes['marital_status_id'] = $marital_status_id ? : null;
+        $this->attributes['marital_status_id'] = $marital_status_id ?: null;
     }
 
     /**
      * @param $permanency_date
+     *
      * @author Bertrand Kintanar
      */
     public function setPermanencyDateAttribute($permanency_date)
     {
-        $this->attributes['permanency_date'] = Carbon::parse($permanency_date) ? : null;
+        $this->attributes['permanency_date'] = Carbon::parse($permanency_date) ?: null;
     }
 
     /**
      * @param $philhealth
+     *
      * @author Bertrand Kintanar
      */
     public function setPhilHealthAttribute($philhealth)
     {
-        $this->attributes['philhealth'] = $philhealth ? : null;
+        $this->attributes['philhealth'] = $philhealth ?: null;
     }
 
     /**
      * @param $probation_end_date
+     *
      * @author Bertrand Kintanar
      */
     public function setProbationEndDateAttribute($probation_end_date)
     {
-        $this->attributes['probation_end_date'] = Carbon::parse($probation_end_date) ? : null;
+        $this->attributes['probation_end_date'] = Carbon::parse($probation_end_date) ?: null;
     }
 
     /**
      * @param $resign_date
+     *
      * @author Bertrand Kintanar
      */
     public function setResignDateAttribute($resign_date)
     {
-        $this->attributes['resign_date'] = Carbon::parse($resign_date) ? : null;
+        $this->attributes['resign_date'] = Carbon::parse($resign_date) ?: null;
     }
 
     /**
      * @param $user_id
+     *
      * @author Bertrand Kintanar
      */
     public function setUserIdAttribute($user_id)
     {
-        $this->attributes['user_id'] = $user_id ? : null;
+        $this->attributes['user_id'] = $user_id ?: null;
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     *
      * @author Bertrand Kintanar
      */
     public function skills()
@@ -408,6 +438,7 @@ class Employee extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     *
      * @author Bertrand Kintanar
      */
     public function user()
@@ -417,6 +448,7 @@ class Employee extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     *
      * @author Bertrand Kintanar
      */
     public function workExperiences()

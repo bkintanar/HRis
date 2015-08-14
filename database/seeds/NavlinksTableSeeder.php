@@ -6,9 +6,7 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
-
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
@@ -18,6 +16,7 @@ class NavlinksTableSeeder extends Seeder
      * Run the database seeds.
      *
      * @return void
+     *
      * @author Bertrand Kintanar
      */
     public function run()
@@ -34,7 +33,7 @@ class NavlinksTableSeeder extends Seeder
                     'icon'       => 'fa-th-large',
                     'parent_id'  => 0,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 2,
@@ -44,7 +43,7 @@ class NavlinksTableSeeder extends Seeder
                     'icon'       => 'fa-user',
                     'parent_id'  => 0,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 3,
@@ -52,9 +51,9 @@ class NavlinksTableSeeder extends Seeder
                     'href'       => 'profile/personal-details',
                     'permission' => 3,
                     'icon'       => 'fa-file-text-o ',
-                    'parent_id'  => - 1,
+                    'parent_id'  => -1,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 4,
@@ -62,9 +61,9 @@ class NavlinksTableSeeder extends Seeder
                     'href'       => 'profile/contact-details',
                     'permission' => 3,
                     'icon'       => 'fa-phone-square',
-                    'parent_id'  => - 1,
+                    'parent_id'  => -1,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 5,
@@ -72,9 +71,9 @@ class NavlinksTableSeeder extends Seeder
                     'href'       => 'profile/emergency-contacts',
                     'permission' => 15,
                     'icon'       => 'fa-plus-square ',
-                    'parent_id'  => - 1,
+                    'parent_id'  => -1,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 6,
@@ -82,9 +81,9 @@ class NavlinksTableSeeder extends Seeder
                     'href'       => 'profile/dependents',
                     'permission' => 15,
                     'icon'       => 'fa-child',
-                    'parent_id'  => - 1,
+                    'parent_id'  => -1,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 7,
@@ -92,9 +91,9 @@ class NavlinksTableSeeder extends Seeder
                     'profile/job',
                     'href'       => 'fa-briefcase',
                     'permission' => 15,
-                    'parent_id'  => - 1,
+                    'parent_id'  => -1,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 8,
@@ -102,9 +101,9 @@ class NavlinksTableSeeder extends Seeder
                     'href'       => 'profile/work-shifts',
                     'permission' => 15,
                     'icon'       => 'fa-clock-o',
-                    'parent_id'  => - 1,
+                    'parent_id'  => -1,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 9,
@@ -112,9 +111,9 @@ class NavlinksTableSeeder extends Seeder
                     'href'       => 'profile/salary',
                     'permission' => 15,
                     'icon'       => 'fa-money',
-                    'parent_id'  => - 1,
+                    'parent_id'  => -1,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 10,
@@ -122,9 +121,9 @@ class NavlinksTableSeeder extends Seeder
                     'href'       => 'profile/qualifications',
                     'permission' => 15,
                     'icon'       => 'fa-bookmark',
-                    'parent_id'  => - 1,
+                    'parent_id'  => -1,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 11,
@@ -134,7 +133,7 @@ class NavlinksTableSeeder extends Seeder
                     'icon'       => 'fa-bar-chart-o',
                     'parent_id'  => 0,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 12,
@@ -144,7 +143,7 @@ class NavlinksTableSeeder extends Seeder
                     'icon'       => 'fa-comments-o',
                     'parent_id'  => 11,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 13,
@@ -154,7 +153,7 @@ class NavlinksTableSeeder extends Seeder
                     'icon'       => 'fa-comments',
                     'parent_id'  => 11,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 14,
@@ -164,7 +163,7 @@ class NavlinksTableSeeder extends Seeder
                     'icon'       => 'fa-clock-o',
                     'parent_id'  => 0,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 15,
@@ -174,7 +173,7 @@ class NavlinksTableSeeder extends Seeder
                     'icon'       => 'fa-cogs',
                     'parent_id'  => 0,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 16,
@@ -184,7 +183,7 @@ class NavlinksTableSeeder extends Seeder
                     'icon'       => 'fa-list-ul',
                     'parent_id'  => 15,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 17,
@@ -194,7 +193,7 @@ class NavlinksTableSeeder extends Seeder
                     'icon'       => 'fa-group',
                     'parent_id'  => 0,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 18,
@@ -204,7 +203,7 @@ class NavlinksTableSeeder extends Seeder
                     'icon'       => 'fa-suitcase',
                     'parent_id'  => 17,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 19,
@@ -214,7 +213,7 @@ class NavlinksTableSeeder extends Seeder
                     'icon'       => 'fa-list-ol',
                     'parent_id'  => 17,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 20,
@@ -224,7 +223,7 @@ class NavlinksTableSeeder extends Seeder
                     'icon'       => 'fa-certificate',
                     'parent_id'  => 19,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 21,
@@ -234,7 +233,7 @@ class NavlinksTableSeeder extends Seeder
                     'icon'       => 'fa-bullseye',
                     'parent_id'  => 19,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 22,
@@ -244,7 +243,7 @@ class NavlinksTableSeeder extends Seeder
                     'icon'       => 'fa-info-circle',
                     'parent_id'  => 19,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 23,
@@ -254,7 +253,7 @@ class NavlinksTableSeeder extends Seeder
                     'icon'       => 'fa-sitemap',
                     'parent_id'  => 19,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 24,
@@ -264,7 +263,7 @@ class NavlinksTableSeeder extends Seeder
                     'icon'       => 'fa-clock-o ',
                     'parent_id'  => 19,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 25,
@@ -274,7 +273,7 @@ class NavlinksTableSeeder extends Seeder
                     'icon'       => 'fa-check-square-o',
                     'parent_id'  => 17,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 26,
@@ -284,7 +283,7 @@ class NavlinksTableSeeder extends Seeder
                     'icon'       => 'fa-wrench ',
                     'parent_id'  => 25,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 27,
@@ -294,7 +293,7 @@ class NavlinksTableSeeder extends Seeder
                     'icon'       => 'fa-graduation-cap',
                     'parent_id'  => 25,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 28,
@@ -304,7 +303,7 @@ class NavlinksTableSeeder extends Seeder
                     'icon'       => 'fa-cog',
                     'parent_id'  => 15,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 29,
@@ -314,7 +313,7 @@ class NavlinksTableSeeder extends Seeder
                     'icon'       => 'fa-exclamation-triangle',
                     'parent_id'  => 28,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 30,
@@ -324,7 +323,7 @@ class NavlinksTableSeeder extends Seeder
                     'icon'       => 'fa-cog',
                     'parent_id'  => 11,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 31,
@@ -334,7 +333,7 @@ class NavlinksTableSeeder extends Seeder
                     'icon'       => 'fa-tasks',
                     'parent_id'  => 30,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 32,
@@ -344,7 +343,7 @@ class NavlinksTableSeeder extends Seeder
                     'icon'       => 'fa-calendar-o',
                     'parent_id'  => 14,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
                 [
                     'id'         => 33,
@@ -354,7 +353,7 @@ class NavlinksTableSeeder extends Seeder
                     'icon'       => 'fa-reorder',
                     'parent_id'  => 32,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
+                    'updated_at' => Carbon::now(),
                 ],
             ]
         );

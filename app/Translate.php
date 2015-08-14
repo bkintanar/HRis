@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis;
@@ -14,14 +13,15 @@ namespace HRis;
 use Illuminate\Support\Facades\Lang;
 
 /**
- * Class Translate
- * @package HRis
+ * Class Translate.
  */
 class Translate
 {
     /**
      * @param $text
+     *
      * @return mixed
+     *
      * @author Bertrand Kintanar
      */
     public static function error($text)
@@ -34,7 +34,7 @@ class Translate
             $error_message = str_replace('__', '_', str_replace($attribute[0], '', $slug));
         }
 
-        $translated_text = $final_text = Lang::get('errors.' . $error_message);
+        $translated_text = $final_text = Lang::get('errors.'.$error_message);
 
         if (count($attribute) > 0) {
             $final_text = str_replace('[:attribute]', $attribute[0], $translated_text);

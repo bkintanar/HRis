@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Requests;
@@ -14,8 +13,7 @@ namespace HRis\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * Class Request
- * @package HRis\Http\Requests
+ * Class Request.
  */
 abstract class Request extends FormRequest
 {

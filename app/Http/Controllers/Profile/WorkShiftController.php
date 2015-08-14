@@ -6,7 +6,6 @@
  * HRis - Human Resource and Payroll System
  *
  * @link    http://github.com/HB-Co/HRis
- *
  */
 
 namespace HRis\Http\Controllers\Profile;
@@ -16,13 +15,11 @@ use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Eloquent\Employee;
 use HRis\Eloquent\EmployeeWorkShift;
 use HRis\Http\Controllers\Controller;
-use HRis\Http\Requests;
 use HRis\Http\Requests\Profile\WorkShiftRequest;
 use Input;
 
 /**
- * Class WorkShiftController
- * @package HRis\Http\Controllers\Profile
+ * Class WorkShiftController.
  *
  * @Middleware("auth")
  */
@@ -39,9 +36,10 @@ class WorkShiftController extends Controller
     protected $employee_work_shift;
 
     /**
-     * @param Sentinel $auth
-     * @param Employee $employee
+     * @param Sentinel          $auth
+     * @param Employee          $employee
      * @param EmployeeWorkShift $employee_work_shift
+     *
      * @author Bertrand Kintanar
      */
     public function __construct(Sentinel $auth, Employee $employee, EmployeeWorkShift $employee_work_shift)
@@ -59,8 +57,10 @@ class WorkShiftController extends Controller
      * @Get("pim/employee-list/{id}/work-shifts")
      *
      * @param WorkShiftRequest $request
-     * @param null $employee_id
+     * @param null             $employee_id
+     *
      * @return \Illuminate\View\View
+     *
      * @author Bertrand Kintanar
      */
     public function index(WorkShiftRequest $request, $employee_id = null)
@@ -71,7 +71,7 @@ class WorkShiftController extends Controller
         $this->data['workshift_history'] = $employee->employeeWorkShift;
 
         $this->data['disabled'] = 'disabled';
-        $this->data['pim'] = $request->is('*pim/*') ? : false;
+        $this->data['pim'] = $request->is('*pim/*') ?: false;
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Job Details' : 'My Job Details';
 
         return $this->template('pages.profile.workshift.view');
@@ -83,9 +83,11 @@ class WorkShiftController extends Controller
      * @Get("profile/work-shifts/edit")
      * @Get("pim/employee-list/{id}/work-shifts/edit")
      *
-     * @param  WorkShiftRequest $request
-     * @param null $employee_id
+     * @param WorkShiftRequest $request
+     * @param null             $employee_id
+     *
      * @return Response
+     *
      * @author Bertrand Kintanar
      */
     public function show(WorkShiftRequest $request, $employee_id = null)
@@ -100,7 +102,7 @@ class WorkShiftController extends Controller
         $this->data['workshift_history'] = $employee->employeeWorkShift;
 
         $this->data['disabled'] = '';
-        $this->data['pim'] = $request->is('*pim/*') ? : false;
+        $this->data['pim'] = $request->is('*pim/*') ?: false;
         $this->data['pageTitle'] = $this->data['pim'] ? 'Edit Employee Job Details' : 'Edit My Job Details';
 
         return $this->template('pages.profile.workshift.edit');
@@ -112,8 +114,10 @@ class WorkShiftController extends Controller
      * @Patch("profile/work-shifts")
      * @Patch("pim/employee-list/{id}/work-shifts")
      *
-     * @param  WorkShiftRequest $request
+     * @param WorkShiftRequest $request
+     *
      * @return Response
+     *
      * @author Bertrand Kintanar
      */
     public function update(WorkShiftRequest $request)
@@ -136,8 +140,10 @@ class WorkShiftController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
+     *
      * @return Response
+     *
      * @author Bertrand Kintanar
      */
     public function destroy($id)
