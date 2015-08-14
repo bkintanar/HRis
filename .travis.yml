@@ -23,4 +23,4 @@ before_script:
     - bower install
     - gulp
 
-script: phpunit
+script: vendor/bin/phpunit
