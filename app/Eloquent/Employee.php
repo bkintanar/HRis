@@ -1,27 +1,44 @@
-<?php namespace HRis\Eloquent;
+<?php
+
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link    http://github.com/HB-Co/HRis
+ *
+ */
+
+namespace HRis\Eloquent;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Employee
- * @package HRis
+ * @package HRis\Eloquent
  */
-class Employee extends Model {
-
+class Employee extends Model
+{
     use HasPlaceholder;
 
     /**
+     * Indicates if the model should be timestamped.
+     *
      * @var bool
      */
     public $timestamps = false;
 
     /**
+     * Additional fields to treat as Carbon instances.
+     *
      * @var array
      */
     protected $dates = ['birth_date', 'joined_date', 'probation_end_date', 'permanency_date', 'resign_date'];
 
     /**
+     * The attributes that are mass assignable.
+     *
      * @var array
      */
     protected $fillable = [
@@ -52,6 +69,7 @@ class Employee extends Model {
         'joined_date',
         'probation_end_date',
         'permanency_date',
+        'resign_date'
     ];
 
     /**
@@ -63,6 +81,7 @@ class Employee extends Model {
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @author Bertrand Kintanar
      */
     public function city()
     {
@@ -71,6 +90,7 @@ class Employee extends Model {
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @author Bertrand Kintanar
      */
     public function country()
     {
@@ -78,15 +98,8 @@ class Employee extends Model {
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function department()
-    {
-        return $this->hasOne('HRis\Eloquent\Department', 'id', 'department_id');
-    }
-
-    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @author Bertrand Kintanar
      */
     public function dependents()
     {
@@ -95,6 +108,7 @@ class Employee extends Model {
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @author Bertrand Kintanar
      */
     public function educations()
     {
@@ -103,10 +117,11 @@ class Employee extends Model {
 
     /**
      * @return mixed
+     * @author Jim Callanta
      */
-    public function employeeSalaryComponents()
+    public function employeeSalaryComponent()
     {
-        return $this->hasMany('HRis\Eloquent\EmployeeSalaryComponents', 'employee_id', 'employee_id')
+        return $this->hasMany('HRis\Eloquent\EmployeeSalaryComponent', 'employee_id', 'id')
             ->with('salaryComponent')
             ->orderBy('id', 'desc')
             ->orderBy('effective_date', 'desc')
@@ -114,82 +129,107 @@ class Employee extends Model {
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function employmentStatus()
-    {
-        return $this->hasOne('HRis\Eloquent\EmploymentStatus', 'id', 'employment_status_id');
-    }
-
-    /**
      * @param $employee_id
      * @param $user_id
      * @return mixed
+     * @author Bertrand Kintanar
      */
     public function getEmployeeById($employee_id, $user_id)
     {
-        if ($employee_id)
-        {
-            return self::whereEmployeeId($employee_id)->with('user', 'country', 'province', 'city', 'employmentStatus', 'jobHistories', 'dependents')->first();
+        if ($employee_id) {
+            return self::whereEmployeeId($employee_id)->with('user', 'country', 'province', 'city', 'jobHistories',
+                'dependents', 'employeeWorkShift')->first();
         }
 
-        return self::whereUserId($user_id)->with('user', 'country', 'province', 'city', 'employmentStatus', 'jobHistories', 'dependents')->first();
+        return self::whereUserId($user_id)->with('user', 'country', 'province', 'city', 'jobHistories', 'dependents',
+            'employeeWorkShift')->first();
+    }
+
+    /**
+     * @param bool|true $paginate
+     * @param string $sort
+     * @param string $direction
+     * @return mixed
+     * @author Bertrand Kintanar
+     */
+    public function getEmployeeList($paginate = true, $sort = 'employees.id', $direction = 'asc')
+    {
+        $employees = $this->select('employees.id', 'employees.employee_id', 'employees.first_name',
+            'employees.last_name', 'job_titles.name as job', 'employment_statuses.name as status',
+            'employment_statuses.class');
+        $employees->leftJoin(
+            \DB::raw('(SELECT `employee_id`, `job_title_id`, `employment_status_id`, `effective_date` FROM `job_histories` AS `jh` WHERE `effective_date` = (SELECT MAX(`effective_date`) FROM `job_histories` AS `jh2` WHERE `jh`.`employee_id` = `jh2`.`employee_id`) group by `employee_id` ) AS `jh`'),
+            'employees.id', '=', 'jh.employee_id');
+        $employees->leftJoin('job_titles', 'jh.job_title_id', '=', 'job_titles.id');
+        $employees->leftJoin('employment_statuses', 'jh.employment_status_id', '=', 'employment_statuses.id');
+        $employees->orderBy($sort, $direction);
+
+        if ($paginate) {
+            return $employees->paginate(DATAS_PER_PAGE);
+        }
+
+        return $employees;
     }
 
     /**
      * @param $employee_id
      * @param $user_employee_id
      * @return mixed
+     * @author Jim Callanta
      */
     public function getEmployeeSalaryDetails($employee_id, $user_employee_id)
     {
-        if ($employee_id)
-        {
-            return self::whereEmployeeId($employee_id)->with('employeeSalaryComponents', 'dependents')->first();
+        if ($employee_id) {
+            return self::whereEmployeeId($employee_id)->with('employeeSalaryComponent', 'dependents')->first();
         }
 
         return self::whereId($user_employee_id)->with('employeeSalaryComponent', 'dependents')->first();
     }
 
     /**
+     * @return string
+     * @author Bertrand Kintanar
+     */
+    public function getFullNameAttribute()
+    {
+        return $this->first_name . ' ' . ($this->middle_name ? $this->middle_name . ' ' : '') . $this->last_name . ($this->suffix_name ? ' ' . $this->suffix_name : '');
+    }
+
+    /**
      * @param $start_date
      * @return array
+     * @author Bertrand Kintanar
      */
     public function getTimeLog($start_date)
     {
         $work_shift = $this->employeeWorkShift()->first();
 
         $wstp = $work_shift->getWorkShiftRange($start_date);
-        $time_in = $this->timelogs()->whereSwipeDate($wstp['from_datetime']->toDateString())->where('swipe_time', '>=', $wstp['from_datetime']->toTimeString())->first();
-        $time_out = $this->timelogs()->whereSwipeDate($wstp['to_datetime']->toDateString())->where('swipe_time', '<=', $wstp['to_datetime']->toTimeString())->orderBy('id', 'desc')->first();
+        $time_in = $this->timelogs()->whereSwipeDate($wstp['from_datetime']->toDateString())->where('swipe_time', '>=',
+            $wstp['from_datetime']->toTimeString())->first();
+        $time_out = $this->timelogs()->whereSwipeDate($wstp['to_datetime']->toDateString())->where('swipe_time', '<=',
+            $wstp['to_datetime']->toTimeString())->orderBy('id', 'desc')->first();
 
         // If employee logs out more than one hour after the work shift schedule check for extended time
-        if ($time_out == null && $time_in != null)
-        {
-            $time_out = $this->timelogs()->where('swipe_datetime', '<=', $wstp['to_datetime']->addHours(4)->toDateTimeString())->orderBy('id', 'desc')->first();
+        if ($time_out == null && $time_in != null) {
+            $time_out = $this->timelogs()->where('swipe_datetime', '<=',
+                $wstp['to_datetime']->addHours(4)->toDateTimeString())->orderBy('id', 'desc')->first();
 
-            if ($time_out != null and $wstp['from_datetime']->addHours(24)->toDateTimeString() < $time_out->swipe_datetime)
-            {
+            if ($time_out != null and $wstp['from_datetime']->addHours(24)->toDateTimeString() < $time_out->swipe_datetime) {
                 $time_out = null;
             }
 
-            if ($time_in->id == $time_out->id)
-            {
+            if ($time_in->id == $time_out->id) {
                 $time_out = null;
             }
         }
 
         // Checks for failure to Login or Logout
-        if ($time_out && $time_in)
-        {
-            if ($time_out->swipe_time == $time_in->swipe_time)
-            {
-                if ($time_out->swipe_datetime >= $wstp['to_datetime']->subHour(1)->toDateTimeString() and $time_out->swipe_datetime <= $wstp['to_datetime']->addHours(4)->toDateTimeString())
-                {
+        if ($time_out && $time_in) {
+            if ($time_out->swipe_time == $time_in->swipe_time) {
+                if ($time_out->swipe_datetime >= $wstp['to_datetime']->subHour(1)->toDateTimeString() and $time_out->swipe_datetime <= $wstp['to_datetime']->addHours(4)->toDateTimeString()) {
                     $time_in = null;
-                }
-                else
-                {
+                } else {
                     $time_out = null;
                 }
             }
@@ -202,17 +242,19 @@ class Employee extends Model {
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return mixed
+     * @author Bertrand Kintanar
      */
     public function employeeWorkShift()
     {
-        return $this->hasMany('HRis\Eloquent\EmployeeWorkShift', 'employee_id', 'id')
+        return $this->hasMany('HRis\Eloquent\EmployeeWorkShift', 'employee_id', 'id')->with('workShift')
             ->orderBy('effective_date', 'desc')
             ->orderBy('id', 'desc');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @author Bertrand Kintanar
      */
     public function timelogs()
     {
@@ -221,6 +263,7 @@ class Employee extends Model {
 
     /**
      * @return mixed
+     * @author Bertrand Kintanar
      */
     public function jobHistory()
     {
@@ -229,6 +272,7 @@ class Employee extends Model {
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @author Bertrand Kintanar
      */
     public function jobHistories()
     {
@@ -236,23 +280,18 @@ class Employee extends Model {
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function jobTitle()
-    {
-        return $this->hasOne('HRis\Eloquent\JobTitle', 'id', 'job_title_id');
-    }
-
-    /**
      * @return mixed
+     * @author Bertrand Kintanar
      */
     public function orderedJobHistories()
     {
-        return $this->jobHistories()->with('jobTitle', 'department', 'employmentStatus', 'workShift', 'location')->orderBy('job_histories.id', 'desc')->get();
+        return $this->jobHistories()->with('jobTitle', 'department', 'workShift',
+            'location')->orderBy('job_histories.id', 'desc')->get();
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @author Bertrand Kintanar
      */
     public function province()
     {
@@ -260,95 +299,107 @@ class Employee extends Model {
     }
 
     /**
-     * @param $value
+     * @param $birth_date
+     * @author Bertrand Kintanar
      */
-    public function setBirthDateAttribute($value)
+    public function setBirthDateAttribute($birth_date)
     {
-        $this->attributes['birth_date'] = $value ? : null;
+        $this->attributes['birth_date'] = Carbon::parse($birth_date) ? : null;
     }
 
     /**
-     * @param $value
+     * @param $employee_id
+     * @author Bertrand Kintanar
      */
-    public function setEmployeeIdAttribute($value)
+    public function setEmployeeIdAttribute($employee_id)
     {
-        $this->attributes['employee_id'] = $value ? : null;
+        $this->attributes['employee_id'] = $employee_id ? : null;
     }
 
     /**
-     * @param $value
+     * @param $face_id
+     * @author Bertrand Kintanar
      */
-    public function setFaceIdAttribute($value)
+    public function setFaceIdAttribute($face_id)
     {
-        $this->attributes['face_id'] = $value ? : null;
+        $this->attributes['face_id'] = $face_id ? : null;
     }
 
     /**
-     * @param $value
+     * @param $hdmf_pagibig
+     * @author Bertrand Kintanar
      */
-    public function setHdmfPagibigAttribute($value)
+    public function setHdmfPagibigAttribute($hdmf_pagibig)
     {
-        $this->attributes['hdmf_pagibig'] = $value ? : null;
+        $this->attributes['hdmf_pagibig'] = $hdmf_pagibig ? : null;
     }
 
     /**
-     * @param $value
+     * @param $joined_date
+     * @author Bertrand Kintanar
      */
-    public function setJoinedDateAttribute($value)
+    public function setJoinedDateAttribute($joined_date)
     {
-        $this->attributes['joined_date'] = Carbon::parse($value) ? : null;
+        $this->attributes['joined_date'] = Carbon::parse($joined_date) ? : null;
     }
 
     /**
-     * @param $value
+     * @param $marital_status_id
+     * @author Bertrand Kintanar
      */
-    public function setMaritalStatusIdAttribute($value)
+    public function setMaritalStatusIdAttribute($marital_status_id)
     {
-        $this->attributes['marital_status_id'] = $value ? : null;
+        $this->attributes['marital_status_id'] = $marital_status_id ? : null;
     }
 
     /**
-     * @param $value
+     * @param $permanency_date
+     * @author Bertrand Kintanar
      */
-    public function setPermanencyDateAttribute($value)
+    public function setPermanencyDateAttribute($permanency_date)
     {
-        $this->attributes['permanency_date'] = Carbon::parse($value) ? : null;
+        $this->attributes['permanency_date'] = Carbon::parse($permanency_date) ? : null;
     }
 
     /**
-     * @param $value
+     * @param $philhealth
+     * @author Bertrand Kintanar
      */
-    public function setPhilHealthAttribute($value)
+    public function setPhilHealthAttribute($philhealth)
     {
-        $this->attributes['philhealth'] = $value ? : null;
+        $this->attributes['philhealth'] = $philhealth ? : null;
     }
 
     /**
-     * @param $value
+     * @param $probation_end_date
+     * @author Bertrand Kintanar
      */
-    public function setProbationEndDateAttribute($value)
+    public function setProbationEndDateAttribute($probation_end_date)
     {
-        $this->attributes['probation_end_date'] = Carbon::parse($value) ? : null;
+        $this->attributes['probation_end_date'] = Carbon::parse($probation_end_date) ? : null;
     }
 
     /**
-     * @param $value
+     * @param $resign_date
+     * @author Bertrand Kintanar
      */
-    public function setResignDateAttribute($value)
+    public function setResignDateAttribute($resign_date)
     {
-        $this->attributes['resign_date'] = Carbon::parse($value) ? : null;
+        $this->attributes['resign_date'] = Carbon::parse($resign_date) ? : null;
     }
 
     /**
-     * @param $value
+     * @param $user_id
+     * @author Bertrand Kintanar
      */
-    public function setUserIdAttribute($value)
+    public function setUserIdAttribute($user_id)
     {
-        $this->attributes['user_id'] = $value ? : null;
+        $this->attributes['user_id'] = $user_id ? : null;
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @author Bertrand Kintanar
      */
     public function skills()
     {
@@ -357,6 +408,7 @@ class Employee extends Model {
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @author Bertrand Kintanar
      */
     public function user()
     {
@@ -365,23 +417,10 @@ class Employee extends Model {
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @author Bertrand Kintanar
      */
     public function workExperiences()
     {
         return $this->hasMany('HRis\Eloquent\WorkExperience');
     }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function workShift()
-    {
-        return $this->hasOne('HRis\Eloquent\WorkShift', 'id', 'work_shift_id');
-    }
-
-    public function getFullNameAttribute()
-    {
-        return $this->first_name . ' ' . ($this->middle_name ? $this->middle_name . ' ' : '') . $this->last_name . ($this->suffix_name ? ' ' . $this->suffix_name : '');
-    }
-
 }

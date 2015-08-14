@@ -25,8 +25,8 @@ use HRis\Eloquent\JobTitle;
 use HRis\Eloquent\Nationality;
 use HRis\Eloquent\PayGrade;
 use HRis\Eloquent\Skill;
-use HRis\Eloquent\SSSContributions;
-use HRis\Eloquent\TaxComputations;
+use HRis\Eloquent\SSSContribution;
+use HRis\Eloquent\TaxComputation;
 use HRis\Eloquent\TerminationReason;
 use HRis\Eloquent\WorkExperience;
 use HRis\Eloquent\WorkShift;
@@ -676,7 +676,7 @@ class AjaxController extends Controller
                 } else {
                     $taxableSalary = $semiMonthly - $request->get('deductions');
                 }
-                $taxes = TaxComputations::getTaxRate($status, $taxableSalary);
+                $taxes = TaxComputation::getTaxRate($status, $taxableSalary);
 
                 $over = 0;
 

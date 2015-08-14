@@ -13,7 +13,7 @@ namespace HRis\Http\Controllers\Profile;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Eloquent\Employee;
-use HRis\Eloquent\EmployeeSalaryComponents;
+use HRis\Eloquent\EmployeeSalaryComponent;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests;
 use HRis\Http\Requests\Profile\SalaryRequest;
@@ -43,7 +43,7 @@ class SalaryComputationsController extends Controller
         parent::__construct($auth);
 
         $this->employee = $employee;
-        $this->employee_salary_components = $employee_salary_components;
+        $this->employee_salary_component = $employee_salary_component;
         $this->salary_services = $salary_services;
     }
 
@@ -54,6 +54,7 @@ class SalaryComputationsController extends Controller
      * @Get("pim/employee-list/{id}/salary")
      *
      * @param SalaryRequest $request
+     * @param null $employee_id
      * @return Response
      * @author Bertrand Kintanar
      */

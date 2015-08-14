@@ -13,9 +13,10 @@ namespace HRis\Services;
 
 use Config;
 use HRis\Eloquent\Dependent;
-use HRis\Eloquent\SalaryComponents;
-use HRis\Eloquent\SSSContributions;
-use HRis\Eloquent\TaxComputations;
+use HRis\Eloquent\EmployeeSalaryComponent;
+use HRis\Eloquent\SalaryComponent;
+use HRis\Eloquent\SSSContribution;
+use HRis\Eloquent\TaxComputation;
 
 /**
  * Class Salary
@@ -24,7 +25,7 @@ use HRis\Eloquent\TaxComputations;
 class Salary
 {
     /**
-     * @param TaxComputations $tax_computations
+     * @param TaxComputation $tax_computation
      * @param Dependent $dependent
      * @param SSSContribution $sss_contribution
      * @param SalaryComponent $salary_component
@@ -41,7 +42,8 @@ class Salary
         $this->tax_computation = $tax_computation;
         $this->dependent = $dependent;
         $this->sss_contribution = $sss_contribution;
-        $this->salary_components = $salary_components;
+        $this->salary_component = $salary_component;
+        $this->employee_salary_component = $employee_salary_component;
     }
 
     /**
@@ -52,8 +54,8 @@ class Salary
     public function getSalaryDetails($employee)
     {
         $mode = Config::get('salary.semi_monthly');
-        $employee_salary_components = $employee->employeeSalaryComponents;
-        $component_ids = $this->salary_components->getSalaryAndSSS();
+        $employee_salary_components = $employee->employeeSalaryComponent;
+        $component_ids = $this->salary_component->getSalaryAndSSS();
         $deductions = 0;
 
         $salary = 0;
@@ -81,7 +83,7 @@ class Salary
         }
 
         $taxableSalary = $salary - $deductions;
-        $taxes = $this->tax_computations->getTaxRate($employee_status, $taxableSalary);
+        $taxes = $this->tax_computation->getTaxRate($employee_status, $taxableSalary);
 
         $over = 0;
         $totalTax = 0;
