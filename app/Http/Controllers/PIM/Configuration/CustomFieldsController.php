@@ -15,8 +15,6 @@ use HRis\Eloquent\CustomField;
 use HRis\Eloquent\CustomFieldSection;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\PIM\CustomFieldSectionsRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
 
 /**
  * Class CustomFieldsController.
@@ -41,7 +39,7 @@ class CustomFieldsController extends Controller
     protected $custom_fields;
 
     /**
-     * @param Sentinel $auth
+     * @param Sentinel           $auth
      * @param CustomFieldSection $custom_field_sections
      *
      * @author Bertrand Kintanar
@@ -105,6 +103,7 @@ class CustomFieldsController extends Controller
      * @Post("pim/configuration/custom-field-sections")
      *
      * @param CustomFieldSectionsRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      *
      * @author Bertrand Kintanar
@@ -136,8 +135,8 @@ class CustomFieldsController extends Controller
         $table['headers'] = ['Id', 'Name', 'Screen'];
         $table['model'] = [
             'singular' => 'custom_field_section',
-            'plural' => 'custom_field_sections',
-            'dashed' => 'custom-field_sections',
+            'plural'   => 'custom_field_sections',
+            'dashed'   => 'custom-field_sections',
         ];
         $table['items'] = $custom_field_sections;
 
@@ -160,8 +159,8 @@ class CustomFieldsController extends Controller
         $table['headers'] = ['Id', 'Name', 'Type', 'Required'];
         $table['model'] = [
             'singular' => 'custom_field',
-            'plural' => 'custom_fields',
-            'dashed' => 'custom-fields',
+            'plural'   => 'custom_fields',
+            'dashed'   => 'custom-fields',
         ];
         $table['items'] = $custom_fields;
 

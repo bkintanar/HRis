@@ -37,8 +37,8 @@ class ContactDetailsController extends Controller
     protected $custom_field_value;
 
     /**
-     * @param Sentinel $auth
-     * @param Employee $employee
+     * @param Sentinel         $auth
+     * @param Employee         $employee
      * @param CustomFieldValue $custom_field_value
      *
      * @author Bertrand Kintanar
@@ -61,7 +61,7 @@ class ContactDetailsController extends Controller
      * @Get("pim/employee-list/{id}/contact-details")
      *
      * @param ContactDetailsRequest $request
-     * @param null $employee_id
+     * @param null                  $employee_id
      *
      * @return \Illuminate\View\View
      *
@@ -94,7 +94,7 @@ class ContactDetailsController extends Controller
      * @Get("pim/employee-list/{id}/contact-details/edit")
      *
      * @param ContactDetailsRequest $request
-     * @param null $employee_id
+     * @param null                  $employee_id
      *
      * @return \Illuminate\View\View
      *

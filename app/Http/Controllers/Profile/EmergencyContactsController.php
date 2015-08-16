@@ -106,13 +106,12 @@ class EmergencyContactsController extends Controller
      * @Get("profile/emergency-contacts/edit")
      *
      * @param Request $request
-     * @param null $employee_id
+     * @param null    $employee_id
      *
      * @author Bertrand Kintanar
      */
     public function edit(Request $request, $employee_id = null)
     {
-
     }
 
     /**

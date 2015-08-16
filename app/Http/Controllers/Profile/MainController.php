@@ -23,7 +23,6 @@ use Illuminate\Support\Facades\DB;
  */
 class MainController extends Controller
 {
-
     /**
      * @var CustomFieldValue
      */
@@ -72,13 +71,12 @@ class MainController extends Controller
         DB::beginTransaction();
 
         try {
-            foreach($custom_fields as $key => $custom_field)
-            {
+            foreach ($custom_fields as $key => $custom_field) {
                 $custom_field_id = (int) str_replace('custom_field_', '', $key);
 
                 $data = [
                     'pim_custom_field_id' => $custom_field_id,
-                    'employee_id' => $id,
+                    'employee_id'         => $id,
                 ];
 
                 $custom_field_value = $this->custom_field_value->firstOrCreate($data);

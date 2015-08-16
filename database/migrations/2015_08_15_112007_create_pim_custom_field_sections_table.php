@@ -7,9 +7,8 @@
  *
  * @link    http://github.com/HB-Co/HRis
  */
-
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreatePimCustomFieldSectionsTable extends Migration
 {
