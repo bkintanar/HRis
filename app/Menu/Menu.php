@@ -32,7 +32,7 @@ class Menu extends Breadcrumb
         return (count($array) != count($array, 1));
     }
 
-    public function inner(callable $callback) 
+    public function inner(callable $callback)
     {
         $this->inner_callable = $callback;
 
@@ -74,7 +74,7 @@ class Menu extends Breadcrumb
         $output = '';
         $callback = $this->getCallback($index);
 
-        if(!is_null($tree) && count($tree) > 0) {
+        if (!is_null($tree) && count($tree) > 0) {
             foreach($tree as $menu_id => $inner_menu) {
                 $menu = $this->model->find($menu_id);
                 $is_nested = $this->model->whereParentId($menu_id)->count() ? true : false;
@@ -83,7 +83,7 @@ class Menu extends Breadcrumb
                     $callback['inner'],                             // Params
                                                                     // ------------
                     $menu,                                          // $menu
-                    $this->outputMenuTree($inner_menu, $index+1),   // $body
+                    $this->outputMenuTree($inner_menu, $index + 1), // $body
                     $this->isActive($menu->href),                   // $is_active
                     $is_nested                                      // $is_nested
                 );
@@ -95,25 +95,25 @@ class Menu extends Breadcrumb
         return $output;
     }
 
-    public function parseMenuTree($tree, $root = null) 
+    public function parseMenuTree($tree, $root = null)
     {
         $return = [];
 
-        foreach($tree as $child => $parent) {
+        foreach ($tree as $child => $parent) {
             if($parent == $root) {
                 unset($tree[$child]);
                 $return[$child] = $this->parseMenuTree($tree, $child);
             }
         }
 
-        return empty($return) ? null : $return;    
+        return empty($return) ? null : $return;
     }
 
     private function getCallback($index)
     {
         $callback = null;
 
-        if(isset($this->callables[$index])) {
+        if (isset($this->callables[$index])) {
             $callback = $this->callables[$index];
         } else {
             // Repeat the last set callable function

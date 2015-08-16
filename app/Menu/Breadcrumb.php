@@ -38,7 +38,8 @@ class Breadcrumb
         return false;
     }
 
-    private function linkName($link) {
+    private function linkName($link) 
+    {
         $name = str_replace('-', ' ', $link);
         return ucwords($name);
     }
@@ -51,14 +52,14 @@ class Breadcrumb
         $href = '';
 
         foreach ($sublinks as $sublink) {
-            if($first) {
+            if ($first) {
                 $href .= $sublink;
                 $first = false;
             } else {
-                $href .= '/' . $sublink;
+                $href .= '/'.$sublink;
             }
 
-            $links[] = (object)[
+            $links[] = (object) [
                 'name' => $this->linkName($sublink),
                 'href' => $href,
             ];
