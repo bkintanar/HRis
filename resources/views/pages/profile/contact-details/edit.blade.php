@@ -2,25 +2,27 @@
 
 @section('content')
 
-<div class="row">
-        {!! Navlink::profileLinks($pim) !!}
-    <div class="col-lg-12">
-        <div class="ibox float-e-margins">
-            <div class="ibox-title">
-                <h5>Contact Details</h5>
-                <div class="ibox-tools">
-                    <a class="collapse-link">
-                        <i class="fa fa-chevron-up"></i>
-                    </a>
+    <div class="row">
+            {!! Navlink::profileLinks($pim) !!}
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Contact Details</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="ibox-content">
-                @include('pages.profile.contact-details.form')
+                <div class="ibox-content">
+                    @include('pages.profile.contact-details.form')
+                </div>
             </div>
         </div>
     </div>
-</div>
-
+    @if ($custom_field_sections)
+        @include('pages.profile.partials.custom-fields')
+    @endif
 @stop
 
 @section('custom_js')
@@ -43,7 +45,6 @@
                     $("#address_city_id").attr('disabled', 'disabled');
 
                     $("#address_city_id").html("");
-                    $("#address_city_id").append('<option value="0" selected>--- Select ---</option>');
                     for ( var i = 1; i < value.length; i++ )
                     {
                         if(value[i].id == city_id)
@@ -59,11 +60,11 @@
                     // re-enable it by removing the disabled attribute
                     $("#address_city_id").removeAttr('disabled');
 
-                    $('.chosen-select').trigger("chosen:updated");
+                    $('#address_city_id').val('').trigger('chosen:updated');
                 });
             }
 
-            $('.chosen-select').chosen();
+            $('.chosen-select').val('').trigger('chosen:updated').chosen();
 
             updateCityValues();
 

@@ -11,9 +11,11 @@
 namespace HRis\Http\Controllers\Profile;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use HRis\Eloquent\CustomFieldSection;
 use HRis\Eloquent\Employee;
 use HRis\Eloquent\EmployeeWorkShift;
 use HRis\Eloquent\JobHistory;
+use HRis\Eloquent\Navlink;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\JobRequest;
 use Illuminate\Support\Facades\Request;
@@ -55,6 +57,9 @@ class JobController extends Controller
         $this->employee = $employee;
         $this->job_history = $job_history;
         $this->employee_work_shift = $employee_work_shift;
+
+        $profile_details_id = Navlink::whereName('Job')->pluck('id');
+        $this->data['custom_field_sections'] = CustomFieldSection::whereScreenId($profile_details_id)->get();
     }
 
     /**

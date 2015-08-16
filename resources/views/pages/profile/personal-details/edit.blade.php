@@ -18,56 +18,56 @@
                 </div>
             </div>
         </div>
+    </div>
+    @if ($custom_field_sections)
+        @include('pages.profile.partials.custom-fields')
+    @endif
+            <!-- Modal -->
+    <div class="modal fade" id="avatar_modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal" type="button">&times;</button>
 
-        <!-- Modal -->
-        <div class="modal fade" id="avatar_modal" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button class="close" data-dismiss="modal" type="button">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Add Avatar</h4>
+                </div>
 
-                        <h4 class="modal-title" id="myModalLabel">Add Avatar</h4>
-                    </div>
-
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="image-crop">
-                                    <img src='/img/profile/{!! isset($employee->avatar) ? $employee->avatar : "default/0.png" !!}'>
-                                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="image-crop">
+                                <img src='/img/profile/{!! isset($employee->avatar) ? $employee->avatar : "default/0.png" !!}'>
                             </div>
-                            <div class="col-md-12">
-                                <div class="btn-zoom">
+                        </div>
+                        <div class="col-md-12">
+                            <div class="btn-zoom">
                                 <button class="btn btn-danger btn-xs" id="zoomOut" type="button">-</button>
                                 <button class="btn btn-warning btn-xs" id="zoomIn" type="button">+</button>
-                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="modal-footer">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <button type="button" class="modal-close btn-sm" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Cancel</span></button>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="button" class="modal-close btn-sm" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Cancel</span></button>
 
-                                <label title="Upload image file" for="inputImage" class="btn btn-white btn-sm">
-                                    <input type="file" accept="image/*" name="file" id="inputImage" class="hide">
-                                    Upload new image
-                                </label>
+                            <label title="Upload image file" for="inputImage" class="btn btn-white btn-sm">
+                                <input type="file" accept="image/*" name="file" id="inputImage" class="hide">
+                                Upload new image
+                            </label>
 
-                                <button class="btn btn-primary btn-sm" id="crop" type="button">Crop And Save</button>
+                            <button class="btn btn-primary btn-sm" id="crop" type="button">Crop And Save</button>
 
-                            </div>
                         </div>
                     </div>
-                        <!--//Cropper-->
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-    </div>
-
-
+                </div>
+                <!--//Cropper-->
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 @stop
 
 @stop

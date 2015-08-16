@@ -12,8 +12,11 @@ namespace HRis\Http\Controllers\Profile;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Exception;
+use HRis\Eloquent\CustomFieldSection;
+use HRis\Eloquent\CustomFieldValue;
 use HRis\Eloquent\EmergencyContact;
 use HRis\Eloquent\Employee;
+use HRis\Eloquent\Navlink;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\EmergencyContactsRequest;
 use Illuminate\Support\Facades\Request;
@@ -33,21 +36,31 @@ class EmergencyContactsController extends Controller
     /**
      * @var EmergencyContact
      */
-    protected $emergencyContact;
+    protected $emergency_contact;
+
+    /**
+     * @var CustomFieldValue
+     */
+    protected $custom_field_value;
 
     /**
      * @param Sentinel         $auth
      * @param Employee         $employee
-     * @param EmergencyContact $emergencyContact
+     * @param EmergencyContact $emergency_contact
+     * @param CustomFieldValue $custom_field_value
      *
      * @author Bertrand Kintanar
      */
-    public function __construct(Sentinel $auth, Employee $employee, EmergencyContact $emergencyContact)
+    public function __construct(Sentinel $auth, Employee $employee, EmergencyContact $emergency_contact, CustomFieldValue $custom_field_value)
     {
         parent::__construct($auth);
 
         $this->employee = $employee;
-        $this->emergencyContact = $emergencyContact;
+        $this->emergency_contact = $emergency_contact;
+        $this->custom_field_value = $custom_field_value;
+
+        $profile_details_id = Navlink::whereName('Emergency Contacts')->pluck('id');
+        $this->data['custom_field_sections'] = CustomFieldSection::whereScreenId($profile_details_id)->get();
     }
 
     /**
@@ -73,14 +86,32 @@ class EmergencyContactsController extends Controller
 
         $this->data['employee'] = $employee;
 
-        $emergency_contacts = $this->emergencyContact->whereEmployeeId($employee->id)->get();
+        $emergency_contacts = $this->emergency_contact->whereEmployeeId($employee->id)->get();
+        $custom_field_values = $this->custom_field_value->whereEmployeeId($employee->id)->lists('value',
+            'custom_field_id');
 
         $this->data['disabled'] = 'disabled';
+        $this->data['custom_field_values'] = count($custom_field_values) ? $custom_field_values : null;
         $this->data['pim'] = $request->is('*pim/*') ?: false;
         $this->data['table'] = $this->setupDataTable($emergency_contacts);
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Emergency Contacts' : 'My Emergency Contacts';
 
         return $this->template('pages.profile.emergency-contacts.view');
+    }
+
+    /**
+     * Edit the Profile - Emergency Contacts.
+     *
+     * @Get("pim/employee-list/{id}/emergency-contacts/edit")
+     * @Get("profile/emergency-contacts/edit")
+     *
+     * @param Request $request
+     * @param null    $employee_id
+     *
+     * @author Bertrand Kintanar
+     */
+    public function edit(Request $request, $employee_id = null)
+    {
     }
 
     /**
@@ -144,14 +175,14 @@ class EmergencyContactsController extends Controller
      */
     public function update(EmergencyContactsRequest $request)
     {
-        $emergencyContact = $this->emergencyContact->whereId($request->get('emergency_contact_id'))->first();
+        $emergency_contact = $this->emergencyContact->whereId($request->get('emergency_contact_id'))->first();
 
-        if (!$emergencyContact) {
+        if (!$emergency_contact) {
             return redirect()->to($request->path())->with('danger', UNABLE_RETRIEVE_MESSAGE);
         }
 
         try {
-            $emergencyContact->update($request->all());
+            $emergency_contact->update($request->all());
         } catch (Exception $e) {
             return redirect()->to($request->path())->with('danger', UNABLE_UPDATE_MESSAGE);
         }
@@ -172,10 +203,10 @@ class EmergencyContactsController extends Controller
     public function delete(EmergencyContactsRequest $request)
     {
         if ($request->ajax()) {
-            $emergencyContactId = $request->get('id');
+            $emergency_contact_id = $request->get('id');
 
             try {
-                $this->emergencyContact->whereId($emergencyContactId)->delete();
+                $this->emergencyContact->whereId($emergency_contact_id)->delete();
 
                 print('success');
             } catch (Exception $e) {
@@ -197,12 +228,12 @@ class EmergencyContactsController extends Controller
     public function show(EmergencyContactsRequest $request)
     {
         if ($request->ajax()) {
-            $emergencyContactId = $request->get('id');
+            $emergency_contact_id = $request->get('id');
 
             try {
-                $emergencyContact = $this->emergencyContact->whereId($emergencyContactId)->first();
+                $emergency_contact = $this->emergencyContact->whereId($emergency_contact_id)->first();
 
-                print(json_encode($emergencyContact));
+                print(json_encode($emergency_contact));
             } catch (Exception $e) {
                 print('failed');
             }

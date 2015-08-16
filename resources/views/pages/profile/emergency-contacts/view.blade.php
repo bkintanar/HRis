@@ -47,7 +47,7 @@
                             <div class="form-group">
                                 {!! Form::label('relationship_id', 'Relationship', ['class' => 'col-md-3 control-label']) !!}
                                 <div class="col-md-9">
-                                    {!! Form::select('relationship_id', HRis\Eloquent\Relationship::listsWithPlaceholder('name', 'id'), null, ['class' => 'form-control chosen-select']) !!}
+                                    {!! Form::select('relationship_id', HRis\Eloquent\Relationship::lists('name', 'id'), null, ['data-placeholder' => '--- Select ---', 'class' => 'form-control chosen-select']) !!}
                                 </div>
                             </div>
 
@@ -76,6 +76,9 @@
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
     </div>
+    @if ($custom_field_sections)
+        @include('pages.profile.partials.custom-fields')
+    @endif
 @stop
 
 @stop
