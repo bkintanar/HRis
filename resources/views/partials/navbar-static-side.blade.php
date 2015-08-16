@@ -29,7 +29,7 @@
 
                     </li>
 
-                    {!! Navlink::generate() !!}
+                    {!! Menu::make() !!}
 
                 </ul>
 
