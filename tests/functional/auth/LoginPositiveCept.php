@@ -13,4 +13,4 @@ $I->click('Login');
 
 # Dashboard
 $I->seeCurrentUrlEquals('/dashboard');
-$I->see('Welcome to Green Wire HRis.');
+$I->see('Welcome to HRis.');

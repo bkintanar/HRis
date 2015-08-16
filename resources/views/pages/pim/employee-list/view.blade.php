@@ -37,10 +37,10 @@
                                     <td>{{ $employee->last_name }}</td>
                                     <td>{{ $employee->jobHistory()->jobTitle->name or '' }}</td>
                                     <td>
-                                        <span class="label {{ $employee->class or '' }}">{{ $employee->status or '' }}</span>
+                                        <span class="label {{ $employee->jobHistory()->employmentStatus->class or '' }}">{{ $employee->jobHistory()->employmentStatus->name or '' }}</span>
                                     </td>
                                     <td>
-                                        <button rel="edit" id="{{$employee->id}}" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" data-toggle="tooltip" data-placement="bottom" title="Edit" type="button"><i class="fa fa-edit"></i></button>
+                                        <a href="/pim/employee-list/{{ $employee->employee_id }}/personal-details"><button rel="edit" id="{{$employee->id}}" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" data-toggle="tooltip" data-placement="bottom" title="Edit" type="button"><i class="fa fa-edit"></i></button></a>
                                         <button rel="delete" id="{{$employee->id}}" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" data-toggle="tooltip" data-placement="bottom" title="Delete" type="button"><i class="fa fa-times"></i></button>
                                     </td>
                                 </tr>
@@ -117,7 +117,7 @@
 
                                 {!! Form::label('marital_status_id', 'Marital Status', ['class' => 'col-md-2 control-label']) !!}
                                 <div class="col-sm-4">
-                                    {!! Form::select('marital_status_id', HRis\Eloquent\MaritalStatus::listsWithPlaceholder('name', 'id'), 1, ['class' => 'form-control chosen-select']) !!}
+                                    {!! Form::select('marital_status_id', HRis\Eloquent\MaritalStatus::lists('name', 'id'), null, ['placeholder' => '--- Select ---', 'class' => 'form-control chosen-select']) !!}
                                 </div>
                             </div>
 

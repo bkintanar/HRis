@@ -17,8 +17,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Country extends Model
 {
-    use HasPlaceholder;
-
     /**
      * The database table used by the model.
      *

@@ -12,7 +12,10 @@ namespace HRis\Http\Controllers\Profile;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Exception;
+use HRis\Eloquent\CustomFieldSection;
+use HRis\Eloquent\CustomFieldValue;
 use HRis\Eloquent\Employee;
+use HRis\Eloquent\Navlink;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\PersonalDetailsRequest;
 use Illuminate\Support\Facades\Config;
@@ -35,17 +38,22 @@ class PersonalDetailsController extends Controller
     protected $employee_id_prefix;
 
     /**
-     * @param Sentinel $auth
-     * @param Employee $employee
+     * @param Sentinel         $auth
+     * @param Employee         $employee
+     * @param CustomFieldValue $custom_field_value
      *
      * @author Bertrand Kintanar
      */
-    public function __construct(Sentinel $auth, Employee $employee)
+    public function __construct(Sentinel $auth, Employee $employee, CustomFieldValue $custom_field_value)
     {
         parent::__construct($auth);
 
         $this->employee = $employee;
+        $this->custom_field_value = $custom_field_value;
         $this->employee_id_prefix = Config::get('company.employee_id_prefix');
+
+        $profile_details_id = Navlink::whereName('Personal Details')->pluck('id');
+        $this->data['custom_field_sections'] = CustomFieldSection::with('customFields', 'customFields.options')->whereScreenId($profile_details_id)->get();
     }
 
     /**
@@ -69,7 +77,10 @@ class PersonalDetailsController extends Controller
             return response()->make(view()->make('errors.404'), 404);
         }
 
+        $custom_field_values = $this->custom_field_value->whereEmployeeId($employee->id)->lists('value', 'custom_field_id');
+
         $this->data['employee'] = $employee;
+        $this->data['custom_field_values'] = count($custom_field_values) ? $custom_field_values : null;
         $this->data['employee_id_prefix'] = $this->employee_id_prefix;
 
         $this->data['disabled'] = 'disabled';
@@ -77,37 +88,6 @@ class PersonalDetailsController extends Controller
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Personal Details' : 'My Personal Details';
 
         return $this->template('pages.profile.personal-details.view');
-    }
-
-    /**
-     * Show the Profile - Personal Details Form.
-     *
-     * @Get("profile/personal-details/edit")
-     * @Get("pim/employee-list/{id}/personal-details/edit")
-     *
-     * @param PersonalDetailsRequest $request
-     * @param null                   $employee_id
-     *
-     * @return \Illuminate\View\View
-     *
-     * @author Bertrand Kintanar
-     */
-    public function show(PersonalDetailsRequest $request, $employee_id = null)
-    {
-        $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
-
-        if (!$employee) {
-            return response()->make(view()->make('errors.404'), 404);
-        }
-
-        $this->data['employee'] = $employee;
-        $this->data['employee_id_prefix'] = $this->employee_id_prefix;
-
-        $this->data['disabled'] = '';
-        $this->data['pim'] = $request->is('*pim/*') ?: false;
-        $this->data['pageTitle'] = $this->data['pim'] ? 'Edit Employee Personal Details' : 'Edit My Personal Details';
-
-        return $this->template('pages.profile.personal-details.edit');
     }
 
     /**

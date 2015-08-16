@@ -17,8 +17,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Location extends Model
 {
-    use HasPlaceholder;
-
     /**
      * Indicates if the model should be timestamped.
      *

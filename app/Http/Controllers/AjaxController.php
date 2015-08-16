@@ -13,6 +13,9 @@ namespace HRis\Http\Controllers;
 use Config;
 use Exception;
 use HRis\Eloquent\City;
+use HRis\Eloquent\CustomField;
+use HRis\Eloquent\CustomFieldOption;
+use HRis\Eloquent\CustomFieldSection;
 use HRis\Eloquent\Education;
 use HRis\Eloquent\EducationLevel;
 use HRis\Eloquent\Employee;
@@ -36,6 +39,8 @@ use HRis\Http\Requests\Administration\NationalityRequest;
 use HRis\Http\Requests\Administration\PayGradeRequest;
 use HRis\Http\Requests\Administration\SkillRequest;
 use HRis\Http\Requests\Administration\WorkShiftRequest;
+use HRis\Http\Requests\PIM\CustomFieldRequest;
+use HRis\Http\Requests\PIM\CustomFieldSectionsRequest;
 use HRis\Http\Requests\PIM\TerminationReasonsRequest;
 use HRis\Http\Requests\Profile\JobRequest;
 use HRis\Http\Requests\Profile\QualificationsEducationRequest;
@@ -733,6 +738,104 @@ class AjaxController extends Controller
 
             try {
                 EmployeeWorkShift::whereId($WorkShiftId)->delete();
+
+                print('success');
+            } catch (Exception $e) {
+                print('failed');
+            }
+        }
+    }
+
+    /**
+     * Get the PIM Custom Field Section.
+     *
+     * @Get("ajax/get-custom-field-section")
+     *
+     * @param CustomFieldSectionsRequest $request
+     *
+     * @author Bertrand Kintanar
+     */
+    public function getCustomFieldSection(CustomFieldSectionsRequest $request)
+    {
+        if ($request->ajax()) {
+            $custom_field_section_id = $request->get('id');
+
+            try {
+                $custom_field_section = CustomFieldSection::whereId($custom_field_section_id)->first();
+
+                print(json_encode($custom_field_section));
+            } catch (Exception $e) {
+                print('failed');
+            }
+        }
+    }
+
+    /**
+     * Delete the PIM Custom Field Section.
+     *
+     * @Delete("ajax/delete-custom-field-section")
+     *
+     * @param CustomFieldSectionsRequest $request
+     *
+     * @author Bertrand Kintanar
+     */
+    public function deleteCustomFieldSection(CustomFieldSectionsRequest $request)
+    {
+        if ($request->ajax()) {
+            $custom_field_section_id = $request->get('id');
+
+            try {
+                CustomFieldSection::whereId($custom_field_section_id)->delete();
+
+                print('success');
+            } catch (Exception $e) {
+                print('failed');
+            }
+        }
+    }
+
+    /**
+     * Get the PIM Custom Field.
+     *
+     * @Get("ajax/get-custom-field")
+     *
+     * @param CustomFieldRequest $request
+     *
+     * @author Bertrand Kintanar
+     */
+    public function getCustomField(CustomFieldRequest $request)
+    {
+        if ($request->ajax()) {
+            $custom_field_id = $request->get('id');
+
+            try {
+                $custom_field = CustomField::with('type', 'options')->whereId($custom_field_id)->first();
+
+                $options = CustomFieldOption::whereCustomFieldId($custom_field_id)->lists('name', 'id');
+
+                print(json_encode(['custom_field' => $custom_field, 'options' => $options]));
+            } catch (Exception $e) {
+                print('failed');
+            }
+        }
+    }
+
+    /**
+     * Delete the PIM Custom Field.
+     *
+     * @Delete("ajax/delete-custom-field")
+     *
+     * @param CustomFieldRequest $request
+     *
+     * @author Bertrand Kintanar
+     */
+    public function deleteCustomField(CustomFieldRequest $request)
+    {
+        if ($request->ajax()) {
+            $custom_field_id = $request->get('id');
+
+            try {
+                CustomField::whereId($custom_field_id)->delete();
 
                 print('success');
             } catch (Exception $e) {
