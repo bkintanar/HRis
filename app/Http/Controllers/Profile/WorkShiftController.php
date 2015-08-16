@@ -12,8 +12,10 @@ namespace HRis\Http\Controllers\Profile;
 
 use Carbon\Carbon;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use HRis\Eloquent\CustomFieldSection;
 use HRis\Eloquent\Employee;
 use HRis\Eloquent\EmployeeWorkShift;
+use HRis\Eloquent\Navlink;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\WorkShiftRequest;
 use Input;
@@ -48,6 +50,9 @@ class WorkShiftController extends Controller
 
         $this->employee = $employee;
         $this->employee_work_shift = $employee_work_shift;
+
+        $profile_details_id = Navlink::whereName('Work Shifts')->pluck('id');
+        $this->data['custom_field_sections'] = CustomFieldSection::whereScreenId($profile_details_id)->get();
     }
 
     /**
@@ -70,42 +75,10 @@ class WorkShiftController extends Controller
         $this->data['employee'] = $employee;
         $this->data['workshift_history'] = $employee->employeeWorkShift;
 
-        $this->data['disabled'] = 'disabled';
         $this->data['pim'] = $request->is('*pim/*') ?: false;
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Job Details' : 'My Job Details';
 
         return $this->template('pages.profile.workshift.view');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @Get("profile/work-shifts/edit")
-     * @Get("pim/employee-list/{id}/work-shifts/edit")
-     *
-     * @param WorkShiftRequest $request
-     * @param null             $employee_id
-     *
-     * @return Response
-     *
-     * @author Bertrand Kintanar
-     */
-    public function show(WorkShiftRequest $request, $employee_id = null)
-    {
-        if (Input::get('success')) {
-            return redirect()->to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
-        }
-
-        $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
-
-        $this->data['employee'] = $employee;
-        $this->data['workshift_history'] = $employee->employeeWorkShift;
-
-        $this->data['disabled'] = '';
-        $this->data['pim'] = $request->is('*pim/*') ?: false;
-        $this->data['pageTitle'] = $this->data['pim'] ? 'Edit Employee Job Details' : 'Edit My Job Details';
-
-        return $this->template('pages.profile.workshift.edit');
     }
 
     /**

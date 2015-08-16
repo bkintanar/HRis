@@ -43,6 +43,7 @@ class AnnotationsServiceProvider extends ServiceProvider
         HRis\Http\Controllers\Auth\PasswordController::class,
         HRis\Http\Controllers\HomeController::class,
         HRis\Http\Controllers\PIM\Configuration\TerminationReasonsController::class,
+        HRis\Http\Controllers\PIM\Configuration\CustomFieldsController::class,
         HRis\Http\Controllers\PIM\EmployeeListController::class,
         HRis\Http\Controllers\Profile\ContactDetailsController::class,
         HRis\Http\Controllers\Profile\DependentsController::class,

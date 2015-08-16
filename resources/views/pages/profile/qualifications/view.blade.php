@@ -16,12 +16,16 @@
 @if ($logged_user->hasAccess(Request::segment(1).'.qualifications.languages.view'))
 {{--    @include ('pages.profile.qualifications.partials.languages')--}}
 @endif
+@if ($custom_field_sections)
+    @include('pages.profile.partials.custom-fields')
+@endif
 
 @stop
 
 @section('custom_js')
 
     {!! Html::script('/js/notification.js') !!}
+    {!! Html::script('/js/custom_datepicker.js') !!}
 
     <script>
         $(document).ready(function () {

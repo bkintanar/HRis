@@ -12,9 +12,11 @@ namespace HRis\Http\Controllers\Profile;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Exception;
+use HRis\Eloquent\CustomFieldSection;
 use HRis\Eloquent\Education;
 use HRis\Eloquent\Employee;
 use HRis\Eloquent\EmployeeSkill;
+use HRis\Eloquent\Navlink;
 use HRis\Eloquent\WorkExperience;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\QualificationsEducationRequest;
@@ -43,6 +45,9 @@ class QualificationsController extends Controller
         parent::__construct($auth);
 
         $this->employee = $employee;
+
+        $profile_details_id = Navlink::whereName('Qualifications')->pluck('id');
+        $this->data['custom_field_sections'] = CustomFieldSection::whereScreenId($profile_details_id)->get();
     }
 
     /**

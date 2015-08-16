@@ -89,7 +89,7 @@ class EmployeeListController extends Controller
             'employees.first_name'     => 'First Name',
             'employees.last_name'      => 'Last Name',
             'job_titles.name'          => 'Job Title',
-            'employment_statuses.name' => 'Employment Status',
+            'employment_statuses.name' => 'Status',
         ];
     }
 

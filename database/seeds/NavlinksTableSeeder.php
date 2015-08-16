@@ -355,6 +355,16 @@ class NavlinksTableSeeder extends Seeder
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                 ],
+                [
+                    'id'         => 34,
+                    'name'       => 'Custom Fields',
+                    'href'       => 'pim/configuration/custom-field-sections',
+                    'permission' => 15,
+                    'icon'       => 'fa-reorder',
+                    'parent_id'  => 28,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                ],
             ]
         );
     }

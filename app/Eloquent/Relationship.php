@@ -17,8 +17,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Relationship extends Model
 {
-    use HasPlaceholder;
-
     /**
      * The database table used by the model.
      *

@@ -11,9 +11,11 @@
 namespace HRis\Http\Controllers\Profile;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use HRis\Eloquent\CustomFieldSection;
 use HRis\Eloquent\Employee;
 use HRis\Eloquent\EmployeeWorkShift;
 use HRis\Eloquent\JobHistory;
+use HRis\Eloquent\Navlink;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\JobRequest;
 use Illuminate\Support\Facades\Request;
@@ -55,6 +57,9 @@ class JobController extends Controller
         $this->employee = $employee;
         $this->job_history = $job_history;
         $this->employee_work_shift = $employee_work_shift;
+
+        $profile_details_id = Navlink::whereName('Job')->pluck('id');
+        $this->data['custom_field_sections'] = CustomFieldSection::whereScreenId($profile_details_id)->get();
     }
 
     /**
@@ -78,7 +83,6 @@ class JobController extends Controller
 
         $job_histories = $employee->orderedJobHistories();
 
-        $this->data['disabled'] = 'disabled';
         $this->data['pim'] = $request->is('*pim/*') ?: false;
         $this->data['table'] = $this->setupDataTable($job_histories);
         $this->data['pageTitle'] = $this->data['pim'] ? 'Employee Job Details' : 'My Job Details';
@@ -104,39 +108,6 @@ class JobController extends Controller
         $table['items'] = $job_histories;
 
         return $table;
-    }
-
-    /**
-     * Show the Profile - Job Form.
-     *
-     * @Get("profile/job/edit")
-     * @Get("pim/employee-list/{id}/job/edit")
-     *
-     * @param JobRequest $request
-     * @param null       $employee_id
-     *
-     * @return \Illuminate\View\View
-     *
-     * @author Bertrand Kintanar
-     */
-    public function show(JobRequest $request, $employee_id = null)
-    {
-        if (Input::get('success')) {
-            return redirect()->to($request->path())->with('success', SUCCESS_UPDATE_MESSAGE);
-        }
-
-        $employee = $this->employee->getEmployeeById($employee_id, $this->logged_user->id);
-
-        $this->data['employee'] = $employee;
-
-        $job_histories = $employee->orderedJobHistories();
-
-        $this->data['disabled'] = '';
-        $this->data['pim'] = $request->is('*pim/*') ?: false;
-        $this->data['table'] = $this->setupDataTable($job_histories);
-        $this->data['pageTitle'] = $this->data['pim'] ? 'Edit Employee Job Details' : 'Edit My Job Details';
-
-        return $this->template('pages.profile.job.edit');
     }
 
     /**
