@@ -12,8 +12,10 @@ namespace HRis\Http\Controllers\Profile;
 
 use Carbon\Carbon;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use HRis\Eloquent\CustomFieldSection;
 use HRis\Eloquent\Employee;
 use HRis\Eloquent\EmployeeWorkShift;
+use HRis\Eloquent\Navlink;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\WorkShiftRequest;
 use Input;
@@ -48,6 +50,9 @@ class WorkShiftController extends Controller
 
         $this->employee = $employee;
         $this->employee_work_shift = $employee_work_shift;
+
+        $profile_details_id = Navlink::whereName('Work Shifts')->pluck('id');
+        $this->data['custom_field_sections'] = CustomFieldSection::whereScreenId($profile_details_id)->get();
     }
 
     /**

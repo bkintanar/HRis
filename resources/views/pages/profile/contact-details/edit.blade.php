@@ -2,25 +2,27 @@
 
 @section('content')
 
-<div class="row">
-        {!! Navlink::profileLinks($pim) !!}
-    <div class="col-lg-12">
-        <div class="ibox float-e-margins">
-            <div class="ibox-title">
-                <h5>Contact Details</h5>
-                <div class="ibox-tools">
-                    <a class="collapse-link">
-                        <i class="fa fa-chevron-up"></i>
-                    </a>
+    <div class="row">
+            {!! Navlink::profileLinks($pim) !!}
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Contact Details</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="ibox-content">
-                @include('pages.profile.contact-details.form')
+                <div class="ibox-content">
+                    @include('pages.profile.contact-details.form')
+                </div>
             </div>
         </div>
     </div>
-</div>
-
+    @if ($custom_field_sections)
+        @include('pages.profile.partials.custom-fields')
+    @endif
 @stop
 
 @section('custom_js')

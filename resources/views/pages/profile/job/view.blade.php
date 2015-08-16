@@ -21,6 +21,9 @@
         </div>
         {!! TablePresenter::display($logged_user, $table) !!}
     </div>
+    @if ($custom_field_sections)
+        @include('pages.profile.partials.custom-fields')
+    @endif
 @stop
 
 @section('custom_js')

@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Request;
  */
 class Navlink extends Model
 {
+    use HasPlaceholder;
     /**
      * The database table used by the model.
      *

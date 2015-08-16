@@ -76,6 +76,9 @@
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
     </div>
+    @if ($custom_field_sections)
+        @include('pages.profile.partials.custom-fields')
+    @endif
 @stop
 
 @stop

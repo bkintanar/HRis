@@ -21,6 +21,9 @@
         </div>
         @include('pages.profile.workshift.work-shifts')
     </div>
+    @if ($custom_field_sections)
+        @include('pages.profile.partials.custom-fields')
+    @endif
 @stop
 
 @section('custom_js')

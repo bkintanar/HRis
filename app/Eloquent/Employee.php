@@ -112,6 +112,16 @@ class Employee extends Model
      *
      * @author Bertrand Kintanar
      */
+    public function customFieldValues()
+    {
+        return $this->hasMany('HRis\Eloquent\CustomFieldValue', 'employee_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     *
+     * @author Bertrand Kintanar
+     */
     public function educations()
     {
         return $this->hasMany('HRis\Eloquent\Education');
@@ -143,11 +153,11 @@ class Employee extends Model
     {
         if ($employee_id) {
             return self::whereEmployeeId($employee_id)->with('user', 'country', 'province', 'city', 'jobHistories',
-                'dependents', 'employeeWorkShift')->first();
+                'dependents', 'employeeWorkShift', 'customFieldValues')->first();
         }
 
         return self::whereUserId($user_id)->with('user', 'country', 'province', 'city', 'jobHistories', 'dependents',
-            'employeeWorkShift')->first();
+            'employeeWorkShift', 'customFieldValues')->first();
     }
 
     /**
