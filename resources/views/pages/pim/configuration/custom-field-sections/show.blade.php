@@ -35,32 +35,10 @@
                                 {!! Form::select('custom_field_type_id', HRis\Eloquent\CustomFieldType::lists('name', 'id'), null, ['class' => 'form-control chosen-select']) !!}
                             </div>
                         </div>
-                        <div class="options" style="display: none;">
-                            <div class="form-group">
-                                {!! Form::label(' ', 'Options', ['class' => 'col-md-3 control-label']) !!}
-                                <div class="col-md-9">
-                                    <div class="input-group">
-                                        {!! Form::text('field_name', null, ['class' => 'form-control']) !!}
-                                        <span class="input-group-btn">
-                                            <button type="button" class="btn btn-white"> Add</button>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-3 control-label"></div>
-                                <div class="col-md-9">
-                                    <ul class="tag-list" style="padding: 0;">
-                                        <li>
-                                            <a href="#0"><i class="fa fa-times"></i> Family</a>
-                                            <input type="hidden" name="custom_field_option_1" value="Family">
-                                        </li>
-                                        <li>
-                                            <a href="#0"><i class="fa fa-times"></i> Work</a>
-                                            <input type="hidden" name="custom_field_option_2" value="Work">
-                                        </li>
-                                    </ul>
-                                </div>
+                        <div class="form-group options" style="display: none;">
+                            {!! Form::label('custom_field_options', 'Options', ['class' => 'col-md-3 control-label']) !!}
+                            <div class="col-md-9">
+                                {!! Form::text('custom_field_options', null, ['class' => 'form-control', 'data-role' => 'tagsinput', 'id' => 'custom_field_options']) !!}
                             </div>
                         </div>
                         <div class="form-group">
@@ -101,7 +79,7 @@
             function editRecord(dataId) {
                 $.ajax({
                     type: "GET",
-                    url: '/ajax/get-termination-reason',
+                    url: '/ajax/get-custom-field',
                     data: {id: dataId}
                 }).done(function (response) {
 
@@ -120,7 +98,7 @@
             function deleteRecord(dataId) {
                 $.ajax({
                     type: "DELETE",
-                    url: '/ajax/delete-termination-reason',
+                    url: '/ajax/delete-custom-field',
                     data: {id: dataId, _token: $('input[name=_token]').val()}
                 }).done(function (response) {
 
@@ -130,7 +108,7 @@
                         $('#custom_field_' + dataId).remove();
 
                         if ($('.custom_fields_list').length == 0) {
-                            $('#custom_fields_body').append('<tr><td colspan="3">No termination reasons listed</td></tr>');
+                            $('#custom_fields_body').append('<tr><td colspan="3">No custom fields listed</td></tr>');
                         }
                     }
                     else {
@@ -166,10 +144,12 @@
             });
 
             $('#add_custom_field').click(function () {
-                $('#name').val('');
+                $('#field_name').val('');
+                $('#custom_field_options').tagsinput('removeAll');
 
                 $("#custom_field_form").attr("value", "POST");
                 $('#custom_field_modal').modal('toggle');
+                $(".chosen-select").val('').attr("data-placeholder", "--- Select ---").trigger("chosen:updated");
             });
         });
     </script>

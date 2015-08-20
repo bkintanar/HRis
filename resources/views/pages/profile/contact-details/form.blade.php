@@ -17,12 +17,12 @@
     <div class="form-group">
             {!! Form::label('address_city_id', 'City', ['class' => 'col-md-2 control-label']) !!}
             <div class="col-md-4">
-                {!! Form::select('address_city_id', HRis\Eloquent\City::lists('name', 'id'), $employee->address_city_id or '', ['data-placeholder' => '--- Select ---', 'class' => 'form-control chosen-select', $disabled]) !!}
+                {!! Form::select('address_city_id', HRis\Eloquent\City::lists('name', 'id'), $employee->address_city_id or '', ['placeholder' => '--- Select ---', 'class' => 'form-control chosen-select', $disabled]) !!}
             </div>
 
             {!! Form::label('address_province_id', 'Province', ['class' => 'col-md-2 control-label']) !!}
             <div class="col-md-4">
-                {!! Form::select('address_province_id', HRis\Eloquent\Province::lists('name', 'id'), $employee->address_province_id, ['data-placeholder' => '--- Select ---', 'class' => 'form-control chosen-select', $disabled]) !!}
+                {!! Form::select('address_province_id', HRis\Eloquent\Province::lists('name', 'id'), $employee->address_province_id, ['placeholder' => '--- Select ---', 'class' => 'form-control chosen-select', $disabled]) !!}
             </div>
     </div>
 
@@ -33,7 +33,7 @@
             </div>
             {!! Form::label('address_country_id', 'Country', ['class' => 'col-md-2 control-label']) !!}
             <div class="col-md-4">
-                {!! Form::select('address_country_id', HRis\Eloquent\Country::lists('name', 'id'), $employee->address_country_id or '', ['data-placeholder' => '--- Select ---', 'class' => 'form-control chosen-select', $disabled]) !!}
+                {!! Form::select('address_country_id', HRis\Eloquent\Country::lists('name', 'id'), $employee->address_country_id or '', ['placeholder' => '--- Select ---', 'class' => 'form-control chosen-select', $disabled]) !!}
             </div>
 
     </div>

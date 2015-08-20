@@ -5,12 +5,12 @@
     <div class="form-group">
             <label for="job_title_id" class="col-md-2 control-label">Job Title</label>
             <div class="col-sm-4">
-                {!! Form::select('job_title_id', HRis\Eloquent\JobTitle::lists('name', 'id'), isset($employee->jobHistory()->job_title_id) ? $employee->jobHistory()->job_title_id : 0, ['data-placeholder' => '--- Select ---', 'class' => 'form-control chosen-select form-fields', $disabled]) !!}
+                {!! Form::select('job_title_id', HRis\Eloquent\JobTitle::lists('name', 'id'), isset($employee->jobHistory()->job_title_id) ? $employee->jobHistory()->job_title_id : 0, ['placeholder' => '--- Select ---', 'class' => 'form-control chosen-select form-fields', $disabled]) !!}
             </div>
 
             <label for="employment_status_id" class="col-md-2 control-label">Employment Status</label>
             <div class="col-sm-4">
-                {!! Form::select('employment_status_id', HRis\Eloquent\EmploymentStatus::lists('name', 'id'), isset($employee->jobHistory()->employment_status_id) ? $employee->jobHistory()->employment_status_id : 0, ['data-placeholder' => '--- Select ---', 'class' => 'form-control chosen-select form-fields', $disabled]) !!}
+                {!! Form::select('employment_status_id', HRis\Eloquent\EmploymentStatus::lists('name', 'id'), isset($employee->jobHistory()->employment_status_id) ? $employee->jobHistory()->employment_status_id : 0, ['placeholder' => '--- Select ---', 'class' => 'form-control chosen-select form-fields', $disabled]) !!}
             </div>
     </div>
     <!-- End - Job Details -->
@@ -19,7 +19,7 @@
 
             <label for="department_id" class="col-md-2 control-label">Department</label>
             <div class="col-sm-4">
-                {!! Form::select('department_id', HRis\Eloquent\Department::lists('name', 'id'), isset($employee->jobHistory()->department_id) ? $employee->jobHistory()->department_id : 0, ['data-placeholder' => '--- Select ---', 'class' => 'form-control chosen-select form-fields', $disabled]) !!}
+                {!! Form::select('department_id', HRis\Eloquent\Department::lists('name', 'id'), isset($employee->jobHistory()->department_id) ? $employee->jobHistory()->department_id : 0, ['placeholder' => '--- Select ---', 'class' => 'form-control chosen-select form-fields', $disabled]) !!}
             </div>
 
             <label for="effective_date" class="col-md-2 control-label">Effective Date</label>
@@ -35,7 +35,7 @@
 
             <label for="" class="col-md-2 control-label">Location</label>
             <div class="col-sm-4">
-                {!! Form::select('location_id', HRis\Eloquent\Location::lists('name', 'id'), isset($employee->jobHistory()->location_id) ? $employee->jobHistory()->location_id : 0, ['data-placeholder' => '--- Select ---', 'class' => 'form-control chosen-select form-fields', $disabled]) !!}
+                {!! Form::select('location_id', HRis\Eloquent\Location::lists('name', 'id'), isset($employee->jobHistory()->location_id) ? $employee->jobHistory()->location_id : 0, ['placeholder' => '--- Select ---', 'class' => 'form-control chosen-select form-fields', $disabled]) !!}
             </div>
 
     </div>

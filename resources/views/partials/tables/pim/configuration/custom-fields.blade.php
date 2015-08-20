@@ -5,7 +5,8 @@
             <td>{{ $item->id }}</td>
             <td>{{ $item->name }}</td>
             <td>{{ $item->type->name }}</td>
-            <td>{{ $item->required ? 'Yes' : 'No' }}</td>
+            <td>@if ($item->type->has_options) <i class="fa fa-check text-navy"></i> @else <i class="fa fa-times text-warning"></i> @endif</td>
+            <td>@if ($item->required) <i class="fa fa-check text-navy"></i> @else <i class="fa fa-times text-warning"></i> @endif</td>
             <td>
                 @if($logged_user->hasAccess($table['permission'].'.update'))
                     <button rel="edit" id="{{$item->id}}" class="btn btn-primary btn-xs btn-warning" name="edit"

@@ -13,9 +13,11 @@ namespace HRis\Http\Controllers\PIM\Configuration;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Eloquent\CustomField;
 use HRis\Eloquent\CustomFieldSection;
+use HRis\Eloquent\CustomFieldType;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\PIM\CustomFieldRequest;
 use HRis\Http\Requests\PIM\CustomFieldSectionsRequest;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CustomFieldsController.
@@ -40,17 +42,29 @@ class CustomFieldsController extends Controller
     protected $custom_fields;
 
     /**
+     * @var CustomFieldType
+     */
+    protected $custom_field_type;
+
+    /**
      * @param Sentinel           $auth
      * @param CustomFieldSection $custom_field_sections
+     * @param CustomField        $custom_fields
+     * @param CustomFieldType    $custom_field_type
      *
      * @author Bertrand Kintanar
      */
-    public function __construct(Sentinel $auth, CustomFieldSection $custom_field_sections, CustomField $custom_fields)
-    {
+    public function __construct(
+        Sentinel $auth,
+        CustomFieldSection $custom_field_sections,
+        CustomField $custom_fields,
+        CustomFieldType $custom_field_type
+    ) {
         parent::__construct($auth);
 
         $this->custom_fields = $custom_fields;
         $this->custom_field_sections = $custom_field_sections;
+        $this->custom_field_type = $custom_field_type;
     }
 
     /**
@@ -134,8 +148,10 @@ class CustomFieldsController extends Controller
      */
     public function storeCustomField(CustomFieldRequest $request, $id)
     {
-        dd($request->all());
         try {
+
+            DB::beginTransaction();
+
             $custom_field_section = $this->custom_field_sections->whereId($id)->first();
 
             $data = [
@@ -143,10 +159,31 @@ class CustomFieldsController extends Controller
                 'name'                 => $request->get('field_name'),
                 'required'             => $request->has('required') ? $request->get('required') : 0,
             ];
-            $custom_field_section->customFields()->create($data);
+
+            // Create CustomField and attach it to the CustomFieldSection
+            $custom_field = $custom_field_section->customFields()->create($data);
+
+            $custom_field_type = $this->custom_field_type->whereId($data['custom_field_type_id'])->first();
+
+            // Checks if the CustomFieldType has options
+            if ($custom_field_type->has_options) {
+
+                $options = explode(',', $request->get('option_name'));
+
+                foreach($options as $option)
+                {
+                    $custom_field->options()->create(['name' => $option]);
+                }
+            }
+
         } catch (Exception $e) {
+
+            DB::rollback();
+
             return redirect()->to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
         }
+
+        DB::commit();
 
         return redirect()->to($request->path())->with('success', SUCCESS_ADD_MESSAGE);
     }
@@ -188,7 +225,7 @@ class CustomFieldsController extends Controller
 
         $table['title'] = 'Custom Fields';
         $table['permission'] = 'pim.configuration.custom-fields';
-        $table['headers'] = ['Id', 'Name', 'Type', 'Required'];
+        $table['headers'] = ['Id', 'Name', 'Type', 'Has Options', 'Required'];
         $table['model'] = [
             'singular' => 'custom_field',
             'plural'   => 'custom_fields',

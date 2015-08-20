@@ -24,17 +24,17 @@ class CustomFieldTypeSeeder extends Seeder
 
         DB::table('custom_field_types')->insert(
             [
-                ['name' => 'Text'],
-                ['name' => 'Drop Down'],
-                ['name' => 'Number'],
-                ['name' => 'Email'],
-                ['name' => 'Text Area'],
-                ['name' => 'Date'],
-                ['name' => 'Checkboxes'],
-                ['name' => 'Radio Buttons'],
-                ['name' => 'Attachments'],
-                ['name' => 'Currency'],
-                ['name' => 'Country'],
+                ['name' => 'Text', 'has_options' => false],
+                ['name' => 'Drop Down', 'has_options' => true],
+                ['name' => 'Number', 'has_options' => false],
+                ['name' => 'Email', 'has_options' => false],
+                ['name' => 'Text Area', 'has_options' => false],
+                ['name' => 'Date', 'has_options' => false],
+                ['name' => 'Checkboxes', 'has_options' => true],
+                ['name' => 'Radio Buttons', 'has_options' => true],
+                ['name' => 'Attachments', 'has_options' => false],
+                ['name' => 'Currency', 'has_options' => false],
+                ['name' => 'Country', 'has_options' => false],
             ]
         );
     }

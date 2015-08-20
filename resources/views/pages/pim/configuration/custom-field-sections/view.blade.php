@@ -32,7 +32,7 @@
                             <div class="form-group">
                                 {!! Form::label('screen_id', 'Screen', ['class' => 'col-md-3 control-label']) !!}
                                 <div class="col-md-9">
-                                    {!! Form::select('screen_id', Navlink::whereParentId(-1)->lists('name', 'id'), null, ['data-placeholder' => '--- Select ---', 'class' => 'form-control chosen-select']) !!}
+                                    {!! Form::select('screen_id', Navlink::whereParentId(-1)->lists('name', 'id'), null, ['placeholder' => '--- Select ---', 'class' => 'form-control chosen-select']) !!}
                                 </div>
                             </div>
 

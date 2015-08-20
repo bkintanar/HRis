@@ -29,6 +29,8 @@
 
 @section('custom_js')
 
+    {!! Html::script('/js/custom_datepicker.js') !!}
+
     <script>
 
         function deleteAction()

@@ -81,6 +81,7 @@
 @section('custom_js')
     <!-- Cropper -->
     {!! Html::script('/js/plugins/cropper/cropper.min.js') !!}
+    {!! Html::script('/js/custom_datepicker.js') !!}
 
     <script>
         function checkEmployeeId (){
@@ -107,16 +108,6 @@
             $('.i-checks').iCheck({
                 checkboxClass: 'icheckbox_square-green',
                 radioClass: 'iradio_square-green'
-            });
-
-            // Date picker
-            $('#datepicker_birth_date .input-group.date').datepicker({
-                todayBtn: "linked",
-                format: 'yyyy-mm-dd',
-                keyboardNavigation: false,
-                forceParse: false,
-                calendarWeeks: true,
-                autoclose: true
             });
 
             // Cropper

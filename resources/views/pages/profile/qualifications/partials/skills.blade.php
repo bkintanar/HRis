@@ -78,7 +78,7 @@
                         <div class="form-group">
                             {!! Form::label('skill_id', 'Skill', ['class' => 'col-md-3 control-label']) !!}
                             <div class="col-md-9">
-                                {!! Form::select('skill_id', HRis\Eloquent\Skill::lists('name', 'id'), null, ['data-placeholder' => '--- Select ---', 'class' => 'form-control chosen-select']) !!}
+                                {!! Form::select('skill_id', HRis\Eloquent\Skill::lists('name', 'id'), null, ['placeholder' => '--- Select ---', 'class' => 'form-control chosen-select']) !!}
                             </div>
                         </div>
 

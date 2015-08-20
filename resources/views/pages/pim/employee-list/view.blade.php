@@ -117,7 +117,7 @@
 
                                 {!! Form::label('marital_status_id', 'Marital Status', ['class' => 'col-md-2 control-label']) !!}
                                 <div class="col-sm-4">
-                                    {!! Form::select('marital_status_id', HRis\Eloquent\MaritalStatus::lists('name', 'id'), 1, ['data-placeholder' => '--- Select ---', 'class' => 'form-control chosen-select']) !!}
+                                    {!! Form::select('marital_status_id', HRis\Eloquent\MaritalStatus::lists('name', 'id'), null, ['placeholder' => '--- Select ---', 'class' => 'form-control chosen-select']) !!}
                                 </div>
                             </div>
 

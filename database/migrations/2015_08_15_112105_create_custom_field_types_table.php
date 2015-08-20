@@ -24,6 +24,7 @@ class CreateCustomFieldTypesTable extends Migration
         Schema::create('custom_field_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->boolean('has_options')->default(0);
         });
     }
 

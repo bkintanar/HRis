@@ -47,7 +47,7 @@
                             <div class="form-group">
                                 {!! Form::label('relationship_id', 'Relationship', ['class' => 'col-md-3 control-label']) !!}
                                 <div class="col-md-9">
-                                    {!! Form::select('relationship_id', HRis\Eloquent\Relationship::lists('name', 'id'), null, ['data-placeholder' => '--- Select ---', 'class' => 'form-control chosen-select']) !!}
+                                    {!! Form::select('relationship_id', HRis\Eloquent\Relationship::lists('name', 'id'), null, ['placeholder' => '--- Select ---', 'class' => 'form-control chosen-select']) !!}
                                 </div>
                             </div>
 
@@ -86,6 +86,7 @@
 @section('custom_js')
 
     {!! Html::script('/js/notification.js') !!}
+    {!! Html::script('/js/custom_datepicker.js') !!}
 
     <script>
         $(document).ready(function () {

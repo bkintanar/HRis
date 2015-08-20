@@ -79,7 +79,7 @@
                         <div class="form-group">
                             {!! Form::label('level', 'Level', ['class' => 'col-md-3 control-label']) !!}
                             <div class="col-md-9">
-                                {!! Form::select('education_level_id', HRis\Eloquent\EducationLevel::lists('name', 'id'), null, ['data-placeholder' => '--- Select ---', 'class' => 'form-control chosen-select', 'id' => 'education_level_id']) !!}
+                                {!! Form::select('education_level_id', HRis\Eloquent\EducationLevel::lists('name', 'id'), null, ['placeholder' => '--- Select ---', 'class' => 'form-control chosen-select', 'id' => 'education_level_id']) !!}
                             </div>
                         </div>
 

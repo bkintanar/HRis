@@ -5,7 +5,7 @@
 
             <label for="" class="col-md-2 control-label">Work Shift</label>
             <div class="col-sm-4">
-                {!! Form::select('work_shift_id', HRis\Eloquent\WorkShift::lists('name', 'id'), $employee->employeeWorkShift()->first() ? $employee->employeeWorkShift()->first()->work_shift_id : 0, ['data-placeholder' => '--- Select ---', 'class' => 'form-control chosen-select form-fields', $disabled]) !!}
+                {!! Form::select('work_shift_id', HRis\Eloquent\WorkShift::lists('name', 'id'), $employee->employeeWorkShift()->first() ? $employee->employeeWorkShift()->first()->work_shift_id : 0, ['placeholder' => '--- Select ---', 'class' => 'form-control chosen-select form-fields', $disabled]) !!}
             </div>
 
             <label for="effective_date" class="col-md-2 control-label">Effective Date</label>

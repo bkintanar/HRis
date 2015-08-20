@@ -4,6 +4,7 @@
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <h5>{{ $custom_field_section->name }}</h5>
+
                 <div class="ibox-tools">
                     <a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
@@ -14,8 +15,12 @@
                 {!! Form::model($employee, ['method' => 'PATCH', 'url' => str_replace('/edit', '', Request::path()) . '/custom-fields', 'class' => 'form-horizontal', 'onSubmit' => 'checkEmployeeId()', 'id' => 'personalDetailsForm']) !!}
                 {!! Form::hidden('id') !!}
 
-                <div class="form-group">
-                @foreach($custom_field_section->customFields as $custom_field)
+                @foreach($custom_field_section->customFields as $index => $custom_field)
+
+                    @if($index % 2 == 0)
+                        <div class="form-group">
+                    @endif
+
                     @if($custom_field->type->name == 'Text')
                         @include('pages.profile.partials.custom-fields-text')
                     @elseif($custom_field->type->name == 'Drop Down')
@@ -23,12 +28,16 @@
                     @elseif($custom_field->type->name == 'Number')
                     @elseif($custom_field->type->name == 'Email')
                     @elseif($custom_field->type->name == 'Text Area')
-                    @elseif($custom_field->type->name == 'Drop Down')
+                    @elseif($custom_field->type->name == 'Date')
+                        @include('pages.profile.partials.custom-fields-date')
                     @elseif($custom_field->type->name == 'Drop Down')
                     @elseif($custom_field->type->name == 'Drop Down')
                     @endif
+
+                    @if(($index+1 <= $custom_field_section->customFields->count() and ($index+1) % 2 == 0) or $custom_field_section->customFields->count() == $index+1)
+                        </div>
+                    @endif
                 @endforeach
-                </div>
 
                 <div class="hr-line-dashed"></div>
 
