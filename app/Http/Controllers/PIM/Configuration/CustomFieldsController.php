@@ -149,7 +149,6 @@ class CustomFieldsController extends Controller
     public function storeCustomField(CustomFieldRequest $request, $id)
     {
         try {
-
             DB::beginTransaction();
 
             $custom_field_section = $this->custom_field_sections->whereId($id)->first();
@@ -167,17 +166,13 @@ class CustomFieldsController extends Controller
 
             // Checks if the CustomFieldType has options
             if ($custom_field_type->has_options) {
-
                 $options = explode(',', $request->get('option_name'));
 
-                foreach($options as $option)
-                {
+                foreach ($options as $option) {
                     $custom_field->options()->create(['name' => $option]);
                 }
             }
-
         } catch (Exception $e) {
-
             DB::rollback();
 
             return redirect()->to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
