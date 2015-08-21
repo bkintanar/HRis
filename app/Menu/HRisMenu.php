@@ -53,22 +53,21 @@ class HRisMenu extends Menu
 
 	public function breadcrumb()
 	{
-	$this->setInnerBreadcrumb(function($breadcrumb) {
-	$output = '<li>';
-	$output .= '<a href="/' . $breadcrumb->href . '">';
-	$output .= $breadcrumb->name;
-	$output .= '</a>';
-	$output .= '</li>';
+		$this->setInnerBreadcrumb(function($breadcrumb) {
+			$output = '<li>';
+			$output .= '<a href="/' . $breadcrumb->href . '">';
+			$output .= $breadcrumb->name;
+			$output .= '</a>';
+			$output .= '</li>';
 
-	return $output;
-	})
-	->setOuterBreadcrumb(function($body) {
-	$output = $body;
+			return $output;
+		})
+		->setOuterBreadcrumb(function($body) {
+			$output = $body;
 
-	return $output;
-	});
+			return $output;
+		});
 
-	return parent::breadcrumb();
+		return parent::breadcrumb();
 	}
-
 }

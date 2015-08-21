@@ -10,5 +10,4 @@ class MenuServiceProvider extends ServiceProvider
     {
         $this->app->bind('menu', 'HRis\Menu\HRisMenu');
     }
-
 }
