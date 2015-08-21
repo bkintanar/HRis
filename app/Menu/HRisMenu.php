@@ -17,10 +17,10 @@ class HRisMenu extends Menu
     public function make()
     {
         $this->inner(function ($menu, $body, $is_active, $is_nested) {
-            $output = '<li ' . ($is_active ? 'class="active"' : '') . '>';
-            $output .= '<a href="/' . $menu->href . '">';
-            $output .= '<i class="fa ' . $menu->icon . '"></i>';
-            $output .= '<span class="nav-label">' . $menu->name . '</span>';
+            $output = '<li '.($is_active ? 'class="active"' : '').'>';
+            $output .= '<a href="/'.$menu->href.'">';
+            $output .= '<i class="fa '.$menu->icon.'"></i>';
+            $output .= '<span class="nav-label">'.$menu->name.'</span>';
             $output .= $is_nested ? '<span class="fa arrow"></span>' : '';
             $output .= '</a>';
             $output .= $body;
@@ -55,7 +55,7 @@ class HRisMenu extends Menu
     {
         $this->setInnerBreadcrumb(function ($breadcrumb) {
             $output = '<li>';
-            $output .= '<a href="/' . $breadcrumb->href . '">';
+            $output .= '<a href="/'.$breadcrumb->href.'">';
             $output .= $breadcrumb->name;
             $output .= '</a>';
             $output .= '</li>';

@@ -28,7 +28,7 @@ class Menu extends Breadcrumb
         $array = $model->parseMenuTree(
             $this->model->lists('parent_id', 'id')
         );
-        
+
         return (count($array) != count($array, 1));
     }
 
@@ -118,7 +118,7 @@ class Menu extends Breadcrumb
         } else {
             // Repeat the last set callable function
             if (count($this->callables)) {
-                $callback = $this->callables[count($this->callables)-1];
+                $callback = $this->callables[count($this->callables) - 1];
             }
         }
 
