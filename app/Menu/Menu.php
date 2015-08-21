@@ -117,7 +117,7 @@ class Menu extends Breadcrumb
             $callback = $this->callables[$index];
         } else {
             // Repeat the last set callable function
-            if count($this->callables)) {
+            if (count($this->callables)) {
                 $callback = $this->callables[count($this->callables)-1];
             }
         }
