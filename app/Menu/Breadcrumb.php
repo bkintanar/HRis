@@ -81,4 +81,5 @@ class Breadcrumb
 
         return $output;
     }
+    
 }
