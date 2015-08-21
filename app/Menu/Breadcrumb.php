@@ -41,7 +41,7 @@ class Breadcrumb
     private function linkName($link)
     {
         $name = str_replace('-', ' ', $link);
-        
+
         return ucwords($name);
     }
 

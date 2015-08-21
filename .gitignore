@@ -6,3 +6,11 @@
 composer.lock
 resources/assets/bower_components/
 public/build
+public/css/all.css
+public/css/all.css.map
+public/css/dependencies.css
+public/css/dependencies.css.map
+public/css/style.css
+public/css/style.css.map
+public/js/all.js
+public/js/all.js.map
