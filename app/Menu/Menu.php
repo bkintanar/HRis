@@ -16,7 +16,7 @@ class Menu extends Breadcrumb
         parent::__construct();
         $this->model = $model;
         $this->init();
-    }  
+    }
 
     private function init()
     {
