@@ -4,10 +4,10 @@ namespace HRis\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class MenuServiceProvider extends ServiceProvider 
+class MenuServiceProvider extends ServiceProvider
 {
-	public function register()
-	{
-		$this->app->bind('menu', 'HRis\Menu\HRisMenu');
-	}
+    public function register()
+    {
+        $this->app->bind('menu', 'HRis\Menu\HRisMenu');
+    }
 }

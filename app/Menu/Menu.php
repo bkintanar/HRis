@@ -75,7 +75,7 @@ class Menu extends Breadcrumb
         $callback = $this->getCallback($index);
 
         if (!is_null($tree) && count($tree) > 0) {
-            foreach($tree as $menu_id => $inner_menu) {
+            foreach ($tree as $menu_id => $inner_menu) {
                 $menu = $this->model->find($menu_id);
                 $is_nested = $this->model->whereParentId($menu_id)->count() ? true : false;
 
@@ -100,7 +100,7 @@ class Menu extends Breadcrumb
         $return = [];
 
         foreach ($tree as $child => $parent) {
-            if($parent == $root) {
+            if ($parent == $root) {
                 unset($tree[$child]);
                 $return[$child] = $this->parseMenuTree($tree, $child);
             }
@@ -117,7 +117,7 @@ class Menu extends Breadcrumb
             $callback = $this->callables[$index];
         } else {
             // Repeat the last set callable function
-            if(count($this->callables)) {
+            if count($this->callables)) {
                 $callback = $this->callables[count($this->callables)-1];
             }
         }

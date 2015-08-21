@@ -38,7 +38,7 @@ class Breadcrumb
         return false;
     }
 
-    private function linkName($link) 
+    private function linkName($link)
     {
         $name = str_replace('-', ' ', $link);
         return ucwords($name);
@@ -74,7 +74,7 @@ class Breadcrumb
         $inner = '';
 
         foreach ($this->links() as $link) {
-            $inner .= call_user_func($this->inner_breadcrumb, $link);    
+            $inner .= call_user_func($this->inner_breadcrumb, $link);
         }
 
         $output .= call_user_func($this->outer_breadcrumb, $inner);

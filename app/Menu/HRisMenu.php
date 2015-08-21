@@ -4,7 +4,7 @@ namespace HRis\Menu;
 
 use HRis\Eloquent\Navlink;
 
-class HRisMenu extends Menu 
+class HRisMenu extends Menu
 {
 
 	protected $model;
