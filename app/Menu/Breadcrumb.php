@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Request;
 
 class Breadcrumb
 {
-	protected $inner_breadcrumb;
+    protected $inner_breadcrumb;
     protected $outer_breadcrumb;
     protected $request;
 
