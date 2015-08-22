@@ -153,6 +153,7 @@ return [
         HRis\Providers\EventServiceProvider::class,
         HRis\Providers\RouteServiceProvider::class,
         HRis\Providers\AnnotationsServiceProvider::class,
+        HRis\Providers\MenuServiceProvider::class,
 
         /*
          * Vendor Service Providers...
@@ -215,6 +216,7 @@ return [
          */
         'Navlink'        => HRis\Eloquent\Navlink::class,
         'TablePresenter' => HRis\Http\Presenters\TablePresenter::class,
+        'Menu'           => HRis\Facades\Menu::class,
         /*
          * Vendor Class Aliases...
          */

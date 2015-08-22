@@ -225,7 +225,7 @@ class Navlink extends Model
     protected static function permissionTab($parent, $id)
     {
         if ($parent->name == 'Profile') {
-            $children = self::where('parent_id', -1)->get();
+            $children = self::where('parent_id', '<', 0)->get();
         } else {
             $children = self::whereParentId($parent->id)->get();
         }
@@ -342,7 +342,7 @@ class Navlink extends Model
 
         $nav = '<div class="col-lg-12 top-nav-b"><div class="btn-group top-nav-li"><ul>';
 
-        $navigations = self::whereParentId(-1)->get();
+        $navigations = self::where('parent_id', '<', 0)->get();
 
         foreach ($navigations as $navigation) {
             $format = self::formatHref($navigation, $pim);
