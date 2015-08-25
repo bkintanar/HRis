@@ -18,7 +18,6 @@ use HRis\Eloquent\EmployeeWorkShift;
 use HRis\Eloquent\Navlink;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\WorkShiftRequest;
-use Input;
 
 /**
  * Class WorkShiftController.
