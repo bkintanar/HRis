@@ -48,10 +48,10 @@ class CustomFieldsController extends Controller
     protected $custom_field_type;
 
     /**
-     * @param Sentinel $auth
+     * @param Sentinel           $auth
      * @param CustomFieldSection $custom_field_sections
-     * @param CustomField $custom_fields
-     * @param CustomFieldType $custom_field_type
+     * @param CustomField        $custom_fields
+     * @param CustomFieldType    $custom_field_type
      *
      * @author Bertrand Kintanar
      */
@@ -108,7 +108,7 @@ class CustomFieldsController extends Controller
 
         $this->data['custom_field_section'] = $custom_field_section;
         $this->data['table'] = $this->setupDataTableCustomField($custom_fields);
-        $this->data['pageTitle'] = 'Custom Field Sections : ' . $custom_field_section->name;
+        $this->data['pageTitle'] = 'Custom Field Sections : '.$custom_field_section->name;
 
         return $this->template('pages.pim.configuration.custom-field-sections.show');
     }
@@ -150,15 +150,14 @@ class CustomFieldsController extends Controller
     public function storeCustomField(CustomFieldRequest $request, $id)
     {
         try {
-
             DB::beginTransaction();
 
             $custom_field_section = $this->custom_field_sections->whereId($id)->first();
 
             $data = [
                 'custom_field_type_id' => $request->get('custom_field_type_id'),
-                'name' => $request->get('field_name'),
-                'required' => $request->has('required') ? $request->get('required') : 0,
+                'name'                 => $request->get('field_name'),
+                'required'             => $request->has('required') ? $request->get('required') : 0,
             ];
 
             // Create CustomField and attach it to the CustomFieldSection
@@ -168,16 +167,13 @@ class CustomFieldsController extends Controller
 
             // Checks if the CustomFieldType has options
             if ($custom_field_type->has_options) {
-
                 $options = explode(',', $request->get('custom_field_options'));
 
                 foreach ($options as $option) {
                     $custom_field->options()->create(['name' => $option]);
                 }
             }
-
         } catch (Exception $e) {
-
             DB::rollback();
 
             return redirect()->to($request->path())->with('danger', UNABLE_ADD_MESSAGE);
@@ -206,8 +202,8 @@ class CustomFieldsController extends Controller
         $table['headers'] = ['Id', 'Name', 'Screen'];
         $table['model'] = [
             'singular' => 'custom_field_section',
-            'plural' => 'custom_field_sections',
-            'dashed' => 'custom-field_sections',
+            'plural'   => 'custom_field_sections',
+            'dashed'   => 'custom-field_sections',
         ];
         $table['items'] = $custom_field_sections;
 
@@ -232,8 +228,8 @@ class CustomFieldsController extends Controller
         $table['headers'] = ['Id', 'Name', 'Type', 'Has Options', 'Required'];
         $table['model'] = [
             'singular' => 'custom_field',
-            'plural' => 'custom_fields',
-            'dashed' => 'custom-fields',
+            'plural'   => 'custom_fields',
+            'dashed'   => 'custom-fields',
         ];
         $table['items'] = $custom_fields;
 
@@ -260,8 +256,8 @@ class CustomFieldsController extends Controller
 
             $data = [
                 'custom_field_type_id' => $request->get('custom_field_type_id'),
-                'name' => $request->get('field_name'),
-                'required' => $request->has('required') ? $request->get('required') : 0,
+                'name'                 => $request->get('field_name'),
+                'required'             => $request->has('required') ? $request->get('required') : 0,
             ];
 
             $custom_field->update($data);
@@ -270,7 +266,6 @@ class CustomFieldsController extends Controller
 
             // Checks if the CustomFieldType has options.
             if ($custom_field_type->has_options) {
-
                 $old_options = CustomFieldOption::whereCustomFieldId($custom_field->id)->get();
                 $options = explode(',', $request->get('custom_field_options'));
 
@@ -290,9 +285,7 @@ class CustomFieldsController extends Controller
                     }
                 }
             }
-
         } catch (Exception $e) {
-
             DB::rollback();
 
             return redirect()->to($request->path())->with('danger', UNABLE_ADD_MESSAGE);

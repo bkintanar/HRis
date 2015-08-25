@@ -19,7 +19,6 @@ use HRis\Eloquent\Navlink;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\JobRequest;
 use Illuminate\Support\Facades\Request;
-use Input;
 
 /**
  * Class JobController.
