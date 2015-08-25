@@ -69,14 +69,4 @@ class EmploymentStatusRequest extends Request
             }
         }
     }
-
-    /**
-     * @return mixed
-     *
-     * @author Bertrand Kintanar
-     */
-    public function forbiddenResponse()
-    {
-        return response()->make(view()->make('errors.403'), 403);
-    }
 }

@@ -17,5 +17,13 @@ use Illuminate\Foundation\Http\FormRequest;
  */
 abstract class Request extends FormRequest
 {
-    //
+    /**
+     * @return mixed
+     *
+     * @author Bertrand Kintanar
+     */
+    public function forbiddenResponse()
+    {
+        return response()->make(view()->make('errors.403'), 403);
+    }
 }

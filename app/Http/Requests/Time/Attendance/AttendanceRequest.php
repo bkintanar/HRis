@@ -23,17 +23,32 @@ class PersonalDetailsRequest extends Request
      *
      * @return array
      *
-     * @author Bertrand Kintanar
+     * @author Harlequin Doyon
      */
     public function rules()
     {
-        if (Request::isMethod('post')) {
-            return [
-                'first_name'  => 'required',
-                'last_name'   => 'required',
-                'employee_id' => 'required|unique',
-                'birth_date'  => 'required',
-            ];
+        switch($this->method())
+        {
+            case 'POST':
+            {
+                return [
+                    'user.name.first' => 'required',
+                    'user.name.last'  => 'required',
+                    'user.email'      => 'required|email|unique:users,email',
+                    'user.password'   => 'required|confirmed',
+                ];
+            }
+            case 'PUT':
+            case 'PATCH':
+            {
+                return [
+                    'user.name.first' => 'required',
+                    'user.name.last'  => 'required',
+                    'user.email'      => 'required|email|unique:users,email,'.$user->id,
+                    'user.password'   => 'required|confirmed',
+                ];
+            }
+            default:break;
         }
 
         return [];
@@ -46,7 +61,7 @@ class PersonalDetailsRequest extends Request
      *
      * @return bool
      *
-     * @author Bertrand Kintanar
+     * @author Harlequin Doyon
      */
     public function authorize(Sentinel $user)
     {
