@@ -28,7 +28,7 @@
 					<input type="text" class="form-control" placeholder="Last Name" name="last_name" required="">
 				</div>
 				<div class="form-group">
-					<input type="email" class="form-control" placeholder="your-name@email.com" name="email" required="">
+					<input type="email" class="form-control" placeholder="Email" name="email" required="">
 				</div>
 				<div class="form-group">
 					<input type="password" class="form-control" placeholder="{{ trans('app.password') }}"
