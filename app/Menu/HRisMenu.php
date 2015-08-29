@@ -3,21 +3,33 @@
 namespace HRis\Menu;
 
 use HRis\Eloquent\Navlink;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 
 class HRisMenu extends Menu
 {
-    protected $model;
-
+    /**
+     * HRisMenu constructor
+     * @author Harlequin Doyon
+     */
     public function __construct()
     {
         $model = new Navlink();
         parent::__construct($model);
     }
 
+    /**
+     * Generates the sidebar menu HTML
+     * @return string
+     * @author Harlequin Doyon
+     */
     public function make()
     {
-        $this->inner(function ($menu, $body, $is_active, $is_nested) {
-            $output = '<li '.($is_active ? 'class="active"' : '').'>';
+        $self = $this;
+
+        $this->inner(function ($menu, $body, $is_active, $is_nested, $has_access) use($self) {
+            if (! $has_access) return '';
+
+            $output = '<li class="'.$self->stylesheetClasses($menu, $is_active).'">';
             $output .= '<a href="/'.$menu->href.'">';
             $output .= '<i class="fa '.$menu->icon.'"></i>';
             $output .= '<span class="nav-label">'.$menu->name.'</span>';
@@ -28,21 +40,21 @@ class HRisMenu extends Menu
 
             return $output;
         })
-        ->outer(function ($menuBody) {
-            return $menuBody;
+        ->outer(function ($body) {
+            return $body;
         })
-        ->addLevel()
-        ->outer(function ($menuBody) {
+        ->addLevel() // Second level menu
+        ->outer(function ($body) {
             $output = '<ul class="nav nav-second-level">';
-            $output .= $menuBody;
+            $output .= $body;
             $output .= '</ul>';
 
             return $output;
         })
-        ->addLevel()
-        ->outer(function ($menuBody) {
+        ->addLevel() // Third level menu
+        ->outer(function ($body) {
             $output = '<ul class="nav nav-third-level">';
-            $output .= $menuBody;
+            $output .= $body;
             $output .= '</ul>';
 
             return $output;
@@ -51,6 +63,11 @@ class HRisMenu extends Menu
         return parent::make();
     }
 
+    /**
+     * Generates the breadcrumb HTML
+     * @return string
+     * @author Harlequin Doyon
+     */
     public function breadcrumb()
     {
         $this->setInnerBreadcrumb(function ($breadcrumb) {
@@ -69,5 +86,59 @@ class HRisMenu extends Menu
         });
 
         return parent::breadcrumb();
+    }
+
+    /**
+     * Override the default method of the parent class
+     * @param  Navlink  $menu
+     * @return boolean
+     * @author Harlequin Doyon
+     */
+    public function hasAccess($menu)
+    {
+        $user = Sentinel::getUser();
+
+        if($user->hasAccess($this->role($menu->href))) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Change the forward slashes to dots.
+     * @param  string $href 
+     * @return string
+     * @author Harlequin Doyon
+     */
+    private function slashToPeriod($href)
+    {
+        return str_replace('/', '.', $href);
+    }
+
+    /**
+     * Get the role syntax for the given href
+     * @param  string $href
+     * @return string
+     * @author Harlequin Doyon
+     */
+    private function role($href)
+    {
+        return $this->slashToPeriod($href).'.view';
+    }
+
+    /**
+     * Get sidebar menu <li> stylesheet classes
+     * @param  Navlink $menu
+     * @param  boolean $is_active
+     * @return string
+     * @author Harlequin Doyon
+     */
+    private function stylesheetClasses($menu, $is_active)
+    {
+        $class = $is_active ? 'active' : '';
+        $class .= starts_with($menu->href, 'pim') || starts_with($menu->href, 'admin') ? ' navy' : '';
+
+        return $class;
     }
 }
