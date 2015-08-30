@@ -3,7 +3,7 @@
 @section('content')
     @include('partials.notification')
     <div class="row">
-        {!! Navlink::profileLinks($pim) !!}
+        {!! Menu::profile() !!}
         @include('pages.profile.salary.form')
     </div>
 @stop
