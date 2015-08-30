@@ -4,17 +4,17 @@ if (! function_exists('permission')) {
     
     function permission($label, $only = [])
     {
-        $permitted = ['create', 'update', 'view', 'delete'];
+        $permit = ['create', 'update', 'view', 'delete'];
 
-        // If $only array is empty return all permitted
+        // If $only array is empty return all permission
         if(! count($only)) {
-            $only = $permitted;
+            $only = $permit;
         }
 
         $arr = [];
 
         foreach ($only as $action) {
-            if(in_array($action, $permitted)) {
+            if(in_array($action, $permit)) {
                 $arr[$label.'.'.$action] = true; 
             }
         }

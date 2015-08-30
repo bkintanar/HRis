@@ -346,7 +346,6 @@ class Navlink extends Model
 
         foreach ($navigations as $navigation) {
             $format = self::formatHref($navigation, $pim);
-
             if (!$user->hasAccess($format['link'].'.view')) {
                 continue;
             }
