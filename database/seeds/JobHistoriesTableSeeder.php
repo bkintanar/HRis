@@ -44,6 +44,16 @@ class JobHistoriesTableSeeder extends Seeder
                     'effective_date'       => null,
                     'comments'             => null,
                 ],
+                [
+                    'id'                   => 3,
+                    'employee_id'          => 3,
+                    'job_title_id'         => 13,
+                    'department_id'        => 3,
+                    'employment_status_id' => 1,
+                    'location_id'          => 1,
+                    'effective_date'       => null,
+                    'comments'             => null,
+                ],
             ]
         );
     }

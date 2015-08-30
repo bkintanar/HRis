@@ -110,6 +110,64 @@ class RolesTableSeeder extends Seeder
                     permission('perforamance.configuration'),
                     permission('perforamance.configuration.trackers'),
                     permission('time.attendance'),
+                    permission('time.attendance.employee-records'),
+                    permission('time.attendance.overtime-records'),
+                    permission('time.requesition'),
+                    permission('time.holidays'),
+                    permission('time.events'),
+                    permission('presence', ['view'])
+                );
+                break;
+            case 'admin':
+                $arr = array_merge(
+                    permission('dashboard', ['view']),
+                    permission('profile', ['view']),
+                    permission('profile.personal-details', ['view', 'update']),
+                    permission('profile.contact-details', ['view', 'update']),
+                    permission('profile.emergency-contacts'),
+                    permission('profile.dependents'),
+                    permission('profile.job'),
+                    permission('profile.work-shifts'),
+                    permission('profile.salary'),
+                    permission('profile.qualifications'),
+                    permission('profile.qualifications.educations'),
+                    permission('profile.qualifications.skills'),
+                    permission('profile.qualifications.work-experiences'),
+                    permission('pim.personal-details', ['view', 'update']),
+                    permission('pim.contact-details', ['view', 'update']),
+                    permission('pim.emergency-contacts'),
+                    permission('pim.dependents'),
+                    permission('pim.job'),
+                    permission('pim.work-shifts'),
+                    permission('pim.salary'),
+                    permission('pim.qualifications'),
+                    permission('pim.qualifications.educations'),
+                    permission('pim.qualifications.skills'),
+                    permission('pim.qualifications.work-experiences'),
+                    permission('performance'),
+                    permission('performance.my-tracker'),
+                    permission('performance.employee-tracker'),
+                    permission('performance.configuration'),
+                    permission('performance.configuration.trackers'),
+                    permission('time'),
+                    permission('pim'),
+                    permission('pim.employee-list'),
+                    permission('admin'),
+                    permission('admin.user-management'),
+                    permission('admin.job'),
+                    permission('admin.job.titles'),
+                    permission('admin.job.pay-grades'),
+                    permission('admin.job.employment-status'),
+                    permission('admin.job.categories'),
+                    permission('admin.job.work-shifts'),
+                    permission('admin.qualifications'),
+                    permission('admin.qualifications.skills'),
+                    permission('admin.qualifications.educations'),
+                    permission('pim.configuration'),
+                    permission('pim.configuration.termination-reasons'),
+                    permission('perforamance.configuration'),
+                    permission('perforamance.configuration.trackers'),
+                    permission('time.attendance'),
                     permission('time.attendance.employee-records')
                 );
                 break;
@@ -129,7 +187,8 @@ class RolesTableSeeder extends Seeder
                     permission('profile.qualifications.skills'),
                     permission('profile.qualifications.work-experiences'),
                     permission('performance', ['view']),
-                    permission('performance.my-tracker', ['view'])
+                    permission('performance.my-tracker', ['view']),
+                    permission('presence', ['view'])
                 );
                 break;
         }

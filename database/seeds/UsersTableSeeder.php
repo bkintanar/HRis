@@ -8,6 +8,8 @@
  * @link    http://github.com/HB-Co/HRis
  */
 use Illuminate\Database\Seeder;
+use HRis\Eloquent\User;
+use Carbon\Carbon;
 
 class UsersTableSeeder extends Seeder
 {
@@ -22,25 +24,34 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->delete();
 
-        DB::table('users')->insert(
+        foreach ($this->users() as $user) {
+            User::create($user);
+        }
+    }
+
+    /**
+     * Users data
+     * @return array
+     * @author Harlequin Doyon
+     */
+    public function users()
+    {
+        return [
             [
-                [
-                    'id'           => 1,
-                    'email'        => 'bertrand.kintanar@gmail.com',
-                    'password'     => Hash::make('retardko'),
-                    'last_login'   => '2014-11-04 15:10:19',
-                    'created_at'   => '2014-10-21 22:56:12',
-                    'updated_at'   => '2014-11-04 15:10:19',
-                ],
-                [
-                    'id'           => 2,
-                    'email'        => 'gabriel@gmail.com',
-                    'password'     => Hash::make('retardko'),
-                    'last_login'   => '2014-10-31 02:05:22',
-                    'created_at'   => '2014-10-21 22:56:12',
-                    'updated_at'   => '2014-10-31 02:05:22',
-                ],
-            ]
-        );
+                'email'        => 'bertrand.kintanar@gmail.com',
+                'password'     => Hash::make('retardko'),
+                'last_login'   => Carbon::now(),
+            ],
+            [
+                'email'        => 'gabriel@gmail.com',
+                'password'     => Hash::make('retardko'),
+                'last_login'   => Carbon::now(),
+            ],
+            [
+                'email'        => 'harlequin.doyon@gmail.com',
+                'password'     => Hash::make('123456'),
+                'last_login'   => Carbon::now(),
+            ],
+        ];
     }
 }
