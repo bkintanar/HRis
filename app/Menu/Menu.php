@@ -31,6 +31,18 @@ class Menu extends Breadcrumb
     protected $callables;
 
     /**
+     * Menu lists that you want to only show
+     * @var array
+     */
+    protected $lists;
+
+    /**
+     * Callback function for menu mapping
+     * @var callable
+     */
+    protected $menu_map;
+
+    /**
      * Menu constructor
      * @param Eloquent $model
      * @author Harlequin Doyon
@@ -95,6 +107,22 @@ class Menu extends Breadcrumb
         return $this;
     }
 
+    public function setLists($lists)
+    {
+        $this->lists = $lists;
+
+        return $this;
+    }
+
+    public function getLists()
+    {
+        if (isset($this->lists) && ! empty($this->lists)) {
+            return $this->lists;
+        }
+
+        return $this->model->lists('parent_id', 'id');
+    }
+
     /**
      * Generate menu
      * @return string
@@ -104,13 +132,20 @@ class Menu extends Breadcrumb
     {
         $output = '';
 
-        $this->menu_tree = $this->addLevel()->parseMenuTree(
-            $this->model->lists('parent_id', 'id')
-        );
+        $this->menu_tree = $this->addLevel()->parseMenuTree($this->getLists());
+        $inner = $this->outputMenuTree($this->menu_tree, self::MAIN_MENU_LEVEL);
+        $callback = $this->getCallback(0);
 
-        $output .= $this->outputMenuTree($this->menu_tree, self::MAIN_MENU_LEVEL);
+        $output .= call_user_func($callback['outer'], $inner);
 
         return $output;
+    }
+
+    public function menu_map(callable $callback)
+    {
+        $this->menu_map = $callback;
+
+        return $this;
     }
 
     /**
@@ -130,17 +165,27 @@ class Menu extends Breadcrumb
                 $menu = $this->model->find($menu_id);
                 $is_nested = $this->model->whereParentId($menu_id)->count() ? true : false;
 
+                if($this->menu_map) {
+                    $new_menu = call_user_func($this->menu_map, $menu);
+                } else {
+                    $new_menu = $menu;
+                }
+
                 $inner = call_user_func(
                     $callback['inner'],                             // Params
                                                                     // ------------
-                    $menu,                                          // $menu
+                    $new_menu,                                      // $menu
                     $this->outputMenuTree($inner_menu, $index + 1), // $body
-                    $this->isActive($menu->href),                   // $is_active
+                    $this->isActive($new_menu->href),               // $is_active
                     $is_nested,                                     // $is_nested
                     $this->hasAccess($menu)                         // $has_access
                 );
 
-                $output .= call_user_func($callback['outer'], $inner);
+                if ($index > 0) {
+                    $output .= call_user_func($callback['outer'], $inner);
+                } else {
+                    $output .= $inner;
+                }
             }
         }
 

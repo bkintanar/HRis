@@ -4,8 +4,9 @@ namespace HRis\Menu;
 
 use HRis\Eloquent\Navlink;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use Illuminate\Support\Facades\Request;
 
-class HRisMenu extends Menu
+class HRisMenu extends BaseMenu
 {
     /**
      * HRisMenu constructor
@@ -13,8 +14,7 @@ class HRisMenu extends Menu
      */
     public function __construct()
     {
-        $model = new Navlink();
-        parent::__construct($model);
+        parent::__construct();
     }
 
     /**
@@ -24,38 +24,21 @@ class HRisMenu extends Menu
      */
     public function make()
     {
-        $self = $this;
-
-        $this->inner(function ($menu, $body, $is_active, $is_nested, $has_access) use($self) {
+        $this->inner(function ($menu, $body, $is_active, $is_nested, $has_access) {
             if (! $has_access) return '';
 
-            $output = '<li class="'.$self->stylesheetClasses($menu, $is_active).'">';
+            $output = '<li class="'.$this->stylesheetClasses($menu, $is_active).'">';
             $output .= '<a href="/'.$menu->href.'">';
-            $output .= '<i class="fa '.$menu->icon.'"></i>';
-            $output .= '<span class="nav-label">'.$menu->name.'</span>';
-            $output .= $is_nested ? '<span class="fa arrow"></span>' : '';
-            $output .= '</a>';
-            $output .= $body;
-            $output .= '</li>';
+            $output .= '<i class="fa '.$menu->icon.' m-right-a"></i>';
+            $output .= $menu->name;
+            $output .= '</a></li>';
 
             return $output;
         })
         ->outer(function ($body) {
-            return $body;
-        })
-        ->addLevel() // Second level menu
-        ->outer(function ($body) {
-            $output = '<ul class="nav nav-second-level">';
+            $output = '<div class="col-lg-12 top-nav-b"><div class="btn-group top-nav-li"><ul>';
             $output .= $body;
-            $output .= '</ul>';
-
-            return $output;
-        })
-        ->addLevel() // Third level menu
-        ->outer(function ($body) {
-            $output = '<ul class="nav nav-third-level">';
-            $output .= $body;
-            $output .= '</ul>';
+            $output .= '</ul></div></div>';
 
             return $output;
         });
@@ -89,6 +72,47 @@ class HRisMenu extends Menu
     }
 
     /**
+     * Parent href of the menu
+     * @param  string $parent
+     * @return this
+     * @author Harlequin Doyon
+     */
+    public function parent($parent)
+    {
+        $lists = $this->model
+            ->where('href', 'LIKE', $parent.'%')
+            ->whereParentId(-1)
+            ->lists('parent_id', 'id');
+
+        foreach ($lists as $key => $item) {
+            $lists[$key] = 0;
+        }
+
+        return $this->setLists($lists);
+    }
+
+    /**
+     * Access profile menu
+     * @return string
+     * @author Harlequin Doyon
+     */
+    public function profile()
+    {
+        $this->parent('profile');
+
+        if ($this->request->is('pim*')) {
+            $this->menu_map(function($menu) {
+                $link = 'pim/employee-list/'.$this->request->segment(3);
+                $menu->href = str_replace('profile', $link, $menu->href);
+                $menu->pim = $this->role(str_replace($link, 'pim', $menu->href));
+                return $menu;
+            });
+        }
+
+        return $this->make();
+    }
+
+    /**
      * Override the default method of the parent class
      * @param  Navlink  $menu
      * @return boolean
@@ -98,47 +122,10 @@ class HRisMenu extends Menu
     {
         $user = Sentinel::getUser();
 
-        if($user->hasAccess($this->role($menu->href))) {
+        if($user->hasAccess(isset($menu->pim) ? $menu->pim : $this->role($menu->href))) {
             return true;
         }
 
         return false;
-    }
-
-    /**
-     * Change the forward slashes to dots.
-     * @param  string $href 
-     * @return string
-     * @author Harlequin Doyon
-     */
-    private function slashToPeriod($href)
-    {
-        return str_replace('/', '.', $href);
-    }
-
-    /**
-     * Get the role syntax for the given href
-     * @param  string $href
-     * @return string
-     * @author Harlequin Doyon
-     */
-    private function role($href)
-    {
-        return $this->slashToPeriod($href).'.view';
-    }
-
-    /**
-     * Get sidebar menu <li> stylesheet classes
-     * @param  Navlink $menu
-     * @param  boolean $is_active
-     * @return string
-     * @author Harlequin Doyon
-     */
-    private function stylesheetClasses($menu, $is_active)
-    {
-        $class = $is_active ? 'active' : '';
-        $class .= starts_with($menu->href, 'pim') || starts_with($menu->href, 'admin') ? ' navy' : '';
-
-        return $class;
     }
 }
