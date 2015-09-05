@@ -99,7 +99,9 @@ class Breadcrumb
         $href = '';
 
         foreach ($sublinks as $index => $sublink) {
-            if(! $index) $href .= '/';
+            if (! $index) {
+                $href .= '/';
+            }
             $href .= $sublink;
 
             $links[] = (object) [

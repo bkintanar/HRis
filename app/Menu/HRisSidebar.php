@@ -25,8 +25,10 @@ class HRisSidebar extends BaseMenu
     {
         $self = $this;
 
-        $this->inner(function ($menu, $body, $is_active, $is_nested, $has_access) use($self) {
-            if (! $has_access) return '';
+        $this->inner(function ($menu, $body, $is_active, $is_nested, $has_access) use ($self) {
+            if (! $has_access) {
+                return '';
+            }
 
             $output = '<li class="'.$self->stylesheetClasses($menu, $is_active).'">';
             $output .= '<a href="/'.$menu->href.'">';

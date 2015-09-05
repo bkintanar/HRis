@@ -25,6 +25,12 @@ class Menu extends Breadcrumb
     protected $outer_callable;
 
     /**
+     * Callable function for has access
+     * @var callable
+     */
+    protected $has_access_callable;
+
+    /**
      * Array of callable
      * @var array
      */
@@ -165,7 +171,7 @@ class Menu extends Breadcrumb
                 $menu = $this->model->find($menu_id);
                 $is_nested = $this->model->whereParentId($menu_id)->count() ? true : false;
 
-                if($this->menu_map) {
+                if ($this->menu_map) {
                     $new_menu = call_user_func($this->menu_map, $menu);
                 } else {
                     $new_menu = $menu;
@@ -222,7 +228,23 @@ class Menu extends Breadcrumb
      */
     public function hasAccess($menu)
     {
+        if (isset($this->has_access_callable) && !empty($this->has_access_callable)) {
+            return call_user_func($this->has_access_callable, $menu);    
+        }
+        
         return true;
+    }
+
+    /**
+     * Set the has_access variable by method chaining
+     * @param callable $callback
+     * @author Harlequin Doyon
+     */
+    public function setHasAccess(callable $callback)
+    {
+        $this->has_access_callable = $callback;
+        
+        return $this;
     }
 
     /**

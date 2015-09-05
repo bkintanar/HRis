@@ -25,7 +25,9 @@ class HRisMenu extends BaseMenu
     public function make()
     {
         $this->inner(function ($menu, $body, $is_active, $is_nested, $has_access) {
-            if (! $has_access) return '';
+            if (! $has_access) {
+                return '';
+            }
 
             $output = '<li class="'.$this->stylesheetClasses($menu, $is_active).'">';
             $output .= '<a href="/'.$menu->href.'">';
@@ -101,7 +103,7 @@ class HRisMenu extends BaseMenu
         $this->parent('profile');
 
         if ($this->request->is('pim*')) {
-            $this->menu_map(function($menu) {
+            $this->menu_map(function ($menu) {
                 $link = 'pim/employee-list/'.$this->request->segment(3);
                 $menu->href = str_replace('profile', $link, $menu->href);
                 $menu->pim = $this->role(str_replace($link, 'pim', $menu->href));
@@ -122,7 +124,7 @@ class HRisMenu extends BaseMenu
     {
         $user = Sentinel::getUser();
 
-        if($user->hasAccess(isset($menu->pim) ? $menu->pim : $this->role($menu->href))) {
+        if ($user->hasAccess(isset($menu->pim) ? $menu->pim : $this->role($menu->href))) {
             return true;
         }
 

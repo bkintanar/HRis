@@ -36,7 +36,7 @@ class BaseMenu extends Menu
     {
         $user = Sentinel::getUser();
 
-        if($user->hasAccess($this->role($menu->href))) {
+        if ($user->hasAccess($this->role($menu->href))) {
             return true;
         }
 
