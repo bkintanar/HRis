@@ -2,12 +2,10 @@
 
 namespace HRis\Http\Controllers\Ajax;
 
-use HRis\Http\Controllers\Controller;
-use HRis\Http\Controllers\Ajax\AjaxController;
-use Illuminate\Support\Facades\Input;
-use HRis\Http\Requests\Request;
-use HRis\Eloquent\Timelog;
 use Carbon\Carbon;
+use HRis\Eloquent\Timelog;
+
+use Illuminate\Support\Facades\Input;
 
 /**
  * Class AttendanceAjaxController.
@@ -17,10 +15,12 @@ use Carbon\Carbon;
 class AttendanceAjaxController extends AjaxController
 {
     /**
-     * Get the server date and time
+     * Get the server date and time.
      *
      * @Get("ajax/server_time")
+     *
      * @return string
+     *
      * @author Harlequin Doyon
      */
     public function serverTime()
@@ -31,10 +31,12 @@ class AttendanceAjaxController extends AjaxController
     }
 
     /**
-     * Save time in log in the database
+     * Save time in log in the database.
      *
      * @Post("ajax/time_in")
+     *
      * @return Response
+     *
      * @author Harlequin Doyon
      */
     public function timeIn()
@@ -42,12 +44,11 @@ class AttendanceAjaxController extends AjaxController
         try {
             Timelog::create([
                 'employee_id' => $this->employee->id,
-                'in' => Carbon::now(),
+                'in'          => Carbon::now(),
             ]);
         } catch (Exception $e) {
             abort(404, 'cannot_create_timelog');
         }
-        
 
         return $this->response(
             'Punch In',
@@ -56,11 +57,14 @@ class AttendanceAjaxController extends AjaxController
     }
 
     /**
-     * Save time out log in the database
+     * Save time out log in the database.
      *
      * @Post("ajax/time_out")
-     * @param  int $timelogId
+     *
+     * @param int $timelogId
+     *
      * @return Response
+     *
      * @author Harlequin Doyon
      */
     public function timeOut()
@@ -70,7 +74,7 @@ class AttendanceAjaxController extends AjaxController
             if (is_null($id)) {
                 Timelog::create([
                     'employee_id' => $this->employee->id,
-                    'out' => Carbon::now(),
+                    'out'         => Carbon::now(),
                 ]);
             } else {
                 $timelog = Timelog::find($id);

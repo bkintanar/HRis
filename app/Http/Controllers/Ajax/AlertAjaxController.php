@@ -3,7 +3,6 @@
 namespace HRis\Http\Controllers\Ajax;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
-use HRis\Http\Controllers\Controller;
 use HRis\Repositories\Time\TimelogRepository;
 
 /**
@@ -14,14 +13,17 @@ use HRis\Repositories\Time\TimelogRepository;
 class AlertAjaxController extends AjaxController
 {
     /**
-     * Timelog repository
+     * Timelog repository.
+     *
      * @var Repository
      */
     protected $timelog;
 
     /**
-     * AlertAjaxController contructor
+     * AlertAjaxController contructor.
+     *
      * @return void
+     *
      * @author Harlequin Doyon
      */
     public function __construct(Sentinel $auth)
@@ -31,59 +33,65 @@ class AlertAjaxController extends AjaxController
     }
 
     /**
-     * Alert configuration of time in
+     * Alert configuration of time in.
      *
      * @Get("alert/time_in")
+     *
      * @return string
+     *
      * @author Harlequin Doyon
      */
     public function timeIn()
     {
         $note = '';
 
-        if (! $this->timelog->hasNoLatestTimein()) {
+        if (!$this->timelog->hasNoLatestTimein()) {
             $note = 'You have an active timelog that doesn\'t have a time in yet';
         }
 
         return response()->json([
-            'title' => 'Are you sure?',
-            'html' => $this->html('You want to time in!', $note),
-            'showCancelButton' => true,
+            'title'              => 'Are you sure?',
+            'html'               => $this->html('You want to time in!', $note),
+            'showCancelButton'   => true,
             'confirmButtonColor' => '#DD6B55',
-            'closeOnConfirm' => false,
+            'closeOnConfirm'     => false,
         ]);
     }
 
     /**
-     * Alert configuration of time out
+     * Alert configuration of time out.
      *
      * @Get("alert/time_out")
      * 
      * @return string
+     *
      * @author Harlequin Doyon
      */
     public function timeOut()
     {
         $note = '';
 
-        if (! $this->timelog->hasNoLatestTimeout()) {
+        if (!$this->timelog->hasNoLatestTimeout()) {
             $note = 'You don\'t have an active time in log';
         }
 
         return response()->json([
-            'title' => 'Are you sure?',
-            'html' => $this->html('You want to time out!', $note),
-            'showCancelButton' => true,
+            'title'              => 'Are you sure?',
+            'html'               => $this->html('You want to time out!', $note),
+            'showCancelButton'   => true,
             'confirmButtonColor' => '#DD6B55',
-            'closeOnConfirm' => false,
+            'closeOnConfirm'     => false,
         ]);
     }
 
     /**
-     * Alert HTML helper
-     * @param  string $msg
-     * @param  string $note
+     * Alert HTML helper.
+     *
+     * @param string $msg
+     * @param string $note
+     *
      * @return string
+     *
      * @author Harlequin Doyon
      */
     private function html($msg, $note = '')

@@ -2,14 +2,15 @@
 
 namespace HRis\Menu;
 
-use HRis\Eloquent\Navlink;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use HRis\Eloquent\Navlink;
 use Illuminate\Support\Facades\Request;
 
 class HRisMenu extends BaseMenu
 {
     /**
-     * HRisMenu constructor
+     * HRisMenu constructor.
+     *
      * @author Harlequin Doyon
      */
     public function __construct()
@@ -18,14 +19,16 @@ class HRisMenu extends BaseMenu
     }
 
     /**
-     * Generates the sidebar menu HTML
+     * Generates the sidebar menu HTML.
+     *
      * @return string
+     *
      * @author Harlequin Doyon
      */
     public function make()
     {
         $this->inner(function ($menu, $body, $is_active, $is_nested, $has_access) {
-            if (! $has_access) {
+            if (!$has_access) {
                 return '';
             }
 
@@ -49,8 +52,10 @@ class HRisMenu extends BaseMenu
     }
 
     /**
-     * Generates the breadcrumb HTML
+     * Generates the breadcrumb HTML.
+     *
      * @return string
+     *
      * @author Harlequin Doyon
      */
     public function breadcrumb()
@@ -74,9 +79,12 @@ class HRisMenu extends BaseMenu
     }
 
     /**
-     * Parent href of the menu
-     * @param  string $parent
+     * Parent href of the menu.
+     *
+     * @param string $parent
+     *
      * @return this
+     *
      * @author Harlequin Doyon
      */
     public function parent($parent)
@@ -94,8 +102,10 @@ class HRisMenu extends BaseMenu
     }
 
     /**
-     * Access profile menu
+     * Access profile menu.
+     *
      * @return string
+     *
      * @author Harlequin Doyon
      */
     public function profile()
@@ -107,6 +117,7 @@ class HRisMenu extends BaseMenu
                 $link = 'pim/employee-list/'.$this->request->segment(3);
                 $menu->href = str_replace('profile', $link, $menu->href);
                 $menu->pim = $this->role(str_replace($link, 'pim', $menu->href));
+
                 return $menu;
             });
         }
@@ -115,9 +126,12 @@ class HRisMenu extends BaseMenu
     }
 
     /**
-     * Override the default method of the parent class
-     * @param  Navlink  $menu
-     * @return boolean
+     * Override the default method of the parent class.
+     *
+     * @param Navlink $menu
+     *
+     * @return bool
+     *
      * @author Harlequin Doyon
      */
     public function hasAccess($menu)

@@ -28,8 +28,10 @@ abstract class Request extends FormRequest
     }
 
     /**
-     * Get the sort param
+     * Get the sort param.
+     *
      * @return string
+     *
      * @author Harlequin Doyon
      */
     public function sort()
@@ -38,8 +40,10 @@ abstract class Request extends FormRequest
     }
 
     /**
-     * Get the direction param
+     * Get the direction param.
+     *
      * @return string
+     *
      * @author Harlequin Doyon
      */
     public function direction()
@@ -48,8 +52,10 @@ abstract class Request extends FormRequest
     }
 
     /**
-     * Get the pagination settings
+     * Get the pagination settings.
+     *
      * @return array
+     *
      * @author Harlequin Doyon
      */
     public function paginationSettings()

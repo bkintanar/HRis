@@ -7,25 +7,29 @@ use Illuminate\Support\Facades\Request;
 class Breadcrumb
 {
     /**
-     * Inner breadcrumb HTML string builder
+     * Inner breadcrumb HTML string builder.
+     *
      * @var callable
      */
     protected $inner_breadcrumb;
 
     /**
-     * Other breadcrumb HTML string builder
+     * Other breadcrumb HTML string builder.
+     *
      * @var callable
      */
     protected $outer_breadcrumb;
 
     /**
-     * Access current request
+     * Access current request.
+     *
      * @var Request
      */
     protected $request;
 
     /**
-     * Breadcrumb constructor
+     * Breadcrumb constructor.
+     *
      * @author Harlequin Doyon
      */
     public function __construct()
@@ -34,8 +38,10 @@ class Breadcrumb
     }
 
     /**
-     * Inner HTML breadcrumb callback method
+     * Inner HTML breadcrumb callback method.
+     *
      * @param callable $inner
+     *
      * @author Harlequin Doyon
      */
     public function setInnerBreadcrumb(callable $inner)
@@ -46,8 +52,10 @@ class Breadcrumb
     }
 
     /**
-     * Outer HTML breadcrumb callback method
+     * Outer HTML breadcrumb callback method.
+     *
      * @param callable $outer
+     *
      * @author Harlequin Doyon
      */
     public function setOuterBreadcrumb(callable $outer)
@@ -58,9 +66,12 @@ class Breadcrumb
     }
 
     /**
-     * Check if href is currently active URL
-     * @param  string  $href
-     * @return boolean
+     * Check if href is currently active URL.
+     *
+     * @param string $href
+     *
+     * @return bool
+     *
      * @author Harlequin Doyon
      */
     public function isActive($href)
@@ -74,10 +85,12 @@ class Breadcrumb
 
     /**
      * Format link to a phrase
-     * ex. "hello-world" to "Hello World"
+     * ex. "hello-world" to "Hello World".
      * 
-     * @param  string $link 
+     * @param string $link
+     *
      * @return string
+     *
      * @author Harlequin Doyon
      */
     private function linkToPhrase($link)
@@ -88,8 +101,10 @@ class Breadcrumb
     }
 
     /**
-     * Break link slashes to object array
+     * Break link slashes to object array.
+     *
      * @return array
+     *
      * @author Harlequin Doyon
      */
     public function links()
@@ -99,7 +114,7 @@ class Breadcrumb
         $href = '';
 
         foreach ($sublinks as $index => $sublink) {
-            if (! $index) {
+            if (!$index) {
                 $href .= '/';
             }
             $href .= $sublink;
@@ -114,8 +129,10 @@ class Breadcrumb
     }
 
     /**
-     * Generate breadcrumb HTML
+     * Generate breadcrumb HTML.
+     *
      * @return string
+     *
      * @author Harlequin Doyon
      */
     public function breadcrumb()

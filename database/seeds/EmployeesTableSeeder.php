@@ -7,9 +7,9 @@
  *
  * @link    http://github.com/HB-Co/HRis
  */
-use Illuminate\Database\Seeder;
 use HRis\Eloquent\Employee;
 use HRis\Eloquent\User;
+use Illuminate\Database\Seeder;
 
 class EmployeesTableSeeder extends Seeder
 {
@@ -30,8 +30,10 @@ class EmployeesTableSeeder extends Seeder
     }
 
     /**
-     * Employee's data
+     * Employee's data.
+     *
      * @return array
+     *
      * @author Harlequin Doyon
      */
     public function employees()

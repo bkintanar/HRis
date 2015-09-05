@@ -2,20 +2,22 @@
 
 namespace HRis\Menu;
 
-use HRis\Eloquent\Navlink;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use HRis\Eloquent\Navlink;
 use Illuminate\Support\Facades\Request;
 
 class BaseMenu extends Menu
 {
     /**
-     * Access the current request
+     * Access the current request.
+     *
      * @var Request
      */
     protected $request;
 
     /**
-     * BaseMenu constructor
+     * BaseMenu constructor.
+     *
      * @author Harlequin Doyon
      */
     public function __construct()
@@ -27,9 +29,12 @@ class BaseMenu extends Menu
     }
 
     /**
-     * Override the default method of the parent class
-     * @param  Navlink  $menu
-     * @return boolean
+     * Override the default method of the parent class.
+     *
+     * @param Navlink $menu
+     *
+     * @return bool
+     *
      * @author Harlequin Doyon
      */
     public function hasAccess($menu)
@@ -45,8 +50,11 @@ class BaseMenu extends Menu
 
     /**
      * Change the forward slashes to dots.
-     * @param  string $href 
+     *
+     * @param string $href
+     *
      * @return string
+     *
      * @author Harlequin Doyon
      */
     protected function slashToPeriod($href)
@@ -55,9 +63,12 @@ class BaseMenu extends Menu
     }
 
     /**
-     * Get the role syntax for the given href
-     * @param  string $href
+     * Get the role syntax for the given href.
+     *
+     * @param string $href
+     *
      * @return string
+     *
      * @author Harlequin Doyon
      */
     protected function role($href)
@@ -66,10 +77,13 @@ class BaseMenu extends Menu
     }
 
     /**
-     * Get sidebar menu <li> stylesheet classes
-     * @param  Navlink $menu
-     * @param  boolean $is_active
+     * Get sidebar menu <li> stylesheet classes.
+     *
+     * @param Navlink $menu
+     * @param bool    $is_active
+     *
      * @return string
+     *
      * @author Harlequin Doyon
      */
     protected function stylesheetClasses($menu, $is_active)

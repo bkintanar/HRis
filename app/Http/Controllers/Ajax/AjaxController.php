@@ -13,7 +13,8 @@ use HRis\Http\Controllers\Controller;
 class AjaxController extends Controller
 {
     /**
-     * Current Employee
+     * Current Employee.
+     *
      * @var Employee
      */
     protected $employee;
@@ -31,7 +32,7 @@ class AjaxController extends Controller
     {
         return response()->json([
             'title' => $title,
-            'text' => $text,
+            'text'  => $text,
             'level' => $level,
         ]);
     }

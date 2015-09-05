@@ -24,7 +24,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \HRis\Console\Commands\ImportTimeLog::class,
+        \HRis\Console\Commands\ImportTimelog::class,
         \HRis\Console\Commands\ImportEmployeeList::class,
         \HRis\Console\Commands\UpdateFaceId::class,
         \HRis\Console\Commands\GenerateAttendance::class,

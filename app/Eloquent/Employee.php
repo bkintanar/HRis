@@ -212,7 +212,7 @@ class Employee extends Model
      *
      * @author Bertrand Kintanar
      */
-    public function getTimeLog($start_date)
+    public function getTimelog($start_date)
     {
         $work_shift = $this->employeeWorkShift()->first();
 
@@ -272,7 +272,7 @@ class Employee extends Model
      */
     public function timelogs()
     {
-        return $this->hasMany('HRis\Eloquent\TimeLog', 'face_id', 'face_id');
+        return $this->hasMany('HRis\Eloquent\Timelog', 'face_id', 'face_id');
     }
 
     /**

@@ -5,14 +5,17 @@ namespace HRis\Repositories;
 class Repository implements RepositoryInterface
 {
     /**
-     * Eloquent model
+     * Eloquent model.
+     *
      * @var Eloquent
      */
     protected $model;
 
     /**
-     * Repository constructor
+     * Repository constructor.
+     *
      * @param Eloquent $model
+     *
      * @author Harlequin Doyon
      */
     public function __construct($model)
@@ -21,8 +24,10 @@ class Repository implements RepositoryInterface
     }
 
     /**
-     * Get all records
+     * Get all records.
+     *
      * @return Collection
+     *
      * @author Harlequin Doyon
      */
     public function all()
@@ -31,9 +36,12 @@ class Repository implements RepositoryInterface
     }
 
     /**
-     * Find a certain record
-     * @param  int $id
+     * Find a certain record.
+     *
+     * @param int $id
+     *
      * @return Eloquent
+     *
      * @author Harlequin Doyon
      */
     public function find($id)

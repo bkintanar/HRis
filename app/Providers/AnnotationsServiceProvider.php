@@ -66,8 +66,9 @@ class AnnotationsServiceProvider extends ServiceProvider
     protected $scanEverything = true;
 
     /**
-     * Automatically scan local
-     * @var boolean
+     * Automatically scan local.
+     *
+     * @var bool
      */
     protected $scanWhenLocal = true;
 }

@@ -5,10 +5,9 @@ namespace HRis\Http\Controllers\Time\Attendance;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Eloquent\Timelog;
 use HRis\Http\Controllers\Controller;
-use HRis\Http\Requests;
 use HRis\Http\Requests\Time\Attendance\AttendanceRequest;
-use Illuminate\Http\Request;
 use HRis\Repositories\Time\TimelogRepository;
+use Illuminate\Http\Request;
 
 /**
  * Class AttendanceController.
@@ -18,27 +17,31 @@ use HRis\Repositories\Time\TimelogRepository;
 class AttendanceController extends Controller
 {
     /**
-     * Sentinel authentication
+     * Sentinel authentication.
+     *
      * @var Sentinel
      */
     public $auth;
 
     /**
-     * Current Employee
+     * Current Employee.
+     *
      * @var Employee
      */
     protected $employee;
 
     /**
-     * Timelog Repository
+     * Timelog Repository.
+     *
      * @var Timelog
      */
     protected $timelog;
 
     /**
-     * Attendance Controller
+     * Attendance Controller.
      * 
      * @param Sentinel $auth
+     *
      * @author Harlequin Doyon
      */
     public function __construct(Sentinel $auth)
@@ -48,12 +51,13 @@ class AttendanceController extends Controller
         if ($this->auth) {
             $this->employee = $this->auth->employee;
         }
-        
+
         $this->initRepositories();
     }
 
     /**
-     * Initialize repositories
+     * Initialize repositories.
+     *
      * @return void
      */
     public function initRepositories()
@@ -67,6 +71,7 @@ class AttendanceController extends Controller
      * @Get("presence")
      *
      * @return Response
+     *
      * @author Harlequin Doyon
      */
     public function index(AttendanceRequest $request)
@@ -87,7 +92,9 @@ class AttendanceController extends Controller
      * Show the form for creating a new timelog.
      *
      * @Get("presence/compose")
+     *
      * @return Response
+     *
      * @author Harlequin Doyon
      */
     public function create()
@@ -99,8 +106,11 @@ class AttendanceController extends Controller
      * Store a newly created timelog in storage.
      *
      * @Post("presence/compose")
-     * @param  Request  $request
+     *
+     * @param Request $request
+     *
      * @return Response
+     *
      * @author Harlequin Doyon
      */
     public function store(Request $request)
@@ -112,8 +122,11 @@ class AttendanceController extends Controller
      * Display the specified timelog.
      *
      * @Get("presence/{id}")
-     * @param  int  $id
+     *
+     * @param int $id
+     *
      * @return Response
+     *
      * @author Harlequin Doyon
      */
     public function show($id)
@@ -125,8 +138,11 @@ class AttendanceController extends Controller
      * Show the form for editing the specified timelog.
      *
      * @Get("presence/{id}/edit")
-     * @param  int  $id
+     *
+     * @param int $id
+     *
      * @return Response
+     *
      * @author Harlequin Doyon
      */
     public function edit($id)
@@ -139,9 +155,11 @@ class AttendanceController extends Controller
      *
      * @Patch("presence/{id}")
      * 
-     * @param  Request  $request
-     * @param  int  $id
+     * @param Request $request
+     * @param int     $id
+     *
      * @return Response
+     *
      * @author Harlequin Doyon
      */
     public function update(Request $request, $id)
@@ -154,8 +172,10 @@ class AttendanceController extends Controller
      *
      * @Delete("presence/{id}")
      * 
-     * @param  int  $id
+     * @param int $id
+     *
      * @return Response
+     *
      * @author Harlequin Doyon
      */
     public function destroy($id)

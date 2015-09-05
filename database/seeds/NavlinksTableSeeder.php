@@ -7,7 +7,6 @@
  *
  * @link    http://github.com/HB-Co/HRis
  */
-use Carbon\Carbon;
 use HRis\Eloquent\Navlink;
 use Illuminate\Database\Seeder;
 
@@ -25,7 +24,7 @@ class NavlinksTableSeeder extends Seeder
         Navlink::truncate();
 
         foreach ($this->links() as $link) {
-            if (! is_numeric($link['parent_id'])) {
+            if (!is_numeric($link['parent_id'])) {
                 $link['parent_id'] = Navlink::whereHref($link['parent_id'])->first()->id;
             }
 

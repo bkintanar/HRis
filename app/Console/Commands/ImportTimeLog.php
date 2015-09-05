@@ -11,15 +11,15 @@
 namespace HRis\Console\Commands;
 
 use Carbon\Carbon;
-use HRis\Eloquent\TimeLog;
+use HRis\Eloquent\Timelog;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use League\Csv\Reader;
 
 /**
- * Class ImportTimeLog.
+ * Class ImportTimelog.
  */
-class ImportTimeLog extends Command
+class ImportTimelog extends Command
 {
     /**
      * The console command description.
@@ -61,7 +61,7 @@ class ImportTimeLog extends Command
                     'swipe_time'     => $time,
                     'swipe_datetime' => Carbon::parse($row[3].' '.$time),
                 ];
-                $timelog = TimeLog::create($data);
+                $timelog = Timelog::create($data);
 
                 $this->info($timelog);
                 Log::info($timelog);

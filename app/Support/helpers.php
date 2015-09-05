@@ -1,12 +1,12 @@
 <?php
 
-if (! function_exists('permission')) {
+if (!function_exists('permission')) {
     function permission($label, $only = [])
     {
         $permit = ['create', 'update', 'view', 'delete'];
 
         // If $only array is empty return all permission
-        if (! count($only)) {
+        if (!count($only)) {
             $only = $permit;
         }
 

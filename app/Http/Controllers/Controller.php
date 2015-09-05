@@ -64,9 +64,12 @@ abstract class Controller extends BaseController
     }
 
     /**
-     * Another way in adding some data in the view
-     * @param  array $arr
+     * Another way in adding some data in the view.
+     *
+     * @param array $arr
+     *
      * @return this
+     *
      * @author Harlequin Doyon
      */
     public function data($arr)

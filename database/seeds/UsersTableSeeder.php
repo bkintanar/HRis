@@ -7,9 +7,9 @@
  *
  * @link    http://github.com/HB-Co/HRis
  */
-use Illuminate\Database\Seeder;
-use HRis\Eloquent\User;
 use Carbon\Carbon;
+use HRis\Eloquent\User;
+use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
 {
@@ -30,8 +30,10 @@ class UsersTableSeeder extends Seeder
     }
 
     /**
-     * Users data
+     * Users data.
+     *
      * @return array
+     *
      * @author Harlequin Doyon
      */
     public function users()

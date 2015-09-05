@@ -2,13 +2,11 @@
 
 namespace HRis\Menu;
 
-use HRis\Eloquent\Navlink;
-use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
-
 class HRisSidebar extends BaseMenu
 {
     /**
-     * HRisSidebar constructor
+     * HRisSidebar constructor.
+     *
      * @author Harlequin Doyon
      */
     public function __construct()
@@ -17,8 +15,10 @@ class HRisSidebar extends BaseMenu
     }
 
     /**
-     * Generates the sidebar menu HTML
+     * Generates the sidebar menu HTML.
+     *
      * @return string
+     *
      * @author Harlequin Doyon
      */
     public function make()
@@ -26,7 +26,7 @@ class HRisSidebar extends BaseMenu
         $self = $this;
 
         $this->inner(function ($menu, $body, $is_active, $is_nested, $has_access) use ($self) {
-            if (! $has_access) {
+            if (!$has_access) {
                 return '';
             }
 

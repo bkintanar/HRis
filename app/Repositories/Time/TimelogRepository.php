@@ -8,20 +8,24 @@ use HRis\Repositories\Repository;
 class TimelogRepository extends Repository
 {
     /**
-     * TimelogRepository constructor
+     * TimelogRepository constructor.
+     *
      * @author Harlequin Doyon
      */
     public function __construct()
     {
-        parent::__construct(new Timelog);
+        parent::__construct(new Timelog());
     }
 
     /**
-     * Pagination
-     * @param  int $id
-     * @param  string $sort
-     * @param  string $direction
+     * Pagination.
+     *
+     * @param int    $id
+     * @param string $sort
+     * @param string $direction
+     *
      * @return Collection
+     *
      * @author Harlequin Doyon
      */
     public function paginate($id = null, $sort = 'id', $direction = 'asc')
@@ -36,8 +40,10 @@ class TimelogRepository extends Repository
     }
 
     /**
-     * Check the latest timelog if user has no time out
-     * @return boolean
+     * Check the latest timelog if user has no time out.
+     *
+     * @return bool
+     *
      * @author Harlequin Doyon
      */
     public function hasNoLatestTimeout()
@@ -52,8 +58,10 @@ class TimelogRepository extends Repository
     }
 
     /**
-     * Fetch the latest record of the table
+     * Fetch the latest record of the table.
+     *
      * @return Eloquent
+     *
      * @author Harlequin Doyon
      */
     public function latest()
@@ -62,15 +70,17 @@ class TimelogRepository extends Repository
     }
 
     /**
-     * Check the latest timelog if user has no time in
+     * Check the latest timelog if user has no time in.
+     *
      * @return Eloquent
+     *
      * @author Harlequin Doyon
      */
     public function hasNoLatestTimein()
     {
         $timelog = $this->latest();
 
-        if (! empty($timelog->in) && ! empty($timelog->out)) {
+        if (!empty($timelog->in) && !empty($timelog->out)) {
             return true;
         }
 
