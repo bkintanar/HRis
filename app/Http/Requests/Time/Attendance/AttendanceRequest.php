@@ -8,15 +8,15 @@
  * @link    http://github.com/HB-Co/HRis
  */
 
-namespace HRis\Http\Requests\Profile;
+namespace HRis\Http\Requests\Time\Attendance;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Http\Requests\Request;
 
 /**
- * Class PersonalDetailsRequest.
+ * Class AttendanceRequest.
  */
-class PersonalDetailsRequest extends Request
+class AttendanceRequest extends Request
 {
     /**
      * Get the validation rules that apply to the request.
@@ -27,8 +27,7 @@ class PersonalDetailsRequest extends Request
      */
     public function rules()
     {
-        switch($this->method())
-        {
+        switch ($this->method()) {
             case 'POST':
             {
                 return [
@@ -65,18 +64,6 @@ class PersonalDetailsRequest extends Request
      */
     public function authorize(Sentinel $user)
     {
-        $user = $user::getUser();
-
-        $permission = Request::is('*pim/*') ? 'pim.personal-details' : 'profile.personal-details';
-
-        // Update
-        if (Request::isMethod('patch') || Request::is('*/edit')) {
-            return ($user->hasAccess($permission.'.update'));
-        } // View
-        else {
-            if (Request::isMethod('get')) {
-                return ($user->hasAccess($permission.'.view'));
-            }
-        }
+        return true;
     }
 }
