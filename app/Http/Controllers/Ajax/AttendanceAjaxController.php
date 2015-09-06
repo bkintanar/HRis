@@ -4,7 +4,6 @@ namespace HRis\Http\Controllers\Ajax;
 
 use Carbon\Carbon;
 use HRis\Eloquent\Timelog;
-
 use Illuminate\Support\Facades\Input;
 
 /**
