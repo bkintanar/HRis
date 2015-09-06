@@ -55,6 +55,7 @@ class AnnotationsServiceProvider extends ServiceProvider
         HRis\Http\Controllers\Profile\QualificationsController::class,
         HRis\Http\Controllers\Profile\WorkShiftController::class,
         HRis\Http\Controllers\Time\Attendance\EmployeeRecordsController::class,
+        HRis\Http\Controllers\Time\Attendance\AttendanceController::class,
     ];
 
     /**
@@ -63,4 +64,11 @@ class AnnotationsServiceProvider extends ServiceProvider
      * @var bool
      */
     protected $scanEverything = true;
+
+    /**
+     * Automatically scan local.
+     *
+     * @var bool
+     */
+    protected $scanWhenLocal = true;
 }

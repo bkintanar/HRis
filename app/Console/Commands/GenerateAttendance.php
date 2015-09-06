@@ -50,9 +50,9 @@ class GenerateAttendance extends Command
             while ($start <= $end) {
                 $employee = Employee::whereId($employee_id)->first();
 
-                $timelog = $employee->getTimeLog($start->toDateString());
+                $timelog = $employee->getTimelog($start->toDateString());
 
-                $next_day = $employee->getTimeLog(Carbon::parse($start)->addDay()->toDateString());
+                $next_day = $employee->getTimelog(Carbon::parse($start)->addDay()->toDateString());
 
                 if (($next_day['in_time'] == null and $next_day['out_time'] == null) or ($timelog['in_time'] == null and $timelog['out_time'] == null)) {
                     $start = $start->addDay(1);

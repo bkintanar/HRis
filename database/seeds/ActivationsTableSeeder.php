@@ -42,6 +42,15 @@ class ActivationsTableSeeder extends Seeder
                     'created_at'   => '2014-10-21 22:56:12',
                     'updated_at'   => '2014-10-31 02:05:22',
                 ],
+                [
+                    'id'           => 3,
+                    'user_id'      => 3,
+                    'code'         => '02JI63aRsK2wvLksFJUpMNyGbeInH7Pv',
+                    'completed'    => 1,
+                    'completed_at' => '2014-10-21 22:56:12',
+                    'created_at'   => '2014-10-21 22:56:12',
+                    'updated_at'   => '2014-10-31 02:05:22',
+                ],
             ]
         );
     }

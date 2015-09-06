@@ -30,16 +30,6 @@ class QualificationsRequest extends Request
     }
 
     /**
-     * @return mixed
-     *
-     * @author Bertrand Kintanar
-     */
-    public function forbiddenResponse()
-    {
-        return response()->make(view()->make('errors.403'), 403);
-    }
-
-    /**
      * Get the validation rules that apply to the request.
      *
      * @return array

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        {!! Navlink::profileLinks($pim) !!}
+        {!! Menu::profile() !!}
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">

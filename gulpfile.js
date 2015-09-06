@@ -50,11 +50,13 @@ elixir(function(mix) {
         paths.bower_components + '/jasny-bootstrap/dist/js/jasny-bootstrap.min.js',
         paths.bower_components + '/chosen/chosen.jquery.min.js',
         paths.bower_components + '/iCheck/icheck.min.js',
+        paths.bower_components + '/sweetalert2/dist/sweetalert2.min.js',
         //paths.bower_components + '/cropper/dist/cropper.min.js',
         paths.plugins + '/metisMenu/jquery.metisMenu.js',
         paths.plugins + '/slimscroll/jquery.slimscroll.min.js',
         paths.plugins + '/pace/pace.min.js',
-        paths.scripts + '/inspinia.js'
+        paths.scripts + '/inspinia.js',
+        paths.scripts + '/custom.js'
     ], null, './')
 
     /**

@@ -29,7 +29,7 @@
 
                     </li>
 
-                    {!! Menu::make() !!}
+                    {!! Sidebar::make() !!}
 
                 </ul>
 
