@@ -34,12 +34,12 @@
                     <div class="form-group">
                         {!! Form::label('address_city_id', 'City', ['class' => 'col-md-2 control-label']) !!}
                         <div class="col-md-4">
-                            {!! Form::select('address_city_id', HRis\Eloquent\City::lists('name', 'id'), $employee->address_city_id, ['data-placeholder' => '--- Select ---', 'class' => 'form-control chosen-select', 'disabled' => 'disabled']) !!}
+                            {!! Form::select('address_city_id', HRis\Eloquent\City::lists('name', 'id'), $employee->address_city_id, ['placeholder' => '--- Select ---', 'class' => 'form-control chosen-select', 'disabled' => 'disabled']) !!}
                         </div>
 
                         {!! Form::label('address_province_id', 'Province', ['class' => 'col-md-2 control-label']) !!}
                         <div class="col-md-4">
-                            {!! Form::select('address_province_id', HRis\Eloquent\Province::lists('name', 'id'), $employee->address_province_id, ['data-placeholder' => '--- Select ---', 'class' => 'form-control chosen-select', 'disabled' => 'disabled']) !!}
+                            {!! Form::select('address_province_id', HRis\Eloquent\Province::lists('name', 'id'), $employee->address_province_id, ['placeholder' => '--- Select ---', 'class' => 'form-control chosen-select', 'disabled' => 'disabled']) !!}
                         </div>
                     </div>
 
@@ -50,7 +50,7 @@
                         </div>
                         {!! Form::label('address_country_id', 'Country', ['class' => 'col-md-2 control-label']) !!}
                         <div class="col-md-4">
-                            {!! Form::select('address_country_id', HRis\Eloquent\Country::lists('name', 'id'), $employee->address_country_id, ['data-placeholder' => '--- Select ---', 'class' => 'form-control chosen-select', 'disabled' => 'disabled']) !!}
+                            {!! Form::select('address_country_id', HRis\Eloquent\Country::lists('name', 'id'), $employee->address_country_id, ['placeholder' => '--- Select ---', 'class' => 'form-control chosen-select', 'disabled' => 'disabled']) !!}
                         </div>
 
                     </div>
@@ -134,7 +134,7 @@
                     // disable the city select before updating its values
                     $("#address_city_id").attr('disabled', 'disabled');
 
-                    $("#address_city_id").html("");
+                    $("#address_city_id").html('');
                     for ( var i = 1; i < value.length; i++ )
                     {
                         if(value[i].id == city_id)
@@ -154,7 +154,9 @@
                 });
             }
 
-            $('.chosen-select').chosen();
+            $('.chosen-select').chosen({
+                placeholder_text_single: '--- Select ---',
+            });
 
             $("#address_province_id").change(function() {
                 updateCityValues();

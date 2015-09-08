@@ -188,6 +188,7 @@
 @section('custom_js')
     <!-- Cropper -->
     {!! Html::script('/js/plugins/cropper/cropper.min.js') !!}
+    {!! Html::script('/js/plugins/moment/moment.js') !!}
     {!! Html::script('/js/custom_datepicker.js') !!}
     {!! Html::script('/js/notification.js') !!}
 
