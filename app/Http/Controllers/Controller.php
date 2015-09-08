@@ -62,4 +62,20 @@ abstract class Controller extends BaseController
     {
         return view($blade, $this->data);
     }
+
+    /**
+     * Another way in adding some data in the view.
+     *
+     * @param array $arr
+     *
+     * @return this
+     *
+     * @author Harlequin Doyon
+     */
+    public function data($arr)
+    {
+        $this->data = array_merge($this->data, $arr);
+
+        return $this;
+    }
 }

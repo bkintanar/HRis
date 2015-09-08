@@ -11,7 +11,7 @@
 namespace HRis\Http\Controllers;
 
 use HRis\Eloquent\Employee;
-use HRis\Eloquent\TimeLog;
+use HRis\Eloquent\Timelog;
 
 /**
  * Class HomeController.
@@ -66,7 +66,7 @@ class HomeController extends Controller
 
         $employee = Employee::whereId(3)->first();
 
-        $timelog = TimeLog::where('swipe_date', '>=', '2015-01-01')->where('swipe_date', '<=',
+        $timelog = Timelog::where('swipe_date', '>=', '2015-01-01')->where('swipe_date', '<=',
             '2015-01-31')->whereFaceId($employee->face_id)->get();
 
         dd($timelog);

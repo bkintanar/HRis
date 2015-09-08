@@ -51,11 +51,11 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Request;
 
 /**
- * Class AjaxController.
+ * Class OldAjaxController.
  *
  * @Middleware("auth")
  */
-class AjaxController extends Controller
+class OldAjaxController extends Controller
 {
     /**
      * Show the profile personal details form.

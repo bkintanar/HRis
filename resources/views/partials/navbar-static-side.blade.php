@@ -29,7 +29,7 @@
 
                     </li>
 
-                    {!! Navlink::generate() !!}
+                    {!! Sidebar::make() !!}
 
                 </ul>
 

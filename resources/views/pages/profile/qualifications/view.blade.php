@@ -2,7 +2,7 @@
 
 @section('content')
     @include('partials.notification')
-        {!! Navlink::profileLinks($pim) !!}
+        {!! Menu::profile() !!}
 
 @if ($logged_user->hasAccess(Request::segment(1).'.qualifications.work-experiences.view'))
     @include ('pages.profile.qualifications.partials.work-experiences')

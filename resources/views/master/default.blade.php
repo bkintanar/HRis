@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <title>HRis | {{ $pageTitle }}</title>
 
@@ -29,7 +30,7 @@
                         <li>
                             <a href="/">Home</a>
                         </li>
-                        {!! Navlink::breadcrumb(Request::path()) !!}
+                        {!! Menu::breadcrumb() !!}
                     </ol>
                 </div>
                 @yield('action_area')

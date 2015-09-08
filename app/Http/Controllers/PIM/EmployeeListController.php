@@ -106,14 +106,11 @@ class EmployeeListController extends Controller
      */
     public function index(PIMRequest $request)
     {
-        $sort = $request->get('sort') != '' ? $request->get('sort') : 'employees.id';
-        $direction = $request->get('direction') != '' ? $request->get('direction') : 'asc';
-
-        $employees = $this->employee->getEmployeeList(true, $sort, $direction);
+        $employees = $this->employee->getEmployeeList(true, $request->sort(), $request->direction());
 
         $this->data['employees'] = $employees;
         $this->data['employee_id_prefix'] = $this->employee_id_prefix;
-        $this->data['settings'] = ['path' => $request->path(), 'sort' => $sort, 'direction' => $direction];
+        $this->data['settings'] = $request->paginationSettings();
         $this->data['columns'] = $this->getColumns();
         $this->data['pim'] = true;
         $this->data['pageTitle'] = 'Employee Information';
