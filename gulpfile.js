@@ -53,6 +53,7 @@ elixir(function(mix) {
         paths.bower_components + '/iCheck/icheck.min.js',
         paths.bower_components + '/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js',
         paths.bower_components + '/sweetalert2/dist/sweetalert2.min.js',
+        paths.bower_components + '/moment/moment.js',
         //paths.bower_components + '/cropper/dist/cropper.min.js',
         paths.plugins + '/metisMenu/jquery.metisMenu.js',
         paths.plugins + '/slimscroll/jquery.slimscroll.min.js',
