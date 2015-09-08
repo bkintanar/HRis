@@ -11,11 +11,8 @@
         <h2>{{ $employee->first_name }} {{ $employee->last_name }}</h2>
         <h3>{{ $employee->jobHistory()->jobTitle->name or '' }}</h3>
 
-        @if(Request::is('*personal-details/edit'))
-            <h4><span id="add_avatar" class="label label-primary">Edit Avatar</span></h4>
-        @else
-            <h4><span class="label {{ $employee->jobHistory()->employmentStatus->class or '' }}">{{ $employee->jobHistory()->employmentStatus->name or '' }}</span></h4>
-        @endif
+            <h4 class="avatar" style="display: none;"><span id="add_avatar" class="label label-primary">Edit Avatar</span></h4>
+            <h4 class="job-title"><span class="label {{ $employee->jobHistory()->employmentStatus->class or '' }}">{{ $employee->jobHistory()->employmentStatus->name or '' }}</span></h4>
         </div>
     </div>
 </div>

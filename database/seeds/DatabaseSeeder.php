@@ -46,5 +46,6 @@ class DatabaseSeeder extends Seeder
         $this->call('SSSContributionsTableSeeder');
         $this->call('SalaryComponentsTableSeeder');
         $this->call('EmployeeSalaryComponentsTableSeeder');
+        $this->call('CustomFieldTypeSeeder');
     }
 }

@@ -21,7 +21,7 @@ class NavlinksTableSeeder extends Seeder
      */
     public function run()
     {
-        Navlink::truncate();
+        DB::table('navlinks')->delete();
 
         foreach ($this->links() as $link) {
             if (!is_numeric($link['parent_id'])) {
@@ -300,6 +300,14 @@ class NavlinksTableSeeder extends Seeder
                 'permission' => 15,
                 'icon'       => 'fa-rocket',
                 'parent_id'  => 'time',
+            ],
+
+            [
+                'name'       => 'Custom Fields',
+                'href'       => 'pim/configuration/custom-field-sections',
+                'permission' => 15,
+                'icon'       => 'fa-reorder',
+                'parent_id'  => 'pim/configuration',
             ],
         ];
     }

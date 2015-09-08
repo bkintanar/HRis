@@ -12,8 +12,10 @@ namespace HRis\Http\Controllers\Profile;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Exception;
+use HRis\Eloquent\CustomFieldSection;
 use HRis\Eloquent\Dependent;
 use HRis\Eloquent\Employee;
+use HRis\Eloquent\Navlink;
 use HRis\Http\Controllers\Controller;
 use HRis\Http\Requests\Profile\DependentsRequest;
 use Illuminate\Support\Facades\Request;
@@ -48,6 +50,9 @@ class DependentsController extends Controller
 
         $this->employee = $employee;
         $this->dependent = $dependent;
+
+        $profile_details_id = Navlink::whereName('Dependents')->pluck('id');
+        $this->data['custom_field_sections'] = CustomFieldSection::whereScreenId($profile_details_id)->get();
     }
 
     /**
