@@ -31,10 +31,9 @@ class Timelog extends Model
 
         if (!empty($this->attributes['in']) && !empty($this->attributes['out'])) {
             $out = Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes['out']);
-            $hours = $in->diffInHours($out);
             $mins = $in->diffInMinutes($out);
-
-            $this->attributes['rendered_hours'] = number_format(($hours * 60 + $mins) / 60, 2);
+            
+            $this->attributes['rendered_hours'] = number_format($mins / 60, 2);
         }
     }
 
@@ -50,10 +49,9 @@ class Timelog extends Model
 
         if (!empty($this->attributes['in']) && !empty($this->attributes['out'])) {
             $in = Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes['in']);
-            $hours = $in->diffInHours($out);
             $mins = $in->diffInMinutes($out);
 
-            $this->attributes['rendered_hours'] = number_format(($hours * 60 + $mins) / 60, 2);
+            $this->attributes['rendered_hours'] = number_format($mins / 60, 2);
         }
     }
 }

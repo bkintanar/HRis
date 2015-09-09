@@ -3,5 +3,9 @@
   "devDependencies": {
     "gulp": "^3.8.8",
     "laravel-elixir": "^1.0.0"
+  },
+  "dependencies": {
+    "vue": "^0.12.12",
+    "vue-resource": "^0.1.15"
   }
 }

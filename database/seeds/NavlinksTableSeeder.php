@@ -288,15 +288,8 @@ class NavlinksTableSeeder extends Seeder
                 'parent_id'  => 'time',
             ],
             [
-                'name'       => 'Holidays',
-                'href'       => 'time/holidays',
-                'permission' => 15,
-                'icon'       => 'fa-history',
-                'parent_id'  => 'time',
-            ],
-            [
-                'name'       => 'Events',
-                'href'       => 'time/events',
+                'name'       => 'Holidays and Events',
+                'href'       => 'time/holidays-and-events',
                 'permission' => 15,
                 'icon'       => 'fa-rocket',
                 'parent_id'  => 'time',

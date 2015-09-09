@@ -82,7 +82,7 @@ class AttendanceController extends Controller
             'pageTitle' => 'My Presence',
             'timelogs'  => $this->timelog->paginate($this->employee->id),
             'settings'  => $request->paginationSettings(),
-            'latest'    => is_null($latest->out) ? $latest : null,
+            'latest'    => isset($latest) && is_null($latest->out) ? $latest : null,
         ]);
 
         return $this->template('pages.time.attendance.index');

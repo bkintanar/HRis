@@ -28,12 +28,12 @@ class AjaxController extends Controller
         }
     }
 
-    protected function response($title, $text, $level = 'success')
+    protected function response($title, $text, $data = [], $level = 'success')
     {
-        return response()->json([
+        return response()->json(array_merge([
             'title' => $title,
             'text'  => $text,
             'level' => $level,
-        ]);
+        ], $data));
     }
 }
