@@ -17,8 +17,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class EducationLevel extends Model
 {
-    use HasPlaceholder;
-
     /**
      * Indicates if the model should be timestamped.
      *
