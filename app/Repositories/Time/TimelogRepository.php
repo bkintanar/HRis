@@ -86,4 +86,13 @@ class TimelogRepository extends Repository
 
         return false;
     }
+
+    public function range($start, $end)
+    {
+        // $start->subMinutes($input['offset']),
+        return $this->model
+            ->whereBetween('in', [ $start, $end ])
+            ->select('id', 'employee_id', 'in', 'out', 'rendered_hours')
+            ->get();
+    }
 }

@@ -29,16 +29,16 @@ elixir(function(mix) {
      */
     mix.less([
         'dependencies.less'
-    ])
+    ], paths.styles + '/dependencies.css')
     .sass([
         'style.sass'
-    ])
+    ], paths.styles + '/style.css')
     .styles([
     	'dependencies.css',
         'animate.css',
         'plugins/iCheck/custom.css',
         '../../resources/assets/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css',
-        'style.css',
+        'style.css'
     ], null, paths.styles);
 
     /**
@@ -63,11 +63,6 @@ elixir(function(mix) {
     ], null, './');
 
     /**
-     * Browserify
-     */
-    mix.browserify('time/attendance/app.js', 'public/js/attendance.js');
-
-    /**
      * Styles and Script Version
      */
     mix.version([paths.styles + '/all.css', paths.scripts + '/all.js']);
@@ -76,10 +71,19 @@ elixir(function(mix) {
      * Fonts & Images
      */
     mix.copy(paths.bower_components + '/font-awesome/fonts', paths.build + '/fonts')
+       .copy(paths.bower_components + '/jquery.filthypillow/*.*', paths.plugins + '/jquery.filthypillow/')
+       .copy(paths.bower_components + '/typeahead.js/dist/', paths.plugins + '/typeahead/')
        .copy(paths.bower_components + '/bootstrap/fonts', paths.build + '/fonts')
        .copy(paths.bower_components + '/chosen/*.png', paths.build + '/css')
        .copy(paths.bower_components + '/cropper/src/img/bg.png', paths.build + '/img/')
        .copy(paths.styles + '/plugins/iCheck/*.png', paths.build + '/css')
        .copy(paths.fonts + '/OpenSans', paths.build + '/fonts')
        .copy(paths.styles + '/patterns', paths.build + '/css/patterns');
+
+    /**
+     * Browserify
+     */
+    mix.browserify('modules/time/attendance/app.js', 'public/js/attendance.js');
+    mix.browserify('modules/time/requisition/app.js', 'public/js/requisition.js');
+    mix.browserify('modules/time/holidays_and_events/app.js', 'public/js/holidays_and_events.js');
 });

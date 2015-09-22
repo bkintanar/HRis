@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html id="app">
 
 <head>
     <meta charset="utf-8">
@@ -9,10 +9,8 @@
     <title>HRis | {{ $pageTitle }}</title>
 
     @include('partials.copyleft')
-
-    {!! Html::style(elixir('css/all.css')) !!}
     @yield('custom_css')
-
+    {!! Html::style(elixir('css/all.css')) !!}
     <link rel="icon" href="/favicon.png" type="image/png">
 
 </head>
@@ -35,16 +33,7 @@
                 </div>
                 @yield('action_area')
             </div>
-            @if(Request::is('presence'))
-            <div class="row wrapper border-bottom">
-                <div id="reportrange" 
-                     class="pull-right" 
-                     style="cursor: pointer; padding: 10px 0;margin-right:6px"
-                >
-                    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;&nbsp;<span></span> <b class="caret"></b>
-                </div>
-            </div>
-            @endif
+            @yield('sub_header')
             <div class="row">
             <div class="col-lg-12">
                 <div class="wrapper wrapper-content">

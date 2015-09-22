@@ -23,8 +23,8 @@ class AjaxController extends Controller
     {
         parent::__construct($auth);
 
-        if ($this->auth) {
-            $this->employee = $this->auth->employee;
+        if ($this->logged_user) {
+            $this->employee = $this->logged_user->employee;
         }
     }
 

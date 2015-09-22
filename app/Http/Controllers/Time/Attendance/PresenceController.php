@@ -10,11 +10,11 @@ use HRis\Repositories\Time\TimelogRepository;
 use Illuminate\Http\Request;
 
 /**
- * Class AttendanceController.
+ * Class PresenceController.
  *
  * @Middleware("auth")
  */
-class AttendanceController extends Controller
+class PresenceController extends Controller
 {
     /**
      * Sentinel authentication.
@@ -48,8 +48,8 @@ class AttendanceController extends Controller
     {
         parent::__construct($auth);
 
-        if ($this->auth) {
-            $this->employee = $this->auth->employee;
+        if ($this->logged_user) {
+            $this->employee = $this->logged_user->employee;
         }
 
         $this->initRepositories();

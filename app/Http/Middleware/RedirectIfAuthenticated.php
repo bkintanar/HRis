@@ -53,7 +53,7 @@ class RedirectIfAuthenticated
         $auth = $this->auth;
 
         if ($auth::check()) {
-            return new RedirectResponse(url('/home'));
+            return new RedirectResponse(url('/'));
         }
 
         return $next($request);

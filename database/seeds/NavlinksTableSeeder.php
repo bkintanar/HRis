@@ -274,15 +274,8 @@ class NavlinksTableSeeder extends Seeder
                 'parent_id'  => 'time/attendance',
             ],
             [
-                'name'       => 'Overtime Records',
-                'href'       => 'time/attendance/overtime-records',
-                'permission' => 15,
-                'icon'       => 'fa-moon-o',
-                'parent_id'  => 'time/attendance',
-            ],
-            [
                 'name'       => 'Requesition',
-                'href'       => 'time/requesition',
+                'href'       => 'time/requisition',
                 'permission' => 15,
                 'icon'       => 'fa-bookmark',
                 'parent_id'  => 'time',

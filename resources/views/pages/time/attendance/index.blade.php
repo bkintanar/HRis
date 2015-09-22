@@ -1,7 +1,7 @@
 @extends('master.default')
 
 @section('content')
-    <div id="app" class="row">
+    <div class="row">
         <div class="col-md-3">
             <div class="row">
                 <div class="ibox">
@@ -42,25 +42,25 @@
                         <ul class="list-group clear-list">
                             <li class="list-group-item fist-item">
                                 <span class="pull-right">
-                                    @{{ totalHours }} hours
+                                    @{{ summaryReport.total_hours }} hours
                                 </span>
                                 Total Hours
                             </li>
                             <li class="list-group-item">
                                 <span class="pull-right">
-                                    0.48 hours
+                                    @{{ summaryReport.late }} hours
                                 </span>
                                 Late
                             </li>
                             <li class="list-group-item">
                                 <span class="pull-right">
-                                    0.22 hours
+                                    @{{ summaryReport.undertime }} hours
                                 </span>
                                 Undertime
                             </li>
                             <li class="list-group-item">
                                 <span class="pull-right">
-                                    12 hours
+                                    @{{ summaryReport.overtime }} hours
                                 </span>
                                 Overtime
                             </li>
@@ -88,8 +88,8 @@
                             <thead>
                                 <tr>
                                     <th>Date</th>
-                                    <th>In</th>
-                                    <th>Out</th>
+                                    <th>Time In</th>
+                                    <th>Time Out</th>
                                     <th>Hours</th>
                                     <th class="fix-width">Action</th>
                                 </tr>
@@ -103,7 +103,7 @@
                                     <td colspan="6" class="text-center">No records found</td>
                                 </tr>
                                 <tr v-repeat="timelog: timelogs">
-                                    <td>@{{ timelog.created_at | dateFormat }}</td>
+                                    <td>@{{ timelog.in | dateFormat }}</td>
                                     <td>@{{ timelog.in | timeFormat }}</td>
                                     <td>@{{ timelog.out | timeFormat }}</td>
                                     <td>@{{ timelog.rendered_hours | decimalPlace }}</td>
@@ -113,7 +113,7 @@
                                             class="btn btn-primary btn-xs btn-warning" 
                                             data-toggle="tooltip" 
                                             data-placement="bottom" 
-                                            title="Edit" 
+                                            title="Edit"
                                             type="button"
                                             v-on="click: editTimelog(timelog)"
                                         >
@@ -138,12 +138,61 @@
                 </div>
             </div>
         </div>
+        <!-- Modal -->
+        <div class="modal inmodal fade" id="edit_timelog" tabindex="-1">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">×</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <h4 class="modal-title">Edit timelog</h4>
+                    </div>
+                    <form class="form-horizontal">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                {!! Form::label('time_in', 'Time In', ['class' => 'col-md-3 control-label']) !!}
+                                <div class="col-md-9">
+                                    {!! Form::text('time_in', null, ['class' => 'form-control', 'placeholder' => 'Time In']) !!}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('time_out', 'Time Out', ['class' => 'col-md-3 control-label']) !!}
+                                <div class="col-md-9">
+                                    {!! Form::text('time_out', null, ['class' => 'form-control', 'placeholder' => 'Time Out']) !!}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-white" data-dismiss="modal" type="button">Close</button>
+                            <button 
+                                class="btn btn-primary" 
+                                data-dismiss="modal" 
+                                v-on="click: updateTimelog">
+                                Save changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 @stop
 
+@section('sub_header')
+<div class="row wrapper border-bottom">
+    <div id="reportrange" 
+         class="pull-right" 
+         style="cursor: pointer; padding: 10px 0;margin-right:6px">
+        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;&nbsp;<span></span> <b class="caret"></b>
+    </div>
+</div>
+@stop
 @section('custom_css')
     {!! Html::style('/css/plugins/dataTables/dataTables.bootstrap.css') !!}
     {!! Html::style('/css/plugins/dataTables/dataTables.responsive.css') !!}
+    {!! Html::style('/js/plugins/jquery.filthypillow/jquery.filthypillow.css') !!}
     {!! Html::style('//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css') !!}
 @stop
 @section('custom_js')
@@ -151,4 +200,5 @@
     {!! Html::script('//cdn.jsdelivr.net/momentjs/latest/moment.min.js') !!}
     {!! Html::script('//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js') !!}
     {!! Html::script('/js/attendance.js') !!}
+    {!! Html::script('/js/plugins/jquery.filthypillow/jquery.filthypillow.min.js') !!}
 @stop

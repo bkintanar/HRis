@@ -3,7 +3,9 @@
 namespace HRis\Http\Controllers\Ajax;
 
 use Carbon\Carbon;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Eloquent\Timelog;
+use HRis\Repositories\Time\TimelogRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -14,6 +16,13 @@ use Illuminate\Support\Facades\Input;
  */
 class AttendanceAjaxController extends AjaxController
 {
+    protected $timelog;
+
+    public function __construct(Sentinel $auth)
+    {
+        parent::__construct($auth);
+        $this->timelog = new TimelogRepository;
+    }
     /**
      * Get the server date and time.
      *
@@ -43,15 +52,20 @@ class AttendanceAjaxController extends AjaxController
         $start = $this->startOfMonth($input);
         $end = $this->endOfMonth($input);
         $dateRange = $this->dateRangeFormat($start, $end);
-        $timelogs = Timelog::whereBetween('created_at', [
-            $start->subMinutes($input['offset']),
-            $end->subMinutes($input['offset']),
-        ])->get();
+        $timelogs = $this->timelog->range(
+                $start->subMinutes($input['offset']), 
+                $end->subMinutes($input['offset'])
+            );
 
         return response()->json([
             'timelogs' => $timelogs,
             'date_range' => $dateRange,
-            'total_hours' => $this->totalHours($timelogs),
+            'summary_report' => [
+                'total_hours' => $this->totalHours($timelogs),
+                'late' => 0,
+                'undertime' => 0,
+                'overtime' => 0,
+            ]
         ]);
     }
 
