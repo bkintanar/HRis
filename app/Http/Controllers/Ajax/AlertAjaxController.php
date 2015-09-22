@@ -3,9 +3,9 @@
 namespace HRis\Http\Controllers\Ajax;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use Collective\Html\FormFacade as Form;
 use HRis\Repositories\Time\TimelogRepository;
 use Illuminate\Http\Request;
-use Collective\Html\FormFacade as Form;
 
 /**
  * Class AlertAjaxController.
@@ -87,40 +87,46 @@ class AlertAjaxController extends AjaxController
     }
 
     /**
-     * Timelog delete alert settings
+     * Timelog delete alert settings.
+     *
      * @Get("alert/timelog-delete")
+     *
      * @return string
+     *
      * @author Harlequin Doyon
      */
     public function timelogDelete()
     {
         return response()->json([
-            'title' => 'Are you sure?',
-            'text' => 'You want to delete this timelog',
-            'type' => 'warning',
-            'showCancelButton' => true,
+            'title'             => 'Are you sure?',
+            'text'              => 'You want to delete this timelog',
+            'type'              => 'warning',
+            'showCancelButton'  => true,
             'cancelButtonColor' => '#DD6B55',
             'confirmButtonText' => 'Yes',
-            'closeOnConfirm' => false,
+            'closeOnConfirm'    => false,
         ]);
     }
 
     /**
-     * Timelog edit alert settings
+     * Timelog edit alert settings.
+     *
      * @Get("alert/timelog-edit")
+     *
      * @return string
+     *
      * @author Harlequin Doyon
      */
     public function timelogEdit(Request $request)
     {
         return response()->json([
             'title' => 'Edit timelog',
-            'html' => $this->formGroup([
+            'html'  => $this->formGroup([
                 ['for' => 'time_in', 'title' => 'Time In', 'content' => $request->input('in')],
                 ['for' => 'time_out', 'title' => 'Time Out', 'content' => $request->input('out')],
             ]),
             'showCancelButton' => true,
-            'closeOnConfirm' => false,
+            'closeOnConfirm'   => false,
         ]);
     }
 

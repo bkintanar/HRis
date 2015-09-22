@@ -7,12 +7,15 @@ use HRis\Http\Controllers\Controller;
 /**
  * @Middleware("auth")
  */
-class RequisitionController extends Controller 
+class RequisitionController extends Controller
 {
     /**
      * Display a listing of requisition.
+     *
      * @Get("time/requisition")
+     *
      * @return Response
+     *
      * @author Harlequin Doyon
      */
     public function index()

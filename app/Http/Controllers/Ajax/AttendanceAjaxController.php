@@ -21,8 +21,9 @@ class AttendanceAjaxController extends AjaxController
     public function __construct(Sentinel $auth)
     {
         parent::__construct($auth);
-        $this->timelog = new TimelogRepository;
+        $this->timelog = new TimelogRepository();
     }
+
     /**
      * Get the server date and time.
      *
@@ -40,9 +41,12 @@ class AttendanceAjaxController extends AjaxController
     }
 
     /**
-     * Get timelogs
+     * Get timelogs.
+     *
      * @Get("ajax/timelogs")
+     *
      * @return string
+     *
      * @author Harlequin Doyon
      */
     public function timelogs(Request $request)
@@ -53,28 +57,32 @@ class AttendanceAjaxController extends AjaxController
         $end = $this->endOfMonth($input);
         $dateRange = $this->dateRangeFormat($start, $end);
         $timelogs = $this->timelog->range(
-                $start->subMinutes($input['offset']), 
+                $start->subMinutes($input['offset']),
                 $end->subMinutes($input['offset'])
             );
 
         return response()->json([
-            'timelogs' => $timelogs,
-            'date_range' => $dateRange,
+            'timelogs'       => $timelogs,
+            'date_range'     => $dateRange,
             'summary_report' => [
                 'total_hours' => $this->totalHours($timelogs),
-                'late' => 0,
-                'undertime' => 0,
-                'overtime' => 0,
-            ]
+                'late'        => 0,
+                'undertime'   => 0,
+                'overtime'    => 0,
+            ],
         ]);
     }
 
     /**
-     * Update timelog
+     * Update timelog.
+     *
      * @Put("ajax/timelog/{id}")
-     * @param  int  $id
-     * @param  Request $request
+     *
+     * @param int     $id
+     * @param Request $request
+     *
      * @return Timelog
+     *
      * @author Harlequin Doyon
      */
     public function updateTimelog($id, Request $request)
@@ -94,8 +102,11 @@ class AttendanceAjaxController extends AjaxController
 
     /**
      * @Delete("ajax/timelog/{id}")
-     * @param  int $id
+     *
+     * @param int $id
+     *
      * @return string
+     *
      * @author Harlequin Doyon
      */
     public function destroyTimelog($id)
@@ -128,6 +139,7 @@ class AttendanceAjaxController extends AjaxController
         foreach ($timelogs as $timelog) {
             $total += $timelog->rendered_hours;
         }
+
         return $total;
     }
 
@@ -138,7 +150,7 @@ class AttendanceAjaxController extends AjaxController
             $end->day == $end->format('t')) {
             return $start->format('F Y');
         } else {
-            return $start->format('F d, Y') . ' - ' . $end->format('F d, Y');
+            return $start->format('F d, Y').' - '.$end->format('F d, Y');
         }
     }
 

@@ -32,7 +32,7 @@ class Timelog extends Model
         if (!empty($this->attributes['in']) && !empty($this->attributes['out'])) {
             $out = Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes['out']);
             $mins = $in->diffInMinutes($out);
-            
+
             $this->attributes['rendered_hours'] = number_format($mins / 60, 2);
         }
     }

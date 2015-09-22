@@ -61,8 +61,8 @@ class TimelogRepository extends Repository
     public function hasNoLatestTimein()
     {
         $timelog = $this->latest();
-        
-        if (! isset($timelog) || (!empty($timelog->in) && !empty($timelog->out))) {
+
+        if (!isset($timelog) || (!empty($timelog->in) && !empty($timelog->out))) {
             return true;
         }
 
@@ -91,7 +91,7 @@ class TimelogRepository extends Repository
     {
         // $start->subMinutes($input['offset']),
         return $this->model
-            ->whereBetween('in', [ $start, $end ])
+            ->whereBetween('in', [$start, $end])
             ->select('id', 'employee_id', 'in', 'out', 'rendered_hours')
             ->get();
     }

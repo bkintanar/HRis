@@ -2,10 +2,8 @@
 
 namespace HRis\Http\Controllers\Time;
 
-use Illuminate\Http\Request;
-
-use HRis\Http\Requests;
 use HRis\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 /**
  * @Middleware("auth")
@@ -16,7 +14,9 @@ class HolidaysAndEventsController extends Controller
      * Display a listing of the holidays and events.
      *
      * @Get("time/holidays-and-events")
+     *
      * @return Response
+     *
      * @author Harlequin Doyon
      */
     public function index()
@@ -41,7 +41,8 @@ class HolidaysAndEventsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
+     * @param Request $request
+     *
      * @return Response
      */
     public function store(Request $request)
@@ -52,7 +53,8 @@ class HolidaysAndEventsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return Response
      */
     public function show($id)
@@ -63,7 +65,8 @@ class HolidaysAndEventsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return Response
      */
     public function edit($id)
@@ -74,8 +77,9 @@ class HolidaysAndEventsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
-     * @param  int  $id
+     * @param Request $request
+     * @param int     $id
+     *
      * @return Response
      */
     public function update(Request $request, $id)
@@ -86,7 +90,8 @@ class HolidaysAndEventsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return Response
      */
     public function destroy($id)
