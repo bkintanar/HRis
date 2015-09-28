@@ -23,17 +23,17 @@ class AjaxController extends Controller
     {
         parent::__construct($auth);
 
-        if ($this->auth) {
-            $this->employee = $this->auth->employee;
+        if ($this->logged_user) {
+            $this->employee = $this->logged_user->employee;
         }
     }
 
-    protected function response($title, $text, $level = 'success')
+    protected function response($title, $text, $data = [], $level = 'success')
     {
-        return response()->json([
+        return response()->json(array_merge([
             'title' => $title,
             'text'  => $text,
             'level' => $level,
-        ]);
+        ], $data));
     }
 }

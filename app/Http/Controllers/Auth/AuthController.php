@@ -22,6 +22,8 @@ use Illuminate\Support\Facades\Mail;
 
 /**
  * Class AuthController.
+ *
+ * @Middleware("guest")
  */
 class AuthController extends Controller
 {

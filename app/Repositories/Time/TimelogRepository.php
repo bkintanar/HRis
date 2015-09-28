@@ -40,24 +40,6 @@ class TimelogRepository extends Repository
     }
 
     /**
-     * Check the latest timelog if user has no time out.
-     *
-     * @return bool
-     *
-     * @author Harlequin Doyon
-     */
-    public function hasNoLatestTimeout()
-    {
-        $timelog = $this->latest();
-
-        if (is_null($timelog->out)) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
      * Fetch the latest record of the table.
      *
      * @return Eloquent
@@ -80,10 +62,37 @@ class TimelogRepository extends Repository
     {
         $timelog = $this->latest();
 
-        if (!empty($timelog->in) && !empty($timelog->out)) {
+        if (!isset($timelog) || (!empty($timelog->in) && !empty($timelog->out))) {
             return true;
         }
 
         return false;
+    }
+
+    /**
+     * Check the latest timelog if user has no time out.
+     *
+     * @return bool
+     *
+     * @author Harlequin Doyon
+     */
+    public function hasNoLatestTimeout()
+    {
+        $timelog = $this->latest();
+
+        if (isset($timelog) && is_null($timelog->out)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function range($start, $end)
+    {
+        // $start->subMinutes($input['offset']),
+        return $this->model
+            ->whereBetween('in', [$start, $end])
+            ->select('id', 'employee_id', 'in', 'out', 'rendered_hours')
+            ->get();
     }
 }

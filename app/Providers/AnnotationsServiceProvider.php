@@ -56,7 +56,8 @@ class AnnotationsServiceProvider extends ServiceProvider
         HRis\Http\Controllers\Profile\QualificationsController::class,
         HRis\Http\Controllers\Profile\WorkShiftController::class,
         HRis\Http\Controllers\Time\Attendance\EmployeeRecordsController::class,
-        HRis\Http\Controllers\Time\Attendance\AttendanceController::class,
+        HRis\Http\Controllers\Time\Attendance\PresenceController::class,
+        HRis\Http\Controllers\Time\RequisitionController::class,
     ];
 
     /**

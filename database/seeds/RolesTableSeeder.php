@@ -112,10 +112,8 @@ class RolesTableSeeder extends Seeder
                     permission('perforamance.configuration.trackers'),
                     permission('time.attendance'),
                     permission('time.attendance.employee-records'),
-                    permission('time.attendance.overtime-records'),
-                    permission('time.requesition'),
-                    permission('time.holidays'),
-                    permission('time.events'),
+                    permission('time.requisition'),
+                    permission('time.holidays-and-events'),
                     permission('presence', ['view'])
                 );
                 break;
@@ -170,7 +168,10 @@ class RolesTableSeeder extends Seeder
                     permission('perforamance.configuration'),
                     permission('perforamance.configuration.trackers'),
                     permission('time.attendance'),
-                    permission('time.attendance.employee-records')
+                    permission('time.attendance.employee-records'),
+                    permission('time.requisition'),
+                    permission('time.holidays-and-events'),
+                    permission('presence', ['view'])
                 );
                 break;
             case 'ess':
