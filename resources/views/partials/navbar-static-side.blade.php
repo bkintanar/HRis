@@ -29,7 +29,9 @@
 
                     </li>
 
+                    <!-- start sidebar -->
                     {!! Sidebar::make() !!}
+                    <!-- end sidebar -->
 
                 </ul>
 

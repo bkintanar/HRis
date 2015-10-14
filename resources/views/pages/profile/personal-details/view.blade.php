@@ -115,9 +115,9 @@
                         </div>
                     </div>
                     @if($logged_user->hasAccess(Request::segment(1).'.personal-details.update'))
-                        <div class="form-group modify-form">
+                        <div class="form-group">
                             <div class="col-sm-4 col-sm-offset-2">
-                                {!! Html::link('#0', 'Modify', ['class' => 'btn btn-primary btn-xs']) !!}
+                                {!! Html::link('#0', 'Modify', ['class' => 'btn btn-primary btn-xs modify-form']) !!}
                             </div>
                         </div>
                     @endif
@@ -319,6 +319,16 @@
 
                 $('.chosen-select').trigger('chosen:updated');
                 $('.i-checks').iCheck('disable');
+            });
+
+            // Date picker
+            $('#datepicker_birth_date .input-group.date').datepicker({
+                todayBtn: "linked",
+                format: 'yyyy-mm-dd',
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true
             });
         });
     </script>
