@@ -16,9 +16,8 @@ class UserTransformer extends TransformerAbstract
      */
     protected $availableIncludes = [
         'employee',
-        'role'
+        'role',
     ];
-
 
     /**
      * Transform object into a generic array.
@@ -32,9 +31,9 @@ class UserTransformer extends TransformerAbstract
     public function transform(User $user)
     {
         return [
-            'id'         => (int)$user->id,
+            'id'         => (int) $user->id,
             'email'      => $user->email,
-            'last_login' => $user->last_login
+            'last_login' => $user->last_login,
         ];
     }
 
@@ -51,7 +50,7 @@ class UserTransformer extends TransformerAbstract
     {
         $employee = $user->employee;
 
-        return $this->item($employee, new EmployeeTransformer);
+        return $this->item($employee, new EmployeeTransformer());
     }
 
     /**
@@ -67,6 +66,6 @@ class UserTransformer extends TransformerAbstract
     {
         $roles = $user->roles;
 
-        return $this->collection($roles, new RoleTransformer);
+        return $this->collection($roles, new RoleTransformer());
     }
 }

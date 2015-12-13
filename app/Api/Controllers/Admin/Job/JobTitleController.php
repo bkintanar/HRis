@@ -7,7 +7,6 @@
  *
  * @link    http://github.com/HB-Co/HRis
  */
-
 namespace HRis\Http\Controllers\Admin\Job;
 
 use Api\Controllers\BaseController;
@@ -55,7 +54,6 @@ class JobTitleController extends BaseController
 
         try {
             $job_title->update($request->all());
-
         } catch (Exception $e) {
             return $this->xhr(UNABLE_UPDATE_MESSAGE, 500);
         }
@@ -79,7 +77,6 @@ class JobTitleController extends BaseController
         }
 
         return $this->xhr(['job_title' => $job_title, 'text' => SUCCESS_ADD_MESSAGE]);
-
     }
 
     /**
@@ -98,7 +95,7 @@ class JobTitleController extends BaseController
         } catch (Exception $e) {
             return $this->xhr(UNABLE_DELETE_MESSAGE);
         }
-        return $this->xhr(SUCCESS_DELETE_MESSAGE);
 
+        return $this->xhr(SUCCESS_DELETE_MESSAGE);
     }
 }

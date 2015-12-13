@@ -7,7 +7,6 @@
  *
  * @link    http://github.com/HB-Co/HRis
  */
-
 namespace HRis\Api\Controllers;
 
 use HRis\Api\Eloquent\City;
@@ -308,10 +307,10 @@ class InputSelectController extends BaseController
      */
     protected function _table_view($model, $custom_attribute = null)
     {
-        if ($custom_attribute)
-        {
+        if ($custom_attribute) {
             return response()->json($model->get(['name', 'id', 'class']));
         }
+
         return response()->json($model->lists('name', 'id'));
     }
 
@@ -325,7 +324,6 @@ class InputSelectController extends BaseController
      */
     protected function _chosen($model, $custom_attribute = null)
     {
-
         $attributes = $this->_merge_attributes($custom_attribute);
 
         $collection = $model->get($attributes);

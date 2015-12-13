@@ -7,7 +7,6 @@
  *
  * @link    http://github.com/HB-Co/HRis
  */
-
 namespace HRis\Http\Controllers\PIM;
 
 use HRis\Api\Controllers\BaseController;
@@ -59,9 +58,7 @@ class EmployeeListController extends BaseController
         EmployeeSalaryComponent $employee_salary_component,
         SalaryComponent $salary_component,
         Pagination $pagination
-    )
-    {
-
+    ) {
         $this->employee = $employee;
         $this->employee_salary_component = $employee_salary_component;
         $this->salary_component = $salary_component;
@@ -136,7 +133,7 @@ class EmployeeListController extends BaseController
         $employee = $this->employee->whereId($employee_id)->first();
 
         if ($employee) {
-            return redirect()->to(Request::path() . '/personal-details');
+            return redirect()->to(Request::path().'/personal-details');
         }
 
         return response()->make(view()->make('errors.404'), 404);

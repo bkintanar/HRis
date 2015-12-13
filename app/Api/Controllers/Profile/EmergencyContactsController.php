@@ -7,11 +7,9 @@
  *
  * @link    http://github.com/HB-Co/HRis
  */
-
 namespace HRis\Api\Controllers\Profile;
 
 use HRis\Api\Controllers\BaseController;
-use HRis\Api\Controllers\Controller;
 use HRis\Api\Eloquent\EmergencyContact;
 use HRis\Api\Eloquent\Employee;
 use HRis\Api\Requests\Profile\EmergencyContactsRequest;
@@ -82,7 +80,6 @@ class EmergencyContactsController extends BaseController
         }
 
         return response()->json(['emergency_contact' => $emergency_contact, 'text' => SUCCESS_ADD_MESSAGE, 'code' => 200]);
-
     }
 
     /**
@@ -105,7 +102,6 @@ class EmergencyContactsController extends BaseController
         try {
             $attributes = array_filter($request->except('relationships', 'relationship'));
             $emergency_contact->update($attributes);
-
         } catch (Exception $e) {
             return response()->json(['text' => UNABLE_UPDATE_MESSAGE, 'code' => 500]);
         }
@@ -131,7 +127,7 @@ class EmergencyContactsController extends BaseController
         } catch (Exception $e) {
             return response()->json(['text' => UNABLE_DELETE_MESSAGE, 'code' => 500]);
         }
-        return response()->json(['text' => SUCCESS_DELETE_MESSAGE, 'code' => 200]);
 
+        return response()->json(['text' => SUCCESS_DELETE_MESSAGE, 'code' => 200]);
     }
 }
