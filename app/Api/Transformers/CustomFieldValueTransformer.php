@@ -7,7 +7,6 @@ use League\Fractal\TransformerAbstract;
 
 class CustomFieldValueTransformer extends TransformerAbstract
 {
-
     /**
      * List of resources to automatically include.
      *
@@ -17,7 +16,7 @@ class CustomFieldValueTransformer extends TransformerAbstract
      */
     protected $defaultIncludes = [
         'custom_field',
-        'employee'
+        'employee',
     ];
 
     /**
@@ -32,10 +31,10 @@ class CustomFieldValueTransformer extends TransformerAbstract
     public function transform(CustomFieldValue $custom_field_value)
     {
         return [
-            'id'              => (int)$custom_field_value->id,
-            'custom_field_id' => (int)$custom_field_value->custom_field_id,
-            'employee_id'     => (int)$custom_field_value->employee_id,
-            'value'           => (int)$custom_field_value->value
+            'id'              => (int) $custom_field_value->id,
+            'custom_field_id' => (int) $custom_field_value->custom_field_id,
+            'employee_id'     => (int) $custom_field_value->employee_id,
+            'value'           => (int) $custom_field_value->value,
         ];
     }
 
@@ -52,7 +51,7 @@ class CustomFieldValueTransformer extends TransformerAbstract
     {
         $custom_field = $custom_field_value->custom_field;
 
-        return $this->item($custom_field, new CustomFieldTransformer);
+        return $this->item($custom_field, new CustomFieldTransformer());
     }
 
     /**
@@ -68,6 +67,6 @@ class CustomFieldValueTransformer extends TransformerAbstract
     {
         $employee = $custom_field_value->employee;
 
-        return $this->item($employee, new EmployeeTransformer);
+        return $this->item($employee, new EmployeeTransformer());
     }
 }

@@ -7,7 +7,6 @@ use League\Fractal\TransformerAbstract;
 
 class CustomFieldTransformer extends TransformerAbstract
 {
-
     /**
      * List of resources to automatically include.
      *
@@ -17,7 +16,7 @@ class CustomFieldTransformer extends TransformerAbstract
      */
     protected $defaultIncludes = [
         'custom_field_section',
-        'custom_field_type'
+        'custom_field_type',
     ];
 
     /**
@@ -32,11 +31,11 @@ class CustomFieldTransformer extends TransformerAbstract
     public function transform(CustomField $custom_field)
     {
         return [
-            'id'                      => (int)$custom_field->id,
-            'custom_field_section_id' => (int)$custom_field->custom_field_section_id,
+            'id'                      => (int) $custom_field->id,
+            'custom_field_section_id' => (int) $custom_field->custom_field_section_id,
             'name'                    => $custom_field->name,
-            'custom_field_type_id'    => (int)$custom_field->custom_field_type_id,
-            'required'                => $custom_field->required
+            'custom_field_type_id'    => (int) $custom_field->custom_field_type_id,
+            'required'                => $custom_field->required,
         ];
     }
 
@@ -53,7 +52,7 @@ class CustomFieldTransformer extends TransformerAbstract
     {
         $custom_field_section = $custom_field->custom_field_section;
 
-        return $this->item($custom_field_section, new CustomFieldSectionTransformer);
+        return $this->item($custom_field_section, new CustomFieldSectionTransformer());
     }
 
     /**
@@ -69,6 +68,6 @@ class CustomFieldTransformer extends TransformerAbstract
     {
         $custom_field_type = $custom_field->custom_field_type;
 
-        return $this->item($custom_field_type, new CustomFieldTypeTransformer);
+        return $this->item($custom_field_type, new CustomFieldTypeTransformer());
     }
 }

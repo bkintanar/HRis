@@ -19,9 +19,9 @@ class CustomFieldTypeTransformer extends TransformerAbstract
     public function transform(CustomFieldType $custom_field_type)
     {
         return [
-            'id'          => (int)$custom_field_type->id,
+            'id'          => (int) $custom_field_type->id,
             'name'        => $custom_field_type->name,
-            'has_options' => $custom_field_type->has_options
+            'has_options' => $custom_field_type->has_options,
         ];
     }
 }

@@ -7,10 +7,8 @@
  *
  * @link    http://github.com/HB-Co/HRis
  */
-
 namespace HRis\Api\Requests\Profile;
 
-use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use HRis\Http\Requests\Request;
 
 /**
@@ -53,11 +51,11 @@ class PersonalContactDetailsRequest extends Request
 
         // Update
         if (Request::isMethod('patch') || Request::is('*/edit')) {
-            return ($this->logged_user->hasAccess($permission.'.update'));
+            return $this->logged_user->hasAccess($permission.'.update');
         } // View
         else {
             if (Request::isMethod('get')) {
-                return ($this->logged_user->hasAccess($permission.'.view'));
+                return $this->logged_user->hasAccess($permission.'.view');
             }
         }
     }

@@ -7,7 +7,6 @@
  *
  * @link    http://github.com/HB-Co/HRis
  */
-
 namespace HRis\Http\Requests\Admin\Job;
 
 use HRis\Http\Requests\Request;
@@ -43,19 +42,19 @@ class JobTitleRequest extends Request
 
         // Create
         if (Request::isMethod('post')) {
-            return ($this->logged_user->hasAccess($permission.'.create'));
+            return $this->logged_user->hasAccess($permission.'.create');
         } // Delete
         else {
             if (Request::isMethod('delete')) {
-                return ($this->logged_user->hasAccess($permission.'.delete'));
+                return $this->logged_user->hasAccess($permission.'.delete');
             } // View
             else {
                 if (Request::isMethod('get')) {
-                    return ($this->logged_user->hasAccess($permission.'.view'));
+                    return $this->logged_user->hasAccess($permission.'.view');
                 } // Update
                 else {
                     if (Request::isMethod('patch')) {
-                        return ($this->logged_user->hasAccess($permission.'.update'));
+                        return $this->logged_user->hasAccess($permission.'.update');
                     }
                 }
             }

@@ -7,7 +7,6 @@
  *
  * @link    http://github.com/HB-Co/HRis
  */
-
 namespace HRis\Api\Controllers\Auth;
 
 use Dingo\Api\Facade\API;
@@ -33,7 +32,7 @@ class AuthController extends BaseController
     {
         $data = JWTAuth::parseToken()->authenticate();
 
-        return $this->item(User::findOrFail($data->id), new UserTransformer);
+        return $this->item(User::findOrFail($data->id), new UserTransformer());
     }
 
     /**
@@ -117,7 +116,6 @@ class AuthController extends BaseController
     {
         $response = [];
         try {
-
             if (JWTAuth::parseToken()->invalidate()) {
                 $response['text'] = 'Signed out';
                 $response['code'] = 200;

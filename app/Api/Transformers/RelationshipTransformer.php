@@ -19,8 +19,8 @@ class RelationshipTransformer extends TransformerAbstract
     public function transform(Relationship $relationship)
     {
         return [
-            'id'   => (int)$relationship->id,
-            'name' => $relationship->name
+            'id'   => (int) $relationship->id,
+            'name' => $relationship->name,
         ];
     }
 }

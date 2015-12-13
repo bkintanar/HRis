@@ -7,7 +7,6 @@
  *
  * @link    http://github.com/HB-Co/HRis
  */
-
 namespace HRis\Api\Controllers;
 
 use HRis\Api\Eloquent\Employee;
@@ -39,6 +38,6 @@ class EmployeeController extends BaseController
     {
         $employee = $this->employee->getEmployeeById($request->get('employee_id'), null);
 
-        return $this->item($employee, new EmployeeTransformer);
+        return $this->item($employee, new EmployeeTransformer());
     }
 }
