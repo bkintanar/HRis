@@ -19,8 +19,8 @@ class EducationLevelTransformer extends TransformerAbstract
     public function transform(EducationLevel $education_level)
     {
         return [
-            'id'   => (int)$education_level->id,
-            'name' => $education_level->name
+            'id'   => (int) $education_level->id,
+            'name' => $education_level->name,
         ];
     }
 }

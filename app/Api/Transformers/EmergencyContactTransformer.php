@@ -15,9 +15,8 @@ class EmergencyContactTransformer extends TransformerAbstract
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     protected $defaultIncludes = [
-        'relationship'
+        'relationship',
     ];
-
 
     /**
      * Resources that can be included if requested.
@@ -42,12 +41,12 @@ class EmergencyContactTransformer extends TransformerAbstract
     public function transform(EmergencyContact $emergency_contact)
     {
         return [
-            'id'              => (int)$emergency_contact->id,
-            'employee_id'     => (int)$emergency_contact->employee_id,
+            'id'              => (int) $emergency_contact->id,
+            'employee_id'     => (int) $emergency_contact->employee_id,
             'first_name'      => $emergency_contact->first_name,
             'middle_name'     => $emergency_contact->middle_name,
             'last_name'       => $emergency_contact->last_name,
-            'relationship_id' => (int)$emergency_contact->relationship_id,
+            'relationship_id' => (int) $emergency_contact->relationship_id,
             'home_phone'      => $emergency_contact->home_phone,
             'mobile_phone'    => $emergency_contact->mobile_phone,
         ];
@@ -66,7 +65,7 @@ class EmergencyContactTransformer extends TransformerAbstract
     {
         $employee = $emergency_contact->employee;
 
-        return $this->item($employee, new EmployeeTransformer);
+        return $this->item($employee, new EmployeeTransformer());
     }
 
     /**
@@ -82,6 +81,6 @@ class EmergencyContactTransformer extends TransformerAbstract
     {
         $relationship = $emergency_contact->relationship;
 
-        return $this->item($relationship, new RelationshipTransformer);
+        return $this->item($relationship, new RelationshipTransformer());
     }
 }

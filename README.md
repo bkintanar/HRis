@@ -1,35 +1,25 @@
-## vue-starter Backend API (Laravel-based)
+[![SensioLabsInsight](https://img.shields.io/sensiolabs/i/76b2c9fd-06e0-4fbc-a325-f76eab8cfb34.svg?style=flat-square)](https://insight.sensiolabs.com/projects/76b2c9fd-06e0-4fbc-a325-f76eab8cfb34) [![StyleCI](https://styleci.io/repos/29657205/shield)](https://styleci.io/repos/29657205)
 
-This application will serve as the companion app to another project called vue-starter. It is meant to be a small demo of a Laravel API, using Dingo and JWT for authentication.
+# .htaccess Information
 
-[vue-starter Frontend App](https://github.com/layer7be/vue-starter)
+```
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews
+    </IfModule>
 
-## Installation
+    RewriteEngine On
 
-### Step 1: Clone the repo
-```
-git clone https://github.com/layer7be/vue-starter-laravel-api
-```
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)/$ /$1 [L,R=301]
 
-### Step 2: Prerequisites
-```
-composer install
-touch database/database.sqlite
-php artisan migrate
-php artisan db:seed
-php artisan key:generate
-php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
-php artisan jwt:secret
-```
+    # Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
 
-### Step 3: Serve
-```
-php artisan serve
-```
-
-### Note about Apache
-If you use Apache to serve this, you will need to add the following 2 lines to your .htaccess (or your virtualhost configuration):
-```
-RewriteCond %{HTTP:Authorization} ^(.)
-RewriteRule . - [e=HTTP_AUTHORIZATION:%1]
+    RewriteCond %{HTTP:Authorization} ^(.*)
+    RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+</IfModule>
 ```

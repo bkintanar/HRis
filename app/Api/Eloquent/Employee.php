@@ -7,7 +7,6 @@
  *
  * @link    http://github.com/HB-Co/HRis
  */
-
 namespace HRis\Api\Eloquent;
 
 use Carbon\Carbon;
@@ -161,7 +160,7 @@ class Employee extends Model
     {
         if ($employee_id) {
             $employee = self::whereEmployeeId($employee_id)->with([
-                'user', 'country', 'province', 'city', 'jobHistories', 'emergencyContacts', 'dependents', 'employeeWorkShift', 'customFieldValues', 'workExperiences', 'educations', 'employeeSkills'
+                'user', 'country', 'province', 'city', 'jobHistories', 'emergencyContacts', 'dependents', 'employeeWorkShift', 'customFieldValues', 'workExperiences', 'educations', 'employeeSkills',
             ])->first();
             $employee->job_history = $employee->jobHistory();
 
@@ -169,7 +168,7 @@ class Employee extends Model
         }
 
         $employee = self::whereUserId($user_id)->with([
-            'user', 'country', 'province', 'city', 'jobHistories', 'emergencyContacts', 'dependents', 'employeeWorkShift', 'customFieldValues', 'workExperiences', 'educations', 'employeeSkills'
+            'user', 'country', 'province', 'city', 'jobHistories', 'emergencyContacts', 'dependents', 'employeeWorkShift', 'customFieldValues', 'workExperiences', 'educations', 'employeeSkills',
         ])->first();
         $employee->job_history = $employee->jobHistory();
 
@@ -178,8 +177,8 @@ class Employee extends Model
 
     /**
      * @param bool|true $paginate
-     * @param string $sort
-     * @param string $direction
+     * @param string    $sort
+     * @param string    $direction
      *
      * @return mixed
      *
@@ -228,7 +227,7 @@ class Employee extends Model
      */
     public function getFullNameAttribute()
     {
-        return $this->first_name . ' ' . ($this->middle_name ? $this->middle_name . ' ' : '') . $this->last_name . ($this->suffix_name ? ' ' . $this->suffix_name : '');
+        return $this->first_name.' '.($this->middle_name ? $this->middle_name.' ' : '').$this->last_name.($this->suffix_name ? ' '.$this->suffix_name : '');
     }
 
     /**
@@ -249,11 +248,11 @@ class Employee extends Model
             $wstp['to_datetime']->toTimeString())->orderBy('id', 'desc')->first();
 
         // If employee logs out more than one hour after the work shift schedule check for extended time
-        if ($time_out == null && $time_in != null) {
+        if ($time_out === null && $time_in !== null) {
             $time_out = $this->timelogs()->where('swipe_datetime', '<=',
                 $wstp['to_datetime']->addHours(4)->toDateTimeString())->orderBy('id', 'desc')->first();
 
-            if ($time_out != null and $wstp['from_datetime']->addHours(24)->toDateTimeString() < $time_out->swipe_datetime) {
+            if ($time_out !== null && $wstp['from_datetime']->addHours(24)->toDateTimeString() < $time_out->swipe_datetime) {
                 $time_out = null;
             }
 
@@ -265,7 +264,7 @@ class Employee extends Model
         // Checks for failure to Login or Logout
         if ($time_out && $time_in) {
             if ($time_out->swipe_time == $time_in->swipe_time) {
-                if ($time_out->swipe_datetime >= $wstp['to_datetime']->subHour(1)->toDateTimeString() and $time_out->swipe_datetime <= $wstp['to_datetime']->addHours(4)->toDateTimeString()) {
+                if ($time_out->swipe_datetime >= $wstp['to_datetime']->subHour(1)->toDateTimeString() && $time_out->swipe_datetime <= $wstp['to_datetime']->addHours(4)->toDateTimeString()) {
                     $time_in = null;
                 } else {
                     $time_out = null;
@@ -274,7 +273,7 @@ class Employee extends Model
         }
 
         return [
-            'in_time' => $time_in ? $time_in->swipe_time : null,
+            'in_time'  => $time_in ? $time_in->swipe_time : null,
             'out_time' => $time_out ? $time_out->swipe_time : null,
         ];
     }

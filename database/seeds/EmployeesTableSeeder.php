@@ -7,8 +7,8 @@
  *
  * @link    http://github.com/HB-Co/HRis
  */
-use HRis\Eloquent\Employee;
-use HRis\Eloquent\User;
+use HRis\Api\Eloquent\Employee;
+use HRis\Api\Eloquent\User;
 use Illuminate\Database\Seeder;
 
 class EmployeesTableSeeder extends Seeder

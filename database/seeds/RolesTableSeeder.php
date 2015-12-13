@@ -58,143 +58,111 @@ class RolesTableSeeder extends Seeder
     {
         $arr = [];
 
+        $root_permission = $arr = array_merge(
+            $this->set('dashboard', ['view']),
+            $this->set('profile', ['view']),
+            $this->set('profile.personal-details', ['view', 'update']),
+            $this->set('profile.contact-details', ['view', 'update']),
+            $this->set('profile.emergency-contacts'),
+            $this->set('profile.dependents'),
+            $this->set('profile.job'),
+            $this->set('profile.work-shifts'),
+            $this->set('profile.salary'),
+            $this->set('profile.qualifications'),
+            $this->set('profile.qualifications.educations'),
+            $this->set('profile.qualifications.skills'),
+            $this->set('profile.qualifications.work-experiences'),
+            $this->set('pim.personal-details', ['view', 'update']),
+            $this->set('pim.contact-details', ['view', 'update']),
+            $this->set('pim.emergency-contacts'),
+            $this->set('pim.dependents'),
+            $this->set('pim.job'),
+            $this->set('pim.work-shifts'),
+            $this->set('pim.salary'),
+            $this->set('pim.qualifications'),
+            $this->set('pim.qualifications.educations'),
+            $this->set('pim.qualifications.skills'),
+            $this->set('pim.qualifications.work-experiences'),
+            $this->set('performance'),
+            $this->set('performance.my-tracker'),
+            $this->set('performance.employee-tracker'),
+            $this->set('performance.configuration'),
+            $this->set('performance.configuration.trackers'),
+            $this->set('time'),
+            $this->set('pim'),
+            $this->set('pim.employee-list'),
+            $this->set('admin'),
+            $this->set('admin.user-management'),
+            $this->set('admin.job'),
+            $this->set('admin.job.titles'),
+            $this->set('admin.job.pay-grades'),
+            $this->set('admin.job.employment-status'),
+            $this->set('admin.job.categories'),
+            $this->set('admin.job.work-shifts'),
+            $this->set('admin.qualifications'),
+            $this->set('admin.qualifications.skills'),
+            $this->set('admin.qualifications.educations'),
+            $this->set('pim.configuration'),
+            $this->set('pim.configuration.termination-reasons'),
+            $this->set('pim.configuration.custom-field-sections'),
+            $this->set('perforamance.configuration'),
+            $this->set('perforamance.configuration.trackers'),
+            $this->set('time.attendance'),
+            $this->set('time.attendance.employee-records'),
+            $this->set('time.requisition'),
+            $this->set('time.holidays-and-events'),
+            $this->set('presence', ['view'])
+        );
+
         switch ($role) {
             case 'root':
-                $arr = array_merge(
-                    permission('dashboard', ['view']),
-                    permission('profile', ['view']),
-                    permission('profile.personal-details', ['view', 'update']),
-                    permission('profile.contact-details', ['view', 'update']),
-                    permission('profile.emergency-contacts'),
-                    permission('profile.dependents'),
-                    permission('profile.job'),
-                    permission('profile.work-shifts'),
-                    permission('profile.salary'),
-                    permission('profile.qualifications'),
-                    permission('profile.qualifications.educations'),
-                    permission('profile.qualifications.skills'),
-                    permission('profile.qualifications.work-experiences'),
-                    permission('pim.personal-details', ['view', 'update']),
-                    permission('pim.contact-details', ['view', 'update']),
-                    permission('pim.emergency-contacts'),
-                    permission('pim.dependents'),
-                    permission('pim.job'),
-                    permission('pim.work-shifts'),
-                    permission('pim.salary'),
-                    permission('pim.qualifications'),
-                    permission('pim.qualifications.educations'),
-                    permission('pim.qualifications.skills'),
-                    permission('pim.qualifications.work-experiences'),
-                    permission('performance'),
-                    permission('performance.my-tracker'),
-                    permission('performance.employee-tracker'),
-                    permission('performance.configuration'),
-                    permission('performance.configuration.trackers'),
-                    permission('time'),
-                    permission('pim'),
-                    permission('pim.employee-list'),
-                    permission('admin'),
-                    permission('admin.user-management'),
-                    permission('admin.job'),
-                    permission('admin.job.titles'),
-                    permission('admin.job.pay-grades'),
-                    permission('admin.job.employment-status'),
-                    permission('admin.job.categories'),
-                    permission('admin.job.work-shifts'),
-                    permission('admin.qualifications'),
-                    permission('admin.qualifications.skills'),
-                    permission('admin.qualifications.educations'),
-                    permission('pim.configuration'),
-                    permission('pim.configuration.termination-reasons'),
-                    permission('pim.configuration.custom-field-sections'),
-                    permission('perforamance.configuration'),
-                    permission('perforamance.configuration.trackers'),
-                    permission('time.attendance'),
-                    permission('time.attendance.employee-records'),
-                    permission('time.requisition'),
-                    permission('time.holidays-and-events'),
-                    permission('presence', ['view'])
-                );
+                $arr = $root_permission;
                 break;
             case 'admin':
-                $arr = array_merge(
-                    permission('dashboard', ['view']),
-                    permission('profile', ['view']),
-                    permission('profile.personal-details', ['view', 'update']),
-                    permission('profile.contact-details', ['view', 'update']),
-                    permission('profile.emergency-contacts'),
-                    permission('profile.dependents'),
-                    permission('profile.job'),
-                    permission('profile.work-shifts'),
-                    permission('profile.salary'),
-                    permission('profile.qualifications'),
-                    permission('profile.qualifications.educations'),
-                    permission('profile.qualifications.skills'),
-                    permission('profile.qualifications.work-experiences'),
-                    permission('pim.personal-details', ['view', 'update']),
-                    permission('pim.contact-details', ['view', 'update']),
-                    permission('pim.emergency-contacts'),
-                    permission('pim.dependents'),
-                    permission('pim.job'),
-                    permission('pim.work-shifts'),
-                    permission('pim.salary'),
-                    permission('pim.qualifications'),
-                    permission('pim.qualifications.educations'),
-                    permission('pim.qualifications.skills'),
-                    permission('pim.qualifications.work-experiences'),
-                    permission('performance'),
-                    permission('performance.my-tracker'),
-                    permission('performance.employee-tracker'),
-                    permission('performance.configuration'),
-                    permission('performance.configuration.trackers'),
-                    permission('time'),
-                    permission('pim'),
-                    permission('pim.employee-list'),
-                    permission('admin'),
-                    permission('admin.user-management'),
-                    permission('admin.job'),
-                    permission('admin.job.titles'),
-                    permission('admin.job.pay-grades'),
-                    permission('admin.job.employment-status'),
-                    permission('admin.job.categories'),
-                    permission('admin.job.work-shifts'),
-                    permission('admin.qualifications'),
-                    permission('admin.qualifications.skills'),
-                    permission('admin.qualifications.educations'),
-                    permission('pim.configuration'),
-                    permission('pim.configuration.termination-reasons'),
-                    permission('pim.configuration.custom-fields'),
-                    permission('perforamance.configuration'),
-                    permission('perforamance.configuration.trackers'),
-                    permission('time.attendance'),
-                    permission('time.attendance.employee-records'),
-                    permission('time.requisition'),
-                    permission('time.holidays-and-events'),
-                    permission('presence', ['view'])
-                );
+                $arr = $root_permission;
                 break;
             case 'ess':
                 $arr = array_merge(
-                    permission('dashboard', ['view']),
-                    permission('profile', ['view']),
-                    permission('profile.personal-details', ['view', 'update']),
-                    permission('profile.contact-details', ['view', 'update']),
-                    permission('profile.emergency-contacts'),
-                    permission('profile.dependents'),
-                    permission('profile.job', ['view']),
-                    permission('profile.work-shifts', ['view']),
-                    permission('profile.salary', ['view']),
-                    permission('profile.qualifications'),
-                    permission('profile.qualifications.educations'),
-                    permission('profile.qualifications.skills'),
-                    permission('profile.qualifications.work-experiences'),
-                    permission('performance', ['view']),
-                    permission('performance.my-tracker', ['view']),
-                    permission('presence', ['view'])
+                    $this->set('dashboard', ['view']),
+                    $this->set('profile', ['view']),
+                    $this->set('profile.personal-details', ['view', 'update']),
+                    $this->set('profile.contact-details', ['view', 'update']),
+                    $this->set('profile.emergency-contacts'),
+                    $this->set('profile.dependents'),
+                    $this->set('profile.job', ['view']),
+                    $this->set('profile.work-shifts', ['view']),
+                    $this->set('profile.salary', ['view']),
+                    $this->set('profile.qualifications'),
+                    $this->set('profile.qualifications.educations'),
+                    $this->set('profile.qualifications.skills'),
+                    $this->set('profile.qualifications.work-experiences'),
+                    $this->set('performance', ['view']),
+                    $this->set('performance.my-tracker', ['view']),
+                    $this->set('presence', ['view'])
                 );
                 break;
         }
 
         return json_encode($arr);
+    }
+
+    public function set($label, $only = [])
+    {
+        $permit = ['create', 'update', 'view', 'delete'];
+
+        // If $only array is empty return all permission
+        if (!count($only)) {
+            $only = $permit;
+        }
+
+        $arr = [];
+
+        foreach ($only as $action) {
+            if (in_array($action, $permit)) {
+                $arr[$label.'.'.$action] = true;
+            }
+        }
+
+        return $arr;
     }
 }

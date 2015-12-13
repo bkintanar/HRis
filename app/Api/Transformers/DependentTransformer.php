@@ -18,7 +18,6 @@ class DependentTransformer extends TransformerAbstract
         'relationship',
     ];
 
-
     /**
      * Resources that can be included if requested.
      *
@@ -42,13 +41,13 @@ class DependentTransformer extends TransformerAbstract
     public function transform(Dependent $dependent)
     {
         return [
-            'id'              => (int)$dependent->id,
-            'employee_id'     => (int)$dependent->employee_id,
+            'id'              => (int) $dependent->id,
+            'employee_id'     => (int) $dependent->employee_id,
             'first_name'      => $dependent->first_name,
             'middle_name'     => $dependent->middle_name,
             'last_name'       => $dependent->last_name,
-            'relationship_id' => (int)$dependent->relationship_id,
-            'birth_date'      => $dependent->birth_date
+            'relationship_id' => (int) $dependent->relationship_id,
+            'birth_date'      => $dependent->birth_date,
         ];
     }
 
@@ -65,7 +64,7 @@ class DependentTransformer extends TransformerAbstract
     {
         $employee = $dependent->employee;
 
-        return $this->item($employee, new EmployeeTransformer);
+        return $this->item($employee, new EmployeeTransformer());
     }
 
     /**
@@ -81,6 +80,6 @@ class DependentTransformer extends TransformerAbstract
     {
         $relationship = $dependent->relationship;
 
-        return $this->item($relationship, new RelationshipTransformer);
+        return $this->item($relationship, new RelationshipTransformer());
     }
 }
