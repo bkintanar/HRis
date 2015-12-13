@@ -7,7 +7,6 @@
  *
  * @link    http://github.com/HB-Co/HRis
  */
-
 namespace HRis\Api\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
@@ -44,6 +43,6 @@ class SalaryComponents extends Model
             ->get(['id'])
             ->take(2);
 
-        return ['monthlyBasic' => $salaryComponent->first()->id, 'SSS' => $salaryComponent->last()->id];
+        return ['monthlyBasic' => $salaryComponents->first()->id, 'SSS' => $salaryComponents->last()->id];
     }
 }

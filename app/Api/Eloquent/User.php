@@ -3,6 +3,7 @@
 namespace HRis\Api\Eloquent;
 
 use Cartalyst\Sentinel\Users\EloquentUser as SentinelUser;
+use Exception;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
@@ -68,7 +69,7 @@ class User extends SentinelUser implements AuthenticatableContract, Authorizable
     }
 
     /**
-     * Get the identifier that will be stored in the subject claim of the JWT
+     * Get the identifier that will be stored in the subject claim of the JWT.
      *
      * @return mixed
      *
@@ -80,7 +81,7 @@ class User extends SentinelUser implements AuthenticatableContract, Authorizable
     }
 
     /**
-     * Return a key value array, containing any custom claims to be added to the JWT
+     * Return a key value array, containing any custom claims to be added to the JWT.
      *
      * @return array
      *

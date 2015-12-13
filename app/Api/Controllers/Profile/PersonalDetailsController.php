@@ -7,11 +7,11 @@
  *
  * @link    http://github.com/HB-Co/HRis
  */
-
 namespace HRis\Api\Controllers\Profile;
 
-use HRis\Api\Eloquent\Employee;
+use Exception;
 use HRis\Api\Controllers\BaseController;
+use HRis\Api\Eloquent\Employee;
 use HRis\Api\Requests\Profile\PersonalContactDetailsRequest;
 use Illuminate\Support\Facades\Config;
 
@@ -35,7 +35,7 @@ class PersonalDetailsController extends BaseController
     }
 
     /**
-     * Updates the Profile - Personal Details and Contact Details
+     * Updates the Profile - Personal Details and Contact Details.
      *
      * @param PersonalContactDetailsRequest $request
      *
@@ -52,7 +52,7 @@ class PersonalDetailsController extends BaseController
 
         $employee = $this->employee->whereId($id)->first();
 
-        if (!$employee || !$employee_id || $employee_id == Config::get('company.employee_id_prefix') . '____') {
+        if (!$employee || !$employee_id || $employee_id == Config::get('company.employee_id_prefix').'____') {
             return response()->json(['error' => UNABLE_UPDATE_MESSAGE], 500);
         }
 

@@ -15,7 +15,7 @@ class CityTransformer extends TransformerAbstract
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     protected $availableIncludes = [
-        'province'
+        'province',
     ];
 
     /**
@@ -30,9 +30,9 @@ class CityTransformer extends TransformerAbstract
     public function transform(City $city)
     {
         return [
-            'id'          => (int)$city->id,
-            'province_id' => (int)$city->province_id,
-            'name'        => $city->name
+            'id'          => (int) $city->id,
+            'province_id' => (int) $city->province_id,
+            'name'        => $city->name,
         ];
     }
 
@@ -49,6 +49,6 @@ class CityTransformer extends TransformerAbstract
     {
         $province = $city->province;
 
-        return $this->item($province, new ProvinceTransformer);
+        return $this->item($province, new ProvinceTransformer());
     }
 }

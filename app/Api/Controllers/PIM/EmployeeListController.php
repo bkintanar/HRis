@@ -7,9 +7,9 @@
  *
  * @link    http://github.com/HB-Co/HRis
  */
-
 namespace HRis\Http\Controllers\PIM;
 
+use Exception;
 use HRis\Api\Controllers\BaseController;
 use HRis\Api\Eloquent\Employee;
 use HRis\Api\Eloquent\EmployeeSalaryComponent;
@@ -42,11 +42,6 @@ class EmployeeListController extends BaseController
     protected $salary_component;
 
     /**
-     * @var
-     */
-    private $columns;
-
-    /**
      * @param Employee                $employee
      * @param EmployeeSalaryComponent $employee_salary_component
      * @param SalaryComponent         $salary_component
@@ -59,9 +54,7 @@ class EmployeeListController extends BaseController
         EmployeeSalaryComponent $employee_salary_component,
         SalaryComponent $salary_component,
         Pagination $pagination
-    )
-    {
-
+    ) {
         $this->employee = $employee;
         $this->employee_salary_component = $employee_salary_component;
         $this->salary_component = $salary_component;
@@ -99,31 +92,10 @@ class EmployeeListController extends BaseController
         $employees = $this->employee->getEmployeeList(false, $request->sort(), $request->direction());
 
         return $this->xhr($employees->get());
-
-        $this->data['employees'] = $employees;
-        $this->data['employee_id_prefix'] = $this->employee_id_prefix;
-        $this->data['settings'] = $request->paginationSettings();
-        $this->data['columns'] = $this->getColumns();
-        $this->data['pim'] = true;
-        $this->data['pageTitle'] = 'Employee Information';
-
-        return $this->template('pages.pim.employee-list.view');
-    }
-
-    /**
-     * @return mixed
-     *
-     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
-     */
-    private function getColumns()
-    {
-        return $this->columns;
     }
 
     /**
      * Show the PIM - Employee with the given Id.
-     *
-     * @Get("pim/employee-list/{id}")
      *
      * @param $employee_id
      *
@@ -136,7 +108,7 @@ class EmployeeListController extends BaseController
         $employee = $this->employee->whereId($employee_id)->first();
 
         if ($employee) {
-            return redirect()->to(Request::path() . '/personal-details');
+            return redirect()->to(Request::path().'/personal-details');
         }
 
         return response()->make(view()->make('errors.404'), 404);
@@ -144,8 +116,6 @@ class EmployeeListController extends BaseController
 
     /**
      * Adding new user - Employee.
-     *
-     * @Post("pim/employee-list")
      *
      * @param PIMRequest $request
      *

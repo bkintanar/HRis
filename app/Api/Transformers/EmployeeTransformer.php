@@ -16,7 +16,7 @@ class EmployeeTransformer extends TransformerAbstract
      */
     protected $defaultIncludes = [
         'user',
-        'job_history'
+        'job_history',
     ];
 
     /**
@@ -31,7 +31,7 @@ class EmployeeTransformer extends TransformerAbstract
         'country',
         'dependents',
         'emergency_contacts',
-        'custom_field_values'
+        'custom_field_values',
     ];
 
     /**
@@ -59,9 +59,9 @@ class EmployeeTransformer extends TransformerAbstract
             'gender'              => $employee->gender,
             'address_1'           => $employee->address_1,
             'address_2'           => $employee->address_2,
-            'address_city_id'     => (int)$employee->address_city_id,
-            'address_province_id' => (int)$employee->address_province_id,
-            'address_country_id'  => (int)$employee->address_country_id,
+            'address_city_id'     => (int) $employee->address_city_id,
+            'address_province_id' => (int) $employee->address_province_id,
+            'address_country_id'  => (int) $employee->address_country_id,
             'postal_code'         => $employee->address_postal_code,
             'home_phone'          => $employee->home_phone,
             'mobile_phone'        => $employee->mobile_phone,
@@ -94,7 +94,7 @@ class EmployeeTransformer extends TransformerAbstract
     {
         $city = $employee->city;
 
-        return $this->item($city, new CityTransformer);
+        return $this->item($city, new CityTransformer());
     }
 
     /**
@@ -110,7 +110,7 @@ class EmployeeTransformer extends TransformerAbstract
     {
         $user = $employee->user;
 
-        return $this->item($user, new UserTransformer);
+        return $this->item($user, new UserTransformer());
     }
 
     /**
@@ -126,7 +126,7 @@ class EmployeeTransformer extends TransformerAbstract
     {
         $country = $employee->country;
 
-        return $this->item($country, new CountryTransformer);
+        return $this->item($country, new CountryTransformer());
     }
 
     /**
@@ -142,7 +142,7 @@ class EmployeeTransformer extends TransformerAbstract
     {
         $dependents = $employee->dependents;
 
-        return $this->collection($dependents, new DependentTransformer);
+        return $this->collection($dependents, new DependentTransformer());
     }
 
     /**
@@ -158,7 +158,7 @@ class EmployeeTransformer extends TransformerAbstract
     {
         $emergency_contacts = $employee->emergencyContacts;
 
-        return $this->collection($emergency_contacts, new EmergencyContactTransformer);
+        return $this->collection($emergency_contacts, new EmergencyContactTransformer());
     }
 
     /**
@@ -174,7 +174,7 @@ class EmployeeTransformer extends TransformerAbstract
     {
         $custom_field_values = $employee->customFieldValues;
 
-        return $this->collection($custom_field_values, new CustomFieldValueTransformer);
+        return $this->collection($custom_field_values, new CustomFieldValueTransformer());
     }
 
     /**
@@ -190,7 +190,7 @@ class EmployeeTransformer extends TransformerAbstract
     {
         $educations = $employee->educations;
 
-        return $this->collection($educations, new EducationTransformer);
+        return $this->collection($educations, new EducationTransformer());
     }
 
     /**
@@ -206,6 +206,6 @@ class EmployeeTransformer extends TransformerAbstract
     {
         $job_history = $employee->jobHistory();
 
-        return $this->item($job_history, new JobHistoryTransformer);
+        return $this->item($job_history, new JobHistoryTransformer());
     }
 }

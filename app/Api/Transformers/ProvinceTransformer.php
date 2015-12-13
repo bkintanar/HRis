@@ -15,7 +15,7 @@ class ProvinceTransformer extends TransformerAbstract
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     protected $availableIncludes = [
-        'country'
+        'country',
     ];
 
     /**
@@ -30,8 +30,8 @@ class ProvinceTransformer extends TransformerAbstract
     public function transform(Province $province)
     {
         return [
-            'id'          => (int)$province->id,
-            'name'        => $province->name
+            'id'          => (int) $province->id,
+            'name'        => $province->name,
         ];
     }
 
@@ -48,6 +48,6 @@ class ProvinceTransformer extends TransformerAbstract
     {
         $country = $province->country;
 
-        return $this->item($country, new CountryTransformer);
+        return $this->item($country, new CountryTransformer());
     }
 }

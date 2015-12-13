@@ -13,9 +13,9 @@
 
 $factory->define(HRis\User::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->email,
-        'password' => bcrypt(str_random(10)),
+        'name'           => $faker->name,
+        'email'          => $faker->email,
+        'password'       => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
     ];
 });
@@ -23,6 +23,6 @@ $factory->define(HRis\User::class, function (Faker\Generator $faker) {
 $factory->define(HRis\Dog::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
-        'age' => $faker->randomDigit,
+        'age'  => $faker->randomDigit,
     ];
 });

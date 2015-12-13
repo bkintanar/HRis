@@ -7,7 +7,6 @@
  *
  * @link    http://github.com/HB-Co/HRis
  */
-
 namespace HRis\Api\Eloquent;
 
 use Carbon\Carbon;
@@ -82,8 +81,8 @@ class EmployeeWorkShift extends Model
             $start_date)->orderBy('id', 'desc')->first();
 
         $from_time_allowance = Config::get('company.from_time_allowance');
-        $from_datetime = Carbon::parse($start_date . ' ' . $employee_work_shift->workShift->from_time)->subHour($from_time_allowance);
-        $to_datetime = Carbon::parse($start_date . ' ' . $employee_work_shift->workShift->from_time)->addHours($employee_work_shift->workShift->duration + 1)->subSecond(1);
+        $from_datetime = Carbon::parse($start_date.' '.$employee_work_shift->workShift->from_time)->subHour($from_time_allowance);
+        $to_datetime = Carbon::parse($start_date.' '.$employee_work_shift->workShift->from_time)->addHours($employee_work_shift->workShift->duration + 1)->subSecond(1);
 
         return ['from_datetime' => $from_datetime, 'to_datetime' => $to_datetime];
     }

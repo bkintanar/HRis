@@ -5,4 +5,3 @@ Homestead.json
 .env
 _ide_helper*.php
 composer.lock
-/config/jwt.php

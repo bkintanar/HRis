@@ -7,7 +7,6 @@ use League\Fractal\TransformerAbstract;
 
 class EducationTransformer extends TransformerAbstract
 {
-
     /**
      * List of resources to automatically include.
      *
@@ -32,9 +31,9 @@ class EducationTransformer extends TransformerAbstract
     public function transform(Education $education)
     {
         return [
-            'id'                   => (int)$education->id,
-            'employee_id'          => (int)$education->employee_id,
-            'education_level_id'   => (int)$education->education_level_id,
+            'id'                   => (int) $education->id,
+            'employee_id'          => (int) $education->employee_id,
+            'education_level_id'   => (int) $education->education_level_id,
             'institute'            => $education->institute,
             'major_specialization' => $education->major_specialization,
             'from_date'            => $education->from_date,
@@ -56,7 +55,7 @@ class EducationTransformer extends TransformerAbstract
     {
         $employee = $education->employee;
 
-        return $this->item($employee, new EmployeeTransformer);
+        return $this->item($employee, new EmployeeTransformer());
     }
 
     /**
@@ -72,6 +71,6 @@ class EducationTransformer extends TransformerAbstract
     {
         $education_level = $education->educationLevel;
 
-        return $this->item($education_level, new EducationLevelTransformer);
+        return $this->item($education_level, new EducationLevelTransformer());
     }
 }
