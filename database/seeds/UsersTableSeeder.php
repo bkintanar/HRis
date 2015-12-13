@@ -37,6 +37,16 @@ class UsersTableSeeder extends Seeder
                 'password'     => Hash::make('retardko'),
                 'last_login'   => Carbon::now(),
             ],
+            [
+                'email'        => 'gabstafari@gmail.com',
+                'password'     => Hash::make('retardko'),
+                'last_login'   => Carbon::now(),
+            ],
+            [
+                'email'        => 'harlequin.doyon@gmail.com',
+                'password'     => Hash::make('retardko'),
+                'last_login'   => Carbon::now(),
+            ],
         ];
     }
 }
