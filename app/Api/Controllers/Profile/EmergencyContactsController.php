@@ -42,27 +42,6 @@ class EmergencyContactsController extends BaseController
     }
 
     /**
-     * Show the Profile - Emergency Contacts.
-     *
-     * @param EmergencyContactsRequest $request
-     *
-     * @return \Illuminate\View\View
-     *
-     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
-     */
-    public function index(EmergencyContactsRequest $request)
-    {
-        $employee = $this->employee->getEmployeeById($request->get('employee_id'), null);
-
-        // TODO: recode this
-        if (!$employee) {
-            return response()->make(view()->make('errors.404'), 404);
-        }
-
-        return $this->xhr($employee);
-    }
-
-    /**
      * Save the Profile - Emergency Contacts.
      *
      * @param EmergencyContactsRequest $request

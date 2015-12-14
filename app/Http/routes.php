@@ -1,30 +1,32 @@
 <?php
 
+use Dingo\Api\Routing\Router;
+
 $api = app('Dingo\Api\Routing\Router');
 
 // Version 1 of our API
-$api->version('v1', function ($api) {
+$api->version('v1', function (Router $api) {
 
     // Set our namespace for the underlying routes
-    $api->group(['namespace' => 'HRis\Api\Controllers', 'middleware' => 'cors'], function ($api) {
+    $api->group(['namespace' => 'HRis\Api\Controllers', 'middleware' => 'cors'], function (Router $api) {
 
         // Login route
         $api->post('login', 'Auth\AuthController@authenticate');
         $api->post('register', 'Auth\AuthController@register');
 
         // Dogs! All routes in here are protected and thus need a valid token
-        //$api->group( [ 'protected' => true, 'middleware' => 'jwt.refresh' ], function ($api) {
-        $api->group(['middleware' => 'jwt.refresh'], function ($api) {
+        //$api->group( [ 'protected' => true, 'middleware' => 'jwt.refresh' ], function (Router $api) {
+        $api->group(['middleware' => 'jwt.refresh'], function (Router $api) {
 
             $api->get('users/me', 'Auth\AuthController@me');
             $api->post('sidebar', 'Auth\AuthController@sidebar');
             $api->get('validate_token', 'Auth\AuthController@validateToken');
 
-            $api->group(['prefix' => 'employee'], function ($api) {
+            $api->group(['prefix' => 'employee'], function (Router $api) {
                 $api->post('get-by-employee-id', 'EmployeeController@getByEmployeeId');
             });
 
-            $api->group(['prefix' => 'profile', 'namespace' => 'Profile'], function ($api) {
+            $api->group(['prefix' => 'profile', 'namespace' => 'Profile'], function (Router $api) {
                 $api->patch('personal-details', 'PersonalDetailsController@update');
                 $api->patch('contact-details', 'PersonalDetailsController@update');
                 $api->get('emergency-contacts', 'EmergencyContactsController@index');

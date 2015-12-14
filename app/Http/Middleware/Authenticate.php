@@ -4,6 +4,7 @@ namespace HRis\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Http\Request;
 
 class Authenticate
 {
@@ -18,8 +19,6 @@ class Authenticate
      * Create a new filter instance.
      *
      * @param Guard $auth
-     *
-     * @return void
      */
     public function __construct(Guard $auth)
     {
@@ -34,7 +33,7 @@ class Authenticate
      *
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         if ($this->auth->guest()) {
             if ($request->ajax()) {

@@ -252,7 +252,7 @@ class Employee extends Model
             $time_out = $this->timelogs()->where('swipe_datetime', '<=',
                 $wstp['to_datetime']->addHours(4)->toDateTimeString())->orderBy('id', 'desc')->first();
 
-            if ($time_out != null && $wstp['from_datetime']->addHours(24)->toDateTimeString() < $time_out->swipe_datetime) {
+            if ($time_out !== null && $wstp['from_datetime']->addHours(24)->toDateTimeString() < $time_out->swipe_datetime) {
                 $time_out = null;
             }
 

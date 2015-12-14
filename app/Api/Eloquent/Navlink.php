@@ -269,7 +269,7 @@ class Navlink extends Model
     {
         $result = '';
         foreach ($children as $child) {
-            $result .= '<tr><td class="'.($indent == true ? 'indent' : '').($double == true ? '-double' : '').' ta-left">'.$child->name.'</td>';
+            $result .= '<tr><td class="'.($indent === true ? 'indent' : '').($double === true ? '-double' : '').' ta-left">'.$child->name.'</td>';
             $result .= '<td></td>';
 
             $result .= self::generateCheckbox($child, $id, PERMISSION_VIEW);
@@ -282,7 +282,7 @@ class Navlink extends Model
             $childrenOfChild = self::whereParentId($child->id)->get();
 
             if (count($childrenOfChild)) {
-                $result .= self::generatePermissions($childrenOfChild, $id, true, $indent == true ? true : false);
+                $result .= self::generatePermissions($childrenOfChild, $id, true, $indent === true ? true : false);
             }
         }
 
