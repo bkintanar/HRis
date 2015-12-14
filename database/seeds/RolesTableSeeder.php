@@ -146,7 +146,7 @@ class RolesTableSeeder extends Seeder
         return json_encode($arr);
     }
 
-    function set($label, $only = [])
+    public function set($label, $only = [])
     {
         $permit = ['create', 'update', 'view', 'delete'];
 
