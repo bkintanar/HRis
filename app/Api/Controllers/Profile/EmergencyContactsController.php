@@ -9,6 +9,7 @@
  */
 namespace HRis\Api\Controllers\Profile;
 
+use Exception;
 use HRis\Api\Controllers\BaseController;
 use HRis\Api\Eloquent\EmergencyContact;
 use HRis\Api\Eloquent\Employee;

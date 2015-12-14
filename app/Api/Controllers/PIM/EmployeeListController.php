@@ -9,6 +9,7 @@
  */
 namespace HRis\Http\Controllers\PIM;
 
+use Exception;
 use HRis\Api\Controllers\BaseController;
 use HRis\Api\Eloquent\Employee;
 use HRis\Api\Eloquent\EmployeeSalaryComponent;
@@ -120,8 +121,6 @@ class EmployeeListController extends BaseController
     /**
      * Show the PIM - Employee with the given Id.
      *
-     * @Get("pim/employee-list/{id}")
-     *
      * @param $employee_id
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
@@ -141,8 +140,6 @@ class EmployeeListController extends BaseController
 
     /**
      * Adding new user - Employee.
-     *
-     * @Post("pim/employee-list")
      *
      * @param PIMRequest $request
      *

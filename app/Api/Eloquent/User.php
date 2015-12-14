@@ -3,6 +3,7 @@
 namespace HRis\Api\Eloquent;
 
 use Cartalyst\Sentinel\Users\EloquentUser as SentinelUser;
+use Exception;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
