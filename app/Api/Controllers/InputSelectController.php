@@ -134,7 +134,7 @@ class InputSelectController extends BaseController
             return response()->json([]);
         }
 
-        return $this->_chosen($this->city->whereProvinceId($province_id));
+        return $this->chosen($this->city->whereProvinceId($province_id));
     }
 
     /**
@@ -146,7 +146,7 @@ class InputSelectController extends BaseController
      */
     public function countries(Request $request)
     {
-        return $this->_chosen($this->country);
+        return $this->chosen($this->country);
     }
 
     /**
@@ -162,7 +162,7 @@ class InputSelectController extends BaseController
             return $this->tableView($this->department);
         }
 
-        return $this->_chosen($this->department);
+        return $this->chosen($this->department);
     }
 
     /**
@@ -178,7 +178,7 @@ class InputSelectController extends BaseController
             return $this->tableView($this->education_level);
         }
 
-        return $this->_chosen($this->education_level);
+        return $this->chosen($this->education_level);
     }
 
     /**
@@ -194,7 +194,7 @@ class InputSelectController extends BaseController
             $this->tableView($this->employment_status, 'class');
         }
 
-        return $this->_chosen($this->employment_status, ['class']);
+        return $this->chosen($this->employment_status, ['class']);
     }
 
     /**
@@ -210,7 +210,7 @@ class InputSelectController extends BaseController
             return $this->tableView($this->job_title);
         }
 
-        return $this->_chosen($this->job_title);
+        return $this->chosen($this->job_title);
     }
 
     /**
@@ -226,7 +226,7 @@ class InputSelectController extends BaseController
             return $this->tableView($this->location);
         }
 
-        return $this->_chosen($this->location);
+        return $this->chosen($this->location);
     }
 
     /**
@@ -238,7 +238,7 @@ class InputSelectController extends BaseController
      */
     public function maritalStatuses(Request $request)
     {
-        return $this->_chosen($this->marital_status);
+        return $this->chosen($this->marital_status);
     }
 
     /**
@@ -250,7 +250,7 @@ class InputSelectController extends BaseController
      */
     public function nationalities(Request $request)
     {
-        return $this->_chosen($this->nationality);
+        return $this->chosen($this->nationality);
     }
 
     /**
@@ -262,7 +262,7 @@ class InputSelectController extends BaseController
      */
     public function provinces(Request $request)
     {
-        return $this->_chosen($this->province);
+        return $this->chosen($this->province);
     }
 
     /**
@@ -278,7 +278,7 @@ class InputSelectController extends BaseController
             return $this->tableView($this->relationship);
         }
 
-        return $this->_chosen($this->relationship);
+        return $this->chosen($this->relationship);
     }
 
     /**
@@ -294,7 +294,7 @@ class InputSelectController extends BaseController
             return $this->tableView($this->skill);
         }
 
-        return $this->_chosen($this->skill);
+        return $this->chosen($this->skill);
     }
 
     /**
@@ -322,9 +322,9 @@ class InputSelectController extends BaseController
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    protected function _chosen($model, $custom_attribute = null)
+    protected function chosen($model, $custom_attribute = null)
     {
-        $attributes = $this->_merge_attributes($custom_attribute);
+        $attributes = $this->mergeAttributes($custom_attribute);
 
         $collection = $model->get($attributes);
 
@@ -347,7 +347,7 @@ class InputSelectController extends BaseController
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    protected function _merge_attributes($custom_attribute)
+    protected function mergeAttributes($custom_attribute)
     {
         $attributes = ['name', 'id'];
 

@@ -248,7 +248,7 @@ class Employee extends Model
             $wstp['to_datetime']->toTimeString())->orderBy('id', 'desc')->first();
 
         // If employee logs out more than one hour after the work shift schedule check for extended time
-        if ($time_out == null && $time_in != null) {
+        if ($time_out === null && $time_in !== null) {
             $time_out = $this->timelogs()->where('swipe_datetime', '<=',
                 $wstp['to_datetime']->addHours(4)->toDateTimeString())->orderBy('id', 'desc')->first();
 
