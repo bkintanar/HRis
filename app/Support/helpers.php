@@ -14,7 +14,7 @@ if (!function_exists('permission')) {
 
         foreach ($only as $action) {
             if (in_array($action, $permit)) {
-                $arr[$label . '.' . $action] = true;
+                $arr[$label.'.'.$action] = true;
             }
         }
 

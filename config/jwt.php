@@ -142,8 +142,8 @@ return [
         |
         */
 
-        'storage' => Tymon\JWTAuth\Providers\Storage\Illuminate::class
+        'storage' => Tymon\JWTAuth\Providers\Storage\Illuminate::class,
 
-    ]
+    ],
 
 ];
