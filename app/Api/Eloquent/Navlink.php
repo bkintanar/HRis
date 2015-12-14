@@ -445,7 +445,7 @@ class Navlink extends Model
      */
     private static function filterPermission($user, $links)
     {
-        return $links->filter(function ($item) use ($user) {
+        return $links->filter(function (Navlink $item) use ($user) {
             $permission = str_replace('/', '.', $item->href);
 
             return $user->hasAccess($permission.'.view');

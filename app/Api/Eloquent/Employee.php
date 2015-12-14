@@ -252,7 +252,7 @@ class Employee extends Model
             $time_out = $this->timelogs()->where('swipe_datetime', '<=',
                 $wstp['to_datetime']->addHours(4)->toDateTimeString())->orderBy('id', 'desc')->first();
 
-            if ($time_out != null and $wstp['from_datetime']->addHours(24)->toDateTimeString() < $time_out->swipe_datetime) {
+            if ($time_out != null && $wstp['from_datetime']->addHours(24)->toDateTimeString() < $time_out->swipe_datetime) {
                 $time_out = null;
             }
 
@@ -264,7 +264,7 @@ class Employee extends Model
         // Checks for failure to Login or Logout
         if ($time_out && $time_in) {
             if ($time_out->swipe_time == $time_in->swipe_time) {
-                if ($time_out->swipe_datetime >= $wstp['to_datetime']->subHour(1)->toDateTimeString() and $time_out->swipe_datetime <= $wstp['to_datetime']->addHours(4)->toDateTimeString()) {
+                if ($time_out->swipe_datetime >= $wstp['to_datetime']->subHour(1)->toDateTimeString() && $time_out->swipe_datetime <= $wstp['to_datetime']->addHours(4)->toDateTimeString()) {
                     $time_in = null;
                 } else {
                     $time_out = null;

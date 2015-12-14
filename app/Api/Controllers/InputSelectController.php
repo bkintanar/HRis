@@ -159,7 +159,7 @@ class InputSelectController extends BaseController
     public function departments(Request $request)
     {
         if ($request->get('table_view')) {
-            return $this->_table_view($this->department);
+            return $this->tableView($this->department);
         }
 
         return $this->_chosen($this->department);
@@ -175,7 +175,7 @@ class InputSelectController extends BaseController
     public function educationLevels(Request $request)
     {
         if ($request->get('table_view')) {
-            return $this->_table_view($this->education_level);
+            return $this->tableView($this->education_level);
         }
 
         return $this->_chosen($this->education_level);
@@ -191,7 +191,7 @@ class InputSelectController extends BaseController
     public function employmentStatuses(Request $request)
     {
         if ($request->get('table_view')) {
-            $this->_table_view($this->employment_status, 'class');
+            $this->tableView($this->employment_status, 'class');
         }
 
         return $this->_chosen($this->employment_status, ['class']);
@@ -207,7 +207,7 @@ class InputSelectController extends BaseController
     public function jobTitles(Request $request)
     {
         if ($request->get('table_view')) {
-            return $this->_table_view($this->job_title);
+            return $this->tableView($this->job_title);
         }
 
         return $this->_chosen($this->job_title);
@@ -223,7 +223,7 @@ class InputSelectController extends BaseController
     public function locations(Request $request)
     {
         if ($request->get('table_view')) {
-            return $this->_table_view($this->location);
+            return $this->tableView($this->location);
         }
 
         return $this->_chosen($this->location);
@@ -275,7 +275,7 @@ class InputSelectController extends BaseController
     public function relationships(Request $request)
     {
         if ($request->get('table_view')) {
-            return $this->_table_view($this->relationship);
+            return $this->tableView($this->relationship);
         }
 
         return $this->_chosen($this->relationship);
@@ -291,7 +291,7 @@ class InputSelectController extends BaseController
     public function skills(Request $request)
     {
         if ($request->get('table_view')) {
-            return $this->_table_view($this->skill);
+            return $this->tableView($this->skill);
         }
 
         return $this->_chosen($this->skill);
@@ -305,7 +305,7 @@ class InputSelectController extends BaseController
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    protected function _table_view($model, $custom_attribute = null)
+    protected function tableView($model, $custom_attribute = null)
     {
         if ($custom_attribute) {
             return response()->json($model->get(['name', 'id', 'class']));
