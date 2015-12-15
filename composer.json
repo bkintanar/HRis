@@ -4,6 +4,12 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "type": "project",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/tralves/Swaggervel"
+        }
+    ],
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
@@ -11,7 +17,8 @@
         "tymon/jwt-auth": "dev-develop",
         "barryvdh/laravel-cors": "^0.7.1",
         "cartalyst/sentinel": "^2.0",
-        "league/fractal": "^0.13.0"
+        "league/fractal": "^0.13.0",
+        "jlapp/swaggervel": "master-dev"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.1",

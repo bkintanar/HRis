@@ -25,12 +25,12 @@ class PersonalContactDetailsRequest extends Request
      */
     public function rules()
     {
-        if (Request::isMethod('post')) {
+        if (Request::isMethod('patch')) {
             return [
-                'first_name'  => 'required',
-                'last_name'   => 'required',
-                'employee_id' => 'required|unique',
-                'birth_date'  => 'required',
+                'employee' => [
+                    'id'          => 'required',
+                    'employee_id' => 'required',
+                ]
             ];
         }
 

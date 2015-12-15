@@ -13,6 +13,10 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Relationship.
+ *
+ * @SWG\Definition(definition="Relationship")
+ * @SWG\Property(property="id", type="integer", format="int64", default=1, description="Unique identifier for the relationship")
+ * @SWG\Property(property="name", type="string", default="Father", description="Name of the relationship")
  */
 class Relationship extends Model
 {

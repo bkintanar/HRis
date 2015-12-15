@@ -50,6 +50,51 @@ class AuthController extends BaseController
     }
 
     /**
+     * Authenticates guest user by logging in.
+     *
+     * @SWG\Post(
+     *     path="/login",
+     *     tags={"Authentication"},
+     *     summary="Authenticates guest user by logging in.",
+     *     @SWG\Response(response="200", description="Success",
+     *         @SWG\Schema(
+     *             title="data",
+     *             type="object",
+     *             @SWG\Property(property="token", type="string"),
+     *         )
+     *     ),
+     *     @SWG\Response(response="401", description="Invalid credentials",
+     *         @SWG\Schema(
+     *             title="data",
+     *             type="object",
+     *             @SWG\Property(property="error", type="string", default="invalid_credentials"),
+     *         )
+     *     ),
+     *     @SWG\Response(response="500", description="Could not create token",
+     *         @SWG\Schema(
+     *             title="data",
+     *             type="object",
+     *             @SWG\Property(property="error", type="string", default="could_not_create_token"),
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="email",
+     *         in="formData",
+     *         description="Registered user's email address",
+     *         required=true,
+     *         type="string",
+     *         default="bertrand.kintanar@gmail.com",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="password",
+     *         in="formData",
+     *         description="Registered user's password",
+     *         required=true,
+     *         type="string",
+     *         default="retardko",
+     *     ),
+     * )
+     *
      * @param Request $request
      *
      * @return \Illuminate\Http\JsonResponse
@@ -106,29 +151,77 @@ class AuthController extends BaseController
     }
 
     /**
-     * Deactivate active user.
+     * Logout currently authenticated user.
+     *
+     * @SWG\Get(
+     *     path="/logout",
+     *     tags={"Authentication"},
+     *     summary="Logout currently authenticated user.",
+     *     @SWG\Response(response="200", description="Signed out",
+     *         @SWG\Schema(
+     *             title="data",
+     *             type="object",
+     *             @SWG\Property(property="message", type="string", default="signed_out"),
+     *             @SWG\Property(property="status_code", type="integer", default=200),
+     *         )
+     *     ),
+     *     @SWG\Response(response="400", description="Token not provided",
+     *         @SWG\Schema(
+     *             title="data",
+     *             type="object",
+     *             @SWG\Property(property="message", type="string", default="Token not provided"),
+     *             @SWG\Property(property="status_code", type="integer", default=400),
+     *             @SWG\Property(property="debug", type="object"),
+     *         )
+     *     ),
+     *     @SWG\Response(response="417", description="Cannot sign out",
+     *         @SWG\Schema(
+     *             title="data",
+     *             type="object",
+     *             @SWG\Property(property="message", type="string", default="cannot_sign_out"),
+     *             @SWG\Property(property="status_code", type="integer", default=417),
+     *         )
+     *     ),
+     *     @SWG\Response(response="500", description="Could not create token",
+     *         @SWG\Schema(
+     *             title="data",
+     *             type="object",
+     *             @SWG\Property(property="message", type="string", default="could_not_create_token"),
+     *             @SWG\Property(property="status_code", type="integer", default=500),
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         description="JWT Token",
+     *         required=true,
+     *         type="string",
+     *         default="Bearer ",
+     *         @SWG\Items(type="string")
+     *     ),
+     * )
      *
      * @return \Illuminate\Http\JsonResponse
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function signout()
+    public function logout()
     {
         $response = [];
         try {
             if (JWTAuth::parseToken()->invalidate()) {
-                $response['text'] = 'Signed out';
-                $response['code'] = 200;
+                $response['message'] = 'signed_out';
+                $response['status_code'] = 200;
             } else {
-                $response['text'] = 'Cannot sign out';
-                $response['code'] = 417;
+                $response['message'] = 'cannot_sign_out';
+                $response['status_code'] = 417;
             }
         } catch (JWTException $e) {
-            $response['text'] = $e->getMessage();
-            $response['code'] = $e->getCode();
+            $response['message'] = $e->getMessage();
+            $response['status_code'] = $e->getCode();
         } catch (\Exception $e) {
-            $response['text'] = $e->getMessage();
-            $response['code'] = $e->getCode();
+            $response['message'] = $e->getMessage();
+            $response['status_code'] = $e->getCode();
         }
 
         return response()->json($response);

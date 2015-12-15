@@ -13,6 +13,10 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Country.
+ *
+ * @SWG\Definition(definition="Country")
+ * @SWG\Property(property="id", type="integer", format="int64", default=1, description="Unique identifier for the country")
+ * @SWG\Property(property="name", type="string", default="Afghanistan", description="Name of the country")
  */
 class Country extends Model
 {

@@ -13,6 +13,10 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class JobTitle.
+ *
+ * @SWG\Definition(definition="JobTitle")
+ * @SWG\Property(property="id", type="integer", format="int64", default=1, description="Unique identifier for the job title")
+ * @SWG\Property(property="name", type="string", default="Chief Executive Officer", description="Name of the job title")
  */
 class JobTitle extends Model
 {

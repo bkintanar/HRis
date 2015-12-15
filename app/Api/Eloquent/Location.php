@@ -13,6 +13,10 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Location.
+ *
+ * @SWG\Definition(definition="Location")
+ * @SWG\Property(property="id", type="integer", format="int64", default=1, description="Unique identifier for the location")
+ * @SWG\Property(property="name", type="string", default="Unit 203", description="Name of the location")
  */
 class Location extends Model
 {

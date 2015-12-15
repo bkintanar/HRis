@@ -13,6 +13,10 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class EducationLevel.
+ *
+ * @SWG\Definition(definition="EducationLevel")
+ * @SWG\Property(property="id", type="integer", format="int64", default=1, description="Unique identifier for the education level")
+ * @SWG\Property(property="name", type="string", default="Administration", description="Name of the education level")
  */
 class EducationLevel extends Model
 {

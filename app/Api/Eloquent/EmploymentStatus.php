@@ -13,6 +13,11 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class EmploymentStatus.
+ *
+ * @SWG\Definition(definition="EmploymentStatus")
+ * @SWG\Property(property="id", type="integer", format="int64", default=2, description="Unique identifier for the employment status")
+ * @SWG\Property(property="name", type="string", default="Regular", description="Name of the employment status")
+ * @SWG\Property(property="class", type="string", default="label-success", description="Bootstrap class for label of the employment status")
  */
 class EmploymentStatus extends Model
 {

@@ -13,6 +13,10 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Skill.
+ *
+ * @SWG\Definition(definition="Skill")
+ * @SWG\Property(property="id", type="integer", format="int64", default=1, description="Unique identifier for the skill")
+ * @SWG\Property(property="name", type="string", default="PHP", description="Name of the skill")
  */
 class Skill extends Model
 {

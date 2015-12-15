@@ -13,6 +13,10 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class City.
+ *
+ * @SWG\Definition(definition="City")
+ * @SWG\Property(property="id", type="integer", format="int64", default=457, description="Unique identifier for the city")
+ * @SWG\Property(property="name", type="string", default="Bogo City", description="Name of the city")
  */
 class City extends Model
 {

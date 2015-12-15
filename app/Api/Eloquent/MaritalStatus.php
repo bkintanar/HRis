@@ -13,6 +13,10 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class MaritalStatus.
+ *
+ * @SWG\Definition(definition="MaritalStatus")
+ * @SWG\Property(property="id", type="integer", format="int64", default=1, description="Unique identifier for the marital status")
+ * @SWG\Property(property="name", type="string", default="Single", description="Name of the marital status")
  */
 class MaritalStatus extends Model
 {
