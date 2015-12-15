@@ -30,7 +30,7 @@ class PersonalContactDetailsRequest extends Request
                 'employee' => [
                     'id'          => 'required',
                     'employee_id' => 'required',
-                ]
+                ],
             ];
         }
 
