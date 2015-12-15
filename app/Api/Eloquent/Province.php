@@ -10,9 +10,14 @@
 namespace HRis\Api\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
+use Swagger\Annotations as SWG;
 
 /**
  * Class Province.
+ *
+ * @SWG\Definition(definition="Province")
+ * @SWG\Property(property="id", type="integer", format="int64", default=25, description="Unique identifier for the province")
+ * @SWG\Property(property="name", type="string", default="Cebu", description="Name of the province")
  */
 class Province extends Model
 {

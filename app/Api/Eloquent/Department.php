@@ -10,9 +10,14 @@
 namespace HRis\Api\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
+use Swagger\Annotations as SWG;
 
 /**
  * Class Department.
+ *
+ * @SWG\Definition(definition="Department")
+ * @SWG\Property(property="id", type="integer", format="int64", default=1, description="Unique identifier for the department")
+ * @SWG\Property(property="name", type="string", default="Administration", description="Name of the department")
  */
 class Department extends Model
 {

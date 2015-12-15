@@ -11,9 +11,32 @@ namespace HRis\Api\Eloquent;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Swagger\Annotations as SWG;
 
 /**
  * Class Employee.
+ *
+ * @SWG\Definition(definition="Employee", required={"id", "employee_id"})
+ * @SWG\Property(property="id", type="integer", format="int64", default=1, description="Unique identifier for the employee")
+ * @SWG\Property(property="employee_id", type="string", default="HRis-0001", description="ID of the employee")
+ * @SWG\Property(property="marital_status_id", type="integer", format="int64", default="2", description="Marital Status ID of the employee")
+ * @SWG\Property(property="nationality_id", type="integer", format="int64", default="62", description="Nationality ID of the employee")
+ * @SWG\Property(property="first_name", type="string", default="Bertrand", description="First name of the employee")
+ * @SWG\Property(property="middle_name", type="string", default="Son", description="Middle name of the employee")
+ * @SWG\Property(property="last_name", type="string", default="Kintanar", description="Last name of the employee")
+ * @SWG\Property(property="avatar", type="string", default="default/0.png", description="Avatar of the employee")
+ * @SWG\Property(property="gender", type="string", default="M", description="Gender of the employee")
+ * @SWG\Property(property="address_1", type="string", default="Judge Pedro Son Compound", description="Street address 1 of the employee")
+ * @SWG\Property(property="address_2", type="string", default="Miñoza St. Talamban", description="Street address 2 of the employee")
+ * @SWG\Property(property="address_city_id", type="integer", format="int64", default=439, description="Street address city ID of the employee")
+ * @SWG\Property(property="address_province_id", type="integer", format="int64", default=25, description="Street address province ID of the employee")
+ * @SWG\Property(property="address_country_id", type="integer", format="int64", default=185, description="Street address country ID of the employee")
+ * @SWG\Property(property="postal_code", type="string", default="6000", description="Street address postal code of the employee")
+ * @SWG\Property(property="home_phone", type="string", default="032 520 2160", description="Home phone of the employee")
+ * @SWG\Property(property="mobile_phone", type="string", default="0949 704 7136", description="Mobile phone of the employee")
+ * @SWG\Property(property="work_email", type="string", default="bertrand@idearobin.com", description="Work email of the employee")
+ * @SWG\Property(property="other_email", type="string", default="email@example.com", description="Other email of the employee")
+ * @SWG\Property(property="birth_date", type="string", default="1985-10-31", description="Birth date of the employee")
  */
 class Employee extends Model
 {
