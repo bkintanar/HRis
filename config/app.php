@@ -149,6 +149,7 @@ return [
         Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
         Dingo\Api\Provider\LaravelServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        Jlapp\Swaggervel\SwaggervelServiceProvider::class,
 
     ],
 
@@ -204,6 +205,7 @@ return [
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         'Activation' => Cartalyst\Sentinel\Laravel\Facades\Activation::class,
         'Reminder'   => Cartalyst\Sentinel\Laravel\Facades\Reminder::class,
-        'Sentinel'   => Cartalyst\Sentinel\Laravel\Facades\Sentinel::class, ],
+        'Sentinel'   => Cartalyst\Sentinel\Laravel\Facades\Sentinel::class,
+    ],
 
 ];

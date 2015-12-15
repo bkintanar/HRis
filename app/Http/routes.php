@@ -18,14 +18,13 @@ $api->version('v1', function (Router $api) {
         //$api->group( [ 'protected' => true, 'middleware' => 'jwt.refresh' ], function (Router $api) {
         $api->group(['middleware' => 'jwt.refresh'], function (Router $api) {
 
+            // Authentication
+            $api->get('logout', 'Auth\AuthController@logout');
+            $api->get('validate_token', 'Auth\AuthController@validateToken');
             $api->get('users/me', 'Auth\AuthController@me');
             $api->post('sidebar', 'Auth\AuthController@sidebar');
-            $api->get('validate_token', 'Auth\AuthController@validateToken');
 
-            $api->group(['prefix' => 'employee'], function (Router $api) {
-                $api->post('get-by-employee-id', 'EmployeeController@getByEmployeeId');
-            });
-
+            // Profile
             $api->group(['prefix' => 'profile', 'namespace' => 'Profile'], function (Router $api) {
                 $api->patch('personal-details', 'PersonalDetailsController@update');
                 $api->patch('contact-details', 'PersonalDetailsController@update');
@@ -35,29 +34,26 @@ $api->version('v1', function (Router $api) {
                 $api->delete('emergency-contacts', 'EmergencyContactsController@destroy');
             });
 
-            $api->get('signout', 'Auth\AuthController@signout');
+            // Employee
+            $api->group(['prefix' => 'employee'], function (Router $api) {
+                $api->post('get-by-employee-id', 'EmployeeController@getByEmployeeId');
+            });
 
-                $api->get('dogs', 'DogsController@index');
-            $api->post('dogs', 'DogsController@store');
-            $api->get('dogs/{id}', 'DogsController@show');
-            $api->delete('dogs/{id}', 'DogsController@destroy');
-            $api->put('dogs/{id}', 'DogsController@update');
+            // Chosen
+            $api->get('cities', 'LookupTableController@cities');
+            $api->get('countries', 'LookupTableController@countries');
+            $api->get('departments', 'LookupTableController@departments');
+            $api->get('education-levels', 'LookupTableController@educationLevels');
+            $api->get('employment-statuses', 'LookupTableController@employmentStatuses');
+            $api->get('job-titles', 'LookupTableController@jobTitles');
+            $api->get('locations', 'LookupTableController@locations');
+            $api->get('marital-statuses', 'LookupTableController@maritalStatuses');
+            $api->get('nationalities', 'LookupTableController@nationalities');
+            $api->get('provinces', 'LookupTableController@provinces');
+            $api->get('relationships', 'LookupTableController@relationships');
+            $api->get('skills', 'LookupTableController@skills');
 
         });
-
-        // Chosen
-        $api->get('cities', 'InputSelectController@cities');
-        $api->get('countries', 'InputSelectController@countries');
-        $api->get('departments', 'InputSelectController@departments');
-        $api->get('education-levels', 'InputSelectController@educationLevels');
-        $api->get('employment-statuses', 'InputSelectController@employmentStatuses');
-        $api->get('job-titles', 'InputSelectController@jobTitles');
-        $api->get('locations', 'InputSelectController@locations');
-        $api->get('marital-statuses', 'InputSelectController@maritalStatuses');
-        $api->get('nationalities', 'InputSelectController@nationalities');
-        $api->get('provinces', 'InputSelectController@provinces');
-        $api->get('relationships', 'InputSelectController@relationships');
-        $api->get('skills', 'InputSelectController@skills');
 
     });
 

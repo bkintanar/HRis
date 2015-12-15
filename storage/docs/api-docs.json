@@ -1,0 +1,1390 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HRis",
+    "description": "Human Resource and Payroll System",
+    "contact": {
+      "email": "bertrand.kintanar@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "host": "api.hris.dev",
+  "basePath": "/api",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Authenticates guest user by logging in.",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "formData",
+            "description": "Registered user's email address",
+            "required": true,
+            "type": "string",
+            "default": "bertrand.kintanar@gmail.com"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "description": "Registered user's password",
+            "required": true,
+            "type": "string",
+            "default": "retardko"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "data",
+              "properties": {
+                "token": {
+                  "description": "Authenticates guest user by logging in.",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Invalid credentials",
+            "schema": {
+              "title": "data",
+              "properties": {
+                "error": {
+                  "description": "Authenticates guest user by logging in.",
+                  "type": "string",
+                  "default": "invalid_credentials"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "500": {
+            "description": "Could not create token",
+            "schema": {
+              "title": "data",
+              "properties": {
+                "error": {
+                  "description": "Authenticates guest user by logging in.",
+                  "type": "string",
+                  "default": "could_not_create_token"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/logout": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Logout currently authenticated user.",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token",
+            "required": true,
+            "type": "string",
+            "items": {
+              "type": "string"
+            },
+            "default": "Bearer "
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Signed out",
+            "schema": {
+              "title": "data",
+              "properties": {
+                "message": {
+                  "description": "Logout currently authenticated user.",
+                  "type": "string",
+                  "default": "signed_out"
+                },
+                "status_code": {
+                  "description": "Logout currently authenticated user.",
+                  "type": "integer",
+                  "default": 200
+                }
+              },
+              "type": "object"
+            }
+          },
+          "400": {
+            "description": "Token not provided",
+            "schema": {
+              "title": "data",
+              "properties": {
+                "message": {
+                  "description": "Logout currently authenticated user.",
+                  "type": "string",
+                  "default": "Token not provided"
+                },
+                "status_code": {
+                  "description": "Logout currently authenticated user.",
+                  "type": "integer",
+                  "default": 400
+                },
+                "debug": {
+                  "description": "Logout currently authenticated user.",
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "417": {
+            "description": "Cannot sign out",
+            "schema": {
+              "title": "data",
+              "properties": {
+                "message": {
+                  "description": "Logout currently authenticated user.",
+                  "type": "string",
+                  "default": "cannot_sign_out"
+                },
+                "status_code": {
+                  "description": "Logout currently authenticated user.",
+                  "type": "integer",
+                  "default": 417
+                }
+              },
+              "type": "object"
+            }
+          },
+          "500": {
+            "description": "Could not create token",
+            "schema": {
+              "title": "data",
+              "properties": {
+                "message": {
+                  "description": "Logout currently authenticated user.",
+                  "type": "string",
+                  "default": "could_not_create_token"
+                },
+                "status_code": {
+                  "description": "Logout currently authenticated user.",
+                  "type": "integer",
+                  "default": 500
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/cities": {
+      "get": {
+        "tags": [
+          "Chosen Options"
+        ],
+        "summary": "Get cities data for chosen options.",
+        "parameters": [
+          {
+            "name": "province_id",
+            "in": "query",
+            "description": "Province primary key",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token",
+            "required": true,
+            "type": "string",
+            "default": "Bearer "
+          },
+          {
+            "name": "table_view",
+            "in": "query",
+            "description": "Returns a table view",
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/City"
+              }
+            }
+          },
+          "400": {
+            "description": "Token not provided",
+            "schema": {
+              "title": "data",
+              "properties": {
+                "message": {
+                  "description": "Error message from server",
+                  "type": "string",
+                  "default": "Token not provided"
+                },
+                "status_code": {
+                  "description": "Status code from server",
+                  "type": "integer",
+                  "default": 400
+                },
+                "debug": {
+                  "description": "Debug back trace",
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/countries": {
+      "get": {
+        "tags": [
+          "Chosen Options"
+        ],
+        "summary": "Get countries data for chosen options.",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token",
+            "required": true,
+            "type": "string",
+            "default": "Bearer "
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Country"
+              }
+            }
+          },
+          "400": {
+            "description": "Token not provided",
+            "schema": {
+              "title": "data",
+              "properties": {
+                "message": {
+                  "description": "Error message from server",
+                  "type": "string",
+                  "default": "Token not provided"
+                },
+                "status_code": {
+                  "description": "Status code from server",
+                  "type": "integer",
+                  "default": 400
+                },
+                "debug": {
+                  "description": "Debug back trace",
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/departments": {
+      "get": {
+        "tags": [
+          "Chosen Options"
+        ],
+        "summary": "Get departments data for chosen options.",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token",
+            "required": true,
+            "type": "string",
+            "default": "Bearer "
+          },
+          {
+            "name": "table_view",
+            "in": "query",
+            "description": "Returns a table view",
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Department"
+              }
+            }
+          },
+          "400": {
+            "description": "Token not provided",
+            "schema": {
+              "title": "data",
+              "properties": {
+                "message": {
+                  "description": "Error message from server",
+                  "type": "string",
+                  "default": "Token not provided"
+                },
+                "status_code": {
+                  "description": "Status code from server",
+                  "type": "integer",
+                  "default": 400
+                },
+                "debug": {
+                  "description": "Debug back trace",
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/education-levels": {
+      "get": {
+        "tags": [
+          "Chosen Options"
+        ],
+        "summary": "Get education levels data for chosen options.",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token",
+            "required": true,
+            "type": "string",
+            "default": "Bearer "
+          },
+          {
+            "name": "table_view",
+            "in": "query",
+            "description": "Returns a table view",
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EducationLevel"
+              }
+            }
+          },
+          "400": {
+            "description": "Token not provided",
+            "schema": {
+              "title": "data",
+              "properties": {
+                "message": {
+                  "description": "Error message from server",
+                  "type": "string",
+                  "default": "Token not provided"
+                },
+                "status_code": {
+                  "description": "Status code from server",
+                  "type": "integer",
+                  "default": 400
+                },
+                "debug": {
+                  "description": "Debug back trace",
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/employment-statuses": {
+      "get": {
+        "tags": [
+          "Chosen Options"
+        ],
+        "summary": "Get employment statuses data for chosen options.",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token",
+            "required": true,
+            "type": "string",
+            "default": "Bearer "
+          },
+          {
+            "name": "table_view",
+            "in": "query",
+            "description": "Returns a table view",
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EmploymentStatus"
+              }
+            }
+          },
+          "400": {
+            "description": "Token not provided",
+            "schema": {
+              "title": "data",
+              "properties": {
+                "message": {
+                  "description": "Error message from server",
+                  "type": "string",
+                  "default": "Token not provided"
+                },
+                "status_code": {
+                  "description": "Status code from server",
+                  "type": "integer",
+                  "default": 400
+                },
+                "debug": {
+                  "description": "Debug back trace",
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/job-titles": {
+      "get": {
+        "tags": [
+          "Chosen Options"
+        ],
+        "summary": "Get job titles data for chosen options.",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token",
+            "required": true,
+            "type": "string",
+            "default": "Bearer "
+          },
+          {
+            "name": "table_view",
+            "in": "query",
+            "description": "Returns a table view",
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/JobTitle"
+              }
+            }
+          },
+          "400": {
+            "description": "Token not provided",
+            "schema": {
+              "title": "data",
+              "properties": {
+                "message": {
+                  "description": "Error message from server",
+                  "type": "string",
+                  "default": "Token not provided"
+                },
+                "status_code": {
+                  "description": "Status code from server",
+                  "type": "integer",
+                  "default": 400
+                },
+                "debug": {
+                  "description": "Debug back trace",
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/locations": {
+      "get": {
+        "tags": [
+          "Chosen Options"
+        ],
+        "summary": "Get locations data for chosen options.",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token",
+            "required": true,
+            "type": "string",
+            "default": "Bearer "
+          },
+          {
+            "name": "table_view",
+            "in": "query",
+            "description": "Returns a table view",
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Location"
+              }
+            }
+          },
+          "400": {
+            "description": "Token not provided",
+            "schema": {
+              "title": "data",
+              "properties": {
+                "message": {
+                  "description": "Error message from server",
+                  "type": "string",
+                  "default": "Token not provided"
+                },
+                "status_code": {
+                  "description": "Status code from server",
+                  "type": "integer",
+                  "default": 400
+                },
+                "debug": {
+                  "description": "Debug back trace",
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/marital-statuses": {
+      "get": {
+        "tags": [
+          "Chosen Options"
+        ],
+        "summary": "Get marital statuses data for chosen options.",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token",
+            "required": true,
+            "type": "string",
+            "default": "Bearer "
+          },
+          {
+            "name": "table_view",
+            "in": "query",
+            "description": "Returns a table view",
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MaritalStatus"
+              }
+            }
+          },
+          "400": {
+            "description": "Token not provided",
+            "schema": {
+              "title": "data",
+              "properties": {
+                "message": {
+                  "description": "Error message from server",
+                  "type": "string",
+                  "default": "Token not provided"
+                },
+                "status_code": {
+                  "description": "Status code from server",
+                  "type": "integer",
+                  "default": 400
+                },
+                "debug": {
+                  "description": "Debug back trace",
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/nationalities": {
+      "get": {
+        "tags": [
+          "Chosen Options"
+        ],
+        "summary": "Get nationalities data for chosen options.",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token",
+            "required": true,
+            "type": "string",
+            "default": "Bearer "
+          },
+          {
+            "name": "table_view",
+            "in": "query",
+            "description": "Returns a table view",
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Nationality"
+              }
+            }
+          },
+          "400": {
+            "description": "Token not provided",
+            "schema": {
+              "title": "data",
+              "properties": {
+                "message": {
+                  "description": "Error message from server",
+                  "type": "string",
+                  "default": "Token not provided"
+                },
+                "status_code": {
+                  "description": "Status code from server",
+                  "type": "integer",
+                  "default": 400
+                },
+                "debug": {
+                  "description": "Debug back trace",
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/provinces": {
+      "get": {
+        "tags": [
+          "Chosen Options"
+        ],
+        "summary": "Get provinces data for chosen options.",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token",
+            "required": true,
+            "type": "string",
+            "default": "Bearer "
+          },
+          {
+            "name": "table_view",
+            "in": "query",
+            "description": "Returns a table view",
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Province"
+              }
+            }
+          },
+          "400": {
+            "description": "Token not provided",
+            "schema": {
+              "title": "data",
+              "properties": {
+                "message": {
+                  "description": "Error message from server",
+                  "type": "string",
+                  "default": "Token not provided"
+                },
+                "status_code": {
+                  "description": "Status code from server",
+                  "type": "integer",
+                  "default": 400
+                },
+                "debug": {
+                  "description": "Debug back trace",
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/relationships": {
+      "get": {
+        "tags": [
+          "Chosen Options"
+        ],
+        "summary": "Get relationships data for chosen options.",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token",
+            "required": true,
+            "type": "string",
+            "default": "Bearer "
+          },
+          {
+            "name": "table_view",
+            "in": "query",
+            "description": "Returns a table view",
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Relationship"
+              }
+            }
+          },
+          "400": {
+            "description": "Token not provided",
+            "schema": {
+              "title": "data",
+              "properties": {
+                "message": {
+                  "description": "Error message from server",
+                  "type": "string",
+                  "default": "Token not provided"
+                },
+                "status_code": {
+                  "description": "Status code from server",
+                  "type": "integer",
+                  "default": 400
+                },
+                "debug": {
+                  "description": "Debug back trace",
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/skills": {
+      "get": {
+        "tags": [
+          "Chosen Options"
+        ],
+        "summary": "Get skills data for chosen options.",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token",
+            "required": true,
+            "type": "string",
+            "default": "Bearer "
+          },
+          {
+            "name": "table_view",
+            "in": "query",
+            "description": "Returns a table view",
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Skill"
+              }
+            }
+          },
+          "400": {
+            "description": "Token not provided",
+            "schema": {
+              "title": "data",
+              "properties": {
+                "message": {
+                  "description": "Error message from server",
+                  "type": "string",
+                  "default": "Token not provided"
+                },
+                "status_code": {
+                  "description": "Status code from server",
+                  "type": "integer",
+                  "default": 400
+                },
+                "debug": {
+                  "description": "Debug back trace",
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/profile/personal-details": {
+      "patch": {
+        "tags": [
+          "Employee Profiles"
+        ],
+        "summary": "Updates the Profile - Personal Details.",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "employee",
+            "in": "body",
+            "description": "Employee object that needs to be updated",
+            "required": true,
+            "schema": {
+              "title": "employee",
+              "properties": {
+                "employee": {
+                  "description": "Updates the Profile - Personal Details.",
+                  "$ref": "#/definitions/Employee"
+                }
+              },
+              "type": "object"
+            },
+            "type": "object"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token",
+            "required": true,
+            "type": "string",
+            "default": "Bearer "
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "data",
+              "required": [
+                "employee",
+                "status"
+              ],
+              "properties": {
+                "employee": {
+                  "description": "Updates the Profile - Personal Details.",
+                  "$ref": "#/definitions/Employee"
+                },
+                "status": {
+                  "description": "Status message from server",
+                  "type": "string",
+                  "default": "Record successfully updated."
+                }
+              },
+              "type": "object"
+            }
+          },
+          "400": {
+            "description": "Token not provided",
+            "schema": {
+              "title": "data",
+              "properties": {
+                "message": {
+                  "description": "Error message from server",
+                  "type": "string",
+                  "default": "Token not provided"
+                },
+                "status_code": {
+                  "description": "Status code from server",
+                  "type": "integer",
+                  "default": 400
+                },
+                "debug": {
+                  "description": "Debug back trace",
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "405": {
+            "description": "Employee Id already in use.",
+            "schema": {
+              "title": "data",
+              "required": [
+                "status"
+              ],
+              "properties": {
+                "status": {
+                  "description": "Error message from server",
+                  "type": "string",
+                  "default": "Employee Id already in use."
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/profile/contact-details": {
+      "patch": {
+        "tags": [
+          "Employee Profiles"
+        ],
+        "summary": "Updates the Profile - Contact Details.",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "employee",
+            "in": "body",
+            "description": "Employee object that needs to be updated",
+            "required": true,
+            "schema": {
+              "title": "employee",
+              "properties": {
+                "employee": {
+                  "description": "Updates the Profile - Personal Details.",
+                  "$ref": "#/definitions/Employee"
+                }
+              },
+              "type": "object"
+            },
+            "type": "object"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Token",
+            "required": true,
+            "type": "string",
+            "default": "Bearer "
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "data",
+              "required": [
+                "employee",
+                "status"
+              ],
+              "properties": {
+                "employee": {
+                  "description": "Updates the Profile - Personal Details.",
+                  "$ref": "#/definitions/Employee"
+                },
+                "status": {
+                  "description": "Status message from server",
+                  "type": "string",
+                  "default": "Record successfully updated."
+                }
+              },
+              "type": "object"
+            }
+          },
+          "400": {
+            "description": "Token not provided",
+            "schema": {
+              "title": "data",
+              "properties": {
+                "message": {
+                  "description": "Error message from server",
+                  "type": "string",
+                  "default": "Token not provided"
+                },
+                "status_code": {
+                  "description": "Status code from server",
+                  "type": "integer",
+                  "default": 400
+                },
+                "debug": {
+                  "description": "Debug back trace",
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "City": {
+      "properties": {
+        "id": {
+          "description": "Unique identifier for the city",
+          "type": "integer",
+          "format": "int64",
+          "default": 457
+        },
+        "name": {
+          "description": "Name of the city",
+          "type": "string",
+          "default": "Bogo City"
+        }
+      }
+    },
+    "Country": {
+      "properties": {
+        "id": {
+          "description": "Unique identifier for the country",
+          "type": "integer",
+          "format": "int64",
+          "default": 1
+        },
+        "name": {
+          "description": "Name of the country",
+          "type": "string",
+          "default": "Afghanistan"
+        }
+      }
+    },
+    "Department": {
+      "properties": {
+        "id": {
+          "description": "Unique identifier for the department",
+          "type": "integer",
+          "format": "int64",
+          "default": 1
+        },
+        "name": {
+          "description": "Name of the department",
+          "type": "string",
+          "default": "Administration"
+        }
+      }
+    },
+    "EducationLevel": {
+      "properties": {
+        "id": {
+          "description": "Unique identifier for the education level",
+          "type": "integer",
+          "format": "int64",
+          "default": 1
+        },
+        "name": {
+          "description": "Name of the education level",
+          "type": "string",
+          "default": "Administration"
+        }
+      }
+    },
+    "Employee": {
+      "required": [
+        "id",
+        "employee_id"
+      ],
+      "properties": {
+        "id": {
+          "description": "Unique identifier for the employee",
+          "type": "integer",
+          "format": "int64",
+          "default": 1
+        },
+        "employee_id": {
+          "description": "ID of the employee",
+          "type": "string",
+          "default": "HRis-0001"
+        },
+        "marital_status_id": {
+          "description": "Marital Status ID of the employee",
+          "type": "integer",
+          "format": "int64",
+          "default": "2"
+        },
+        "nationality_id": {
+          "description": "Nationality ID of the employee",
+          "type": "integer",
+          "format": "int64",
+          "default": "62"
+        },
+        "first_name": {
+          "description": "First name of the employee",
+          "type": "string",
+          "default": "Bertrand"
+        },
+        "middle_name": {
+          "description": "Middle name of the employee",
+          "type": "string",
+          "default": "Son"
+        },
+        "last_name": {
+          "description": "Last name of the employee",
+          "type": "string",
+          "default": "Kintanar"
+        },
+        "avatar": {
+          "description": "Avatar of the employee",
+          "type": "string",
+          "default": "default/0.png"
+        },
+        "gender": {
+          "description": "Gender of the employee",
+          "type": "string",
+          "default": "M"
+        },
+        "address_1": {
+          "description": "Street address 1 of the employee",
+          "type": "string",
+          "default": "Judge Pedro Son Compound"
+        },
+        "address_2": {
+          "description": "Street address 2 of the employee",
+          "type": "string",
+          "default": "Mi\u00f1oza St. Talamban"
+        },
+        "address_city_id": {
+          "description": "Street address city ID of the employee",
+          "type": "integer",
+          "format": "int64",
+          "default": 439
+        },
+        "address_province_id": {
+          "description": "Street address province ID of the employee",
+          "type": "integer",
+          "format": "int64",
+          "default": 25
+        },
+        "address_country_id": {
+          "description": "Street address country ID of the employee",
+          "type": "integer",
+          "format": "int64",
+          "default": 185
+        },
+        "postal_code": {
+          "description": "Street address postal code of the employee",
+          "type": "string",
+          "default": "6000"
+        },
+        "home_phone": {
+          "description": "Home phone of the employee",
+          "type": "string",
+          "default": "032 520 2160"
+        },
+        "mobile_phone": {
+          "description": "Mobile phone of the employee",
+          "type": "string",
+          "default": "0949 704 7136"
+        },
+        "work_email": {
+          "description": "Work email of the employee",
+          "type": "string",
+          "default": "bertrand@idearobin.com"
+        },
+        "other_email": {
+          "description": "Other email of the employee",
+          "type": "string",
+          "default": "email@example.com"
+        },
+        "birth_date": {
+          "description": "Birth date of the employee",
+          "type": "string",
+          "default": "1985-10-31"
+        }
+      }
+    },
+    "EmploymentStatus": {
+      "properties": {
+        "id": {
+          "description": "Unique identifier for the employment status",
+          "type": "integer",
+          "format": "int64",
+          "default": 2
+        },
+        "name": {
+          "description": "Name of the employment status",
+          "type": "string",
+          "default": "Regular"
+        },
+        "class": {
+          "description": "Bootstrap class for label of the employment status",
+          "type": "string",
+          "default": "label-success"
+        }
+      }
+    },
+    "JobTitle": {
+      "properties": {
+        "id": {
+          "description": "Unique identifier for the job title",
+          "type": "integer",
+          "format": "int64",
+          "default": 1
+        },
+        "name": {
+          "description": "Name of the job title",
+          "type": "string",
+          "default": "Chief Executive Officer"
+        }
+      }
+    },
+    "Location": {
+      "properties": {
+        "id": {
+          "description": "Unique identifier for the location",
+          "type": "integer",
+          "format": "int64",
+          "default": 1
+        },
+        "name": {
+          "description": "Name of the location",
+          "type": "string",
+          "default": "Unit 203"
+        }
+      }
+    },
+    "MaritalStatus": {
+      "properties": {
+        "id": {
+          "description": "Unique identifier for the marital status",
+          "type": "integer",
+          "format": "int64",
+          "default": 1
+        },
+        "name": {
+          "description": "Name of the marital status",
+          "type": "string",
+          "default": "Single"
+        }
+      }
+    },
+    "Nationality": {
+      "properties": {
+        "id": {
+          "description": "Unique identifier for the nationality",
+          "type": "integer",
+          "format": "int64",
+          "default": 1
+        },
+        "name": {
+          "description": "Name of the nationality",
+          "type": "string",
+          "default": "Afghan"
+        }
+      }
+    },
+    "Province": {
+      "properties": {
+        "id": {
+          "description": "Unique identifier for the province",
+          "type": "integer",
+          "format": "int64",
+          "default": 25
+        },
+        "name": {
+          "description": "Name of the province",
+          "type": "string",
+          "default": "Cebu"
+        }
+      }
+    },
+    "Relationship": {
+      "properties": {
+        "id": {
+          "description": "Unique identifier for the relationship",
+          "type": "integer",
+          "format": "int64",
+          "default": 1
+        },
+        "name": {
+          "description": "Name of the relationship",
+          "type": "string",
+          "default": "Father"
+        }
+      }
+    },
+    "Skill": {
+      "properties": {
+        "id": {
+          "description": "Unique identifier for the skill",
+          "type": "integer",
+          "format": "int64",
+          "default": 1
+        },
+        "name": {
+          "description": "Name of the skill",
+          "type": "string",
+          "default": "PHP"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Fork HRis on GitHub",
+    "url": "https://github.com/bkintanar/HRis"
+  }
+}

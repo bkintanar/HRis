@@ -10,9 +10,14 @@
 namespace HRis\Api\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
+use Swagger\Annotations as SWG;
 
 /**
  * Class Nationality.
+ *
+ * @SWG\Definition(definition="Nationality")
+ * @SWG\Property(property="id", type="integer", format="int64", default=1, description="Unique identifier for the nationality")
+ * @SWG\Property(property="name", type="string", default="Afghan", description="Name of the nationality")
  */
 class Nationality extends Model
 {
