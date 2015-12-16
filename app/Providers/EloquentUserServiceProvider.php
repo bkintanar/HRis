@@ -13,9 +13,9 @@ class EloquentUserServiceProvider implements UserInterface
     protected $user;
 
     /**
-     * Create a new User instance
+     * Create a new User instance.
      *
-     * @param  \Illuminate\Database\Eloquent\Model $user
+     * @param \Illuminate\Database\Eloquent\Model $user
      */
     public function __construct(Model $user)
     {
@@ -23,10 +23,11 @@ class EloquentUserServiceProvider implements UserInterface
     }
 
     /**
-     * Get the user by the given key, value
+     * Get the user by the given key, value.
      *
-     * @param  mixed $key
-     * @param  mixed $value
+     * @param mixed $key
+     * @param mixed $value
+     *
      * @return Illuminate\Database\Eloquent\Model
      */
     public function getBy($key, $value)

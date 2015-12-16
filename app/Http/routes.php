@@ -17,15 +17,15 @@ $api->version('v1', function (Router $api) {
         $api->get('auth/refresh', [
             'middleware' => [
                 'before' => 'jwt.auth',
-                'after'  => 'jwt.refresh'
+                'after'  => 'jwt.refresh',
             ],
             function () {
                 return response()->json(['code' => 200, 'text' => 'Token refreshed']);
-            }
+            },
         ]);
 
         // Dogs! All routes in here are protected and thus need a valid token
-        $api->group( [ 'protected' => true, 'middleware' => 'jwt.auth' ], function (Router $api) {
+        $api->group(['protected' => true, 'middleware' => 'jwt.auth'], function (Router $api) {
 //        $api->group(['middleware' => 'jwt.auth'], function (Router $api) {
 
             // Authentication

@@ -8,6 +8,7 @@ class AuthControllerTest extends TestCase
 {
     /**
      * @test
+     *
      * @return void
      *
      * +---------------------------------+
@@ -29,6 +30,7 @@ class AuthControllerTest extends TestCase
 
     /**
      * @test
+     *
      * @return void
      *
      * +---------------------------------+
@@ -50,6 +52,7 @@ class AuthControllerTest extends TestCase
 
     /**
      * @test
+     *
      * @return void
      *
      * +---------------------------------+
