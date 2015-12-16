@@ -7,13 +7,12 @@ return [
     | JWT Authentication Secret
     |--------------------------------------------------------------------------
     |
-    | Don't forget to set this in your .env file, as it will be used to sign
-    | your tokens. A helper command is provided for this:
-    | `php artisan jwt:secret`
+    | Don't forget to set this, as it will be used to sign your tokens.
+    | A helper command is provided for this: `php artisan jwt:generate`
     |
     */
 
-    'secret' => env('JWT_SECRET'),
+    'secret' => env('JWT_SECRET', 'changeme'),
 
     /*
     |--------------------------------------------------------------------------
@@ -21,16 +20,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | Specify the length of time (in minutes) that the token will be valid for.
-    | Defaults to 1 hour.
-    |
-    | You can also set this to null, to yield a never expiring token.
-    | Some people may want this behaviour for e.g. a mobile app.
-    | This is not particularly recommended, so make sure you have appropriate
-    | systems in place to revoke the token if necessary.
+    | Defaults to 1 hour
     |
     */
 
-    'ttl' => env('JWT_TTL', 60),
+    'ttl' => 60,
 
     /*
     |--------------------------------------------------------------------------
@@ -44,7 +38,7 @@ return [
     |
     */
 
-    'refresh_ttl' => env('JWT_REFRESH_TTL', 20160),
+    'refresh_ttl' => 20160,
 
     /*
     |--------------------------------------------------------------------------
@@ -58,7 +52,31 @@ return [
     |
     */
 
-    'algo' => env('JWT_ALGO', 'HS256'),
+    'algo' => 'HS256',
+
+    /*
+    |--------------------------------------------------------------------------
+    | User Model namespace
+    |--------------------------------------------------------------------------
+    |
+    | Specify the full namespace to your User model.
+    | e.g. 'Acme\Entities\User'
+    |
+    */
+
+    'user' => 'HRis\Api\Eloquent\User',
+
+    /*
+    |--------------------------------------------------------------------------
+    | User identifier
+    |--------------------------------------------------------------------------
+    |
+    | Specify a unique property of the user that will be added as the 'sub'
+    | claim of the token payload.
+    |
+    */
+
+    'identifier' => 'id',
 
     /*
     |--------------------------------------------------------------------------
@@ -83,22 +101,7 @@ return [
     |
     */
 
-    'blacklist_enabled' => env('JWT_BLACKLIST_ENABLED', false),
-
-    /*
-    | -------------------------------------------------------------------------
-    | Blacklist Grace Period
-    | -------------------------------------------------------------------------
-    |
-    | When multiple concurrent requests are made with the same JWT,
-    | it is possible that some of them fail, due to token regeneration
-    | on every request.
-    |
-    | Set grace period in seconds to prevent parallel request failure.
-    |
-    */
-
-    'blacklist_grace_period' => env('JWT_BLACKLIST_GRACE_PERIOD', 0),
+    'blacklist_enabled' => env('JWT_BLACKLIST_ENABLED', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -113,6 +116,18 @@ return [
 
         /*
         |--------------------------------------------------------------------------
+        | User Provider
+        |--------------------------------------------------------------------------
+        |
+        | Specify the provider that is used to find the user based
+        | on the subject claim
+        |
+        */
+
+        'user' => 'HRis\Providers\EloquentUserServiceProvider',
+
+        /*
+        |--------------------------------------------------------------------------
         | JWT Provider
         |--------------------------------------------------------------------------
         |
@@ -120,7 +135,7 @@ return [
         |
         */
 
-        'jwt' => Tymon\JWTAuth\Providers\JWT\Namshi::class,
+        'jwt' => 'Tymon\JWTAuth\Providers\JWT\NamshiAdapter',
 
         /*
         |--------------------------------------------------------------------------
@@ -131,7 +146,9 @@ return [
         |
         */
 
-        'auth' => Tymon\JWTAuth\Providers\Auth\Illuminate::class,
+        'auth' => function ($app) {
+            return new Tymon\JWTAuth\Providers\Auth\IlluminateAuthAdapter($app['auth']);
+        },
 
         /*
         |--------------------------------------------------------------------------
@@ -142,8 +159,10 @@ return [
         |
         */
 
-        'storage' => Tymon\JWTAuth\Providers\Storage\Illuminate::class,
+        'storage' => function ($app) {
+            return new Tymon\JWTAuth\Providers\Storage\IlluminateCacheAdapter($app['cache']);
+        }
 
-    ],
+    ]
 
 ];
