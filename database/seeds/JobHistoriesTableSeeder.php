@@ -27,7 +27,7 @@ class JobHistoriesTableSeeder extends Seeder
                 [
                     'id'                   => 1,
                     'employee_id'          => 1,
-                    'job_title_id'         => 9,
+                    'job_title_id'         => 3,
                     'department_id'        => 3,
                     'employment_status_id' => 2,
                     'location_id'          => 1,
