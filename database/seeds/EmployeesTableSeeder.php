@@ -56,7 +56,7 @@ class EmployeesTableSeeder extends Seeder
                 'address_postal_code' => 6000,
                 'home_phone'          => '032 520 2160',
                 'mobile_phone'        => '0949 704 7136',
-                'work_email'          => 'bert.nst@gmail.com',
+                'work_email'          => 'bertrand@idearobin.com',
                 'birth_date'          => '1985-10-31',
             ],
             [

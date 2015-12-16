@@ -9,6 +9,7 @@
  */
 namespace HRis\Api\Controllers\Profile;
 
+use Dingo\Api\Facade\API;
 use Exception;
 use HRis\Api\Controllers\BaseController;
 use HRis\Api\Eloquent\EmergencyContact;
@@ -53,13 +54,12 @@ class EmergencyContactsController extends BaseController
     public function store(EmergencyContactsRequest $request)
     {
         try {
-            $attributes = array_filter($request->except('relationships', 'relationship'));
-            $emergency_contact = $this->emergency_contact->create($attributes);
+            $emergency_contact = $this->emergency_contact->create($request->all());
         } catch (Exception $e) {
-            return response()->json(['text' => UNABLE_ADD_MESSAGE, 'code' => 500]);
+            return API::response()->array(['status' => UNABLE_ADD_MESSAGE])->statusCode(500);
         }
 
-        return response()->json(['emergency_contact' => $emergency_contact, 'text' => SUCCESS_ADD_MESSAGE, 'code' => 200]);
+        return API::response()->array(['emergency_contact' => $emergency_contact, 'status' => SUCCESS_ADD_MESSAGE])->statusCode(200);
     }
 
     /**
@@ -80,13 +80,12 @@ class EmergencyContactsController extends BaseController
         }
 
         try {
-            $attributes = array_filter($request->except('relationships', 'relationship'));
-            $emergency_contact->update($attributes);
+            $emergency_contact->update($request->all());
         } catch (Exception $e) {
-            return response()->json(['text' => UNABLE_UPDATE_MESSAGE, 'code' => 500]);
+            return API::response()->array(['status' => UNABLE_UPDATE_MESSAGE])->statusCode(500);
         }
 
-        return response()->json(['text' => SUCCESS_UPDATE_MESSAGE, 'code' => 200]);
+        return API::response()->array(['status' => SUCCESS_UPDATE_MESSAGE])->statusCode(200);
     }
 
     /**
@@ -105,9 +104,9 @@ class EmergencyContactsController extends BaseController
         try {
             $this->emergency_contact->whereId($emergency_contact_id)->delete();
         } catch (Exception $e) {
-            return response()->json(['text' => UNABLE_DELETE_MESSAGE, 'code' => 500]);
+            return API::response()->array(['status' => UNABLE_DELETE_MESSAGE])->statusCode(500);
         }
 
-        return response()->json(['text' => SUCCESS_DELETE_MESSAGE, 'code' => 200]);
+        return API::response()->array(['status' => SUCCESS_DELETE_MESSAGE])->statusCode(200);
     }
 }
