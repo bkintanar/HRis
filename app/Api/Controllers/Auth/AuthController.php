@@ -105,16 +105,20 @@ class AuthController extends BaseController
     public function authenticate(Request $request)
     {
         // grab credentials from the request
-        $credentials = $request->only('email', 'password');
+        $credentials = array_filter($request->only('email', 'password'));
+
+        $claims = ['company' => 'HRis'];
 
         try {
             // attempt to verify the credentials and create a token for the user
-            if (!$token = JWTAuth::attempt($credentials)) {
+            if (!$token = JWTAuth::attempt($credentials, $claims)) {
                 return response()->json(['error' => 'invalid_credentials'], 401);
             }
         } catch (JWTException $e) {
             // something went wrong whilst attempting to encode the token
             return response()->json(['error' => 'could_not_create_token'], 500);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
         }
 
         // all good so return the token
@@ -219,12 +223,9 @@ class AuthController extends BaseController
             }
         } catch (JWTException $e) {
             $response['message'] = $e->getMessage();
-            $response['status_code'] = $e->getCode();
-        } catch (\Exception $e) {
-            $response['message'] = $e->getMessage();
-            $response['status_code'] = $e->getCode();
+            $response['status_code'] = 500;
         }
 
-        return response()->json($response);
+        return API::response()->array(['status' => $response['message'], 'status_code' => $response['status_code']])->statusCode($response['status_code']);
     }
 }

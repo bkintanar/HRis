@@ -5,3 +5,7 @@ Homestead.json
 .env
 _ide_helper*.php
 composer.lock
+storage/docs/api-docs.json
+build
+cache.properties
+

@@ -17,12 +17,11 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Foundation\Auth\Access\Authorizable;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
  * Class User.
  */
-class User extends SentinelUser implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, JWTSubject
+class User extends SentinelUser implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
     use Authenticatable, Authorizable, CanResetPassword;
 
@@ -73,29 +72,5 @@ class User extends SentinelUser implements AuthenticatableContract, Authorizable
     public function employee()
     {
         return $this->hasOne('HRis\Api\Eloquent\Employee');
-    }
-
-    /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     *
-     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
-     */
-    public function getJWTIdentifier()
-    {
-        return $this->attributes['id'];
-    }
-
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     *
-     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
-     */
-    public function getJWTCustomClaims()
-    {
-        return [];
     }
 }

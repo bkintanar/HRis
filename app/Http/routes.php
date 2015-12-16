@@ -11,23 +11,33 @@ $api->version('v1', function (Router $api) {
     $api->group(['namespace' => 'HRis\Api\Controllers', 'middleware' => 'cors'], function (Router $api) {
 
         // Login route
-        $api->post('login', 'Auth\AuthController@authenticate');
+        $api->post('login', 'Auth\AuthController@authenticate');                                // docs done
         $api->post('register', 'Auth\AuthController@register');
 
+        $api->get('auth/refresh', [
+            'middleware' => [
+                'before' => 'jwt.auth',
+                'after'  => 'jwt.refresh',
+            ],
+            function () {
+                return response()->json(['code' => 200, 'text' => 'Token refreshed']);
+            },
+        ]);
+
         // Dogs! All routes in here are protected and thus need a valid token
-        //$api->group( [ 'protected' => true, 'middleware' => 'jwt.refresh' ], function (Router $api) {
-        $api->group(['middleware' => 'jwt.refresh'], function (Router $api) {
+        $api->group(['protected' => true, 'middleware' => 'jwt.auth'], function (Router $api) {
+//        $api->group(['middleware' => 'jwt.auth'], function (Router $api) {
 
             // Authentication
-            $api->get('logout', 'Auth\AuthController@logout');
+            $api->get('logout', 'Auth\AuthController@logout');                                  // docs done
             $api->get('validate_token', 'Auth\AuthController@validateToken');
             $api->get('users/me', 'Auth\AuthController@me');
             $api->post('sidebar', 'Auth\AuthController@sidebar');
 
             // Profile
             $api->group(['prefix' => 'profile', 'namespace' => 'Profile'], function (Router $api) {
-                $api->patch('personal-details', 'PersonalDetailsController@update');
-                $api->patch('contact-details', 'PersonalDetailsController@update');
+                $api->patch('personal-details', 'PersonalDetailsController@update');            // docs done
+                $api->patch('contact-details', 'PersonalDetailsController@update');             // docs done
                 $api->get('emergency-contacts', 'EmergencyContactsController@index');
                 $api->post('emergency-contacts', 'EmergencyContactsController@store');
                 $api->patch('emergency-contacts', 'EmergencyContactsController@update');
@@ -40,19 +50,18 @@ $api->version('v1', function (Router $api) {
             });
 
             // Chosen
-            $api->get('cities', 'LookupTableController@cities');
-            $api->get('countries', 'LookupTableController@countries');
-            $api->get('departments', 'LookupTableController@departments');
-            $api->get('education-levels', 'LookupTableController@educationLevels');
-            $api->get('employment-statuses', 'LookupTableController@employmentStatuses');
-            $api->get('job-titles', 'LookupTableController@jobTitles');
-            $api->get('locations', 'LookupTableController@locations');
-            $api->get('marital-statuses', 'LookupTableController@maritalStatuses');
-            $api->get('nationalities', 'LookupTableController@nationalities');
-            $api->get('provinces', 'LookupTableController@provinces');
-            $api->get('relationships', 'LookupTableController@relationships');
-            $api->get('skills', 'LookupTableController@skills');
-
+            $api->get('cities', 'LookupTableController@cities');                                // docs done
+            $api->get('countries', 'LookupTableController@countries');                          // docs done
+            $api->get('departments', 'LookupTableController@departments');                      // docs done
+            $api->get('education-levels', 'LookupTableController@educationLevels');             // docs done
+            $api->get('employment-statuses', 'LookupTableController@employmentStatuses');       // docs done
+            $api->get('job-titles', 'LookupTableController@jobTitles');                         // docs done
+            $api->get('locations', 'LookupTableController@locations');                          // docs done
+            $api->get('marital-statuses', 'LookupTableController@maritalStatuses');             // docs done
+            $api->get('nationalities', 'LookupTableController@nationalities');                  // docs done
+            $api->get('provinces', 'LookupTableController@provinces');                          // docs done
+            $api->get('relationships', 'LookupTableController@relationships');                  // docs done
+            $api->get('skills', 'LookupTableController@skills');                                // docs done
         });
 
     });
