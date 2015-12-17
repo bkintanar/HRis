@@ -9,7 +9,6 @@
  */
 namespace HRis\Api\Eloquent;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -23,13 +22,6 @@ class Dependent extends Model
      * @var bool
      */
     public $timestamps = false;
-
-    /**
-     * Additional fields to treat as Carbon instances.
-     *
-     * @var array
-     */
-    protected $dates = ['birth_date'];
 
     /**
      * The attributes that are mass assignable.
@@ -51,18 +43,6 @@ class Dependent extends Model
      * @var string
      */
     protected $table = 'dependents';
-
-    /**
-     * Casts birth_date attribute to Carbon.
-     *
-     * @param $birth_date
-     *
-     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
-     */
-    public function setBirthDateAttribute($birth_date)
-    {
-        $this->attributes['birth_date'] = Carbon::parse($birth_date) ?: null;
-    }
 
     /**
      * A dependent object has one relationship.
