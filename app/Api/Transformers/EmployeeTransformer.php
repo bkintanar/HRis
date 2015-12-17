@@ -38,6 +38,7 @@ class EmployeeTransformer extends TransformerAbstract
         'country',
         'dependents',
         'emergency_contacts',
+        'job_histories',
         'custom_field_values',
     ];
 
@@ -83,7 +84,7 @@ class EmployeeTransformer extends TransformerAbstract
             'remarks'             => $employee->remarks,
             'joined_date'         => $employee->joined_date,
             'probation_end_date'  => $employee->probation_end_date,
-            'permanence_date'     => $employee->permanence_date,
+            'permanency_date'     => $employee->permanency_date,
             'resign_date'         => $employee->resign_date,
         ];
     }
@@ -214,5 +215,21 @@ class EmployeeTransformer extends TransformerAbstract
         $job_history = $employee->jobHistory();
 
         return $this->item($job_history, new JobHistoryTransformer());
+    }
+
+    /**
+     * Include JobHistories.
+     *
+     * @param Employee $employee
+     *
+     * @return \League\Fractal\Resource\Collection
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     */
+    public function includeJobHistories(Employee $employee)
+    {
+        $job_histories = $employee->jobHistories()->get();
+
+        return $this->collection($job_histories, new JobHistoryTransformer());
     }
 }
