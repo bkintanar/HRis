@@ -47,6 +47,9 @@ $api->version('v1', function (Router $api) {
                 $api->post('dependents', 'DependentsController@store');
                 $api->patch('dependents', 'DependentsController@update');
                 $api->delete('dependents', 'DependentsController@destroy');
+
+                $api->patch('job', 'JobController@update');
+                $api->delete('job', 'JobController@destroy');
             });
 
             // Employee

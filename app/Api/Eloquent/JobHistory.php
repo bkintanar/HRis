@@ -25,13 +25,6 @@ class JobHistory extends Model
     public $timestamps = false;
 
     /**
-     * Additional fields to treat as Carbon instances.
-     *
-     * @var array
-     */
-    protected $dates = ['effective_date'];
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -109,16 +102,6 @@ class JobHistory extends Model
     public function location()
     {
         return $this->hasOne('HRis\Api\Eloquent\Location', 'id', 'location_id');
-    }
-
-    /**
-     * @param $effective_date
-     *
-     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
-     */
-    public function setEffectiveDateAttribute($effective_date)
-    {
-        $this->attributes['effective_date'] = Carbon::parse($effective_date) ?: null;
     }
 
     /**
