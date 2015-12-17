@@ -45,7 +45,7 @@ module.exports = {
                             },
                             '/job': {
                                 name: 'profile-job',
-                                component: require('./compiled/pages/page.vue'),
+                                component: require('./compiled/pages/profile/job.vue'),
                                 auth: true
                             },
                             '/work-shifts': {
@@ -170,7 +170,7 @@ module.exports = {
                             },
                             '/employee-list/:employee_id/job': {
                                 name: 'pim-employee-list-job',
-                                component: require('./compiled/pages/page.vue'),
+                                component: require('./compiled/pages/profile/job.vue'),
                                 auth: true
                             },
                             '/employee-list/:employee_id/work-shifts': {

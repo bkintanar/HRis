@@ -1,5 +1,5 @@
 module.exports = {
-    props: ['employee', 'page_title', 'job_titles', 'employment_statuses', 'routes', 'has_access', 'permission'],
+    props: ['employee', 'page_title', 'job_titles', 'employment_statuses', 'routes', 'has_access', 'permission', 'logged'],
     replace: false,
     data: function () {
         return {
@@ -19,9 +19,25 @@ module.exports = {
                 job_history: [],
                 emergency_contacts: {
                     data: []
-                }
+                },
+                job_histories: [{}]
             },
-            has_access: ''
+            has_access: '',
+            logged: {
+                avatar: '',
+                id: null,
+                employee: {
+                    data: {
+                        first_name: '',
+                        last_name: '',
+                        job_history: {
+                            data: {
+                                job_title_id: ''
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     ready: function () {
