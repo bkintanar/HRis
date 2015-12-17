@@ -37,11 +37,16 @@ $api->version('v1', function (Router $api) {
             // Profile
             $api->group(['prefix' => 'profile', 'namespace' => 'Profile'], function (Router $api) {
                 $api->patch('personal-details', 'PersonalDetailsController@update');            // docs done
+
                 $api->patch('contact-details', 'PersonalDetailsController@update');             // docs done
-                $api->get('emergency-contacts', 'EmergencyContactsController@index');
+
                 $api->post('emergency-contacts', 'EmergencyContactsController@store');
                 $api->patch('emergency-contacts', 'EmergencyContactsController@update');
                 $api->delete('emergency-contacts', 'EmergencyContactsController@destroy');
+
+                $api->post('dependents', 'DependentsController@store');
+                $api->patch('dependents', 'DependentsController@update');
+                $api->delete('dependents', 'DependentsController@destroy');
             });
 
             // Employee
