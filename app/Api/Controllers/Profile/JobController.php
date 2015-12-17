@@ -60,7 +60,6 @@ class JobController extends BaseController
         $job_history = [];
 
         try {
-
             $_job_history = array_slice($_employee['job_history']['data'], 0, 9);
 
             unset($_job_history['id'], $_job_history['work_shift_id']);
@@ -103,7 +102,7 @@ class JobController extends BaseController
         } catch (Exception $e) {
             return API::response()->array(['status' => UNABLE_DELETE_MESSAGE])->statusCode(500);
         }
-        return API::response()->array(['status' => SUCCESS_DELETE_MESSAGE])->statusCode(200);
 
+        return API::response()->array(['status' => SUCCESS_DELETE_MESSAGE])->statusCode(200);
     }
 }

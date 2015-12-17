@@ -45,14 +45,14 @@ class JobRequest extends Request
 
         // Update
         if (Request::isMethod('patch') || Request::is('*/edit')) {
-            return ($this->logged_user->hasAccess($permission.'.update'));
+            return $this->logged_user->hasAccess($permission.'.update');
         } // View
         else {
             if (Request::isMethod('get')) {
-                return ($this->logged_user->hasAccess($permission.'.view'));
+                return $this->logged_user->hasAccess($permission.'.view');
             } else {
                 if (Request::isMethod('delete')) {
-                    return ($this->logged_user->hasAccess($permission.'.delete'));
+                    return $this->logged_user->hasAccess($permission.'.delete');
                 }
             }
         }
