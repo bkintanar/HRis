@@ -98,7 +98,7 @@ class AuthControllerTest extends TestCase
         $content_array = $this->login();
         $token = $content_array['token'];
 
-        $response = $this->call('GET', '/api/logout',[],[],[], ['HTTP_Authorization' => 'Bearer ' . $token],[]);
+        $response = $this->call('GET', '/api/logout', [], [], [], ['HTTP_Authorization' => 'Bearer '.$token], []);
 
         $content = $response->getContent();
         $status_code = $response->getStatusCode();
@@ -118,7 +118,6 @@ class AuthControllerTest extends TestCase
      */
     public function it_should_return_error_in_logout_when_no_token_is_passed()
     {
-
         $response = $this->get('/api/logout')->response;
 
         $content = $response->getContent();
@@ -142,7 +141,7 @@ class AuthControllerTest extends TestCase
         $content_array = $this->login();
         $token = $content_array['token'];
 
-        $response = $this->call('GET', '/api/users/me',[],[],[], ['HTTP_Authorization' => 'Bearer ' . $token],[]);
+        $response = $this->call('GET', '/api/users/me', [], [], [], ['HTTP_Authorization' => 'Bearer '.$token], []);
 
         $content = $response->getContent();
         $status_code = $response->getStatusCode();
@@ -189,7 +188,7 @@ class AuthControllerTest extends TestCase
         $content_array = $this->login();
         $token = $content_array['token'];
 
-        $response = $this->call('GET', '/api/users/me',[],[],[], ['HTTP_Authorization' => 'Bearer ' . $token.'invalid_token'],[]);
+        $response = $this->call('GET', '/api/users/me', [], [], [], ['HTTP_Authorization' => 'Bearer '.$token.'invalid_token'], []);
 
         $content = $response->getContent();
         $status_code = $response->getStatusCode();
