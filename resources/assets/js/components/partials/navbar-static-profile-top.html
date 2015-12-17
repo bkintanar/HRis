@@ -1,0 +1,94 @@
+<div class="col-lg-12 top-nav-b">
+    <div class="btn-group top-nav-li">
+        <ul>
+            <li :class="{'active': $route.path.indexOf('/profile/personal-details') > -1 || $route.path.indexOf('/pim/employee-list/'+$route.params.employee_id+'/personal-details') > -1, 'navy': $route.path.indexOf('/pim') > -1 }">
+                <a v-if="$route.path.indexOf('/profile') > -1" v-link="{name : 'profile-personal-details'}">
+                    <i class="fa fa-file-text-o  m-right-a"></i>
+                    Personal Details
+                </a>
+                <a v-if="$route.path.indexOf('/pim') > -1"
+                   v-link="{name : 'pim-employee-list-personal-details', params: {employee_id: $route.params.employee_id}}">
+                    <i class="fa fa-file-text-o  m-right-a"></i>
+                    Personal Details
+                </a>
+            </li>
+            <li :class="{'active': $route.path.indexOf('/profile/contact-details') > -1 || $route.path.indexOf('/pim/employee-list/'+$route.params.employee_id+'/contact-details') > -1, 'navy': $route.path.indexOf('/pim') > -1 }">
+                <a v-if="$route.path.indexOf('/profile') > -1" v-link="{name : 'profile-contact-details'}">
+                    <i class="fa fa-phone-square m-right-a"></i>
+                    Contact Details
+                </a>
+                <a v-if="$route.path.indexOf('/pim') > -1"
+                   v-link="{name : 'pim-employee-list-contact-details', params: {employee_id: $route.params.employee_id}}">
+                    <i class="fa fa-phone-square m-right-a"></i>
+                    Contact Details
+                </a>
+            </li>
+            <li :class="{'active': $route.path.indexOf('/profile/emergency-contacts') > -1 || $route.path.indexOf('/pim/employee-list/'+$route.params.employee_id+'/emergency-contacts') > -1, 'navy': $route.path.indexOf('/pim') > -1 }">
+                <a v-if="$route.path.indexOf('/profile') > -1" v-link="{name : 'profile-emergency-contacts'}">
+                    <i class="fa fa-plus-square  m-right-a"></i>
+                    Emergency Contacts
+                </a>
+                <a v-if="$route.path.indexOf('/pim') > -1"
+                   v-link="{name : 'pim-employee-list-emergency-contacts', params: {employee_id: $route.params.employee_id}}">
+                    <i class="fa fa-plus-square  m-right-a"></i>
+                    Emergency Contacts
+                </a>
+            </li>
+            <li :class="{'active': $route.path.indexOf('/profile/dependents') > -1 || $route.path.indexOf('/pim/employee-list/'+$route.params.employee_id+'/dependents') > -1, 'navy': $route.path.indexOf('/pim') > -1 }">
+                <a v-if="$route.path.indexOf('/profile') > -1" v-link="{name : 'profile-dependents'}">
+                    <i class="fa fa-child m-right-a"></i>
+                    Dependents
+                </a>
+                <a v-if="$route.path.indexOf('/pim') > -1"
+                   v-link="{name : 'pim-employee-list-dependents', params: {employee_id: $route.params.employee_id}}">
+                    <i class="fa fa-child m-right-a"></i>
+                    Dependents
+                </a>
+            </li>
+            <li :class="{'active': $route.path.indexOf('/profile/job') > -1 || $route.path.indexOf('/pim/employee-list/'+$route.params.employee_id+'/job') > -1, 'navy': $route.path.indexOf('/pim') > -1 }">
+                <a v-if="$route.path.indexOf('/profile') > -1" v-link="{name : 'profile-job'}">
+                    <i class="fa fa-briefcase m-right-a"></i>
+                    Job
+                </a>
+                <a v-if="$route.path.indexOf('/pim') > -1"
+                   v-link="{name : 'pim-employee-list-job', params: {employee_id: $route.params.employee_id}}">
+                    <i class="fa fa-briefcase m-right-a"></i>
+                    Job
+                </a>
+            </li>
+            <li :class="{'active': $route.path.indexOf('/profile/work-shifts') > -1 || $route.path.indexOf('/pim/employee-list/'+$route.params.employee_id+'/work-shifts') > -1, 'navy': $route.path.indexOf('/pim') > -1 }">
+                <a v-if="$route.path.indexOf('/profile') > -1" v-link="{name : 'profile-work-shifts'}">
+                    <i class="fa fa-clock-o m-right-a"></i>
+                    Work Shifts
+                </a>
+                <a v-if="$route.path.indexOf('/pim') > -1"
+                   v-link="{name : 'pim-employee-list-work-shifts', params: {employee_id: $route.params.employee_id}}">
+                    <i class="fa fa-clock-o m-right-a"></i>
+                    Work Shifts
+                </a>
+            </li>
+            <li :class="{'active': $route.path.indexOf('/profile/salary') > -1 || $route.path.indexOf('/pim/employee-list/'+$route.params.employee_id+'/salary') > -1, 'navy': $route.path.indexOf('/pim') > -1 }">
+                <a v-if="$route.path.indexOf('/profile') > -1" v-link="{name : 'profile-salary'}">
+                    <i class="fa fa-money m-right-a"></i>
+                    Salary
+                </a>
+                <a v-if="$route.path.indexOf('/pim') > -1"
+                   v-link="{name : 'pim-employee-list-salary', params: {employee_id: $route.params.employee_id}}">
+                    <i class="fa fa-money m-right-a"></i>
+                    Salary
+                </a>
+            </li>
+            <li :class="{'active': $route.path.indexOf('/profile/qualifications') > -1 || $route.path.indexOf('/pim/employee-list/'+$route.params.employee_id+'/qualifications') > -1, 'navy': $route.path.indexOf('/pim') > -1 }">
+                <a v-if="$route.path.indexOf('/profile') > -1" v-link="{name : 'profile-qualifications'}">
+                    <i class="fa fa-bookmark m-right-a"></i>
+                    Qualifications
+                </a>
+                <a v-if="$route.path.indexOf('/pim') > -1"
+                   v-link="{name : 'pim-employee-list-qualifications', params: {employee_id: $route.params.employee_id}}">
+                    <i class="fa fa-bookmark m-right-a"></i>
+                    Qualifications
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

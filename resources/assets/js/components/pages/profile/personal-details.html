@@ -1,0 +1,155 @@
+<div class="row" v-if="employee">
+    <navbar-static-profile-top></navbar-static-profile-top>
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Personal Details</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <form onsubmit="return false;" accept-charset="UTF-8" class="form-horizontal" id="personalDetailsForm">
+                    <input name="user[id]" type="hidden" v-model="employee.user.data.id">
+                    <input name="id" type="hidden" v-model="employee.id">
+                    <!-- Start - Full Name -->
+                    <div class="form-group">
+                        <label for="first_name" class="col-md-2 control-label">Full Name</label>
+                        <div class="col-md-4">
+                            <input class="form-control" disabled="disabled" type="text" v-model="employee.first_name"
+                                   id="first_name" required="required">
+                            <span class="help-block m-b-none">First Name</span>
+                        </div>
+                        <div class="col-md-2">
+                            <input class="form-control" disabled="disabled" type="text" v-model="employee.middle_name"
+                                   id="middle_name">
+                            <span class="help-block m-b-none">Middle Name</span>
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" disabled="disabled" type="text" v-model="employee.last_name"
+                                   id="last_name" required="required">
+                            <span class="help-block m-b-none">Last Name</span>
+                        </div>
+                    </div>
+                    <!-- End - Full Name -->
+
+                    <div class="hr-line-dashed"></div>
+
+                    <!-- Start - Employee Id & Face Id -->
+                    <div class="form-group">
+                        <label for="employee_id" class="col-md-2 control-label">Employee Id</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" data-mask="HRis-9999" disabled="disabled" type="text"
+                                   v-model="employee.employee_id" id="employee_id" required="required">
+                        </div>
+                        <label for="face_id" class="col-md-2 control-label">Face Id</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" data-mask="999" disabled="disabled" type="text"
+                                   v-model="employee.face_id" id="face_id">
+                        </div>
+                    </div>
+                    <!-- End - Employee Id & Face Id -->
+
+                    <div class="hr-line-dashed"></div>
+
+                    <!-- Start - Gender & Marital Status -->
+                    <div class="form-group">
+                        <label for="gender[1]" class="col-md-2 control-label">Gender</label>
+                        <div class="col-sm-4">
+                            <label class="radio-inline i-checks">
+                                <input disabled="disabled" type="radio" name="gender" value="M"
+                                       v-model="employee.gender" id="gender[1]"> Male
+                            </label>
+                            <label class="radio-inline i-checks">
+                                <input disabled="disabled" type="radio" name="gender" value="F"
+                                       v-model="employee.gender" id="gender[2]"> Female
+                            </label>
+                        </div>
+                        <label for="marital_status_id" class="col-md-2 control-label">Marital Status</label>
+                        <div class="col-sm-4">
+                            <chosen id="marital_status_id" disabled="disabled" class="vue-chosen"
+                                    :options="marital_statuses_chosen" :v-model.sync="marital_status_obj"
+                                    :chosen="{ width:'100%' }" placeholder="--- Select ---" text-key="name"></chosen>
+                        </div>
+                    </div>
+                    <!-- End - Gender & Marital Status -->
+
+                    <!-- Start - Nationality & DOB -->
+                    <div class="form-group">
+                        <label for="nationality_id" class="col-md-2 control-label">Nationality</label>
+                        <div class="col-sm-4">
+                            <chosen id="nationality_id" disabled="disabled" class="vue-chosen"
+                                    :options="nationalities_chosen" :v-model.sync="nationality_obj"
+                                    :chosen="{ width:'100%' }" placeholder="--- Select ---" text-key="name"></chosen>
+                        </div>
+                        <label for="birth_date" class="col-md-2 control-label">Date of Birth</label>
+                        <div class="col-sm-4" id="datepicker_birth_date">
+                            <div class="input-group date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input
+                                    class="form-control" data-mask="9999-99-99" disabled="disabled" name="birth_date"
+                                    type="text" v-model="employee.birth_date" id="birth_date">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End - Nationality & DOB -->
+
+                    <div class="hr-line-dashed"></div>
+
+                    <!-- Start - Social Security & Tax Identification -->
+                    <div class="form-group">
+                        <label for="social_security" class="col-md-2 control-label">Social Security</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" data-mask="99-9999999-9" disabled="disabled" type="text"
+                                   v-model="employee.social_security" id="social_security">
+                        </div>
+                        <label for="tax_identification" class="col-md-2 control-label">Tax Identification</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" data-mask="999-999-999" disabled="disabled" type="text"
+                                   v-model="employee.tax_identification" id="tax_identification">
+                        </div>
+                    </div>
+                    <!-- End - Social Security & Tax Identification -->
+
+                    <!-- Start - PhilHealth & PagIbig -->
+                    <div class="form-group">
+                        <label for="philhealth" class="col-md-2 control-label">PhilHealth</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" data-mask="99-999999999-9" disabled="disabled" type="text"
+                                   v-model="employee.philhealth" id="philhealth">
+                        </div>
+                        <label for="hdmf_pagibig" class="col-md-2 control-label">HDMF / PagIbig</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" data-mask="9999 9999 9999" disabled="disabled" type="text"
+                                   v-model="employee.hdmf_pagibig" id="hdmf_pagibig">
+                        </div>
+                    </div>
+                    <!-- End - PhilHealth & PagIbig -->
+
+                    <div class="hr-line-dashed"></div>
+
+                    <!-- Start - Control Buttons -->
+                    <div class="form-group save-form" style="display:none;">
+                        <div class="col-sm-4 col-sm-offset-2">
+                            <button class="btn btn-white btn-xs cancel-form" type="button" @click.prevent="cancelForm">
+                                Cancel
+                            </button>
+                            <button class="btn btn-primary btn-xs" type="submit" @click="submitForm">Save changes
+                            </button>
+
+                        </div>
+                    </div>
+                    <div class="form-group" v-if="has_access && has_access[permission + '.update']">
+                        <div class="col-sm-4 col-sm-offset-2">
+                            <button class="btn btn-primary btn-xs modify-form" type="button"
+                                    @click.prevent="modifyForm">Modify
+                            </button>
+                        </div>
+                    </div>
+                    <!-- End - Control Buttons -->
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

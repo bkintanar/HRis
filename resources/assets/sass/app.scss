@@ -1,0 +1,8 @@
+// @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+$icon-font-path: "/fonts/bootstrap/";
+$fa-font-path: "/fonts/fontawesome";
+@import 'bootstrap';
+@import 'font-awesome';
+@import "chosen";
+@import "dropzone";

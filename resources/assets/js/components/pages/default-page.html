@@ -1,0 +1,43 @@
+<div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <span>
+                            <img alt="image" id="profile-image-nav" class="img-circle"
+                                 src="/images/profile/default/0.png">
+                        </span>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{
+                                logged.employee.data.first_name }} {{ logged.employee.data.last_name }}</strong>
+                                </span> <span class="text-muted text-xs block" v-if="job_titles">
+                                    {{job_titles[logged.employee.data.job_history.data.job_title_id]}}
+                                <b class="caret"></b></span> </span> </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a href="/profile">Profile</a></li>
+                            <li><a href="contacts.html">Contacts</a></li>
+                            <li><a href="mailbox.html">Mailbox</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#0">Logout</a></li>
+                        </ul>
+                    </div>
+                    <div class="logo-element">
+                        HRis
+                    </div>
+
+                </li>
+                <navbar-static-side></navbar-static-side>
+            </ul>
+        </div>
+    </nav>
+    <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+            <navbar-static-top></navbar-static-top>
+        </div>
+        <router-view :employee="employee" :page_title="page_title" :job_titles="job_titles"
+                     :employment_statuses="employment_statuses" :routes="routes" :has_access="has_access"
+                     :permission="permission"></router-view>
+        <static-footer></static-footer>
+    </div>
+</div>

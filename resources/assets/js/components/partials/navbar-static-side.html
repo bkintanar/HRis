@@ -1,0 +1,30 @@
+<li v-for="navlink in navlinks"
+    v-bind:class="{ 'active': $route.path.indexOf('/'+navlink.href) == 0, 'navy': navlink.href.indexOf('pim') == 0 || navlink.href.indexOf('admin') == 0 }">
+    <a v-link="{name: navlink.route}">
+        <i class="fa {{navlink.icon}}"></i>
+        <span class="nav-label">{{navlink.name}}</span>
+        <span v-if="navlink.children.length" class="fa arrow"></span>
+    </a>
+    <ul class="nav nav-second-level collapse" v-bind:class="{ 'in': $route.path.indexOf('/'+navlink.href) == 0 }"
+        v-if="navlink.children.length">
+        <li v-for="child in navlink.children"
+            v-bind:class="{ 'active': $route.path.indexOf('/'+child.href) == 0, 'navy': child.href.indexOf('pim') == 0 || child.href.indexOf('admin') == 0 }">
+            <a v-link="{name : child.route}">
+                <i class="fa {{child.icon}}"></i>
+                <span class="nav-label">{{child.name}}</span>
+                <span v-if="child.children.length" class="fa arrow"></span>
+            </a>
+            <ul class="nav nav-third-level collapse" v-bind:class="{ 'in': $route.path.indexOf('/'+child.href) == 0 }"
+                v-if="child.children.length">
+                <li v-for="grandchild in child.children"
+                    v-bind:class="{ 'active': $route.path.indexOf('/'+grandchild.href) == 0, 'navy': grandchild.href.indexOf('pim') == 0 || grandchild.href.indexOf('admin') == 0 }">
+                    <a v-link="{name : grandchild.route}">
+                        <i class="fa {{grandchild.icon}}"></i>
+                        <span class="nav-label">{{grandchild.name}}</span>
+                        <span v-if="grandchild.children.length" class="fa arrow"></span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</li>

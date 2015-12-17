@@ -1,0 +1,26 @@
+<div class="row wrapper border-bottom page-heading"
+     :class="{ 'grad-red': ($route.path.indexOf('/pim') == 0 || $route.path.indexOf('/admin') == 0), 'greenpro-bg': ($route.path.indexOf('/pim') == -1 && $route.path.indexOf('/admin') == -1) }">
+    <div class="col-sm-6">
+        <h2>{{page_title}}</h2>
+        <!-- Breadcrumbs -->
+        <ol class="breadcrumb">
+            <li>
+                <a v-link="{name: 'dashboard'}">Home</a>
+            </li>
+            <li v-for="route in routes">
+                <a v-link="{name: route.name, params: {employee_id: route.params.employee_id} }">{{route.segment}}</a>
+            </li>
+        </ol>
+    </div>
+    <action-area :employee="employee" :job_titles="job_titles" :employment_statuses="employment_statuses"
+                 v-if="$route.path.indexOf('employee-list/') > -1 || $route.path.indexOf('profile/') > -1"></action-area>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="wrapper wrapper-content">
+            <router-view :employee="employee" :page_title="page_title" :job_titles="job_titles"
+                         :employment_statuses="employment_statuses" :routes="routes" :has_access="has_access"
+                         :permission="permission"></router-view>
+        </div>
+    </div>
+</div>

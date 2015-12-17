@@ -1,0 +1,130 @@
+<div class="row" v-if="employee">
+    <navbar-static-profile-top></navbar-static-profile-top>
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Assigned Dependents</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+
+                <div class="">
+                    <a id="add_dependent" v-if="has_access && has_access[permission + '.create']"
+                       @click="toggleModal" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
+                </div>
+                <div class="table-responsive" v-if="employee.dependents">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Full Name</th>
+                            <th>Relationship</th>
+                            <th>Birth Date</th>
+                            <th class="fix-width">Action</th>
+                        </tr>
+                        </thead>
+
+                        <tbody id="dependents_body">
+
+                        <tr v-for="dependent in employee.dependents.data" class="item-{{$index}}">
+                            <td>{{dependent.first_name + ' ' + dependent.last_name}}</td>
+                            <td>{{relationships[dependent.relationship_id]}}</td>
+                            <td>{{dependent.birth_date}}</td>
+                            <td>
+                                <button rel="edit" id="edit_{{dependent.id}}"
+                                        v-if="has_access[permission + '.update']"
+                                        class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip"
+                                        data-placement="bottom" title="" type="button"
+                                        @click="editRecord(dependent, $index)" data-original-title="Edit">
+                                    <i class="fa fa-edit"></i></button>
+                                <button rel="delete" id="delete_{{dependent.id}}"
+                                        v-if="has_access[permission + '.delete']"
+                                        class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip"
+                                        data-placement="bottom" title="" type="button"
+                                        @click="deleteRecord(dependent, $index)"
+                                        data-original-title="Delete"><i class="fa fa-times"></i></button>
+                            </td>
+                        </tr>
+                        <tr v-if="employee.dependents && employee.dependents.data.length == 0">
+                            <td colspan="4">No dependents listed</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="dependent_modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal" type="button">&times;</button>
+
+                    <h4 class="modal-title" id="my_modal_label">Dependent Details</h4>
+                </div>
+
+                <div class="modal-body">
+                    <!--Add form-->
+                    <form method="POST" onsubmit="return false;" accept-charset="UTF-8" class="form-horizontal"
+                          id="dependentsForm">
+                        <input type="hidden" v-model.sync="modal.dependent_id">
+                        <div class="form-group">
+                            <label for="first_name" class="col-md-3 control-label">First Name</label>
+                            <div class="col-md-9">
+                                <input class="form-control" required="required" v-model.sync="modal.first_name" type="text"
+                                       id="first_name">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="middle_name" class="col-md-3 control-label">Middle Name</label>
+                            <div class="col-md-9">
+                                <input class="form-control" v-model.sync="modal.middle_name" type="text" id="middle_name">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="last_name" class="col-md-3 control-label">Last Name</label>
+                            <div class="col-md-9">
+                                <input class="form-control" required="required" v-model.sync="modal.last_name" type="text"
+                                       id="last_name">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="relationship_id" class="col-md-3 control-label">Relationship</label>
+                            <div class="col-md-9">
+                                <chosen id="relationship_id" class="vue-chosen"
+                                        :options="relationships_chosen" :v-model.sync="relationship_obj"
+                                        :chosen="{ width:'100%' }" placeholder="--- Select ---"
+                                        text-key="name"></chosen>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="birth_date" class="col-md-3 control-label">Birth Date</label>
+                            <div class="col-md-9" id="datepicker">
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input class="form-control" data-mask="9999-99-99" v-model.sync="modal.birth_date" type="text" id="birth_date">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-white btn-xs" data-dismiss="modal" type="button">Close</button>
+                            <input class="btn btn-primary btn-xs" type="submit" @click="submitForm"
+                                   value="Save changes">
+                        </div>
+
+                    </form><!--// form-->
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>
+
