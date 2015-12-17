@@ -52,7 +52,7 @@ class Employee extends Model
      *
      * @var array
      */
-    protected $dates = ['birth_date', 'joined_date', 'probation_end_date', 'permanency_date', 'resign_date'];
+    protected $dates = ['birth_date', 'resign_date'];
 
     /**
      * The attributes that are mass assignable.
@@ -395,16 +395,6 @@ class Employee extends Model
     }
 
     /**
-     * @param $joined_date
-     *
-     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
-     */
-    public function setJoinedDateAttribute($joined_date)
-    {
-        $this->attributes['joined_date'] = Carbon::parse($joined_date) ?: null;
-    }
-
-    /**
      * @param $marital_status_id
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
@@ -415,16 +405,6 @@ class Employee extends Model
     }
 
     /**
-     * @param $permanency_date
-     *
-     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
-     */
-    public function setPermanencyDateAttribute($permanency_date)
-    {
-        $this->attributes['permanency_date'] = Carbon::parse($permanency_date) ?: null;
-    }
-
-    /**
      * @param $philhealth
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
@@ -432,16 +412,6 @@ class Employee extends Model
     public function setPhilHealthAttribute($philhealth)
     {
         $this->attributes['philhealth'] = $philhealth ?: null;
-    }
-
-    /**
-     * @param $probation_end_date
-     *
-     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
-     */
-    public function setProbationEndDateAttribute($probation_end_date)
-    {
-        $this->attributes['probation_end_date'] = Carbon::parse($probation_end_date) ?: null;
     }
 
     /**
