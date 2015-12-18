@@ -145,7 +145,7 @@ module.exports = {
                         subRoutes: {
                             '/employee-list': {
                                 name: 'pim-employee-list',
-                                component: require('./compiled/pages/page.vue'),
+                                component: require('./compiled/pages/pim/employee-list.vue'),
                                 auth: true
                             },
                             '/employee-list/:employee_id/personal-details': {
@@ -308,7 +308,7 @@ module.exports = {
                             transition.next();
                         },
                         function() {
-                            transition.redirect('/login');
+                            transition.redirect('/logout');
                         }
                     );
                 } else {
