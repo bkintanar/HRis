@@ -46,11 +46,11 @@ class PIMRequest extends Request
 
         // View
         if (Request::isMethod('get')) {
-            return ($this->logged_user->hasAccess($permission.'.view'));
+            return $this->logged_user->hasAccess($permission.'.view');
         } // Create
         else {
             if (Request::isMethod('post')) {
-                return ($this->logged_user->hasAccess($permission.'.create'));
+                return $this->logged_user->hasAccess($permission.'.create');
             }
         }
     }
