@@ -57,6 +57,11 @@ $api->version('v1', function (Router $api) {
                 $api->post('get-by-employee-id', 'EmployeeController@getByEmployeeId');
             });
 
+            // PIM
+            $api->group(['prefix' => 'pim', 'namespace' => 'PIM'], function (Router $api) {
+                $api->get('employee-list', 'EmployeeListController@index');
+            });
+
             // Chosen
             $api->get('cities', 'LookupTableController@cities');                                // docs done
             $api->get('countries', 'LookupTableController@countries');                          // docs done
