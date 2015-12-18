@@ -7,15 +7,15 @@
  *
  * @link    http://github.com/HB-Co/HRis
  */
-namespace HRis\Http\Controllers\PIM;
+namespace HRis\Api\Controllers\PIM;
 
+use Dingo\Api\Facade\API;
 use Exception;
 use HRis\Api\Controllers\BaseController;
 use HRis\Api\Eloquent\Employee;
 use HRis\Api\Eloquent\EmployeeSalaryComponent;
 use HRis\Api\Eloquent\SalaryComponent;
-use HRis\Http\Requests\PIM\PIMRequest;
-use HRis\Services\Pagination;
+use HRis\Api\Requests\PIM\PIMRequest;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Request;
 
@@ -32,11 +32,6 @@ class EmployeeListController extends BaseController
     protected $employee_salary_component;
 
     /**
-     * @var Pagination
-     */
-    protected $pagination;
-
-    /**
      * @var SalaryComponent
      */
     protected $salary_component;
@@ -45,20 +40,14 @@ class EmployeeListController extends BaseController
      * @param Employee                $employee
      * @param EmployeeSalaryComponent $employee_salary_component
      * @param SalaryComponent         $salary_component
-     * @param Pagination              $pagination
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function __construct(
-        Employee $employee,
-        EmployeeSalaryComponent $employee_salary_component,
-        SalaryComponent $salary_component,
-        Pagination $pagination
-    ) {
+    public function __construct(Employee $employee, EmployeeSalaryComponent $employee_salary_component, SalaryComponent $salary_component)
+    {
         $this->employee = $employee;
         $this->employee_salary_component = $employee_salary_component;
         $this->salary_component = $salary_component;
-        $this->pagination = $pagination;
         $this->employee_id_prefix = Config::get('company.employee_id_prefix');
 
         $this->setColumns();
@@ -91,7 +80,7 @@ class EmployeeListController extends BaseController
     {
         $employees = $this->employee->getEmployeeList(false, $request->sort(), $request->direction());
 
-        return $this->xhr($employees->get());
+        return API::response()->array(['employees' => $employees->get()])->statusCode(200);
     }
 
     /**
