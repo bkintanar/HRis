@@ -9,13 +9,13 @@ $api->version('v1', function (Router $api) {
 
     // Set our namespace for the underlying routes
     $api->group([
-        'namespace' => 'HRis\Api\Controllers',
+        'namespace'  => 'HRis\Api\Controllers',
         'middleware' => [
             'cors',
-            'api.throttle'
+            'api.throttle',
         ],
-        'limit' => 100,
-        'expires' => 5], function (Router $api) {
+        'limit'   => 100,
+        'expires' => 5, ], function (Router $api) {
 
         // Login route
         $api->post('login', 'Auth\AuthController@authenticate');                                            // docs done
