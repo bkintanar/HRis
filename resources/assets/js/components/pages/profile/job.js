@@ -259,7 +259,7 @@ module.exports = {
                     clearBtn: true
                 });
 
-                $('#datepicker_effective_date .input-group.date').datepicker('update', this.employee.job_history.effective_date);
+                $('#datepicker_effective_date .input-group.date').datepicker('update', this.employee.job_history.data.effective_date);
                 $('#datepicker_joined_date .input-group.date').datepicker('update', this.employee.joined_date);
                 $('#datepicker_probation_end_date .input-group.date').datepicker('update', this.employee.probation_end_date);
                 $('#datepicker_permanency_date .input-group.date').datepicker('update', this.employee.permanency_date);

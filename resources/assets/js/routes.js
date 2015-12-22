@@ -60,7 +60,7 @@ module.exports = {
                             },
                             '/qualifications': {
                                 name: 'profile-qualifications',
-                                component: require('./compiled/pages/page.vue'),
+                                component: require('./compiled/pages/profile/qualifications.vue'),
                                 auth: true
                             }
                         }
@@ -185,7 +185,7 @@ module.exports = {
                             },
                             '/employee-list/:employee_id/qualifications': {
                                 name: 'pim-employee-list-qualifications',
-                                component: require('./compiled/pages/page.vue'),
+                                component: require('./compiled/pages/profile/qualifications.vue'),
                                 auth: true
                             },
                             '/configuration': {
