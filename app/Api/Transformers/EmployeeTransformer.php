@@ -39,6 +39,9 @@ class EmployeeTransformer extends TransformerAbstract
         'dependents',
         'emergency_contacts',
         'job_histories',
+        'work_experiences',
+        'employee_skills',
+        'educations',
         'custom_field_values',
     ];
 
@@ -186,22 +189,6 @@ class EmployeeTransformer extends TransformerAbstract
     }
 
     /**
-     * Include Education.
-     *
-     * @param Employee $employee
-     *
-     * @return \League\Fractal\Resource\Collection
-     *
-     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
-     */
-    public function includeEducation(Employee $employee)
-    {
-        $educations = $employee->educations;
-
-        return $this->collection($educations, new EducationTransformer());
-    }
-
-    /**
      * Include JobHistory.
      *
      * @param Employee $employee
@@ -231,5 +218,53 @@ class EmployeeTransformer extends TransformerAbstract
         $job_histories = $employee->jobHistories()->get();
 
         return $this->collection($job_histories, new JobHistoryTransformer());
+    }
+
+    /**
+     * Include WorkExperiences.
+     *
+     * @param Employee $employee
+     *
+     * @return \League\Fractal\Resource\Collection
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     */
+    public function includeWorkExperiences(Employee $employee)
+    {
+        $work_experiences = $employee->workExperiences()->get();
+
+        return $this->collection($work_experiences, new WorkExperienceTransformer());
+    }
+
+    /**
+     * Include EmployeeSkills.
+     *
+     * @param Employee $employee
+     *
+     * @return \League\Fractal\Resource\Collection
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     */
+    public function includeEmployeeSkills(Employee $employee)
+    {
+        $employee_skills = $employee->employeeSkills()->get();
+
+        return $this->collection($employee_skills, new EmployeeSkillTransformer());
+    }
+
+    /**
+     * Include Educations.
+     *
+     * @param Employee $employee
+     *
+     * @return \League\Fractal\Resource\Collection
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     */
+    public function includeEducations(Employee $employee)
+    {
+        $educations = $employee->educations()->get();
+
+        return $this->collection($educations, new EducationTransformer());
     }
 }

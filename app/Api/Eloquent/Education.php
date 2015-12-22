@@ -25,13 +25,6 @@ class Education extends Model
     public $timestamps = false;
 
     /**
-     * Additional fields to treat as Carbon instances.
-     *
-     * @var array
-     */
-    protected $dates = ['from_date', 'to_date'];
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -63,27 +56,5 @@ class Education extends Model
     public function employee()
     {
         return $this->belongsTo('HRis\Api\Eloquent\Employee', 'id', 'employee_id');
-    }
-
-    /**
-     * Casts from_date attribute to Carbon.
-     *
-     * @param $from_date
-     *
-     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
-     */
-    public function setFromDateAttribute($from_date)
-    {
-        $this->attributes['from_date'] = Carbon::parse($from_date) ?: null;
-    }
-
-    /**
-     * @param $to_date
-     *
-     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
-     */
-    public function setToDateAttribute($to_date)
-    {
-        $this->attributes['to_date'] = Carbon::parse($to_date) ?: null;
     }
 }
