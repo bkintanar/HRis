@@ -1,0 +1,665 @@
+/*custom CSS*/
+body
+  background-color: $gray
+
+a
+  outline: none !important
+
+.input-full-width
+  width: 100%
+
+.img-circle
+  height: 48px
+  width: 48px
+
+.top-nav-b
+  text-align: center
+
+.top-nav-c
+  margin: 0 auto 18px
+
+.top-nav-c .btn-primary a
+  color: #fff
+
+.top-nav-c button a
+  color: #676a6c
+
+.top-nav-c a
+  margin: 0
+  padding: 0
+  float: left
+    border-radius: 0
+
+.top-nav-c a button
+  border-radius: 0 !important
+
+.top-nav-c button
+  padding: 0 !important
+
+.top-nav-c button a
+  padding: 6px 12px
+
+.m-right-a
+  margin-right: 6px
+
+.grad-red
+  background: $navy
+
+.greenpro-bg
+  background: $green
+
+.grad-red .col-sm-6 h2, .grad-red .col-sm-6 ol, .greenpro-bg .col-sm-6 h2, .greenpro-bg .col-sm-6 ol
+  color: #fff
+
+.breadcrumb
+  background-color: inherit
+
+.grad-red .col-sm-6 .breadcrumb>li+li:before, .greenpro-bg .col-sm-6 .breadcrumb>li+li:before
+  color: #FFF
+
+.grad-red .col-sm-6 .profile-img .profile-details, .greenpro-bg .col-sm-6 .profile-img .profile-details
+  color: #fff
+
+.breadcrumb>li+li:before
+  content: "/"
+
+/*Personal details Custom CSS*/
+
+.profile-img
+  display: block
+  clear: both
+  overflow: hidden
+
+.profile-img img
+  height: 79px
+  width: 79px
+
+.profile-details h2, .profile-details h2
+  padding: 0
+  margin: 0
+
+.profile-details h2
+  font-size: 17px
+  font-weight: bold
+
+.profile-details h3
+  font-size: 14px
+  font-weight: normal
+  margin: 7px 0 0
+  padding: 0
+
+.profile-details button
+  margin-top: 6px
+
+.change-pic
+  color: #fff
+  text-decoration: none
+
+#cus-input
+  width: 361px
+  margin: 0 auto
+  padding: 10px 0
+
+
+/*Crop-Box-CSS*/
+.imageBox
+  position: relative
+  height: 400px
+  width: 400px
+  border: 1px solid #aaa
+    overflow: hidden
+    background: #fff no-repeat
+    cursor: move
+  margin: 0 auto
+
+.imageBox .thumbBox
+  position: absolute
+  top: 50%
+  left: 50%
+  width: 200px
+  height: 200px
+  margin-top: -100px
+  margin-left: -100px
+  box-sizing: border-box
+  border: 1px solid rgb(102, 102, 102)
+  box-shadow: 0 0 0 100px rgba(0, 0, 0, 0.5)
+  background: none repeat scroll 0% 0% transparent
+
+.imageBox .spinner
+  position: absolute
+  top: 0
+  left: 0
+  bottom: 0
+  right: 0
+  text-align: center
+  line-height: 400px
+  background: rgba(0,0,0,0.7)
+
+/*//Cropbox*/
+
+.datepicker
+  z-index: 9999 !important
+
+.pull-centered
+  text-align: center
+  padding-bottom: 15px
+
+.top-nav-li ul
+  list-style: none
+  text-align: center
+  padding: 0
+  -webkit-border-radius: 3px
+  -moz-border-radius: 3px
+  border-radius: 3px
+  background: #fff
+  z-index: 10
+  overflow: hidden
+
+  li
+    display: inline-block
+    padding: 0
+    margin: 0
+    border-right: 1px solid #EAEAEA
+
+    &:hover
+      border-top-color: #DFDFDF
+      border-right-color: #DFDFDF
+      border-bottom-color: #DFDFDF
+
+    &:active
+      background: $green
+      color: #fff !important
+
+      a
+        color: #fff !important
+
+    &:last-child
+      border-right: 0
+
+      a
+        border-right: 0
+
+    &.active
+      background: $green
+      a
+        color: #fff !important
+
+    &.navy
+      &:active, &.active
+        background: $navy
+
+    a
+      color: #676a6c
+      padding: 6px 8px
+      display: inline-block
+      z-index: 9999
+
+tbody.thin-table td
+  padding: 3px 0 !important
+  font-weight: bold
+  text-align: center
+
+th.no-pdng
+  padding: 5px 0 !important
+  text-align: center
+
+button.sve-btn
+  float: right
+  width: auto
+
+td.indent
+  text-indent: 20px
+  font-weight: normal !important
+
+td.indent-double
+  text-indent: 40px
+  font-weight: normal !important
+
+td.ta-left
+  text-align: left !important
+  font-weight: normal !important
+
+th.ta-left
+  text-align: left !important
+
+th.fix-width
+  width: 10%
+
+.no-marg-left
+  margin-left: 0 !important
+  margin-right: 0 !important
+
+.coupon_question
+  margin-top: 10px !important
+
+.hidden-content
+  display: none
+
+.advance-p
+  clear: both
+
+.control-label
+  padding-top: 7px
+  margin-bottom: 0
+  text-align: right
+
+.btn-cs
+  clear: both
+  display: flex
+
+.ad-p-btn
+  clear: both
+
+#add_avatar
+  cursor: pointer
+
+.logo-wrapper
+  padding: 0
+  margin: 0
+
+.logo-wrapper img
+  width: 100%
+
+
+/** Custom ---------- */
+
+.badge-success,
+.label-success
+  background-color: $green
+
+.count-info .label
+  background-color: $red
+  line-height: 12px
+  padding: 2px 5px
+  position: absolute
+  right: 2px
+  top: 14px
+  font-size: 9px
+  left: auto
+  border-radius: 10px
+  min-width: 21px
+
+.btn-primary
+  background: $green !important
+  border-color: $green !important
+
+.btn-ghost
+
+  span
+    width: 20px
+    height: 2px
+    background: $dark-light
+    margin: 4px 0
+    display: block
+    text-align: right
+    -webkit-transition: all 0.3s linear
+    transition: all 0.3s linear
+
+  &.mini
+    span
+      &:nth-child(2)
+        width: 25px
+
+      &:last-child
+        width: 15px
+
+.btn-group-xs>.btn,
+.btn-xs
+  padding: 5px 10px
+
+.badge-success,
+.label-success,
+.badge-danger,
+.label-danger
+  font-size: 11px
+
+.tooltip
+  &.bottom
+    .tooltip-arrow
+      border-bottom-color: $dark !important
+
+    .tooltip-inner
+      background: $dark !important
+      padding: 5px 10px
+
+button[rel="edit"],
+button[rel="delete"]
+  background: transparent !important
+  border: transparent !important
+  color: $navy !important
+  font-size: 15px !important
+  padding: 5px
+
+/** Login Page ---------- */
+.loginscreen.middle-box
+  margin: auto !important
+
+/** Avatar -------------- */
+.image-crop
+  max-height: 300px
+
+.image-crop *
+  margin: auto
+
+.modal-close
+  font-size: 13px
+  float: left
+  border: 0
+  background: transparent
+  text-decoration: underline
+  color: #1ab394
+  outline: none
+  -webkit-box-shadow: 0 0 0
+  -moz-box-shadow: 0 0 0
+  box-shadow: 0 0 0
+
+.cropper-container[style]
+  left: 0 !important
+
+.btn-zoom
+  text-align: center
+  margin: 20px auto
+
+  button
+    display: inline-block
+    vertical-align: top
+    width: 80px
+    margin-bottom: 5px
+    font-size: 14px
+    outline: none
+    -webkit-box-shadow: 0 0 0
+    -moz-box-shadow: 0 0 0
+    box-shadow: 0 0 0
+
+/** Mini Sidebar -------------- */
+
+.nav-header
+  border: 0 !important
+  background-color: transparent !important
+
+.navbar-static-side
+  overflow: auto
+  background-color: $dark
+
+#side-menu
+
+  &>li:not(.nav-header)
+    border-left: 4px solid $dark
+
+    &:hover,
+    &:focus,
+    &.active,
+    &.active:hover,
+    &.active:focus
+      border-left: 4px solid $green !important
+      background-color: $dark-light !important
+
+    &.navy
+      &:hover, &.active, &.active:hover
+        border-left: 4px solid $navy !important
+
+  li
+    border-left: 4px solid transparent !important
+
+    a
+      background: transparent
+
+    .nav-second-level, .nav-third-level
+      li
+        border-color: transparent !important
+
+        a
+          padding: 10px 20px 10px 25px
+
+        &:last-child
+          margin-bottom: auto
+
+        &.active
+          background: transparent !important
+  .nav-header
+    border-color: transparent !important
+
+.fixed-sidebar.mini-navbar
+
+  #side-menu
+    li
+      a
+        .nav-label,
+        .fa.arrow
+          display: none !important
+
+    .nav-second-level,
+    .nav-third-level
+
+      li
+        margin: auto
+
+        &:hover, &.active
+          border-left: 4px solid $green
+          background-color: $dark-light !important
+
+        a
+          padding: 14px 20px 14px 25px !important
+          -webkit-border-radius: 0 !important
+          -moz-border-radius: 0 !important
+          border-radius: 0 !important
+
+          &:focus
+            background: transparent !important
+
+  #page-wrapper,
+  .footer.fixed
+    margin-left: 70px !important
+
+  .navbar-static-side
+    width: 70px !important
+    overflow: auto
+    -webkit-overflow-scrolling: touch
+
+
+/** Selectbox -------------- */
+
+.chosen-container-single
+  .chosen-single
+    div
+      height: 18px !important
+      top: 5px !important
+
+.bootstrap-tagsinput
+  width: 100% !important
+
+@media screen and (min-width: 270px)
+  .btn-group-xs>.btn,
+  .btn-xs
+    padding: 10px 15px
+    font-size: 13px
+
+  .page-heading
+    padding: 0 10px 40px
+
+  .navbar-top-links
+    li
+      a
+        padding-left: 8px
+        padding-right: 8px
+
+    .dropdown-menu
+      li
+        &.divider
+          clear: both
+          overflow: hidden
+        a
+          padding: 3px 14px 3px 3px
+
+        .dropdown-messages-box
+          min-height: 50px
+
+
+    .dropdown-alerts,
+    .dropdown-messages
+      margin: auto
+
+      .media-body
+        small.pull-right
+          padding-left: 10px
+
+
+    .dropdown-alerts
+      margin-left: -100px
+
+    .dropdown-messages
+      margin-left: -60px
+
+  .chosen-container
+    max-width: 100%
+
+  .ibox-title
+    position: relative
+
+    .ibox-tools
+      position: absolute
+      right: 0
+      top: 0
+
+      a
+        display: block
+        width: 40px
+        height: 40px
+        margin: auto
+        text-align: center
+        line-height: 40px
+
+  .profile-img
+    float: left
+    padding-top: 20px
+    position: relative
+    overflow: visible
+    width: 100%
+
+    img,
+    .profile-details
+      float: left
+      text-align: left
+
+    .profile-details
+      position: absolute
+      padding-left: 80px
+      margin-left: 6px
+        margin-top: 0
+
+
+    span.label
+      border: 1px solid #fff
+      position: relative
+      top: 5px
+
+  .fixed-sidebar.mini-navbar
+
+    #side-menu
+      li
+        .nav-second-level,
+        .nav-third-level
+
+          a
+            font-size: 0
+
+            .fa
+              display: block
+              font-size: 14px
+
+            span.fa.arrow
+              display: none !important
+
+  div[style*="width:50%"]
+    width: 100%	!important
+
+  .top-nav-li
+    display: block
+
+    ul
+      li
+        display: block
+        border-bottom: 1px solid #EAEAEA
+
+        a
+          display: block
+          width: 100%
+          text-align: left
+          padding: 8px 15px
+
+@media screen and (min-width: 500px)
+  .top-nav-li
+    display: block
+
+    ul
+      li
+        display: inline-block
+        width: 49.999%
+
+
+@media screen and (min-width: 768px)
+  .btn-group-xs>.btn,
+  .btn-xs
+    padding: 5px 10px
+
+  .profile-img
+    float: right
+
+  .navbar-top-links
+
+    .dropdown-alerts,
+    .dropdown-messages
+      margin: auto
+
+  .fixed-sidebar.mini-navbar
+
+    #side-menu
+      li
+        &:hover
+          &>ul
+            display: block
+
+      .nav-second-level,
+      .nav-third-level
+        position: absolute !important
+        left: 100% !important
+        top: 0px
+        background-color: $dark
+        font-size: 12px
+        min-width: 180px
+        display: none
+
+        a
+          font-size: 12px !important
+          font-weight: normal
+
+          .fa
+            display: none !important
+
+  .page-heading
+    padding: 0 10px 20px
+
+  .profile-img
+    float: right
+    padding-top: 20px
+    position: relative
+    overflow: hidden
+    width: auto
+
+    .profile-details
+      position: relative
+      padding-left: 0
+
+@media screen and (min-width: 1200px)
+
+  .top-nav-li
+    display: block
+
+    ul
+      display: inline-block
+
+      li
+        display: inline-block
+        width: auto
+        border-bottom: 0
+        float: left
