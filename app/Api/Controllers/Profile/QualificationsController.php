@@ -9,7 +9,6 @@
  */
 namespace HRis\Api\Controllers\Profile;
 
-use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Dingo\Api\Facade\API;
 use Exception;
 use HRis\Api\Controllers\BaseController;
@@ -25,8 +24,6 @@ use HRis\Api\Requests\Profile\QualificationsWorkExperienceRequest;
 
 /**
  * Class QualificationsController.
- *
- * @Middleware("auth")
  */
 class QualificationsController extends BaseController
 {
@@ -36,7 +33,6 @@ class QualificationsController extends BaseController
     protected $employee;
 
     /**
-     * @param Sentinel $auth
      * @param Employee $employee
      */
     public function __construct(Employee $employee)
@@ -44,7 +40,7 @@ class QualificationsController extends BaseController
         $this->employee = $employee;
 
         $profile_details_id = Navlink::whereName('Qualifications')->pluck('id');
-//        $this->data['custom_field_sections'] = CustomFieldSection::whereScreenId($profile_details_id)->get();
+        $this->data['custom_field_sections'] = CustomFieldSection::whereScreenId($profile_details_id)->get();
     }
 
     /**
@@ -55,7 +51,7 @@ class QualificationsController extends BaseController
      *
      * @return \Illuminate\Http\RedirectResponse
      *
-     * @author Bertrand Kintanar
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function storeWorkExperience(QualificationsWorkExperienceRequest $request, WorkExperience $workExperience)
     {
@@ -75,7 +71,7 @@ class QualificationsController extends BaseController
      *
      * @return \Illuminate\Http\JsonResponse
      *
-     * @author Bertrand Kintanar
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function destroyWorkExperience(QualificationsWorkExperienceRequest $request, WorkExperience $workExperience)
     {
@@ -98,7 +94,7 @@ class QualificationsController extends BaseController
      *
      * @return \Illuminate\Http\RedirectResponse
      *
-     * @author Bertrand Kintanar
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function updateWorkExperience(QualificationsWorkExperienceRequest $request, WorkExperience $workExperience)
     {
@@ -125,7 +121,7 @@ class QualificationsController extends BaseController
      *
      * @return \Illuminate\Http\RedirectResponse
      *
-     * @author Bertrand Kintanar
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function storeEducation(QualificationsEducationRequest $request, Education $education)
     {
@@ -145,7 +141,7 @@ class QualificationsController extends BaseController
      *
      * @return \Illuminate\Http\JsonResponse
      *
-     * @author Bertrand Kintanar
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function destroyEducation(QualificationsEducationRequest $request, Education $education)
     {
@@ -168,7 +164,7 @@ class QualificationsController extends BaseController
      *
      * @return \Illuminate\Http\RedirectResponse
      *
-     * @author Bertrand Kintanar
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function updateEducation(QualificationsEducationRequest $request, Education $education)
     {
@@ -194,7 +190,7 @@ class QualificationsController extends BaseController
      *
      * @return \Illuminate\Http\RedirectResponse
      *
-     * @author Bertrand Kintanar
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function storeSkill(QualificationsSkillRequest $request, EmployeeSkill $employee_skill)
     {
@@ -202,8 +198,8 @@ class QualificationsController extends BaseController
             $employee = $this->employee->whereId($request->get('employee_id'))->first();
 
             $skill_id = $request->get('skill_id');
-            $years_of_experience = $request->get('years_of_experience') or null;
-            $comment = $request->get('comment') or null;
+            $years_of_experience = $request->get('years_of_experience') || null;
+            $comment = $request->get('comment') || null;
 
             $employee->skills()->attach($skill_id, [
                 'years_of_experience' => $years_of_experience,
@@ -221,15 +217,12 @@ class QualificationsController extends BaseController
     /**
      * Update the Profile - Qualifications - Skills.
      *
-     * @Patch("profile/qualifications/skills")
-     * @Patch("pim/employee-list/{id}/qualifications/skills")
-     *
      * @param QualificationsSkillRequest $request
      * @param EmployeeSkill              $employeeSkill
      *
      * @return \Illuminate\Http\RedirectResponse
      *
-     * @author Bertrand Kintanar
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function updateSkill(QualificationsSkillRequest $request, EmployeeSkill $employeeSkill)
     {
@@ -259,7 +252,7 @@ class QualificationsController extends BaseController
      *
      * @return \Illuminate\Http\JsonResponse
      *
-     * @author Bertrand Kintanar
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function destroySkill(QualificationsSkillRequest $request, EmployeeSkill $employee_skill)
     {
