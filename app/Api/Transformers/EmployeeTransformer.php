@@ -73,7 +73,7 @@ class EmployeeTransformer extends TransformerAbstract
             'address_city_id'     => (int) $employee->address_city_id,
             'address_province_id' => (int) $employee->address_province_id,
             'address_country_id'  => (int) $employee->address_country_id,
-            'postal_code'         => $employee->address_postal_code,
+            'address_postal_code' => $employee->address_postal_code,
             'home_phone'          => $employee->home_phone,
             'mobile_phone'        => $employee->mobile_phone,
             'work_email'          => $employee->work_email,
