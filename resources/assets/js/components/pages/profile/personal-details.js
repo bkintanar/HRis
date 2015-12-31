@@ -27,8 +27,6 @@ module.exports = {
     methods: {
 
         queryDatabase: function () {
-            var that = this;
-
             if (this.$route.path.indexOf('/pim') > -1) {
                 this.employee_id = this.$route.params.employee_id;
             } else {
@@ -44,15 +42,15 @@ module.exports = {
             client(params).then(
                 function (response) {
 
-                    that.$dispatch('update-employee', response.entity.data);
+                    this.$dispatch('update-employee', response.entity.data);
 
-                    that.original_employee_id = response.entity.data.employee_id;
+                    this.original_employee_id = response.entity.data.employee_id;
 
-                    that.chosenNationalities();
-                    that.chosenMaritalStatuses();
+                    this.chosenNationalities();
+                    this.chosenMaritalStatuses();
 
                     var maritalStatusChosenWatcher = setInterval(function () {
-                        if (that.employee != null) {
+                        if (this.employee != null) {
                             // iCheck
                             $('.i-checks').iCheck({
                                 checkboxClass: 'icheckbox_square-green',
@@ -62,22 +60,22 @@ module.exports = {
                         }
                     }, 1);
 
-                    if (that.employee) {
+                    if (this.employee) {
                         $('input[name="gender"]').on('ifChecked', function (event) {
-                            that.employee.gender = this.value;
+                            this.employee.gender = this.value;
                         });
 
-                        that.switchGender(that.employee.gender);
+                        this.switchGender(this.employee.gender);
                     }
-                },
+                }.bind(this),
                 function (response) {
                     if (response.status.code == 422) {
-                        that.$route.router.go({
+                        this.$route.router.go({
                             name: 'error-404'
                         });
                         console.log(response.entity);
                     }
-                }
+                }.bind(this)
             );
         },
         submitForm: function () {

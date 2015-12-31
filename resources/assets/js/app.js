@@ -96,42 +96,16 @@ module.exports = {
 
             this.routes = route;
             this.preparePermission();
+            this.setJobTitles();
+            this.setEmploymentStatuses();
 
             document.title = 'HRis | ' + page_title;
         });
 
         this.$on('update-employee', function (employee) {
 
-            var self = this;
-
             this.employee = employee;
             this.employee.birth_date = this.employee.birth_date ? this.employee.birth_date.date.substring(0, 10) : null;
-
-            client({
-                path: '/job-titles?table_view=true',
-                headers: {'Authorization': localStorage.getItem('jwt-token')}
-            }).then(
-                function (response) {
-                    self.job_titles = response.entity;
-                    that.$broadcast('set-job-titles-default');
-                    that.$broadcast('set-job-titles-action-area');
-                },
-                function (response) {
-                    console.log(response);
-                }
-            );
-
-            client({
-                path: '/employment-statuses?table_view=true',
-                headers: {'Authorization': localStorage.getItem('jwt-token')}
-            }).then(
-                function (response) {
-                    self.employment_statuses = response.entity;
-                },
-                function (response) {
-                    console.log(response);
-                }
-            );
 
             this.$broadcast('employee-loaded');
         });
@@ -171,7 +145,7 @@ module.exports = {
 
         setLogin: function (user) {
 
-            var that = this;
+            //var that = this;
 
             // Save login info in our data and set header in case it's not set already
             this.user = user;
@@ -183,9 +157,39 @@ module.exports = {
             }).then(
                 function (response) {
                     localStorage.setItem('sidebar', btoa(response.entity.sidebar));
-                    that.$broadcast('set-sidebar');
+                    this.$broadcast('set-sidebar');
+                }.bind(this)
+            )
+        },
+
+        setEmploymentStatuses: function () {
+
+            client({
+                path: '/employment-statuses?table_view=true',
+                headers: {'Authorization': localStorage.getItem('jwt-token')}
+            }).then(
+                function (response) {
+                    this.employment_statuses = response.entity;
+                }.bind(this),
+                function (response) {
+                    console.log(response);
                 }
-            );
+            )
+        },
+
+        setJobTitles: function () {
+
+            client({
+                path: '/job-titles?table_view=true',
+                headers: {'Authorization': localStorage.getItem('jwt-token')}
+            }).then(
+                function (response) {
+                    this.job_titles = response.entity;
+                }.bind(this),
+                function (response) {
+                    console.log(response);
+                }
+            )
         },
 
         destroyLogin: function (user) {

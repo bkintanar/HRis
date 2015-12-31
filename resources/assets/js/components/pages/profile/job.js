@@ -22,8 +22,6 @@ module.exports = {
     },
     methods: {
         queryDatabase: function () {
-            var that = this;
-
             if (this.$route.path.indexOf('/pim') > -1) {
                 this.employee_id = this.$route.params.employee_id;
             } else {
@@ -39,26 +37,24 @@ module.exports = {
             client(params).then(
                 function (response) {
 
-                    that.$dispatch('update-employee', response.entity.data);
+                    this.$dispatch('update-employee', response.entity.data);
 
-                    that.chosenJobTitles();
-                    that.chosenEmploymentStatuses();
-                    that.chosenDepartments();
-                    that.chosenLocations();
-                },
+                    this.chosenJobTitles();
+                    this.chosenEmploymentStatuses();
+                    this.chosenDepartments();
+                    this.chosenLocations();
+                }.bind(this),
                 function (response) {
                     if (response.status.code == 422) {
-                        that.$route.router.go({
+                        this.$route.router.go({
                             name: 'error-404'
                         });
                         console.log(response.entity);
                     }
-                }
+                }.bind(this)
             );
         },
         deleteRecord: function (job_history, index) {
-            var that = this;
-
             var previousWindowKeyDown = window.onkeydown; // https://github.com/t4t5/sweetalert/issues/127
             swal({
                 title: 'Are you sure?',
@@ -89,49 +85,47 @@ module.exports = {
                             switch (response.status.code) {
                                 case 200:
                                     swal({title: response.entity.status, type: 'success', timer: 2000});
-                                    that.employee.job_histories.data.splice(index, 1);
-                                    that.setCurrentJobHistory();
+                                    this.employee.job_histories.data.splice(index, 1);
+                                    this.setCurrentJobHistory();
                                     break;
                                 case 500:
                                     swal({title: response.entity.status, type: 'error', timer: 2000});
                                     break;
                             }
-                        },
+                        }.bind(this),
                         function (response) {
                             if (response.status.code == 422) {
-                                that.$route.router.go({
+                                this.$route.router.go({
                                     name: 'error-404'
                                 });
                                 console.log(response.entity);
                             }
-                        }
+                        }.bind(this)
                     );
 
                 } else {
                     swal('Cancelled', 'No record has been deleted', 'error');
                 }
-            });
+            }.bind(this));
         },
         setCurrentJobHistory: function () {
-            var that = this;
+            var current_job_history = this.employee.job_histories.data[0];
 
-            var current_job_history = that.employee.job_histories.data[0];
+            this.employee.job_history.data.job_title_id = current_job_history.job_title_id;
+            this.employee.job_history.data.department_id = current_job_history.department_id;
+            this.employee.job_history.data.employment_status_id = current_job_history.employment_status_id;
+            this.employee.job_history.data.work_shift_id = current_job_history.work_shift_id;
+            this.employee.job_history.data.location_id = current_job_history.location_id;
 
-            that.employee.job_history.data.job_title_id = current_job_history.job_title_id;
-            that.employee.job_history.data.department_id = current_job_history.department_id;
-            that.employee.job_history.data.employment_status_id = current_job_history.employment_status_id;
-            that.employee.job_history.data.work_shift_id = current_job_history.work_shift_id;
-            that.employee.job_history.data.location_id = current_job_history.location_id;
+            this.job_title_obj = this.job_titles_chosen[this.employee.job_history.data.job_title_id - 1];
+            this.employment_status_obj = this.employment_statuses_chosen[this.employee.job_history.data.employment_status_id - 1];
+            this.department_obj = this.departments_chosen[this.employee.job_history.data.department_id - 1];
+            this.location_obj = this.locations_chosen[this.employee.job_history.data.location_id - 1];
 
-            that.job_title_obj = that.job_titles_chosen[that.employee.job_history.data.job_title_id - 1];
-            that.employment_status_obj = that.employment_statuses_chosen[that.employee.job_history.data.employment_status_id - 1];
-            that.department_obj = that.departments_chosen[that.employee.job_history.data.department_id - 1];
-            that.location_obj = that.locations_chosen[that.employee.job_history.data.location_id - 1];
+            this.employee.job_history.data.effective_date = current_job_history.effective_date;
+            this.employee.job_history.data.comments = current_job_history.comments;
 
-            that.employee.job_history.data.effective_date = current_job_history.effective_date;
-            that.employee.job_history.data.comments = current_job_history.comments;
-
-            that.updateLoggedUser(current_job_history);
+            this.updateLoggedUser(current_job_history);
         },
 
         modifyForm: function () {
@@ -160,8 +154,6 @@ module.exports = {
         },
 
         chosenJobTitles: function () {
-            var that = this;
-
             // retrieve job-titles
             client({
                 path: '/job-titles',
@@ -169,21 +161,19 @@ module.exports = {
             }).then(
                 function (response) {
                     if (response) {
-                        that.job_titles_chosen = response.entity;
+                        this.job_titles_chosen = response.entity;
                     }
 
-                    if (that.employee) {
-                        that.job_title_obj = that.job_titles_chosen[that.employee.job_history.data.job_title_id - 1];
+                    if (this.employee) {
+                        this.job_title_obj = this.job_titles_chosen[this.employee.job_history.data.job_title_id - 1];
                     }
 
                     $('.vue-chosen').trigger('chosen:updated');
-                }
+                }.bind(this)
             );
         },
 
         chosenEmploymentStatuses: function () {
-            var that = this;
-
             // retrieve employment-statuses
             client({
                 path: '/employment-statuses',
@@ -191,20 +181,19 @@ module.exports = {
             }).then(
                 function (response) {
                     if (response) {
-                        that.employment_statuses_chosen = response.entity;
+                        this.employment_statuses_chosen = response.entity;
                     }
 
-                    if (that.employee) {
-                        that.employment_status_obj = that.employment_statuses_chosen[that.employee.job_history.data.employment_status_id - 1];
+                    if (this.employee) {
+                        this.employment_status_obj = this.employment_statuses_chosen[this.employee.job_history.data.employment_status_id - 1];
                     }
 
                     $('.vue-chosen').trigger('chosen:updated');
-                }
+                }.bind(this)
             );
         },
 
         chosenDepartments: function () {
-            var that = this;
 
             // retrieve departments
             client({
@@ -213,21 +202,19 @@ module.exports = {
             }).then(
                 function (response) {
                     if (response) {
-                        that.departments_chosen = response.entity;
+                        this.departments_chosen = response.entity;
                     }
 
-                    if (that.employee) {
-                        that.department_obj = that.departments_chosen[that.employee.job_history.data.department_id - 1];
+                    if (this.employee) {
+                        this.department_obj = this.departments_chosen[this.employee.job_history.data.department_id - 1];
                     }
 
                     $('.vue-chosen').trigger('chosen:updated');
-                }
+                }.bind(this)
             );
         },
 
         chosenLocations: function () {
-            var that = this;
-
             // retrieve locations
             client({
                 path: '/locations',
@@ -235,15 +222,15 @@ module.exports = {
             }).then(
                 function (response) {
                     if (response) {
-                        that.locations_chosen = response.entity;
+                        this.locations_chosen = response.entity;
                     }
 
-                    if (that.employee) {
-                        that.location_obj = that.locations_chosen[that.employee.job_history.data.location_id - 1];
+                    if (this.employee) {
+                        this.location_obj = this.locations_chosen[this.employee.job_history.data.location_id - 1];
                     }
 
                     $('.vue-chosen').trigger('chosen:updated');
-                }
+                }.bind(this)
             );
         },
 
@@ -273,12 +260,10 @@ module.exports = {
         },
 
         submitForm: function () {
-            var that = this;
-
             // jasny bug work around
             $('#comments').focus();
 
-            if (!that.employee.job_history.data.effective_date) {
+            if (!this.employee.job_history.data.effective_date) {
                 swal({title: 'Effective Date is a required field', type: 'error', timer: 2000});
                 $('#effective_date').focus();
                 return false;
@@ -300,11 +285,11 @@ module.exports = {
                     switch (response.status.code) {
                         case 200:
                             if (response.entity.job_history) {
-                                that.employee.job_histories.data.unshift(response.entity.job_history);
-                                that.updateLoggedUser(response.entity.job_history);
+                                this.employee.job_histories.data.unshift(response.entity.job_history);
+                                this.updateLoggedUser(response.entity.job_history);
                             }
                             swal({title: response.entity.status, type: 'success', timer: 2000});
-                            that.cancelForm();
+                            this.cancelForm();
                             break;
                         case 405:
                             swal({title: response.text, type: 'warning', timer: 2000});
@@ -314,7 +299,7 @@ module.exports = {
                             swal({title: response.text, type: 'error', timer: 2000});
                             break;
                     }
-                }
+                }.bind(this)
             );
         },
 

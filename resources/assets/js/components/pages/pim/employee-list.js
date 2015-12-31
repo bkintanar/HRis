@@ -15,8 +15,6 @@ module.exports = {
     methods: {
         getEmployeeList: function () {
 
-            var that = this;
-
             let params = {
                 path: '/pim/employee-list',
                 method: 'GET',
@@ -28,16 +26,16 @@ module.exports = {
             client(params).then(
                 function (response) {
 
-                    that.employees = response.entity.employees;
-                },
+                    this.employees = response.entity.employees;
+                }.bind(this),
                 function (response) {
                     if (response.status.code == 422) {
-                        that.$route.router.go({
+                        this.$route.router.go({
                             name: 'error-404'
                         });
                         console.log(response.entity);
                     }
-                }
+                }.bind(this)
             );
         }
     }

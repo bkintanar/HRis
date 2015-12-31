@@ -8,11 +8,9 @@ module.exports = {
         }
     },
     ready: function () {
-        var that = this;
-        var that = this;
         this.$on('set-sidebar', function () {
-            that.navlinks = JSON.parse(atob(localStorage.getItem('sidebar')));
+            this.navlinks = JSON.parse(atob(localStorage.getItem('sidebar')));
             $('#side-menu').metisMenu();
-        });
+        }.bind(this));
     }
 };

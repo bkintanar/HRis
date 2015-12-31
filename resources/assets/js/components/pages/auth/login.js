@@ -17,7 +17,6 @@ module.exports = {
     methods: {
         attempt: function (e) {
             e.preventDefault();
-            var that = this;
 
             let params = {
                 path: '/login',
@@ -27,19 +26,18 @@ module.exports = {
             client(params).then(
                 function (response) {
                     localStorage.setItem('jwt-token', 'Bearer ' + response.entity.token);
-                    that.getUserData();
-                },
+                    this.getUserData();
+                }.bind(this),
                 function (response) {
-                    that.messages = [];
+                    this.messages = [];
                     if (response.entity.error) {
-                        that.messages.push({type: 'danger', message: 'Sorry, you provided invalid credentials'});
+                        this.messages.push({type: 'danger', message: 'Sorry, you provided invalid credentials'});
                     }
-                }
+                }.bind(this)
             );
         },
 
         getUserData: function () {
-            var that = this;
 
             client({
                 path: '/users/me?include=employee,role',
@@ -47,9 +45,9 @@ module.exports = {
             }).then(
                 function (response) {
 
-                    that.$dispatch('userHasLoggedIn', response.entity.data);
-                    that.$route.router.go('/dashboard');
-                },
+                    this.$dispatch('userHasLoggedIn', response.entity.data);
+                    this.$route.router.go('/dashboard');
+                }.bind(this),
                 function (response) {
                     console.log(response);
                 }

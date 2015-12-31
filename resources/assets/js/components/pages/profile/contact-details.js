@@ -42,8 +42,6 @@ module.exports = {
     },
     methods: {
         queryDatabase: function () {
-            var that = this;
-
             if (this.$route.path.indexOf('/pim') > -1) {
                 this.employee_id = this.$route.params.employee_id;
             } else {
@@ -59,11 +57,11 @@ module.exports = {
             client(params).then(
                 function (response) {
 
-                    that.$dispatch('update-employee', response.entity.data);
+                    this.$dispatch('update-employee', response.entity.data);
 
-                    that.chosenProvinces();
-                    that.chosenCountries();
-                },
+                    this.chosenProvinces();
+                    this.chosenCountries();
+                }.bind(this),
                 function (response) {
                     console.log(response);
                 }
@@ -71,8 +69,6 @@ module.exports = {
         },
 
         submitForm: function () {
-            var that = this;
-
             // jasny bug work around
             $('#address_1').focus();
 
@@ -93,15 +89,15 @@ module.exports = {
                     switch (response.status.code) {
                         case 200:
 
-                            if (that.$route.path.indexOf('/pim') > -1) {
-                                that.$route.router.go({
+                            if (this.$route.path.indexOf('/pim') > -1) {
+                                this.$route.router.go({
                                     name: 'pim-employee-list-contact-details',
                                     params: {employee_id: response.entity.employee.employee_id}
                                 });
                             }
 
                             swal({title: response.entity.status, type: 'success', timer: 2000});
-                            that.cancelForm();
+                            this.cancelForm();
                             break;
                         case 405:
                             swal({title: response.entity.status, type: 'warning', timer: 2000});
@@ -111,7 +107,7 @@ module.exports = {
                             swal({title: response.entity.status, type: 'error', timer: 2000});
                             break;
                     }
-                }
+                }.bind(this)
             );
         },
 
@@ -136,7 +132,6 @@ module.exports = {
         },
 
         chosenProvinces: function () {
-            var that = this;
 
             // retrieve provinces
             client({
@@ -145,17 +140,15 @@ module.exports = {
             }).then(
                 function (response) {
                     if (response) {
-                        that.provinces_chosen = response.entity;
+                        this.provinces_chosen = response.entity;
                     }
 
-                    that.address_province_obj = that.provinces_chosen[that.employee.address_province_id - 1];
-                }
+                    this.address_province_obj = this.provinces_chosen[this.employee.address_province_id - 1];
+                }.bind(this)
             );
         },
 
         chosenCountries: function () {
-            var that = this;
-
             // retrieve countries
             client({
                 path: '/countries',
@@ -163,17 +156,15 @@ module.exports = {
             }).then(
                 function (response) {
                     if (response) {
-                        that.countries_chosen = response.entity;
+                        this.countries_chosen = response.entity;
                     }
 
-                    that.address_country_obj = that.countries_chosen[that.employee.address_country_id - 1];
-                }
+                    this.address_country_obj = this.countries_chosen[this.employee.address_country_id - 1];
+                }.bind(this)
             );
         },
 
         chosenCities: function (value, open) {
-            var that = this;
-
             // retrieve cities
             client({
                 path: '/cities?province_id=' + value,
@@ -181,14 +172,14 @@ module.exports = {
             }).then(
                 function (response) {
                     if (response) {
-                        that.cities_chosen = response.entity;
+                        this.cities_chosen = response.entity;
                     }
                     $('.vue-chosen').trigger("chosen:updated");
 
                     if (open) {
                         $('#address_city_id').trigger("chosen:open");
                     }
-                }
+                }.bind(this)
             );
         }
     }

@@ -23,7 +23,6 @@ module.exports = {
         }
     },
     ready: function () {
-        var that = this;
         this.queryDatabase();
         this.chosenRelationships();
 
@@ -33,8 +32,6 @@ module.exports = {
     },
     methods: {
         queryDatabase: function () {
-
-            var that = this;
 
             if (this.$route.path.indexOf('/pim') > -1) {
                 this.employee_id = this.$route.params.employee_id;
@@ -51,25 +48,25 @@ module.exports = {
             client(params).then(
                 function (response) {
 
-                    that.$dispatch('update-employee', response.entity.data);
+                    this.$dispatch('update-employee', response.entity.data);
 
                     client({
                         path: '/relationships?table_view=true',
                         headers: {'Authorization': localStorage.getItem('jwt-token')}
                     }).then(
                         function (response) {
-                            that.relationships = response.entity;
-                        });
+                            this.relationships = response.entity;
+                        }.bind(this));
 
-                },
+                }.bind(this),
                 function (response) {
                     if (response.status.code == 422) {
-                        that.$route.router.go({
+                        this.$route.router.go({
                             name: 'error-404'
                         });
                         console.log(response.entity);
                     }
-                }
+                }.bind(this)
             );
         },
         toggleModal: function () {
@@ -92,32 +89,30 @@ module.exports = {
         },
         submitForm: function () {
 
-            var that = this;
-
             // jasny bug work around
             $('#first_name').focus();
 
-            that.modal.employee_id = that.employee.id;
-            that.modal.relationship_id = that.relationship_obj.id;
+            this.modal.employee_id = this.employee.id;
+            this.modal.relationship_id = this.relationship_obj.id;
 
-            if (that.modal.relationship_id && that.modal.first_name && that.modal.last_name) {
+            if (this.modal.relationship_id && this.modal.first_name && this.modal.last_name) {
 
                 client({
                     path: '/profile/emergency-contacts',
-                    method: that.editMode ? 'PATCH' : 'POST',
-                    entity: that.modal,
+                    method: this.editMode ? 'PATCH' : 'POST',
+                    entity: this.modal,
                     headers: {'Authorization': localStorage.getItem('jwt-token')}
                 }).then(
                     function (response) {
                         switch (response.status.code) {
                             case 200:
                                 $('#emergency_contact_modal').modal('toggle');
-                                if (that.editMode) {
-                                    that.updateRowInTable();
+                                if (this.editMode) {
+                                    this.updateRowInTable();
                                     swal({title: response.entity.status, type: 'success', timer: 2000});
                                 }
                                 else {
-                                    that.employee.emergency_contacts.data.push(response.entity.emergency_contact);
+                                    this.employee.emergency_contacts.data.push(response.entity.emergency_contact);
                                     swal({title: response.entity.status, type: 'success', timer: 2000});
                                 }
                                 break;
@@ -126,7 +121,7 @@ module.exports = {
                                 break;
                         }
                         $('.vue-chosen').trigger('chosen:updated');
-                    }
+                    }.bind(this)
                 );
             }
             else {
@@ -144,12 +139,11 @@ module.exports = {
             this.employee.emergency_contacts.data[this.editIndex].mobile_phone = this.modal.mobile_phone;
         },
         editRecord: function (emergency_contact, index) {
-            var that = this;
 
             this.editMode = true;
             this.editIndex = index;
 
-            that.assignValuesToModal(emergency_contact);
+            this.assignValuesToModal(emergency_contact);
 
             $('#emergency_contact_modal').modal('toggle');
 
@@ -160,7 +154,6 @@ module.exports = {
             $('#first_name').focus();
         },
         deleteRecord: function (emergency_contact, index) {
-            var that = this;
 
             var previousWindowKeyDown = window.onkeydown; // https://github.com/t4t5/sweetalert/issues/127
             swal({
@@ -188,18 +181,18 @@ module.exports = {
                             switch (response.status.code) {
                                 case 200:
                                     swal({title: response.entity.status, type: 'success', timer: 2000});
-                                    that.employee.emergency_contacts.data.splice(index, 1);
+                                    this.employee.emergency_contacts.data.splice(index, 1);
                                     break;
                                 case 500:
                                     swal({title: response.entity.status, type: 'error', timer: 2000});
                                     break;
                             }
-                        }
+                        }.bind(this)
                     );
                 } else {
                     swal('Cancelled', 'No record has been deleted', 'error');
                 }
-            });
+            }.bind(this));
         },
         assignValuesToModal: function (emergency_contact) {
             this.modal.emergency_contact_id = emergency_contact.id;
@@ -213,19 +206,17 @@ module.exports = {
         },
         chosenRelationships: function () {
 
-            var that = this;
-
-            // retrieve relationshops
+            // retrieve relationships
             client({
                 path: '/relationships',
                 headers: {'Authorization': localStorage.getItem('jwt-token')}
             }).then(
                 function (response) {
                     if (response) {
-                        that.relationships_chosen = response.entity;
+                        this.relationships_chosen = response.entity;
                     }
                     $('.vue-chosen').trigger('chosen:updated');
-                }
+                }.bind(this)
             );
         }
     }

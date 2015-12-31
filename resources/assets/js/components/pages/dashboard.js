@@ -7,7 +7,6 @@ module.exports = {
         this.$dispatch('update-page-title', 'Dashboard');
     },
     ready: function () {
-        var that = this;
 
         if (this.$route.path.indexOf('/pim') > -1) {
             this.employee_id = this.$route.params.employee_id;
@@ -24,7 +23,7 @@ module.exports = {
         client(params).then(
             function (response) {
 
-                that.$dispatch('update-employee', response.entity.data);
-            });
+                this.$dispatch('update-employee', response.entity.data);
+            }.bind(this));
     }
 };
