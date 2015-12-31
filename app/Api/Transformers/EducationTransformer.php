@@ -39,9 +39,9 @@ class EducationTransformer extends TransformerAbstract
         $to_date = new DateTime($education->to_date);
 
         return [
-            'id'                   => (int)$education->id,
-            'employee_id'          => (int)$education->employee_id,
-            'education_level_id'   => (int)$education->education_level_id,
+            'id'                   => (int) $education->id,
+            'employee_id'          => (int) $education->employee_id,
+            'education_level_id'   => (int) $education->education_level_id,
             'institute'            => $education->institute,
             'major_specialization' => $education->major_specialization,
             'from_date'            => $education->from_date,
