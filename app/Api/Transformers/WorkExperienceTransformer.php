@@ -31,8 +31,6 @@ class WorkExperienceTransformer extends TransformerAbstract
 
         $diff = $from_date->diffForHumans($to_date);
 
-//        dd($diff);
-
         return [
             'id'          => (int) $work_experience->id,
             'employee_id' => (int) $work_experience->employee_id,
