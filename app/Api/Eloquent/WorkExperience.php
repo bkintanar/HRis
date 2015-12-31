@@ -9,7 +9,6 @@
  */
 namespace HRis\Api\Eloquent;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**

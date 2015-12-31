@@ -86,8 +86,8 @@ class QualificationsController extends BaseController
         } catch (Exception $e) {
             return API::response()->array(['status' => UNABLE_DELETE_MESSAGE])->statusCode(500);
         }
-        return API::response()->array(['status' => SUCCESS_DELETE_MESSAGE])->statusCode(200);
 
+        return API::response()->array(['status' => SUCCESS_DELETE_MESSAGE])->statusCode(200);
     }
 
     /**

@@ -10,7 +10,6 @@
 namespace HRis\Api\Transformers;
 
 use Carbon\Carbon;
-use DateTime;
 use HRis\Api\Eloquent\WorkExperience;
 use League\Fractal\TransformerAbstract;
 
@@ -35,8 +34,8 @@ class WorkExperienceTransformer extends TransformerAbstract
 //        dd($diff);
 
         return [
-            'id'          => (int)$work_experience->id,
-            'employee_id' => (int)$work_experience->employee_id,
+            'id'          => (int) $work_experience->id,
+            'employee_id' => (int) $work_experience->employee_id,
             'company'     => $work_experience->company,
             'job_title'   => $work_experience->job_title,
             'from_date'   => $work_experience->from_date,
