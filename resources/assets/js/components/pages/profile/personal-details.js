@@ -59,22 +59,28 @@ module.exports = {
         this.chosenNationalities();
         this.chosenMaritalStatuses();
 
-        if (this.employee != null) {
-          // iCheck
-          $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green'
-          });
-        }
+        var genderWatcher = setInterval(function() {
 
-        if (this.employee) {
-          $('input[name="gender"]').on('ifChecked', function() {
+          if (this.employee != null) {
 
-            this.employee.gender = this.value;
-          });
+            var _this = this;
 
-          this.switchGender(this.employee.gender);
-        }
+            // iCheck
+            $('.i-checks').iCheck({
+              checkboxClass: 'icheckbox_square-green',
+              radioClass: 'iradio_square-green'
+            });
+            clearInterval(genderWatcher);
+
+            $('input[name="gender"]').on('ifChecked', function() {
+
+              _this.employee.gender = this.value;
+            });
+
+            this.switchGender(this.employee.gender);
+          }
+        }.bind(this), 1);
+
       }.bind(this),
 
       function(response) {
