@@ -1,10 +1,13 @@
 module.exports = {
-    props: ['employee', 'page_title', 'job_titles', 'employment_statuses', 'routes', 'has_access', 'permission', 'logged'],
+  props: [
+    'employee', 'page_title', 'job_titles', 'employment_statuses', 'routes', 'has_access', 'permission', 'logged'
+  ],
 
-    compiled: function () {
-        this.logged = JSON.parse(atob(localStorage.getItem('logged')));
-        this.logged.employee_id = localStorage.getItem('employee_id');
-        this.logged.avatar = localStorage.getItem('avatar');
-        this.logged.has_access = JSON.parse(atob(localStorage.getItem('permissions')));
-    }
+  compiled: function() {
+
+    this.logged = JSON.parse(atob(localStorage.getItem('logged')));
+    this.logged.employee_id = localStorage.getItem('employee_id');
+    this.logged.avatar = localStorage.getItem('avatar');
+    this.logged.has_access = JSON.parse(atob(localStorage.getItem('permissions')));
+  }
 };

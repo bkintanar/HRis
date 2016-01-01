@@ -1,6 +1,9 @@
 module.exports = {
-    props: ['employee', 'job_titles', 'employment_statuses'],
-    route: {
-        canReuse: false
-    }
+  props: [
+    'employee', 'job_titles', 'employment_statuses'
+  ],
+
+  route: {
+    canReuse: false
+  }
 };

@@ -32,7 +32,6 @@ window.client = rest.wrap(pathPrefix, {prefix: config.api.base_url})
     .wrap(mime)
     .wrap(defaultRequest, config.api.defaultRequest)
     .wrap(errorCode, {code: 400});
-    //.wrap(jwtAuth);
 
 // Bootstrap the app
 // HRis Components
@@ -43,26 +42,6 @@ Vue.component('navbar-static-profile-top', require('./compiled/partials/navbar-s
 Vue.component('navbar-static-top', require('./compiled/partials/navbar-static-top.vue'));
 Vue.component('static-footer', require('./compiled/partials/static-footer.vue'));
 Vue.component('chosen', require('./compiled/partials/chosen.vue'));
-
-Vue.directive('trans', {
-    update: function (value) {
-        value = translate(value);
-        var arg = this.arg;
-        switch (arg) {
-            case 'placeholder':
-                this.el.placeholder = value;
-                break;
-            case 'value':
-                this.el.value = value;
-                break;
-            case 'html':
-                this.el.innerHTML = value;
-                break;
-            default:
-                this.el.innerHTML = value;
-        }
-    }
-});
 
 const App = Vue.extend(require('./compiled/app.vue'));
 router.start(App, 'body');

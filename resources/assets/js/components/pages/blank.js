@@ -1,5 +1,5 @@
 module.exports = {
-    route: {
-        canReuse: false
-    }
+  route: {
+    canReuse: false
+  }
 };
