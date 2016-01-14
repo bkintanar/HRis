@@ -25,7 +25,7 @@ class CreateCustomFieldValuesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('custom_field_id');
             $table->unsignedInteger('employee_id');
-            $table->string('value');
+            $table->string('value')->nullable();
 
             $table->foreign('custom_field_id')->references('id')->on('custom_fields')->onDelete('cascade');
             $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');

@@ -15,6 +15,15 @@ use League\Fractal\TransformerAbstract;
 class CustomFieldSectionTransformer extends TransformerAbstract
 {
     /**
+     * List of resources to automatically include.
+     *
+     * @var array
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     */
+    protected $defaultIncludes = ['custom_fields'];
+
+    /**
      * Transform object into a generic array.
      *
      * @param CustomFieldSection $custom_field_section
@@ -26,9 +35,25 @@ class CustomFieldSectionTransformer extends TransformerAbstract
     public function transform(CustomFieldSection $custom_field_section)
     {
         return [
-            'id'        => (int) $custom_field_section->id,
-            'name'      => $custom_field_section->name,
-            'screen_id' => (int) $custom_field_section->screen_id,
+            'id'          => (int) $custom_field_section->id,
+            'name'        => $custom_field_section->name,
+            'screen_id'   => (int) $custom_field_section->screen_id,
         ];
+    }
+
+    /**
+     * Include CustomFields.
+     *
+     * @param CustomFieldSection $custom_field_section
+     *
+     * @return \League\Fractal\Resource\Collection
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     */
+    public function includeCustomFields(CustomFieldSection $custom_field_section)
+    {
+        $custom_fields = $custom_field_section->customFields;
+
+        return $this->collection($custom_fields, new CustomFieldTransformer());
     }
 }

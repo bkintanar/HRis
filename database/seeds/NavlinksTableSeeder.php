@@ -106,6 +106,13 @@ class NavlinksTableSeeder extends Seeder
                 'parent_id'  => -1,
             ],
             [
+                'name'       => 'Projects',
+                'href'       => 'profile/projects',
+                'permission' => 15,
+                'icon'       => 'fa-product-hunt',
+                'parent_id'  => -1,
+            ],
+            [
                 'name'       => 'Presence',
                 'href'       => 'presence',
                 'permission' => 15,

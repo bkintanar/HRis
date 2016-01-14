@@ -17,6 +17,7 @@ use HRis\Api\Eloquent\EmploymentStatus;
 use HRis\Api\Eloquent\JobTitle;
 use HRis\Api\Eloquent\Location;
 use HRis\Api\Eloquent\MaritalStatus;
+use HRis\Api\Eloquent\Navlink;
 use HRis\Api\Eloquent\Nationality;
 use HRis\Api\Eloquent\Province;
 use HRis\Api\Eloquent\Relationship;
@@ -67,6 +68,11 @@ class LookupTableController extends BaseController
     protected $marital_status;
 
     /**
+     * @var Navlink
+     */
+    protected $navlink;
+
+    /**
      * @var Nationality
      */
     protected $nationality;
@@ -94,22 +100,23 @@ class LookupTableController extends BaseController
     /**
      * InputSelectController constructor.
      *
-     * @param City             $city
-     * @param Country          $country
-     * @param Department       $department
-     * @param EducationLevel   $education_level
-     * @param EmploymentStatus $employment_status
-     * @param JobTitle         $job_title
-     * @param Location         $location
-     * @param MaritalStatus    $marital_status
-     * @param Nationality      $nationality
-     * @param Province         $province
-     * @param Relationship     $relationship
-     * @param Skill            $skill
+     * @param City              $city
+     * @param Country           $country
+     * @param Department        $department
+     * @param EducationLevel    $education_level
+     * @param EmploymentStatus  $employment_status
+     * @param JobTitle          $job_title
+     * @param Location          $location
+     * @param MaritalStatus     $marital_status
+     * @param Navlink           $navlink
+     * @param Nationality       $nationality
+     * @param Province          $province
+     * @param Relationship      $relationship
+     * @param Skill             $skill
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function __construct(City $city, Country $country, Department $department, EducationLevel $education_level, EmploymentStatus $employment_status, JobTitle $job_title, Location $location, MaritalStatus $marital_status, Nationality $nationality, Province $province, Relationship $relationship, Skill $skill)
+    public function __construct(City $city, Country $country, Department $department, EducationLevel $education_level, EmploymentStatus $employment_status, JobTitle $job_title, Location $location, MaritalStatus $marital_status, Navlink $navlink, Nationality $nationality, Province $province, Relationship $relationship, Skill $skill)
     {
         $this->city = $city;
         $this->country = $country;
@@ -119,6 +126,7 @@ class LookupTableController extends BaseController
         $this->job_title = $job_title;
         $this->location = $location;
         $this->marital_status = $marital_status;
+        $this->navlink = $navlink;
         $this->nationality = $nationality;
         $this->province = $province;
         $this->relationship = $relationship;
@@ -840,5 +848,16 @@ class LookupTableController extends BaseController
         }
 
         return $this->chosen($this->skill);
+    }
+
+    public function screens(Request $request)
+    {
+        $navlinks = $this->navlink->whereParentId(-1);
+
+        if ($this->table_view) {
+            return $this->tableView($navlinks);
+        }
+
+        return $this->chosen($navlinks);
     }
 }

@@ -68,6 +68,8 @@ $api->version('v1', function (Router $api) {
                     $api->delete('skills', 'QualificationsController@destroySkill');
                     $api->patch('skills', 'QualificationsController@updateSkill');
                 });
+
+                $api->patch('custom-fields', 'CustomFieldsController@update');
             });
 
             // Employee
@@ -78,6 +80,15 @@ $api->version('v1', function (Router $api) {
             // PIM
             $api->group(['prefix' => 'pim', 'namespace' => 'PIM'], function (Router $api) {
                 $api->get('employee-list', 'EmployeeListController@index');
+
+                // Configuration
+                $api->group(['prefix' => 'configuration', 'namespace' => 'Configuration'], function (Router $api) {
+                    $api->get('custom-field-sections', 'CustomFieldsController@index');
+                    $api->post('custom-field-sections', 'CustomFieldsController@store');
+                    $api->patch('custom-field-sections', 'CustomFieldsController@update');
+                    $api->delete('custom-field-sections', 'CustomFieldsController@destroy');
+                    $api->post('custom-field-sections-by-screen-id', 'CustomFieldsController@getCustomFieldSectionsByScreenId');
+                });
             });
 
             // Chosen
@@ -89,6 +100,7 @@ $api->version('v1', function (Router $api) {
             $api->get('job-titles', 'LookupTableController@jobTitles');                                     // docs done
             $api->get('locations', 'LookupTableController@locations');                                      // docs done
             $api->get('marital-statuses', 'LookupTableController@maritalStatuses');                         // docs done
+            $api->get('screens', 'LookupTableController@screens');
             $api->get('nationalities', 'LookupTableController@nationalities');                              // docs done
             $api->get('provinces', 'LookupTableController@provinces');                                      // docs done
             $api->get('relationships', 'LookupTableController@relationships');                              // docs done
