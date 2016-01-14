@@ -1,25 +1,19 @@
-[![Build Status](https://img.shields.io/travis/bkintanar/HRis/api/develop.svg?style=flat-square)](https://travis-ci.org/bkintanar/HRis) [![SensioLabsInsight](https://img.shields.io/sensiolabs/i/76b2c9fd-06e0-4fbc-a325-f76eab8cfb34.svg?style=flat-square)](https://insight.sensiolabs.com/projects/76b2c9fd-06e0-4fbc-a325-f76eab8cfb34) [![StyleCI](https://styleci.io/repos/29657205/shield)](https://styleci.io/repos/29657205)
+# HRis - Human Resource and Payroll System
 
-# .htaccess Information
+[![Author](https://img.shields.io/badge/author-@bkintanar-blue.svg?style=flat-square)](https://twitter.com/bkintanar) [![Build Status](https://img.shields.io/travis/bkintanar/HRis/api/develop.svg?style=flat-square)](https://travis-ci.org/bkintanar/HRis) [![SensioLabsInsight](https://img.shields.io/sensiolabs/i/76b2c9fd-06e0-4fbc-a325-f76eab8cfb34.svg?style=flat-square)](https://insight.sensiolabs.com/projects/76b2c9fd-06e0-4fbc-a325-f76eab8cfb34) [![StyleCI](https://styleci.io/repos/29657205/shield)](https://styleci.io/repos/29657205)
 
-```
-<IfModule mod_rewrite.c>
-    <IfModule mod_negotiation.c>
-        Options -MultiViews
-    </IfModule>
+## Official Documentation
 
-    RewriteEngine On
+Documentation can be read in the [wiki section](https://github.com/bkintanar/HRis/wiki).
 
-    # Redirect Trailing Slashes If Not A Folder...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)/$ /$1 [L,R=301]
+## Contributing
 
-    # Handle Front Controller...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ index.php [L]
+Thank you for considering contributing to the HRis project! Please contact one of the contributors for the contribution guidelines.
 
-    RewriteCond %{HTTP:Authorization} ^(.*)
-    RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
-</IfModule>
-```
+## Security Vulnerabilities
+
+If you discover a security vulnerability within HRis, please send an e-mail to Bertrand Kintanar at bertrand.kintanar@gmail.com. All security vulnerabilities will be promptly addressed.
+
+### License
+
+The HRis' License is still a work in progress.

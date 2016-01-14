@@ -32,7 +32,7 @@ class RelationshipsTableSeeder extends Seeder
                 ['id' => 6, 'name' => 'Child'],
                 ['id' => 7, 'name' => 'Grandfather'],
                 ['id' => 8, 'name' => 'Grandmother'],
-                ['id' => 10, 'name' => 'Other'],
+                ['id' => 9, 'name' => 'Other'],
             ]
         );
     }

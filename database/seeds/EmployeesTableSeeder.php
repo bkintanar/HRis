@@ -58,6 +58,10 @@ class EmployeesTableSeeder extends Seeder
                 'mobile_phone'        => '0949 704 7136',
                 'work_email'          => 'bertrand@idearobin.com',
                 'birth_date'          => '1985-10-31',
+                'social_security'     => '07-2480504-4',
+                'tax_identification'  => '278-992-354',
+                'philhealth'          => '12-050792495-1',
+                'hdmf_pagibig'        => '1210 2113 5039',
             ],
             [
                 'employee_id'         => 'HRis-0002',

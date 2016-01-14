@@ -10,9 +10,19 @@
 namespace HRis\Api\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
+use Swagger\Annotations as SWG;
 
 /**
  * Class Dependent.
+ *
+ * @SWG\Definition(definition="Dependent", required={"id", "employee_id", "relationship_id"})
+ * @SWG\Property(property="id", type="integer", format="int64", default=1, description="Unique identifier for the dependent")
+ * @SWG\Property(property="employee_id", type="integer", format="int64", default=1, description="ID of the employee")
+ * @SWG\Property(property="first_name", type="string", default="Noemi", description="First name of the employee's dependent")
+ * @SWG\Property(property="middle_name", type="string", default="Antipolo", description="Middle name of the employee's dependent")
+ * @SWG\Property(property="last_name", type="string", default="Kintanar", description="Last name of the employee's dependent")
+ * @SWG\Property(property="relationship_id", type="integer", format="int64", default=5, description="Relationship ID of the employee's dependent")
+ * @SWG\Property(property="birth_date", type="string", default="2015-01-01", description="Birth date of the employee's dependent")
  */
 class Dependent extends Model
 {

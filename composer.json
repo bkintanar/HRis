@@ -17,7 +17,7 @@
     "php": ">=5.5.9",
     "laravel/framework": "5.1.*",
     "dingo/api": "1.0.*@dev",
-    "tymon/jwt-auth": "0.5.*",
+    "tymon/jwt-auth": "dev-develop",
     "barryvdh/laravel-cors": "^0.7.1",
     "cartalyst/sentinel": "^2.0",
     "league/fractal": "^0.13.0",

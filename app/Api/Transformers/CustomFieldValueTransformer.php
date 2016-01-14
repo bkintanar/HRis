@@ -15,18 +15,6 @@ use League\Fractal\TransformerAbstract;
 class CustomFieldValueTransformer extends TransformerAbstract
 {
     /**
-     * List of resources to automatically include.
-     *
-     * @var array
-     *
-     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
-     */
-    protected $defaultIncludes = [
-        'custom_field',
-        'employee',
-    ];
-
-    /**
      * Transform object into a generic array.
      *
      * @param CustomFieldValue $custom_field_value
@@ -41,7 +29,7 @@ class CustomFieldValueTransformer extends TransformerAbstract
             'id'              => (int) $custom_field_value->id,
             'custom_field_id' => (int) $custom_field_value->custom_field_id,
             'employee_id'     => (int) $custom_field_value->employee_id,
-            'value'           => (int) $custom_field_value->value,
+            'value'           => $custom_field_value->value,
         ];
     }
 
@@ -56,7 +44,7 @@ class CustomFieldValueTransformer extends TransformerAbstract
      */
     public function includeCustomField(CustomFieldValue $custom_field_value)
     {
-        $custom_field = $custom_field_value->custom_field;
+        $custom_field = $custom_field_value->customField;
 
         return $this->item($custom_field, new CustomFieldTransformer());
     }

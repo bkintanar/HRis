@@ -9,7 +9,6 @@
  */
 namespace HRis\Api\Controllers\PIM;
 
-use Dingo\Api\Facade\API;
 use Exception;
 use HRis\Api\Controllers\BaseController;
 use HRis\Api\Eloquent\Employee;
@@ -80,7 +79,7 @@ class EmployeeListController extends BaseController
     {
         $employees = $this->employee->getEmployeeList(false, $request->sort(), $request->direction());
 
-        return API::response()->array(['employees' => $employees->get()])->statusCode(200);
+        return $this->response()->array(['employees' => $employees->get()])->statusCode(200);
     }
 
     /**

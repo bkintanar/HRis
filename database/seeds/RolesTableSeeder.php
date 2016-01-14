@@ -105,6 +105,7 @@ class RolesTableSeeder extends Seeder
             $this->set('pim.configuration'),
             $this->set('pim.configuration.termination-reasons'),
             $this->set('pim.configuration.custom-field-sections'),
+            $this->set('pim.configuration.custom-fields'),
             $this->set('perforamance.configuration'),
             $this->set('perforamance.configuration.trackers'),
             $this->set('time.attendance'),

@@ -89,6 +89,7 @@ class EmployeeTransformer extends TransformerAbstract
             'probation_end_date'  => $employee->probation_end_date,
             'permanency_date'     => $employee->permanency_date,
             'resign_date'         => $employee->resign_date,
+            'custom_field_values' => $employee->customFieldValues->lists('value', 'custom_field_id'),
         ];
     }
 
@@ -183,9 +184,9 @@ class EmployeeTransformer extends TransformerAbstract
      */
     public function includeCustomFieldValues(Employee $employee)
     {
-        $custom_field_values = $employee->customFieldValues;
+        $custom_field_values = $employee->customFieldValues->lists('value', 'custom_field_id');
 
-        return $this->collection($custom_field_values, new CustomFieldValueTransformer());
+        return $custom_field_values;
     }
 
     /**

@@ -9,7 +9,6 @@
  */
 namespace HRis\Api\Controllers\Profile;
 
-use Dingo\Api\Facade\API;
 use Exception;
 use HRis\Api\Controllers\BaseController;
 use HRis\Api\Eloquent\CustomFieldSection;
@@ -58,10 +57,10 @@ class QualificationsController extends BaseController
         try {
             $work_experience = $workExperience->create($request->all());
         } catch (Exception $e) {
-            return API::response()->array(['status' => UNABLE_ADD_MESSAGE])->statusCode(500);
+            return $this->response()->array(['message' => UNABLE_ADD_MESSAGE, 'status_code' => 422])->statusCode(422);
         }
 
-        return API::response()->array(['work_experience' => $work_experience, 'status' => SUCCESS_ADD_MESSAGE])->statusCode(200);
+        return $this->response()->array(['work_experience' => $work_experience, 'message' => SUCCESS_ADD_MESSAGE, 'status_code' => 201])->statusCode(201);
     }
 
     /**
@@ -80,10 +79,10 @@ class QualificationsController extends BaseController
         try {
             $workExperience->whereId($work_experience_id)->delete();
         } catch (Exception $e) {
-            return API::response()->array(['status' => UNABLE_DELETE_MESSAGE])->statusCode(500);
+            return $this->response()->array(['message' => UNABLE_DELETE_MESSAGE, 'status_code' => 422])->statusCode(422);
         }
 
-        return API::response()->array(['status' => SUCCESS_DELETE_MESSAGE])->statusCode(200);
+        return $this->response()->array(['message' => SUCCESS_DELETE_MESSAGE, 'status_code' => 200])->statusCode(200);
     }
 
     /**
@@ -101,16 +100,16 @@ class QualificationsController extends BaseController
         $workExperience = $workExperience->whereId($request->get('work_experience_id'))->first();
 
         if (!$workExperience) {
-            return API::response()->array(['status' => UNABLE_RETRIEVE_MESSAGE])->statusCode(500);
+            return $this->response()->array(['message' => UNABLE_RETRIEVE_MESSAGE, 'status_code' => 422])->statusCode(422);
         }
 
         try {
             $workExperience->update($request->all());
         } catch (Exception $e) {
-            return API::response()->array(['status' => UNABLE_UPDATE_MESSAGE])->statusCode(500);
+            return $this->response()->array(['message' => UNABLE_UPDATE_MESSAGE, 'status_code' => 200])->statusCode(422);
         }
 
-        return API::response()->array(['status' => SUCCESS_UPDATE_MESSAGE])->statusCode(200);
+        return $this->response()->array(['message' => SUCCESS_UPDATE_MESSAGE, 'status_code' => 200])->statusCode(200);
     }
 
     /**
@@ -128,16 +127,17 @@ class QualificationsController extends BaseController
         try {
             $education = $education->create($request->except(['education_level', 'education_levels']));
         } catch (Exception $e) {
-            return API::response()->array(['status' => UNABLE_ADD_MESSAGE])->statusCode(500);
+            return $this->response()->array(['message' => UNABLE_ADD_MESSAGE, 'status_code' => 422])->statusCode(422);
         }
 
-        return API::response()->array(['education' => $education, 'status' => SUCCESS_ADD_MESSAGE])->statusCode(200);
+        return $this->response()->array(['education' => $education, 'message' => SUCCESS_ADD_MESSAGE, 'status_code' => 201])->statusCode(201);
     }
 
     /**
      * Delete the Profile - Qualifications - Educations.
      *
      * @param QualificationsEducationRequest $request
+     * @param Education                      $education
      *
      * @return \Illuminate\Http\JsonResponse
      *
@@ -150,10 +150,10 @@ class QualificationsController extends BaseController
         try {
             $education->whereId($education_id)->delete();
         } catch (Exception $e) {
-            return API::response()->array(['status' => UNABLE_DELETE_MESSAGE])->statusCode(500);
+            return $this->response()->array(['message' => UNABLE_DELETE_MESSAGE, 'status_code' => 422])->statusCode(422);
         }
 
-        return API::response()->array(['status' => SUCCESS_DELETE_MESSAGE])->statusCode(200);
+        return $this->response()->array(['message' => SUCCESS_DELETE_MESSAGE, 'status_code' => 200])->statusCode(200);
     }
 
     /**
@@ -171,22 +171,23 @@ class QualificationsController extends BaseController
         $education = $education->whereId($request->get('education_id'))->first();
 
         if (!$education) {
-            return API::response()->array(['status' => UNABLE_RETRIEVE_MESSAGE])->statusCode(500);
+            return $this->response()->array(['message' => UNABLE_RETRIEVE_MESSAGE, 'status_code' => 422])->statusCode(422);
         }
 
         try {
             $education->update($request->except(['education_level', 'education_levels']));
         } catch (Exception $e) {
-            return API::response()->array(['status' => UNABLE_UPDATE_MESSAGE])->statusCode(500);
+            return $this->response()->array(['message' => UNABLE_UPDATE_MESSAGE, 'status_code' => 422])->statusCode(422);
         }
 
-        return API::response()->array(['status' => SUCCESS_UPDATE_MESSAGE])->statusCode(200);
+        return $this->response()->array(['message' => SUCCESS_UPDATE_MESSAGE, 'status_code' => 200])->statusCode(200);
     }
 
     /**
      * Save the Profile - Qualifications - Skills.
      *
      * @param QualificationsSkillRequest $request
+     * @param EmployeeSkill              $employee_skill
      *
      * @return \Illuminate\Http\RedirectResponse
      *
@@ -206,12 +207,12 @@ class QualificationsController extends BaseController
                 'comment'             => $comment,
             ]);
         } catch (Exception $e) {
-            return API::response()->array(['status' => UNABLE_ADD_MESSAGE])->statusCode(500);
+            return $this->response()->array(['message' => UNABLE_ADD_MESSAGE, 'status_code' => 422])->statusCode(422);
         }
 
         $skill = $employee_skill::whereEmployeeId($employee->id)->orderBy('id', 'desc')->first();
 
-        return API::response()->array(['skill' => $skill, 'status' => SUCCESS_ADD_MESSAGE])->statusCode(200);
+        return $this->response()->array(['skill' => $skill, 'message' => SUCCESS_ADD_MESSAGE, 'status_code' => 201])->statusCode(201);
     }
 
     /**
@@ -229,7 +230,7 @@ class QualificationsController extends BaseController
         $employeeSkill = $employeeSkill->whereId($request->get('id'))->first();
 
         if (!$employeeSkill) {
-            return API::response()->array(['status' => UNABLE_RETRIEVE_MESSAGE])->statusCode(500);
+            return $this->response()->array(['message' => UNABLE_RETRIEVE_MESSAGE, 'status_code' => 422])->statusCode(422);
         }
 
         try {
@@ -239,16 +240,17 @@ class QualificationsController extends BaseController
 
             $employeeSkill->save();
         } catch (Exception $e) {
-            return API::response()->array(['status' => UNABLE_UPDATE_MESSAGE])->statusCode(500);
+            return $this->response()->array(['message' => UNABLE_UPDATE_MESSAGE, 'status_code' => 422])->statusCode(422);
         }
 
-        return API::response()->array(['status' => SUCCESS_UPDATE_MESSAGE])->statusCode(200);
+        return $this->response()->array(['message' => SUCCESS_UPDATE_MESSAGE, 'status_code' => 200])->statusCode(200);
     }
 
     /**
      * Delete the Profile - Qualifications - Skills.
      *
      * @param QualificationsSkillRequest $request
+     * @param EmployeeSkill              $employee_skill
      *
      * @return \Illuminate\Http\JsonResponse
      *
@@ -261,9 +263,9 @@ class QualificationsController extends BaseController
         try {
             $employee_skill->whereId($employee_skill_id)->delete();
         } catch (Exception $e) {
-            return API::response()->array(['status' => UNABLE_DELETE_MESSAGE])->statusCode(500);
+            return $this->response()->array(['message' => UNABLE_DELETE_MESSAGE, 'status_code' => 422])->statusCode(422);
         }
 
-        return API::response()->array(['status' => SUCCESS_DELETE_MESSAGE])->statusCode(200);
+        return $this->response()->array(['message' => SUCCESS_DELETE_MESSAGE, 'status_code' => 200])->statusCode(200);
     }
 }

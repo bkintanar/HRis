@@ -13,9 +13,14 @@ use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Request;
+use Swagger\Annotations as SWG;
 
 /**
  * Class Navlink.
+ *
+ * @SWG\Definition(definition="Screen", required={"id", "employee_id"})
+ * @SWG\Property(property="id", type="integer", format="int64", default=3, description="Unique identifier for the screen")
+ * @SWG\Property(property="name", type="string", default="Personal Details", description="name of the screen")
  */
 class Navlink extends Model
 {
