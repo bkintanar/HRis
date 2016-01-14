@@ -10,9 +10,14 @@
 namespace HRis\Api\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
+use Swagger\Annotations as SWG;
 
 /**
  * Class CustomFieldType.
+ *
+ * @SWG\Definition(definition="CustomFieldType", required={"id", "employee_id"})
+ * @SWG\Property(property="id", type="integer", format="int64", default=1, description="Unique identifier for the custom field type")
+ * @SWG\Property(property="name", type="string", default="Text", description="name of the custom field type")
  */
 class CustomFieldType extends Model
 {

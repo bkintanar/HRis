@@ -58,7 +58,7 @@ class EmployeeWorkShift extends Model
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function getCurrentEmployeeWorkShift($fillables = null, $employee_id)
+    public function getCurrentEmployeeWorkShift($fillables, $employee_id)
     {
         $employee_work_shift = $this->whereEmployeeId($employee_id)
             ->orderBy('effective_date', 'desc')

@@ -9,7 +9,6 @@
  */
 namespace HRis\Api\Controllers\Auth;
 
-use Dingo\Api\Facade\API;
 use HRis\Api\Controllers\BaseController;
 use HRis\Api\Eloquent\Navlink;
 use HRis\Api\Eloquent\User;
@@ -17,7 +16,10 @@ use HRis\Api\Requests\UserRequest;
 use HRis\Api\Transformers\UserTransformer;
 use Illuminate\Http\Request;
 use Swagger\Annotations as SWG;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends BaseController
@@ -31,9 +33,32 @@ class AuthController extends BaseController
      */
     public function me(Request $request)
     {
-        $data = JWTAuth::parseToken()->authenticate();
+        $data = [];
+        try {
+            $data = JWTAuth::parseToken()->authenticate();
+        } catch (\Exception $e) {
+            dd('test');
+        }
 
         return $this->item(User::findOrFail($data->id), new UserTransformer());
+    }
+
+    /**
+     * @return mixed
+     */
+    public function token()
+    {
+        $token = JWTAuth::getToken();
+        if (!$token) {
+            throw new BadRequestHttpException('Token not provided');
+        }
+        try {
+            $token = JWTAuth::refresh($token);
+        } catch (TokenInvalidException $e) {
+            throw new AccessDeniedHttpException('The token is invalid');
+        }
+
+        return $this->response->withArray(['token' => $token]);
     }
 
     /**
@@ -61,21 +86,27 @@ class AuthController extends BaseController
      *         @SWG\Schema(
      *             title="data",
      *             type="object",
+     *             required={"token", "status_code"},
      *             @SWG\Property(property="token", type="string"),
+     *             @SWG\Property(property="status_code", type="integer", default=200, description="Status code from server"),
      *         )
      *     ),
      *     @SWG\Response(response="401", description="Invalid credentials",
      *         @SWG\Schema(
      *             title="data",
      *             type="object",
-     *             @SWG\Property(property="error", type="string", default="invalid_credentials"),
+     *             required={"message", "status_code"},
+     *             @SWG\Property(property="message", type="string", default="invalid_credentials"),
+     *             @SWG\Property(property="status_code", type="integer", default=401, description="Status code from server"),
      *         )
      *     ),
-     *     @SWG\Response(response="500", description="Could not create token",
+     *     @SWG\Response(response="422", description="Could not create token",
      *         @SWG\Schema(
      *             title="data",
      *             type="object",
-     *             @SWG\Property(property="error", type="string", default="could_not_create_token"),
+     *             required={"message", "status_code"},
+     *             @SWG\Property(property="message", type="string", default="could_not_create_token"),
+     *             @SWG\Property(property="status_code", type="integer", default=422, description="Status code from server"),
      *         )
      *     ),
      *     @SWG\Parameter(
@@ -112,28 +143,17 @@ class AuthController extends BaseController
         try {
             // attempt to verify the credentials and create a token for the user
             if (!$token = JWTAuth::attempt($credentials, $claims)) {
-                return response()->json(['error' => 'invalid_credentials'], 401);
+                return response()->json(['message' => 'invalid_credentials', 'status_code' => 401], 401);
             }
         } catch (JWTException $e) {
             // something went wrong whilst attempting to encode the token
-            return response()->json(['error' => 'could_not_create_token'], 500);
+            return response()->json(['message' => 'could_not_create_token', 'status_code' => 422], 422);
         } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+            return response()->json(['message' => $e->getMessage(), 'status_code' => 422], 422);
         }
 
         // all good so return the token
-        return response()->json(compact('token'));
-    }
-
-    /**
-     * @return mixed
-     *
-     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
-     */
-    public function validateToken()
-    {
-        // Our routes file should have already authenticated this token, so we just return success here
-        return API::response()->array(['status' => 'success'])->statusCode(200);
+        return response()->json(['token' => $token, 'status_code' => 200], 200);
     }
 
     /**
@@ -166,16 +186,18 @@ class AuthController extends BaseController
      *         @SWG\Schema(
      *             title="data",
      *             type="object",
+     *             required={"message", "status_code"},
      *             @SWG\Property(property="message", type="string", default="signed_out"),
-     *             @SWG\Property(property="status_code", type="integer", default=200),
+     *             @SWG\Property(property="status_code", type="integer", default=200, description="Status code from server"),
      *         )
      *     ),
      *     @SWG\Response(response="400", description="Token not provided",
      *         @SWG\Schema(
      *             title="data",
      *             type="object",
+     *             required={"message", "status_code", "debug"},
      *             @SWG\Property(property="message", type="string", default="Token not provided"),
-     *             @SWG\Property(property="status_code", type="integer", default=400),
+     *             @SWG\Property(property="status_code", type="integer", default=400, description="Status code from server"),
      *             @SWG\Property(property="debug", type="object"),
      *         )
      *     ),
@@ -183,16 +205,18 @@ class AuthController extends BaseController
      *         @SWG\Schema(
      *             title="data",
      *             type="object",
+     *             required={"message", "status_code"},
      *             @SWG\Property(property="message", type="string", default="cannot_sign_out"),
-     *             @SWG\Property(property="status_code", type="integer", default=417),
+     *             @SWG\Property(property="status_code", type="integer", default=417, description="Status code from server"),
      *         )
      *     ),
-     *     @SWG\Response(response="500", description="Could not create token",
+     *     @SWG\Response(response="422", description="Could not create token",
      *         @SWG\Schema(
      *             title="data",
      *             type="object",
+     *             required={"message", "status_code"},
      *             @SWG\Property(property="message", type="string", default="could_not_create_token"),
-     *             @SWG\Property(property="status_code", type="integer", default=500),
+     *             @SWG\Property(property="status_code", type="integer", default=422, description="Status code from server"),
      *         )
      *     ),
      *     @SWG\Parameter(
@@ -223,9 +247,9 @@ class AuthController extends BaseController
             }
         } catch (JWTException $e) {
             $response['message'] = $e->getMessage();
-            $response['status_code'] = 500;
+            $response['status_code'] = 422;
         }
 
-        return API::response()->array(['status' => $response['message'], 'status_code' => $response['status_code']])->statusCode($response['status_code']);
+        return $this->response()->array($response)->statusCode($response['status_code']);
     }
 }

@@ -46,6 +46,18 @@ class CustomFieldValue extends Model
      */
     public function employee()
     {
-        return $this->belongsTo('HRis\Api\Eloquent\Employee', 'id', 'employee_id');
+        return $this->belongsTo('HRis\Api\Eloquent\Employee', 'employee_id', 'id');
+    }
+
+    /**
+     * A custom field value object belongs to on a custom field.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     */
+    public function customField()
+    {
+        return $this->belongsTo('HRis\Api\Eloquent\CustomField', 'custom_field_id', 'id');
     }
 }

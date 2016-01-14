@@ -17,3 +17,4 @@ const SUCCESS_ADD_MESSAGE = 'Record successfully added.';
 const SUCCESS_UPDATE_MESSAGE = 'Record successfully updated.';
 const SUCCESS_DELETE_MESSAGE = 'Record successfully deleted.';
 const EMPLOYEE_ID_IN_MESSAGE = 'Employee Id already in use.';
+const EMPLOYEE_ID_NOT_FOUND = 'Employee Id not found.';

@@ -7,14 +7,14 @@
  *
  * @link    http://github.com/HB-Co/HRis
  */
-namespace HRis\Api\Requests\Profile;
+namespace HRis\Api\Requests\PIM;
 
 use HRis\Http\Requests\Request;
 
 /**
- * Class EmergencyContactsRequest.
+ * Class CustomFieldSectionsRequest.
  */
-class EmergencyContactsRequest extends Request
+class CustomFieldSectionsRequest extends Request
 {
     /**
      * Get the validation rules that apply to the request.
@@ -25,16 +25,11 @@ class EmergencyContactsRequest extends Request
      */
     public function rules()
     {
-        $rules = [];
-        if (Request::isMethod('delete') || Request::isMethod('patch')) {
-            $rules['id'] = 'exists:emergency_contacts,id';
-        }
         if (Request::isMethod('post') || Request::isMethod('patch')) {
-            $rules['first_name'] = 'required';
-            $rules['relationship_id'] = 'required';
+            return ['name'];
         }
 
-        return $rules;
+        return [];
     }
 
     /**
@@ -46,7 +41,7 @@ class EmergencyContactsRequest extends Request
      */
     public function authorize()
     {
-        $permission = Request::is('*pim/*') ? 'pim.emergency-contacts' : 'profile.emergency-contacts';
+        $permission = 'pim.configuration.custom-field-sections';
 
         // Create
         if (Request::isMethod('post')) {
@@ -67,5 +62,15 @@ class EmergencyContactsRequest extends Request
                 }
             }
         }
+    }
+
+    /**
+     * @return mixed
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     */
+    public function forbiddenResponse()
+    {
+        return response()->make(view()->make('errors.403'), 403);
     }
 }

@@ -73,7 +73,7 @@ class JobHistory extends Model
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function getCurrentEmployeeJob($fillables = null, $employee_id)
+    public function getCurrentEmployeeJob($fillables, $employee_id)
     {
         $job = $this->whereEmployeeId($employee_id)
             ->orderBy('effective_date', 'desc')

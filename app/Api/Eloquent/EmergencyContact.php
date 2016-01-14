@@ -10,9 +10,20 @@
 namespace HRis\Api\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
+use Swagger\Annotations as SWG;
 
 /**
  * Class EmergencyContact.
+ *
+ * @SWG\Definition(definition="EmergencyContact", required={"id", "employee_id"})
+ * @SWG\Property(property="id", type="integer", format="int64", default=1, description="Unique identifier for the emergency contact")
+ * @SWG\Property(property="employee_id", type="integer", format="int64", default=1, description="ID of the employee")
+ * @SWG\Property(property="first_name", type="string", default="Noemi", description="First name of the employee's emergency contact")
+ * @SWG\Property(property="middle_name", type="string", default="Antipolo", description="Middle name of the employee's emergency contact")
+ * @SWG\Property(property="last_name", type="string", default="Kintanar", description="Last name of the employee's emergency contact")
+ * @SWG\Property(property="relationship_id", type="integer", format="int64", default=5, description="Relationship ID of the employee's emergency contact")
+ * @SWG\Property(property="home_phone", type="string", default="032 520 2160", description="Home phone of the employee's emergency contact")
+ * @SWG\Property(property="mobile_phone", type="string", default="0919 846 0201", description="Mobile phone of the employee's emergency contact")
  */
 class EmergencyContact extends Model
 {

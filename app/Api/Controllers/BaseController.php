@@ -15,7 +15,7 @@ use Swagger\Annotations as SWG;
 
 /**
  * @SWG\Swagger(
- *     schemes={"http"},
+ *     schemes={"https", "http"},
  *     host="api.hris.dev",
  *     basePath="/api",
  *     @SWG\Info(
@@ -35,4 +35,6 @@ use Swagger\Annotations as SWG;
 class BaseController extends Controller
 {
     use Helpers;
+
+    public $data = [];
 }

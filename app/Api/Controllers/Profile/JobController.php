@@ -9,7 +9,6 @@
  */
 namespace HRis\Api\Controllers\Profile;
 
-use Dingo\Api\Facade\API;
 use Exception;
 use HRis\Api\Controllers\BaseController;
 use HRis\Api\Eloquent\Employee;
@@ -78,10 +77,10 @@ class JobController extends BaseController
 
             $employee->update($attributes);
         } catch (Exception $e) {
-            return API::response()->array(['status' => UNABLE_UPDATE_MESSAGE])->statusCode(500);
+            return $this->response()->array(['message' => UNABLE_UPDATE_MESSAGE, 'status_code' => 422])->statusCode(422);
         }
 
-        return API::response()->array(['job_history' => $job_history, 'status' => SUCCESS_UPDATE_MESSAGE])->statusCode(200);
+        return $this->response()->array(['job_history' => $job_history, 'message' => SUCCESS_UPDATE_MESSAGE, 'status_code' => 200])->statusCode(200);
     }
 
     /**
@@ -100,9 +99,9 @@ class JobController extends BaseController
         try {
             $this->job_history->whereId($job_history_id)->delete();
         } catch (Exception $e) {
-            return API::response()->array(['status' => UNABLE_DELETE_MESSAGE])->statusCode(500);
+            return $this->response()->array(['message' => UNABLE_DELETE_MESSAGE, 'status_code' => 422])->statusCode(422);
         }
 
-        return API::response()->array(['status' => SUCCESS_DELETE_MESSAGE])->statusCode(200);
+        return $this->response()->array(['message' => SUCCESS_DELETE_MESSAGE, 'status_code' => 200])->statusCode(200);
     }
 }

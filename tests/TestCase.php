@@ -4,6 +4,7 @@ namespace Test;
 
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class TestCase extends BaseTestCase
 {
@@ -15,9 +16,21 @@ class TestCase extends BaseTestCase
     protected $baseUrl = 'http://localhost';
 
     /**
-     * @var
+     * @var User
+     */
+    protected $user;
+
+    /**
+     * @var string
      */
     protected $token;
+
+    public function __construct($name = null, array $data = [], $dataName = '')
+    {
+        parent::__construct($name, $data, $dataName);
+
+        parent::setUp();
+    }
 
     /**
      * Creates the application.
@@ -44,6 +57,9 @@ class TestCase extends BaseTestCase
 
         $content_array = json_decode($content, true);
         $this->token = $content_array['token'];
+
+        JWTAuth::setToken($this->token);
+        $this->user = JWTAuth::toUser();
 
         return $content_array;
     }

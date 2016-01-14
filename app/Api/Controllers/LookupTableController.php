@@ -11,6 +11,7 @@ namespace HRis\Api\Controllers;
 
 use HRis\Api\Eloquent\City;
 use HRis\Api\Eloquent\Country;
+use HRis\Api\Eloquent\CustomFieldType;
 use HRis\Api\Eloquent\Department;
 use HRis\Api\Eloquent\EducationLevel;
 use HRis\Api\Eloquent\EmploymentStatus;
@@ -18,6 +19,7 @@ use HRis\Api\Eloquent\JobTitle;
 use HRis\Api\Eloquent\Location;
 use HRis\Api\Eloquent\MaritalStatus;
 use HRis\Api\Eloquent\Nationality;
+use HRis\Api\Eloquent\Navlink;
 use HRis\Api\Eloquent\Province;
 use HRis\Api\Eloquent\Relationship;
 use HRis\Api\Eloquent\Skill;
@@ -67,6 +69,11 @@ class LookupTableController extends BaseController
     protected $marital_status;
 
     /**
+     * @var Navlink
+     */
+    protected $navlink;
+
+    /**
      * @var Nationality
      */
     protected $nationality;
@@ -96,12 +103,14 @@ class LookupTableController extends BaseController
      *
      * @param City             $city
      * @param Country          $country
+     * @param CustomFieldType  $custom_field_type
      * @param Department       $department
      * @param EducationLevel   $education_level
      * @param EmploymentStatus $employment_status
      * @param JobTitle         $job_title
      * @param Location         $location
      * @param MaritalStatus    $marital_status
+     * @param Navlink          $navlink
      * @param Nationality      $nationality
      * @param Province         $province
      * @param Relationship     $relationship
@@ -109,16 +118,18 @@ class LookupTableController extends BaseController
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function __construct(City $city, Country $country, Department $department, EducationLevel $education_level, EmploymentStatus $employment_status, JobTitle $job_title, Location $location, MaritalStatus $marital_status, Nationality $nationality, Province $province, Relationship $relationship, Skill $skill)
+    public function __construct(City $city, Country $country, CustomFieldType $custom_field_type, Department $department, EducationLevel $education_level, EmploymentStatus $employment_status, JobTitle $job_title, Location $location, MaritalStatus $marital_status, Navlink $navlink, Nationality $nationality, Province $province, Relationship $relationship, Skill $skill)
     {
         $this->city = $city;
         $this->country = $country;
+        $this->custom_field_type = $custom_field_type;
         $this->department = $department;
         $this->education_level = $education_level;
         $this->employment_status = $employment_status;
         $this->job_title = $job_title;
         $this->location = $location;
         $this->marital_status = $marital_status;
+        $this->navlink = $navlink;
         $this->nationality = $nationality;
         $this->province = $province;
         $this->relationship = $relationship;
@@ -840,5 +851,115 @@ class LookupTableController extends BaseController
         }
 
         return $this->chosen($this->skill);
+    }
+
+    /**
+     * Get skills data for chosen options.
+     *
+     * @SWG\Get(
+     *     path="/screens",
+     *     tags={"Chosen Options"},
+     *     summary="Get screens data for chosen options.",
+     *     @SWG\Response(response="200", description="Success",
+     *         @SWG\Schema(
+     *             type="array",
+     *             @SWG\Items(ref="#/definitions/Screen")
+     *         ),
+     *     ),
+     *     @SWG\Response(response="400", description="Token not provided",
+     *         @SWG\Schema(
+     *             title="data",
+     *             type="object",
+     *             @SWG\Property(property="message", type="string", default="Token not provided", description="Error message from server"),
+     *             @SWG\Property(property="status_code", type="integer", default=400, description="Status code from server"),
+     *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         description="JWT Token",
+     *         required=true,
+     *         type="string",
+     *         default="Bearer "
+     *     ),
+     *     @SWG\Parameter(
+     *         name="table_view",
+     *         in="query",
+     *         description="Returns a table view",
+     *         type="boolean",
+     *         default=false
+     *     ),
+     * )
+     *
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     */
+    public function screens(Request $request)
+    {
+        $navlinks = $this->navlink->whereParentId(-1);
+
+        if ($this->table_view) {
+            return $this->tableView($navlinks);
+        }
+
+        return $this->chosen($navlinks);
+    }
+
+    /**
+     * Get skills data for chosen options.
+     *
+     * @SWG\Get(
+     *     path="/types",
+     *     tags={"Chosen Options"},
+     *     summary="Get custom field types data for chosen options.",
+     *     @SWG\Response(response="200", description="Success",
+     *         @SWG\Schema(
+     *             type="array",
+     *             @SWG\Items(ref="#/definitions/CustomFieldType")
+     *         ),
+     *     ),
+     *     @SWG\Response(response="400", description="Token not provided",
+     *         @SWG\Schema(
+     *             title="data",
+     *             type="object",
+     *             @SWG\Property(property="message", type="string", default="Token not provided", description="Error message from server"),
+     *             @SWG\Property(property="status_code", type="integer", default=400, description="Status code from server"),
+     *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         description="JWT Token",
+     *         required=true,
+     *         type="string",
+     *         default="Bearer "
+     *     ),
+     *     @SWG\Parameter(
+     *         name="table_view",
+     *         in="query",
+     *         description="Returns a table view",
+     *         type="boolean",
+     *         default=false
+     *     ),
+     * )
+     *
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     */
+    public function types(Request $request)
+    {
+        if ($this->table_view) {
+            return $this->tableView($this->custom_field_type);
+        }
+
+        return $this->chosen($this->custom_field_type);
     }
 }

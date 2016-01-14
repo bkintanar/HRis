@@ -28,7 +28,7 @@ class CustomField extends Model
      *
      * @var array
      */
-    protected $fillable = ['custom_field_section_id', 'name', 'custom_field_type_id', 'required'];
+    protected $fillable = ['custom_field_section_id', 'name', 'custom_field_type_id', 'required', 'mask'];
 
     /**
      * The database table used by the model.

@@ -23,7 +23,10 @@ class AuthControllerTest extends TestCase
         $content_array = json_decode($content, true);
 
         $this->assertArrayHasKey('token', $content_array);
+        $this->assertArrayHasKey('status_code', $content_array);
+
         $this->assertEquals(200, $status_code);
+        $this->assertEquals($status_code, $content_array['status_code']);
     }
 
     /**
@@ -42,8 +45,11 @@ class AuthControllerTest extends TestCase
 
         $content_array = json_decode($content, true);
 
-        $this->assertArrayHasKey('error', $content_array);
+        $this->assertArrayHasKey('message', $content_array);
+        $this->assertArrayHasKey('status_code', $content_array);
+
         $this->assertEquals(401, $status_code);
+        $this->assertEquals($status_code, $content_array['status_code']);
     }
 
     /**
@@ -62,8 +68,11 @@ class AuthControllerTest extends TestCase
 
         $content_array = json_decode($content, true);
 
-        $this->assertArrayHasKey('error', $content_array);
+        $this->assertArrayHasKey('message', $content_array);
+        $this->assertArrayHasKey('status_code', $content_array);
+
         $this->assertEquals(401, $status_code);
+        $this->assertEquals($status_code, $content_array['status_code']);
     }
 
     /**
@@ -82,8 +91,11 @@ class AuthControllerTest extends TestCase
 
         $content_array = json_decode($content, true);
 
-        $this->assertArrayHasKey('error', $content_array);
-        $this->assertEquals(500, $status_code);
+        $this->assertArrayHasKey('message', $content_array);
+        $this->assertArrayHasKey('status_code', $content_array);
+
+        $this->assertEquals(422, $status_code);
+        $this->assertEquals($status_code, $content_array['status_code']);
     }
 
     /**
@@ -105,8 +117,11 @@ class AuthControllerTest extends TestCase
 
         $content_array = json_decode($content, true);
 
-        $this->assertArrayHasKey('status', $content_array);
-        $this->assertEquals(500, $status_code);
+        $this->assertArrayHasKey('message', $content_array);
+        $this->assertArrayHasKey('status_code', $content_array);
+
+        $this->assertEquals(422, $status_code);
+        $this->assertEquals($status_code, $content_array['status_code']);
     }
 
     /**
@@ -125,35 +140,8 @@ class AuthControllerTest extends TestCase
 
         $content_array = json_decode($content, true);
 
-        $this->assertArrayHasKey('error', $content_array);
-        $this->assertEquals(400, $status_code);
-    }
-
-    /**
-     * @test
-     *
-     * +-----------------------------------+
-     * | POSITIVE TEST | GET /api/users/me |
-     * +-----------------------------------+
-     */
-    public function it_should_return_a_user_transformer_if_successful()
-    {
-        $content_array = $this->login();
-        $token = $content_array['token'];
-
-        $response = $this->call('GET', '/api/users/me');
-
-        $content = $response->getContent();
-        $status_code = $response->getStatusCode();
-
-        $content_array = json_decode($content, true);
-
-        $this->assertArrayHasKey('data', $content_array);
-        $this->assertArrayHasKey('id', $content_array['data']);
-        $this->assertArrayHasKey('email', $content_array['data']);
-        $this->assertArrayHasKey('last_login', $content_array['data']);
-
-        $this->assertEquals(200, $status_code);
+        $this->assertArrayHasKey('message', $content_array);
+        $this->assertEquals(401, $status_code);
     }
 
     /**
@@ -172,8 +160,8 @@ class AuthControllerTest extends TestCase
 
         $content_array = json_decode($content, true);
 
-        $this->assertArrayHasKey('error', $content_array);
-        $this->assertEquals(400, $status_code);
+        $this->assertArrayHasKey('message', $content_array);
+        $this->assertEquals(401, $status_code);
     }
 
     /**
@@ -195,7 +183,7 @@ class AuthControllerTest extends TestCase
 
         $content_array = json_decode($content, true);
 
-        $this->assertArrayHasKey('error', $content_array);
-        $this->assertEquals(400, $status_code);
+        $this->assertArrayHasKey('message', $content_array);
+        $this->assertEquals(401, $status_code);
     }
 }

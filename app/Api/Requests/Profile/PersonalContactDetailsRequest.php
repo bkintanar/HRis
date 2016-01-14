@@ -27,10 +27,8 @@ class PersonalContactDetailsRequest extends Request
     {
         if (Request::isMethod('patch')) {
             return [
-                'employee' => [
-                    'id'          => 'required',
-                    'employee_id' => 'required',
-                ],
+                'employee.id'          => 'required',
+                'employee.employee_id' => 'required',
             ];
         }
 

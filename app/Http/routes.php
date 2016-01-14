@@ -2,7 +2,7 @@
 
 use Dingo\Api\Routing\Router;
 
-$api = app('Dingo\Api\Routing\Router');
+$api = app(Router::class);
 
 // Version 1 of our API
 $api->version('v1', function (Router $api) {
@@ -14,22 +14,14 @@ $api->version('v1', function (Router $api) {
             'cors',
             'api.throttle',
         ],
-        'limit'   => 100,
+        'limit'   => 200,
         'expires' => 5, ], function (Router $api) {
 
         // Login route
         $api->post('login', 'Auth\AuthController@authenticate');                                            // docs done
         $api->post('register', 'Auth\AuthController@register');
 
-        $api->get('auth/refresh', [
-            'middleware' => [
-                'before' => 'jwt.auth',
-                'after'  => 'jwt.refresh',
-            ],
-            function () {
-                return response()->json(['code' => 200, 'text' => 'Token refreshed']);
-            },
-        ]);
+        $api->get('auth/refresh', 'Auth\AuthController@token');
 
         // All routes in here are protected and thus need a valid token
         $api->group(['protected' => true, 'middleware' => 'jwt.auth'], function (Router $api) {
@@ -46,13 +38,13 @@ $api->version('v1', function (Router $api) {
 
                 $api->patch('contact-details', 'PersonalDetailsController@update');                         // docs done
 
-                $api->post('emergency-contacts', 'EmergencyContactsController@store');
-                $api->patch('emergency-contacts', 'EmergencyContactsController@update');
-                $api->delete('emergency-contacts', 'EmergencyContactsController@destroy');
+                $api->post('emergency-contacts', 'EmergencyContactsController@store');                      // docs done
+                $api->patch('emergency-contacts', 'EmergencyContactsController@update');                    // docs done
+                $api->delete('emergency-contacts', 'EmergencyContactsController@destroy');                  // docs done
 
-                $api->post('dependents', 'DependentsController@store');
-                $api->patch('dependents', 'DependentsController@update');
-                $api->delete('dependents', 'DependentsController@destroy');
+                $api->post('dependents', 'DependentsController@store');                                     // docs done
+                $api->patch('dependents', 'DependentsController@update');                                   // docs done
+                $api->delete('dependents', 'DependentsController@destroy');                                 // docs done
 
                 $api->patch('job', 'JobController@update');
                 $api->delete('job', 'JobController@destroy');
@@ -68,6 +60,8 @@ $api->version('v1', function (Router $api) {
                     $api->delete('skills', 'QualificationsController@destroySkill');
                     $api->patch('skills', 'QualificationsController@updateSkill');
                 });
+
+                $api->patch('custom-fields', 'CustomFieldsController@update');
             });
 
             // Employee
@@ -78,6 +72,20 @@ $api->version('v1', function (Router $api) {
             // PIM
             $api->group(['prefix' => 'pim', 'namespace' => 'PIM'], function (Router $api) {
                 $api->get('employee-list', 'EmployeeListController@index');
+
+                // Configuration
+                $api->group(['prefix' => 'configuration', 'namespace' => 'Configuration'], function (Router $api) {
+                    $api->get('custom-field-sections', 'CustomFieldsController@index');
+                    $api->post('custom-field-sections', 'CustomFieldsController@store');
+                    $api->patch('custom-field-sections', 'CustomFieldsController@update');
+                    $api->delete('custom-field-sections', 'CustomFieldsController@destroy');
+                    $api->post('custom-field-sections-by-screen-id', 'CustomFieldsController@getCustomFieldSectionsByScreenId');
+
+                    $api->get('custom-fields', 'CustomFieldsController@show');
+                    $api->post('custom-fields', 'CustomFieldsController@storeCustomField');
+                    $api->patch('custom-fields', 'CustomFieldsController@updateCustomField');
+                    $api->delete('custom-fields', 'CustomFieldsController@destroyCustomField');
+                });
             });
 
             // Chosen
@@ -89,6 +97,8 @@ $api->version('v1', function (Router $api) {
             $api->get('job-titles', 'LookupTableController@jobTitles');                                     // docs done
             $api->get('locations', 'LookupTableController@locations');                                      // docs done
             $api->get('marital-statuses', 'LookupTableController@maritalStatuses');                         // docs done
+            $api->get('screens', 'LookupTableController@screens');                                          // docs done
+            $api->get('types', 'LookupTableController@types');                                              // docs done
             $api->get('nationalities', 'LookupTableController@nationalities');                              // docs done
             $api->get('provinces', 'LookupTableController@provinces');                                      // docs done
             $api->get('relationships', 'LookupTableController@relationships');                              // docs done

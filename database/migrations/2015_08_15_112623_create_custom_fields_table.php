@@ -16,7 +16,7 @@ class CreateCustomFieldsTable extends Migration
      * Run the migrations.
      *
      * @return void
-     * 
+     *
      * @author Bertrand Kintanar
      */
     public function up()
@@ -27,6 +27,7 @@ class CreateCustomFieldsTable extends Migration
             $table->string('name');
             $table->unsignedInteger('custom_field_type_id');
             $table->boolean('required');
+            $table->string('mask')->nullable();
 
             $table->foreign('custom_field_section_id')->references('id')->on('custom_field_sections')->onDelete('cascade');
             $table->foreign('custom_field_type_id')->references('id')->on('custom_field_types')->onDelete('cascade');
@@ -37,7 +38,7 @@ class CreateCustomFieldsTable extends Migration
      * Reverse the migrations.
      *
      * @return void
-     * 
+     *
      * @author Bertrand Kintanar
      */
     public function down()

@@ -9,7 +9,6 @@
  */
 namespace HRis\Api\Controllers\Profile;
 
-use Dingo\Api\Facade\API;
 use Exception;
 use HRis\Api\Controllers\BaseController;
 use HRis\Api\Eloquent\Employee;
@@ -29,15 +28,17 @@ use Swagger\Annotations as SWG;
  *         @SWG\Schema(
  *             title="data",
  *             type="object",
- *             required={"employee", "status"},
+ *             required={"employee", "message", "status_code"},
  *             @SWG\Property(property="employee", ref="#/definitions/Employee"),
- *             @SWG\Property(property="status", type="string", default="Record successfully updated.", description="Status message from server"),
+ *             @SWG\Property(property="message", type="string", default="Record successfully updated.", description="Status message from server"),
+ *             @SWG\Property(property="status_code", type="integer", default=200, description="Status code from server"),
  *         )
  *     ),
  *     @SWG\Response(response="400", description="Token not provided",
  *         @SWG\Schema(
  *             title="data",
  *             type="object",
+ *             required={"message", "status_code", "debug"},
  *             @SWG\Property(property="message", type="string", default="Token not provided", description="Error message from server"),
  *             @SWG\Property(property="status_code", type="integer", default=400, description="Status code from server"),
  *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
@@ -47,8 +48,18 @@ use Swagger\Annotations as SWG;
  *         @SWG\Schema(
  *             title="data",
  *             type="object",
- *             required={"status"},
- *             @SWG\Property(property="status", type="string", default="Employee Id already in use.", description="Error message from server"),
+ *             required={"message", "status_code"},
+ *             @SWG\Property(property="message", type="string", default="Employee Id already in use.", description="Error message from server"),
+ *             @SWG\Property(property="status_code", type="integer", default=405, description="Status code from server"),
+ *         )
+ *     ),
+ *     @SWG\Response(response="422", description="Unable to update record.",
+ *         @SWG\Schema(
+ *             title="data",
+ *             type="object",
+ *             required={"message", "status_code"},
+ *             @SWG\Property(property="message", type="string", default="Unable to update record.", description="Status message from server"),
+ *             @SWG\Property(property="status_code", type="integer", default=422, description="Status code from server"),
  *         )
  *     ),
  *     @SWG\Parameter(
@@ -56,7 +67,6 @@ use Swagger\Annotations as SWG;
  *         in="body",
  *         description="Employee object that needs to be updated",
  *         required=true,
- *         type="object",
  *         @SWG\Schema(title="employee", type="object",
  *             @SWG\Property(property="employee", ref="#/definitions/Employee")
  *         )
@@ -82,18 +92,29 @@ use Swagger\Annotations as SWG;
  *         @SWG\Schema(
  *             title="data",
  *             type="object",
- *             required={"employee", "status"},
+ *             required={"employee", "message", "status_code"},
  *             @SWG\Property(property="employee", ref="#/definitions/Employee"),
- *             @SWG\Property(property="status", type="string", default="Record successfully updated.", description="Status message from server"),
+ *             @SWG\Property(property="message", type="string", default="Record successfully updated.", description="Status message from server"),
+ *             @SWG\Property(property="status_code", type="integer", default=200, description="Status code from server"),
  *         )
  *     ),
  *     @SWG\Response(response="400", description="Token not provided",
  *         @SWG\Schema(
  *             title="data",
  *             type="object",
+ *             required={"message", "status_code", "debug"},
  *             @SWG\Property(property="message", type="string", default="Token not provided", description="Error message from server"),
  *             @SWG\Property(property="status_code", type="integer", default=400, description="Status code from server"),
  *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
+ *         )
+ *     ),
+ *     @SWG\Response(response="422", description="Unable to update record.",
+ *         @SWG\Schema(
+ *             title="data",
+ *             type="object",
+ *             required={"message", "status_code"},
+ *             @SWG\Property(property="message", type="string", default="Unable to update record.", description="Status message from server"),
+ *             @SWG\Property(property="status_code", type="integer", default=422, description="Status code from server"),
  *         )
  *     ),
  *     @SWG\Parameter(
@@ -101,7 +122,6 @@ use Swagger\Annotations as SWG;
  *         in="body",
  *         description="Employee object that needs to be updated",
  *         required=true,
- *         type="object",
  *         @SWG\Schema(title="employee", type="object",
  *             @SWG\Property(property="employee", ref="#/definitions/Employee")
  *         )
@@ -136,8 +156,6 @@ class PersonalDetailsController extends BaseController
      */
     public function __construct(Employee $employee)
     {
-        $this->middleware('jwt.auth');
-
         $this->employee = $employee;
     }
 
@@ -160,13 +178,13 @@ class PersonalDetailsController extends BaseController
         $employee = $this->employee->findOrFail($id);
 
         if (!$employee || !$employee_id || $employee_id == Config::get('company.employee_id_prefix').'____') {
-            return API::response()->array(['status' => UNABLE_UPDATE_MESSAGE])->statusCode(405);
+            return $this->response()->array(['message' => UNABLE_UPDATE_MESSAGE, 'status_code' => 405])->statusCode(405);
         }
 
         // If user is trying to update the employee_id to a used employee_id.
         $original_employee_id = $this->employee->whereEmployeeId($employee_id)->pluck('id');
         if ($id != $original_employee_id && !is_null($original_employee_id)) {
-            return API::response()->array(['status' => EMPLOYEE_ID_IN_MESSAGE])->statusCode(405);
+            return $this->response()->array(['message' => EMPLOYEE_ID_IN_MESSAGE, 'status_code' => 405])->statusCode(405);
         }
 
         try {
@@ -174,9 +192,9 @@ class PersonalDetailsController extends BaseController
 
             $employee->update($attributes);
         } catch (Exception $e) {
-            return API::response()->array(['status' => UNABLE_UPDATE_MESSAGE])->statusCode(500);
+            return $this->response()->array(['message' => UNABLE_UPDATE_MESSAGE, 'status_code' => 422])->statusCode(422);
         }
 
-        return API::response()->array(['employee' => $employee, 'status' => SUCCESS_UPDATE_MESSAGE])->statusCode(200);
+        return $this->response()->array(['employee' => $employee, 'message' => SUCCESS_UPDATE_MESSAGE, 'status_code' => 200])->statusCode(200);
     }
 }
