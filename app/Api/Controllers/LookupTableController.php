@@ -17,8 +17,8 @@ use HRis\Api\Eloquent\EmploymentStatus;
 use HRis\Api\Eloquent\JobTitle;
 use HRis\Api\Eloquent\Location;
 use HRis\Api\Eloquent\MaritalStatus;
-use HRis\Api\Eloquent\Navlink;
 use HRis\Api\Eloquent\Nationality;
+use HRis\Api\Eloquent\Navlink;
 use HRis\Api\Eloquent\Province;
 use HRis\Api\Eloquent\Relationship;
 use HRis\Api\Eloquent\Skill;
@@ -100,19 +100,19 @@ class LookupTableController extends BaseController
     /**
      * InputSelectController constructor.
      *
-     * @param City              $city
-     * @param Country           $country
-     * @param Department        $department
-     * @param EducationLevel    $education_level
-     * @param EmploymentStatus  $employment_status
-     * @param JobTitle          $job_title
-     * @param Location          $location
-     * @param MaritalStatus     $marital_status
-     * @param Navlink           $navlink
-     * @param Nationality       $nationality
-     * @param Province          $province
-     * @param Relationship      $relationship
-     * @param Skill             $skill
+     * @param City             $city
+     * @param Country          $country
+     * @param Department       $department
+     * @param EducationLevel   $education_level
+     * @param EmploymentStatus $employment_status
+     * @param JobTitle         $job_title
+     * @param Location         $location
+     * @param MaritalStatus    $marital_status
+     * @param Navlink          $navlink
+     * @param Nationality      $nationality
+     * @param Province         $province
+     * @param Relationship     $relationship
+     * @param Skill            $skill
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */

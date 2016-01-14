@@ -14,7 +14,6 @@ use League\Fractal\TransformerAbstract;
 
 class CustomFieldTransformer extends TransformerAbstract
 {
-
     /**
      * Transform object into a generic array.
      *

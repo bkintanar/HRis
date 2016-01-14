@@ -48,8 +48,8 @@ class CustomFieldsController extends BaseController
     {
         $custom_field_values = array_filter($request->get('custom_field_values'));
 
-        foreach($custom_field_values as $key => $custom_field_value) {
-            if(is_array($custom_field_value)) {
+        foreach ($custom_field_values as $key => $custom_field_value) {
+            if (is_array($custom_field_value)) {
                 $custom_field_values[$key] = $custom_field_value['id'];
             }
         }
@@ -61,7 +61,6 @@ class CustomFieldsController extends BaseController
 
         try {
             foreach ($custom_field_ids as $custom_field_id) {
-
                 $data = [
                     'custom_field_id' => $custom_field_id,
                     'employee_id'     => $employee_id,

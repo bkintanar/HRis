@@ -182,7 +182,6 @@ class Employee extends Model
     public function getEmployeeById($employee_id, $user_id)
     {
         if ($employee_id) {
-
             $employee = self::whereEmployeeId($employee_id)->with([
                 'user', 'country', 'province', 'city', 'jobHistories', 'emergencyContacts', 'dependents', 'employeeWorkShift', 'customFieldValues', 'workExperiences', 'educations', 'employeeSkills',
             ])->first();

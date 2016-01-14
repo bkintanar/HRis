@@ -33,8 +33,8 @@ class EmployeeController extends BaseController
     protected $custom_field;
 
     /**
-     * @param Employee $employee
-     * @param CustomField $custom_field
+     * @param Employee         $employee
+     * @param CustomField      $custom_field
      * @param CustomFieldValue $custom_field_value
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
@@ -71,10 +71,8 @@ class EmployeeController extends BaseController
         $employee_id = $this->employee->whereEmployeeId($employee_id)->pluck('id');
         $custom_fields = $this->custom_field->get();
 
-        foreach($custom_fields as $custom_field)
-        {
-            if (!$this->custom_field_value->whereCustomFieldId($custom_field->id)->whereEmployeeId($employee_id)->first())
-            {
+        foreach ($custom_fields as $custom_field) {
+            if (!$this->custom_field_value->whereCustomFieldId($custom_field->id)->whereEmployeeId($employee_id)->first()) {
                 $data = [
                     'custom_field_id' => $custom_field->id,
                     'employee_id'     => $employee_id,

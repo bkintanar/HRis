@@ -10,15 +10,14 @@
 namespace HRis\Api\Controllers\PIM\Configuration;
 
 use Dingo\Api\Facade\API;
+use HRis\Api\Controllers\BaseController;
 use HRis\Api\Eloquent\CustomField;
 use HRis\Api\Eloquent\CustomFieldOption;
 use HRis\Api\Eloquent\CustomFieldSection;
 use HRis\Api\Eloquent\CustomFieldType;
-use HRis\Api\Controllers\BaseController;
 use HRis\Api\Eloquent\Navlink;
 use HRis\Api\Requests\PIM\CustomFieldRequest;
 use HRis\Api\Requests\PIM\CustomFieldSectionsRequest;
-use HRis\Api\Transformers\CustomFieldSectionTransformer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -263,7 +262,6 @@ class CustomFieldsController extends BaseController
             $custom_field_section = CustomFieldSection::whereId($request->get('custom_field_section_id'))->first();
 
             $custom_field_section->update($request->only(['name', 'screen_id']));
-
         } catch (Exception $e) {
             DB::rollback();
 
@@ -339,7 +337,7 @@ class CustomFieldsController extends BaseController
 
         $custom_field_sections = $this->custom_field_section->with('customFields.options')->whereScreenId($screen_id)->get();
 
-        $custom_field_sections->each(function($custom_field_section) {
+        $custom_field_sections->each(function ($custom_field_section) {
             $custom_fields = $custom_field_section->customFields;
 
             $custom_field_section->fields = array_chunk($custom_fields->toArray(), 2);
