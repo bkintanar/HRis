@@ -33,7 +33,7 @@ module.exports = {
       }.bind(this),
       function(response) {
         this.messages = [];
-        if (response.entity.error) {
+        if (response.entity.status_code >= 400) {
           this.messages.push({type: 'danger', message: 'Sorry, you provided invalid credentials'});
         }
       }.bind(this));

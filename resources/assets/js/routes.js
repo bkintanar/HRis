@@ -62,6 +62,11 @@ module.exports = {
                 name: 'profile-qualifications',
                 component: require('./compiled/pages/profile/qualifications.vue'),
                 auth: true
+              },
+              '/projects': {
+                name: 'profile-projects',
+                component: require('./compiled/pages/profile/projects.vue'),
+                auth: true
               }
             }
           },
@@ -188,10 +193,15 @@ module.exports = {
                 component: require('./compiled/pages/profile/qualifications.vue'),
                 auth: true
               },
+              '/employee-list/:employee_id/projects': {
+                name: 'pim-employee-list-projects',
+                component: require('./compiled/pages/profile/projects.vue'),
+                auth: true
+              },
               '/configuration': {
                 name: 'pim-configuration',
                 auth: true,
-                component: require('./compiled/pages/page.vue'),
+                component: require('./compiled/pages/blank.vue'),
                 subRoutes: {
                   '/termination-reasons': {
                     name: 'pim-configuration-termination-reasons',
@@ -200,7 +210,12 @@ module.exports = {
                   },
                   '/custom-field-sections': {
                     name: 'pim-configuration-custom-field-sections',
-                    component: require('./compiled/pages/page.vue'),
+                    component: require('./compiled/pages/pim/configuration/custom-field-sections.vue'),
+                    auth: true
+                  },
+                  '/custom-field-sections/:custom_field_section_id': {
+                    name: 'pim-configuration-custom-fields',
+                    component: require('./compiled/pages/pim/configuration/custom-fields.vue'),
                     auth: true
                   }
                 }
@@ -296,13 +311,17 @@ module.exports = {
           let params = {
             path: '/auth/refresh',
             method: 'GET',
-            headers: {Authorization: localStorage.getItem('jwt-token')}
+            headers: { Authorization: localStorage.getItem('jwt-token') }
           };
 
           client(params).then(
           function(response) {
 
-            var token = response.request.headers.Authorization;
+            var token = response.entity.token;
+
+            if (token.indexOf('Bearer ') === -1) {
+              token = 'Bearer ' + token;
+            }
 
             localStorage.setItem('jwt-token', token);
             transition.next();
@@ -310,7 +329,9 @@ module.exports = {
 
           function() {
 
-            transition.redirect('/logout');
+            localStorage.removeItem('user');
+            localStorage.removeItem('jwt-token');
+            transition.redirect('/');
           });
         } else {
           transition.redirect('/login');

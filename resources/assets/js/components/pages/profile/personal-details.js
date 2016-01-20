@@ -1,6 +1,6 @@
 module.exports = {
   props: [
-    'employee', 'page_title', 'job_titles', 'employment_statuses', 'routes', 'has_access', 'permission', 'logged'
+    'employee', 'page_title', 'job_titles', 'employment_statuses', 'routes', 'has_access', 'permission', 'logged', 'custom_field_values'
   ],
 
   compiled: function() {
@@ -24,7 +24,8 @@ module.exports = {
       nationalities_chosen: [{}],
       marital_status: '',
       marital_statuses_chosen: [{}],
-      original_employee_id: ''
+      original_employee_id: '',
+      custom_field_sections: [{}]
     };
   },
 
@@ -43,6 +44,27 @@ module.exports = {
         this.employee_id = localStorage.getItem('employee_id');
       }
 
+      client({
+        path: '/pim/configuration/custom-field-sections-by-screen-id',
+        entity: {screen_name: 'Personal Details'},
+        headers: {Authorization: localStorage.getItem('jwt-token')}
+      }).then(
+      function(response) {
+
+        this.custom_field_sections = response.entity.custom_field_sections;
+
+      }.bind(this),
+
+      function(response) {
+
+        if (response.status.code == 422) {
+          this.$route.router.go({
+            name: 'error-404'
+          });
+          console.log(response.entity);
+        }
+      }.bind(this));
+
       let params = {
         path: '/employee/get-by-employee-id?include=user',
         entity: {employee_id: this.employee_id},
@@ -53,6 +75,7 @@ module.exports = {
       function(response) {
 
         this.$dispatch('update-employee', response.entity.data);
+        this.custom_field_values = response.entity.data.custom_field_values;
 
         this.original_employee_id = response.entity.data.employee_id;
 
@@ -112,28 +135,28 @@ module.exports = {
       client(params).then(
       function(response) {
 
+        this.updateLocalStorage(response.entity.employee.employee_id);
+
+        if (this.$route.path.indexOf('/pim') > -1) {
+          this.$route.router.go({
+            name: 'pim-employee-list-personal-details',
+            params: {employee_id: response.entity.employee.employee_id}
+          });
+        }
+
+        this.$route.params.employee_id = response.entity.employee.employee_id;
+        swal({title: response.entity.message, type: 'success', timer: 2000});
+        this.cancelForm();
+
+      }.bind(this),
+      function(response) {
         switch (response.status.code) {
-          case 200:
-
-            this.updateLocalStorage(response.entity.employee.employee_id);
-
-            if (this.$route.path.indexOf('/pim') > -1) {
-              this.$route.router.go({
-                name: 'pim-employee-list-personal-details',
-                params: {employee_id: response.entity.employee.employee_id}
-              });
-            }
-
-            this.$route.params.employee_id = response.entity.employee.employee_id;
-            swal({title: response.entity.status, type: 'success', timer: 2000});
-            this.cancelForm();
-            break;
           case 405:
-            swal({title: response.entity.status, type: 'warning', timer: 2000});
+            swal({title: response.entity.message, type: 'warning', timer: 2000});
             break;
-          case 500:
+          case 422:
             $('#first_name').focus();
-            swal({title: response.entity.status, type: 'error', timer: 2000});
+            swal({title: response.entity.message, type: 'error', timer: 2000});
             break;
         }
       }.bind(this));

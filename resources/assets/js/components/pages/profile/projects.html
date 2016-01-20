@@ -1,0 +1,316 @@
+<div class="row" v-if="employee">
+    <navbar-static-profile-top></navbar-static-profile-top>
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Work Experience</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="ibox-content">
+                <div class="">
+                    <a id="add_work_experience" v-if="has_access && has_access[permission + '.work-experiences.create']" @click="toggleModal('work_experience')" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Job Title</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Comment</th>
+                            <th class="fix-width">Action</th>
+                        </tr>
+                        </thead>
+
+                        <tbody id="work_experiences_body">
+                        <tr v-for="work_experience in work_experiences" class="item-{{$index}}">
+                            <td>{{work_experience.company}}</td>
+                            <td>{{work_experience.job_title}}</td>
+                            <td v-if="work_experience.from_date">{{work_experience.from_date}}</td>
+                            <td v-if="work_experience.to_date">{{work_experience.to_date}}</td>
+                            <td>{{work_experience.comment}}</td>
+                            <td>
+                                <button rel="edit" id="edit_{{work_experience.id}}" v-if="has_access && has_access[permission + '.work-experiences.update']" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" title="" type="button" @click="editWorkExperienceRecord(work_experience, $index)" data-original-title="Edit"><i class="fa fa-edit"></i></button>
+                                <button rel="delete" id="delete_{{work_experience.id}}" v-if="has_access && has_access[permission + '.work-experiences.delete']" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" title="" type="button" @click="deleteWorkExperienceRecord(work_experience, $index)" data-original-title="Delete"><i class="fa fa-times"></i></button>
+                            </td>
+                        </tr>
+                        <tr v-if="work_experiences && work_experiences.length == 0">
+                            <td colspan="6">No work experiences listed</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="work_experience_modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal" type="button">&times;</button>
+
+                    <h4 class="modal-title" id="my_modal_label">Work Experience Details</h4>
+                </div>
+
+                <div class="modal-body">
+                    <!--Add form-->
+                    <form method="POST" onsubmit="return false;" accept-charset="UTF-8" class="form-horizontal">
+                        <input type="hidden" v-model="work_experience_modal.work_experience_id">
+                        <div class="form-group">
+                            <label for="company" class="col-md-3 control-label">Company</label>
+                            <div class="col-md-9">
+                                <input class="form-control" name="company" type="text" v-model='work_experience_modal.company' id="company">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="job_title" class="col-md-3 control-label">Job Title</label>
+                            <div class="col-md-9">
+                                <input class="form-control" name="job_title" type="text" v-model='work_experience_modal.job_title' id="job_title">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="work_experience_date_range" class="col-md-3 control-label">Year</label>
+                            <div class="col-md-9">
+                                <div class="input-daterange input-group input-full-width" id="work_experience_date_range">
+                                    <input class="input-sm form-control" data-mask="9999-99-99" id="work_experience_from_date" name="from_date" v-model='work_experience_modal.from_date' type="text">
+                                    <span class="input-group-addon">to</span>
+                                    <input class="input-sm form-control" data-mask="9999-99-99" id="work_experience_to_date" name="to_date" v-model='work_experience_modal.to_date' type="text">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="comment" class="col-md-3 control-label">Comment</label>
+                            <div class="col-md-9">
+                                <textarea class="form-control" name="comment" cols="30" rows="5" v-model='work_experience_modal.comment' id="comment"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-white btn-xs" data-dismiss="modal" type="button">Close</button>
+                            <input class="btn btn-primary btn-xs" type="submit" @click="submitWorkExperienceForm" value="Save changes">
+                        </div>
+                    </form><!--// form-->
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Education</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="ibox-content">
+                <div class="">
+                    <a id="add_education" v-if="has_access && has_access[permission + '.educations.create']" @click="toggleModal('education')" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Institute</th>
+                            <th>Major/Specialization</th>
+                            <th>Level</th>
+                            <th>Year</th>
+                            <th>GPA/Score</th>
+                            <th class="fix-width">Action</th>
+                        </tr>
+                        </thead>
+
+                        <tr v-for="education in educations" class="item-{{$index}}">
+                            <td>{{education.institute}}</td>
+                            <td>{{education.major_specialization}}</td>
+                            <td>{{education_levels[education.education_level_id]}}</td>
+                            <td v-if="education.from_date && education.to_date">{{education.from_date}} - {{education.to_date}}</td>
+                            <td>{{education.gpa_score}}</td>
+                            <td>
+                                <button rel="edit" id="edit_{{education.id}}" v-if="has_access && has_access[permission + '.educations.update']" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" title="" type="button" @click="editEducationRecord(education, $index)" data-original-title="Edit"><i class="fa fa-edit"></i></button>
+                                <button rel="delete" id="delete_{{education.id}}" v-if="has_access && has_access[permission + '.educations.delete']" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" title="" type="button" @click="deleteEducationRecord(education, $index)" data-original-title="Delete"><i class="fa fa-times"></i></button>
+                            </td>
+                        </tr>
+                        <tr v-if="educations && educations.length == 0">
+                            <td colspan="6">No educations listed</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="education_modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal" type="button">&times;</button>
+
+                    <h4 class="modal-title">Education Details</h4>
+                </div>
+
+                <div class="modal-body">
+                    <!--Add form-->
+                    <form method="POST" onsubmit="return false;" accept-charset="UTF-8" class="form-horizontal">
+                        <input type="hidden" v-model="education_modal.education_id">
+
+                        <div class="form-group">
+                            <label for="education_level_id" class="col-md-3 control-label">Level</label>
+                            <div class="col-md-9">
+                                <chosen id="education_level_id" class="vue-chosen"
+                                        :options="education_level_chosen" :v-model.sync="education_level_obj"
+                                        :chosen="{ width:'100%' }" placeholder="--- Select ---" text-key="name"></chosen>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="institute" class="col-md-3 control-label">Institute</label>
+                            <div class="col-md-9">
+                                <input class="form-control" v-model="education_modal.institute" name="institute" type="text" id="institute">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="major_specialization" class="col-md-3 control-label">Major/Specialization</label>
+                            <div class="col-md-9">
+                                <input class="form-control" v-model="education_modal.major_specialization" name="major_specialization" type="text" id="major_specialization">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="education_date_range" class="col-md-3 control-label">Year</label>
+                            <div class="col-md-9">
+                                <div class="input-daterange input-group input-full-width" id="education_date_range">
+                                    <input class="input-sm form-control" data-mask="9999-99-99" v-model="education_modal.from_date" id="education_from_date" type="text">
+                                    <span class="input-group-addon">to</span>
+                                    <input class="input-sm form-control" data-mask="9999-99-99" v-model="education_modal.to_date" id="education_to_date" name="to_date" type="text">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="gpa_score" class="col-md-3 control-label">GPA/Score</label>
+                            <div class="col-md-9">
+                                <input class="form-control" name="gpa_score" v-model="education_modal.gpa_score" type="text" id="gpa_score">
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-white btn-xs" data-dismiss="modal" type="button">Close</button>
+                            <input class="btn btn-primary btn-xs" type="submit" @click="submitEducationForm" value="Save changes">
+                        </div>
+                    </form><!--// form-->
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Skills</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="ibox-content">
+                <div class="">
+                    <a id="add_skill" v-if="has_access && has_access[permission + '.skills.create']" @click="toggleModal('skill')" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Skill</th>
+                            <th>Years of Experience</th>
+                            <th>Comment</th>
+                            <th class="fix-width">Action</th>
+                        </tr>
+                        </thead>
+
+                        <tbody id="skills_body">
+                        <tr v-for="skill in employee_skills" class="item-{{$index}}">
+                            <td>{{skills[skill.skill_id]}}</td>
+                            <td>{{skill.years_of_experience}}</td>
+                            <td>{{skill.comment}}</td>
+                            <td>
+                                <button rel="edit" id="edit_{{skill.id}}" v-if="has_access && has_access[permission + '.skills.update']" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" title="" type="button" @click="editSkillRecord(skill, $index)" data-original-title="Edit"><i class="fa fa-edit"></i></button>
+                                <button rel="delete" id="delete_{{skill.id}}" v-if="has_access && has_access[permission + '.skills.delete']" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" title="" type="button" @click="deleteSkillRecord(skill, $index)" data-original-title="Delete"><i class="fa fa-times"></i></button>
+                            </td>
+                        </tr>
+                        <tr v-if="employee_skills && employee_skills.length == 0">
+                            <td colspan="4">No skills listed</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="skill_modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal" type="button">&times;</button>
+
+                    <h4 class="modal-title" id="my_model_label">Skill Details</h4>
+                </div>
+
+                <div class="modal-body">
+                    <!--Add form-->
+                    <form method="POST" onsubmit="return false;" accept-charset="UTF-8" class="form-horizontal">
+                        <input id="employee_skill_id" name="employee_skill_id" type="hidden" value="">
+                        <input id="skillForm" name="_method" type="hidden" value="POST">
+                        <div class="form-group">
+                            <label for="skill_id" class="col-md-3 control-label">Skill</label>
+                            <div class="col-md-9">
+                                <chosen id="skill_id" class="vue-chosen"
+                                        :options="skill_chosen" :v-model.sync="skill_obj"
+                                        :chosen="{ width:'100%' }" placeholder="--- Select ---" text-key="name"></chosen>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="years_of_experience" class="col-md-3 control-label">Years Experience</label>
+                            <div class="col-md-9">
+                                <input class="form-control" name="years_of_experience" type="text" v-model="skill_modal.years_of_experience" id="years_of_experience">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="skill_comment" class="col-md-3 control-label">Comments</label>
+                            <div class="col-md-9">
+                                <textarea class="form-control" v-model="skill_modal.comment" name="skill_comment" cols="30" rows="5" id="skill_comment"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-white btn-xs" data-dismiss="modal" type="button">Close</button>
+                            <input class="btn btn-primary btn-xs" type="submit" @click="submitSkillForm" value="Save changes">
+                        </div>
+                    </form><!--// form-->
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>

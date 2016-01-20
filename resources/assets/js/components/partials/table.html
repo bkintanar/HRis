@@ -1,0 +1,22 @@
+<div class="col-lg-12" v-if="table">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>{{ table.title }}</h5>
+            <div class="ibox-tools">
+                <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-content">
+
+            <div class="" v-if="has_access && table.model.dashed != 'job-histories' && has_access[table.permission + '.create']">
+                <a id="add_{{ table.model.singular }}" @click="toggleModal(name)" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
+            </div>
+            <div class="table-responsive">
+              <custom-field-sections v-if="name == 'custom-field-sections'" :table="table" :has_access="has_access" :permissions="permissions" :modal="modal"></custom-field-sections>
+              <custom-fields v-if="name == 'custom-fields'" :table="table" :has_access="has_access" :permissions="permissions" :modal="modal"></custom-fields>
+            </div>
+        </div>
+    </div>
+</div>

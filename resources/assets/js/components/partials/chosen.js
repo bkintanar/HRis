@@ -74,6 +74,8 @@ module.exports = {
           }
         });
 
+        this.$broadcast('chosen-updated');
+
         $(this.$el).trigger('chosen:updated');
       }
       finally {

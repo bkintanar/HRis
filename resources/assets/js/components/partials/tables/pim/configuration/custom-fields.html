@@ -1,0 +1,31 @@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th v-for="header in table.headers">{{ header }}</th>
+        <th class="fix-width">Action</th>
+    </tr>
+    </thead>
+    <tbody id="{{ table.model.plural }}_body">
+    <tr v-for="item in table.items" v-if="table.items" class="item-{{$index}} {{table.model.plural}}_list" id="{{table.model.singular}}_{{item.id}}">
+        <input type="hidden" v-model.sync="item.id" id="custom_field_id">
+        <td>{{item.id}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.type.name}}</td>
+        <td v-if="!item.type.has_options">{{item.mask}}</td>
+        <td v-if="item.type.has_options"><i class="fa fa-times text-warning"></i></td>
+        <td v-if="item.type.has_options"><i class="fa fa-check text-navy"></i></td>
+        <td v-if="!item.type.has_options"><i class="fa fa-times text-warning"></i></td>
+        <td v-if="item.required"><i class="fa fa-check text-navy"></i></td>
+        <td v-if="!item.required"><i class="fa fa-times text-warning"></i></td>
+        <td>
+            <button v-if="has_access[table.permission+'.update']" rel="edit" id="{{item.id}}" class="btn btn-primary btn-xs btn-warning" name="edit"
+                    title="Edit" @click="editRecord(item, $index)" type="button"><i class="fa fa-edit"></i></button>
+            <button v-if="has_access[table.permission+'.delete']" rel="delete" id="{{item.id}}" class="btn btn-primary btn-xs btn-danger" name="delete"
+                    title="Delete" @click="deleteRecord(item, $index)" type="button"><i class="fa fa-times"></i></button>
+        </td>
+    </tr>
+    <tr v-if="table.items && table.items.length == 0">
+        <td colspan="{{table.headers.length + 1}}">No custom fields listed</td>
+    </tr>
+    </tbody>
+</table>

@@ -199,7 +199,7 @@ $chosen-sprite-retina-path: '/images/chosen-sprite@2x.png' !default;
             width: 18px;
 
             b {
-                background: url($chosen-sprite-path) no-repeat 0 7px;
+                background: url($chosen-sprite-path) no-repeat 0 6px;
                 display: block;
                 height: 100%;
                 width: 100%;
@@ -472,7 +472,7 @@ $chosen-sprite-retina-path: '/images/chosen-sprite@2x.png' !default;
     .chosen-container .chosen-results-scroll-down span,
     .chosen-container .chosen-results-scroll-up span {
         background-image: url($chosen-sprite-retina-path) !important;
-        background-size: 52px 37px !important;
+        background-size: 52px 33px !important;
         background-repeat: no-repeat !important;
     }
 }

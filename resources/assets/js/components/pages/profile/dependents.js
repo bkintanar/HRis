@@ -1,6 +1,6 @@
 module.exports = {
   props: [
-    'employee', 'page_title', 'job_titles', 'employment_statuses', 'routes', 'has_access', 'permission', 'logged'
+    'employee', 'page_title', 'job_titles', 'employment_statuses', 'routes', 'has_access', 'permission', 'logged', 'custom_field_values'
   ],
 
   compiled: function() {
@@ -26,7 +26,8 @@ module.exports = {
         relationship_id: '',
         birth_date: '',
         dependent_id: 0
-      }
+      },
+      custom_field_sections: [{}]
     };
   },
 
@@ -49,20 +50,42 @@ module.exports = {
         this.employee_id = localStorage.getItem('employee_id');
       }
 
+      client({
+        path: '/pim/configuration/custom-field-sections-by-screen-id',
+        entity: { screen_name: 'Dependents' },
+        headers: { Authorization: localStorage.getItem('jwt-token') }
+      }).then(
+      function(response) {
+
+        this.custom_field_sections = response.entity.custom_field_sections;
+
+      }.bind(this),
+
+      function(response) {
+
+        if (response.status.code == 422) {
+          this.$route.router.go({
+            name: 'error-404'
+          });
+          console.log(response.entity);
+        }
+      }.bind(this));
+
       let params = {
         path: '/employee/get-by-employee-id?include=user,dependents',
-        entity: {employee_id: this.employee_id},
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        entity: { employee_id: this.employee_id },
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       };
 
       client(params).then(
       function(response) {
 
         this.$dispatch('update-employee', response.entity.data);
+        this.custom_field_values = response.entity.data.custom_field_values;
 
         client({
           path: '/relationships?table_view=true',
-          headers: {Authorization: localStorage.getItem('jwt-token')}
+          headers: { Authorization: localStorage.getItem('jwt-token') }
         }).then(
               function(response) {
                 this.relationships = response.entity;
@@ -122,28 +145,29 @@ module.exports = {
           path: '/profile/dependents',
           method: this.editMode ? 'PATCH' : 'POST',
           entity: this.modal,
-          headers: {Authorization: localStorage.getItem('jwt-token')}
+          headers: { Authorization: localStorage.getItem('jwt-token') }
         }).then(
         function(response) {
 
-          switch (response.status.code) {
-            case 200:
-              $('#dependent_modal').modal('toggle');
-              if (this.editMode) {
-                this.updateRowInTable();
-                swal({title: response.entity.status, type: 'success', timer: 2000});
-              } else {
-                this.employee.dependents.data.push(response.entity.dependent);
-                swal({title: response.entity.status, type: 'success', timer: 2000});
-              }
-
-              break;
-            case 500:
-              swal({title: response.entity.status, type: 'error', timer: 2000});
-              break;
+          $('#dependent_modal').modal('toggle');
+          if (this.editMode) {
+            this.updateRowInTable();
+            swal({ title: response.entity.message, type: 'success', timer: 2000 });
+          } else {
+            this.employee.dependents.data.push(response.entity.dependent);
+            swal({ title: response.entity.message, type: 'success', timer: 2000 });
           }
+
           $('.vue-chosen').trigger('chosen:updated');
-        }.bind(this));
+
+        }.bind(this),
+        function(response) {
+
+          if (response.status.code == 422) {
+            swal({title: response.entity.message, type: 'error', timer: 2000});
+          }
+
+        });
       } else {
         $('#dependent_modal').on('shown.bs.modal', function() {
           $('.vue-chosen', this).trigger('chosen:open');
@@ -211,16 +235,17 @@ module.exports = {
           }).then(
           function(response) {
 
-            switch (response.status.code) {
-              case 200:
-                swal({title: response.entity.status, type: 'success', timer: 2000});
-                this.employee.dependents.data.splice(index, 1);
-                break;
-              case 500:
-                swal({title: response.entity.status, type: 'error', timer: 2000});
-                break;
+            swal({title: response.entity.message, type: 'success', timer: 2000});
+            this.employee.dependents.data.splice(index, 1);
+
+          }.bind(this),
+          function(response) {
+
+            if (response.status.code == 422) {
+              swal({title: response.entity.message, type: 'error', timer: 2000});
             }
-          }.bind(this));
+
+          });
         } else {
           swal('Cancelled', 'No record has been deleted', 'error');
         }
@@ -229,7 +254,7 @@ module.exports = {
 
     assignValuesToModal: function(dependent) {
 
-      this.modal.dependent_id = dependent.id;
+      this.modal.id = dependent.id;
       this.modal.first_name = dependent.first_name;
       this.modal.middle_name = dependent.middle_name;
       this.modal.last_name = dependent.last_name;

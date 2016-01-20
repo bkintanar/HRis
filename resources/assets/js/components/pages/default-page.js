@@ -1,9 +1,11 @@
 module.exports = {
   props: [
-    'employee', 'page_title', 'job_titles', 'employment_statuses', 'routes', 'has_access', 'permission', 'logged'
+    'employee', 'page_title', 'job_titles', 'employment_statuses', 'routes', 'has_access', 'permission', 'logged', 'custom_field_values'
   ],
 
   compiled: function() {
+
+    console.log(JSON.parse(atob(localStorage.getItem('logged'))));
 
     this.logged = JSON.parse(atob(localStorage.getItem('logged')));
     this.logged.employee_id = localStorage.getItem('employee_id');

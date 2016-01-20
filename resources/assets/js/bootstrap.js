@@ -1,8 +1,13 @@
 // Import requirements using browserify
-window.Vue = require('vue');
-window.VueRouter = require('vue-router');
+//window.Vue = require('vue');
+//window.VueRouter = require('vue-router');
 
-Vue.use(require('vue-resource'));
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import VueResource from 'vue-resource';
+
+Vue.use(VueRouter);
+Vue.use(VueResource);
 
 // Insert vue-router and vue-resource into Vue
 
@@ -42,6 +47,22 @@ Vue.component('navbar-static-profile-top', require('./compiled/partials/navbar-s
 Vue.component('navbar-static-top', require('./compiled/partials/navbar-static-top.vue'));
 Vue.component('static-footer', require('./compiled/partials/static-footer.vue'));
 Vue.component('chosen', require('./compiled/partials/chosen.vue'));
+Vue.component('table-presenter', require('./compiled/partials/table.vue'));
+
+// Partial Tables
+Vue.component(
+  'custom-field-sections',
+  require('./compiled/partials/tables/pim/configuration/custom-field-sections.vue')
+);
+Vue.component(
+  'custom-fields',
+  require('./compiled/partials/tables/pim/configuration/custom-fields.vue')
+);
+
+// Partial Profile
+Vue.component('custom-field-section', require('./compiled/pages/profile/partials/custom-field-section.vue'));
+Vue.component('custom-field-text', require('./compiled/pages/profile/partials/custom-field-text.vue'));
+Vue.component('custom-field-drop-down', require('./compiled/pages/profile/partials/custom-field-drop-down.vue'));
 
 const App = Vue.extend(require('./compiled/app.vue'));
 router.start(App, 'body');

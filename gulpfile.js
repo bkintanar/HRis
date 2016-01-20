@@ -12,8 +12,6 @@ elixir.config.js.browserify.options.debug = true;
 
 var paths = {
     'jquery': './bower_components/jquery/',
-    'vue': './bower_components/vue/',
-    'router': './bower_components/vue-router/',
     'bootstrap': './bower_components/bootstrap-sass/assets/',
     'fontawesome': './bower_components/font-awesome/',
     'cookies': './bower_components/cookies-js/',
@@ -29,8 +27,9 @@ var paths = {
     'moment': './bower_components/moment/',
     'datetimepicker': './bower_components/eonasdan-bootstrap-datetimepicker/',
     'nestable': './bower_components/nestable/',
+    'tagsinput': './bower_components/bootstrap-tagsinput/',
     'inspinia': './resources/assets/sass/inspinia/'
-}
+};
 
 elixir(function (mix) {
     mix.sass("*.*", 'public/css/app.css', {includePaths: [paths.bootstrap + 'stylesheets', paths.fontawesome + 'scss', paths.bourbon + 'stylesheets']});
@@ -39,6 +38,7 @@ elixir(function (mix) {
         'public/css/app.css',
         'public/css/animate.css',
         'public/css/icheck.css',
+        paths.tagsinput + 'dist/bootstrap-tagsinput.css',
         paths.datepicker + 'dist/css/bootstrap-datepicker3.min.css',
         paths.jasny + 'dist/css/jasny-bootstrap.min.css',
         paths.metisMenu + 'dist/metisMenu.min.css',
@@ -65,6 +65,7 @@ elixir(function (mix) {
             paths.moment + "min/moment.min.js",
             paths.datetimepicker + "build/js/bootstrap-datetimepicker.min.js",
             paths.nestable + "jquery.nestable.js",
+            paths.tagsinput + "dist/bootstrap-tagsinput.min.js",
             "resources/assets/js/vendor/ie10-viewport-bug-workaround.js",
             "resources/assets/js/vendor/inspinia.js"
         ], 'public/js/vendor.js', './');
@@ -80,5 +81,4 @@ elixir(function (mix) {
      'js/user.js',
      'js/admin.js'
      ])*/
-    ;
 });

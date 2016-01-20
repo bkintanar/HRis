@@ -1,6 +1,6 @@
 module.exports = {
   props: [
-    'employee', 'page_title', 'job_titles', 'employment_statuses', 'routes', 'has_access', 'permission', 'logged'
+    'employee', 'page_title', 'job_titles', 'employment_statuses', 'routes', 'has_access', 'permission', 'logged', 'custom_field_values'
   ],
 
   compiled: function() {
@@ -50,6 +50,7 @@ module.exports = {
       function(response) {
 
         this.$dispatch('update-employee', response.entity.data);
+        this.custom_field_values = response.entity.data.custom_field_values;
 
         this.chosenJobTitles();
         this.chosenEmploymentStatuses();
@@ -96,23 +97,14 @@ module.exports = {
 
           client(params).then(
           function(response) {
-
-            switch (response.status.code) {
-              case 200:
-                swal({title: response.entity.status, type: 'success', timer: 2000});
-                this.employee.job_histories.data.splice(index, 1);
-                this.setCurrentJobHistory();
-                break;
-              case 500:
-                swal({title: response.entity.status, type: 'error', timer: 2000});
-                break;
-            }
+            swal({title: response.entity.message, type: 'success', timer: 2000});
+            this.employee.job_histories.data.splice(index, 1);
+            this.setCurrentJobHistory();
           }.bind(this),
           function(response) {
 
             if (response.status.code == 422) {
-              this.$route.router.go({name: 'error-404'});
-              console.log(response.entity);
+              swal({title: response.entity.message, type: 'error', timer: 2000});
             }
           }.bind(this));
 
@@ -303,25 +295,26 @@ module.exports = {
         headers: {Authorization: localStorage.getItem('jwt-token')}
       }).then(
       function(response) {
-        switch (response.status.code) {
-          case 200:
-            if (response.entity.job_history) {
-              this.employee.job_histories.data.unshift(response.entity.job_history);
-              this.updateLoggedUser(response.entity.job_history);
-            }
+        if (response.entity.job_history) {
+          this.employee.job_histories.data.unshift(response.entity.job_history);
+          this.updateLoggedUser(response.entity.job_history);
+        }
 
-            swal({title: response.entity.status, type: 'success', timer: 2000});
-            this.cancelForm();
-            break;
+        swal({title: response.entity.message, type: 'success', timer: 2000});
+        this.cancelForm();
+
+      }.bind(this),
+      function(response) {
+        switch (response.status.code) {
           case 405:
-            swal({title: response.text, type: 'warning', timer: 2000});
+            swal({title: response.entity.message, type: 'warning', timer: 2000});
             break;
-          case 500:
+          case 422:
             $('#first_name').focus();
-            swal({title: response.text, type: 'error', timer: 2000});
+            swal({title: response.entity.message, type: 'error', timer: 2000});
             break;
         }
-      }.bind(this));
+      });
     },
 
     updateLoggedUser: function(current_job_history) {

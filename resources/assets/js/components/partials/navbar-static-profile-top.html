@@ -89,6 +89,17 @@
                     Qualifications
                 </a>
             </li>
+            <li :class="{'active': $route.path.indexOf('/profile/projects') > -1 || $route.path.indexOf('/pim/employee-list/'+$route.params.employee_id+'/projects') > -1, 'navy': $route.path.indexOf('/pim') > -1 }">
+                <a v-if="$route.path.indexOf('/profile') > -1" v-link="{name : 'profile-projects'}">
+                    <i class="fa fa-product-hunt m-right-a"></i>
+                    Projects
+                </a>
+                <a v-if="$route.path.indexOf('/pim') > -1"
+                   v-link="{name : 'pim-employee-list-projects', params: {employee_id: $route.params.employee_id}}">
+                    <i class="fa fa-product-hunt m-right-a"></i>
+                    Projects
+                </a>
+            </li>
         </ul>
     </div>
 </div>

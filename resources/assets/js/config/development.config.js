@@ -1,7 +1,9 @@
+var protocol = (location.protocol === 'https:') ? 'https://' : 'http://';
+
 var config = {
   env: 'development',
   api: {
-    base_url: 'http://api.hris.dev/api',
+    base_url: protocol + '//api.hris.dev/api',
     defaultRequest: {
       headers: {
         'Content-Type': 'application/json'

@@ -199,23 +199,23 @@ module.exports = {
       }).then(
       function(response) {
 
-        switch (response.status.code) {
-          case 200:
-            $('#work_experience_modal').modal('toggle');
-            if (this.editMode) {
-              this.updateRowInWorkExperienceTable();
-              swal({title: response.entity.status, type: 'success', timer: 2000});
-            } else {
-              this.work_experiences.push(response.entity.work_experience);
-              swal({title: response.entity.status, type: 'success', timer: 2000});
-            }
-
-            break;
-          case 500:
-            swal({title: response.entity.status, type: 'error', timer: 2000});
-            break;
+        $('#work_experience_modal').modal('toggle');
+        if (this.editMode) {
+          this.updateRowInWorkExperienceTable();
+          swal({title: response.entity.message, type: 'success', timer: 2000});
+        } else {
+          this.work_experiences.push(response.entity.work_experience);
+          swal({title: response.entity.message, type: 'success', timer: 2000});
         }
-      }.bind(this));
+
+      }.bind(this),
+      function(response) {
+
+        if (response.status.code == 422) {
+            swal({title: response.entity.message, type: 'error', timer: 2000});
+        }
+
+      });
     },
 
     submitEducationForm: function() {
@@ -234,23 +234,23 @@ module.exports = {
       }).then(
       function(response) {
 
-        switch (response.status.code) {
-          case 200:
-            $('#education_modal').modal('toggle');
-            if (this.editMode) {
-              this.updateRowInEducationTable();
-              swal({title: response.entity.status, type: 'success', timer: 2000});
-            } else {
-              this.educations.push(response.entity.education);
-              swal({title: response.entity.status, type: 'success', timer: 2000});
-            }
-
-            break;
-          case 500:
-            swal({title: response.entity.status, type: 'error', timer: 2000});
-            break;
+        $('#education_modal').modal('toggle');
+        if (this.editMode) {
+          this.updateRowInEducationTable();
+          swal({title: response.entity.message, type: 'success', timer: 2000});
+        } else {
+          this.educations.push(response.entity.education);
+          swal({title: response.entity.message, type: 'success', timer: 2000});
         }
-      }.bind(this));
+
+      }.bind(this),
+      function(response) {
+
+        if (response.status.code == 422) {
+          swal({title: response.entity.message, type: 'error', timer: 2000});
+        }
+
+      });
     },
 
     submitSkillForm: function() {
@@ -266,23 +266,23 @@ module.exports = {
       }).then(
       function(response) {
 
-        switch (response.status.code) {
-          case 200:
-            $('#skill_modal').modal('toggle');
-            if (this.editMode) {
-              this.updateRowInSkillTable();
-              swal({title: response.entity.status, type: 'success', timer: 2000});
-            } else {
-              this.employee_skills.push(response.entity.skill);
-              swal({title: response.entity.status, type: 'success', timer: 2000});
-            }
-
-            break;
-          case 500:
-            swal({title: response.entity.status, type: 'error', timer: 2000});
-            break;
+        $('#skill_modal').modal('toggle');
+        if (this.editMode) {
+          this.updateRowInSkillTable();
+          swal({title: response.entity.message, type: 'success', timer: 2000});
+        } else {
+          this.employee_skills.push(response.entity.skill);
+          swal({title: response.entity.message, type: 'success', timer: 2000});
         }
-      }.bind(this));
+
+      }.bind(this),
+      function(response) {
+
+        if (response.status.code == 422) {
+          swal({title: response.entity.message, type: 'error', timer: 2000});
+        }
+
+      });
     },
 
     editWorkExperienceRecord: function(work_experience, index) {
@@ -355,16 +355,17 @@ module.exports = {
           }).then(
           function(response) {
 
-            switch (response.status.code) {
-              case 200:
-                swal({title: response.entity.status, type: 'success', timer: 2000});
-                this.work_experiences.splice(index, 1);
-                break;
-              case 500:
-                swal({title: response.entity.status, type: 'error', timer: 2000});
-                break;
+            swal({title: response.entity.message, type: 'success', timer: 2000});
+            this.work_experiences.splice(index, 1);
+
+          }.bind(this),
+          function(response) {
+
+            if (response.status.code == 422) {
+              swal({title: response.entity.message, type: 'error', timer: 2000});
             }
-          }.bind(this));
+
+          });
         } else {
           swal('Cancelled', 'No record has been deleted', 'error');
         }
@@ -399,16 +400,17 @@ module.exports = {
           }).then(
           function(response) {
 
-            switch (response.status.code) {
-              case 200:
-                swal({title: response.entity.status, type: 'success', timer: 2000});
-                this.educations.splice(index, 1);
-                break;
-              case 500:
-                swal({title: response.entity.status, type: 'error', timer: 2000});
-                break;
+            swal({title: response.entity.message, type: 'success', timer: 2000});
+            this.educations.splice(index, 1);
+
+          }.bind(this),
+          function(response) {
+
+            if (response.status.code == 422) {
+              swal({title: response.entity.message, type: 'error', timer: 2000});
             }
-          }.bind(this));
+
+          });
         } else {
           swal('Cancelled', 'No record has been deleted', 'error');
         }
@@ -443,16 +445,17 @@ module.exports = {
           }).then(
           function(response) {
 
-            switch (response.status.code) {
-              case 200:
-                swal({title: response.entity.status, type: 'success', timer: 2000});
-                this.employee_skills.splice(index, 1);
-                break;
-              case 500:
-                swal({title: response.entity.status, type: 'error', timer: 2000});
-                break;
+            swal({title: response.entity.message, type: 'success', timer: 2000});
+            this.employee_skills.splice(index, 1);
+
+          }.bind(this),
+          function(response) {
+
+            if (response.status.code == 422) {
+              swal({title: response.entity.message, type: 'error', timer: 2000});
             }
-          }.bind(this));
+
+          });
         } else {
           swal('Cancelled', 'No record has been deleted', 'error');
         }

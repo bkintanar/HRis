@@ -1,0 +1,6 @@
+<label for="custom_field_{{custom_field.id}}" class="col-md-2 control-label">{{custom_field.name}}</label>
+<div class="col-sm-4">
+    <chosen id="custom_field_{{custom_field.id}}" disabled="disabled" class="vue-chosen"
+            :options="custom_field.options" :v-model.sync="custom_field_values[custom_field.id]"
+            :chosen="{ width:'100%' }" placeholder="--- Select ---" text-key="name"></chosen>
+</div>

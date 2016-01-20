@@ -1,9 +1,13 @@
 module.exports = {
   props: [
-    'employee', 'page_title', 'job_titles', 'employment_statuses', 'routes', 'has_access', 'permission', 'logged'
+    'employee', 'page_title', 'job_titles', 'employment_statuses', 'routes', 'has_access', 'permission', 'logged', 'custom_field_values'
   ],
 
   replace: false,
+
+  route: {
+    canReuse: false
+  },
 
   data: function() {
 
@@ -42,7 +46,8 @@ module.exports = {
             }
           }
         }
-      }
+      },
+      custom_field_values: [{}]
     };
   },
 
@@ -80,9 +85,8 @@ module.exports = {
 
         if (route_segments[i] == 'pim') {
           route_segments[i] = 'PIM';
-          continue;
         } else if (route_segments[i].indexOf('HRis') != 0) {
-          route_segments[i] = route_segments[i].replace('-', ' ');
+          route_segments[i] = route_segments[i].replace(/-/g, ' ');
           route_segments[i] = this.toTitleCase(route_segments[i]);
         }
 
@@ -91,6 +95,13 @@ module.exports = {
             segment: route_segments[i],
             name: route_name + '-personal-details',
             params: {employee_id: route_segments[i]}
+          });
+        } else if (i > 1 && !isNaN(route_segments[i]) && route_segments[i-1].indexOf('Custom Field Sections') == 0) {
+
+          route.push({
+            segment: route_segments[i],
+            name: 'pim-configuration-custom-fields',
+            params: {custom_field_section_id: route_segments[i]}
           });
         } else {
           route.push({

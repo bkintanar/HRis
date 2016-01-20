@@ -1,6 +1,6 @@
 module.exports = {
   props: [
-    'employee', 'page_title', 'job_titles', 'employment_statuses', 'routes', 'has_access', 'permission', 'logged'
+    'employee', 'page_title', 'job_titles', 'employment_statuses', 'routes', 'has_access', 'permission', 'logged', 'custom_field_values'
   ],
 
   compiled: function() {
@@ -26,8 +26,9 @@ module.exports = {
         relationship_id: '',
         home_phone: '',
         mobile_phone: '',
-        emergency_contact_id: 0
-      }
+        id: 0
+      },
+      custom_field_sections: [{}]
     };
   },
 
@@ -50,6 +51,27 @@ module.exports = {
         this.employee_id = localStorage.getItem('employee_id');
       }
 
+      client({
+        path: '/pim/configuration/custom-field-sections-by-screen-id',
+        entity: {screen_name: 'Emergency Contacts'},
+        headers: {Authorization: localStorage.getItem('jwt-token')}
+      }).then(
+      function(response) {
+
+        this.custom_field_sections = response.entity.custom_field_sections;
+
+      }.bind(this),
+
+      function(response) {
+
+        if (response.status.code == 422) {
+          this.$route.router.go({
+            name: 'error-404'
+          });
+          console.log(response.entity);
+        }
+      }.bind(this));
+
       let params = {
         path: '/employee/get-by-employee-id?include=user,emergency_contacts',
         entity: {employee_id: this.employee_id},
@@ -60,6 +82,7 @@ module.exports = {
       function(response) {
 
         this.$dispatch('update-employee', response.entity.data);
+        this.custom_field_values = response.entity.data.custom_field_values;
 
         client({
           path: '/relationships?table_view=true',
@@ -118,25 +141,23 @@ module.exports = {
           headers: {Authorization: localStorage.getItem('jwt-token')}
         }).then(
         function(response) {
-
-          switch (response.status.code) {
-            case 200:
-              $('#emergency_contact_modal').modal('toggle');
-              if (this.editMode) {
-                this.updateRowInTable();
-                swal({title: response.entity.status, type: 'success', timer: 2000});
-              } else {
-                this.employee.emergency_contacts.data.push(response.entity.emergency_contact);
-                swal({title: response.entity.status, type: 'success', timer: 2000});
-              }
-
-              break;
-            case 500:
-              swal({title: response.entity.status, type: 'error', timer: 2000});
-              break;
+          $('#emergency_contact_modal').modal('toggle');
+          if (this.editMode) {
+            this.updateRowInTable();
+            swal({title: response.entity.message, type: 'success', timer: 2000});
+          } else {
+            this.employee.emergency_contacts.data.push(response.entity.emergency_contact);
+            swal({title: response.entity.message, type: 'success', timer: 2000});
           }
+
           $('.vue-chosen').trigger('chosen:updated');
-        }.bind(this));
+        }.bind(this),
+        function(response) {
+
+          if (response.status.code == 422) {
+            swal({title: response.entity.message, type: 'error', timer: 2000});
+          }
+        });
       } else {
         $('#emergency_contact_modal').on('shown.bs.modal', function() {
           $('.vue-chosen', this).trigger('chosen:open');
@@ -199,11 +220,11 @@ module.exports = {
 
             switch (response.status.code) {
               case 200:
-                swal({title: response.entity.status, type: 'success', timer: 2000});
+                swal({title: response.entity.message, type: 'success', timer: 2000});
                 this.employee.emergency_contacts.data.splice(index, 1);
                 break;
               case 500:
-                swal({title: response.entity.status, type: 'error', timer: 2000});
+                swal({title: response.entity.message, type: 'error', timer: 2000});
                 break;
             }
           }.bind(this));
@@ -215,7 +236,7 @@ module.exports = {
 
     assignValuesToModal: function(emergency_contact) {
 
-      this.modal.emergency_contact_id = emergency_contact.id;
+      this.modal.id = emergency_contact.id;
       this.modal.first_name = emergency_contact.first_name;
       this.modal.middle_name = emergency_contact.middle_name;
       this.modal.last_name = emergency_contact.last_name;
