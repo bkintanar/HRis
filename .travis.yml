@@ -18,3 +18,9 @@ before_script:
     - php artisan db:seed --env=testing --no-interaction -vvv
 
 script: vendor/bin/phpunit
+
+before_install:
+    - pip install --user codecov
+
+after_success:
+    - codecov
