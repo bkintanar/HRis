@@ -15,10 +15,6 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \Barryvdh\Cors\HandleCors::class,
         \Barryvdh\Cors\HandlePreflight::class,
-        // \HRis\Http\Middleware\EncryptCookies::class,
-        // \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-        // \Illuminate\Session\Middleware\StartSession::class,
-        // \Illuminate\View\Middleware\ShareErrorsFromSession::class,
     ];
 
     /**
@@ -27,9 +23,6 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        // 'auth' => \HRis\Http\Middleware\Authenticate::class,
-        // 'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'guest'       => \HRis\Http\Middleware\RedirectIfAuthenticated::class,
         'jwt.auth'    => \Tymon\JWTAuth\Middleware\Authenticate::class,
         'jwt.refresh' => \Tymon\JWTAuth\Middleware\RefreshToken::class,
         'cors'        => \Barryvdh\Cors\HandleCors::class,
