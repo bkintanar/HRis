@@ -22,7 +22,7 @@ class CitiesTableSeeder extends Seeder
     {
         DB::table('cities')->delete();
 
-        DB::table('cities')->insert(
+        $cities =
             [
                 ['id' => 1, 'province_id' => 1, 'name' => 'Bangued'],
                 ['id' => 2, 'province_id' => 1, 'name' => 'Boliney'],
@@ -1025,7 +1025,11 @@ class CitiesTableSeeder extends Seeder
                 ['id' => 999, 'province_id' => 49, 'name' => 'Sapang Dalaga'],
                 ['id' => 1000, 'province_id' => 49, 'name' => 'Sinacaban'],
 
-            ]
-        );
+            ];
+
+        // [FIX] [PDOException] SQLSTATE[HY000]: General error: 1 too many SQL variables
+        foreach ($cities as $city) {
+            DB::table('cities')->insert($city);
+        }
     }
 }
