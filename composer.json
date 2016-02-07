@@ -39,7 +39,7 @@
     ],
     "psr-4": {
       "HRis\\": "app/",
-      "Test\\": "tests/"
+      "Tests\\": "tests/"
     }
   },
   "autoload-dev": {

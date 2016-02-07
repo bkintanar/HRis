@@ -101,14 +101,42 @@ class CustomFieldsController extends BaseController
      */
     public function index()
     {
-        $custom_field_sections = $this->custom_field_section->with('screen')->get();
+        $custom_field_sections = $this->custom_field_section->with('screen')->paginate(ROWS_PER_PAGE);
 
-        $table = $this->setupDataTable($custom_field_sections);
+        if (!$custom_field_sections) {
+            return $this->response()->array(['message' => UNABLE_RETRIEVE_MESSAGE, 'status_code' => 404])->statusCode(404);
+        }
 
         $response['data'] = $custom_field_sections;
-        $response['table'] = $table;
+        $response['table'] = $this->setupDataTable($custom_field_sections);
 
-        return response()->json($response);
+        return $this->response()->array($response);
+    }
+
+    /**
+     * Setup table for custom field section.
+     *
+     * @param $custom_field_sections
+     *
+     * @return array
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     */
+    public function setupDataTable($custom_field_sections)
+    {
+        $table = [];
+
+        $table['title'] = 'Custom Field Sections';
+        $table['permission'] = 'pim.configuration.custom-field-sections';
+        $table['headers'] = ['Id', 'Name', 'Screen'];
+        $table['model'] = [
+            'singular' => 'custom_field_section',
+            'plural'   => 'custom_field_sections',
+            'dashed'   => 'custom-field-sections',
+        ];
+        $table['items'] = $custom_field_sections;
+
+        return $table;
     }
 
     /**
@@ -124,15 +152,41 @@ class CustomFieldsController extends BaseController
         $custom_field_section = $this->custom_field_section->whereId($custom_field_section_id)->first();
 
         if (!$custom_field_section) {
-            return response()->make(view()->make('errors.404'), 404);
+            return $this->response()->array(['message' => UNABLE_RETRIEVE_MESSAGE, 'status_code' => 404])->statusCode(404);
         }
 
-        $custom_fields = $this->custom_field->with('type', 'options')->whereCustomFieldSectionId($custom_field_section_id)->get();
+        $custom_fields = $this->custom_field->with('type', 'options')->whereCustomFieldSectionId($custom_field_section_id)->paginate(ROWS_PER_PAGE);
 
         $response['data'] = $custom_fields;
         $response['table'] = $this->setupDataTableCustomField($custom_fields);
 
-        return response()->json($response);
+        return $this->response()->array($response);
+    }
+
+    /**
+     * Setup table for custom field.
+     *
+     * @param $custom_fields
+     *
+     * @return array
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     */
+    public function setupDataTableCustomField($custom_fields)
+    {
+        $table = [];
+
+        $table['title'] = 'Custom Fields';
+        $table['permission'] = 'pim.configuration.custom-fields';
+        $table['headers'] = ['Id', 'Name', 'Type', 'Mask', 'Has Options', 'Required'];
+        $table['model'] = [
+            'singular' => 'custom_field',
+            'plural'   => 'custom_fields',
+            'dashed'   => 'custom-fields',
+        ];
+        $table['items'] = $custom_fields;
+
+        return $table;
     }
 
     /**
@@ -206,58 +260,6 @@ class CustomFieldsController extends BaseController
         $custom_field = $this->custom_field->with('type', 'options')->whereId($custom_field->id)->first();
 
         return $this->response()->array(['custom_field' => $custom_field, 'message' => SUCCESS_ADD_MESSAGE, 'status_code' => 201])->statusCode(201);
-    }
-
-    /**
-     * Setup table for custom field section.
-     *
-     * @param $custom_field_sections
-     *
-     * @return array
-     *
-     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
-     */
-    public function setupDataTable($custom_field_sections)
-    {
-        $table = [];
-
-        $table['title'] = 'Custom Field Sections';
-        $table['permission'] = 'pim.configuration.custom-field-sections';
-        $table['headers'] = ['Id', 'Name', 'Screen'];
-        $table['model'] = [
-            'singular' => 'custom_field_section',
-            'plural'   => 'custom_field_sections',
-            'dashed'   => 'custom-field-sections',
-        ];
-        $table['items'] = $custom_field_sections;
-
-        return $table;
-    }
-
-    /**
-     * Setup table for custom field.
-     *
-     * @param $custom_fields
-     *
-     * @return array
-     *
-     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
-     */
-    public function setupDataTableCustomField($custom_fields)
-    {
-        $table = [];
-
-        $table['title'] = 'Custom Fields';
-        $table['permission'] = 'pim.configuration.custom-fields';
-        $table['headers'] = ['Id', 'Name', 'Type', 'Mask', 'Has Options', 'Required'];
-        $table['model'] = [
-            'singular' => 'custom_field',
-            'plural'   => 'custom_fields',
-            'dashed'   => 'custom-fields',
-        ];
-        $table['items'] = $custom_fields;
-
-        return $table;
     }
 
     /**

@@ -25,7 +25,7 @@ class CustomFieldRequest extends Request
      */
     public function rules()
     {
-        if (Request::isMethod('post') || Request::isMethod('patch')) {
+        if ($this->isMethod('post') || $this->isMethod('patch')) {
             return ['name'];
         }
 
@@ -44,19 +44,19 @@ class CustomFieldRequest extends Request
         $permission = 'pim.configuration.custom-fields';
 
         // Create
-        if (Request::isMethod('post')) {
+        if ($this->isMethod('post')) {
             return $this->logged_user->hasAccess($permission.'.create');
         } // Delete
         else {
-            if (Request::isMethod('delete')) {
+            if ($this->isMethod('delete')) {
                 return $this->logged_user->hasAccess($permission.'.delete');
             } // View
             else {
-                if (Request::isMethod('get')) {
+                if ($this->isMethod('get')) {
                     return $this->logged_user->hasAccess($permission.'.view');
                 } // Update
                 else {
-                    if (Request::isMethod('patch')) {
+                    if ($this->isMethod('patch')) {
                         return $this->logged_user->hasAccess($permission.'.update');
                     }
                 }

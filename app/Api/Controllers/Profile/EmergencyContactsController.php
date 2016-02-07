@@ -261,9 +261,9 @@ class EmergencyContactsController extends BaseController
     {
         $emergency_contact_id = $request->get('id');
 
-        try {
-            $this->emergency_contact->whereId($emergency_contact_id)->delete();
-        } catch (Exception $e) {
+        $response_code = $this->emergency_contact->whereId($emergency_contact_id)->delete();
+
+        if (!$response_code) {
             return $this->response()->array(['message' => UNABLE_DELETE_MESSAGE, 'status_code' => 422])->statusCode(422);
         }
 

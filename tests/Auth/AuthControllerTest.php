@@ -1,8 +1,8 @@
 <?php
 
-namespace Test\Auth;
+namespace Tests\Auth;
 
-use Test\TestCase;
+use Tests\TestCase;
 
 class AuthControllerTest extends TestCase
 {
@@ -102,10 +102,10 @@ class AuthControllerTest extends TestCase
      * @test
      *
      * +---------------------------------+
-     * | NEGATIVE TEST | GET /api/logout |
+     * | POSITIVE TEST | GET /api/logout |
      * +---------------------------------+
      */
-    public function it_should_return_error_in_logout_when_token_cant_be_invalidated()
+    public function it_should_return_success_in_logout_when_token_has_been_invalidated()
     {
         $content_array = $this->login();
         $token = $content_array['token'];
@@ -120,7 +120,7 @@ class AuthControllerTest extends TestCase
         $this->assertArrayHasKey('message', $content_array);
         $this->assertArrayHasKey('status_code', $content_array);
 
-        $this->assertEquals(422, $status_code);
+        $this->assertEquals(200, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
     }
 
