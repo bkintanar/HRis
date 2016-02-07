@@ -1,10 +1,10 @@
 <?php
 
-namespace Test\Profile;
+namespace Tests\Profile;
 
 use HRis\Api\Eloquent\Relationship;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Test\TestCase;
+use Tests\TestCase;
 
 class DependentsControllerTest extends TestCase
 {
@@ -47,8 +47,6 @@ class DependentsControllerTest extends TestCase
 
         $this->assertEquals(201, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
-
-        $this->it_should_return_a_success_message_if_delete_is_successful($dependent['id']);
     }
 
     /**
@@ -143,8 +141,6 @@ class DependentsControllerTest extends TestCase
 
         $this->assertEquals(200, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
-
-        $this->it_should_return_a_success_message_if_delete_is_successful($id);
     }
 
     /**
@@ -154,20 +150,16 @@ class DependentsControllerTest extends TestCase
      * +------------------------------------------------+
      * | POSITIVE TEST | DELETE /api/profile/dependents |
      * +------------------------------------------------+
-     *
-     * @param null $id
      */
-    public function it_should_return_a_success_message_if_delete_is_successful($id = null)
+    public function it_should_return_a_success_message_if_delete_is_successful()
     {
-        if ($id == null) {
-            $response = $this->_insert_record();
+        $response = $this->_insert_record();
 
-            $content = $response->getContent();
+        $content = $response->getContent();
 
-            $content_array = json_decode($content, true);
+        $content_array = json_decode($content, true);
 
-            $id = $content_array['dependent']['id'];
-        }
+        $id = $content_array['dependent']['id'];
 
         $response = $this->delete('/api/profile/dependents', ['id' => $id], ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
 
@@ -180,6 +172,31 @@ class DependentsControllerTest extends TestCase
         $this->assertArrayHasKey('status_code', $content_array);
 
         $this->assertEquals(200, $status_code);
+        $this->assertEquals($status_code, $content_array['status_code']);
+    }
+
+    /**
+     * @test
+     *
+     * +----------------------------------------------+
+     * | NEGATIVE TEST | DELETE /api/admin/job/titles |
+     * +----------------------------------------------+
+     */
+    public function it_should_return_an_error_if_delete_fails()
+    {
+        $this->login();
+
+        $response = $this->delete('/api/profile/dependents', ['id' => 100], ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
+
+        $content = $response->getContent();
+        $status_code = $response->getStatusCode();
+
+        $content_array = json_decode($content, true);
+
+        $this->assertArrayHasKey('message', $content_array);
+        $this->assertArrayHasKey('status_code', $content_array);
+
+        $this->assertEquals(422, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
     }
 

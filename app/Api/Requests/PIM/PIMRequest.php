@@ -25,7 +25,7 @@ class PIMRequest extends Request
      */
     public function rules()
     {
-        if (Request::isMethod('post')) {
+        if ($this->isMethod('post')) {
             return [];
         }
 
@@ -41,15 +41,15 @@ class PIMRequest extends Request
      */
     public function authorize()
     {
-        $permission = str_replace('/', '.', Request::path());
+        $permission = str_replace('/', '.', $this->path());
         $permission = substr($permission, 4);
 
         // View
-        if (Request::isMethod('get')) {
+        if ($this->isMethod('get')) {
             return $this->logged_user->hasAccess($permission.'.view');
         } // Create
         else {
-            if (Request::isMethod('post')) {
+            if ($this->isMethod('post')) {
                 return $this->logged_user->hasAccess($permission.'.create');
             }
         }

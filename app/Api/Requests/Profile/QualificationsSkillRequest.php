@@ -37,22 +37,22 @@ class QualificationsSkillRequest extends Request
      */
     public function authorize()
     {
-        $permission = Request::is('*pim/*') ? 'pim.qualifications.skills' : 'profile.qualifications.skills';
+        $permission = $this->is('*pim/*') ? 'pim.qualifications.skills' : 'profile.qualifications.skills';
 
         // Create
-        if (Request::isMethod('post')) {
+        if ($this->isMethod('post')) {
             return $this->logged_user->hasAccess($permission.'.create');
         } // Delete
         else {
-            if (Request::isMethod('delete')) {
+            if ($this->isMethod('delete')) {
                 return $this->logged_user->hasAccess($permission.'.delete');
             } // View
             else {
-                if (Request::isMethod('get')) {
+                if ($this->isMethod('get')) {
                     return $this->logged_user->hasAccess($permission.'.view');
                 } // Update
                 else {
-                    if (Request::isMethod('patch')) {
+                    if ($this->isMethod('patch')) {
                         return $this->logged_user->hasAccess($permission.'.update');
                     }
                 }

@@ -28,7 +28,6 @@ $api->version('v1', function (Router $api) {
 
             // Authentication
             $api->get('logout', 'Auth\AuthController@logout');                                              // docs done
-            $api->get('validate_token', 'Auth\AuthController@validateToken');
             $api->get('users/me', 'Auth\AuthController@me');
             $api->post('sidebar', 'Auth\AuthController@sidebar');
 
@@ -85,6 +84,18 @@ $api->version('v1', function (Router $api) {
                     $api->post('custom-fields', 'CustomFieldsController@storeCustomField');
                     $api->patch('custom-fields', 'CustomFieldsController@updateCustomField');
                     $api->delete('custom-fields', 'CustomFieldsController@destroyCustomField');
+                });
+            });
+
+            // Admin
+            $api->group(['prefix' => 'admin', 'namespace' => 'Admin'], function (Router $api) {
+
+                // Job
+                $api->group(['prefix' => 'job', 'namespace' => 'Job'], function (Router $api) {
+                    $api->get('titles', 'JobTitlesController@index');                                       // docs done
+                    $api->post('titles', 'JobTitlesController@store');                                      // docs done
+                    $api->patch('titles', 'JobTitlesController@update');                                    // docs done
+                    $api->delete('titles', 'JobTitlesController@destroy');                                  // docs done
                 });
             });
 

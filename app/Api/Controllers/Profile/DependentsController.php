@@ -261,9 +261,9 @@ class DependentsController extends BaseController
     {
         $dependent_id = $request->get('id');
 
-        try {
-            $this->dependent->whereId($dependent_id)->delete();
-        } catch (Exception $e) {
+        $response_code = $this->dependent->whereId($dependent_id)->delete();
+
+        if (!$response_code) {
             return $this->response()->array(['message' => UNABLE_DELETE_MESSAGE, 'status_code' => 422])->statusCode(422);
         }
 

@@ -9,12 +9,16 @@
  */
 namespace HRis\Http\Requests;
 
+use Dingo\Api\Http\FormRequest;
 use HRis\Api\Eloquent\User;
-use Illuminate\Foundation\Http\FormRequest;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 abstract class Request extends FormRequest
 {
+    public $app_list_limit;
+
+    public $logged_user;
+
     public function __construct()
     {
         $this->app_list_limit = env('APP_LIST_LIMIT', 50);

@@ -1,6 +1,6 @@
 <?php
 
-namespace Test;
+namespace Tests;
 
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
@@ -24,13 +24,6 @@ class TestCase extends BaseTestCase
      * @var string
      */
     protected $token;
-
-    public function __construct($name = null, array $data = [], $dataName = '')
-    {
-        parent::__construct($name, $data, $dataName);
-
-        parent::setUp();
-    }
 
     /**
      * Creates the application.
@@ -82,5 +75,10 @@ class TestCase extends BaseTestCase
         }
 
         return parent::call($method, $uri, $parameters, $cookies, $file, $server, $content);
+    }
+
+    public function str_rand()
+    {
+        return substr(md5(rand()), 0, 7);
     }
 }

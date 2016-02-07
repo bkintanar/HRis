@@ -25,7 +25,7 @@ class DependentsRequest extends Request
      */
     public function rules()
     {
-        if (Request::isMethod('post') || Request::isMethod('patch')) {
+        if ($this->isMethod('post') || $this->isMethod('patch')) {
             return ['first_name', 'relationship_id'];
         }
 
@@ -41,22 +41,22 @@ class DependentsRequest extends Request
      */
     public function authorize()
     {
-        $permission = Request::is('*pim/*') ? 'pim.dependents' : 'profile.dependents';
+        $permission = $this->is('*pim/*') ? 'pim.dependents' : 'profile.dependents';
 
         // Create
-        if (Request::isMethod('post')) {
+        if ($this->isMethod('post')) {
             return $this->logged_user->hasAccess($permission.'.create');
         } // Delete
         else {
-            if (Request::isMethod('delete')) {
+            if ($this->isMethod('delete')) {
                 return $this->logged_user->hasAccess($permission.'.delete');
             } // View
             else {
-                if (Request::isMethod('get')) {
+                if ($this->isMethod('get')) {
                     return $this->logged_user->hasAccess($permission.'.view');
                 } // Update
                 else {
-                    if (Request::isMethod('patch')) {
+                    if ($this->isMethod('patch')) {
                         return $this->logged_user->hasAccess($permission.'.update');
                     }
                 }

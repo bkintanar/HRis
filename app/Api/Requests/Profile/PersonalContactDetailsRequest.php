@@ -25,7 +25,7 @@ class PersonalContactDetailsRequest extends Request
      */
     public function rules()
     {
-        if (Request::isMethod('patch')) {
+        if ($this->isMethod('patch')) {
             return [
                 'employee.id'          => 'required',
                 'employee.employee_id' => 'required',
@@ -44,15 +44,15 @@ class PersonalContactDetailsRequest extends Request
      */
     public function authorize()
     {
-        $permission = Request::is('*pim/*') ? 'pim' : 'profile';
-        $permission .= Request::is('*personal-details*') ? '.personal-details' : '.personal-details';
+        $permission = $this->is('*pim/*') ? 'pim' : 'profile';
+        $permission .= $this->is('*personal-details*') ? '.personal-details' : '.personal-details';
 
         // Update
-        if (Request::isMethod('patch') || Request::is('*/edit')) {
+        if ($this->isMethod('patch') || $this->is('*/edit')) {
             return $this->logged_user->hasAccess($permission.'.update');
         } // View
         else {
-            if (Request::isMethod('get')) {
+            if ($this->isMethod('get')) {
                 return $this->logged_user->hasAccess($permission.'.view');
             }
         }

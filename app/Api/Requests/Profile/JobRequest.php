@@ -25,7 +25,7 @@ class JobRequest extends Request
      */
     public function rules()
     {
-        if (Request::isMethod('post')) {
+        if ($this->isMethod('post')) {
             return [];
         }
 
@@ -41,17 +41,17 @@ class JobRequest extends Request
      */
     public function authorize()
     {
-        $permission = Request::is('*pim/*') ? 'pim.job' : 'profile.job';
+        $permission = $this->is('*pim/*') ? 'pim.job' : 'profile.job';
 
         // Update
-        if (Request::isMethod('patch') || Request::is('*/edit')) {
+        if ($this->isMethod('patch') || $this->is('*/edit')) {
             return $this->logged_user->hasAccess($permission.'.update');
         } // View
         else {
-            if (Request::isMethod('get')) {
+            if ($this->isMethod('get')) {
                 return $this->logged_user->hasAccess($permission.'.view');
             } else {
-                if (Request::isMethod('delete')) {
+                if ($this->isMethod('delete')) {
                     return $this->logged_user->hasAccess($permission.'.delete');
                 }
             }

@@ -26,10 +26,10 @@ class EmergencyContactsRequest extends Request
     public function rules()
     {
         $rules = [];
-        if (Request::isMethod('delete') || Request::isMethod('patch')) {
+        if ($this->isMethod('delete') || $this->isMethod('patch')) {
             $rules['id'] = 'exists:emergency_contacts,id';
         }
-        if (Request::isMethod('post') || Request::isMethod('patch')) {
+        if ($this->isMethod('post') || $this->isMethod('patch')) {
             $rules['first_name'] = 'required';
             $rules['relationship_id'] = 'required';
         }
@@ -46,22 +46,22 @@ class EmergencyContactsRequest extends Request
      */
     public function authorize()
     {
-        $permission = Request::is('*pim/*') ? 'pim.emergency-contacts' : 'profile.emergency-contacts';
+        $permission = $this->is('*pim/*') ? 'pim.emergency-contacts' : 'profile.emergency-contacts';
 
         // Create
-        if (Request::isMethod('post')) {
+        if ($this->isMethod('post')) {
             return $this->logged_user->hasAccess($permission.'.create');
         } // Delete
         else {
-            if (Request::isMethod('delete')) {
+            if ($this->isMethod('delete')) {
                 return $this->logged_user->hasAccess($permission.'.delete');
             } // View
             else {
-                if (Request::isMethod('get')) {
+                if ($this->isMethod('get')) {
                     return $this->logged_user->hasAccess($permission.'.view');
                 } // Update
                 else {
-                    if (Request::isMethod('patch')) {
+                    if ($this->isMethod('patch')) {
                         return $this->logged_user->hasAccess($permission.'.update');
                     }
                 }
