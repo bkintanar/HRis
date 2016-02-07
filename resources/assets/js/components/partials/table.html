@@ -11,11 +11,32 @@
         <div class="ibox-content">
 
             <div class="" v-if="has_access && table.model.dashed != 'job-histories' && has_access[table.permission + '.create']">
-                <a id="add_{{ table.model.singular }}" @click="toggleModal(name)" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
+                <a id="add_{{ table.model.singular }}" @click="toggleModal()" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
             </div>
             <div class="table-responsive">
               <custom-field-sections v-if="name == 'custom-field-sections'" :table="table" :has_access="has_access" :permissions="permissions" :modal="modal"></custom-field-sections>
               <custom-fields v-if="name == 'custom-fields'" :table="table" :has_access="has_access" :permissions="permissions" :modal="modal"></custom-fields>
+              <job-titles v-if="name == 'job-titles'" :table="table" :has_access="has_access" :permissions="permissions" :modal="modal"></job-titles>
+            </div>
+            <div class="row" v-if="table.items.total">
+                <div class="col-sm-6">
+                    <div>Displaying {{ table.items.from }}-{{ table.items.to }} of {{ table.items.total }}</div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="dataTables_paginate">
+                        <ul class="pagination">
+                            <li class="paginate_button" :class="{'disabled': table.items.prev_page_url == null }">
+                                <a @click="goto(table.items.current_page-1 < 1 ? 1 : table.items.current_page-1)"> Previous </a>
+                            </li>
+                            <li class="paginate_button" :class="{'active': table.items.current_page == page+1 }" v-for="page in table.items.last_page">
+                                <a @click="goto(page+1)">{{ page+1 }}</a>
+                            </li>
+                            <li class="paginate_button" :class="{'disabled': table.items.next_page_url == null }">
+                                <a @click="goto(table.items.current_page+1 > table.items.last_page ? table.items.last_page : table.items.current_page+1)"> Next </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

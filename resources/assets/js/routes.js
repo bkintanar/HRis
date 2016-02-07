@@ -229,37 +229,37 @@ module.exports = {
             subRoutes: {
               '/user-management': {
                 name: 'admin-user-management',
-                component: require('./compiled/pages/page.vue'),
+                component: require('./compiled/pages/admin/user-management.vue'),
                 auth: true
               },
               '/job': {
                 name: 'admin-job',
-                component: require('./compiled/pages/page.vue'),
+                component: require('./compiled/pages/blank.vue'),
                 auth: true,
                 subRoutes: {
                   '/titles': {
                     name: 'admin-job-titles',
-                    component: require('./compiled/pages/page.vue'),
+                    component: require('./compiled/pages/admin/job/titles.vue'),
                     auth: true
                   },
                   '/pay-grades': {
                     name: 'admin-job-pay-grades',
-                    component: require('./compiled/pages/page.vue'),
+                    component: require('./compiled/pages/admin/job/pay-grades.vue'),
                     auth: true
                   },
                   '/employment-status': {
                     name: 'admin-job-employment-status',
-                    component: require('./compiled/pages/page.vue'),
+                    component: require('./compiled/pages/admin/job/employment-status.vue'),
                     auth: true
                   },
                   '/categories': {
                     name: 'admin-job-categories',
-                    component: require('./compiled/pages/page.vue'),
+                    component: require('./compiled/pages/admin/job/categories.vue'),
                     auth: true
                   },
                   '/work-shifts': {
                     name: 'admin-job-work-shifts',
-                    component: require('./compiled/pages/page.vue'),
+                    component: require('./compiled/pages/admin/job/work-shifts.vue'),
                     auth: true
                   }
                 }
@@ -296,6 +296,7 @@ module.exports = {
       '/': '/dashboard',
       '/profile': '/profile/personal-details',
       '/pim': '/pim/employee-list',
+      '/admin': '/admin/user-management',
       '/admin/job': '/admin/job/titles',
       '/admin/qualifications': '/admin/qualifications/skills',
       '/translator': '/translator/translations'

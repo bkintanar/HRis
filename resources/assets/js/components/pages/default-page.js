@@ -5,8 +5,6 @@ module.exports = {
 
   compiled: function() {
 
-    console.log(JSON.parse(atob(localStorage.getItem('logged'))));
-
     this.logged = JSON.parse(atob(localStorage.getItem('logged')));
     this.logged.employee_id = localStorage.getItem('employee_id');
     this.logged.avatar = localStorage.getItem('avatar');

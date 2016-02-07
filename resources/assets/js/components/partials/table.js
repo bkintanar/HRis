@@ -5,40 +5,32 @@ module.exports = {
 
   methods: {
 
-    toggleModal: function(name) {
+    editRecord: function(model, index) {
+
+      this.$parent.editRecord(model, index);
+    },
+
+    deleteRecord: function(model, index) {
+
+      this.$parent.deleteRecord(model, index);
+    },
+
+    toggleModal: function() {
 
       this.modal.editMode = false;
 
-      switch (name) {
-        case 'custom-field-sections':
+      this.$parent.toggleModal();
+    },
 
-          this.modal.name = null;
+    goto: function(page) {
 
-          $('#custom_field_section_modal').modal('toggle');
+      let count = this.table.items.total - 1 % 10;
 
-          $('#custom_field_section_modal').on('shown.bs.modal', function() {
-            $('.vue-chosen', this).trigger('chosen:updated');
-          });
-
-          break;
-
-        case 'custom-fields':
-
-          this.modal.name = null;
-          this.modal.type_obj = null;
-          this.modal.mask = null;
-          this.modal.required = null;
-          this.modal.custom_field_options = null;
-
-          $('#custom_field_modal').modal('toggle');
-          $('#custom_field_modal').on('shown.bs.modal', function() {
-            $('.vue-chosen', this).trigger('chosen:updated');
-            $('#custom_field_options').tagsinput('removeAll');
-          });
-
-        default:
-
+      if (this.table.items.current_page == this.table.items.last_page && (count % 10 == 0)) {
+        page = page - 1;
       }
+      
+      this.$parent.queryDatabase(page);
     }
   }
 };

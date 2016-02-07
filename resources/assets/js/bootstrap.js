@@ -58,6 +58,10 @@ Vue.component(
   'custom-fields',
   require('./compiled/partials/tables/pim/configuration/custom-fields.vue')
 );
+Vue.component(
+  'job-titles',
+  require('./compiled/partials/tables/admin/job/titles.vue')
+);
 
 // Partial Profile
 Vue.component('custom-field-section', require('./compiled/pages/profile/partials/custom-field-section.vue'));
