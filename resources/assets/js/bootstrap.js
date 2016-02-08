@@ -33,10 +33,10 @@ var errorCode = require('rest/interceptor/errorCode');
 var interceptor = require('rest/interceptor');
 var jwtAuth = require('./interceptors/jwtAuth');
 
-window.client = rest.wrap(pathPrefix, {prefix: config.api.base_url})
+window.client = rest.wrap(pathPrefix, { prefix: config.api.base_url })
     .wrap(mime)
     .wrap(defaultRequest, config.api.defaultRequest)
-    .wrap(errorCode, {code: 400});
+    .wrap(errorCode, { code: 400 });
 
 // Bootstrap the app
 // HRis Components

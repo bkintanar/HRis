@@ -16,7 +16,7 @@ module.exports = {
 
   props: {
     options: null,
-    'v-model': {twoWay: true, default: null},
+    'v-model': { twoWay: true, default: null },
     'selected-options': {
       twoWay: true, default: function() {
 
@@ -26,7 +26,7 @@ module.exports = {
     chosen: null,
     'text-key': null,
     placeholder: null,
-    multiple: {type: Boolean, required: false}
+    multiple: { type: Boolean, required: false }
   },
 
   filters: {
@@ -44,9 +44,9 @@ module.exports = {
       return val.map(function(x) {
 
         if (key) {
-          return {text: x[key], value: x};
+          return { text: x[key], value: x };
         } else {
-          return {text: (x ? x : '').toString(), value: x};
+          return { text: (x ? x : '').toString(), value: x };
         }
       });
     }
@@ -87,7 +87,7 @@ module.exports = {
     var _this = this;
 
     // initialize
-    var coptions = $.extend({}, {width: '10em'}, this.chosen);
+    var coptions = $.extend({}, { width: '10em' }, this.chosen);
     $(this.$el).chosen(coptions);
 
     // initialize selection

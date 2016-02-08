@@ -53,7 +53,7 @@ module.exports = {
       let params = {
         method: 'GET',
         path: '/pim/configuration/custom-fields?custom_field_section_id=' + this.$route.params.custom_field_section_id + '&page=' + page,
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       };
 
       client(params).then(
@@ -74,7 +74,7 @@ module.exports = {
       // retrieve screens
       client({
         path: '/screens',
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       }).then(
           function(response) {
             if (response) {
@@ -90,7 +90,7 @@ module.exports = {
       // retrieve types
       client({
         path: '/types',
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       }).then(
           function(response) {
             if (response) {
@@ -141,14 +141,14 @@ module.exports = {
         path: '/pim/configuration/custom-fields',
         method: this.modal.editMode ? 'PATCH' : 'POST',
         entity: this.modal,
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       }).then(
       function(response) {
 
         $('#custom_field_modal').modal('toggle');
         if (this.modal.editMode) {
           this.updateRowInTable();
-          swal({title: response.entity.message, type: 'success', timer: 2000});
+          swal({ title: response.entity.message, type: 'success', timer: 2000 });
         } else {
 
           let page = this.table.items.current_page;
@@ -161,7 +161,7 @@ module.exports = {
       }.bind(this),
       function(response) {
         if (response.status.code == 422) {
-          swal({title: response.entity.message, type: 'error', timer: 2000});
+          swal({ title: response.entity.message, type: 'error', timer: 2000 });
         }
       });
     },

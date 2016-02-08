@@ -46,8 +46,8 @@ module.exports = {
       let params = {
         method: 'GET',
         path: '/admin/job/titles?page=' + page,
-        entity: {employee_id: this.employee_id},
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        entity: { employee_id: this.employee_id },
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       };
 
       client(params).then(
@@ -80,31 +80,31 @@ module.exports = {
         path: '/admin/job/titles',
         method: this.modal.editMode ? 'PATCH' : 'POST',
         entity: this.modal,
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       }).then(
           function(response) {
 
             $('#job_title_modal').modal('toggle');
             if (this.modal.editMode) {
               this.updateRowInTable();
-              swal({title: response.entity.message, type: 'success', timer: 2000});
+              swal({ title: response.entity.message, type: 'success', timer: 2000 });
             } else {
 
               let page = this.table.items.last_page;
 
               this.queryDatabase(page);
 
-              swal({title: response.entity.message, type: 'success', timer: 2000});
+              swal({ title: response.entity.message, type: 'success', timer: 2000 });
             }
           }.bind(this),
           function(response) {
             if (response.status.code == 422) {
-              swal({title: response.entity.message, type: 'error', timer: 2000});
+              swal({ title: response.entity.message, type: 'error', timer: 2000 });
             }
           });
     },
 
-    deleteRecord: function(job_title, index) {
+    deleteRecord: function(job_title) {
 
       var previousWindowKeyDown = window.onkeydown; // https://github.com/t4t5/sweetalert/issues/127
       swal({

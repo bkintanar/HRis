@@ -5,7 +5,7 @@
   "requireSemicolons": true,
   "requireParenthesesAroundIIFE": true,
   "requireCamelCaseOrUpperCaseIdentifiers": false,
-  "maximumLineLength": 120,
+  "maximumLineLength": 140,
   "validateLineBreaks": "LF",
   "validateIndentation": 2,
   "requireTrailingComma": false,

@@ -65,8 +65,8 @@ module.exports = {
 
       let params = {
         path: '/employee/get-by-employee-id?include=user,work_experiences,educations,employee_skills',
-        entity: {employee_id: this.employee_id},
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        entity: { employee_id: this.employee_id },
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       };
 
       client(params).then(
@@ -92,7 +92,7 @@ module.exports = {
 
       client({
         path: '/education-levels?table_view=true',
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       }).then(
       function(response) {
 
@@ -101,7 +101,7 @@ module.exports = {
 
       client({
         path: '/skills?table_view=true',
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       }).then(
       function(response) {
 
@@ -114,7 +114,7 @@ module.exports = {
       // retrieve education levels
       client({
         path: '/education-levels',
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       }).then(
       function(response) {
 
@@ -128,7 +128,7 @@ module.exports = {
       // retrieve skills
       client({
         path: '/skills',
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       }).then(
       function(response) {
 
@@ -195,24 +195,24 @@ module.exports = {
         path: '/profile/qualifications/work-experiences',
         method: this.editMode ? 'PATCH' : 'POST',
         entity: this.work_experience_modal,
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       }).then(
       function(response) {
 
         $('#work_experience_modal').modal('toggle');
         if (this.editMode) {
           this.updateRowInWorkExperienceTable();
-          swal({title: response.entity.message, type: 'success', timer: 2000});
+          swal({ title: response.entity.message, type: 'success', timer: 2000 });
         } else {
           this.work_experiences.push(response.entity.work_experience);
-          swal({title: response.entity.message, type: 'success', timer: 2000});
+          swal({ title: response.entity.message, type: 'success', timer: 2000 });
         }
 
       }.bind(this),
       function(response) {
 
         if (response.status.code == 422) {
-            swal({title: response.entity.message, type: 'error', timer: 2000});
+          swal({ title: response.entity.message, type: 'error', timer: 2000 });
         }
 
       });
@@ -230,24 +230,24 @@ module.exports = {
         path: '/profile/qualifications/educations',
         method: this.editMode ? 'PATCH' : 'POST',
         entity: this.education_modal,
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       }).then(
       function(response) {
 
         $('#education_modal').modal('toggle');
         if (this.editMode) {
           this.updateRowInEducationTable();
-          swal({title: response.entity.message, type: 'success', timer: 2000});
+          swal({ title: response.entity.message, type: 'success', timer: 2000 });
         } else {
           this.educations.push(response.entity.education);
-          swal({title: response.entity.message, type: 'success', timer: 2000});
+          swal({ title: response.entity.message, type: 'success', timer: 2000 });
         }
 
       }.bind(this),
       function(response) {
 
         if (response.status.code == 422) {
-          swal({title: response.entity.message, type: 'error', timer: 2000});
+          swal({ title: response.entity.message, type: 'error', timer: 2000 });
         }
 
       });
@@ -262,24 +262,24 @@ module.exports = {
         path: '/profile/qualifications/skills',
         method: this.editMode ? 'PATCH' : 'POST',
         entity: this.skill_modal,
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       }).then(
       function(response) {
 
         $('#skill_modal').modal('toggle');
         if (this.editMode) {
           this.updateRowInSkillTable();
-          swal({title: response.entity.message, type: 'success', timer: 2000});
+          swal({ title: response.entity.message, type: 'success', timer: 2000 });
         } else {
           this.employee_skills.push(response.entity.skill);
-          swal({title: response.entity.message, type: 'success', timer: 2000});
+          swal({ title: response.entity.message, type: 'success', timer: 2000 });
         }
 
       }.bind(this),
       function(response) {
 
         if (response.status.code == 422) {
-          swal({title: response.entity.message, type: 'error', timer: 2000});
+          swal({ title: response.entity.message, type: 'error', timer: 2000 });
         }
 
       });
@@ -350,19 +350,19 @@ module.exports = {
           client({
             path: '/profile/qualifications/work-experiences',
             method: 'DELETE',
-            entity: {id: work_experience.id},
-            headers: {Authorization: localStorage.getItem('jwt-token')}
+            entity: { id: work_experience.id },
+            headers: { Authorization: localStorage.getItem('jwt-token') }
           }).then(
           function(response) {
 
-            swal({title: response.entity.message, type: 'success', timer: 2000});
+            swal({ title: response.entity.message, type: 'success', timer: 2000 });
             this.work_experiences.splice(index, 1);
 
           }.bind(this),
           function(response) {
 
             if (response.status.code == 422) {
-              swal({title: response.entity.message, type: 'error', timer: 2000});
+              swal({ title: response.entity.message, type: 'error', timer: 2000 });
             }
 
           });
@@ -395,19 +395,19 @@ module.exports = {
           client({
             path: '/profile/qualifications/educations',
             method: 'DELETE',
-            entity: {id: education.id},
-            headers: {Authorization: localStorage.getItem('jwt-token')}
+            entity: { id: education.id },
+            headers: { Authorization: localStorage.getItem('jwt-token') }
           }).then(
           function(response) {
 
-            swal({title: response.entity.message, type: 'success', timer: 2000});
+            swal({ title: response.entity.message, type: 'success', timer: 2000 });
             this.educations.splice(index, 1);
 
           }.bind(this),
           function(response) {
 
             if (response.status.code == 422) {
-              swal({title: response.entity.message, type: 'error', timer: 2000});
+              swal({ title: response.entity.message, type: 'error', timer: 2000 });
             }
 
           });
@@ -440,19 +440,19 @@ module.exports = {
           client({
             path: '/profile/qualifications/skills',
             method: 'DELETE',
-            entity: {id: skill.id},
-            headers: {Authorization: localStorage.getItem('jwt-token')}
+            entity: { id: skill.id },
+            headers: { Authorization: localStorage.getItem('jwt-token') }
           }).then(
           function(response) {
 
-            swal({title: response.entity.message, type: 'success', timer: 2000});
+            swal({ title: response.entity.message, type: 'success', timer: 2000 });
             this.employee_skills.splice(index, 1);
 
           }.bind(this),
           function(response) {
 
             if (response.status.code == 422) {
-              swal({title: response.entity.message, type: 'error', timer: 2000});
+              swal({ title: response.entity.message, type: 'error', timer: 2000 });
             }
 
           });

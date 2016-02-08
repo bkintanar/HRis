@@ -26,8 +26,8 @@ module.exports = {
       let params = {
         path: '/pim/employee-list',
         method: 'GET',
-        entity: {employee_id: this.employee_id},
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        entity: { employee_id: this.employee_id },
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       };
 
       // retrieve employee list

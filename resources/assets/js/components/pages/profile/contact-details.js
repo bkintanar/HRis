@@ -67,8 +67,8 @@ module.exports = {
 
       client({
         path: '/pim/configuration/custom-field-sections-by-screen-id',
-        entity: {screen_name: 'Contact Details'},
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        entity: { screen_name: 'Contact Details' },
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       }).then(
       function(response) {
 
@@ -88,8 +88,8 @@ module.exports = {
 
       let params = {
         path: '/employee/get-by-employee-id?include=user',
-        entity: {employee_id: this.employee_id},
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        entity: { employee_id: this.employee_id },
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       };
 
       client(params).then(
@@ -120,8 +120,8 @@ module.exports = {
       let params = {
         path: '/profile/contact-details',
         method: 'PATCH',
-        entity: {employee: this.employee},
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        entity: { employee: this.employee },
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       };
 
       client(params).then(
@@ -130,22 +130,22 @@ module.exports = {
         if (this.$route.path.indexOf('/pim') > -1) {
           this.$route.router.go({
             name: 'pim-employee-list-contact-details',
-            params: {employee_id: response.entity.employee.employee_id}
+            params: { employee_id: response.entity.employee.employee_id }
           });
         }
 
-        swal({title: response.entity.message, type: 'success', timer: 2000});
+        swal({ title: response.entity.message, type: 'success', timer: 2000 });
         this.cancelForm();
 
       }.bind(this),
       function(response) {
         switch (response.status.code) {
           case 405:
-            swal({title: response.entity.message, type: 'warning', timer: 2000});
+            swal({ title: response.entity.message, type: 'warning', timer: 2000 });
             break;
           case 422:
             $('#first_name').focus();
-            swal({title: response.entity.message, type: 'error', timer: 2000});
+            swal({ title: response.entity.message, type: 'error', timer: 2000 });
             break;
         }
       });
@@ -177,7 +177,7 @@ module.exports = {
       // retrieve provinces
       client({
         path: '/provinces',
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       }).then(
       function(response) {
 
@@ -194,7 +194,7 @@ module.exports = {
       // retrieve countries
       client({
         path: '/countries',
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       }).then(
       function(response) {
 
@@ -211,7 +211,7 @@ module.exports = {
       // retrieve cities
       client({
         path: '/cities?province_id=' + value,
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       }).then(
       function(response) {
 

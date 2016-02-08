@@ -42,8 +42,8 @@ module.exports = {
 
       let params = {
         path: '/employee/get-by-employee-id?include=user,job_histories',
-        entity: {employee_id: this.employee_id},
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        entity: { employee_id: this.employee_id },
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       };
 
       client(params).then(
@@ -91,20 +91,20 @@ module.exports = {
           let params = {
             path: '/profile/job',
             method: 'DELETE',
-            entity: {id: job_history.id},
-            headers: {Authorization: localStorage.getItem('jwt-token')}
+            entity: { id: job_history.id },
+            headers: { Authorization: localStorage.getItem('jwt-token') }
           };
 
           client(params).then(
           function(response) {
-            swal({title: response.entity.message, type: 'success', timer: 2000});
+            swal({ title: response.entity.message, type: 'success', timer: 2000 });
             this.employee.job_histories.data.splice(index, 1);
             this.setCurrentJobHistory();
           }.bind(this),
           function(response) {
 
             if (response.status.code == 422) {
-              swal({title: response.entity.message, type: 'error', timer: 2000});
+              swal({ title: response.entity.message, type: 'error', timer: 2000 });
             }
           }.bind(this));
 
@@ -167,7 +167,7 @@ module.exports = {
       // retrieve job-titles
       client({
         path: '/job-titles',
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       }).then(
       function(response) {
         if (response) {
@@ -187,7 +187,7 @@ module.exports = {
       // retrieve employment-statuses
       client({
         path: '/employment-statuses',
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       }).then(
       function(response) {
         if (response) {
@@ -208,7 +208,7 @@ module.exports = {
       // retrieve departments
       client({
         path: '/departments',
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       }).then(
       function(response) {
         if (response) {
@@ -228,7 +228,7 @@ module.exports = {
       // retrieve locations
       client({
         path: '/locations',
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       }).then(
       function(response) {
         if (response) {
@@ -277,7 +277,7 @@ module.exports = {
       $('#comments').focus();
 
       if (!this.employee.job_history.data.effective_date) {
-        swal({title: 'Effective Date is a required field', type: 'error', timer: 2000});
+        swal({ title: 'Effective Date is a required field', type: 'error', timer: 2000 });
         $('#effective_date').focus();
         return false;
       }
@@ -291,8 +291,8 @@ module.exports = {
       client({
         path: '/profile/job',
         method: 'PATCH',
-        entity: {employee: this.employee},
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        entity: { employee: this.employee },
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       }).then(
       function(response) {
         if (response.entity.job_history) {
@@ -300,18 +300,18 @@ module.exports = {
           this.updateLoggedUser(response.entity.job_history);
         }
 
-        swal({title: response.entity.message, type: 'success', timer: 2000});
+        swal({ title: response.entity.message, type: 'success', timer: 2000 });
         this.cancelForm();
 
       }.bind(this),
       function(response) {
         switch (response.status.code) {
           case 405:
-            swal({title: response.entity.message, type: 'warning', timer: 2000});
+            swal({ title: response.entity.message, type: 'warning', timer: 2000 });
             break;
           case 422:
             $('#first_name').focus();
-            swal({title: response.entity.message, type: 'error', timer: 2000});
+            swal({ title: response.entity.message, type: 'error', timer: 2000 });
             break;
         }
       });

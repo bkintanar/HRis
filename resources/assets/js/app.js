@@ -94,20 +94,20 @@ module.exports = {
           route.push({
             segment: route_segments[i],
             name: route_name + '-personal-details',
-            params: {employee_id: route_segments[i]}
+            params: { employee_id: route_segments[i] }
           });
-        } else if (i > 1 && !isNaN(route_segments[i]) && route_segments[i-1].indexOf('Custom Field Sections') == 0) {
+        } else if (i > 1 && !isNaN(route_segments[i]) && route_segments[i - 1].indexOf('Custom Field Sections') == 0) {
 
           route.push({
             segment: route_segments[i],
             name: 'pim-configuration-custom-fields',
-            params: {custom_field_section_id: route_segments[i]}
+            params: { custom_field_section_id: route_segments[i] }
           });
         } else {
           route.push({
             segment: route_segments[i],
             name: route_name,
-            params: {employee_id: route_segments[i - 1]}
+            params: { employee_id: route_segments[i - 1] }
           });
         }
       }
@@ -133,7 +133,7 @@ module.exports = {
     if (token !== null && token !== 'undefined') {
       client({
         path: '/users/me?include=employee,role',
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       }).then(
       function(response) {
 
@@ -171,7 +171,7 @@ module.exports = {
       client({
         method: 'POST',
         path: '/sidebar',
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       }).then(
       function(response) {
 
@@ -184,7 +184,7 @@ module.exports = {
 
       client({
         path: '/employment-statuses?table_view=true',
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       }).then(
       function(response) {
 
@@ -200,7 +200,7 @@ module.exports = {
 
       client({
         path: '/job-titles?table_view=true',
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       }).then(
       function(response) {
 
@@ -250,7 +250,7 @@ module.exports = {
         this.permission = 'pim.' + route_segment;
       }
 
-      this.route = {path: route_path, dotted: route_dotted, segment: route_segment, pim: route_is_pim};
+      this.route = { path: route_path, dotted: route_dotted, segment: route_segment, pim: route_is_pim };
 
       this.has_access = JSON.parse(atob(localStorage.getItem('permissions')));
     }

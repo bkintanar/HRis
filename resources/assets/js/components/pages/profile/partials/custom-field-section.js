@@ -8,7 +8,7 @@ module.exports = {
   data: function() {
     return {
       custom_field_value_objs: [{}]
-    }
+    };
   },
 
   methods: {

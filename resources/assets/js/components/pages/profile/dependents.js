@@ -164,7 +164,7 @@ module.exports = {
         function(response) {
 
           if (response.status.code == 422) {
-            swal({title: response.entity.message, type: 'error', timer: 2000});
+            swal({ title: response.entity.message, type: 'error', timer: 2000 });
           }
 
         });
@@ -230,19 +230,19 @@ module.exports = {
           client({
             path: '/profile/dependents',
             method: 'DELETE',
-            entity: {id: dependent.id},
-            headers: {Authorization: localStorage.getItem('jwt-token')}
+            entity: { id: dependent.id },
+            headers: { Authorization: localStorage.getItem('jwt-token') }
           }).then(
           function(response) {
 
-            swal({title: response.entity.message, type: 'success', timer: 2000});
+            swal({ title: response.entity.message, type: 'success', timer: 2000 });
             this.employee.dependents.data.splice(index, 1);
 
           }.bind(this),
           function(response) {
 
             if (response.status.code == 422) {
-              swal({title: response.entity.message, type: 'error', timer: 2000});
+              swal({ title: response.entity.message, type: 'error', timer: 2000 });
             }
 
           });
@@ -268,7 +268,7 @@ module.exports = {
       // retrieve relationshops
       client({
         path: '/relationships',
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       }).then(
       function(response) {
         if (response) {

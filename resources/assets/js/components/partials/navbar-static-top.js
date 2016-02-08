@@ -8,7 +8,7 @@ module.exports = {
       localStorage.removeItem('logged');
       localStorage.removeItem('permissions');
       localStorage.removeItem('sidebar');
-      this.$route.router.go({name: 'login'});
+      this.$route.router.go({ name: 'login' });
     }
   }
 };

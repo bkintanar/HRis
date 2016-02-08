@@ -23,7 +23,7 @@ module.exports = {
 
       let params = {
         path: '/login',
-        entity: {email: this.user.email, password: this.user.password}
+        entity: { email: this.user.email, password: this.user.password }
       };
 
       client(params).then(
@@ -34,7 +34,7 @@ module.exports = {
       function(response) {
         this.messages = [];
         if (response.entity.status_code >= 400) {
-          this.messages.push({type: 'danger', message: 'Sorry, you provided invalid credentials'});
+          this.messages.push({ type: 'danger', message: 'Sorry, you provided invalid credentials' });
         }
       }.bind(this));
     },
@@ -43,7 +43,7 @@ module.exports = {
 
       client({
         path: '/users/me?include=employee,role',
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       }).then(
       function(response) {
 

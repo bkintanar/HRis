@@ -53,8 +53,8 @@ module.exports = {
 
       client({
         path: '/pim/configuration/custom-field-sections-by-screen-id',
-        entity: {screen_name: 'Emergency Contacts'},
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        entity: { screen_name: 'Emergency Contacts' },
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       }).then(
       function(response) {
 
@@ -74,8 +74,8 @@ module.exports = {
 
       let params = {
         path: '/employee/get-by-employee-id?include=user,emergency_contacts',
-        entity: {employee_id: this.employee_id},
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        entity: { employee_id: this.employee_id },
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       };
 
       client(params).then(
@@ -86,7 +86,7 @@ module.exports = {
 
         client({
           path: '/relationships?table_view=true',
-          headers: {Authorization: localStorage.getItem('jwt-token')}
+          headers: { Authorization: localStorage.getItem('jwt-token') }
         }).then(
         function(response) {
 
@@ -138,16 +138,16 @@ module.exports = {
           path: '/profile/emergency-contacts',
           method: this.editMode ? 'PATCH' : 'POST',
           entity: this.modal,
-          headers: {Authorization: localStorage.getItem('jwt-token')}
+          headers: { Authorization: localStorage.getItem('jwt-token') }
         }).then(
         function(response) {
           $('#emergency_contact_modal').modal('toggle');
           if (this.editMode) {
             this.updateRowInTable();
-            swal({title: response.entity.message, type: 'success', timer: 2000});
+            swal({ title: response.entity.message, type: 'success', timer: 2000 });
           } else {
             this.employee.emergency_contacts.data.push(response.entity.emergency_contact);
-            swal({title: response.entity.message, type: 'success', timer: 2000});
+            swal({ title: response.entity.message, type: 'success', timer: 2000 });
           }
 
           $('.vue-chosen').trigger('chosen:updated');
@@ -155,7 +155,7 @@ module.exports = {
         function(response) {
 
           if (response.status.code == 422) {
-            swal({title: response.entity.message, type: 'error', timer: 2000});
+            swal({ title: response.entity.message, type: 'error', timer: 2000 });
           }
         });
       } else {
@@ -213,18 +213,18 @@ module.exports = {
           client({
             path: '/profile/emergency-contacts',
             method: 'DELETE',
-            entity: {id: emergency_contact.id},
-            headers: {Authorization: localStorage.getItem('jwt-token')}
+            entity: { id: emergency_contact.id },
+            headers: { Authorization: localStorage.getItem('jwt-token') }
           }).then(
           function(response) {
 
             switch (response.status.code) {
               case 200:
-                swal({title: response.entity.message, type: 'success', timer: 2000});
+                swal({ title: response.entity.message, type: 'success', timer: 2000 });
                 this.employee.emergency_contacts.data.splice(index, 1);
                 break;
               case 500:
-                swal({title: response.entity.message, type: 'error', timer: 2000});
+                swal({ title: response.entity.message, type: 'error', timer: 2000 });
                 break;
             }
           }.bind(this));
@@ -251,7 +251,7 @@ module.exports = {
       // retrieve relationships
       client({
         path: '/relationships',
-        headers: {Authorization: localStorage.getItem('jwt-token')}
+        headers: { Authorization: localStorage.getItem('jwt-token') }
       }).then(
       function(response) {
 

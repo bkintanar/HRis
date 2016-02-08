@@ -29,7 +29,7 @@ module.exports = {
       if (this.table.items.current_page == this.table.items.last_page && (count % 10 == 0)) {
         page = page - 1;
       }
-      
+
       this.$parent.queryDatabase(page);
     }
   }
