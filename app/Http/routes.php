@@ -96,6 +96,11 @@ $api->version('v1', function (Router $api) {
                     $api->post('titles', 'JobTitlesController@store');                                      // docs done
                     $api->patch('titles', 'JobTitlesController@update');                                    // docs done
                     $api->delete('titles', 'JobTitlesController@destroy');                                  // docs done
+
+                    $api->get('employment-status', 'EmploymentStatusController@index');                     // docs done
+                    $api->post('employment-status', 'EmploymentStatusController@store');                    // docs done
+                    $api->patch('employment-status', 'EmploymentStatusController@update');                  // docs done
+                    $api->delete('employment-status', 'EmploymentStatusController@destroy');                // docs done
                 });
             });
 
