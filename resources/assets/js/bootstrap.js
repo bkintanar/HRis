@@ -62,6 +62,10 @@ Vue.component(
   'job-titles',
   require('./compiled/partials/tables/admin/job/titles.vue')
 );
+Vue.component(
+  'employment-statuses',
+  require('./compiled/partials/tables/admin/job/employment-statuses.vue')
+);
 
 // Partial Profile
 Vue.component('custom-field-section', require('./compiled/pages/profile/partials/custom-field-section.vue'));

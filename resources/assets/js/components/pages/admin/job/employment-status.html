@@ -1,3 +1,43 @@
-<div>
+<div class="row">
 
+    <table-presenter :has_access="has_access" :table="table" :name="'employment-statuses'" :modal="modal"></table-presenter>
+
+    <!-- Modal -->
+    <div class="modal fade" id="employment_status_modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal" type="button">&times;</button>
+
+                    <h4 class="modal-title" id="my_modal_label">Employment Status Details</h4>
+                </div>
+
+                <div class="modal-body">
+                    <!--Add form-->
+                    <form method="POST" onsubmit="return false;" accept-charset="UTF-8" class="form-horizontal" id="employmentStatusForm">
+                        <input name="employment_status_id" type="hidden" v-model="employment_status_id">
+
+                        <div class="form-group">
+                            <label for="name" class="col-md-3 control-label">Name</label>
+                            <div class="col-md-9">
+                                <input class="form-control" type="text" required="required" v-model.sync="modal.name" id="name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="class" class="col-md-3 control-label">Class</label>
+                            <div class="col-md-9">
+                                <input class="form-control" type="text" v-model.sync="modal.class" id="class">
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-white btn-xs" data-dismiss="modal" type="button">Close</button>
+                            <input class="btn btn-primary btn-xs" type="submit" @click="submitForm"
+                                   value="Save changes">
+                        </div>
+                    </form><!--// form-->
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </div>
