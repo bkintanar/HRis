@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Profile;
+namespace Tests\Admin\Job;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
