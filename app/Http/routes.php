@@ -101,6 +101,11 @@ $api->version('v1', function (Router $api) {
                     $api->post('employment-status', 'EmploymentStatusController@store');                    // docs done
                     $api->patch('employment-status', 'EmploymentStatusController@update');                  // docs done
                     $api->delete('employment-status', 'EmploymentStatusController@destroy');                // docs done
+
+                    $api->get('pay-grades', 'PayGradesController@index');                                   // docs done
+                    $api->post('pay-grades', 'PayGradesController@store');                                  // docs done
+                    $api->patch('pay-grades', 'PayGradesController@update');                                // docs done
+                    $api->delete('pay-grades', 'PayGradesController@destroy');                              // docs done
                 });
             });
 
