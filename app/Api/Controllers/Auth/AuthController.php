@@ -9,6 +9,7 @@
  */
 namespace HRis\Api\Controllers\Auth;
 
+use Exception;
 use HRis\Api\Controllers\BaseController;
 use HRis\Api\Eloquent\Navlink;
 use HRis\Api\Eloquent\User;
@@ -58,11 +59,11 @@ class AuthController extends BaseController
             throw new AccessDeniedHttpException('The token is invalid');
         }
 
-        return $this->response->withArray(['token' => $token]);
+        return $this->responseAPI(201, SUCCESS_TOKEN_REFRESH_MESSAGE, compact('token'));
     }
 
     /**
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
@@ -72,7 +73,7 @@ class AuthController extends BaseController
 
         $sidebar = Navlink::sidebar($user);
 
-        return response()->json(compact('sidebar'));
+        return $this->responseAPI(200, SUCCESS_RETRIEVE_SIDEBAR_MESSAGE, compact('sidebar'));
     }
 
     /**
@@ -82,13 +83,14 @@ class AuthController extends BaseController
      *     path="/login",
      *     tags={"Authentication"},
      *     summary="Authenticates guest user by logging in.",
-     *     @SWG\Response(response="200", description="Success",
+     *     @SWG\Response(response="201", description="Success",
      *         @SWG\Schema(
      *             title="data",
      *             type="object",
      *             required={"token", "status_code"},
      *             @SWG\Property(property="token", type="string"),
-     *             @SWG\Property(property="status_code", type="integer", default=200, description="Status code from server"),
+     *             @SWG\Property(property="status_code", type="integer", default=201, description="Status code from server"),
+     *             @SWG\Property(property="message", type="string", default="Token successfully created."),
      *         )
      *     ),
      *     @SWG\Response(response="401", description="Invalid credentials",
@@ -129,7 +131,7 @@ class AuthController extends BaseController
      *
      * @param Request $request
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
@@ -143,23 +145,23 @@ class AuthController extends BaseController
         try {
             // attempt to verify the credentials and create a token for the user
             if (!$token = JWTAuth::attempt($credentials, $claims)) {
-                return response()->json(['message' => 'invalid_credentials', 'status_code' => 401], 401);
+                return $this->responseAPI(401, 'invalid_credentials');
             }
         } catch (JWTException $e) {
             // something went wrong whilst attempting to encode the token
-            return response()->json(['message' => 'could_not_create_token', 'status_code' => 422], 422);
-        } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage(), 'status_code' => 422], 422);
+            return $this->responseAPI(422, 'could_not_create_token');
+        } catch (Exception $e) {
+            return $this->responseAPI(422, $e->getMessage());
         }
 
         // all good so return the token
-        return response()->json(['token' => $token, 'status_code' => 200], 200);
+        return $this->responseAPI(201, SUCCESS_TOKEN_CREATED_MESSAGE, compact('token'));
     }
 
     /**
      * @param UserRequest $request
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
@@ -172,7 +174,7 @@ class AuthController extends BaseController
         $user = User::create($newUser);
         $token = JWTAuth::fromUser($user);
 
-        return response()->json(compact('token'));
+        return $this->responseAPI(201, SUCCESS_TOKEN_CREATED_MESSAGE, compact('token'));
     }
 
     /**
@@ -230,7 +232,7 @@ class AuthController extends BaseController
      *     ),
      * )
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
@@ -250,6 +252,6 @@ class AuthController extends BaseController
             $response['status_code'] = 422;
         }
 
-        return $this->response()->array($response)->statusCode($response['status_code']);
+        return $this->responseAPI($response['status_code'], $response['message']);
     }
 }

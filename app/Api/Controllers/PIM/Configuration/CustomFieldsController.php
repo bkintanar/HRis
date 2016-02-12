@@ -62,40 +62,24 @@ class CustomFieldsController extends BaseController
      *
      * @param CustomFieldSectionsRequest $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function destroy(CustomFieldSectionsRequest $request)
     {
-        $custom_field_section_id = $request->get('id');
-
-        try {
-            $this->custom_field_section->whereId($custom_field_section_id)->delete();
-        } catch (Exception $e) {
-            return $this->response()->array(['message' => UNABLE_DELETE_MESSAGE, 'status_code' => 422])->statusCode(422);
-        }
-
-        return $this->response()->array(['message' => SUCCESS_DELETE_MESSAGE, 'status_code' => 200])->statusCode(200);
+        return $this->destroyModel($request, $this->custom_field_section);
     }
 
     public function destroyCustomField(CustomFieldRequest $request)
     {
-        $custom_field_id = $request->get('id');
-
-        try {
-            $this->custom_field->whereId($custom_field_id)->delete();
-        } catch (Exception $e) {
-            return $this->response()->array(['message' => UNABLE_DELETE_MESSAGE, 'status_code' => 422])->statusCode(422);
-        }
-
-        return $this->response()->array(['message' => SUCCESS_DELETE_MESSAGE, 'status_code' => 200])->statusCode(200);
+        return $this->destroyModel($request, $this->custom_field);
     }
 
     /**
      * Show the PIM - Custom Fields.
      *
-     * @return \Illuminate\View\View
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
@@ -104,13 +88,10 @@ class CustomFieldsController extends BaseController
         $custom_field_sections = $this->custom_field_section->with('screen')->paginate(ROWS_PER_PAGE);
 
         if (!$custom_field_sections) {
-            return $this->response()->array(['message' => UNABLE_RETRIEVE_MESSAGE, 'status_code' => 404])->statusCode(404);
+            return $this->responseAPI(404, UNABLE_RETRIEVE_MESSAGE);
         }
 
-        $response['data'] = $custom_field_sections;
-        $response['table'] = $this->setupDataTable($custom_field_sections);
-
-        return $this->response()->array($response);
+        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, ['data' => $custom_field_sections, 'table' => $this->setupDataTable($custom_field_sections)]);
     }
 
     /**
@@ -142,7 +123,9 @@ class CustomFieldsController extends BaseController
     /**
      * Show a PIM - Custom Field Section.
      *
-     * @return \Illuminate\View\View
+     * @param Request $request
+     *
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
@@ -152,15 +135,12 @@ class CustomFieldsController extends BaseController
         $custom_field_section = $this->custom_field_section->whereId($custom_field_section_id)->first();
 
         if (!$custom_field_section) {
-            return $this->response()->array(['message' => UNABLE_RETRIEVE_MESSAGE, 'status_code' => 404])->statusCode(404);
+            return $this->responseAPI(404, UNABLE_RETRIEVE_MESSAGE);
         }
 
         $custom_fields = $this->custom_field->with('type', 'options')->whereCustomFieldSectionId($custom_field_section_id)->paginate(ROWS_PER_PAGE);
 
-        $response['data'] = $custom_fields;
-        $response['table'] = $this->setupDataTableCustomField($custom_fields);
-
-        return $this->response()->array($response);
+        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, ['data' => $custom_fields, 'table' => $this->setupDataTable($custom_fields)]);
     }
 
     /**
@@ -194,30 +174,21 @@ class CustomFieldsController extends BaseController
      *
      * @param CustomFieldSectionsRequest $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function store(CustomFieldSectionsRequest $request)
     {
-        try {
-            $response = $this->custom_field_section->create($request->all());
-        } catch (Exception $e) {
-            return $this->response()->array(['message' => UNABLE_ADD_MESSAGE, 'status_code' => 422])->statusCode(422);
-        }
-
-        $custom_field_section = $this->custom_field_section->with('screen')->whereId($response->id)->first();
-
-        return $this->response()->array(['custom_field_section' => $custom_field_section, 'message' => SUCCESS_ADD_MESSAGE, 'status_code' => 201])->statusCode(201);
+        return $this->storeModel($request, $this->custom_field_section, 'custom_field_section');
     }
 
     /**
      * Save the PIM - Custom Field.
      *
      * @param CustomFieldRequest $request
-     * @param                    $id
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
@@ -252,14 +223,14 @@ class CustomFieldsController extends BaseController
         } catch (Exception $e) {
             DB::rollback();
 
-            return $this->response()->array(['message' => UNABLE_ADD_MESSAGE, 'status_code' => 422])->statusCode(422);
+            return $this->responseAPI(422, UNABLE_ADD_MESSAGE);
         }
 
         DB::commit();
 
         $custom_field = $this->custom_field->with('type', 'options')->whereId($custom_field->id)->first();
 
-        return $this->response()->array(['custom_field' => $custom_field, 'message' => SUCCESS_ADD_MESSAGE, 'status_code' => 201])->statusCode(201);
+        return $this->responseAPI(201, SUCCESS_ADD_MESSAGE, compact('custom_field'));
     }
 
     /**
@@ -267,7 +238,7 @@ class CustomFieldsController extends BaseController
      *
      * @param CustomFieldSectionsRequest $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
@@ -282,12 +253,12 @@ class CustomFieldsController extends BaseController
         } catch (Exception $e) {
             DB::rollback();
 
-            return $this->response()->array(['message' => UNABLE_UPDATE_MESSAGE, 'status_code' => 422])->statusCode(422);
+            return $this->responseAPI(422, UNABLE_UPDATE_MESSAGE);
         }
 
         DB::commit();
 
-        return $this->response()->array(['message' => SUCCESS_UPDATE_MESSAGE, 'status_code' => 200])->statusCode(200);
+        return $this->responseAPI(200, SUCCESS_UPDATE_MESSAGE);
     }
 
     /**
@@ -295,7 +266,7 @@ class CustomFieldsController extends BaseController
      *
      * @param CustomFieldRequest $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
@@ -341,12 +312,12 @@ class CustomFieldsController extends BaseController
         } catch (Exception $e) {
             DB::rollback();
 
-            return $this->response()->array(['message' => UNABLE_UPDATE_MESSAGE, 'status_code' => 422])->statusCode(422);
+            return $this->responseAPI(422, UNABLE_UPDATE_MESSAGE);
         }
 
         DB::commit();
 
-        return $this->response()->array(['message' => SUCCESS_UPDATE_MESSAGE, 'status_code' => 200])->statusCode(200);
+        return $this->responseAPI(200, SUCCESS_UPDATE_MESSAGE);
     }
 
     public function getCustomFieldSectionsByScreenId(Request $request)
@@ -361,6 +332,6 @@ class CustomFieldsController extends BaseController
             $custom_field_section->fields = array_chunk($custom_fields->toArray(), 2);
         });
 
-        return $this->response()->array(['custom_field_sections' => $custom_field_sections, 'status_code' => 200])->statusCode(200);
+        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, compact('custom_field_sections'));
     }
 }

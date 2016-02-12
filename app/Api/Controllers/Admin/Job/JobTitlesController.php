@@ -9,7 +9,6 @@
  */
 namespace HRis\Api\Controllers\Admin\Job;
 
-use Exception;
 use HRis\Api\Controllers\BaseController;
 use HRis\Api\Eloquent\JobTitle;
 use HRis\Api\Requests\Admin\Job\JobTitleRequest;
@@ -92,21 +91,13 @@ class JobTitlesController extends BaseController
      *
      * @param JobTitleRequest $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function destroy(JobTitleRequest $request)
     {
-        $job_title_id = $request->get('id');
-
-        $response_code = $this->job_title->whereId($job_title_id)->delete();
-
-        if (!$response_code) {
-            return $this->response()->array(['message' => UNABLE_DELETE_MESSAGE, 'status_code' => 422])->statusCode(422);
-        }
-
-        return $this->response()->array(['message' => SUCCESS_DELETE_MESSAGE, 'status_code' => 200])->statusCode(200);
+        return $this->destroyModel($request, $this->job_title);
     }
 
     /**
@@ -172,7 +163,7 @@ class JobTitlesController extends BaseController
      *
      * @param JobTitleRequest $request
      *
-     * @return \Illuminate\View\View
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
@@ -180,12 +171,7 @@ class JobTitlesController extends BaseController
     {
         $job_titles = $this->job_title->paginate(ROWS_PER_PAGE);
 
-        $response['data'] = $job_titles;
-        $response['table'] = $this->setupDataTable($job_titles);
-        $response['message'] = SUCCESS_RETRIEVE_MESSAGE;
-        $response['status_code'] = 200;
-
-        return $this->response()->array($response)->statusCode(200);
+        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, ['data' => $job_titles, 'table' => $this->setupDataTable($job_titles)]);
     }
 
     /**
@@ -269,19 +255,13 @@ class JobTitlesController extends BaseController
      *
      * @param JobTitleRequest $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function store(JobTitleRequest $request)
     {
-        try {
-            $job_title = $this->job_title->create($request->all());
-        } catch (Exception $e) {
-            return $this->response()->array(['message' => UNABLE_ADD_MESSAGE, 'status_code' => 422])->statusCode(422);
-        }
-
-        return $this->response()->array(['job_title' => $job_title, 'message' => SUCCESS_ADD_MESSAGE, 'status_code' => 201])->statusCode(201);
+        return $this->storeModel($request, $this->job_title, 'job_title');
     }
 
     /**
@@ -349,23 +329,12 @@ class JobTitlesController extends BaseController
      *
      * @param JobTitleRequest $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function update(JobTitleRequest $request)
     {
-        $job_title = $this->job_title->whereId($request->get('id'))->first();
-
-        if (!$job_title) {
-            return $this->response()->array(['message' => UNABLE_RETRIEVE_MESSAGE, 'status_code' => 404])->statusCode(404);
-        }
-        try {
-            $job_title->update($request->only(['name', 'description']));
-        } catch (Exception $e) {
-            return $this->response()->array(['message' => UNABLE_UPDATE_MESSAGE, 'status_code' => 422])->statusCode(422);
-        }
-
-        return $this->response()->array(['message' => SUCCESS_UPDATE_MESSAGE, 'status_code' => 200])->statusCode(200);
+        return $this->updateModel($request, $this->job_title, ['name', 'description']);
     }
 }

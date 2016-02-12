@@ -9,7 +9,6 @@
  */
 namespace HRis\Api\Controllers\Profile;
 
-use Exception;
 use HRis\Api\Controllers\BaseController;
 use HRis\Api\Eloquent\Dependent;
 use HRis\Api\Eloquent\Employee;
@@ -95,19 +94,13 @@ class DependentsController extends BaseController
      *
      * @param DependentsRequest $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function store(DependentsRequest $request)
     {
-        try {
-            $dependent = $this->dependent->create($request->all());
-        } catch (Exception $e) {
-            return $this->response()->array(['message' => UNABLE_ADD_MESSAGE, 'status_code' => 422])->statusCode(422);
-        }
-
-        return $this->response()->array(['dependent' => $dependent, 'message' => SUCCESS_ADD_MESSAGE, 'status_code' => 201])->statusCode(201);
+        return $this->storeModel($request, $this->dependent, 'dependent');
     }
 
     /**
@@ -175,25 +168,13 @@ class DependentsController extends BaseController
      *
      * @param DependentsRequest $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function update(DependentsRequest $request)
     {
-        $dependent = $this->dependent->whereId($request->get('id'))->first();
-
-        if (!$dependent) {
-            return $this->response()->array(['message' => UNABLE_RETRIEVE_MESSAGE, 'status_code' => 404])->statusCode(404);
-        }
-
-        try {
-            $dependent->update($request->all());
-        } catch (Exception $e) {
-            return $this->response()->array(['message' => UNABLE_UPDATE_MESSAGE, 'status_code' => 422])->statusCode(422);
-        }
-
-        return $this->response()->array(['message' => SUCCESS_UPDATE_MESSAGE, 'status_code' => 200])->statusCode(200);
+        return $this->updateModel($request, $this->dependent);
     }
 
     /**
@@ -253,20 +234,12 @@ class DependentsController extends BaseController
      *
      * @param DependentsRequest $request
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function destroy(DependentsRequest $request)
     {
-        $dependent_id = $request->get('id');
-
-        $response_code = $this->dependent->whereId($dependent_id)->delete();
-
-        if (!$response_code) {
-            return $this->response()->array(['message' => UNABLE_DELETE_MESSAGE, 'status_code' => 422])->statusCode(422);
-        }
-
-        return $this->response()->array(['message' => SUCCESS_DELETE_MESSAGE, 'status_code' => 200])->statusCode(200);
+        return $this->destroyModel($request, $this->dependent);
     }
 }

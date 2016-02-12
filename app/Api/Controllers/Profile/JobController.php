@@ -44,7 +44,7 @@ class JobController extends BaseController
      *
      * @param JobRequest $request
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
@@ -77,10 +77,10 @@ class JobController extends BaseController
 
             $employee->update($attributes);
         } catch (Exception $e) {
-            return $this->response()->array(['message' => UNABLE_UPDATE_MESSAGE, 'status_code' => 422])->statusCode(422);
+            return $this->responseAPI(422, UNABLE_UPDATE_MESSAGE);
         }
 
-        return $this->response()->array(['job_history' => $job_history, 'message' => SUCCESS_UPDATE_MESSAGE, 'status_code' => 200])->statusCode(200);
+        return $this->responseAPI(200, SUCCESS_UPDATE_MESSAGE, compact('job_history'));
     }
 
     /**
@@ -88,20 +88,12 @@ class JobController extends BaseController
      *
      * @param JobRequest $request
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function destroy(JobRequest $request)
     {
-        $job_history_id = $request->get('id');
-
-        try {
-            $this->job_history->whereId($job_history_id)->delete();
-        } catch (Exception $e) {
-            return $this->response()->array(['message' => UNABLE_DELETE_MESSAGE, 'status_code' => 422])->statusCode(422);
-        }
-
-        return $this->response()->array(['message' => SUCCESS_DELETE_MESSAGE, 'status_code' => 200])->statusCode(200);
+        return $this->destroyModel($request, $this->job_history);
     }
 }

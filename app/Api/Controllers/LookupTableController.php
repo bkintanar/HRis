@@ -186,7 +186,7 @@ class LookupTableController extends BaseController
      *
      * @param Request $request
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
@@ -195,7 +195,7 @@ class LookupTableController extends BaseController
         $province_id = $request->get('province_id');
 
         if (!$province_id) {
-            return response()->json([]);
+            return $this->responseAPI(404, UNABLE_RETRIEVE_MESSAGE);
         }
 
         if ($this->table_view) {
@@ -209,24 +209,28 @@ class LookupTableController extends BaseController
      * @param      $model
      * @param null $custom_attribute
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     protected function tableView($model, $custom_attribute = null)
     {
         if ($custom_attribute) {
-            return response()->json($model->get(['name', 'id', 'class']));
+            $data = $model->get(['name', 'id', 'class']);
+
+            return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, compact('data'));
         }
 
-        return response()->json($model->lists('name', 'id'));
+        $data = $model->lists('name', 'id');
+
+        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, compact('data'));
     }
 
     /**
      * @param      $model
      * @param null $custom_attribute
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
@@ -245,7 +249,7 @@ class LookupTableController extends BaseController
             }
         }
 
-        return response()->json($chosen);
+        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, compact('chosen'));
     }
 
     /**
@@ -300,7 +304,7 @@ class LookupTableController extends BaseController
      *
      * @param Request $request
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
@@ -354,7 +358,7 @@ class LookupTableController extends BaseController
      *
      * @param Request $request
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
@@ -408,7 +412,7 @@ class LookupTableController extends BaseController
      *
      * @param Request $request
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
@@ -462,14 +466,14 @@ class LookupTableController extends BaseController
      *
      * @param Request $request
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function employmentStatuses(Request $request)
     {
         if ($this->table_view) {
-            $this->tableView($this->employment_status, 'class');
+            return $this->tableView($this->employment_status, 'class');
         }
 
         return $this->chosen($this->employment_status, ['class']);
@@ -516,7 +520,7 @@ class LookupTableController extends BaseController
      *
      * @param Request $request
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
@@ -570,7 +574,7 @@ class LookupTableController extends BaseController
      *
      * @param Request $request
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
@@ -624,7 +628,7 @@ class LookupTableController extends BaseController
      *
      * @param Request $request
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
@@ -678,7 +682,7 @@ class LookupTableController extends BaseController
      *
      * @param Request $request
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
@@ -732,7 +736,7 @@ class LookupTableController extends BaseController
      *
      * @param Request $request
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
@@ -786,7 +790,7 @@ class LookupTableController extends BaseController
      *
      * @param Request $request
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
@@ -840,7 +844,7 @@ class LookupTableController extends BaseController
      *
      * @param Request $request
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
@@ -894,7 +898,7 @@ class LookupTableController extends BaseController
      *
      * @param Request $request
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
@@ -950,7 +954,7 @@ class LookupTableController extends BaseController
      *
      * @param Request $request
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */

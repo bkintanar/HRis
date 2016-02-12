@@ -49,14 +49,14 @@ class EmployeeController extends BaseController
     /**
      * @param EmployeeRequest $request
      *
-     * @return \Illuminate\Http\JsonResponse
-     *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     *
+     * @return \Dingo\Api\Http\Response
      */
     public function getByEmployeeId(EmployeeRequest $request)
     {
         if (!$request->has('employee_id')) {
-            return $this->response()->array(['status' => EMPLOYEE_ID_NOT_FOUND])->statusCode(404);
+            return $this->responseAPI(404, EMPLOYEE_ID_NOT_FOUND);
         }
 
         $employee_id = $request->get('employee_id');
