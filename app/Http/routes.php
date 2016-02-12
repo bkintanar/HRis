@@ -113,6 +113,14 @@ $api->version('v1', function (Router $api) {
                     $api->patch('pay-grades', 'PayGradesController@update');                                // docs done
                     $api->delete('pay-grades', 'PayGradesController@destroy');                              // docs done
                 });
+
+                // Qualification
+                $api->group(['prefix' => 'qualifications', 'namespace' => 'Qualifications'], function (Router $api) {
+                    $api->get('educations', 'EducationsController@index');                                  // docs done
+                    $api->post('educations', 'EducationsController@store');                                 // docs done
+                    $api->patch('educations', 'EducationsController@update');                               // docs done
+                    $api->delete('educations', 'EducationsController@destroy');                             // docs done
+                });
             });
 
             // Chosen
