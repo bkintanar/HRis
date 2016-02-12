@@ -71,15 +71,15 @@ class EmployeeListController extends BaseController
      *
      * @param PIMRequest $request
      *
-     * @return \Illuminate\View\View
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function index(PIMRequest $request)
     {
-        $employees = $this->employee->getEmployeeList(false, $request->sort(), $request->direction());
+        $employees = $this->employee->getEmployeeList(false, $request->sort(), $request->direction())->get();
 
-        return $this->response()->array(['employees' => $employees->get()])->statusCode(200);
+        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, compact('employees'));
     }
 
     /**

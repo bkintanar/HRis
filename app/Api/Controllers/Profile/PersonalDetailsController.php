@@ -136,10 +136,6 @@ use Swagger\Annotations as SWG;
  *     ),
  * )
  *
- * @param PersonalContactDetailsRequest $request
- *
- * @return \Illuminate\Http\JsonResponse
- *
  * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
  */
 class PersonalDetailsController extends BaseController
@@ -164,7 +160,7 @@ class PersonalDetailsController extends BaseController
      *
      * @param PersonalContactDetailsRequest $request
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
@@ -178,13 +174,13 @@ class PersonalDetailsController extends BaseController
         $employee = $this->employee->findOrFail($id);
 
         if (!$employee || !$employee_id || $employee_id == Config::get('company.employee_id_prefix').'____') {
-            return $this->response()->array(['message' => UNABLE_UPDATE_MESSAGE, 'status_code' => 405])->statusCode(405);
+            return $this->responseAPI(405, UNABLE_UPDATE_MESSAGE);
         }
 
         // If user is trying to update the employee_id to a used employee_id.
         $original_employee_id = $this->employee->whereEmployeeId($employee_id)->pluck('id');
         if ($id != $original_employee_id && !is_null($original_employee_id)) {
-            return $this->response()->array(['message' => EMPLOYEE_ID_IN_MESSAGE, 'status_code' => 405])->statusCode(405);
+            return $this->responseAPI(405, EMPLOYEE_ID_IN_MESSAGE);
         }
 
         try {
@@ -192,9 +188,9 @@ class PersonalDetailsController extends BaseController
 
             $employee->update($attributes);
         } catch (Exception $e) {
-            return $this->response()->array(['message' => UNABLE_UPDATE_MESSAGE, 'status_code' => 422])->statusCode(422);
+            return $this->responseAPI(422, UNABLE_UPDATE_MESSAGE);
         }
 
-        return $this->response()->array(['employee' => $employee, 'message' => SUCCESS_UPDATE_MESSAGE, 'status_code' => 200])->statusCode(200);
+        return $this->responseAPI(200, SUCCESS_UPDATE_MESSAGE, compact('employee'));
     }
 }

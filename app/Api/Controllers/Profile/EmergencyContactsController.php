@@ -9,7 +9,6 @@
  */
 namespace HRis\Api\Controllers\Profile;
 
-use Exception;
 use HRis\Api\Controllers\BaseController;
 use HRis\Api\Eloquent\EmergencyContact;
 use HRis\Api\Eloquent\Employee;
@@ -95,19 +94,13 @@ class EmergencyContactsController extends BaseController
      *
      * @param EmergencyContactsRequest $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function store(EmergencyContactsRequest $request)
     {
-        try {
-            $emergency_contact = $this->emergency_contact->create($request->all());
-        } catch (Exception $e) {
-            return $this->response()->array(['message' => UNABLE_ADD_MESSAGE, 'status_code' => 422])->statusCode(422);
-        }
-
-        return $this->response()->array(['emergency_contact' => $emergency_contact, 'message' => SUCCESS_ADD_MESSAGE, 'status_code' => 201])->statusCode(201);
+        return $this->storeModel($request, $this->emergency_contact, 'emergency_contact');
     }
 
     /**
@@ -175,25 +168,13 @@ class EmergencyContactsController extends BaseController
      *
      * @param EmergencyContactsRequest $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function update(EmergencyContactsRequest $request)
     {
-        $emergency_contact = $this->emergency_contact->whereId($request->get('id'))->first();
-
-        if (!$emergency_contact) {
-            return $this->response()->array(['message' => UNABLE_RETRIEVE_MESSAGE, 'status_code' => 404])->statusCode(404);
-        }
-
-        try {
-            $emergency_contact->update($request->all());
-        } catch (Exception $e) {
-            return $this->response()->array(['message' => UNABLE_UPDATE_MESSAGE, 'status_code' => 422])->statusCode(422);
-        }
-
-        return $this->response()->array(['message' => SUCCESS_UPDATE_MESSAGE, 'status_code' => 200])->statusCode(200);
+        return $this->updateModel($request, $this->emergency_contact);
     }
 
     /**
@@ -253,20 +234,12 @@ class EmergencyContactsController extends BaseController
      *
      * @param EmergencyContactsRequest $request
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function destroy(EmergencyContactsRequest $request)
     {
-        $emergency_contact_id = $request->get('id');
-
-        $response_code = $this->emergency_contact->whereId($emergency_contact_id)->delete();
-
-        if (!$response_code) {
-            return $this->response()->array(['message' => UNABLE_DELETE_MESSAGE, 'status_code' => 422])->statusCode(422);
-        }
-
-        return $this->response()->array(['message' => SUCCESS_DELETE_MESSAGE, 'status_code' => 200])->statusCode(200);
+        return $this->destroyModel($request, $this->emergency_contact);
     }
 }

@@ -37,7 +37,7 @@ class CustomFieldsController extends BaseController
      *
      * @param Request $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
@@ -70,11 +70,11 @@ class CustomFieldsController extends BaseController
         } catch (Exception $e) {
             DB::rollBack();
 
-            return $this->response()->array(['message' => UNABLE_UPDATE_MESSAGE, 'status_code' => 422])->statusCode(422);
+            return $this->responseAPI(422, UNABLE_UPDATE_MESSAGE);
         }
 
         DB::commit();
 
-        return $this->response()->array(['message' => SUCCESS_UPDATE_MESSAGE, 'status_code' => 200])->statusCode(200);
+        return $this->responseAPI(200, SUCCESS_UPDATE_MESSAGE);
     }
 }

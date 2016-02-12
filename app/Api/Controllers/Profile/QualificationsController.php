@@ -46,21 +46,15 @@ class QualificationsController extends BaseController
      * Save the Profile - Qualifications - Work Experiences.
      *
      * @param QualificationsWorkExperienceRequest $request
-     * @param WorkExperience                      $workExperience
+     * @param WorkExperience                      $work_experience
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function storeWorkExperience(QualificationsWorkExperienceRequest $request, WorkExperience $workExperience)
+    public function storeWorkExperience(QualificationsWorkExperienceRequest $request, WorkExperience $work_experience)
     {
-        try {
-            $work_experience = $workExperience->create($request->all());
-        } catch (Exception $e) {
-            return $this->response()->array(['message' => UNABLE_ADD_MESSAGE, 'status_code' => 422])->statusCode(422);
-        }
-
-        return $this->response()->array(['work_experience' => $work_experience, 'message' => SUCCESS_ADD_MESSAGE, 'status_code' => 201])->statusCode(201);
+        return $this->storeModel($request, $work_experience, 'work_experience');
     }
 
     /**
@@ -68,21 +62,13 @@ class QualificationsController extends BaseController
      *
      * @param QualificationsWorkExperienceRequest $request
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function destroyWorkExperience(QualificationsWorkExperienceRequest $request, WorkExperience $workExperience)
+    public function destroyWorkExperience(QualificationsWorkExperienceRequest $request, WorkExperience $work_experience)
     {
-        $work_experience_id = $request->get('id');
-
-        try {
-            $workExperience->whereId($work_experience_id)->delete();
-        } catch (Exception $e) {
-            return $this->response()->array(['message' => UNABLE_DELETE_MESSAGE, 'status_code' => 422])->statusCode(422);
-        }
-
-        return $this->response()->array(['message' => SUCCESS_DELETE_MESSAGE, 'status_code' => 200])->statusCode(200);
+        return $this->destroyModel($request, $work_experience);
     }
 
     /**
@@ -91,7 +77,7 @@ class QualificationsController extends BaseController
      * @param QualificationsWorkExperienceRequest $request
      * @param WorkExperience                      $workExperience
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
@@ -100,16 +86,16 @@ class QualificationsController extends BaseController
         $workExperience = $workExperience->whereId($request->get('work_experience_id'))->first();
 
         if (!$workExperience) {
-            return $this->response()->array(['message' => UNABLE_RETRIEVE_MESSAGE, 'status_code' => 422])->statusCode(422);
+            return $this->responseAPI(404, UNABLE_RETRIEVE_MESSAGE);
         }
 
         try {
             $workExperience->update($request->all());
         } catch (Exception $e) {
-            return $this->response()->array(['message' => UNABLE_UPDATE_MESSAGE, 'status_code' => 200])->statusCode(422);
+            return $this->responseAPI(422, UNABLE_UPDATE_MESSAGE);
         }
 
-        return $this->response()->array(['message' => SUCCESS_UPDATE_MESSAGE, 'status_code' => 200])->statusCode(200);
+        return $this->responseAPI(200, SUCCESS_UPDATE_MESSAGE);
     }
 
     /**
@@ -118,19 +104,13 @@ class QualificationsController extends BaseController
      * @param QualificationsEducationRequest $request
      * @param Education                      $education
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function storeEducation(QualificationsEducationRequest $request, Education $education)
     {
-        try {
-            $education = $education->create($request->except(['education_level', 'education_levels']));
-        } catch (Exception $e) {
-            return $this->response()->array(['message' => UNABLE_ADD_MESSAGE, 'status_code' => 422])->statusCode(422);
-        }
-
-        return $this->response()->array(['education' => $education, 'message' => SUCCESS_ADD_MESSAGE, 'status_code' => 201])->statusCode(201);
+        return $this->storeModel($request, $education, 'education');
     }
 
     /**
@@ -139,21 +119,13 @@ class QualificationsController extends BaseController
      * @param QualificationsEducationRequest $request
      * @param Education                      $education
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function destroyEducation(QualificationsEducationRequest $request, Education $education)
     {
-        $education_id = $request->get('id');
-
-        try {
-            $education->whereId($education_id)->delete();
-        } catch (Exception $e) {
-            return $this->response()->array(['message' => UNABLE_DELETE_MESSAGE, 'status_code' => 422])->statusCode(422);
-        }
-
-        return $this->response()->array(['message' => SUCCESS_DELETE_MESSAGE, 'status_code' => 200])->statusCode(200);
+        return $this->destroyModel($request, $education);
     }
 
     /**
@@ -162,7 +134,7 @@ class QualificationsController extends BaseController
      * @param QualificationsEducationRequest $request
      * @param Education                      $education
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
@@ -171,16 +143,16 @@ class QualificationsController extends BaseController
         $education = $education->whereId($request->get('education_id'))->first();
 
         if (!$education) {
-            return $this->response()->array(['message' => UNABLE_RETRIEVE_MESSAGE, 'status_code' => 422])->statusCode(422);
+            return $this->responseAPI(404, UNABLE_RETRIEVE_MESSAGE);
         }
 
         try {
             $education->update($request->except(['education_level', 'education_levels']));
         } catch (Exception $e) {
-            return $this->response()->array(['message' => UNABLE_UPDATE_MESSAGE, 'status_code' => 422])->statusCode(422);
+            return $this->responseAPI(422, UNABLE_UPDATE_MESSAGE);
         }
 
-        return $this->response()->array(['message' => SUCCESS_UPDATE_MESSAGE, 'status_code' => 200])->statusCode(200);
+        return $this->responseAPI(200, SUCCESS_UPDATE_MESSAGE);
     }
 
     /**
@@ -189,7 +161,7 @@ class QualificationsController extends BaseController
      * @param QualificationsSkillRequest $request
      * @param EmployeeSkill              $employee_skill
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
@@ -207,12 +179,12 @@ class QualificationsController extends BaseController
                 'comment'             => $comment,
             ]);
         } catch (Exception $e) {
-            return $this->response()->array(['message' => UNABLE_ADD_MESSAGE, 'status_code' => 422])->statusCode(422);
+            return $this->responseAPI(422, UNABLE_ADD_MESSAGE);
         }
 
         $skill = $employee_skill::whereEmployeeId($employee->id)->orderBy('id', 'desc')->first();
 
-        return $this->response()->array(['skill' => $skill, 'message' => SUCCESS_ADD_MESSAGE, 'status_code' => 201])->statusCode(201);
+        return $this->responseAPI(201, SUCCESS_ADD_MESSAGE, compact('skill'));
     }
 
     /**
@@ -221,7 +193,7 @@ class QualificationsController extends BaseController
      * @param QualificationsSkillRequest $request
      * @param EmployeeSkill              $employeeSkill
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
@@ -230,7 +202,7 @@ class QualificationsController extends BaseController
         $employeeSkill = $employeeSkill->whereId($request->get('id'))->first();
 
         if (!$employeeSkill) {
-            return $this->response()->array(['message' => UNABLE_RETRIEVE_MESSAGE, 'status_code' => 422])->statusCode(422);
+            return $this->responseAPI(404, UNABLE_RETRIEVE_MESSAGE);
         }
 
         try {
@@ -240,10 +212,10 @@ class QualificationsController extends BaseController
 
             $employeeSkill->save();
         } catch (Exception $e) {
-            return $this->response()->array(['message' => UNABLE_UPDATE_MESSAGE, 'status_code' => 422])->statusCode(422);
+            return $this->responseAPI(422, UNABLE_UPDATE_MESSAGE);
         }
 
-        return $this->response()->array(['message' => SUCCESS_UPDATE_MESSAGE, 'status_code' => 200])->statusCode(200);
+        return $this->responseAPI(200, SUCCESS_UPDATE_MESSAGE);
     }
 
     /**
@@ -252,20 +224,12 @@ class QualificationsController extends BaseController
      * @param QualificationsSkillRequest $request
      * @param EmployeeSkill              $employee_skill
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function destroySkill(QualificationsSkillRequest $request, EmployeeSkill $employee_skill)
     {
-        $employee_skill_id = $request->get('id');
-
-        try {
-            $employee_skill->whereId($employee_skill_id)->delete();
-        } catch (Exception $e) {
-            return $this->response()->array(['message' => UNABLE_DELETE_MESSAGE, 'status_code' => 422])->statusCode(422);
-        }
-
-        return $this->response()->array(['message' => SUCCESS_DELETE_MESSAGE, 'status_code' => 200])->statusCode(200);
+        return $this->destroyModel($request, $employee_skill);
     }
 }
