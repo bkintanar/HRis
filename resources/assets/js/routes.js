@@ -205,7 +205,7 @@ module.exports = {
                 subRoutes: {
                   '/termination-reasons': {
                     name: 'pim-configuration-termination-reasons',
-                    component: require('./compiled/pages/page.vue'),
+                    component: require('./compiled/pages/pim/configuration/termination-reasons.vue'),
                     auth: true
                   },
                   '/custom-field-sections': {

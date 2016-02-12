@@ -13,11 +13,9 @@ module.exports = {
         items: [{}]
       },
       modal: {
-        pay_grade_id: 0,
+        termination_reason_id: 0,
         editMode: false,
         name: '',
-        min_salary: '',
-        max_salary: '',
         required: false,
         mask: ''
       },
@@ -33,7 +31,7 @@ module.exports = {
 
   compiled: function() {
 
-    this.$dispatch('update-page-title', 'Pay Grades');
+    this.$dispatch('update-page-title', 'Termination Reasons');
   },
 
   ready: function() {
@@ -46,7 +44,7 @@ module.exports = {
 
       let params = {
         method: 'GET',
-        path: '/admin/job/pay-grades?page=' + page,
+        path: '/pim/configuration/termination-reasons?page=' + page,
         entity: { employee_id: this.employee_id },
         headers: { Authorization: localStorage.getItem('jwt-token') }
       };
@@ -63,29 +61,29 @@ module.exports = {
           });
     },
 
-    editRecord: function(pay_grade, index) {
+    editRecord: function(termination_reason, index) {
 
       this.modal.editMode = true;
       this.modal.editIndex = index;
 
-      this.assignValuesToModal(pay_grade);
+      this.assignValuesToModal(termination_reason);
 
-      $('#pay_grade_modal').modal('toggle');
-      $('#pay_grade_modal').on('shown.bs.modal', function() {
+      $('#termination_reason_modal').modal('toggle');
+      $('#termination_reason_modal').on('shown.bs.modal', function() {
         $('.vue-chosen', this).trigger('chosen:updated');
       });
     },
 
     submitForm: function() {
       client({
-        path: '/admin/job/pay-grades',
+        path: '/pim/configuration/termination-reasons',
         method: this.modal.editMode ? 'PATCH' : 'POST',
         entity: this.modal,
         headers: { Authorization: localStorage.getItem('jwt-token') }
       }).then(
           function(response) {
 
-            $('#pay_grade_modal').modal('toggle');
+            $('#termination_reason_modal').modal('toggle');
             if (this.modal.editMode) {
               this.updateRowInTable();
               swal({ title: response.entity.message, type: 'success', timer: 2000 });
@@ -105,7 +103,7 @@ module.exports = {
           });
     },
 
-    deleteRecord: function(pay_grade) {
+    deleteRecord: function(termination_reason) {
 
       var previousWindowKeyDown = window.onkeydown; // https://github.com/t4t5/sweetalert/issues/127
       swal({
@@ -124,9 +122,9 @@ module.exports = {
         window.onkeydown = previousWindowKeyDown; // https://github.com/t4t5/sweetalert/issues/127
         if (isConfirm) {
           client({
-            path: '/admin/job/pay-grades',
+            path: '/pim/configuration/termination-reasons',
             method: 'DELETE',
-            entity: { id: pay_grade.id },
+            entity: { id: termination_reason.id },
             headers: { Authorization: localStorage.getItem('jwt-token') }
           }).then(
               function(response) {
@@ -152,16 +150,12 @@ module.exports = {
     updateRowInTable: function() {
 
       this.table.items.data[this.modal.editIndex].name = this.modal.name;
-      this.table.items.data[this.modal.editIndex].min_salary = this.modal.min_salary;
-      this.table.items.data[this.modal.editIndex].max_salary = this.modal.max_salary;
     },
 
-    assignValuesToModal: function(pay_grade) {
+    assignValuesToModal: function(termination_reason) {
 
-      this.modal.id = pay_grade.id;
-      this.modal.name = pay_grade.name;
-      this.modal.min_salary = pay_grade.min_salary;
-      this.modal.max_salary = pay_grade.max_salary;
+      this.modal.id = termination_reason.id;
+      this.modal.name = termination_reason.name;
     },
 
     goto: function(page) {
@@ -178,10 +172,8 @@ module.exports = {
     toggleModal: function() {
 
       this.modal.name = null;
-      this.modal.min_salary = null;
-      this.modal.max_salary = null;
 
-      $('#pay_grade_modal').modal('toggle');
+      $('#termination_reason_modal').modal('toggle');
     }
   }
 };

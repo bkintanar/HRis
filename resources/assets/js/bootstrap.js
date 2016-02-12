@@ -51,6 +51,10 @@ Vue.component('table-presenter', require('./compiled/partials/table.vue'));
 
 // Partial Tables
 Vue.component(
+  'termination-reasons',
+  require('./compiled/partials/tables/pim/configuration/termination-reasons.vue')
+);
+Vue.component(
   'custom-field-sections',
   require('./compiled/partials/tables/pim/configuration/custom-field-sections.vue')
 );

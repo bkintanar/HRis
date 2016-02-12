@@ -14,6 +14,7 @@
                 <a id="add_{{ table.model.singular }}" @click="toggleModal()" href="javascript:void(0);" class="btn btn-primary btn-xs">Add a new row</a>
             </div>
             <div class="table-responsive">
+              <termination-reasons v-if="name == 'termination-reasons'" :table="table" :has_access="has_access" :permissions="permissions" :modal="modal"></termination-reasons>
               <custom-field-sections v-if="name == 'custom-field-sections'" :table="table" :has_access="has_access" :permissions="permissions" :modal="modal"></custom-field-sections>
               <custom-fields v-if="name == 'custom-fields'" :table="table" :has_access="has_access" :permissions="permissions" :modal="modal"></custom-fields>
               <job-titles v-if="name == 'job-titles'" :table="table" :has_access="has_access" :permissions="permissions" :modal="modal"></job-titles>
