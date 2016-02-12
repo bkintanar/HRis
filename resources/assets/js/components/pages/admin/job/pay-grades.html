@@ -1,3 +1,49 @@
-<div>
+<div class="row">
 
+    <table-presenter :has_access="has_access" :table="table" :name="'pay-grades'" :modal="modal"></table-presenter>
+
+    <!-- Modal -->
+    <div class="modal fade" id="pay_grade_modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal" type="button">&times;</button>
+
+                    <h4 class="modal-title" id="my_modal_label">Pay Grade Details</h4>
+                </div>
+
+                <div class="modal-body">
+                    <!--Add form-->
+                    <form method="POST" onsubmit="return false;" accept-charset="UTF-8" class="form-horizontal" id="jobTitleForm">
+                        <input name="pay_grade_id" type="hidden" v-model="pay_grade_id">
+
+                        <div class="form-group">
+                            <label for="name" class="col-md-3 control-label">Name</label>
+                            <div class="col-md-9">
+                                <input class="form-control" type="text" required="required" v-model.sync="modal.name" id="name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="min_salary" class="col-md-3 control-label">Minimum Salary</label>
+                            <div class="col-md-9">
+                                <input class="form-control" type="text" v-model.sync="modal.min_salary" id="min_salary">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="max_salary" class="col-md-3 control-label">Maximum Salary</label>
+                            <div class="col-md-9">
+                                <input class="form-control" type="text" v-model.sync="modal.max_salary" id="max_salary">
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-white btn-xs" data-dismiss="modal" type="button">Close</button>
+                            <input class="btn btn-primary btn-xs" type="submit" @click="submitForm"
+                                   value="Save changes">
+                        </div>
+                    </form><!--// form-->
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </div>

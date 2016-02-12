@@ -63,6 +63,10 @@ Vue.component(
   require('./compiled/partials/tables/admin/job/titles.vue')
 );
 Vue.component(
+  'pay-grades',
+  require('./compiled/partials/tables/admin/job/pay-grades.vue')
+);
+Vue.component(
   'employment-statuses',
   require('./compiled/partials/tables/admin/job/employment-statuses.vue')
 );
