@@ -10,9 +10,16 @@
 namespace HRis\Api\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
+use Swagger\Annotations as SWG;
 
 /**
  * Class PayGrade.
+ *
+ * @SWG\Definition(definition="PayGrade")
+ * @SWG\Property(property="id", type="integer", format="int64", default=1, description="Unique identifier for the pay grade")
+ * @SWG\Property(property="name", type="string", default="Entry Level", description="Name of the pay grade")
+ * @SWG\Property(property="min_salary", type="integer", format="int64", default=10000, description="Minimum salary of the pay grade")
+ * @SWG\Property(property="max_salary", type="integer", format="int64", default=15000, description="Maximum salary of the pay grade")
  */
 class PayGrade extends Model
 {
