@@ -10,9 +10,14 @@
 namespace HRis\Api\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
+use Swagger\Annotations as SWG;
 
 /**
  * Class TerminationReason.
+ *
+ * @SWG\Definition(definition="TerminationReason")
+ * @SWG\Property(property="id", type="integer", format="int64", default=1, description="Unique identifier for the termination reason")
+ * @SWG\Property(property="name", type="string", default="Contract Not Renewed", description="Name of the termination reason")
  */
 class TerminationReason extends Model
 {

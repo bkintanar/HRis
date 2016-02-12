@@ -74,6 +74,12 @@ $api->version('v1', function (Router $api) {
 
                 // Configuration
                 $api->group(['prefix' => 'configuration', 'namespace' => 'Configuration'], function (Router $api) {
+
+                    $api->get('termination-reasons', 'TerminationReasonsController@index');                  // docs done
+                    $api->post('termination-reasons', 'TerminationReasonsController@store');                 // docs done
+                    $api->patch('termination-reasons', 'TerminationReasonsController@update');               // docs done
+                    $api->delete('termination-reasons', 'TerminationReasonsController@destroy');             // docs done
+
                     $api->get('custom-field-sections', 'CustomFieldsController@index');
                     $api->post('custom-field-sections', 'CustomFieldsController@store');
                     $api->patch('custom-field-sections', 'CustomFieldsController@update');

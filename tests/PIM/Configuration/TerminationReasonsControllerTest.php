@@ -1,28 +1,26 @@
 <?php
 
-namespace Tests\Admin\Job;
+namespace Tests\PIM\Configuration;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
-class PayGradesControllerTest extends TestCase
+class TerminationReasonsControllerTest extends TestCase
 {
     use DatabaseTransactions;
 
-    protected $pay_grade = [
-        'name'         => 'pay_grade_name_',
-        'min_salary'   => 10000,
-        'max_salary'   => 20000,
+    protected $termination_reason = [
+        'name' => 'termination_reason_name_',
     ];
 
     /**
      * @test
      *
-     * +------------------------------------------------+
-     * | POSITIVE TEST | POST /api/admin/job/pay-grades |
-     * +------------------------------------------------+
+     * +-----------------------------------------------------------------+
+     * | POSITIVE TEST | POST /api/pim/configuration/termination-reasons |
+     * +-----------------------------------------------------------------+
      */
-    public function it_should_return_an_pay_grade_object_if_post_is_successful()
+    public function it_should_return_an_termination_reason_object_if_post_is_successful()
     {
         $response = $this->_insert_record();
 
@@ -31,14 +29,12 @@ class PayGradesControllerTest extends TestCase
 
         $content_array = json_decode($content, true);
 
-        $this->assertArrayHasKey('pay_grade', $content_array);
+        $this->assertArrayHasKey('termination_reason', $content_array);
 
-        $pay_grade = $content_array['pay_grade'];
+        $termination_reason = $content_array['termination_reason'];
 
-        $this->assertArrayHasKey('name', $pay_grade);
-        $this->assertArrayHasKey('min_salary', $pay_grade);
-        $this->assertArrayHasKey('max_salary', $pay_grade);
-        $this->assertArrayHasKey('id', $pay_grade);
+        $this->assertArrayHasKey('name', $termination_reason);
+        $this->assertArrayHasKey('id', $termination_reason);
 
         $this->assertEquals(201, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
@@ -47,15 +43,15 @@ class PayGradesControllerTest extends TestCase
     /**
      * @test
      *
-     * +------------------------------------------------+
-     * | NEGATIVE TEST | POST /api/admin/job/pay-grades |
-     * +------------------------------------------------+
+     * +-----------------------------------------------------------------+
+     * | NEGATIVE TEST | POST /api/pim/configuration/termination-reasons |
+     * +-----------------------------------------------------------------+
      */
     public function it_should_return_an_error_if_post_is_unsuccessful()
     {
         $this->login();
 
-        $response = $this->post('/api/admin/job/pay-grades', [], ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
+        $response = $this->post('/api/pim/configuration/termination-reasons', [], ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
 
         $content = $response->getContent();
         $status_code = $response->getStatusCode();
@@ -72,17 +68,17 @@ class PayGradesControllerTest extends TestCase
     /**
      * @test
      *
-     * +-------------------------------------------------+
-     * | NEGATIVE TEST | PATCH /api/admin/job/pay-grades |
-     * +-------------------------------------------------+
+     * +------------------------------------------------------------------+
+     * | NEGATIVE TEST | PATCH /api/pim/configuration/termination-reasons |
+     * +------------------------------------------------------------------+
      */
-    public function it_should_return_an_error_if_pay_grade_doesnt_exist()
+    public function it_should_return_an_error_if_termination_reason_doesnt_exist()
     {
         $this->login();
 
-        $data = $this->pay_grade;
+        $data = $this->termination_reason;
 
-        $response = $this->patch('/api/admin/job/pay-grades', $data, ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
+        $response = $this->patch('/api/pim/configuration/termination-reasons', $data, ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
 
         $content = $response->getContent();
         $status_code = $response->getStatusCode();
@@ -99,9 +95,9 @@ class PayGradesControllerTest extends TestCase
     /**
      * @test
      *
-     * +-------------------------------------------------+
-     * | POSITIVE TEST | PATCH /api/admin/job/pay-grades |
-     * +-------------------------------------------------+
+     * +------------------------------------------------------------------+
+     * | POSITIVE TEST | PATCH /api/pim/configuration/termination-reasons |
+     * +------------------------------------------------------------------+
      */
     public function it_should_return_a_success_message_if_patch_is_successful()
     {
@@ -111,13 +107,13 @@ class PayGradesControllerTest extends TestCase
 
         $content_array = json_decode($content, true);
 
-        $id = $content_array['pay_grade']['id'];
+        $id = $content_array['termination_reason']['id'];
 
-        $data = $this->pay_grade;
-        $data['name'] = 'pay_grade_name_'.$this->str_rand();
+        $data = $this->termination_reason;
+        $data['name'] = 'termination_reason_name_'.$this->str_rand();
         $data['id'] = $id;
 
-        $response = $this->patch('/api/admin/job/pay-grades', $data, ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
+        $response = $this->patch('/api/pim/configuration/termination-reasons', $data, ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
 
         $content = $response->getContent();
         $status_code = $response->getStatusCode();
@@ -133,11 +129,11 @@ class PayGradesControllerTest extends TestCase
 
     /**
      * @test
-     * @depends it_should_return_an_pay_grade_object_if_post_is_successful
+     * @depends it_should_return_an_termination_reason_object_if_post_is_successful
      *
-     * +--------------------------------------------------+
-     * | POSITIVE TEST | DELETE /api/admin/job/pay-grades |
-     * +--------------------------------------------------+
+     * +-------------------------------------------------------------------+
+     * | POSITIVE TEST | DELETE /api/pim/configuration/termination-reasons |
+     * +-------------------------------------------------------------------+
      */
     public function it_should_return_a_success_message_if_delete_is_successful()
     {
@@ -147,9 +143,9 @@ class PayGradesControllerTest extends TestCase
 
         $content_array = json_decode($content, true);
 
-        $id = $content_array['pay_grade']['id'];
+        $id = $content_array['termination_reason']['id'];
 
-        $response = $this->delete('/api/admin/job/pay-grades', ['id' => $id], ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
+        $response = $this->delete('/api/pim/configuration/termination-reasons', ['id' => $id], ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
 
         $content = $response->getContent();
         $status_code = $response->getStatusCode();
@@ -166,15 +162,15 @@ class PayGradesControllerTest extends TestCase
     /**
      * @test
      *
-     * +-----------------------------------------------+
-     * | POSITIVE TEST | GET /api/admin/job/pay-grades |
-     * +-----------------------------------------------+
+     * +----------------------------------------------------------------+
+     * | POSITIVE TEST | GET /api/pim/configuration/termination-reasons |
+     * +----------------------------------------------------------------+
      */
     public function it_should_return_a_response_if_fetching_of_data_is_successful()
     {
         $this->login();
 
-        $response = $this->get('/api/admin/job/pay-grades', ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
+        $response = $this->get('/api/pim/configuration/termination-reasons', ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
 
         $content = $response->getContent();
         $status_code = $response->getStatusCode();
@@ -214,15 +210,15 @@ class PayGradesControllerTest extends TestCase
     /**
      * @test
      *
-     * +--------------------------------------------------+
-     * | NEGATIVE TEST | DELETE /api/admin/job/pay-grades |
-     * +--------------------------------------------------+
+     * +-------------------------------------------------------------------+
+     * | NEGATIVE TEST | DELETE /api/pim/configuration/termination-reasons |
+     * +-------------------------------------------------------------------+
      */
     public function it_should_return_an_error_if_delete_fails()
     {
         $this->login();
 
-        $response = $this->delete('/api/admin/job/pay-grades', ['id' => 100], ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
+        $response = $this->delete('/api/pim/configuration/termination-reasons', ['id' => 100], ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
 
         $content = $response->getContent();
         $status_code = $response->getStatusCode();
@@ -243,9 +239,9 @@ class PayGradesControllerTest extends TestCase
     {
         $this->login();
 
-        $data = $this->pay_grade;
+        $data = $this->termination_reason;
         $data['name'] .= $this->str_rand();
 
-        return $this->post('/api/admin/job/pay-grades', $data, ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
+        return $this->post('/api/pim/configuration/termination-reasons', $data, ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
     }
 }
