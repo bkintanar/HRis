@@ -171,7 +171,7 @@ module.exports = {
       }).then(
       function(response) {
         if (response) {
-          this.job_titles_chosen = response.entity;
+          this.job_titles_chosen = response.entity.chosen;
         }
 
         if (this.employee) {
@@ -191,7 +191,7 @@ module.exports = {
       }).then(
       function(response) {
         if (response) {
-          this.employment_statuses_chosen = response.entity;
+          this.employment_statuses_chosen = response.entity.chosen;
         }
 
         if (this.employee) {
@@ -212,7 +212,7 @@ module.exports = {
       }).then(
       function(response) {
         if (response) {
-          this.departments_chosen = response.entity;
+          this.departments_chosen = response.entity.chosen;
         }
 
         if (this.employee) {
@@ -232,7 +232,7 @@ module.exports = {
       }).then(
       function(response) {
         if (response) {
-          this.locations_chosen = response.entity;
+          this.locations_chosen = response.entity.chosen;
         }
 
         if (this.employee) {

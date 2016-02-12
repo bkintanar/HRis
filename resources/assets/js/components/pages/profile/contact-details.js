@@ -182,7 +182,7 @@ module.exports = {
       function(response) {
 
         if (response) {
-          this.provinces_chosen = response.entity;
+          this.provinces_chosen = response.entity.chosen;
         }
 
         this.address_province_obj = this.provinces_chosen[this.employee.address_province_id - 1];
@@ -199,7 +199,7 @@ module.exports = {
       function(response) {
 
         if (response) {
-          this.countries_chosen = response.entity;
+          this.countries_chosen = response.entity.chosen;
         }
 
         this.address_country_obj = this.countries_chosen[this.employee.address_country_id - 1];
@@ -216,7 +216,7 @@ module.exports = {
       function(response) {
 
         if (response) {
-          this.cities_chosen = response.entity;
+          this.cities_chosen = response.entity.chosen;
         }
 
         $('.vue-chosen').trigger('chosen:updated');

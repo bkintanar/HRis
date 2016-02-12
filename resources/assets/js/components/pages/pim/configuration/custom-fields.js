@@ -78,7 +78,7 @@ module.exports = {
       }).then(
           function(response) {
             if (response) {
-              this.modal.screens_chosen = response.entity;
+              this.modal.screens_chosen = response.entity.chosen;
             }
 
             $('.vue-chosen').trigger('chosen:updated');
@@ -94,7 +94,7 @@ module.exports = {
       }).then(
           function(response) {
             if (response) {
-              this.modal.types_chosen = response.entity;
+              this.modal.types_chosen = response.entity.chosen;
             }
 
             $('.vue-chosen').trigger('chosen:updated');

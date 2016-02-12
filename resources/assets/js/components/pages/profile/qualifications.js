@@ -96,7 +96,7 @@ module.exports = {
       }).then(
       function(response) {
 
-        this.education_levels = response.entity;
+        this.education_levels = response.entity.data;
       }.bind(this));
 
       client({
@@ -105,7 +105,7 @@ module.exports = {
       }).then(
       function(response) {
 
-        this.skills = response.entity;
+        this.skills = response.entity.data;
       }.bind(this));
     },
 
@@ -118,7 +118,7 @@ module.exports = {
       }).then(
       function(response) {
 
-        this.education_level_chosen = response.entity;
+        this.education_level_chosen = response.entity.chosen;
         $('.vue-chosen').trigger('chosen:updated');
       }.bind(this));
     },
@@ -132,7 +132,7 @@ module.exports = {
       }).then(
       function(response) {
 
-        this.skill_chosen = response.entity;
+        this.skill_chosen = response.entity.chosen;
         $('.vue-chosen').trigger('chosen:updated');
       }.bind(this));
     },

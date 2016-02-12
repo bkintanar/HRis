@@ -233,7 +233,7 @@ module.exports = {
       }).then(
       function(response) {
         if (response) {
-          this.nationalities_chosen = response.entity;
+          this.nationalities_chosen = response.entity.chosen;
         }
 
         this.nationality_obj = this.nationalities_chosen[this.employee.nationality_id - 1];
@@ -250,7 +250,7 @@ module.exports = {
       }).then(
       function(response) {
         if (response) {
-          this.marital_statuses_chosen = response.entity;
+          this.marital_statuses_chosen = response.entity.chosen;
         }
 
         this.marital_status_obj = this.marital_statuses_chosen[this.employee.marital_status_id - 1];

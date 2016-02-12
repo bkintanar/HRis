@@ -90,7 +90,7 @@ module.exports = {
         }).then(
         function(response) {
 
-          this.relationships = response.entity;
+          this.relationships = response.entity.data;
         }.bind(this));
 
       }.bind(this),
@@ -256,7 +256,7 @@ module.exports = {
       function(response) {
 
         if (response) {
-          this.relationships_chosen = response.entity;
+          this.relationships_chosen = response.entity.chosen;
         }
 
         $('.vue-chosen').trigger('chosen:updated');

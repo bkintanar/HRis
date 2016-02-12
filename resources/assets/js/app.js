@@ -188,7 +188,7 @@ module.exports = {
       }).then(
       function(response) {
 
-        this.employment_statuses = response.entity;
+        this.employment_statuses = response.entity.data;
       }.bind(this),
       function(response) {
 
@@ -204,7 +204,7 @@ module.exports = {
       }).then(
       function(response) {
 
-        this.job_titles = response.entity;
+        this.job_titles = response.entity.data;
       }.bind(this),
       function(response) {
 
