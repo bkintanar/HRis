@@ -74,6 +74,10 @@ Vue.component(
   'employment-statuses',
   require('./compiled/partials/tables/admin/job/employment-statuses.vue')
 );
+Vue.component(
+  'education-levels',
+  require('./compiled/partials/tables/admin/qualifications/educations.vue')
+);
 
 // Partial Profile
 Vue.component('custom-field-section', require('./compiled/pages/profile/partials/custom-field-section.vue'));

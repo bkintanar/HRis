@@ -266,7 +266,7 @@ module.exports = {
               },
               '/qualifications': {
                 name: 'admin-qualifications',
-                component: require('./compiled/pages/page.vue'),
+                component: require('./compiled/pages/blank.vue'),
                 auth: true,
                 subRoutes: {
                   '/skills': {
@@ -276,7 +276,7 @@ module.exports = {
                   },
                   '/educations': {
                     name: 'admin-qualifications-educations',
-                    component: require('./compiled/pages/page.vue'),
+                    component: require('./compiled/pages/admin/qualifications/educations.vue'),
                     auth: true
                   }
                 }
