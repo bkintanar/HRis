@@ -194,7 +194,7 @@ class EmployeeTransformer extends TransformerAbstract
      *
      * @param Employee $employee
      *
-     * @return \League\Fractal\Resource\Collection
+     * @return \League\Fractal\Resource\Item
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */

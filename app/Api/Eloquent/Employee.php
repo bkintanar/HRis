@@ -199,9 +199,9 @@ class Employee extends Model
     }
 
     /**
-     * @param bool|true $paginate
-     * @param string    $sort
-     * @param string    $direction
+     * @param bool   $paginate
+     * @param string $sort
+     * @param string $direction
      *
      * @return mixed
      *

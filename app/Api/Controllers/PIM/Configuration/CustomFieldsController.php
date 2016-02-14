@@ -294,20 +294,10 @@ class CustomFieldsController extends BaseController
                 $options = explode(',', $request->get('custom_field_options'));
 
                 // Delete database entry that aren't in the new option list.
-                foreach ($old_options as $option) {
-                    if (!in_array($option->name, $options)) {
-                        $option->delete();
-                    }
-                }
+                $this->deleteOldOptions($options, $old_options);
 
-                foreach ($options as $option) {
-                    $custom_field_option = $this->custom_field_option->whereCustomFieldId($custom_field->id)->whereName($option)->count();
-
-                    // Only add to database those options that aren't there yet.
-                    if (!$custom_field_option) {
-                        $custom_field->options()->create(['name' => $option]);
-                    }
-                }
+                // Assign / Create database entry basing on the new option list.
+                $this->createNewOptions($options, $custom_field);
             }
         } catch (Exception $e) {
             DB::rollback();
@@ -320,6 +310,15 @@ class CustomFieldsController extends BaseController
         return $this->responseAPI(200, SUCCESS_UPDATE_MESSAGE);
     }
 
+    /**
+     * Get Custom Field Sections by Screen Id.
+     *
+     * @param Request $request
+     *
+     * @return \Dingo\Api\Http\Response
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     */
     public function getCustomFieldSectionsByScreenId(Request $request)
     {
         $screen_id = Navlink::whereName($request->get('screen_name'))->pluck('id');
@@ -333,5 +332,42 @@ class CustomFieldsController extends BaseController
         });
 
         return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, compact('custom_field_sections'));
+    }
+
+    /**
+     * Delete database entry that aren't in the new option list.
+     *
+     * @param $options
+     * @param $old_options
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     */
+    private function deleteOldOptions($options, $old_options)
+    {
+        foreach ($old_options as $option) {
+            if (!in_array($option->name, $options)) {
+                $option->delete();
+            }
+        }
+    }
+
+    /**
+     * Create database entry basing on the new option list.
+     *
+     * @param $options
+     * @param $custom_field
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     */
+    private function createNewOptions($options, $custom_field)
+    {
+        foreach ($options as $option) {
+            $custom_field_option = $this->custom_field_option->whereCustomFieldId($custom_field->id)->whereName($option)->count();
+
+            // Only add to database those options that aren't there yet.
+            if (!$custom_field_option) {
+                $custom_field->options()->create(['name' => $option]);
+            }
+        }
     }
 }

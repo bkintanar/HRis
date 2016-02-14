@@ -63,7 +63,7 @@ class UserTransformer extends TransformerAbstract
     /**
      * Include Role.
      *
-     * @param Role $user
+     * @param User $user
      *
      * @return \League\Fractal\Resource\Collection
      *
