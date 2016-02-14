@@ -302,13 +302,11 @@ class LookupTableController extends BaseController
      *     ),
      * )
      *
-     * @param Request $request
-     *
      * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function countries(Request $request)
+    public function countries()
     {
         if ($this->table_view) {
             return $this->tableView($this->country);
@@ -356,13 +354,11 @@ class LookupTableController extends BaseController
      *     ),
      * )
      *
-     * @param Request $request
-     *
      * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function departments(Request $request)
+    public function departments()
     {
         if ($this->table_view) {
             return $this->tableView($this->department);
@@ -410,13 +406,11 @@ class LookupTableController extends BaseController
      *     ),
      * )
      *
-     * @param Request $request
-     *
      * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function educationLevels(Request $request)
+    public function educationLevels()
     {
         if ($this->table_view) {
             return $this->tableView($this->education_level);
@@ -464,13 +458,11 @@ class LookupTableController extends BaseController
      *     ),
      * )
      *
-     * @param Request $request
-     *
      * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function employmentStatuses(Request $request)
+    public function employmentStatuses()
     {
         if ($this->table_view) {
             return $this->tableView($this->employment_status, 'class');
@@ -518,13 +510,11 @@ class LookupTableController extends BaseController
      *     ),
      * )
      *
-     * @param Request $request
-     *
      * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function jobTitles(Request $request)
+    public function jobTitles()
     {
         if ($this->table_view) {
             return $this->tableView($this->job_title);
@@ -572,13 +562,11 @@ class LookupTableController extends BaseController
      *     ),
      * )
      *
-     * @param Request $request
-     *
      * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function locations(Request $request)
+    public function locations()
     {
         if ($this->table_view) {
             return $this->tableView($this->location);
@@ -626,13 +614,11 @@ class LookupTableController extends BaseController
      *     ),
      * )
      *
-     * @param Request $request
-     *
      * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function maritalStatuses(Request $request)
+    public function maritalStatuses()
     {
         if ($this->table_view) {
             return $this->tableView($this->marital_status);
@@ -680,13 +666,11 @@ class LookupTableController extends BaseController
      *     ),
      * )
      *
-     * @param Request $request
-     *
      * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function nationalities(Request $request)
+    public function nationalities()
     {
         if ($this->table_view) {
             return $this->tableView($this->nationality);
@@ -734,13 +718,11 @@ class LookupTableController extends BaseController
      *     ),
      * )
      *
-     * @param Request $request
-     *
      * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function provinces(Request $request)
+    public function provinces()
     {
         if ($this->table_view) {
             return $this->tableView($this->province);
@@ -788,13 +770,11 @@ class LookupTableController extends BaseController
      *     ),
      * )
      *
-     * @param Request $request
-     *
      * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function relationships(Request $request)
+    public function relationships()
     {
         if ($this->table_view) {
             return $this->tableView($this->relationship);
@@ -842,13 +822,11 @@ class LookupTableController extends BaseController
      *     ),
      * )
      *
-     * @param Request $request
-     *
      * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function skills(Request $request)
+    public function skills()
     {
         if ($this->table_view) {
             return $this->tableView($this->skill);
@@ -896,13 +874,11 @@ class LookupTableController extends BaseController
      *     ),
      * )
      *
-     * @param Request $request
-     *
      * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function screens(Request $request)
+    public function screens()
     {
         $navlinks = $this->navlink->whereParentId(-1);
 
@@ -952,13 +928,11 @@ class LookupTableController extends BaseController
      *     ),
      * )
      *
-     * @param Request $request
-     *
      * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function types(Request $request)
+    public function types()
     {
         if ($this->table_view) {
             return $this->tableView($this->custom_field_type);

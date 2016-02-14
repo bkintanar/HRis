@@ -374,8 +374,8 @@ class Navlink extends Model
     }
 
     /**
-     * @param $navigation
-     * @param $pim
+     * @param      $navigation
+     * @param bool $pim
      *
      * @return array
      *

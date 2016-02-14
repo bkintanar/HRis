@@ -45,7 +45,7 @@ class AuthController extends BaseController
     }
 
     /**
-     * @return mixed
+     * @return \Dingo\Api\Http\Response
      */
     public function token()
     {
