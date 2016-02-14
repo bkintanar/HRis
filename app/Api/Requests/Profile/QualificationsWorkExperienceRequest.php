@@ -39,24 +39,6 @@ class QualificationsWorkExperienceRequest extends Request
     {
         $permission = $this->is('*pim/*') ? 'pim.qualifications.work-experiences' : 'profile.qualifications.work-experiences';
 
-        // Create
-        if ($this->isMethod('post')) {
-            return $this->logged_user->hasAccess($permission.'.create');
-        } // Delete
-        else {
-            if ($this->isMethod('delete')) {
-                return $this->logged_user->hasAccess($permission.'.delete');
-            } // View
-            else {
-                if ($this->isMethod('get')) {
-                    return $this->logged_user->hasAccess($permission.'.view');
-                } // Update
-                else {
-                    if ($this->isMethod('patch')) {
-                        return $this->logged_user->hasAccess($permission.'.update');
-                    }
-                }
-            }
-        }
+        return $this->hasAccess($permission);
     }
 }

@@ -43,18 +43,6 @@ class JobRequest extends Request
     {
         $permission = $this->is('*pim/*') ? 'pim.job' : 'profile.job';
 
-        // Update
-        if ($this->isMethod('patch') || $this->is('*/edit')) {
-            return $this->logged_user->hasAccess($permission.'.update');
-        } // View
-        else {
-            if ($this->isMethod('get')) {
-                return $this->logged_user->hasAccess($permission.'.view');
-            } else {
-                if ($this->isMethod('delete')) {
-                    return $this->logged_user->hasAccess($permission.'.delete');
-                }
-            }
-        }
+        return $this->hasAccess($permission);
     }
 }

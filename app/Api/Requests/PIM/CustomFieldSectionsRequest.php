@@ -41,36 +41,6 @@ class CustomFieldSectionsRequest extends Request
      */
     public function authorize()
     {
-        $permission = 'pim.configuration.custom-field-sections';
-
-        // Create
-        if ($this->isMethod('post')) {
-            return $this->logged_user->hasAccess($permission.'.create');
-        } // Delete
-        else {
-            if ($this->isMethod('delete')) {
-                return $this->logged_user->hasAccess($permission.'.delete');
-            } // View
-            else {
-                if ($this->isMethod('get')) {
-                    return $this->logged_user->hasAccess($permission.'.view');
-                } // Update
-                else {
-                    if ($this->isMethod('patch')) {
-                        return $this->logged_user->hasAccess($permission.'.update');
-                    }
-                }
-            }
-        }
-    }
-
-    /**
-     * @return mixed
-     *
-     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
-     */
-    public function forbiddenResponse()
-    {
-        return response()->make(view()->make('errors.403'), 403);
+        return $this->hasAccess('pim.configuration.custom-field-sections');
     }
 }
