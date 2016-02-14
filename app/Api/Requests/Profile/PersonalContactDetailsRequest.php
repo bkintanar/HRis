@@ -47,14 +47,6 @@ class PersonalContactDetailsRequest extends Request
         $permission = $this->is('*pim/*') ? 'pim' : 'profile';
         $permission .= $this->is('*personal-details*') ? '.personal-details' : '.personal-details';
 
-        // Update
-        if ($this->isMethod('patch') || $this->is('*/edit')) {
-            return $this->logged_user->hasAccess($permission.'.update');
-        } // View
-        else {
-            if ($this->isMethod('get')) {
-                return $this->logged_user->hasAccess($permission.'.view');
-            }
-        }
+        return $this->hasAccess($permission);
     }
 }

@@ -44,14 +44,6 @@ class PIMRequest extends Request
         $permission = str_replace('/', '.', $this->path());
         $permission = substr($permission, 4);
 
-        // View
-        if ($this->isMethod('get')) {
-            return $this->logged_user->hasAccess($permission.'.view');
-        } // Create
-        else {
-            if ($this->isMethod('post')) {
-                return $this->logged_user->hasAccess($permission.'.create');
-            }
-        }
+        return $this->hasAccess($permission);
     }
 }
