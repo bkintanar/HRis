@@ -13,7 +13,6 @@ use Exception;
 use HRis\Api\Controllers\BaseController;
 use HRis\Api\Eloquent\Navlink;
 use HRis\Api\Eloquent\User;
-use HRis\Api\Requests\UserRequest;
 use HRis\Api\Transformers\UserTransformer;
 use Illuminate\Http\Request;
 use Swagger\Annotations as SWG;
@@ -26,26 +25,23 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 class AuthController extends BaseController
 {
     /**
-     * @param Request $request
-     *
-     * @return mixed
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function me(Request $request)
+    public function me()
     {
-        $data = [];
-        try {
-            $data = JWTAuth::parseToken()->authenticate();
-        } catch (\Exception $e) {
-            dd('test');
-        }
+        $data = JWTAuth::parseToken()->authenticate();
 
-        return $this->item(User::findOrFail($data->id), new UserTransformer());
+        $user = User::findOrFail($data->id);
+
+        return $this->item($user, new UserTransformer());
     }
 
     /**
      * @return \Dingo\Api\Http\Response
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function token()
     {
@@ -147,33 +143,11 @@ class AuthController extends BaseController
             if (!$token = JWTAuth::attempt($credentials, $claims)) {
                 return $this->responseAPI(401, 'invalid_credentials');
             }
-        } catch (JWTException $e) {
-            // something went wrong whilst attempting to encode the token
-            return $this->responseAPI(422, 'could_not_create_token');
         } catch (Exception $e) {
-            return $this->responseAPI(422, $e->getMessage());
+            return $this->responseAPI(422, 'could_not_create_token');
         }
 
         // all good so return the token
-        return $this->responseAPI(201, SUCCESS_TOKEN_CREATED_MESSAGE, compact('token'));
-    }
-
-    /**
-     * @param UserRequest $request
-     *
-     * @return \Dingo\Api\Http\Response
-     *
-     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
-     */
-    public function register(UserRequest $request)
-    {
-        $newUser = [
-            'email'    => $request->get('email'),
-            'password' => bcrypt($request->get('password')),
-        ];
-        $user = User::create($newUser);
-        $token = JWTAuth::fromUser($user);
-
         return $this->responseAPI(201, SUCCESS_TOKEN_CREATED_MESSAGE, compact('token'));
     }
 

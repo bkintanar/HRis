@@ -198,7 +198,7 @@ class CustomFieldsController extends BaseController
         try {
             DB::beginTransaction();
 
-            $custom_field_section = $this->custom_field_section->whereId($custom_field_section_id)->first();
+            $custom_field_section = $this->custom_field_section->findOrFail($custom_field_section_id);
 
             $data = [
                 'custom_field_type_id' => $request->get('type_id'),
@@ -249,6 +249,10 @@ class CustomFieldsController extends BaseController
 
             $custom_field_section = CustomFieldSection::whereId($request->get('custom_field_section_id'))->first();
 
+            if (!$custom_field_section) {
+                return $this->responseAPI(404, UNABLE_RETRIEVE_MESSAGE);
+            }
+
             $custom_field_section->update($request->only(['name', 'screen_id']));
         } catch (Exception $e) {
             DB::rollback();
@@ -276,6 +280,10 @@ class CustomFieldsController extends BaseController
             DB::beginTransaction();
 
             $custom_field = $this->custom_field->whereId($request->get('custom_field_id'))->first();
+
+            if (!$custom_field) {
+                return $this->responseAPI(404, UNABLE_RETRIEVE_MESSAGE);
+            }
 
             $data = [
                 'custom_field_type_id' => $request->get('type_id'),
