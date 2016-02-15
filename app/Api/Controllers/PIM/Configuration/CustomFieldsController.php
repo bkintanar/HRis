@@ -42,6 +42,11 @@ class CustomFieldsController extends BaseController
     protected $custom_field_type;
 
     /**
+     * @var CustomFieldOption
+     */
+    protected $custom_field_option;
+
+    /**
      * @param CustomFieldSection $custom_field_section
      * @param CustomField        $custom_field
      * @param CustomFieldType    $custom_field_type
@@ -140,7 +145,7 @@ class CustomFieldsController extends BaseController
 
         $custom_fields = $this->custom_field->with('type', 'options')->whereCustomFieldSectionId($custom_field_section_id)->paginate(ROWS_PER_PAGE);
 
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, ['data' => $custom_fields, 'table' => $this->setupDataTable($custom_fields)]);
+        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, ['data' => $custom_fields, 'table' => $this->setupDataTableCustomField($custom_fields)]);
     }
 
     /**
