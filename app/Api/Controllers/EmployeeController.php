@@ -55,10 +55,6 @@ class EmployeeController extends BaseController
      */
     public function getByEmployeeId(EmployeeRequest $request)
     {
-        if (!$request->has('employee_id')) {
-            return $this->responseAPI(404, EMPLOYEE_ID_NOT_FOUND);
-        }
-
         $employee_id = $request->get('employee_id');
 
         $this->initializeCustomFieldValues($employee_id);
