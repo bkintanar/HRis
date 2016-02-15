@@ -3,6 +3,7 @@
 namespace Tests\Auth;
 
 use Tests\TestCase;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthControllerTest extends TestCase
 {
@@ -107,8 +108,7 @@ class AuthControllerTest extends TestCase
      */
     public function it_should_return_success_in_logout_when_token_has_been_invalidated()
     {
-        $content_array = $this->login();
-        $token = $content_array['token'];
+        $this->login();
 
         $response = $this->call('GET', '/api/logout');
 
@@ -185,5 +185,116 @@ class AuthControllerTest extends TestCase
 
         $this->assertArrayHasKey('message', $content_array);
         $this->assertEquals(401, $status_code);
+    }
+
+    /**
+     * @test
+     *
+     * +---------------------------------------+
+     * | NEGATIVE TEST | GET /api/auth/refresh |
+     * +---------------------------------------+
+     */
+    public function it_should_throw_an_exception_when_providing_a_malformed_token()
+    {
+        $this->login();
+
+        JWTAuth::setToken('foo.bar.baz');
+
+        $response = $this->get('/api/auth/refresh')->response;
+
+        $content = $response->getContent();
+        $status_code = $response->getStatusCode();
+
+        $content_array = json_decode($content, true);
+
+        $this->assertArrayHasKey('message', $content_array);
+        $this->assertEquals(403, $status_code);
+    }
+
+    /**
+     * @test
+     *
+     * +---------------------------------------+
+     * | NEGATIVE TEST | GET /api/auth/refresh |
+     * +---------------------------------------+
+     */
+    public function it_should_throw_an_exception_when_not_providing_a_token()
+    {
+        $response = $this->get('/api/auth/refresh')->response;
+
+        $content = $response->getContent();
+        $status_code = $response->getStatusCode();
+
+        $content_array = json_decode($content, true);
+
+        $this->assertArrayHasKey('message', $content_array);
+        $this->assertEquals(400, $status_code);
+    }
+
+    /**
+     * @test
+     *
+     * +---------------------------------------+
+     * | POSITIVE TEST | GET /api/auth/refresh |
+     * +---------------------------------------+
+     */
+    public function it_should_respond_a_token()
+    {
+        $this->login();
+
+        $response = $this->get('/api/auth/refresh')->response;
+
+        $content = $response->getContent();
+        $status_code = $response->getStatusCode();
+
+        $content_array = json_decode($content, true);
+
+        $this->assertArrayHasKey('message', $content_array);
+        $this->assertEquals(201, $status_code);
+    }
+
+    /**
+     * @test
+     *
+     * +-----------------------------------+
+     * | POSITIVE TEST | POST /api/sidebar |
+     * +-----------------------------------+
+     */
+    public function it_should_respond_a_sidebar()
+    {
+        $this->login();
+
+        $response = $this->post('/api/sidebar')->response;
+
+        $content = $response->getContent();
+        $status_code = $response->getStatusCode();
+
+        $content_array = json_decode($content, true);
+
+        $this->assertArrayHasKey('message', $content_array);
+        $this->assertArrayHasKey('sidebar', $content_array);
+        $this->assertEquals(200, $status_code);
+    }
+
+    /**
+     * @test
+     *
+     * +-----------------------------------+
+     * | POSITIVE TEST | GET /api/users/me |
+     * +-----------------------------------+
+     */
+    public function it_should_respond_a_user()
+    {
+        $this->login();
+
+        $response = $this->get('/api/users/me')->response;
+
+        $content = $response->getContent();
+        $status_code = $response->getStatusCode();
+
+        $content_array = json_decode($content, true);
+
+        $this->assertArrayHasKey('data', $content_array);
+        $this->assertEquals(200, $status_code);
     }
 }
