@@ -9,7 +9,6 @@
  */
 namespace HRis\Api\Controllers\Profile;
 
-use Exception;
 use HRis\Api\Controllers\BaseController;
 use HRis\Api\Eloquent\Employee;
 use HRis\Api\Requests\Profile\PersonalContactDetailsRequest;
@@ -171,25 +170,21 @@ class PersonalDetailsController extends BaseController
         $id = $_employee['id'];
         $employee_id = $_employee['employee_id'];
 
-        $employee = $this->employee->findOrFail($id);
+        $employee = $this->employee->find($id);
 
         if (!$employee || !$employee_id || $employee_id == Config::get('company.employee_id_prefix').'____') {
             return $this->responseAPI(405, UNABLE_UPDATE_MESSAGE);
         }
 
         // If user is trying to update the employee_id to a used employee_id.
-        $original_employee_id = $this->employee->whereEmployeeId($employee_id)->pluck('id');
+        $original_employee_id = $this->employee->whereEmployeeId($employee_id)->value('id');
         if ($id != $original_employee_id && !is_null($original_employee_id)) {
             return $this->responseAPI(405, EMPLOYEE_ID_IN_MESSAGE);
         }
 
-        try {
-            $attributes = array_filter(array_slice($request->get('employee'), 0, 33));
+        $attributes = array_filter(array_slice($request->get('employee'), 0, 33));
 
-            $employee->update($attributes);
-        } catch (Exception $e) {
-            return $this->responseAPI(422, UNABLE_UPDATE_MESSAGE);
-        }
+        $employee->update($attributes);
 
         return $this->responseAPI(200, SUCCESS_UPDATE_MESSAGE, compact('employee'));
     }

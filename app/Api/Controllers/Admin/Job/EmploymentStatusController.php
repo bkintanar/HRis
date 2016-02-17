@@ -335,6 +335,6 @@ class EmploymentStatusController extends BaseController
      */
     public function update(EmploymentStatusRequest $request)
     {
-        return $this->updateModel($request, $this->employment_status, ['name', 'description']);
+        return $this->updateModel($request, $this->employment_status, ['name', 'class']);
     }
 }

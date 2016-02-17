@@ -27,7 +27,7 @@ class PersonalContactDetailsRequest extends Request
     {
         if ($this->isMethod('patch')) {
             return [
-                'employee.id'          => 'required',
+                'employee.id'          => 'required|exists:employees,id',
                 'employee.employee_id' => 'required',
             ];
         }

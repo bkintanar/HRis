@@ -16,7 +16,7 @@ class PersonalDetailsControllerTest extends TestCase
      * | POSITIVE TEST | PATCH /api/profile/personal-details |
      * +-----------------------------------------------------+
      */
-    public function it_should_return_a_success_message_if_patch_is_successful_employee()
+    public function it_should_return_a_success_message_if_patch_is_successful()
     {
         $this->login();
 

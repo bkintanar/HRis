@@ -334,7 +334,7 @@ class CustomFieldsController extends BaseController
      */
     public function getCustomFieldSectionsByScreenId(Request $request)
     {
-        $screen_id = Navlink::whereName($request->get('screen_name'))->pluck('id');
+        $screen_id = Navlink::whereName($request->get('screen_name'))->value('id');
 
         $custom_field_sections = $this->custom_field_section->with('customFields.options')->whereScreenId($screen_id)->get();
 

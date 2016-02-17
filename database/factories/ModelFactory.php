@@ -19,10 +19,3 @@ $factory->define(HRis\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
-
-$factory->define(HRis\Dog::class, function (Faker\Generator $faker) {
-    return [
-        'name' => $faker->name,
-        'age'  => $faker->randomDigit,
-    ];
-});

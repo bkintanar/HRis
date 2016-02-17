@@ -15,7 +15,7 @@
   ],
   "require": {
     "php": ">=5.5.9",
-    "laravel/framework": "5.1.*",
+    "laravel/framework": "5.2.*",
     "dingo/api": "1.0.*@dev",
     "tymon/jwt-auth": "dev-develop",
     "barryvdh/laravel-cors": "^0.7.1",
@@ -27,11 +27,13 @@
     "barryvdh/laravel-ide-helper": "^2.1",
     "doctrine/dbal": "^2.5",
     "fzaninotto/faker": "~1.4",
+    "mayflower/php-codebrowser": "~1.1",
     "mockery/mockery": "0.9.*",
     "phpunit/phpunit": "~4.0",
     "phpspec/phpspec": "~2.1",
     "phpmd/phpmd": "~2.3",
-    "mayflower/php-codebrowser": "~1.1"
+    "symfony/css-selector": "~3.0",
+    "symfony/dom-crawler": "~3.0"
   },
   "autoload": {
     "classmap": [

@@ -63,7 +63,7 @@ class EmergencyContactsControllerTest extends TestCase
         $this->login();
 
         $data = $this->emergency_contact;
-        $data['relationship_id'] = Relationship::whereName('Other')->pluck('id');
+        $data['relationship_id'] = Relationship::whereName('Other')->value('id');
 
         $response = $this->post('/api/profile/emergency-contacts', $data, ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
 
@@ -91,7 +91,7 @@ class EmergencyContactsControllerTest extends TestCase
         $this->login();
 
         $data = $this->emergency_contact;
-        $data['relationship_id'] = Relationship::whereName('Other')->pluck('id');
+        $data['relationship_id'] = Relationship::whereName('Other')->value('id');
 
         $response = $this->patch('/api/profile/emergency-contacts', $data, ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
 
@@ -128,7 +128,7 @@ class EmergencyContactsControllerTest extends TestCase
         $data = $this->emergency_contact;
         $data['first_name'] = 'First Name Test 2';
         $data['employee_id'] = $this->user->employee->id;
-        $data['relationship_id'] = Relationship::whereName('Other')->pluck('id');
+        $data['relationship_id'] = Relationship::whereName('Other')->value('id');
         $data['id'] = $id;
 
         $response = $this->patch('/api/profile/emergency-contacts', $data, ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
@@ -209,7 +209,7 @@ class EmergencyContactsControllerTest extends TestCase
         $data = $this->emergency_contact;
 
         $data['employee_id'] = $this->user->employee->id;
-        $data['relationship_id'] = Relationship::whereName('Other')->pluck('id');
+        $data['relationship_id'] = Relationship::whereName('Other')->value('id');
 
         return $this->post('/api/profile/emergency-contacts', $data, ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
     }
