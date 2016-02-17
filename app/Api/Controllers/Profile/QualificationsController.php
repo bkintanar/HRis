@@ -38,7 +38,7 @@ class QualificationsController extends BaseController
     {
         $this->employee = $employee;
 
-        $profile_details_id = Navlink::whereName('Qualifications')->pluck('id');
+        $profile_details_id = Navlink::whereName('Qualifications')->value('id');
         $this->data['custom_field_sections'] = CustomFieldSection::whereScreenId($profile_details_id)->get();
     }
 

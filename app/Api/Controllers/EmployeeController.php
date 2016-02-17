@@ -71,7 +71,7 @@ class EmployeeController extends BaseController
      */
     private function initializeCustomFieldValues($employee_id)
     {
-        $employee_id = $this->employee->whereEmployeeId($employee_id)->pluck('id');
+        $employee_id = $this->employee->whereEmployeeId($employee_id)->value('id');
         $custom_fields = $this->custom_field->get();
 
         foreach ($custom_fields as $custom_field) {

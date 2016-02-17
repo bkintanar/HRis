@@ -61,7 +61,7 @@ class DependentsControllerTest extends TestCase
         $this->login();
 
         $data = $this->dependent;
-        $data['relationship_id'] = Relationship::whereName('Other')->pluck('id');
+        $data['relationship_id'] = Relationship::whereName('Other')->value('id');
 
         $response = $this->post('/api/profile/dependents', $data, ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
 
@@ -89,7 +89,7 @@ class DependentsControllerTest extends TestCase
         $this->login();
 
         $data = $this->dependent;
-        $data['relationship_id'] = Relationship::whereName('Other')->pluck('id');
+        $data['relationship_id'] = Relationship::whereName('Other')->value('id');
 
         $response = $this->patch('/api/profile/dependents', $data, ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
 
@@ -126,7 +126,7 @@ class DependentsControllerTest extends TestCase
         $data = $this->dependent;
         $data['first_name'] = 'First Name Test 2';
         $data['employee_id'] = $this->user->employee->id;
-        $data['relationship_id'] = Relationship::whereName('Other')->pluck('id');
+        $data['relationship_id'] = Relationship::whereName('Other')->value('id');
         $data['id'] = $id;
 
         $response = $this->patch('/api/profile/dependents', $data, ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
@@ -207,7 +207,7 @@ class DependentsControllerTest extends TestCase
         $data = $this->dependent;
 
         $data['employee_id'] = $this->user->employee->id;
-        $data['relationship_id'] = Relationship::whereName('Other')->pluck('id');
+        $data['relationship_id'] = Relationship::whereName('Other')->value('id');
         $data['birth_date'] = '2015-01-01';
 
         return $this->post('/api/profile/dependents', $data, ['HTTP_Authorization' => 'Bearer '.$this->token])->response;

@@ -15,7 +15,8 @@ before_script:
     - composer install --prefer-source --no-interaction
     - chmod -R 777 storage
     - chmod -R 777 bootstrap/cache
-    - cp .env.testing .env
+    - cp .env.travis .env.testing
+    - cp .env.travis .env
     - php artisan migrate --env=testing --no-interaction -vvv
     - php artisan db:seed --env=testing --no-interaction -vvv
 
