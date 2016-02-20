@@ -14,6 +14,7 @@ const UNABLE_ADD_MESSAGE = 'Unable to add record to the database.';
 const UNABLE_RETRIEVE_MESSAGE = 'Unable to retrieve record from database.';
 const UNABLE_UPDATE_MESSAGE = 'Unable to update record.';
 const UNABLE_DELETE_MESSAGE = 'Unable to delete record from the database.';
+const UNPROCESSABLE_ENTITY = '422 Unprocessable Entity';
 
 // Standard success message
 const SUCCESS_ADD_MESSAGE = 'Record successfully added.';

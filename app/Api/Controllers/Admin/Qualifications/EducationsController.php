@@ -265,6 +265,65 @@ class EducationsController extends BaseController
     }
 
     /**
+     * Get a single instance of Education Level.
+     *
+     * @SWG\Get(
+     *     path="/admin/qualifications/educations/1",
+     *     tags={"Administration"},
+     *     consumes={"application/json"},
+     *     summary="Get a single instance of Education Level.",
+     *     @SWG\Response(response="200", description="Success",
+     *         @SWG\Schema(
+     *             title="data",
+     *             type="object",
+     *             required={"employment_status", "message", "status_code"},
+     *             @SWG\Property(property="employment_status", ref="#/definitions/EducationLevel"),
+     *             @SWG\Property(property="message", type="string", default="Record successfully retrieved.", description="Status message from server"),
+     *             @SWG\Property(property="status_code", type="integer", default=200, description="Status code from server"),
+     *         )
+     *     ),
+     *     @SWG\Response(response="400", description="Token not provided",
+     *         @SWG\Schema(
+     *             title="data",
+     *             type="object",
+     *             required={"message", "status_code", "debug"},
+     *             @SWG\Property(property="message", type="string", default="Token not provided", description="Error message from server"),
+     *             @SWG\Property(property="status_code", type="integer", default=400, description="Status code from server"),
+     *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
+     *         )
+     *     ),
+     *     @SWG\Response(response="404", description="404 Not Found",
+     *         @SWG\Schema(
+     *             title="data",
+     *             type="object",
+     *             required={"message", "status_code"},
+     *             @SWG\Property(property="message", type="string", default="404 Not Found", description="Status message from server"),
+     *             @SWG\Property(property="status_code", type="integer", default=404, description="Status code from server"),
+     *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         description="JWT Token",
+     *         required=true,
+     *         type="string",
+     *         default="Bearer "
+     *     ),
+     * )
+     *
+     * @param EducationLevel $education_level
+     *
+     * @return \Dingo\Api\Http\Response
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     */
+    public function show(EducationLevel $education_level)
+    {
+        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, compact('education_level'));
+    }
+
+    /**
      * Update the Admin - Qualifications Education.
      *
      * @SWG\Patch(

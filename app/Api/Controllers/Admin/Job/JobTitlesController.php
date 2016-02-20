@@ -265,6 +265,65 @@ class JobTitlesController extends BaseController
     }
 
     /**
+     * Get a single instance of Job Title.
+     *
+     * @SWG\Get(
+     *     path="/admin/job/titles/1",
+     *     tags={"Administration"},
+     *     consumes={"application/json"},
+     *     summary="Get a single instance of Job Title.",
+     *     @SWG\Response(response="200", description="Success",
+     *         @SWG\Schema(
+     *             title="data",
+     *             type="object",
+     *             required={"employment_status", "message", "status_code"},
+     *             @SWG\Property(property="employment_status", ref="#/definitions/JobTitle"),
+     *             @SWG\Property(property="message", type="string", default="Record successfully retrieved.", description="Status message from server"),
+     *             @SWG\Property(property="status_code", type="integer", default=200, description="Status code from server"),
+     *         )
+     *     ),
+     *     @SWG\Response(response="400", description="Token not provided",
+     *         @SWG\Schema(
+     *             title="data",
+     *             type="object",
+     *             required={"message", "status_code", "debug"},
+     *             @SWG\Property(property="message", type="string", default="Token not provided", description="Error message from server"),
+     *             @SWG\Property(property="status_code", type="integer", default=400, description="Status code from server"),
+     *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
+     *         )
+     *     ),
+     *     @SWG\Response(response="404", description="404 Not Found",
+     *         @SWG\Schema(
+     *             title="data",
+     *             type="object",
+     *             required={"message", "status_code"},
+     *             @SWG\Property(property="message", type="string", default="404 Not Found", description="Status message from server"),
+     *             @SWG\Property(property="status_code", type="integer", default=404, description="Status code from server"),
+     *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         description="JWT Token",
+     *         required=true,
+     *         type="string",
+     *         default="Bearer "
+     *     ),
+     * )
+     *
+     * @param JobTitle $job_title
+     *
+     * @return \Dingo\Api\Http\Response
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     */
+    public function show(JobTitle $job_title)
+    {
+        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, compact('job_title'));
+    }
+
+    /**
      * Update the Admin - Job Title.
      *
      * @SWG\Patch(

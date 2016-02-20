@@ -42,6 +42,8 @@ class PayGradesControllerTest extends TestCase
 
         $this->assertEquals(201, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
+
+        $this->assertEquals(SUCCESS_ADD_MESSAGE, $content_array['message']);
     }
 
     /**
@@ -67,6 +69,8 @@ class PayGradesControllerTest extends TestCase
 
         $this->assertEquals(422, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
+
+        $this->assertEquals(UNPROCESSABLE_ENTITY, $content_array['message']);
     }
 
     /**
@@ -94,6 +98,8 @@ class PayGradesControllerTest extends TestCase
 
         $this->assertEquals(404, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
+
+        $this->assertEquals(UNABLE_RETRIEVE_MESSAGE, $content_array['message']);
     }
 
     /**
@@ -129,6 +135,8 @@ class PayGradesControllerTest extends TestCase
 
         $this->assertEquals(200, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
+
+        $this->assertEquals(SUCCESS_UPDATE_MESSAGE, $content_array['message']);
     }
 
     /**
@@ -161,6 +169,8 @@ class PayGradesControllerTest extends TestCase
 
         $this->assertEquals(200, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
+
+        $this->assertEquals(SUCCESS_DELETE_MESSAGE, $content_array['message']);
     }
 
     /**
@@ -214,6 +224,40 @@ class PayGradesControllerTest extends TestCase
     /**
      * @test
      *
+     * +-------------------------------------------------+
+     * | POSITIVE TEST | GET /api/admin/job/pay-grades/1 |
+     * +-------------------------------------------------+
+     */
+    public function it_should_return_a_single_instance_if_fetching_of_data_is_successful()
+    {
+        $this->login();
+
+        $response = $this->_insert_record();
+
+        $content = $response->getContent();
+
+        $content_array = json_decode($content, true);
+
+        $pay_grade = $content_array['pay_grade'];
+
+        $response = $this->get('/api/admin/job/pay-grades/'.$pay_grade['id'], ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
+
+        $content = $response->getContent();
+        $status_code = $response->getStatusCode();
+
+        $content_array = json_decode($content, true);
+
+        $this->assertArrayHasKey('pay_grade', $content_array);
+
+        $this->assertEquals(200, $status_code);
+        $this->assertEquals($status_code, $content_array['status_code']);
+
+        $this->assertEquals(SUCCESS_RETRIEVE_MESSAGE, $content_array['message']);
+    }
+
+    /**
+     * @test
+     *
      * +--------------------------------------------------+
      * | NEGATIVE TEST | DELETE /api/admin/job/pay-grades |
      * +--------------------------------------------------+
@@ -234,6 +278,8 @@ class PayGradesControllerTest extends TestCase
 
         $this->assertEquals(422, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
+
+        $this->assertEquals(UNABLE_DELETE_MESSAGE, $content_array['message']);
     }
 
     /**

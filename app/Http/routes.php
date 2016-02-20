@@ -99,16 +99,19 @@ $api->version('v1', function (Router $api) {
                 // Job
                 $api->group(['prefix' => 'job', 'namespace' => 'Job'], function (Router $api) {
                     $api->get('titles', 'JobTitlesController@index');                                       // docs done
+                    $api->get('titles/{job_titles}', 'JobTitlesController@show');                           // docs done
                     $api->post('titles', 'JobTitlesController@store');                                      // docs done
                     $api->patch('titles', 'JobTitlesController@update');                                    // docs done
                     $api->delete('titles', 'JobTitlesController@destroy');                                  // docs done
 
                     $api->get('employment-status', 'EmploymentStatusController@index');                     // docs done
+                    $api->get('employment-status/{employment_status}', 'EmploymentStatusController@show');  // docs done
                     $api->post('employment-status', 'EmploymentStatusController@store');                    // docs done
                     $api->patch('employment-status', 'EmploymentStatusController@update');                  // docs done
                     $api->delete('employment-status', 'EmploymentStatusController@destroy');                // docs done
 
                     $api->get('pay-grades', 'PayGradesController@index');                                   // docs done
+                    $api->get('pay-grades/{pay_grade}', 'PayGradesController@show');                        // docs done
                     $api->post('pay-grades', 'PayGradesController@store');                                  // docs done
                     $api->patch('pay-grades', 'PayGradesController@update');                                // docs done
                     $api->delete('pay-grades', 'PayGradesController@destroy');                              // docs done
@@ -117,6 +120,7 @@ $api->version('v1', function (Router $api) {
                 // Qualification
                 $api->group(['prefix' => 'qualifications', 'namespace' => 'Qualifications'], function (Router $api) {
                     $api->get('educations', 'EducationsController@index');                                  // docs done
+                    $api->get('educations/{education_level}', 'EducationsController@show');                 // docs done
                     $api->post('educations', 'EducationsController@store');                                 // docs done
                     $api->patch('educations', 'EducationsController@update');                               // docs done
                     $api->delete('educations', 'EducationsController@destroy');                             // docs done
