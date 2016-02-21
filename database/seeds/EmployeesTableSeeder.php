@@ -5,7 +5,7 @@
  *
  * HRis - Human Resource and Payroll System
  *
- * @link    http://github.com/HB-Co/HRis
+ * @link http://github.com/HB-Co/HRis
  */
 use HRis\Api\Eloquent\Employee;
 use HRis\Api\Eloquent\User;
