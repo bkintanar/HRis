@@ -5,7 +5,7 @@
  *
  * HRis - Human Resource and Payroll System
  *
- * @link    http://github.com/HB-Co/HRis
+ * @link http://github.com/HB-Co/HRis
  */
 namespace HRis\Api\Requests\Auth;
 
@@ -24,7 +24,7 @@ class Request extends BaseRequest
     {
         return [
             'email'    => 'required|exists:users,email',
-            'password' => 'required'
+            'password' => 'required',
         ];
     }
 
