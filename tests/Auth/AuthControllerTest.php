@@ -49,7 +49,7 @@ class AuthControllerTest extends TestCase
         $this->assertArrayHasKey('message', $content_array);
         $this->assertArrayHasKey('status_code', $content_array);
 
-        $this->assertEquals(401, $status_code);
+        $this->assertEquals(422, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
     }
 
