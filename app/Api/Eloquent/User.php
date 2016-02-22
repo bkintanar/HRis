@@ -10,7 +10,6 @@
 namespace HRis\Api\Eloquent;
 
 use Cartalyst\Sentinel\Users\EloquentUser as SentinelUser;
-use Exception;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
@@ -46,24 +45,6 @@ class User extends SentinelUser implements AuthenticatableContract, Authorizable
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
-
-    /**
-     * @throws Exception
-     *
-     * @return mixed
-     *
-     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
-     */
-    public function role()
-    {
-        $roles = $this->getRoles();
-
-        if (empty($roles)) {
-            throw new Exception('User not in group.');
-        }
-
-        return $roles[0];
-    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
