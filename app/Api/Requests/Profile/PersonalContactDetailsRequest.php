@@ -31,8 +31,6 @@ class PersonalContactDetailsRequest extends Request
                 'employee.employee_id' => 'required',
             ];
         }
-
-        return [];
     }
 
     /**
@@ -45,7 +43,7 @@ class PersonalContactDetailsRequest extends Request
     public function authorize()
     {
         $permission = $this->is('*pim/*') ? 'pim' : 'profile';
-        $permission .= $this->is('*personal-details*') ? '.personal-details' : '.personal-details';
+        $permission .= $this->is('*personal-details*') ? '.personal-details' : '.contact-details';
 
         return $this->hasAccess($permission);
     }

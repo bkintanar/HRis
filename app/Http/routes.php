@@ -99,7 +99,7 @@ $api->version('v1', function (Router $api) {
                 // Job
                 $api->group(['prefix' => 'job', 'namespace' => 'Job'], function (Router $api) {
                     $api->get('titles', 'JobTitlesController@index');                                       // docs done
-                    $api->get('titles/{job_titles}', 'JobTitlesController@show');                           // docs done
+                    $api->get('titles/{job_title}', 'JobTitlesController@show');                            // docs done
                     $api->post('titles', 'JobTitlesController@store');                                      // docs done
                     $api->patch('titles', 'JobTitlesController@update');                                    // docs done
                     $api->delete('titles', 'JobTitlesController@destroy');                                  // docs done
