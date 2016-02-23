@@ -64,27 +64,13 @@ abstract class Request extends FormRequest
      */
     public function hasAccess($permission)
     {
-        switch ($this->getMethod()) {
-            case 'DELETE':
-                $hasAccess = $this->logged_user->hasAccess($permission.'.delete');
-                break;
+        $methods = [
+            'DELETE' => $this->logged_user->hasAccess($permission.'.delete'),
+            'GET'    => $this->logged_user->hasAccess($permission.'.view'),
+            'PATCH'  => $this->logged_user->hasAccess($permission.'.update'),
+            'POST'   => $this->logged_user->hasAccess($permission.'.create'),
+        ];
 
-            case 'GET':
-                $hasAccess = $this->logged_user->hasAccess($permission.'.view');
-                break;
-
-            case 'PATCH':
-                $hasAccess = $this->logged_user->hasAccess($permission.'.update');
-                break;
-
-            case 'POST':
-                $hasAccess = $this->logged_user->hasAccess($permission.'.create');
-                break;
-
-            default:
-                $hasAccess = false;
-        }
-
-        return $hasAccess;
+        return $methods[$this->getMethod()];
     }
 }
