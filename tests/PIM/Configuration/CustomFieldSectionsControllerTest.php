@@ -234,6 +234,35 @@ class CustomFieldSectionsControllerTest extends TestCase
     }
 
     /**
+     * @test
+     *
+     * +--------------------------------------------------------------------+
+     * | NEGATIVE TEST | PATCH /api/pim/configuration/custom-field-sections |
+     * +--------------------------------------------------------------------+
+     */
+    public function it_should_return_an_error_if_update_fails()
+    {
+        $this->login();
+
+        $this->renameTable('custom_field_sections', 'custom_field_sections_test');
+
+        $response = $this->patch('/api/pim/configuration/custom-field-sections', $this->custom_field_section, ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
+
+        $content = $response->getContent();
+        $status_code = $response->getStatusCode();
+
+        $content_array = json_decode($content, true);
+
+        $this->assertArrayHasKey('message', $content_array);
+        $this->assertArrayHasKey('status_code', $content_array);
+
+        $this->assertEquals(422, $status_code);
+        $this->assertEquals($status_code, $content_array['status_code']);
+
+        $this->renameTable('custom_field_sections_test', 'custom_field_sections');
+    }
+
+    /**
      * @return \Dingo\Api\Http\Response
      */
     protected function _insert_record()

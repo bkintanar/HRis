@@ -92,10 +92,6 @@ class CustomFieldsController extends BaseController
     {
         $custom_field_sections = $this->custom_field_section->with('screen')->paginate(ROWS_PER_PAGE);
 
-        if (!$custom_field_sections) {
-            return $this->responseAPI(404, UNABLE_RETRIEVE_MESSAGE);
-        }
-
         return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, ['data' => $custom_field_sections, 'table' => $this->setupDataTable($custom_field_sections)]);
     }
 
@@ -250,9 +246,7 @@ class CustomFieldsController extends BaseController
     public function update(CustomFieldSectionsRequest $request)
     {
         try {
-            DB::beginTransaction();
-
-            $custom_field_section = CustomFieldSection::whereId($request->get('custom_field_section_id'))->first();
+            $custom_field_section = $this->custom_field_section->whereId($request->get('custom_field_section_id'))->first();
 
             if (!$custom_field_section) {
                 return $this->responseAPI(404, UNABLE_RETRIEVE_MESSAGE);
@@ -260,12 +254,8 @@ class CustomFieldsController extends BaseController
 
             $custom_field_section->update($request->only(['name', 'screen_id']));
         } catch (Exception $e) {
-            DB::rollback();
-
             return $this->responseAPI(422, UNABLE_UPDATE_MESSAGE);
         }
-
-        DB::commit();
 
         return $this->responseAPI(200, SUCCESS_UPDATE_MESSAGE);
     }
@@ -282,20 +272,13 @@ class CustomFieldsController extends BaseController
     public function updateCustomField(CustomFieldRequest $request)
     {
         try {
-            DB::beginTransaction();
-
             $custom_field = $this->custom_field->whereId($request->get('custom_field_id'))->first();
 
             if (!$custom_field) {
                 return $this->responseAPI(404, UNABLE_RETRIEVE_MESSAGE);
             }
 
-            $data = [
-                'custom_field_type_id' => $request->get('type_id'),
-                'name'                 => $request->get('name'),
-                'required'             => $request->get('required'),
-                'mask'                 => $request->has('mask') ? $request->get('mask') : null,
-            ];
+            $data = $this->getRequestData($request);
 
             $custom_field->update($data);
 
@@ -313,12 +296,8 @@ class CustomFieldsController extends BaseController
                 $this->createNewOptions($options, $custom_field);
             }
         } catch (Exception $e) {
-            DB::rollback();
-
             return $this->responseAPI(422, UNABLE_UPDATE_MESSAGE);
         }
-
-        DB::commit();
 
         return $this->responseAPI(200, SUCCESS_UPDATE_MESSAGE);
     }
@@ -382,5 +361,24 @@ class CustomFieldsController extends BaseController
                 $custom_field->options()->create(['name' => $option]);
             }
         }
+    }
+
+    /**
+     * Set the data before processing it.
+     *
+     * @param CustomFieldRequest $request
+     *
+     * @return array
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     */
+    private function getRequestData(CustomFieldRequest $request)
+    {
+        return [
+            'custom_field_type_id' => $request->get('type_id'),
+            'name'                 => $request->get('name'),
+            'required'             => $request->get('required'),
+            'mask'                 => $request->has('mask') ? $request->get('mask') : null,
+        ];
     }
 }
