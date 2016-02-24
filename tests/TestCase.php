@@ -4,6 +4,7 @@ namespace Tests;
 
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Support\Facades\Schema;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class TestCase extends BaseTestCase
@@ -80,5 +81,10 @@ class TestCase extends BaseTestCase
     public function str_rand()
     {
         return substr(md5(rand()), 0, 7);
+    }
+
+    public function renameTable($from, $to)
+    {
+        Schema::rename($from, $to);
     }
 }

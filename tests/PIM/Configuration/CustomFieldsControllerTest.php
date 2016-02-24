@@ -120,6 +120,7 @@ class CustomFieldsControllerTest extends TestCase
         $data = $this->custom_field;
         $data['name'] = 'custom_field_name_'.$this->str_rand();
         $data['custom_field_id'] = $id;
+        $data['custom_field_options'] = 'a, b, c, d, e';
 
         $response = $this->patch('/api/pim/configuration/custom-fields', $data, ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
 
@@ -242,6 +243,97 @@ class CustomFieldsControllerTest extends TestCase
 
         $this->assertEquals(422, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
+    }
+
+    /**
+     * @test
+     *
+     * +--------------------------------------------------------------------------------------+
+     * | NEGATIVE TEST | GET /api/pim/configuration/custom-fields?custom_field_section_id=100 |
+     * +--------------------------------------------------------------------------------------+
+     */
+    public function it_should_return_an_error_if_get_fails()
+    {
+        $this->login();
+
+        $response = $this->get('/api/pim/configuration/custom-fields?custom_field_section_id=100', ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
+
+        $content = $response->getContent();
+        $status_code = $response->getStatusCode();
+
+        $content_array = json_decode($content, true);
+
+        $this->assertArrayHasKey('message', $content_array);
+        $this->assertArrayHasKey('status_code', $content_array);
+
+        $this->assertEquals(404, $status_code);
+        $this->assertEquals($status_code, $content_array['status_code']);
+    }
+
+    /**
+     * @test
+     *
+     * +------------------------------------------------------------+
+     * | NEGATIVE TEST | PATCH /api/pim/configuration/custom-fields |
+     * +------------------------------------------------------------+
+     */
+    public function it_should_return_an_error_if_update_fails()
+    {
+        $response = $this->_insert_record();
+
+        $content = $response->getContent();
+
+        $content_array = json_decode($content, true);
+
+        $id = $content_array['custom_field']['id'];
+
+        $data = $this->custom_field;
+        $data['name'] = 'custom_field_name_'.$this->str_rand();
+        $data['custom_field_id'] = $id;
+
+        $this->renameTable('custom_fields', 'custom_fields_test');
+
+        $response = $this->patch('/api/pim/configuration/custom-fields', $data, ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
+
+        $content = $response->getContent();
+        $status_code = $response->getStatusCode();
+
+        $content_array = json_decode($content, true);
+
+        $this->assertArrayHasKey('message', $content_array);
+        $this->assertArrayHasKey('status_code', $content_array);
+
+        $this->assertEquals(422, $status_code);
+        $this->assertEquals($status_code, $content_array['status_code']);
+
+        $this->renameTable('custom_fields_test', 'custom_fields');
+    }
+
+    /**
+     * @test
+     *
+     * +-----------------------------------------------------------+
+     * | POSITIVE TEST | POST /api/pim/configuration/custom-fields |
+     * +-----------------------------------------------------------+
+     */
+    public function it_should_return_a_response_if_fetching_by_screen_id_is_successful()
+    {
+        $this->login();
+
+        $this->_insert_record();
+        $this->_insert_record();
+
+        $response = $this->post('/api/pim/configuration/custom-field-sections-by-screen-id', ['screen_name' => 'Personal Details'], ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
+
+        $content = $response->getContent();
+        $status_code = $response->getStatusCode();
+
+        $content_array = json_decode($content, true);
+
+        $this->assertEquals(200, $status_code);
+        $this->assertEquals($status_code, $content_array['status_code']);
+
+        $this->assertEquals(SUCCESS_RETRIEVE_MESSAGE, $content_array['message']);
     }
 
     /**
