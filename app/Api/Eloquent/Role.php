@@ -24,14 +24,12 @@ class Role extends Model
     protected $table = 'roles';
 
     /**
-     * A city object belongs to on province.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function users()
     {
-        return $this->belongsToMany('HRis\Api\Eloquent\User', 'role_users', 'role_id', 'user_id');
+        return $this->belongsToMany(User::class);
     }
 }

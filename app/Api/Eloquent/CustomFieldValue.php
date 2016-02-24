@@ -46,7 +46,7 @@ class CustomFieldValue extends Model
      */
     public function employee()
     {
-        return $this->belongsTo('HRis\Api\Eloquent\Employee', 'employee_id', 'id');
+        return $this->belongsTo(Employee::class, 'employee_id', 'id');
     }
 
     /**
@@ -58,6 +58,6 @@ class CustomFieldValue extends Model
      */
     public function customField()
     {
-        return $this->belongsTo('HRis\Api\Eloquent\CustomField', 'custom_field_id', 'id');
+        return $this->belongsTo(CustomField::class, 'custom_field_id', 'id');
     }
 }

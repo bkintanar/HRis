@@ -53,7 +53,7 @@ class User extends SentinelUser implements AuthenticatableContract, Authorizable
      */
     public function employee()
     {
-        return $this->hasOne('HRis\Api\Eloquent\Employee');
+        return $this->hasOne(Employee::class);
     }
 
     /**

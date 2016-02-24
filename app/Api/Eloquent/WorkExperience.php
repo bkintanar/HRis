@@ -44,6 +44,6 @@ class WorkExperience extends Model
      */
     public function employee()
     {
-        return $this->belongsTo('HRis\Api\Eloquent\Employee', 'id', 'employee_id');
+        return $this->belongsTo(Employee::class);
     }
 }

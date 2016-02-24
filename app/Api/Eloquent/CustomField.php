@@ -44,7 +44,17 @@ class CustomField extends Model
      */
     public function type()
     {
-        return $this->hasOne('HRis\Api\Eloquent\CustomFieldType', 'id', 'custom_field_type_id');
+        return $this->hasOne(CustomFieldType::class, 'id', 'custom_field_type_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     */
+    public function section()
+    {
+        return $this->belongsTo(CustomFieldSection::class);
     }
 
     /**
@@ -54,6 +64,6 @@ class CustomField extends Model
      */
     public function options()
     {
-        return $this->hasMany('HRis\Api\Eloquent\CustomFieldOption', 'custom_field_id', 'id');
+        return $this->hasMany(CustomFieldOption::class, 'custom_field_id', 'id');
     }
 }

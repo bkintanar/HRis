@@ -46,7 +46,7 @@ class CustomFieldSection extends Model
      */
     public function screen()
     {
-        return $this->belongsTo('HRis\Api\Eloquent\Navlink', 'screen_id', 'id');
+        return $this->belongsTo(Navlink::class);
     }
 
     /**
@@ -56,6 +56,6 @@ class CustomFieldSection extends Model
      */
     public function customFields()
     {
-        return $this->hasMany('HRis\Api\Eloquent\CustomField', 'custom_field_section_id', 'id');
+        return $this->hasMany(CustomField::class);
     }
 }

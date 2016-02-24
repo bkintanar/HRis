@@ -37,6 +37,6 @@ class City extends Model
      */
     public function province()
     {
-        return $this->hasOne('HRis\Api\Eloquent\Province', 'id', 'province_id');
+        return $this->belongsTo(Province::class);
     }
 }
