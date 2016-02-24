@@ -52,7 +52,7 @@ class JobHistory extends Model
      */
     public function department()
     {
-        return $this->hasOne('HRis\Api\Eloquent\Department', 'id', 'department_id');
+        return $this->hasOne(Department::class, 'id', 'department_id');
     }
 
     /**
@@ -62,7 +62,7 @@ class JobHistory extends Model
      */
     public function employmentStatus()
     {
-        return $this->hasOne('HRis\Api\Eloquent\EmploymentStatus', 'id', 'employment_status_id');
+        return $this->hasOne(EmploymentStatus::class, 'id', 'employment_status_id');
     }
 
     /**
@@ -90,7 +90,7 @@ class JobHistory extends Model
      */
     public function jobTitle()
     {
-        return $this->hasOne('HRis\Api\Eloquent\JobTitle', 'id', 'job_title_id');
+        return $this->hasOne(JobTitle::class, 'id', 'job_title_id');
     }
 
     /**
@@ -100,7 +100,7 @@ class JobHistory extends Model
      */
     public function location()
     {
-        return $this->hasOne('HRis\Api\Eloquent\Location', 'id', 'location_id');
+        return $this->hasOne(Location::class, 'id', 'location_id');
     }
 
     /**
@@ -110,6 +110,6 @@ class JobHistory extends Model
      */
     public function workShift()
     {
-        return $this->hasOne('HRis\Api\Eloquent\WorkShift', 'id', 'work_shift_id');
+        return $this->hasOne(WorkShift::class, 'id', 'work_shift_id');
     }
 }

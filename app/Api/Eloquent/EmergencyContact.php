@@ -65,18 +65,18 @@ class EmergencyContact extends Model
      */
     public function relationship()
     {
-        return $this->hasOne('HRis\Api\Eloquent\Relationship', 'id', 'relationship_id');
+        return $this->hasOne(Relationship::class, 'id', 'relationship_id');
     }
 
     /**
      * An emergency contact object belongs to employee.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function employee()
     {
-        return $this->belongsTo('HRis\Api\Eloquent\Employee', 'employee_id', 'id');
+        return $this->belongsTo(Employee::class);
     }
 }

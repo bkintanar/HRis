@@ -49,6 +49,6 @@ class Skill extends Model
      */
     public function employees()
     {
-        return $this->belongsToMany('HRis\Api\Eloquent\Employee');
+        return $this->belongsToMany(Employee::class);
     }
 }

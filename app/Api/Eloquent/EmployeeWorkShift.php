@@ -104,6 +104,6 @@ class EmployeeWorkShift extends Model
      */
     public function workShift()
     {
-        return $this->hasOne('HRis\Api\Eloquent\WorkShift', 'id', 'work_shift_id');
+        return $this->hasOne(WorkShift::class, 'id', 'work_shift_id');
     }
 }

@@ -98,23 +98,23 @@ class Employee extends Model
     protected $table = 'employees';
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function city()
     {
-        return $this->hasOne('HRis\Api\Eloquent\City', 'id', 'address_city_id');
+        return $this->belongsTo(City::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function country()
     {
-        return $this->hasOne('HRis\Api\Eloquent\Country', 'id', 'address_country_id');
+        return $this->belongsTo(Country::class);
     }
 
     /**
@@ -124,7 +124,7 @@ class Employee extends Model
      */
     public function dependents()
     {
-        return $this->hasMany('HRis\Api\Eloquent\Dependent', 'employee_id', 'id');
+        return $this->hasMany(Dependent::class);
     }
 
     /**
@@ -134,7 +134,7 @@ class Employee extends Model
      */
     public function emergencyContacts()
     {
-        return $this->hasMany('HRis\Api\Eloquent\EmergencyContact', 'employee_id', 'id');
+        return $this->hasMany(EmergencyContact::class);
     }
 
     /**
@@ -144,7 +144,7 @@ class Employee extends Model
      */
     public function customFieldValues()
     {
-        return $this->hasMany('HRis\Api\Eloquent\CustomFieldValue', 'employee_id', 'id');
+        return $this->hasMany(CustomFieldValue::class);
     }
 
     /**
@@ -154,7 +154,7 @@ class Employee extends Model
      */
     public function educations()
     {
-        return $this->hasMany('HRis\Api\Eloquent\Education');
+        return $this->hasMany(Education::class);
     }
 
     /**
@@ -164,7 +164,7 @@ class Employee extends Model
      */
     public function employeeSalaryComponent()
     {
-        return $this->hasMany('HRis\Api\Eloquent\EmployeeSalaryComponent', 'employee_id', 'id')
+        return $this->hasMany(EmployeeSalaryComponent::class)
             ->with('salaryComponent')
             ->orderBy('id', 'desc')
             ->orderBy('effective_date', 'desc')
@@ -302,13 +302,13 @@ class Employee extends Model
     }
 
     /**
-     * @return mixed
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function employeeWorkShift()
     {
-        return $this->hasMany('HRis\Api\Eloquent\EmployeeWorkShift', 'employee_id', 'id')->with('workShift')
+        return $this->hasMany(EmployeeWorkShift::class)->with('workShift')
             ->orderBy('effective_date', 'desc')
             ->orderBy('id', 'desc');
     }
@@ -320,7 +320,7 @@ class Employee extends Model
      */
     public function timelogs()
     {
-        return $this->hasMany('HRis\Api\Eloquent\Timelog', 'face_id', 'face_id');
+        return $this->hasMany(Timelog::class);
     }
 
     /**
@@ -340,18 +340,18 @@ class Employee extends Model
      */
     public function jobHistories()
     {
-        return $this->hasMany('HRis\Api\Eloquent\JobHistory')->with('jobTitle', 'department', 'workShift',
+        return $this->hasMany(JobHistory::class)->with('jobTitle', 'department', 'workShift',
             'location')->orderBy('job_histories.id', 'desc');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function province()
     {
-        return $this->hasOne('HRis\Api\Eloquent\Province', 'id', 'address_province_id');
+        return $this->belongsTo(Province::class);
     }
 
     /**
@@ -441,7 +441,7 @@ class Employee extends Model
      */
     public function skills()
     {
-        return $this->belongsToMany('HRis\Api\Eloquent\Skill');
+        return $this->belongsToMany(Skill::class);
     }
 
     /**
@@ -451,17 +451,17 @@ class Employee extends Model
      */
     public function employeeSkills()
     {
-        return $this->hasMany('HRis\Api\Eloquent\EmployeeSkill');
+        return $this->hasMany(EmployeeSkill::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function user()
     {
-        return $this->hasOne('HRis\Api\Eloquent\User', 'id', 'user_id');
+        return $this->belongsTo(User::class);
     }
 
     /**
@@ -471,6 +471,6 @@ class Employee extends Model
      */
     public function workExperiences()
     {
-        return $this->hasMany('HRis\Api\Eloquent\WorkExperience');
+        return $this->hasMany(WorkExperience::class);
     }
 }
