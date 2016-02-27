@@ -9,14 +9,12 @@
  */
 namespace HRis\Exceptions;
 
-use Dingo\Api\Exception\Handler as ExceptionHandler;
-use Dingo\Api\Http\Response;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -33,34 +31,29 @@ class Handler extends ExceptionHandler
     ];
 
     /**
-     * Handle an exception if it has an existing handler.
+     * Report or log an exception.
      *
-     * @param \Exception $exception
+     * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
+     *
+     * @param \Exception $e
+     *
+     * @return void
+     */
+    public function report(Exception $e)
+    {
+        parent::report($e);
+    }
+
+    /**
+     * Render an exception into an HTTP response.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \Exception               $e
      *
      * @return \Illuminate\Http\Response
      */
-    public function handle(Exception $exception)
+    public function render($request, Exception $e)
     {
-        $this->report($exception);
-
-        foreach ($this->handlers as $hint => $handler) {
-            if (!$exception instanceof $hint) {
-                continue;
-            }
-
-            if ($response = $handler($exception)) {
-                if (!$response instanceof Response) {
-                    $response = new Response($response, $this->getExceptionStatusCode($exception));
-                }
-
-                return $response;
-            }
-        }
-
-        if ($exception instanceof ModelNotFoundException) {
-            $exception = new NotFoundHttpException($exception->getMessage(), $exception);
-        }
-
-        return $this->genericResponse($exception);
+        return parent::render($request, $e);
     }
 }

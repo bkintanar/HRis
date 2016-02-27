@@ -15,6 +15,8 @@ class PayGradesControllerTest extends TestCase
         'max_salary'   => 20000,
     ];
 
+    protected $class_name = 'HRis\Api\Eloquent\PayGrade';
+
     /**
      * @test
      *
@@ -253,6 +255,30 @@ class PayGradesControllerTest extends TestCase
         $this->assertEquals($status_code, $content_array['status_code']);
 
         $this->assertEquals(SUCCESS_RETRIEVE_MESSAGE, $content_array['message']);
+    }
+
+    /**
+     * @test
+     *
+     * +---------------------------------------------------+
+     * | NEGATIVE TEST | GET /api/admin/job/pay-grades/100 |
+     * +---------------------------------------------------+
+     */
+    public function it_should_return_an_error_if_fetching_of_data_is_unsuccessful()
+    {
+        $this->login();
+
+        $response = $this->get('/api/admin/job/pay-grades/100', ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
+
+        $content = $response->getContent();
+        $status_code = $response->getStatusCode();
+
+        $content_array = json_decode($content, true);
+
+        $this->assertEquals(500, $status_code);
+        $this->assertEquals($status_code, $content_array['status_code']);
+
+        $this->assertEquals("No query results for model [{$this->class_name}].", $content_array['message']);
     }
 
     /**
