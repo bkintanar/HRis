@@ -162,8 +162,7 @@ return [
         Jlapp\Swaggervel\SwaggervelServiceProvider::class,
 
         // Overrides
-//        Dingo\Api\Provider\LaravelServiceProvider::class,
-        HRis\Providers\ApiServiceProvider::class,
+        Dingo\Api\Provider\LaravelServiceProvider::class,
     ],
 
     /*

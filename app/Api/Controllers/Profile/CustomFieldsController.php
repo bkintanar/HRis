@@ -13,7 +13,6 @@ use Exception;
 use HRis\Api\Controllers\BaseController;
 use HRis\Api\Eloquent\CustomFieldValue;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class CustomFieldsController extends BaseController
 {
@@ -54,8 +53,6 @@ class CustomFieldsController extends BaseController
         $custom_field_ids = array_keys($custom_field_values);
         $employee_id = $request->get('employee_id');
 
-        DB::beginTransaction();
-
         try {
             foreach ($custom_field_ids as $custom_field_id) {
                 $data = [
@@ -63,17 +60,13 @@ class CustomFieldsController extends BaseController
                     'employee_id'     => $employee_id,
                 ];
 
-                $custom_field_value = $this->custom_field_value->firstOrCreate($data);
-                $custom_field_value->value = $custom_field_values[$custom_field_id];
-                $custom_field_value->save();
+                $values = array_merge($data, ['value' => $custom_field_values[$custom_field_id]]);
+
+                $this->custom_field_value->updateOrCreate($data, $values);
             }
         } catch (Exception $e) {
-            DB::rollBack();
-
             return $this->responseAPI(422, UNABLE_UPDATE_MESSAGE);
         }
-
-        DB::commit();
 
         return $this->responseAPI(200, SUCCESS_UPDATE_MESSAGE);
     }

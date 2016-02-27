@@ -13,6 +13,8 @@ class EducationsControllerTest extends TestCase
         'name' => 'education_level_name_',
     ];
 
+    protected $class_name = 'HRis\Api\Eloquent\EducationLevel';
+
     /**
      * @test
      *
@@ -249,6 +251,30 @@ class EducationsControllerTest extends TestCase
         $this->assertEquals($status_code, $content_array['status_code']);
 
         $this->assertEquals(SUCCESS_RETRIEVE_MESSAGE, $content_array['message']);
+    }
+
+    /**
+     * @test
+     *
+     * +------------------------------------------------------------+
+     * | NEGATIVE TEST | GET /api/admin/qualifications/educations/1 |
+     * +------------------------------------------------------------+
+     */
+    public function it_should_return_an_error_if_fetching_of_data_is_unsuccessful()
+    {
+        $this->login();
+
+        $response = $this->get('/api/admin/qualifications/educations/100', ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
+
+        $content = $response->getContent();
+        $status_code = $response->getStatusCode();
+
+        $content_array = json_decode($content, true);
+
+        $this->assertEquals(500, $status_code);
+        $this->assertEquals($status_code, $content_array['status_code']);
+
+        $this->assertEquals("No query results for model [{$this->class_name}].", $content_array['message']);
     }
 
     /**
