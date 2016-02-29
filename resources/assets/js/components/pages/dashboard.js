@@ -21,7 +21,8 @@ module.exports = {
     }
 
     let params = {
-      path: '/employee/get-by-employee-id?include=user',
+      method: 'GET',
+      path: '/employee/' + this.employee_id + '?include=user',
       entity: { employee_id: this.employee_id },
       headers: { Authorization: localStorage.getItem('jwt-token') }
     };

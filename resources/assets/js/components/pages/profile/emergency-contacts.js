@@ -73,7 +73,8 @@ module.exports = {
       }.bind(this));
 
       let params = {
-        path: '/employee/get-by-employee-id?include=user,emergency_contacts',
+        method: 'GET',
+        path: '/employee/' + this.employee_id + '?include=user,emergency_contacts',
         entity: { employee_id: this.employee_id },
         headers: { Authorization: localStorage.getItem('jwt-token') }
       };

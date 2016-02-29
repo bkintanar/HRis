@@ -29,6 +29,12 @@
                                 <input class="form-control" type="text" v-model.sync="modal.class" id="class">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="class" class="col-md-3 control-label">Sample</label>
+                            <div class="col-md-9">
+                                <span v-if="modal.name" class="label {{modal.class}}">{{modal.name}}</span>
+                            </div>
+                        </div>
 
                         <div class="modal-footer">
                             <button class="btn btn-white btn-xs" data-dismiss="modal" type="button">Close</button>

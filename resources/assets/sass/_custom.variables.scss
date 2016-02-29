@@ -1,0 +1,269 @@
+//== Colors
+//
+//## Gray and brand colors for use across Bootstrap.
+
+$brand-black:           #000000 !important;
+$brand-white:           #FFFFFF !important;
+
+$brand-red:             #F44336 !important;
+$brand-pink:            #E91E63 !important;
+$brand-purple:          #9C27B0 !important;
+
+$brand-deep-purple:     #673AB7 !important;
+$brand-indigo:          #3F51B5 !important;
+$brand-blue:            #2196F3 !important;
+
+$brand-light-blue:      #03A9F4 !important;
+$brand-cyan:            #00BCD4 !important;
+$brand-teal:            #009688 !important;
+
+$brand-green:           #4CAF50 !important;
+$brand-light-green:     #8BC34A !important;
+$brand-lime:            #CDDC39 !important;
+
+$brand-yellow:          #FFEB3B !important;
+$brand-amber:           #FFC107 !important;
+$brand-orange:          #FF9800 !important;
+
+$brand-deep-orange:     #FF5722 !important;
+$brand-brown:           #795548 !important;
+$brand-grey:            #9E9E9E !important;
+
+//== Labels
+//
+//##
+
+// Colors
+// Contextual variations (linked labels get darker on :hover)
+
+.label-red {
+  background-color: $brand-red;
+  color: $brand-white;
+}
+.label-pink {
+  background-color: $brand-pink;
+  color: $brand-white;
+}
+
+.label-purple {
+  background-color: $brand-purple;
+  color: $brand-white;
+}
+
+.label-deep-purple {
+  background-color: $brand-deep-purple;
+  color: $brand-white;
+}
+
+.label-indigo {
+  background-color: $brand-indigo;
+  color: $brand-white;
+}
+
+.label-blue {
+  background-color: $brand-blue;
+  color: $brand-black;
+}
+.label-light-blue {
+  background-color: $brand-light-blue;
+  color: $brand-black;
+}
+
+.label-cyan {
+  background-color: $brand-cyan;
+  color: $brand-white;
+}
+
+.label-teal {
+  background-color: $brand-teal;
+  color: $brand-white;
+}
+
+.label-green {
+  background-color: $brand-green;
+  color: $brand-white;
+}
+
+.label-light-green {
+  background-color: $brand-light-green;
+  color: $brand-black;
+}
+
+.label-lime {
+  background-color: $brand-lime;
+  color: $brand-black;
+}
+
+.label-yellow {
+  background-color: $brand-yellow;
+  color: $brand-black;
+}
+
+.label-amber {
+  background-color: $brand-amber;
+  color: $brand-black;
+}
+
+.label-orange {
+  background-color: $brand-orange;
+  color: $brand-black;
+}
+
+.label-deep-orange {
+  background-color: $brand-deep-orange;
+  color: $brand-white;
+}
+
+.label-brown {
+  background-color: $brand-brown;
+  color: $brand-white;
+}
+
+.label-grey {
+  background-color: $brand-grey;
+  color: $brand-black;
+}
+
+
+.radio {
+  padding-left: 20px;
+}
+.radio label {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  padding-left: 5px;
+}
+.radio label::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  width: 17px;
+  height: 17px;
+  left: 0;
+  margin-left: -20px;
+  border: 1px solid #cccccc;
+  border-radius: 50%;
+  background-color: #fff;
+  -webkit-transition: border 0.15s ease-in-out;
+  -o-transition: border 0.15s ease-in-out;
+  transition: border 0.15s ease-in-out;
+}
+.radio label::after {
+  display: inline-block;
+  position: absolute;
+  content: " ";
+  width: 11px;
+  height: 11px;
+  left: 3px;
+  top: 3px;
+  margin-left: -20px;
+  border-radius: 50%;
+  background-color: #555555;
+  -webkit-transform: scale(0, 0);
+  -ms-transform: scale(0, 0);
+  -o-transform: scale(0, 0);
+  transform: scale(0, 0);
+  -webkit-transition: -webkit-transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
+  -moz-transition: -moz-transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
+  -o-transition: -o-transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
+  transition: transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
+}
+
+.radio input[type="radio"] {
+  opacity: 0;
+  z-index: 1;
+}
+.radio input[type="radio"]:focus + label::before {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.radio input[type="radio"]:checked + label::after {
+  -webkit-transform: scale(1, 1);
+  -ms-transform: scale(1, 1);
+  -o-transform: scale(1, 1);
+  transform: scale(1, 1);
+}
+.radio input[type="radio"]:disabled + label {
+  opacity: 0.65;
+}
+.radio input[type="radio"]:disabled + label::before {
+  cursor: not-allowed;
+}
+.radio.radio-inline {
+  margin-top: 0;
+}
+
+.radio-red input[type="radio"] + label::after {
+  background-color: $brand-red;
+}
+.radio-red input[type="radio"]:checked + label::before {
+  border-color: $brand-red;
+}
+.radio-red input[type="radio"]:checked + label::after {
+  background-color: $brand-red;
+}
+
+.radio-pink input[type="radio"] + label::after {
+  background-color: $brand-pink;
+}
+.radio-pink input[type="radio"]:checked + label::before {
+  border-color: $brand-pink;
+}
+.radio-pink input[type="radio"]:checked + label::after {
+  background-color: $brand-pink;
+}
+
+.radio-purple input[type="radio"] + label::after {
+  background-color: $brand-purple;
+}
+.radio-purple input[type="radio"]:checked + label::before {
+  border-color: $brand-purple;
+}
+.radio-purple input[type="radio"]:checked + label::after {
+  background-color: $brand-purple;
+}
+
+.radio-deep-purple input[type="radio"] + label::after {
+  background-color: $brand-deep-purple;
+}
+.radio-deep-purple input[type="radio"]:checked + label::before {
+  border-color: $brand-deep-purple;
+}
+.radio-deep-purple input[type="radio"]:checked + label::after {
+  background-color: $brand-deep-purple;
+}
+
+.radio-indigo input[type="radio"] + label::after {
+  background-color: $brand-indigo;
+}
+.radio-indigo input[type="radio"]:checked + label::before {
+  border-color: $brand-indigo;
+}
+.radio-indigo input[type="radio"]:checked + label::after {
+  background-color: $brand-indigo;
+}
+
+.radio-blue input[type="radio"] + label::after {
+  background-color: $brand-blue;
+}
+.radio-blue input[type="radio"]:checked + label::before {
+  border-color: $brand-blue;
+}
+.radio-blue input[type="radio"]:checked + label::after {
+  background-color: $brand-blue;
+}
+
+input[type="checkbox"].styled:checked + label:after,
+input[type="radio"].styled:checked + label:after {
+  content: "\f00c";
+}
+input[type="checkbox"] .styled:checked + label::before,
+input[type="radio"] .styled:checked + label::before {
+  color: #fff;
+}
+input[type="checkbox"] .styled:checked + label::after,
+input[type="radio"] .styled:checked + label::after {
+  color: #fff;
+}

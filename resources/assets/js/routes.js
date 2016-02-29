@@ -296,6 +296,7 @@ module.exports = {
       '/': '/dashboard',
       '/profile': '/profile/personal-details',
       '/pim': '/pim/employee-list',
+      '/pim/configuration': '/pim/configuration/termination-reasons',
       '/admin': '/admin/user-management',
       '/admin/job': '/admin/job/titles',
       '/admin/qualifications': '/admin/qualifications/skills',
