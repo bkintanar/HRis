@@ -12,7 +12,6 @@ namespace HRis\Api\Controllers;
 use HRis\Api\Eloquent\CustomField;
 use HRis\Api\Eloquent\CustomFieldValue;
 use HRis\Api\Eloquent\Employee;
-use HRis\Api\Requests\EmployeeRequest;
 use HRis\Api\Transformers\EmployeeTransformer;
 
 class EmployeeController extends BaseController
@@ -47,19 +46,17 @@ class EmployeeController extends BaseController
     }
 
     /**
-     * @param EmployeeRequest $request
+     * @param Employee $employee
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      *
      * @return \Dingo\Api\Http\Response
      */
-    public function getByEmployeeId(EmployeeRequest $request)
+    public function show(Employee $employee)
     {
-        $employee_id = $request->get('employee_id');
+        $this->initializeCustomFieldValues($employee->employee_id);
 
-        $this->initializeCustomFieldValues($employee_id);
-
-        $employee = $this->employee->getEmployeeById($employee_id, null);
+        $employee = $this->employee->getEmployeeById($employee->employee_id, null);
 
         return $this->item($employee, new EmployeeTransformer());
     }

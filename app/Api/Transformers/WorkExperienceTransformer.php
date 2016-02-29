@@ -11,9 +11,8 @@ namespace HRis\Api\Transformers;
 
 use Carbon\Carbon;
 use HRis\Api\Eloquent\WorkExperience;
-use League\Fractal\TransformerAbstract;
 
-class WorkExperienceTransformer extends TransformerAbstract
+class WorkExperienceTransformer extends BaseTransformer
 {
     /**
      * Transform object into a generic array.

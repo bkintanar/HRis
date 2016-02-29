@@ -10,9 +10,8 @@
 namespace HRis\Api\Transformers;
 
 use Cartalyst\Sentinel\Roles\EloquentRole as Role;
-use League\Fractal\TransformerAbstract;
 
-class RoleTransformer extends TransformerAbstract
+class RoleTransformer extends BaseTransformer
 {
     /**
      * Transform object into a generic array.

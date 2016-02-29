@@ -10,9 +10,8 @@
 namespace HRis\Api\Transformers;
 
 use HRis\Api\Eloquent\Relationship;
-use League\Fractal\TransformerAbstract;
 
-class RelationshipTransformer extends TransformerAbstract
+class RelationshipTransformer extends BaseTransformer
 {
     /**
      * Transform object into a generic array.

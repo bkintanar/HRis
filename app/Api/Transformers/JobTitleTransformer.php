@@ -10,9 +10,8 @@
 namespace HRis\Api\Transformers;
 
 use HRis\Api\Eloquent\JobTitle;
-use League\Fractal\TransformerAbstract;
 
-class JobTitleTransformer extends TransformerAbstract
+class JobTitleTransformer extends BaseTransformer
 {
     /**
      * Transform object into a generic array.

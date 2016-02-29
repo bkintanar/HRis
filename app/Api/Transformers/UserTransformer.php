@@ -10,9 +10,9 @@
 namespace HRis\Api\Transformers;
 
 use HRis\Api\Eloquent\User;
-use League\Fractal\TransformerAbstract;
+use League\Fractal\ParamBag;
 
-class UserTransformer extends TransformerAbstract
+class UserTransformer extends BaseTransformer
 {
     /**
      * Resources that can be included if requested.
@@ -63,16 +63,19 @@ class UserTransformer extends TransformerAbstract
     /**
      * Include Role.
      *
-     * @param User $user
+     * @param User     $user
+     * @param ParamBag $params
+     *
+     * @throws \Exception
      *
      * @return \League\Fractal\Resource\Collection
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function includeRole(User $user)
+    public function includeRole(User $user, ParamBag $params = null)
     {
-        $roles = $user->roles;
+        $roles = $user->roles()->get();
 
-        return $this->collection($roles, new RoleTransformer());
+        return $this->transformCollection($roles, new RoleTransformer(), $params);
     }
 }

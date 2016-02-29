@@ -10,9 +10,9 @@
 namespace HRis\Api\Transformers;
 
 use HRis\Api\Eloquent\CustomFieldSection;
-use League\Fractal\TransformerAbstract;
+use League\Fractal\ParamBag;
 
-class CustomFieldSectionTransformer extends TransformerAbstract
+class CustomFieldSectionTransformer extends BaseTransformer
 {
     /**
      * List of resources to automatically include.
@@ -45,15 +45,18 @@ class CustomFieldSectionTransformer extends TransformerAbstract
      * Include CustomFields.
      *
      * @param CustomFieldSection $custom_field_section
+     * @param ParamBag           $params
+     *
+     * @throws \Exception
      *
      * @return \League\Fractal\Resource\Collection
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function includeCustomFields(CustomFieldSection $custom_field_section)
+    public function includeCustomFields(CustomFieldSection $custom_field_section, ParamBag $params = null)
     {
-        $custom_fields = $custom_field_section->customFields;
+        $custom_fields = $custom_field_section->customFields();
 
-        return $this->collection($custom_fields, new CustomFieldTransformer());
+        return $this->transformCollection($custom_fields, new CustomFieldTransformer(), $params);
     }
 }

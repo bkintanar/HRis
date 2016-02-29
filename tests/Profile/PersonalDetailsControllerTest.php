@@ -20,7 +20,7 @@ class PersonalDetailsControllerTest extends TestCase
     {
         $this->login();
 
-        $response = $this->post('/api/employee/get-by-employee-id?include=user', ['employee_id' => 'HRis-0001'], ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
+        $response = $this->get('/api/employee/HRis-0001?include=user', ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
 
         $content = $response->getContent();
 
@@ -81,7 +81,7 @@ class PersonalDetailsControllerTest extends TestCase
     {
         $this->login();
 
-        $response = $this->post('/api/employee/get-by-employee-id?include=user', ['employee_id' => 'HRis-0001'], ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
+        $response = $this->get('/api/employee/HRis-0001?include=user', ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
 
         $content = $response->getContent();
 
@@ -116,7 +116,7 @@ class PersonalDetailsControllerTest extends TestCase
     {
         $this->login();
 
-        $response = $this->post('/api/employee/get-by-employee-id?include=user', ['employee_id' => 'HRis-0001'], ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
+        $response = $this->get('/api/employee/HRis-0001?include=user', ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
 
         $content = $response->getContent();
 

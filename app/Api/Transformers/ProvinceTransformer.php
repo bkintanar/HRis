@@ -10,9 +10,8 @@
 namespace HRis\Api\Transformers;
 
 use HRis\Api\Eloquent\Province;
-use League\Fractal\TransformerAbstract;
 
-class ProvinceTransformer extends TransformerAbstract
+class ProvinceTransformer extends BaseTransformer
 {
     /**
      * Resources that can be included if requested.

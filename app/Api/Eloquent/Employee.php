@@ -98,13 +98,25 @@ class Employee extends Model
     protected $table = 'employees';
 
     /**
+     * Get the route key for the model.
+     *
+     * @return string
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     */
+    public function getRouteKeyName()
+    {
+        return 'employee_id';
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
     public function city()
     {
-        return $this->belongsTo(City::class);
+        return $this->belongsTo(City::class, 'address_city_id', 'id');
     }
 
     /**
@@ -114,7 +126,7 @@ class Employee extends Model
      */
     public function country()
     {
-        return $this->belongsTo(Country::class);
+        return $this->belongsTo(Country::class, 'address_country_id', 'id');
     }
 
     /**
@@ -220,7 +232,7 @@ class Employee extends Model
         $employees->orderBy($sort, $direction);
 
         if ($paginate) {
-            return $employees->paginate(DATAS_PER_PAGE);
+            return $employees->paginate(ROWS_PER_PAGE);
         }
 
         return $employees;
@@ -251,54 +263,6 @@ class Employee extends Model
     public function getFullNameAttribute()
     {
         return $this->first_name.' '.($this->middle_name ? $this->middle_name.' ' : '').$this->last_name.($this->suffix_name ? ' '.$this->suffix_name : '');
-    }
-
-    /**
-     * @param $start_date
-     *
-     * @return array
-     *
-     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
-     */
-    public function getTimelog($start_date)
-    {
-        $work_shift = $this->employeeWorkShift()->first();
-
-        $wstp = $work_shift->getWorkShiftRange($start_date);
-        $time_in = $this->timelogs()->whereSwipeDate($wstp['from_datetime']->toDateString())->where('swipe_time', '>=',
-            $wstp['from_datetime']->toTimeString())->first();
-        $time_out = $this->timelogs()->whereSwipeDate($wstp['to_datetime']->toDateString())->where('swipe_time', '<=',
-            $wstp['to_datetime']->toTimeString())->orderBy('id', 'desc')->first();
-
-        // If employee logs out more than one hour after the work shift schedule check for extended time
-        if ($time_out === null && $time_in !== null) {
-            $time_out = $this->timelogs()->where('swipe_datetime', '<=',
-                $wstp['to_datetime']->addHours(4)->toDateTimeString())->orderBy('id', 'desc')->first();
-
-            if ($time_out !== null && $wstp['from_datetime']->addHours(24)->toDateTimeString() < $time_out->swipe_datetime) {
-                $time_out = null;
-            }
-
-            if ($time_in->id == $time_out->id) {
-                $time_out = null;
-            }
-        }
-
-        // Checks for failure to Login or Logout
-        if ($time_out && $time_in) {
-            if ($time_out->swipe_time == $time_in->swipe_time) {
-                if ($time_out->swipe_datetime >= $wstp['to_datetime']->subHour(1)->toDateTimeString() && $time_out->swipe_datetime <= $wstp['to_datetime']->addHours(4)->toDateTimeString()) {
-                    $time_in = null;
-                } else {
-                    $time_out = null;
-                }
-            }
-        }
-
-        return [
-            'in_time'  => $time_in ? $time_in->swipe_time : null,
-            'out_time' => $time_out ? $time_out->swipe_time : null,
-        ];
     }
 
     /**
@@ -351,7 +315,7 @@ class Employee extends Model
      */
     public function province()
     {
-        return $this->belongsTo(Province::class);
+        return $this->belongsTo(Province::class, 'address_province_id', 'id');
     }
 
     /**

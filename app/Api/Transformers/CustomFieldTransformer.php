@@ -10,9 +10,8 @@
 namespace HRis\Api\Transformers;
 
 use HRis\Api\Eloquent\CustomField;
-use League\Fractal\TransformerAbstract;
 
-class CustomFieldTransformer extends TransformerAbstract
+class CustomFieldTransformer extends BaseTransformer
 {
     /**
      * Transform object into a generic array.

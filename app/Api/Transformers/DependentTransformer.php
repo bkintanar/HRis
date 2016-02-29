@@ -10,9 +10,8 @@
 namespace HRis\Api\Transformers;
 
 use HRis\Api\Eloquent\Dependent;
-use League\Fractal\TransformerAbstract;
 
-class DependentTransformer extends TransformerAbstract
+class DependentTransformer extends BaseTransformer
 {
     /**
      * List of resources to automatically include.
