@@ -10,9 +10,9 @@
 namespace HRis\Api\Transformers;
 
 use HRis\Api\Eloquent\Employee;
-use League\Fractal\TransformerAbstract;
+use League\Fractal\ParamBag;
 
-class EmployeeTransformer extends TransformerAbstract
+class EmployeeTransformer extends BaseTransformer
 {
     /**
      * List of resources to automatically include.
@@ -145,32 +145,38 @@ class EmployeeTransformer extends TransformerAbstract
      * Include Dependent.
      *
      * @param Employee $employee
+     * @param ParamBag $params
+     *
+     * @throws \Exception
      *
      * @return \League\Fractal\Resource\Collection
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function includeDependents(Employee $employee)
+    public function includeDependents(Employee $employee, ParamBag $params = null)
     {
-        $dependents = $employee->dependents;
+        $dependents = $employee->dependents();
 
-        return $this->collection($dependents, new DependentTransformer());
+        return $this->transformCollection($dependents, new DependentTransformer(), $params);
     }
 
     /**
      * Include EmergencyContact.
      *
      * @param Employee $employee
+     * @param ParamBag $params
+     *
+     * @throws \Exception
      *
      * @return \League\Fractal\Resource\Collection
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function includeEmergencyContacts(Employee $employee)
+    public function includeEmergencyContacts(Employee $employee, ParamBag $params = null)
     {
-        $emergency_contacts = $employee->emergencyContacts;
+        $emergency_contacts = $employee->emergencyContacts();
 
-        return $this->collection($emergency_contacts, new EmergencyContactTransformer());
+        return $this->transformCollection($emergency_contacts, new EmergencyContactTransformer(), $params);
     }
 
     /**
@@ -209,63 +215,75 @@ class EmployeeTransformer extends TransformerAbstract
      * Include JobHistories.
      *
      * @param Employee $employee
+     * @param ParamBag $params
+     *
+     * @throws \Exception
      *
      * @return \League\Fractal\Resource\Collection
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function includeJobHistories(Employee $employee)
+    public function includeJobHistories(Employee $employee, ParamBag $params = null)
     {
         $job_histories = $employee->jobHistories()->get();
 
-        return $this->collection($job_histories, new JobHistoryTransformer());
+        return $this->transformCollection($job_histories, new JobHistoryTransformer(), $params);
     }
 
     /**
      * Include WorkExperiences.
      *
      * @param Employee $employee
+     * @param ParamBag $params
+     *
+     * @throws \Exception
      *
      * @return \League\Fractal\Resource\Collection
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function includeWorkExperiences(Employee $employee)
+    public function includeWorkExperiences(Employee $employee, ParamBag $params = null)
     {
-        $work_experiences = $employee->workExperiences()->get();
+        $work_experiences = $employee->workExperiences();
 
-        return $this->collection($work_experiences, new WorkExperienceTransformer());
+        return $this->transformCollection($work_experiences, new WorkExperienceTransformer(), $params);
     }
 
     /**
      * Include EmployeeSkills.
      *
      * @param Employee $employee
+     * @param ParamBag $params
+     *
+     * @throws \Exception
      *
      * @return \League\Fractal\Resource\Collection
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function includeEmployeeSkills(Employee $employee)
+    public function includeEmployeeSkills(Employee $employee, ParamBag $params = null)
     {
-        $employee_skills = $employee->employeeSkills()->get();
+        $employee_skills = $employee->employeeSkills();
 
-        return $this->collection($employee_skills, new EmployeeSkillTransformer());
+        return $this->transformCollection($employee_skills, new EmployeeSkillTransformer(), $params);
     }
 
     /**
      * Include Educations.
      *
      * @param Employee $employee
+     * @param ParamBag $params
+     *
+     * @throws \Exception
      *
      * @return \League\Fractal\Resource\Collection
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function includeEducations(Employee $employee)
+    public function includeEducations(Employee $employee, ParamBag $params = null)
     {
-        $educations = $employee->educations()->get();
+        $educations = $employee->educations();
 
-        return $this->collection($educations, new EducationTransformer());
+        return $this->transformCollection($educations, new EducationTransformer(), $params);
     }
 }

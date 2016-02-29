@@ -10,9 +10,8 @@
 namespace HRis\Api\Transformers;
 
 use HRis\Api\Eloquent\City;
-use League\Fractal\TransformerAbstract;
 
-class CityTransformer extends TransformerAbstract
+class CityTransformer extends BaseTransformer
 {
     /**
      * Resources that can be included if requested.

@@ -10,9 +10,8 @@
 namespace HRis\Api\Transformers;
 
 use HRis\Api\Eloquent\EmployeeSkill;
-use League\Fractal\TransformerAbstract;
 
-class EmployeeSkillTransformer extends TransformerAbstract
+class EmployeeSkillTransformer extends BaseTransformer
 {
     /**
      * Transform object into a generic array.

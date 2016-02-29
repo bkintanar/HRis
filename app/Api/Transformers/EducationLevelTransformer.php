@@ -10,9 +10,8 @@
 namespace HRis\Api\Transformers;
 
 use HRis\Api\Eloquent\EducationLevel;
-use League\Fractal\TransformerAbstract;
 
-class EducationLevelTransformer extends TransformerAbstract
+class EducationLevelTransformer extends BaseTransformer
 {
     /**
      * Transform object into a generic array.

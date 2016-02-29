@@ -38,6 +38,9 @@ $api->version('v1', function (Router $api) {
             $api->get('users/me', 'Auth\AuthController@me');
             $api->post('sidebar', 'Auth\AuthController@sidebar');
 
+            // Employee
+            $api->get('employee/{employee}', 'EmployeeController@show');
+
             // Profile
             $api->group(['prefix' => 'profile', 'namespace' => 'Profile'], function (Router $api) {
                 $api->patch('personal-details', 'PersonalDetailsController@update');                        // docs done
@@ -68,11 +71,6 @@ $api->version('v1', function (Router $api) {
                 });
 
                 $api->patch('custom-fields', 'CustomFieldsController@update');
-            });
-
-            // Employee
-            $api->group(['prefix' => 'employee'], function (Router $api) {
-                $api->post('get-by-employee-id', 'EmployeeController@getByEmployeeId');
             });
 
             // PIM

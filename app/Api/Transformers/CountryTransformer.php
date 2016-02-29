@@ -10,9 +10,8 @@
 namespace HRis\Api\Transformers;
 
 use HRis\Api\Eloquent\Country;
-use League\Fractal\TransformerAbstract;
 
-class CountryTransformer extends TransformerAbstract
+class CountryTransformer extends BaseTransformer
 {
     /**
      * Transform object into a generic array.

@@ -11,9 +11,8 @@ namespace HRis\Api\Transformers;
 
 use DateTime;
 use HRis\Api\Eloquent\Education;
-use League\Fractal\TransformerAbstract;
 
-class EducationTransformer extends TransformerAbstract
+class EducationTransformer extends BaseTransformer
 {
     /**
      * List of resources to automatically include.

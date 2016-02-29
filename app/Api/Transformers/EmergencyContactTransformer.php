@@ -10,9 +10,8 @@
 namespace HRis\Api\Transformers;
 
 use HRis\Api\Eloquent\EmergencyContact;
-use League\Fractal\TransformerAbstract;
 
-class EmergencyContactTransformer extends TransformerAbstract
+class EmergencyContactTransformer extends BaseTransformer
 {
     /**
      * List of resources to automatically include.
