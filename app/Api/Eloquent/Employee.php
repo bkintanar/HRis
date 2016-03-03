@@ -437,4 +437,24 @@ class Employee extends Model
     {
         return $this->hasMany(WorkExperience::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     */
+    public function supervisors()
+    {
+        return $this->hasMany(EmployeeSupervisor::class, 'employee_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     */
+    public function subordinates()
+    {
+        return $this->hasMany(EmployeeSupervisor::class, 'supervisor_id', 'id');
+    }
 }

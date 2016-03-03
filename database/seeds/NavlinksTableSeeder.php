@@ -106,6 +106,13 @@ class NavlinksTableSeeder extends Seeder
                 'parent_id'  => -1,
             ],
             [
+                'name'       => 'Reports To',
+                'href'       => 'profile/reports-to',
+                'permission' => 15,
+                'icon'       => 'fa-flag',
+                'parent_id'  => -1,
+            ],
+            [
                 'name'       => 'Projects',
                 'href'       => 'profile/projects',
                 'permission' => 15,

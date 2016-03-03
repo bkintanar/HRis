@@ -74,7 +74,7 @@ class UserTransformer extends BaseTransformer
      */
     public function includeRole(User $user, ParamBag $params = null)
     {
-        $roles = $user->roles()->get();
+        $roles = $user->roles();
 
         return $this->transformCollection($roles, new RoleTransformer(), $params);
     }

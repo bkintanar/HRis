@@ -49,6 +49,8 @@ class EmergencyContactsControllerTest extends TestCase
 
         $this->assertEquals(201, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
+
+        $this->assertEquals(SUCCESS_ADD_MESSAGE, $content_array['message']);
     }
 
     /**
@@ -77,6 +79,8 @@ class EmergencyContactsControllerTest extends TestCase
 
         $this->assertEquals(422, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
+
+        $this->assertEquals(UNABLE_ADD_MESSAGE, $content_array['message']);
     }
 
     /**
@@ -105,6 +109,8 @@ class EmergencyContactsControllerTest extends TestCase
 
         $this->assertEquals(404, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
+
+        $this->assertEquals(UNABLE_RETRIEVE_MESSAGE, $content_array['message']);
     }
 
     /**
@@ -143,6 +149,8 @@ class EmergencyContactsControllerTest extends TestCase
 
         $this->assertEquals(200, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
+
+        $this->assertEquals(SUCCESS_UPDATE_MESSAGE, $content_array['message']);
     }
 
     /**
@@ -175,6 +183,8 @@ class EmergencyContactsControllerTest extends TestCase
 
         $this->assertEquals(200, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
+
+        $this->assertEquals(SUCCESS_DELETE_MESSAGE, $content_array['message']);
     }
 
     /**
@@ -200,6 +210,8 @@ class EmergencyContactsControllerTest extends TestCase
 
         $this->assertEquals(422, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
+
+        $this->assertEquals(UNPROCESSABLE_ENTITY, $content_array['message']);
     }
 
     protected function _insert_record()

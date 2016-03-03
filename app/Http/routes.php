@@ -55,6 +55,10 @@ $api->version('v1', function (Router $api) {
                 $api->patch('dependents', 'DependentsController@update');                                   // docs done
                 $api->delete('dependents', 'DependentsController@destroy');                                 // docs done
 
+                $api->post('reports-to', 'ReportsToController@store');                                      // docs done
+                $api->patch('reports-to', 'ReportsToController@update');                                    // docs done
+                $api->delete('reports-to', 'ReportsToController@destroy');                                  // docs done
+
                 $api->patch('job', 'JobController@update');
                 $api->delete('job', 'JobController@destroy');
 

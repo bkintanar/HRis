@@ -43,6 +43,8 @@ class EmployeeTransformer extends BaseTransformer
         'employee_skills',
         'educations',
         'custom_field_values',
+        'supervisors',
+        'subordinates',
     ];
 
     /**
@@ -225,7 +227,7 @@ class EmployeeTransformer extends BaseTransformer
      */
     public function includeJobHistories(Employee $employee, ParamBag $params = null)
     {
-        $job_histories = $employee->jobHistories()->get();
+        $job_histories = $employee->jobHistories();
 
         return $this->transformCollection($job_histories, new JobHistoryTransformer(), $params);
     }
@@ -285,5 +287,47 @@ class EmployeeTransformer extends BaseTransformer
         $educations = $employee->educations();
 
         return $this->transformCollection($educations, new EducationTransformer(), $params);
+    }
+
+    /**
+     * Include Supervisors.
+     *
+     * @param Employee $employee
+     * @param ParamBag $params
+     *
+     * @throws \Exception
+     *
+     * @return \League\Fractal\Resource\Collection
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     */
+    public function includeSupervisors(Employee $employee, ParamBag $params = null)
+    {
+        $supervisors = $employee->supervisors()->pluck('supervisor_id')->toArray();
+
+        $supervisors = $employee->whereIn('id', $supervisors);
+
+        return $this->transformCollection($supervisors, new self(), $params);
+    }
+
+    /**
+     * Include Subordinates.
+     *
+     * @param Employee $employee
+     * @param ParamBag $params
+     *
+     * @throws \Exception
+     *
+     * @return \League\Fractal\Resource\Collection
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     */
+    public function includeSubordinates(Employee $employee, ParamBag $params = null)
+    {
+        $subordinates = $employee->subordinates()->pluck('employee_id')->toArray();
+
+        $subordinates = $employee->whereIn('id', $subordinates);
+
+        return $this->transformCollection($subordinates, new self(), $params);
     }
 }

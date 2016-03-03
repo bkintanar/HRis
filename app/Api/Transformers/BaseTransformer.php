@@ -34,7 +34,7 @@ class BaseTransformer extends TransformerAbstract
     public function transformCollection($model, $transformer, $params)
     {
         if ($params === null) {
-            return $this->collection($model, $transformer);
+            return $this->collection($model->get(), $transformer);
         }
 
         // Optional params validation
