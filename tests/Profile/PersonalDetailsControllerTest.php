@@ -43,6 +43,8 @@ class PersonalDetailsControllerTest extends TestCase
 
         $this->assertEquals(200, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
+
+        $this->assertEquals(SUCCESS_UPDATE_MESSAGE, $content_array['message']);
     }
 
     /**
@@ -68,6 +70,8 @@ class PersonalDetailsControllerTest extends TestCase
 
         $this->assertEquals(422, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
+
+        $this->assertEquals(UNPROCESSABLE_ENTITY, $content_array['message']);
     }
 
     /**
@@ -103,6 +107,8 @@ class PersonalDetailsControllerTest extends TestCase
 
         $this->assertEquals(405, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
+
+        $this->assertEquals(UNABLE_UPDATE_MESSAGE, $content_array['message']);
     }
 
     /**
@@ -138,5 +144,7 @@ class PersonalDetailsControllerTest extends TestCase
 
         $this->assertEquals(405, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
+
+        $this->assertEquals(EMPLOYEE_ID_IN_MESSAGE, $content_array['message']);
     }
 }

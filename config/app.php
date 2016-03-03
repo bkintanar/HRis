@@ -160,6 +160,7 @@ return [
         Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         Jlapp\Swaggervel\SwaggervelServiceProvider::class,
+        Felixkiss\UniqueWithValidator\UniqueWithValidatorServiceProvider::class,
 
         // Overrides
         Dingo\Api\Provider\LaravelServiceProvider::class,

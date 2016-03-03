@@ -2,29 +2,26 @@
 
 namespace Tests\Profile;
 
-use HRis\Api\Eloquent\Relationship;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
-class DependentsControllerTest extends TestCase
+class ReportsToControllerTest extends TestCase
 {
     use DatabaseTransactions;
 
-    protected $dependent = [
-        'first_name'   => 'First Name Test',
-        'middle_name'  => 'Middle Name Test',
-        'last_name'    => 'Last Name Test',
-        'mobile_phone' => '2015-01-01',
+    protected $employee_supervisor = [
+        'employee_id'   => 2,
+        'supervisor_id' => 1,
     ];
 
     /**
      * @test
      *
      * +----------------------------------------------+
-     * | POSITIVE TEST | POST /api/profile/dependents |
+     * | POSITIVE TEST | POST /api/profile/reports-to |
      * +----------------------------------------------+
      */
-    public function it_should_return_an_dependent_object_if_post_is_successful()
+    public function it_should_return_an_employee_supervisor_object_if_post_is_successful()
     {
         $response = $this->_insert_record();
 
@@ -33,17 +30,13 @@ class DependentsControllerTest extends TestCase
 
         $content_array = json_decode($content, true);
 
-        $this->assertArrayHasKey('dependent', $content_array);
+        $this->assertArrayHasKey('supervisor', $content_array);
 
-        $dependent = $content_array['dependent'];
+        $employee_supervisor = $content_array['supervisor'];
 
-        $this->assertArrayHasKey('employee_id', $dependent);
-        $this->assertArrayHasKey('first_name', $dependent);
-        $this->assertArrayHasKey('middle_name', $dependent);
-        $this->assertArrayHasKey('last_name', $dependent);
-        $this->assertArrayHasKey('relationship_id', $dependent);
-        $this->assertArrayHasKey('birth_date', $dependent);
-        $this->assertArrayHasKey('id', $dependent);
+        $this->assertArrayHasKey('employee_id', $employee_supervisor);
+        $this->assertArrayHasKey('supervisor_id', $employee_supervisor);
+        $this->assertArrayHasKey('id', $employee_supervisor);
 
         $this->assertEquals(201, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
@@ -55,17 +48,18 @@ class DependentsControllerTest extends TestCase
      * @test
      *
      * +----------------------------------------------+
-     * | NEGATIVE TEST | POST /api/profile/dependents |
+     * | NEGATIVE TEST | POST /api/profile/reports-to |
      * +----------------------------------------------+
      */
     public function it_should_return_an_error_if_post_is_unsuccessful()
     {
         $this->login();
 
-        $data = $this->dependent;
-        $data['relationship_id'] = Relationship::whereName('Other')->value('id');
+        $data = $this->employee_supervisor;
 
-        $response = $this->post('/api/profile/dependents', $data, ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
+        $data['employee_id'] = 1;
+
+        $response = $this->post('/api/profile/reports-to', $data, ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
 
         $content = $response->getContent();
         $status_code = $response->getStatusCode();
@@ -78,24 +72,23 @@ class DependentsControllerTest extends TestCase
         $this->assertEquals(422, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
 
-        $this->assertEquals(UNABLE_ADD_MESSAGE, $content_array['message']);
+        $this->assertEquals(UNPROCESSABLE_ENTITY, $content_array['message']);
     }
 
     /**
      * @test
      *
      * +-----------------------------------------------+
-     * | NEGATIVE TEST | PATCH /api/profile/dependents |
+     * | NEGATIVE TEST | PATCH /api/profile/reports-to |
      * +-----------------------------------------------+
      */
-    public function it_should_return_an_error_if_dependent_doesnt_exist()
+    public function it_should_return_an_error_if_employee_supervisor_doesnt_exist()
     {
         $this->login();
 
-        $data = $this->dependent;
-        $data['relationship_id'] = Relationship::whereName('Other')->value('id');
+        $data = $this->employee_supervisor;
 
-        $response = $this->patch('/api/profile/dependents', $data, ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
+        $response = $this->patch('/api/profile/reports-to', $data, ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
 
         $content = $response->getContent();
         $status_code = $response->getStatusCode();
@@ -113,11 +106,11 @@ class DependentsControllerTest extends TestCase
 
     /**
      * @test
-     * @depends it_should_return_an_dependent_object_if_post_is_successful
+     * @depends it_should_return_an_employee_supervisor_object_if_post_is_successful
      *
-     * +----------------------------------------------+
-     * | POSITIVE TEST | PATCH /api/profile/dependents |
-     * +----------------------------------------------+
+     * +-----------------------------------------------+
+     * | POSITIVE TEST | PATCH /api/profile/reports-to |
+     * +-----------------------------------------------+
      */
     public function it_should_return_a_success_message_if_patch_is_successful()
     {
@@ -127,15 +120,14 @@ class DependentsControllerTest extends TestCase
 
         $content_array = json_decode($content, true);
 
-        $id = $content_array['dependent']['id'];
+        $id = $content_array['supervisor']['id'];
 
-        $data = $this->dependent;
-        $data['first_name'] = 'First Name Test 2';
-        $data['employee_id'] = $this->user->employee->id;
-        $data['relationship_id'] = Relationship::whereName('Other')->value('id');
+        $data = $this->employee_supervisor;
+        $data['employee_id'] = 3;
+        $data['supervisor_id'] = $this->user->employee->id;
         $data['id'] = $id;
 
-        $response = $this->patch('/api/profile/dependents', $data, ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
+        $response = $this->patch('/api/profile/reports-to', $data, ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
 
         $content = $response->getContent();
         $status_code = $response->getStatusCode();
@@ -153,10 +145,10 @@ class DependentsControllerTest extends TestCase
 
     /**
      * @test
-     * @depends it_should_return_an_dependent_object_if_post_is_successful
+     * @depends it_should_return_an_employee_supervisor_object_if_post_is_successful
      *
      * +------------------------------------------------+
-     * | POSITIVE TEST | DELETE /api/profile/dependents |
+     * | POSITIVE TEST | DELETE /api/profile/reports-to |
      * +------------------------------------------------+
      */
     public function it_should_return_a_success_message_if_delete_is_successful()
@@ -167,9 +159,9 @@ class DependentsControllerTest extends TestCase
 
         $content_array = json_decode($content, true);
 
-        $id = $content_array['dependent']['id'];
+        $id = $content_array['supervisor']['id'];
 
-        $response = $this->delete('/api/profile/dependents', ['id' => $id], ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
+        $response = $this->delete('/api/profile/reports-to', ['id' => $id], ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
 
         $content = $response->getContent();
         $status_code = $response->getStatusCode();
@@ -189,14 +181,14 @@ class DependentsControllerTest extends TestCase
      * @test
      *
      * +------------------------------------------------+
-     * | NEGATIVE TEST | DELETE /api/profile/dependents |
+     * | NEGATIVE TEST | DELETE /api/profile/reports-to |
      * +------------------------------------------------+
      */
     public function it_should_return_an_error_if_delete_fails()
     {
         $this->login();
 
-        $response = $this->delete('/api/profile/dependents', ['id' => 100], ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
+        $response = $this->delete('/api/profile/reports-to', ['id' => 100], ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
 
         $content = $response->getContent();
         $status_code = $response->getStatusCode();
@@ -216,12 +208,8 @@ class DependentsControllerTest extends TestCase
     {
         $this->login();
 
-        $data = $this->dependent;
+        $data = $this->employee_supervisor;
 
-        $data['employee_id'] = $this->user->employee->id;
-        $data['relationship_id'] = Relationship::whereName('Other')->value('id');
-        $data['birth_date'] = '2015-01-01';
-
-        return $this->post('/api/profile/dependents', $data, ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
+        return $this->post('/api/profile/reports-to', $data, ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
     }
 }
