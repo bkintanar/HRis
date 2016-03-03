@@ -9,6 +9,8 @@
  */
 namespace HRis\Providers;
 
+use Elasticsearch\ClientBuilder;
+use HRis\Api\ThirdParty\Elastic;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -30,6 +32,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(Elastic::class, function () {
+            return new Elastic(
+                ClientBuilder::create()
+                    ->build()
+            );
+        });
     }
 }
