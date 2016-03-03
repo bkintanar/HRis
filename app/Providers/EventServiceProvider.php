@@ -9,8 +9,10 @@
  */
 namespace HRis\Providers;
 
+use HRis\Api\Eloquent\Employee;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Artisan;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -36,6 +38,8 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot($events);
 
-        //
+        Employee::updated(function () {
+            Artisan::queue('elasticsearch:employees');
+        });
     }
 }

@@ -146,6 +146,14 @@ class Employee extends Model
     }
 
     /**
+     * @return array
+     */
+    public function includes()
+    {
+        return ['city', 'country', 'maritalStatus', 'nationality', 'province', 'user'];
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>

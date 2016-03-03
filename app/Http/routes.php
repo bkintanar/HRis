@@ -153,6 +153,7 @@ $api->version('v1', function (Router $api) {
             $api->get('skills', 'LookupTableController@skills');                                            // docs done
         });
 
+        $api->get('playground', 'PlaygroundController@index');
     });
 
 });
