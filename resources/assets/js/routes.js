@@ -48,6 +48,11 @@ module.exports = {
                 component: require('./compiled/pages/profile/job.vue'),
                 auth: true
               },
+              '/reports-to': {
+                name: 'profile-reports-to',
+                component: require('./compiled/pages/profile/job.vue'),
+                auth: true
+              },
               '/work-shifts': {
                 name: 'profile-work-shifts',
                 component: require('./compiled/pages/page.vue'),

@@ -239,6 +239,21 @@ module.exports = {
 
     preparePermission: function() {
 
+      var properties = [
+        localStorage.hasOwnProperty('logged'),
+        localStorage.hasOwnProperty('employee_id'),
+        localStorage.hasOwnProperty('avatar'),
+        localStorage.hasOwnProperty('permissions')
+      ];
+
+      for (var property in properties) {
+
+        if (!properties[property]) {
+          this.destroyLogin();
+          this.$route.router.go('/login');
+        }
+      }
+
       var route_path = this.$route.path.substr(1); // removes the first character ('/') in the path
       var route_dotted = route_path.replace(/\//g, '.');
       var route_segment = route_path.split('/');

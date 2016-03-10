@@ -1,6 +1,6 @@
 module.exports = {
 
-  ready: function() {
+  compiled: function() {
 
     this.$dispatch('updatePageTitle', 'Login');
   },
