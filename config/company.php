@@ -14,4 +14,5 @@ return [
 
     'from_time_allowance' => 1,
 
+    'use_gravatar' => true,
 ];

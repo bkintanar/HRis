@@ -10,7 +10,9 @@
 namespace HRis\Api\Eloquent;
 
 use Carbon\Carbon;
+use HRis\Jobs\GetGravatarImages;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Swagger\Annotations as SWG;
 
 /**
@@ -40,6 +42,8 @@ use Swagger\Annotations as SWG;
  */
 class Employee extends Model
 {
+    use DispatchesJobs;
+
     /**
      * Indicates if the model should be timestamped.
      *
@@ -96,6 +100,28 @@ class Employee extends Model
      * @var string
      */
     protected $table = 'employees';
+
+    /**
+     * Update Avatar with Gravatar if work_email has been modified.
+     */
+    public static function boot()
+    {
+        parent::boot();
+
+        $use_gravatar = config('company.use_gravatar');
+
+        if ($use_gravatar) {
+            static::updated(function (Employee $employee) {
+                $changed_attributes = $employee->getDirty();
+
+                if (array_key_exists('work_email', $changed_attributes)) {
+                    $job = (new GetGravatarImages($employee));
+
+                    dispatch($job);
+                }
+            });
+        }
+    }
 
     /**
      * Get the route key for the model.

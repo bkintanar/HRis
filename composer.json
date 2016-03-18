@@ -22,7 +22,8 @@
     "cartalyst/sentinel": "^2.0",
     "league/fractal": "^0.13.0",
     "jlapp/swaggervel": "master-dev",
-    "felixkiss/uniquewith-validator": "^2.0"
+    "felixkiss/uniquewith-validator": "^2.0",
+    "thomaswelton/laravel-gravatar": "^1.1"
   },
   "require-dev": {
     "barryvdh/laravel-ide-helper": "^2.1",

@@ -161,6 +161,7 @@ return [
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         Jlapp\Swaggervel\SwaggervelServiceProvider::class,
         Felixkiss\UniqueWithValidator\UniqueWithValidatorServiceProvider::class,
+        Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider::class,
 
         // Overrides
         Dingo\Api\Provider\LaravelServiceProvider::class,
@@ -223,6 +224,9 @@ return [
         'Activation' => Cartalyst\Sentinel\Laravel\Facades\Activation::class,
         'Reminder'   => Cartalyst\Sentinel\Laravel\Facades\Reminder::class,
         'Sentinel'   => Cartalyst\Sentinel\Laravel\Facades\Sentinel::class,
+
+        // Gravatar related aliases
+        'Gravatar' => Thomaswelton\LaravelGravatar\Facades\Gravatar::class,
     ],
 
 ];
