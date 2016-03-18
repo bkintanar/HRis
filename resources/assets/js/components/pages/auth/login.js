@@ -47,8 +47,17 @@ module.exports = {
       }).then(
       function(response) {
 
+        var route = '/dashboard';
+
         this.$dispatch('userHasLoggedIn', response.entity.data);
-        this.$route.router.go('/dashboard');
+
+        if (localStorage.hasOwnProperty('route-intended')) {
+          route = localStorage.getItem('route-intended');
+          localStorage.removeItem('route-intended');
+        }
+
+        this.$route.router.go(route);
+
       }.bind(this),
       function(response) {
         console.log(response);

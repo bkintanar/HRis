@@ -183,6 +183,11 @@ module.exports = {
                 component: require('./compiled/pages/profile/job.vue'),
                 auth: true
               },
+              '/employee-list/:employee_id/reports-to': {
+                name: 'pim-employee-list-reports-to',
+                component: require('./compiled/pages/profile/job.vue'),
+                auth: true
+              },
               '/employee-list/:employee_id/work-shifts': {
                 name: 'pim-employee-list-work-shifts',
                 component: require('./compiled/pages/page.vue'),

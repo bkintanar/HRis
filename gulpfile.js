@@ -58,7 +58,7 @@ elixir(function (mix) {
             paths.datepicker + "dist/js/bootstrap-datepicker.min.js",
             paths.jasny + "dist/js/jasny-bootstrap.min.js",
             paths.icheck + "icheck.min.js",
-            paths.chosen + "chosen.jquery.min.js",
+            paths.chosen + "chosen.jquery.js",
             paths.metisMenu + "dist/metisMenu.min.js",
             paths.slimScroll + "jquery.slimscroll.min.js",
             paths.sweetalert2 + "dist/sweetalert2.min.js",

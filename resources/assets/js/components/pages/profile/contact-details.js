@@ -113,6 +113,11 @@ module.exports = {
       // jasny bug work around
       $('#address_1').focus();
 
+      this.disableFields();
+
+      $('#submitButton').val('Saving...');
+      $('#submitButton').prop('disabled', true);
+
       // Set values
       this.employee.address_city_id = this.address_city_obj.id;
       this.employee.address_province_id = this.address_province_obj.id;
@@ -167,8 +172,16 @@ module.exports = {
       // retrieve original data since cancel button was pressed.
       this.queryDatabase();
 
+      $('#submitButton').prop('disabled', false);
+      $('#submitButton').val('Save changes');
+
       $('.save-form').css('display', 'none');
       $('.modify-form').css('display', '');
+
+      this.disableFields();
+    },
+
+    disableFields: function() {
       $('.vue-chosen').prop('disabled', true).trigger('chosen:updated');
       $('.form-control').prop('disabled', true);
     },

@@ -6,7 +6,7 @@
                     <div class="dropdown profile-element" v-if="logged">
                         <span>
                             <img alt="image" id="profile-image-nav" class="img-circle"
-                                 src="/images/profile/default/0.png">
+                                 v-bind:src="logged.employee.data.avatar">
                         </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs">

@@ -157,6 +157,11 @@ module.exports = {
 
       $('.save-form').css('display', 'none');
       $('.modify-form').css('display', '');
+
+      this.disableFields();
+    },
+
+    disableFields: function() {
       $('.vue-chosen').prop('disabled', true).trigger('chosen:updated');
       $('.form-control').prop('disabled', true);
 
@@ -276,6 +281,8 @@ module.exports = {
 
       // jasny bug work around
       $('#comments').focus();
+
+      this.disableFields();
 
       if (!this.employee.job_history.data.effective_date) {
         swal({ title: 'Effective Date is a required field', type: 'error', timer: 2000 });

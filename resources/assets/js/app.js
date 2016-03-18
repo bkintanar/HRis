@@ -251,6 +251,7 @@ module.exports = {
         if (!properties[property]) {
           this.destroyLogin();
           this.$route.router.go('/login');
+          localStorage.setItem('route-intended', this.$route.path);
         }
       }
 
