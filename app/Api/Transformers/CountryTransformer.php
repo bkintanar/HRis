@@ -25,8 +25,8 @@ class CountryTransformer extends BaseTransformer
     public function transform(Country $country)
     {
         return [
-            'id'          => (int) $country->id,
-            'name'        => $country->name,
+            'id'   => (int) $country->id,
+            'name' => $country->name,
         ];
     }
 }

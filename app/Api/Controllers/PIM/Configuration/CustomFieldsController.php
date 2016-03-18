@@ -303,27 +303,22 @@ class CustomFieldsController extends BaseController
     }
 
     /**
-     * Get Custom Field Sections by Screen Id.
+     * Set the data before processing it.
      *
-     * @param Request $request
+     * @param CustomFieldRequest $request
      *
-     * @return \Dingo\Api\Http\Response
+     * @return array
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function getCustomFieldSectionsByScreenId(Request $request)
+    private function getRequestData(CustomFieldRequest $request)
     {
-        $screen_id = Navlink::whereName($request->get('screen_name'))->value('id');
-
-        $custom_field_sections = $this->custom_field_section->with('customFields.options')->whereScreenId($screen_id)->get();
-
-        $custom_field_sections->each(function ($custom_field_section) {
-            $custom_fields = $custom_field_section->customFields;
-
-            $custom_field_section->fields = array_chunk($custom_fields->toArray(), 2);
-        });
-
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, compact('custom_field_sections'));
+        return [
+            'custom_field_type_id' => $request->get('type_id'),
+            'name'                 => $request->get('name'),
+            'required'             => $request->get('required'),
+            'mask'                 => $request->has('mask') ? $request->get('mask') : null,
+        ];
     }
 
     /**
@@ -364,21 +359,26 @@ class CustomFieldsController extends BaseController
     }
 
     /**
-     * Set the data before processing it.
+     * Get Custom Field Sections by Screen Id.
      *
-     * @param CustomFieldRequest $request
+     * @param Request $request
      *
-     * @return array
+     * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    private function getRequestData(CustomFieldRequest $request)
+    public function getCustomFieldSectionsByScreenId(Request $request)
     {
-        return [
-            'custom_field_type_id' => $request->get('type_id'),
-            'name'                 => $request->get('name'),
-            'required'             => $request->get('required'),
-            'mask'                 => $request->has('mask') ? $request->get('mask') : null,
-        ];
+        $screen_id = Navlink::whereName($request->get('screen_name'))->value('id');
+
+        $custom_field_sections = $this->custom_field_section->with('customFields.options')->whereScreenId($screen_id)->get();
+
+        $custom_field_sections->each(function ($custom_field_section) {
+            $custom_fields = $custom_field_section->customFields;
+
+            $custom_field_section->fields = array_chunk($custom_fields->toArray(), 2);
+        });
+
+        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, compact('custom_field_sections'));
     }
 }

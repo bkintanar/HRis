@@ -25,11 +25,11 @@ class EmployeeSkillTransformer extends BaseTransformer
     public function transform(EmployeeSkill $skill)
     {
         return [
-            'id'                    => (int) $skill->id,
-            'employee_id'           => (int) $skill->employee_id,
-            'skill_id'              => $skill->skill_id,
-            'years_of_experience'   => $skill->years_of_experience,
-            'comment'               => $skill->comment,
+            'id'                  => (int) $skill->id,
+            'employee_id'         => (int) $skill->employee_id,
+            'skill_id'            => $skill->skill_id,
+            'years_of_experience' => $skill->years_of_experience,
+            'comment'             => $skill->comment,
         ];
     }
 }

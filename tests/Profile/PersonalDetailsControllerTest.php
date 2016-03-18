@@ -29,6 +29,7 @@ class PersonalDetailsControllerTest extends TestCase
         $data = $content_array['data'];
         $data['first_name'] = 'Test';
         $data['last_name'] = 'Cases';
+        $data['work_email'] = 'bertrand@idearobin.com';
         $data['birth_date'] = $data['birth_date']['date'];
 
         $response = $this->patch('/api/profile/personal-details', ['employee' => $data], ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
