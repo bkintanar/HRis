@@ -150,6 +150,26 @@ class Employee extends Model
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
+    public function nationality()
+    {
+        return $this->belongsTo(Nationality::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     */
+    public function maritalStatus()
+    {
+        return $this->belongsTo(MaritalStatus::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     */
     public function country()
     {
         return $this->belongsTo(Country::class, 'address_country_id', 'id');

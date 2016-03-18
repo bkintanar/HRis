@@ -35,9 +35,9 @@ class CustomFieldSectionTransformer extends BaseTransformer
     public function transform(CustomFieldSection $custom_field_section)
     {
         return [
-            'id'          => (int) $custom_field_section->id,
-            'name'        => $custom_field_section->name,
-            'screen_id'   => (int) $custom_field_section->screen_id,
+            'id'        => (int) $custom_field_section->id,
+            'name'      => $custom_field_section->name,
+            'screen_id' => (int) $custom_field_section->screen_id,
         ];
     }
 

@@ -36,8 +36,8 @@ class ProvinceTransformer extends BaseTransformer
     public function transform(Province $province)
     {
         return [
-            'id'          => (int) $province->id,
-            'name'        => $province->name,
+            'id'   => (int) $province->id,
+            'name' => $province->name,
         ];
     }
 

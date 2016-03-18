@@ -50,6 +50,23 @@ class Navlink extends Model
 
     /**
      * @param $user
+     * @param $links
+     *
+     * @return mixed
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     */
+    private static function filterPermission($user, $links)
+    {
+        return $links->filter(function (Navlink $item) use ($user) {
+            $permission = str_replace('/', '.', $item->href);
+
+            return $user->hasAccess($permission.'.view');
+        });
+    }
+
+    /**
+     * @param $user
      * @param $children
      *
      * @return mixed
@@ -71,22 +88,5 @@ class Navlink extends Model
         }
 
         return $children;
-    }
-
-    /**
-     * @param $user
-     * @param $links
-     *
-     * @return mixed
-     *
-     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
-     */
-    private static function filterPermission($user, $links)
-    {
-        return $links->filter(function (Navlink $item) use ($user) {
-            $permission = str_replace('/', '.', $item->href);
-
-            return $user->hasAccess($permission.'.view');
-        });
     }
 }
