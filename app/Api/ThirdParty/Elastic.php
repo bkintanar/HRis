@@ -14,6 +14,7 @@ class Elastic
 
     /**
      * Elastic constructor.
+     *
      * @param Client $client
      */
     public function __construct(Client $client)
@@ -24,7 +25,7 @@ class Elastic
     /**
      * Delete a single item.
      *
-     * @param  array $parameters
+     * @param array $parameters
      *
      * @return array
      */
@@ -39,7 +40,7 @@ class Elastic
      * This method normalises the 'bulk' method of the Elastic Search
      * Client to have a signature more similar to 'index'.
      *
-     * @param  array $collection [[index, type, id, body], [index, type, id, body]...]
+     * @param array $collection [[index, type, id, body], [index, type, id, body]...]
      *
      * @return array
      */
@@ -49,11 +50,11 @@ class Elastic
 
         foreach ($collection as $item) {
             $parameters['body'][] = [
-                "index" => [
+                'index' => [
                     '_id'    => $item['id'],
                     '_index' => $item['index'],
                     '_type'  => $item['type'],
-                ]
+                ],
             ];
 
             $parameters['body'][] = $item['body'];
@@ -69,7 +70,7 @@ class Elastic
      * to delete a non-existent index by first
      * checking if it exists, then deleting.
      *
-     * @param  string $name
+     * @param string $name
      *
      * @return bool
      */
@@ -80,7 +81,7 @@ class Elastic
         }
 
         return $this->client->indices()->delete([
-            'index' => $name
+            'index' => $name,
         ]);
     }
 
@@ -101,7 +102,7 @@ class Elastic
      */
     public function searchEmployee($request)
     {
-//        $query = [
+        //        $query = [
 //            'multi_match' => [
 //                [
 //                    'query'  => $request['query'],
@@ -123,15 +124,15 @@ class Elastic
                 'use_dis_max'          => true,
                 'fuzzy_max_expansions' => 50,
                 'fuzziness'            => 'AUTO',
-            ]
+            ],
         ];
 
         $parameters = [
             'index' => 'hris',
             'type'  => 'employee',
             'body'  => [
-                'query' => $query
-            ]
+                'query' => $query,
+            ],
         ];
 
         return $this->search($parameters);
@@ -183,7 +184,7 @@ class Elastic
     /**
      * Index a single item.
      *
-     * @param  array $parameters [index, type, id, body]
+     * @param array $parameters [index, type, id, body]
      *
      * @return array
      */

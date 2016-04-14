@@ -44,7 +44,7 @@ class CreateEmployeesTable extends Migration
             $table->string('middle_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('suffix_name')->nullable();
-            $table->string('avatar')->default('default/0.png')->nullable();
+            $table->string('avatar')->default('/images/profile/default/0.png')->nullable();
             $table->char('gender', 1)->nullable();
             $table->string('address_1')->nullable();
             $table->string('address_2')->nullable();
