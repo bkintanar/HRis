@@ -12,7 +12,6 @@ namespace HRis\Api\Controllers;
 use HRis\Api\Eloquent\Employee;
 use HRis\Api\ThirdParty\Elastic;
 use Illuminate\Http\Request;
-use Swagger\Annotations as SWG;
 
 class PlaygroundController extends BaseController
 {
