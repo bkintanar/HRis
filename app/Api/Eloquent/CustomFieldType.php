@@ -15,7 +15,7 @@ use Swagger\Annotations as SWG;
 /**
  * Class CustomFieldType.
  *
- * @SWG\Definition(definition="CustomFieldType", required={"id", "employee_id"})
+ * @SWG\Definition(definition="CustomFieldType", required={"id"})
  * @SWG\Property(property="id", type="integer", format="int64", default=1, description="Unique identifier for the custom field type")
  * @SWG\Property(property="name", type="string", default="Text", description="name of the custom field type")
  */
