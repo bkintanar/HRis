@@ -15,7 +15,7 @@ use Swagger\Annotations as SWG;
 /**
  * Class Navlink.
  *
- * @SWG\Definition(definition="Screen", required={"id", "employee_id"})
+ * @SWG\Definition(definition="Screen", required={"id"})
  * @SWG\Property(property="id", type="integer", format="int64", default=3, description="Unique identifier for the screen")
  * @SWG\Property(property="name", type="string", default="Personal Details", description="name of the screen")
  */

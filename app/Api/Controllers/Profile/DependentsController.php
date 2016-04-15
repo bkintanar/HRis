@@ -52,7 +52,7 @@ class DependentsController extends BaseController
      *             title="data",
      *             type="object",
      *             required={"dependent", "message", "status_code"},
-     *             @SWG\Property(property="emergency_contact", ref="#/definitions/Dependent"),
+     *             @SWG\Property(property="dependent", ref="#/definitions/Dependent"),
      *             @SWG\Property(property="message", type="string", default="Record successfully added.", description="Status message from server"),
      *             @SWG\Property(property="status_code", type="integer", default=201, description="Status code from server"),
      *         )

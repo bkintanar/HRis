@@ -52,7 +52,7 @@ class ReportsToController extends BaseController
      *             title="data",
      *             type="object",
      *             required={"supervisor", "message", "status_code"},
-     *             @SWG\Property(property="employee", ref="#/definitions/Employee"),
+     *             @SWG\Property(property="supervisor", ref="#/definitions/Employee"),
      *             @SWG\Property(property="message", type="string", default="Record successfully added.", description="Status message from server"),
      *             @SWG\Property(property="status_code", type="integer", default=201, description="Status code from server"),
      *         )
