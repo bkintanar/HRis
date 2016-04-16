@@ -123,9 +123,8 @@ module.exports = {
         window.onkeydown = previousWindowKeyDown; // https://github.com/t4t5/sweetalert/issues/127
         if (isConfirm) {
           client({
-            path: '/admin/job/employment-status',
+            path: '/admin/job/employment-status/' + employment_status.id,
             method: 'DELETE',
-            entity: { id: employment_status.id },
             headers: { Authorization: localStorage.getItem('jwt-token') }
           }).then(
               function(response) {

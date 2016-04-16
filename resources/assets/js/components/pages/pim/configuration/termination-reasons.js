@@ -122,9 +122,8 @@ module.exports = {
         window.onkeydown = previousWindowKeyDown; // https://github.com/t4t5/sweetalert/issues/127
         if (isConfirm) {
           client({
-            path: '/pim/configuration/termination-reasons',
+            path: '/pim/configuration/termination-reasons/' + termination_reason.id,
             method: 'DELETE',
-            entity: { id: termination_reason.id },
             headers: { Authorization: localStorage.getItem('jwt-token') }
           }).then(
               function(response) {

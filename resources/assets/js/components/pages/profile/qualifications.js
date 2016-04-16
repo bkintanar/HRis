@@ -349,9 +349,8 @@ module.exports = {
         window.onkeydown = previousWindowKeyDown; // https://github.com/t4t5/sweetalert/issues/127
         if (isConfirm) {
           client({
-            path: '/profile/qualifications/work-experiences',
+            path: '/profile/qualifications/work-experiences/' + work_experience.id,
             method: 'DELETE',
-            entity: { id: work_experience.id },
             headers: { Authorization: localStorage.getItem('jwt-token') }
           }).then(
           function(response) {
@@ -394,9 +393,8 @@ module.exports = {
         window.onkeydown = previousWindowKeyDown; // https://github.com/t4t5/sweetalert/issues/127
         if (isConfirm) {
           client({
-            path: '/profile/qualifications/educations',
+            path: '/profile/qualifications/educations/' + education.id,
             method: 'DELETE',
-            entity: { id: education.id },
             headers: { Authorization: localStorage.getItem('jwt-token') }
           }).then(
           function(response) {
@@ -439,9 +437,8 @@ module.exports = {
         window.onkeydown = previousWindowKeyDown; // https://github.com/t4t5/sweetalert/issues/127
         if (isConfirm) {
           client({
-            path: '/profile/qualifications/skills',
+            path: '/profile/qualifications/skills/' + skill.id,
             method: 'DELETE',
-            entity: { id: skill.id },
             headers: { Authorization: localStorage.getItem('jwt-token') }
           }).then(
           function(response) {

@@ -105,6 +105,7 @@
                         <div class="col-sm-4 col-sm-offset-2">
                             <button class="btn btn-white btn-xs cancel-form" @click.prevent="cancelForm">Cancel</button>
                             <input class="btn btn-primary btn-xs" type="submit" @click="submitForm" value="Save changes">
+                            <button class="btn btn-danger btn-xs terminate-form" @click.prevent="terminateForm">Terminate Employment</button>
                         </div>
                     </div>
                     <div class="form-group" v-if="has_access[permission + '.update']">

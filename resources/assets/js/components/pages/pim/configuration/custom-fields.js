@@ -204,9 +204,8 @@ module.exports = {
         window.onkeydown = previousWindowKeyDown; // https://github.com/t4t5/sweetalert/issues/127
         if (isConfirm) {
           client({
-            path: '/pim/configuration/custom-fields',
+            path: '/pim/configuration/custom-fields/' + custom_field.id,
             method: 'DELETE',
-            entity: { id: custom_field.id },
             headers: { Authorization: localStorage.getItem('jwt-token') }
           }).then(
               function(response) {

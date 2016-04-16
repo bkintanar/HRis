@@ -90,9 +90,8 @@ module.exports = {
         if (isConfirm) {
 
           let params = {
-            path: '/profile/job',
+            path: '/profile/job/' + job_history.id,
             method: 'DELETE',
-            entity: { id: job_history.id },
             headers: { Authorization: localStorage.getItem('jwt-token') }
           };
 
@@ -148,6 +147,10 @@ module.exports = {
       this.toggleDatepickers(true);
 
       $('#first_name').focus();
+    },
+
+    terminateForm: function() {
+
     },
 
     cancelForm: function() {

@@ -212,9 +212,8 @@ module.exports = {
         window.onkeydown = previousWindowKeyDown; // https://github.com/t4t5/sweetalert/issues/127
         if (isConfirm) {
           client({
-            path: '/profile/emergency-contacts',
+            path: '/profile/emergency-contacts/' + emergency_contact.id,
             method: 'DELETE',
-            entity: { id: emergency_contact.id },
             headers: { Authorization: localStorage.getItem('jwt-token') }
           }).then(
           function(response) {

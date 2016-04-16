@@ -170,9 +170,8 @@ module.exports = {
         window.onkeydown = previousWindowKeyDown; // https://github.com/t4t5/sweetalert/issues/127
         if (isConfirm) {
           client({
-            path: '/pim/configuration/custom-field-sections',
+            path: '/pim/configuration/custom-field-sections/' + custom_field_section.id,
             method: 'DELETE',
-            entity: { id: custom_field_section.id },
             headers: { Authorization: localStorage.getItem('jwt-token') }
           }).then(
               function(response) {
