@@ -35,13 +35,14 @@ class JobTitlesController extends BaseController
     }
 
     /**
-     * Delete the Admin - Job Title.
+     * Deletes a single instance of Job Title.
      *
      * @SWG\Delete(
      *     path="/admin/job/titles/{job_title}",
+     *     description="This route provides the ability to delete a Job Title.",
      *     tags={"Administration"},
      *     consumes={"application/json"},
-     *     summary="Delete the Admin - Job Title.",
+     *     summary="Deletes a single instance of Employment Status.",
      *     @SWG\Response(response="200", description="Success",
      *         @SWG\Schema(
      *             title="data",
@@ -61,14 +62,13 @@ class JobTitlesController extends BaseController
      *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
      *         )
      *     ),
-     *     @SWG\Response(response="500", description="No query results for model [HRis\\Api\\Eloquent\\JobTitle].",
+     *     @SWG\Response(response="422", description="422 Unprocessable Entity",
      *         @SWG\Schema(
      *             title="data",
      *             type="object",
-     *             required={"message", "status_code", "debug"},
-     *             @SWG\Property(property="message", type="string", default="No query results for model [HRis\\Api\\Eloquent\\JobTitle].", description="Status message from server"),
-     *             @SWG\Property(property="status_code", type="integer", default=500, description="Status code from server"),
-     *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
+     *             required={"message", "status_code"},
+     *             @SWG\Property(property="message", type="string", default="422 Unprocessable Entity", description="Status message from server"),
+     *             @SWG\Property(property="status_code", type="integer", default=422, description="Status code from server"),
      *         )
      *     ),
      *     @SWG\Parameter(
@@ -103,13 +103,14 @@ class JobTitlesController extends BaseController
     }
 
     /**
-     * Retrieve the Admin - Job Title.
+     * Retrieves a paginate aware collection of Job Title.
      *
      * @SWG\Get(
      *     path="/admin/job/titles",
+     *     description="This route provides the ability to retrieve a paginate aware collection of Job Titles.",
      *     tags={"Administration"},
      *     consumes={"application/json"},
-     *     summary="Retrieve the Admin - Job Title.",
+     *     summary="Retrieves a paginate aware collection of Job Title.",
      *     @SWG\Response(response="200", description="Success",
      *         @SWG\Schema(
      *             title="data",
@@ -205,13 +206,14 @@ class JobTitlesController extends BaseController
     }
 
     /**
-     * Save the Admin - Job Title.
+     * Stores a single instance of Job Title.
      *
      * @SWG\Post(
      *     path="/admin/job/titles",
+     *     description="This route provides the ability to store a single instance of Job Title.",
      *     tags={"Administration"},
      *     consumes={"application/json"},
-     *     summary="Save the Admin - Job Title.",
+     *     summary="Stores a single instance of Employment Status.",
      *     @SWG\Response(response="201", description="Success",
      *         @SWG\Schema(
      *             title="data",
@@ -269,13 +271,14 @@ class JobTitlesController extends BaseController
     }
 
     /**
-     * Get a single instance of Job Title.
+     * Retrieves a single instance of Job Title.
      *
      * @SWG\Get(
-     *     path="/admin/job/titles/1",
+     *     path="/admin/job/titles/{job_title}",
+     *     description="This route provides the ability to retrieve a single instance of Job Title.",
      *     tags={"Administration"},
      *     consumes={"application/json"},
-     *     summary="Get a single instance of Job Title.",
+     *     summary="Retrieves a single instance of Job Title.",
      *     @SWG\Response(response="200", description="Success",
      *         @SWG\Schema(
      *             title="data",
@@ -296,15 +299,23 @@ class JobTitlesController extends BaseController
      *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
      *         )
      *     ),
-     *     @SWG\Response(response="404", description="404 Not Found",
+     *     @SWG\Response(response="422", description="422 Unprocessable Entity",
      *         @SWG\Schema(
      *             title="data",
      *             type="object",
      *             required={"message", "status_code"},
-     *             @SWG\Property(property="message", type="string", default="404 Not Found", description="Status message from server"),
-     *             @SWG\Property(property="status_code", type="integer", default=404, description="Status code from server"),
-     *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
+     *             @SWG\Property(property="message", type="string", default="422 Unprocessable Entity", description="Status message from server"),
+     *             @SWG\Property(property="status_code", type="integer", default=422, description="Status code from server"),
      *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="job_title",
+     *         in="path",
+     *         description="Job title id to be retrieved.",
+     *         required=true,
+     *         type="integer",
+     *         format="int64",
+     *         default=1,
      *     ),
      *     @SWG\Parameter(
      *         name="Authorization",
@@ -328,13 +339,14 @@ class JobTitlesController extends BaseController
     }
 
     /**
-     * Update the Admin - Job Title.
+     * Updates a single instance of Job Title.
      *
      * @SWG\Patch(
      *     path="/admin/job/titles",
+     *     description="This route provides the ability to update a single instance of Job Title.",
      *     tags={"Administration"},
      *     consumes={"application/json"},
-     *     summary="Update the Admin - Job Title.",
+     *     summary="Updates a single instance of Employment Status.",
      *     @SWG\Response(response="200", description="Success",
      *         @SWG\Schema(
      *             title="data",

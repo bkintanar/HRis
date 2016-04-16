@@ -62,14 +62,13 @@ class EmploymentStatusController extends BaseController
      *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
      *         )
      *     ),
-     *     @SWG\Response(response="500", description="No query results for model [HRis\\Api\\Eloquent\\EmploymentStatus].",
+     *     @SWG\Response(response="422", description="422 Unprocessable Entity",
      *         @SWG\Schema(
      *             title="data",
      *             type="object",
-     *             required={"message", "status_code", "debug"},
-     *             @SWG\Property(property="message", type="string", default="No query results for model [HRis\\Api\\Eloquent\\EmploymentStatus].", description="Status message from server"),
-     *             @SWG\Property(property="status_code", type="integer", default=500, description="Status code from server"),
-     *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
+     *             required={"message", "status_code"},
+     *             @SWG\Property(property="message", type="string", default="422 Unprocessable Entity", description="Status message from server"),
+     *             @SWG\Property(property="status_code", type="integer", default=422, description="Status code from server"),
      *         )
      *     ),
      *     @SWG\Parameter(
@@ -104,13 +103,14 @@ class EmploymentStatusController extends BaseController
     }
 
     /**
-     * Retrieve the Admin - Employment Status.
+     * Retrieves a paginate aware collection of Employment Statuses.
      *
      * @SWG\Get(
      *     path="/admin/job/employment-status",
+     *     description="This route provides the ability to retrieve a paginate aware collection of Employment Statuses.",
      *     tags={"Administration"},
      *     consumes={"application/json"},
-     *     summary="Retrieve the Admin - Employment Status.",
+     *     summary="Retrieves a paginate aware collection of Employment Statuses.",
      *     @SWG\Response(response="200", description="Success",
      *         @SWG\Schema(
      *             title="data",
@@ -206,13 +206,14 @@ class EmploymentStatusController extends BaseController
     }
 
     /**
-     * Save the Admin - Employment Status.
+     * Stores a single instance of Employment Status.
      *
      * @SWG\Post(
      *     path="/admin/job/employment-status",
+     *     description="This route provides the ability to store a single instance of Employment Status.",
      *     tags={"Administration"},
      *     consumes={"application/json"},
-     *     summary="Save the Admin - Employment Status.",
+     *     summary="Stores a single instance of Employment Status.",
      *     @SWG\Response(response="201", description="Success",
      *         @SWG\Schema(
      *             title="data",
@@ -270,13 +271,14 @@ class EmploymentStatusController extends BaseController
     }
 
     /**
-     * Get a single instance of Employment Status.
+     * Retrieves a single instance of Employment Status.
      *
      * @SWG\Get(
-     *     path="/admin/job/employment-status/1",
+     *     path="/admin/job/employment-status/{employment_status}",
+     *     description="This route provides the ability to retrieve a single instance of Employment Status.",
      *     tags={"Administration"},
      *     consumes={"application/json"},
-     *     summary="Get a single instance of Employment Status.",
+     *     summary="Retrieves a single instance of Employment Status.",
      *     @SWG\Response(response="200", description="Success",
      *         @SWG\Schema(
      *             title="data",
@@ -297,15 +299,23 @@ class EmploymentStatusController extends BaseController
      *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
      *         )
      *     ),
-     *     @SWG\Response(response="404", description="404 Not Found",
+     *     @SWG\Response(response="422", description="422 Unprocessable Entity",
      *         @SWG\Schema(
      *             title="data",
      *             type="object",
      *             required={"message", "status_code"},
-     *             @SWG\Property(property="message", type="string", default="404 Not Found", description="Status message from server"),
-     *             @SWG\Property(property="status_code", type="integer", default=404, description="Status code from server"),
-     *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
+     *             @SWG\Property(property="message", type="string", default="422 Unprocessable Entity", description="Status message from server"),
+     *             @SWG\Property(property="status_code", type="integer", default=422, description="Status code from server"),
      *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="employment_status",
+     *         in="path",
+     *         description="Employment status id to be retrieved.",
+     *         required=true,
+     *         type="integer",
+     *         format="int64",
+     *         default=1,
      *     ),
      *     @SWG\Parameter(
      *         name="Authorization",
@@ -329,13 +339,14 @@ class EmploymentStatusController extends BaseController
     }
 
     /**
-     * Update the Admin - Employment Status.
+     * Updates a single instance of Employment Status.
      *
      * @SWG\Patch(
      *     path="/admin/job/employment-status",
+     *     description="This route provides the ability to update a single instance of Employment Status.",
      *     tags={"Administration"},
      *     consumes={"application/json"},
-     *     summary="Update the Admin - Employment Status.",
+     *     summary="Updates a single instance of Employment Status",
      *     @SWG\Response(response="200", description="Success",
      *         @SWG\Schema(
      *             title="data",

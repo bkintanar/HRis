@@ -9,8 +9,6 @@ class ReportsToControllerTest extends TestCase
 {
     use DatabaseTransactions;
 
-    protected $class_name = 'HRis\Api\Eloquent\EmployeeSupervisor';
-
     protected $employee_supervisor = [
         'employee_id'   => 2,
         'supervisor_id' => 1,
@@ -200,10 +198,10 @@ class ReportsToControllerTest extends TestCase
         $this->assertArrayHasKey('message', $content_array);
         $this->assertArrayHasKey('status_code', $content_array);
 
-        $this->assertEquals(500, $status_code);
+        $this->assertEquals(422, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
 
-        $this->assertEquals("No query results for model [{$this->class_name}].", $content_array['message']);
+        $this->assertEquals(UNPROCESSABLE_ENTITY, $content_array['message']);
     }
 
     protected function _insert_record()

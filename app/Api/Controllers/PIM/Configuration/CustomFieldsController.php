@@ -212,12 +212,7 @@ class CustomFieldsController extends BaseController
 
             $custom_field_section = $this->custom_field_section->findOrFail($custom_field_section_id);
 
-            $data = [
-                'custom_field_type_id' => $request->get('type_id'),
-                'name'                 => $request->get('name'),
-                'required'             => $request->get('required'),
-                'mask'                 => $request->has('mask') ? $request->get('mask') : null,
-            ];
+            $data = $this->getRequestData($request);
 
             // Create CustomField and attach it to the CustomFieldSection
             $custom_field = $custom_field_section->customFields()->create($data);

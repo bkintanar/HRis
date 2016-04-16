@@ -40,13 +40,14 @@ class EmergencyContactsController extends BaseController
     }
 
     /**
-     * Save the Profile - Emergency Contacts.
+     * Stores a single instance of Emergency Contact.
      *
      * @SWG\Post(
      *     path="/profile/emergency-contacts",
+     *     description="This route provides the ability to store a single instance of Emergency Contact.",
      *     tags={"Employee Profiles"},
      *     consumes={"application/json"},
-     *     summary="Save the Profile - Emergency Contacts.",
+     *     summary="Stores a single instance of Emergency Contact.",
      *     @SWG\Response(response="201", description="Success",
      *         @SWG\Schema(
      *             title="data",
@@ -104,13 +105,14 @@ class EmergencyContactsController extends BaseController
     }
 
     /**
-     * Update the Profile - Emergency Contacts.
+     * Updates a single instance of Emergency Contact.
      *
      * @SWG\Patch(
      *     path="/profile/emergency-contacts",
+     *     description="This route provides the ability to update a single instance of Emergency Contact.",
      *     tags={"Employee Profiles"},
      *     consumes={"application/json"},
-     *     summary="Update the Profile - Emergency Contacts.",
+     *     summary="Updates a single instance of Emergency Contact.",
      *     @SWG\Response(response="200", description="Success",
      *         @SWG\Schema(
      *             title="data",
@@ -153,7 +155,7 @@ class EmergencyContactsController extends BaseController
      *         name="emergency_contact",
      *         in="body",
      *         required=true,
-     *         description="employee's emergency contact object that needs to be updated",
+     *         description="Emergency contact object that needs to be updated",
      *         @SWG\Property(ref="#/definitions/EmergencyContact")
      *     ),
      *     @SWG\Parameter(
@@ -178,13 +180,14 @@ class EmergencyContactsController extends BaseController
     }
 
     /**
-     * Delete the Profile - Emergency Contacts.
+     * Deletes a single instance of Emergency Contact.
      *
      * @SWG\Delete(
      *     path="/profile/emergency-contacts/{emergency_contact}",
+     *     description="This route provides the ability to delete a Emergency Contact.",
      *     tags={"Employee Profiles"},
      *     consumes={"application/json"},
-     *     summary="Delete the Profile - Emergency Contacts.",
+     *     summary="Deletes a single instance of Emergency Contact.",
      *     @SWG\Response(response="200", description="Success",
      *         @SWG\Schema(
      *             title="data",
@@ -204,20 +207,19 @@ class EmergencyContactsController extends BaseController
      *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
      *         )
      *     ),
-     *     @SWG\Response(response="500", description="No query results for model [HRis\\Api\\Eloquent\\EmergencyContact].",
+     *     @SWG\Response(response="422", description="422 Unprocessable Entity",
      *         @SWG\Schema(
      *             title="data",
      *             type="object",
-     *             required={"message", "status_code", "debug"},
-     *             @SWG\Property(property="message", type="string", default="No query results for model [HRis\\Api\\Eloquent\\EmergencyContact].", description="Status message from server"),
-     *             @SWG\Property(property="status_code", type="integer", default=500, description="Status code from server"),
-     *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
+     *             required={"message", "status_code"},
+     *             @SWG\Property(property="message", type="string", default="422 Unprocessable Entity", description="Status message from server"),
+     *             @SWG\Property(property="status_code", type="integer", default=422, description="Status code from server"),
      *         )
      *     ),
      *     @SWG\Parameter(
      *         name="emergency_contact",
      *         in="path",
-     *         description="Employee's emergency contact id to be deleted",
+     *         description="Emergency contact id to be deleted",
      *         required=true,
      *         type="integer",
      *         format="int64",
