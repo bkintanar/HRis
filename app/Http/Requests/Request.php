@@ -21,7 +21,6 @@ abstract class Request extends FormRequest
 
     public function __construct()
     {
-        $this->app_list_limit = env('APP_LIST_LIMIT', 50);
         $token = JWTAuth::getToken();
         if (!empty($token)) {
             $user = JWTAuth::toUser($token);

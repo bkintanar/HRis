@@ -9,12 +9,12 @@ class EmploymentStatusControllerTest extends TestCase
 {
     use DatabaseTransactions;
 
+    protected $class_name = 'HRis\Api\Eloquent\EmploymentStatus';
+
     protected $employment_status = [
         'name'   => 'employment_status_name_',
         'class'  => 'desc',
     ];
-
-    protected $class_name = 'HRis\Api\Eloquent\EmploymentStatus';
 
     /**
      * @test
@@ -157,7 +157,7 @@ class EmploymentStatusControllerTest extends TestCase
 
         $id = $content_array['employment_status']['id'];
 
-        $response = $this->delete('/api/admin/job/employment-status', ['id' => $id], ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
+        $response = $this->delete('/api/admin/job/employment-status/'.$id, ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
 
         $content = $response->getContent();
         $status_code = $response->getStatusCode();
@@ -282,7 +282,7 @@ class EmploymentStatusControllerTest extends TestCase
     {
         $this->login();
 
-        $response = $this->delete('/api/admin/job/employment-status', ['id' => 100], ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
+        $response = $this->delete('/api/admin/job/employment-status/100', ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
 
         $content = $response->getContent();
         $status_code = $response->getStatusCode();
@@ -292,10 +292,10 @@ class EmploymentStatusControllerTest extends TestCase
         $this->assertArrayHasKey('message', $content_array);
         $this->assertArrayHasKey('status_code', $content_array);
 
-        $this->assertEquals(422, $status_code);
+        $this->assertEquals(500, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
 
-        $this->assertEquals(UNABLE_DELETE_MESSAGE, $content_array['message']);
+        $this->assertEquals("No query results for model [{$this->class_name}].", $content_array['message']);
     }
 
     /**

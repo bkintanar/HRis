@@ -38,7 +38,7 @@ class TerminationReasonsController extends BaseController
      * Delete the PIM Configuration - Termination Reason.
      *
      * @SWG\Delete(
-     *     path="/pim/configuration/termination-reasons",
+     *     path="/pim/configuration/termination-reasons/{termination_reason}",
      *     tags={"PIM - Configuration"},
      *     consumes={"application/json"},
      *     summary="Delete the PIM Configuration - Termination Reason.",
@@ -61,18 +61,19 @@ class TerminationReasonsController extends BaseController
      *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
      *         )
      *     ),
-     *     @SWG\Response(response="422", description="Unable to delete record from the database.",
+     *     @SWG\Response(response="500", description="No query results for model [HRis\\Api\\Eloquent\\TerminationReason].",
      *         @SWG\Schema(
      *             title="data",
      *             type="object",
-     *             required={"message", "status_code"},
-     *             @SWG\Property(property="message", type="string", default="Unable to delete record from the database.", description="Status message from server"),
-     *             @SWG\Property(property="status_code", type="integer", default=422, description="Status code from server"),
+     *             required={"message", "status_code", "debug"},
+     *             @SWG\Property(property="message", type="string", default="No query results for model [HRis\\Api\\Eloquent\\TerminationReason].", description="Status message from server"),
+     *             @SWG\Property(property="status_code", type="integer", default=500, description="Status code from server"),
+     *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
      *         )
      *     ),
      *     @SWG\Parameter(
-     *         name="id",
-     *         in="formData",
+     *         name="termination_reason",
+     *         in="path",
      *         description="Termination reason id to be deleted",
      *         required=true,
      *         type="integer",
@@ -89,15 +90,16 @@ class TerminationReasonsController extends BaseController
      *     ),
      * )
      *
+     * @param TerminationReason        $termination_reason
      * @param TerminationReasonRequest $request
      *
      * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function destroy(TerminationReasonRequest $request)
+    public function destroy(TerminationReason $termination_reason, TerminationReasonRequest $request)
     {
-        return $this->destroyModel($request, $this->termination_reason);
+        return $this->destroyModel($termination_reason, $this->termination_reason);
     }
 
     /**
@@ -105,9 +107,10 @@ class TerminationReasonsController extends BaseController
      *
      * @SWG\Get(
      *     path="/pim/configuration/termination-reasons",
+     *     description="",
      *     tags={"PIM - Configuration"},
      *     consumes={"application/json"},
-     *     summary="Save the PIM Configuration - Termination Reason.",
+     *     summary="Retrieve the PIM Configuration - Termination Reason.",
      *     @SWG\Response(response="200", description="Success",
      *         @SWG\Schema(
      *             title="data",

@@ -181,7 +181,7 @@ class DependentsController extends BaseController
      * Delete the Profile - Dependents.
      *
      * @SWG\Delete(
-     *     path="/profile/dependents",
+     *     path="/profile/dependents/{dependent}",
      *     tags={"Employee Profiles"},
      *     consumes={"application/json"},
      *     summary="Delete the Profile - Dependents.",
@@ -204,18 +204,19 @@ class DependentsController extends BaseController
      *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
      *         )
      *     ),
-     *     @SWG\Response(response="422", description="Unable to delete record from the database.",
+     *     @SWG\Response(response="500", description="No query results for model [HRis\\Api\\Eloquent\\Dependent].",
      *         @SWG\Schema(
      *             title="data",
      *             type="object",
-     *             required={"message", "status_code"},
-     *             @SWG\Property(property="message", type="string", default="Unable to delete record from the database.", description="Status message from server"),
-     *             @SWG\Property(property="status_code", type="integer", default=422, description="Status code from server"),
+     *             required={"message", "status_code", "debug"},
+     *             @SWG\Property(property="message", type="string", default="No query results for model [HRis\\Api\\Eloquent\\Dependent].", description="Status message from server"),
+     *             @SWG\Property(property="status_code", type="integer", default=500, description="Status code from server"),
+     *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
      *         )
      *     ),
      *     @SWG\Parameter(
-     *         name="id",
-     *         in="formData",
+     *         name="dependent",
+     *         in="path",
      *         description="Employee's dependent id to be deleted",
      *         required=true,
      *         type="integer",
@@ -232,14 +233,15 @@ class DependentsController extends BaseController
      *     ),
      * )
      *
+     * @param Dependent         $dependent
      * @param DependentsRequest $request
      *
      * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function destroy(DependentsRequest $request)
+    public function destroy(Dependent $dependent, DependentsRequest $request)
     {
-        return $this->destroyModel($request, $this->dependent);
+        return $this->destroyModel($dependent, $this->dependent);
     }
 }

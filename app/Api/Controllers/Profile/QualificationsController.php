@@ -32,11 +32,33 @@ class QualificationsController extends BaseController
     protected $employee;
 
     /**
-     * @param Employee $employee
+     * @var WorkExperience
      */
-    public function __construct(Employee $employee)
+    protected $work_experience;
+
+    /**
+     * @var Education
+     */
+    protected $education;
+
+    /**
+     * @var EmployeeSkill
+     */
+    protected $employee_skill;
+
+    /**
+     * @param Employee       $employee
+     * @param WorkExperience $work_experience
+     * @param Education      $education
+     * @param EmployeeSkill  $employee_skill
+     */
+    public function __construct(Employee $employee, WorkExperience $work_experience, Education $education, EmployeeSkill $employee_skill)
     {
         $this->employee = $employee;
+
+        $this->work_experience = $work_experience;
+        $this->education = $education;
+        $this->employee_skill = $employee_skill;
 
         $profile_details_id = Navlink::whereName('Qualifications')->value('id');
         $this->data['custom_field_sections'] = CustomFieldSection::whereScreenId($profile_details_id)->get();
@@ -60,15 +82,16 @@ class QualificationsController extends BaseController
     /**
      * Delete the Profile - Qualifications - Work Experiences.
      *
+     * @param WorkExperience                      $work_experience
      * @param QualificationsWorkExperienceRequest $request
      *
      * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function destroyWorkExperience(QualificationsWorkExperienceRequest $request, WorkExperience $work_experience)
+    public function destroyWorkExperience(WorkExperience $work_experience, QualificationsWorkExperienceRequest $request)
     {
-        return $this->destroyModel($request, $work_experience);
+        return $this->destroyModel($work_experience, $this->work_experience);
     }
 
     /**
@@ -116,16 +139,16 @@ class QualificationsController extends BaseController
     /**
      * Delete the Profile - Qualifications - Educations.
      *
-     * @param QualificationsEducationRequest $request
      * @param Education                      $education
+     * @param QualificationsEducationRequest $request
      *
      * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function destroyEducation(QualificationsEducationRequest $request, Education $education)
+    public function destroyEducation(Education $education, QualificationsEducationRequest $request)
     {
-        return $this->destroyModel($request, $education);
+        return $this->destroyModel($education, $this->education);
     }
 
     /**
@@ -221,15 +244,15 @@ class QualificationsController extends BaseController
     /**
      * Delete the Profile - Qualifications - Skills.
      *
-     * @param QualificationsSkillRequest $request
      * @param EmployeeSkill              $employee_skill
+     * @param QualificationsSkillRequest $request
      *
      * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function destroySkill(QualificationsSkillRequest $request, EmployeeSkill $employee_skill)
+    public function destroySkill(EmployeeSkill $employee_skill, QualificationsSkillRequest $request)
     {
-        return $this->destroyModel($request, $employee_skill);
+        return $this->destroyModel($employee_skill, $this->employee_skill);
     }
 }
