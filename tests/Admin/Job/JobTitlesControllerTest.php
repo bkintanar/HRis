@@ -9,8 +9,6 @@ class JobTitlesControllerTest extends TestCase
 {
     use DatabaseTransactions;
 
-    protected $class_name = 'HRis\Api\Eloquent\JobTitle';
-
     protected $job_title = [
         'name'         => 'job_title_name_',
         'description'  => 'desc',
@@ -265,10 +263,10 @@ class JobTitlesControllerTest extends TestCase
 
         $content_array = json_decode($content, true);
 
-        $this->assertEquals(500, $status_code);
+        $this->assertEquals(422, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
 
-        $this->assertEquals("No query results for model [{$this->class_name}].", $content_array['message']);
+        $this->assertEquals(UNPROCESSABLE_ENTITY, $content_array['message']);
     }
 
     /**
@@ -292,10 +290,10 @@ class JobTitlesControllerTest extends TestCase
         $this->assertArrayHasKey('message', $content_array);
         $this->assertArrayHasKey('status_code', $content_array);
 
-        $this->assertEquals(500, $status_code);
+        $this->assertEquals(422, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
 
-        $this->assertEquals("No query results for model [{$this->class_name}].", $content_array['message']);
+        $this->assertEquals(UNPROCESSABLE_ENTITY, $content_array['message']);
     }
 
     /**

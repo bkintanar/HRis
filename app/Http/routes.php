@@ -10,6 +10,17 @@
 use Dingo\Api\Routing\Router;
 
 $api = app(Router::class);
+$response = app(Dingo\Api\Http\Response\Factory::class);
+
+app(Dingo\Api\Exception\Handler::class)->register(function (Illuminate\Database\Eloquent\ModelNotFoundException $e) use ($response) {
+
+    $response_array = [
+        'message'     => '422 Unprocessable Entity',
+        'status_code' => 422,
+    ];
+
+    return $response->withArray($response_array)->statusCode($response_array['status_code']);
+});
 
 // Version 1 of our API
 $api->version('v1', function (Router $api) {
@@ -85,6 +96,7 @@ $api->version('v1', function (Router $api) {
                 $api->group(['prefix' => 'configuration', 'namespace' => 'Configuration'], function (Router $api) {
 
                     $api->get('termination-reasons', 'TerminationReasonsController@index');                           // docs done
+                    $api->get('termination-reasons/{termination_reason}', 'TerminationReasonsController@show');       // docs done
                     $api->post('termination-reasons', 'TerminationReasonsController@store');                          // docs done
                     $api->patch('termination-reasons', 'TerminationReasonsController@update');                        // docs done
                     $api->delete('termination-reasons/{termination_reason}', 'TerminationReasonsController@destroy'); // docs done

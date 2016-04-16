@@ -35,13 +35,14 @@ class PayGradesController extends BaseController
     }
 
     /**
-     * Delete the Admin - Pay Grade.
+     * Deletes a single instance of Pay Grade.
      *
      * @SWG\Delete(
      *     path="/admin/job/pay-grades/{pay_grade}",
+     *     description="This route provides the ability to delete a Pay Grade.",
      *     tags={"Administration"},
      *     consumes={"application/json"},
-     *     summary="Delete the Admin - Pay Grade.",
+     *     summary="Deletes a single instance of Pay Grade.",
      *     @SWG\Response(response="200", description="Success",
      *         @SWG\Schema(
      *             title="data",
@@ -61,14 +62,13 @@ class PayGradesController extends BaseController
      *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
      *         )
      *     ),
-     *     @SWG\Response(response="500", description="No query results for model [HRis\\Api\\Eloquent\\PayGrade].",
+     *     @SWG\Response(response="422", description="422 Unprocessable Entity",
      *         @SWG\Schema(
      *             title="data",
      *             type="object",
-     *             required={"message", "status_code", "debug"},
-     *             @SWG\Property(property="message", type="string", default="No query results for model [HRis\\Api\\Eloquent\\PayGrade].", description="Status message from server"),
-     *             @SWG\Property(property="status_code", type="integer", default=500, description="Status code from server"),
-     *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
+     *             required={"message", "status_code"},
+     *             @SWG\Property(property="message", type="string", default="422 Unprocessable Entity", description="Status message from server"),
+     *             @SWG\Property(property="status_code", type="integer", default=422, description="Status code from server"),
      *         )
      *     ),
      *     @SWG\Parameter(
@@ -103,13 +103,14 @@ class PayGradesController extends BaseController
     }
 
     /**
-     * Retrieve the Admin - Pay Grade.
+     * Retrieves a paginate aware collection of Pay Grades.
      *
      * @SWG\Get(
      *     path="/admin/job/pay-grades",
+     *     description="This route provides the ability to retrieve a paginate aware collection of Pay Grades.",
      *     tags={"Administration"},
      *     consumes={"application/json"},
-     *     summary="Retrieve the Admin - Pay Grade.",
+     *     summary="Retrieves a paginate aware collection of Pay Grades.",
      *     @SWG\Response(response="200", description="Success",
      *         @SWG\Schema(
      *             title="data",
@@ -205,13 +206,14 @@ class PayGradesController extends BaseController
     }
 
     /**
-     * Save the Admin - Pay Grade.
+     * Stores a single instance of Pay Grade.
      *
      * @SWG\Post(
      *     path="/admin/job/pay-grades",
+     *     description="This route provides the ability to store a single instance of Pay Grade.",
      *     tags={"Administration"},
      *     consumes={"application/json"},
-     *     summary="Save the Admin - Pay Grade.",
+     *     summary="Stores a single instance of Pay Grade.",
      *     @SWG\Response(response="201", description="Success",
      *         @SWG\Schema(
      *             title="data",
@@ -269,13 +271,14 @@ class PayGradesController extends BaseController
     }
 
     /**
-     * Get a single instance of Pay Grade.
+     * Retrieves a single instance of Pay Grade.
      *
      * @SWG\Get(
-     *     path="/admin/job/pay-grades/1",
+     *     path="/admin/job/pay-grades/{pay_grade}",
+     *     description="This route provides the ability to retrieve a single instance of Pay Grade.",
      *     tags={"Administration"},
      *     consumes={"application/json"},
-     *     summary="Get a single instance of Pay Grade.",
+     *     summary="Retrieves a single instance of Pay Grade.",
      *     @SWG\Response(response="200", description="Success",
      *         @SWG\Schema(
      *             title="data",
@@ -296,15 +299,23 @@ class PayGradesController extends BaseController
      *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
      *         )
      *     ),
-     *     @SWG\Response(response="404", description="404 Not Found",
+     *     @SWG\Response(response="422", description="422 Unprocessable Entity",
      *         @SWG\Schema(
      *             title="data",
      *             type="object",
      *             required={"message", "status_code"},
-     *             @SWG\Property(property="message", type="string", default="404 Not Found", description="Status message from server"),
-     *             @SWG\Property(property="status_code", type="integer", default=404, description="Status code from server"),
-     *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
+     *             @SWG\Property(property="message", type="string", default="422 Unprocessable Entity", description="Status message from server"),
+     *             @SWG\Property(property="status_code", type="integer", default=422, description="Status code from server"),
      *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="pay_grade",
+     *         in="path",
+     *         description="Pay grade id to be retrieved.",
+     *         required=true,
+     *         type="integer",
+     *         format="int64",
+     *         default=1,
      *     ),
      *     @SWG\Parameter(
      *         name="Authorization",
@@ -328,13 +339,14 @@ class PayGradesController extends BaseController
     }
 
     /**
-     * Update the Admin - Pay Grade.
+     * Updates a single instance of Pay Grade.
      *
      * @SWG\Patch(
      *     path="/admin/job/pay-grades",
+     *     description="This route provides the ability to update a single instance of Pay Grade.",
      *     tags={"Administration"},
      *     consumes={"application/json"},
-     *     summary="Update the Admin - Pay Grade.",
+     *     summary="Updates a single instance of Pay Grade.",
      *     @SWG\Response(response="200", description="Success",
      *         @SWG\Schema(
      *             title="data",

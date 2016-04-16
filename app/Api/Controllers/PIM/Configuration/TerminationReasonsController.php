@@ -35,13 +35,14 @@ class TerminationReasonsController extends BaseController
     }
 
     /**
-     * Delete the PIM Configuration - Termination Reason.
+     * Deletes a single instance of Termination Reason.
      *
      * @SWG\Delete(
      *     path="/pim/configuration/termination-reasons/{termination_reason}",
+     *     description="This route provides the ability to delete a Termination Reason.",
      *     tags={"PIM - Configuration"},
      *     consumes={"application/json"},
-     *     summary="Delete the PIM Configuration - Termination Reason.",
+     *     summary="Deletes a single instance of Termination Reason.",
      *     @SWG\Response(response="200", description="Success",
      *         @SWG\Schema(
      *             title="data",
@@ -61,14 +62,13 @@ class TerminationReasonsController extends BaseController
      *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
      *         )
      *     ),
-     *     @SWG\Response(response="500", description="No query results for model [HRis\\Api\\Eloquent\\TerminationReason].",
+     *     @SWG\Response(response="422", description="422 Unprocessable Entity",
      *         @SWG\Schema(
      *             title="data",
      *             type="object",
-     *             required={"message", "status_code", "debug"},
-     *             @SWG\Property(property="message", type="string", default="No query results for model [HRis\\Api\\Eloquent\\TerminationReason].", description="Status message from server"),
-     *             @SWG\Property(property="status_code", type="integer", default=500, description="Status code from server"),
-     *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
+     *             required={"message", "status_code"},
+     *             @SWG\Property(property="message", type="string", default="422 Unprocessable Entity", description="Status message from server"),
+     *             @SWG\Property(property="status_code", type="integer", default=422, description="Status code from server"),
      *         )
      *     ),
      *     @SWG\Parameter(
@@ -103,14 +103,14 @@ class TerminationReasonsController extends BaseController
     }
 
     /**
-     * Retrieve the PIM Configuration - Termination Reason.
+     * Retrieves a paginate aware collection of Termination Reason.
      *
      * @SWG\Get(
      *     path="/pim/configuration/termination-reasons",
-     *     description="",
+     *     description="This route provides the ability to retrieve a paginate aware collection of Termination Reasons.",
      *     tags={"PIM - Configuration"},
      *     consumes={"application/json"},
-     *     summary="Retrieve the PIM Configuration - Termination Reason.",
+     *     summary="Retrieves a paginate aware collection of Termination Reason.",
      *     @SWG\Response(response="200", description="Success",
      *         @SWG\Schema(
      *             title="data",
@@ -206,13 +206,14 @@ class TerminationReasonsController extends BaseController
     }
 
     /**
-     * Save the PIM Configuration - Termination Reason.
+     * Stores a single instance of Termination Reason.
      *
      * @SWG\Post(
      *     path="/pim/configuration/termination-reasons",
+     *     description="This route provides the ability to store a single instance of Termination Reason.",
      *     tags={"PIM - Configuration"},
      *     consumes={"application/json"},
-     *     summary="Save the PIM Configuration - Termination Reason.",
+     *     summary="Stores a single instance of Termination Reason.",
      *     @SWG\Response(response="201", description="Success",
      *         @SWG\Schema(
      *             title="data",
@@ -270,13 +271,82 @@ class TerminationReasonsController extends BaseController
     }
 
     /**
-     * Update the PIM Configuration - Termination Reason.
+     * Retrieves a single instance of Termination Reason.
+     *
+     * @SWG\Get(
+     *     path="/pim/configuration/termination-reasons/{termination_reason}",
+     *     description="This route provides the ability to retrieve a single instance of Termination Reason.",
+     *     tags={"PIM - Configuration"},
+     *     consumes={"application/json"},
+     *     summary="Retrieves a single instance of Termination Reason.",
+     *     @SWG\Response(response="200", description="Success",
+     *         @SWG\Schema(
+     *             title="data",
+     *             type="object",
+     *             required={"employment_status", "message", "status_code"},
+     *             @SWG\Property(property="employment_status", ref="#/definitions/TerminationReason"),
+     *             @SWG\Property(property="message", type="string", default="Record successfully retrieved.", description="Status message from server"),
+     *             @SWG\Property(property="status_code", type="integer", default=200, description="Status code from server"),
+     *         )
+     *     ),
+     *     @SWG\Response(response="400", description="Token not provided",
+     *         @SWG\Schema(
+     *             title="data",
+     *             type="object",
+     *             required={"message", "status_code", "debug"},
+     *             @SWG\Property(property="message", type="string", default="Token not provided", description="Error message from server"),
+     *             @SWG\Property(property="status_code", type="integer", default=400, description="Status code from server"),
+     *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
+     *         )
+     *     ),
+     *     @SWG\Response(response="422", description="422 Unprocessable Entity",
+     *         @SWG\Schema(
+     *             title="data",
+     *             type="object",
+     *             required={"message", "status_code"},
+     *             @SWG\Property(property="message", type="string", default="422 Unprocessable Entity", description="Status message from server"),
+     *             @SWG\Property(property="status_code", type="integer", default=422, description="Status code from server"),
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="termination_reason",
+     *         in="path",
+     *         description="Termination reason id to be retrieved.",
+     *         required=true,
+     *         type="integer",
+     *         format="int64",
+     *         default=1,
+     *     ),
+     *     @SWG\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         description="JWT Token",
+     *         required=true,
+     *         type="string",
+     *         default="Bearer "
+     *     ),
+     * )
+     *
+     * @param TerminationReason $termination_reason
+     *
+     * @return \Dingo\Api\Http\Response
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     */
+    public function show(TerminationReason $termination_reason)
+    {
+        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, compact('termination_reason'));
+    }
+
+    /**
+     * Updates a single instance of Termination Reason.
      *
      * @SWG\Patch(
      *     path="/pim/configuration/termination-reasons",
+     *     description="This route provides the ability to update a single instance of Termination Reason.",
      *     tags={"PIM - Configuration"},
      *     consumes={"application/json"},
-     *     summary="Update the PIM Configuration - Termination Reason.",
+     *     summary="Updates a single instance of Termination Reason.",
      *     @SWG\Response(response="200", description="Success",
      *         @SWG\Schema(
      *             title="data",

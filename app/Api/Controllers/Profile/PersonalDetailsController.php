@@ -16,13 +16,14 @@ use Illuminate\Support\Facades\Config;
 use Swagger\Annotations as SWG;
 
 /**
- * Updates the Profile - Personal Details.
+ * Updates a single instance of Employee Personal Details.
  *
  * @SWG\Patch(
  *     path="/profile/personal-details",
+ *     description="This route provides the ability to update a single instance of Employee Personal Details.",
  *     tags={"Employee Profiles"},
  *     consumes={"application/json"},
- *     summary="Updates the Profile - Personal Details.",
+ *     summary="Updates a single instance of Employee Personal Details.",
  *     @SWG\Response(response="200", description="Success",
  *         @SWG\Schema(
  *             title="data",
@@ -80,13 +81,14 @@ use Swagger\Annotations as SWG;
  *     ),
  * )
  *
- * Updates the Profile - Contact Details.
+ * Updates a single instance of Employee Contact Details.
  *
  * @SWG\Patch(
  *     path="/profile/contact-details",
+ *     description="This route provides the ability to update a single instance of Employee Contact Details.",
  *     tags={"Employee Profiles"},
  *     consumes={"application/json"},
- *     summary="Updates the Profile - Contact Details.",
+ *     summary="Updates a single instance of Employee Contact Details.",
  *     @SWG\Response(response="200", description="Success",
  *         @SWG\Schema(
  *             title="data",

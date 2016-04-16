@@ -40,13 +40,14 @@ class ReportsToController extends BaseController
     }
 
     /**
-     * Save the Profile - ReportsTo.
+     * Stores a single instance of Employee Supervisor.
      *
      * @SWG\Post(
-     *     path="/profile/supervisors",
+     *     path="/profile/reports-to",
+     *     description="This route provides the ability to store a single instance of Employee Supervisor.",
      *     tags={"Employee Profiles"},
      *     consumes={"application/json"},
-     *     summary="Save the Profile - ReportsTo.",
+     *     summary="Stores a single instance of Employee Supervisor.",
      *     @SWG\Response(response="201", description="Success",
      *         @SWG\Schema(
      *             title="data",
@@ -104,13 +105,14 @@ class ReportsToController extends BaseController
     }
 
     /**
-     * Update the Profile - ReportsTo.
+     * Updates a single instance of Employee Supervisor.
      *
      * @SWG\Patch(
-     *     path="/profile/supervisors",
+     *     path="/profile/reports-to",
+     *     description="This route provides the ability to update a single instance of Employee Supervisor.",
      *     tags={"Employee Profiles"},
      *     consumes={"application/json"},
-     *     summary="Update the Profile - ReportsTo.",
+     *     summary="Updates a single instance of Employee Supervisor.",
      *     @SWG\Response(response="200", description="Success",
      *         @SWG\Schema(
      *             title="data",
@@ -178,13 +180,14 @@ class ReportsToController extends BaseController
     }
 
     /**
-     * Delete the Profile - ReportsTo.
+     * Deletes a single instance of EmployeeSupervisor.
      *
      * @SWG\Delete(
      *     path="/profile/reports-to/{employee_supervisor}",
+     *     description="This route provides the ability to delete a EmployeeSupervisor.",
      *     tags={"Employee Profiles"},
      *     consumes={"application/json"},
-     *     summary="Delete the Profile - ReportsTo.",
+     *     summary="Deletes a single instance of EmployeeSupervisor.",
      *     @SWG\Response(response="200", description="Success",
      *         @SWG\Schema(
      *             title="data",
@@ -204,20 +207,19 @@ class ReportsToController extends BaseController
      *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
      *         )
      *     ),
-     *     @SWG\Response(response="500", description="No query results for model [HRis\\Api\\Eloquent\\EmployeeSupervisor].",
+     *     @SWG\Response(response="422", description="422 Unprocessable Entity",
      *         @SWG\Schema(
      *             title="data",
      *             type="object",
-     *             required={"message", "status_code", "debug"},
-     *             @SWG\Property(property="message", type="string", default="No query results for model [HRis\\Api\\Eloquent\\EmployeeSupervisor].", description="Status message from server"),
-     *             @SWG\Property(property="status_code", type="integer", default=500, description="Status code from server"),
-     *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
+     *             required={"message", "status_code"},
+     *             @SWG\Property(property="message", type="string", default="422 Unprocessable Entity", description="Status message from server"),
+     *             @SWG\Property(property="status_code", type="integer", default=422, description="Status code from server"),
      *         )
      *     ),
      *     @SWG\Parameter(
      *         name="employee_supervisor",
      *         in="path",
-     *         description="Employee's supervisor id to be deleted",
+     *         description="Employee supervisor id to be deleted",
      *         required=true,
      *         type="integer",
      *         format="int64",

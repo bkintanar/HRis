@@ -35,13 +35,14 @@ class EducationsController extends BaseController
     }
 
     /**
-     * Delete the Admin - Qualifications Education.
+     * Deletes a single instance of Education Level.
      *
      * @SWG\Delete(
      *     path="/admin/qualifications/educations/{education_level}",
+     *     description="This route provides the ability to delete a Education Level.",
      *     tags={"Administration"},
      *     consumes={"application/json"},
-     *     summary="Delete the Admin - Qualifications Education.",
+     *     summary="Deletes a single instance of Education Level.",
      *     @SWG\Response(response="200", description="Success",
      *         @SWG\Schema(
      *             title="data",
@@ -61,20 +62,19 @@ class EducationsController extends BaseController
      *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
      *         )
      *     ),
-     *     @SWG\Response(response="500", description="No query results for model [HRis\\Api\\Eloquent\\EducationLevel].",
+     *     @SWG\Response(response="422", description="422 Unprocessable Entity",
      *         @SWG\Schema(
      *             title="data",
      *             type="object",
-     *             required={"message", "status_code", "debug"},
-     *             @SWG\Property(property="message", type="string", default="No query results for model [HRis\\Api\\Eloquent\\EducationLevel].", description="Status message from server"),
-     *             @SWG\Property(property="status_code", type="integer", default=500, description="Status code from server"),
-     *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
+     *             required={"message", "status_code"},
+     *             @SWG\Property(property="message", type="string", default="422 Unprocessable Entity", description="Status message from server"),
+     *             @SWG\Property(property="status_code", type="integer", default=422, description="Status code from server"),
      *         )
      *     ),
      *     @SWG\Parameter(
      *         name="education_level",
      *         in="path",
-     *         description="education level id to be deleted",
+     *         description="Education level id to be deleted",
      *         required=true,
      *         type="integer",
      *         format="int64",
@@ -103,13 +103,14 @@ class EducationsController extends BaseController
     }
 
     /**
-     * Retrieve the Admin - Qualifications Education.
+     * Retrieves a paginate aware collection of Education Level.
      *
      * @SWG\Get(
      *     path="/admin/qualifications/educations",
+     *     description="This route provides the ability to retrieve a paginate aware collection of Education Levels.",
      *     tags={"Administration"},
      *     consumes={"application/json"},
-     *     summary="Retrieve the Admin - Qualifications Education.",
+     *     summary="Retrieves a paginate aware collection of Education Level.",
      *     @SWG\Response(response="200", description="Success",
      *         @SWG\Schema(
      *             title="data",
@@ -205,13 +206,14 @@ class EducationsController extends BaseController
     }
 
     /**
-     * Save the Admin - Qualifications Education.
+     * Stores a single instance of Education Level.
      *
      * @SWG\Post(
      *     path="/admin/qualifications/educations",
+     *     description="This route provides the ability to store a single instance of Education Level.",
      *     tags={"Administration"},
      *     consumes={"application/json"},
-     *     summary="Save the Admin - Qualifications Education.",
+     *     summary="Stores a single instance of Education Level.",
      *     @SWG\Response(response="201", description="Success",
      *         @SWG\Schema(
      *             title="data",
@@ -269,13 +271,14 @@ class EducationsController extends BaseController
     }
 
     /**
-     * Get a single instance of Education Level.
+     * Retrieves a single instance of Education Level.
      *
      * @SWG\Get(
-     *     path="/admin/qualifications/educations/1",
+     *     path="/admin/qualifications/educations/{education_level}",
+     *     description="This route provides the ability to retrieve a single instance of Education Level.",
      *     tags={"Administration"},
      *     consumes={"application/json"},
-     *     summary="Get a single instance of Education Level.",
+     *     summary="Retrieves a single instance of Education Level.",
      *     @SWG\Response(response="200", description="Success",
      *         @SWG\Schema(
      *             title="data",
@@ -296,15 +299,23 @@ class EducationsController extends BaseController
      *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
      *         )
      *     ),
-     *     @SWG\Response(response="404", description="404 Not Found",
+     *     @SWG\Response(response="422", description="422 Unprocessable Entity",
      *         @SWG\Schema(
      *             title="data",
      *             type="object",
      *             required={"message", "status_code"},
-     *             @SWG\Property(property="message", type="string", default="404 Not Found", description="Status message from server"),
-     *             @SWG\Property(property="status_code", type="integer", default=404, description="Status code from server"),
-     *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
+     *             @SWG\Property(property="message", type="string", default="422 Unprocessable Entity", description="Status message from server"),
+     *             @SWG\Property(property="status_code", type="integer", default=422, description="Status code from server"),
      *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="education_level",
+     *         in="path",
+     *         description="Education level id to be retrieved.",
+     *         required=true,
+     *         type="integer",
+     *         format="int64",
+     *         default=1,
      *     ),
      *     @SWG\Parameter(
      *         name="Authorization",
@@ -328,13 +339,14 @@ class EducationsController extends BaseController
     }
 
     /**
-     * Update the Admin - Qualifications Education.
+     * Updates a single instance of Education Level.
      *
      * @SWG\Patch(
      *     path="/admin/qualifications/educations",
+     *     description="This route provides the ability to update a single instance of Education Level.",
      *     tags={"Administration"},
      *     consumes={"application/json"},
-     *     summary="Update the Admin - Qualifications Education.",
+     *     summary="Updates a single instance of Education Level.",
      *     @SWG\Response(response="200", description="Success",
      *         @SWG\Schema(
      *             title="data",

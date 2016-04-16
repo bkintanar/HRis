@@ -9,8 +9,6 @@ class CustomFieldsControllerTest extends TestCase
 {
     use DatabaseTransactions;
 
-    protected $class_name = 'HRis\Api\Eloquent\CustomField';
-
     protected $custom_field = [
         'name'                 => 'custom_field_name_',
         'type_id'              => 2,
@@ -243,10 +241,10 @@ class CustomFieldsControllerTest extends TestCase
         $this->assertArrayHasKey('message', $content_array);
         $this->assertArrayHasKey('status_code', $content_array);
 
-        $this->assertEquals(500, $status_code);
+        $this->assertEquals(422, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
 
-        $this->assertEquals("No query results for model [{$this->class_name}].", $content_array['message']);
+        $this->assertEquals(UNPROCESSABLE_ENTITY, $content_array['message']);
     }
 
     /**
