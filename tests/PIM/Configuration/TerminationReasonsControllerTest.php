@@ -9,6 +9,8 @@ class TerminationReasonsControllerTest extends TestCase
 {
     use DatabaseTransactions;
 
+    protected $class_name = 'HRis\Api\Eloquent\TerminationReason';
+
     protected $termination_reason = [
         'name' => 'termination_reason_name_',
     ];
@@ -145,7 +147,7 @@ class TerminationReasonsControllerTest extends TestCase
 
         $id = $content_array['termination_reason']['id'];
 
-        $response = $this->delete('/api/pim/configuration/termination-reasons', ['id' => $id], ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
+        $response = $this->delete('/api/pim/configuration/termination-reasons/'.$id, ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
 
         $content = $response->getContent();
         $status_code = $response->getStatusCode();
@@ -218,7 +220,7 @@ class TerminationReasonsControllerTest extends TestCase
     {
         $this->login();
 
-        $response = $this->delete('/api/pim/configuration/termination-reasons', ['id' => 100], ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
+        $response = $this->delete('/api/pim/configuration/termination-reasons/100', ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
 
         $content = $response->getContent();
         $status_code = $response->getStatusCode();
@@ -228,8 +230,10 @@ class TerminationReasonsControllerTest extends TestCase
         $this->assertArrayHasKey('message', $content_array);
         $this->assertArrayHasKey('status_code', $content_array);
 
-        $this->assertEquals(422, $status_code);
+        $this->assertEquals(500, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
+
+        $this->assertEquals("No query results for model [{$this->class_name}].", $content_array['message']);
     }
 
     /**

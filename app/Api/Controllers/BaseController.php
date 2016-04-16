@@ -121,18 +121,16 @@ class BaseController extends Controller
     /**
      * Standard deleting of model.
      *
-     * @param $request
+     * @param $item
      * @param $model
      *
      * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    protected function destroyModel($request, $model)
+    protected function destroyModel($item, $model)
     {
-        $model_id = $request->get('id');
-
-        $response_code = $model->whereId($model_id)->delete();
+        $response_code = $model->whereId($item->id)->delete();
 
         if (!$response_code) {
             return $this->responseAPI(422, UNABLE_DELETE_MESSAGE);

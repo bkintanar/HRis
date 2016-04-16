@@ -181,7 +181,7 @@ class EmergencyContactsController extends BaseController
      * Delete the Profile - Emergency Contacts.
      *
      * @SWG\Delete(
-     *     path="/profile/emergency-contacts",
+     *     path="/profile/emergency-contacts/{emergency_contact}",
      *     tags={"Employee Profiles"},
      *     consumes={"application/json"},
      *     summary="Delete the Profile - Emergency Contacts.",
@@ -204,18 +204,19 @@ class EmergencyContactsController extends BaseController
      *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
      *         )
      *     ),
-     *     @SWG\Response(response="422", description="Unable to delete record from the database.",
+     *     @SWG\Response(response="500", description="No query results for model [HRis\\Api\\Eloquent\\EmergencyContact].",
      *         @SWG\Schema(
      *             title="data",
      *             type="object",
-     *             required={"message", "status_code"},
-     *             @SWG\Property(property="message", type="string", default="Unable to delete record from the database.", description="Status message from server"),
-     *             @SWG\Property(property="status_code", type="integer", default=422, description="Status code from server"),
+     *             required={"message", "status_code", "debug"},
+     *             @SWG\Property(property="message", type="string", default="No query results for model [HRis\\Api\\Eloquent\\EmergencyContact].", description="Status message from server"),
+     *             @SWG\Property(property="status_code", type="integer", default=500, description="Status code from server"),
+     *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
      *         )
      *     ),
      *     @SWG\Parameter(
-     *         name="id",
-     *         in="formData",
+     *         name="emergency_contact",
+     *         in="path",
      *         description="Employee's emergency contact id to be deleted",
      *         required=true,
      *         type="integer",
@@ -232,14 +233,15 @@ class EmergencyContactsController extends BaseController
      *     ),
      * )
      *
+     * @param EmergencyContact         $emergency_contact
      * @param EmergencyContactsRequest $request
      *
      * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function destroy(EmergencyContactsRequest $request)
+    public function destroy(EmergencyContact $emergency_contact, EmergencyContactsRequest $request)
     {
-        return $this->destroyModel($request, $this->emergency_contact);
+        return $this->destroyModel($emergency_contact, $this->emergency_contact);
     }
 }

@@ -181,7 +181,7 @@ class ReportsToController extends BaseController
      * Delete the Profile - ReportsTo.
      *
      * @SWG\Delete(
-     *     path="/profile/supervisors",
+     *     path="/profile/reports-to/{employee_supervisor}",
      *     tags={"Employee Profiles"},
      *     consumes={"application/json"},
      *     summary="Delete the Profile - ReportsTo.",
@@ -204,18 +204,19 @@ class ReportsToController extends BaseController
      *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
      *         )
      *     ),
-     *     @SWG\Response(response="422", description="Unable to delete record from the database.",
+     *     @SWG\Response(response="500", description="No query results for model [HRis\\Api\\Eloquent\\EmployeeSupervisor].",
      *         @SWG\Schema(
      *             title="data",
      *             type="object",
-     *             required={"message", "status_code"},
-     *             @SWG\Property(property="message", type="string", default="Unable to delete record from the database.", description="Status message from server"),
-     *             @SWG\Property(property="status_code", type="integer", default=422, description="Status code from server"),
+     *             required={"message", "status_code", "debug"},
+     *             @SWG\Property(property="message", type="string", default="No query results for model [HRis\\Api\\Eloquent\\EmployeeSupervisor].", description="Status message from server"),
+     *             @SWG\Property(property="status_code", type="integer", default=500, description="Status code from server"),
+     *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
      *         )
      *     ),
      *     @SWG\Parameter(
-     *         name="id",
-     *         in="formData",
+     *         name="employee_supervisor",
+     *         in="path",
      *         description="Employee's supervisor id to be deleted",
      *         required=true,
      *         type="integer",
@@ -232,14 +233,15 @@ class ReportsToController extends BaseController
      *     ),
      * )
      *
-     * @param ReportsToRequest $request
+     * @param EmployeeSupervisor $employee_supervisor
+     * @param ReportsToRequest   $request
      *
      * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function destroy(ReportsToRequest $request)
+    public function destroy(EmployeeSupervisor $employee_supervisor, ReportsToRequest $request)
     {
-        return $this->destroyModel($request, $this->employee_supervisor);
+        return $this->destroyModel($employee_supervisor, $this->employee_supervisor);
     }
 }

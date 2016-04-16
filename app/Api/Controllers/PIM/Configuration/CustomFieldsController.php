@@ -65,20 +65,31 @@ class CustomFieldsController extends BaseController
     /**
      * Delete the PIM - Custom Field Section.
      *
+     * @param CustomFieldSection         $custom_field_section
      * @param CustomFieldSectionsRequest $request
      *
      * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function destroy(CustomFieldSectionsRequest $request)
+    public function destroy(CustomFieldSection $custom_field_section, CustomFieldSectionsRequest $request)
     {
-        return $this->destroyModel($request, $this->custom_field_section);
+        return $this->destroyModel($custom_field_section, $this->custom_field_section);
     }
 
-    public function destroyCustomField(CustomFieldRequest $request)
+    /**
+     * Delete the PIM - Custom Field.
+     *
+     * @param CustomField        $custom_field
+     * @param CustomFieldRequest $request
+     *
+     * @return \Dingo\Api\Http\Response
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     */
+    public function destroyCustomField(CustomField $custom_field, CustomFieldRequest $request)
     {
-        return $this->destroyModel($request, $this->custom_field);
+        return $this->destroyModel($custom_field, $this->custom_field);
     }
 
     /**
@@ -221,13 +232,13 @@ class CustomFieldsController extends BaseController
                     $custom_field->options()->create(['name' => $option]);
                 }
             }
+
+            DB::commit();
         } catch (Exception $e) {
             DB::rollback();
 
             return $this->responseAPI(422, UNABLE_ADD_MESSAGE);
         }
-
-        DB::commit();
 
         $custom_field = $this->custom_field->with('type', 'options')->whereId($custom_field->id)->first();
 

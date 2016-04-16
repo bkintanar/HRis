@@ -86,14 +86,15 @@ class JobController extends BaseController
     /**
      * Delete the Profile - Job.
      *
+     * @param JobHistory $job_history
      * @param JobRequest $request
      *
      * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function destroy(JobRequest $request)
+    public function destroy(JobHistory $job_history, JobRequest $request)
     {
-        return $this->destroyModel($request, $this->job_history);
+        return $this->destroyModel($job_history, $this->job_history);
     }
 }

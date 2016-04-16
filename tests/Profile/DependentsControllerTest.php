@@ -10,6 +10,8 @@ class DependentsControllerTest extends TestCase
 {
     use DatabaseTransactions;
 
+    protected $class_name = 'HRis\Api\Eloquent\Dependent';
+
     protected $dependent = [
         'first_name'   => 'First Name Test',
         'middle_name'  => 'Middle Name Test',
@@ -169,7 +171,7 @@ class DependentsControllerTest extends TestCase
 
         $id = $content_array['dependent']['id'];
 
-        $response = $this->delete('/api/profile/dependents', ['id' => $id], ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
+        $response = $this->delete('/api/profile/dependents/'.$id, ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
 
         $content = $response->getContent();
         $status_code = $response->getStatusCode();
@@ -196,7 +198,7 @@ class DependentsControllerTest extends TestCase
     {
         $this->login();
 
-        $response = $this->delete('/api/profile/dependents', ['id' => 100], ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
+        $response = $this->delete('/api/profile/dependents/100', ['HTTP_Authorization' => 'Bearer '.$this->token])->response;
 
         $content = $response->getContent();
         $status_code = $response->getStatusCode();
@@ -206,10 +208,10 @@ class DependentsControllerTest extends TestCase
         $this->assertArrayHasKey('message', $content_array);
         $this->assertArrayHasKey('status_code', $content_array);
 
-        $this->assertEquals(422, $status_code);
+        $this->assertEquals(500, $status_code);
         $this->assertEquals($status_code, $content_array['status_code']);
 
-        $this->assertEquals(UNABLE_DELETE_MESSAGE, $content_array['message']);
+        $this->assertEquals("No query results for model [{$this->class_name}].", $content_array['message']);
     }
 
     protected function _insert_record()

@@ -38,10 +38,11 @@ class EmploymentStatusController extends BaseController
      * Delete the Admin - Employment Status.
      *
      * @SWG\Delete(
-     *     path="/admin/job/employment-status",
+     *     path="/admin/job/employment-status/{employment_status}",
+     *     description="This route provides the ability to delete an Employment Status.",
      *     tags={"Administration"},
      *     consumes={"application/json"},
-     *     summary="Delete the Admin - Employment Status.",
+     *     summary="Deletes an Employment Status.",
      *     @SWG\Response(response="200", description="Success",
      *         @SWG\Schema(
      *             title="data",
@@ -61,18 +62,19 @@ class EmploymentStatusController extends BaseController
      *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
      *         )
      *     ),
-     *     @SWG\Response(response="422", description="Unable to delete record from the database.",
+     *     @SWG\Response(response="500", description="No query results for model [HRis\\Api\\Eloquent\\EmploymentStatus].",
      *         @SWG\Schema(
      *             title="data",
      *             type="object",
-     *             required={"message", "status_code"},
-     *             @SWG\Property(property="message", type="string", default="Unable to delete record from the database.", description="Status message from server"),
-     *             @SWG\Property(property="status_code", type="integer", default=422, description="Status code from server"),
+     *             required={"message", "status_code", "debug"},
+     *             @SWG\Property(property="message", type="string", default="No query results for model [HRis\\Api\\Eloquent\\EmploymentStatus].", description="Status message from server"),
+     *             @SWG\Property(property="status_code", type="integer", default=500, description="Status code from server"),
+     *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
      *         )
      *     ),
      *     @SWG\Parameter(
-     *         name="id",
-     *         in="formData",
+     *         name="employment_status",
+     *         in="path",
      *         description="Employment status id to be deleted",
      *         required=true,
      *         type="integer",
@@ -89,15 +91,16 @@ class EmploymentStatusController extends BaseController
      *     ),
      * )
      *
+     * @param EmploymentStatus        $employment_status
      * @param EmploymentStatusRequest $request
      *
      * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function destroy(EmploymentStatusRequest $request)
+    public function destroy(EmploymentStatus $employment_status, EmploymentStatusRequest $request)
     {
-        return $this->destroyModel($request, $this->employment_status);
+        return $this->destroyModel($employment_status, $this->employment_status);
     }
 
     /**
@@ -107,7 +110,7 @@ class EmploymentStatusController extends BaseController
      *     path="/admin/job/employment-status",
      *     tags={"Administration"},
      *     consumes={"application/json"},
-     *     summary="Save the Admin - Employment Status.",
+     *     summary="Retrieve the Admin - Employment Status.",
      *     @SWG\Response(response="200", description="Success",
      *         @SWG\Schema(
      *             title="data",

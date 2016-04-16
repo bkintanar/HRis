@@ -38,7 +38,7 @@ class EducationsController extends BaseController
      * Delete the Admin - Qualifications Education.
      *
      * @SWG\Delete(
-     *     path="/admin/qualifications/educations",
+     *     path="/admin/qualifications/educations/{education_level}",
      *     tags={"Administration"},
      *     consumes={"application/json"},
      *     summary="Delete the Admin - Qualifications Education.",
@@ -61,18 +61,19 @@ class EducationsController extends BaseController
      *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
      *         )
      *     ),
-     *     @SWG\Response(response="422", description="Unable to delete record from the database.",
+     *     @SWG\Response(response="500", description="No query results for model [HRis\\Api\\Eloquent\\EducationLevel].",
      *         @SWG\Schema(
      *             title="data",
      *             type="object",
-     *             required={"message", "status_code"},
-     *             @SWG\Property(property="message", type="string", default="Unable to delete record from the database.", description="Status message from server"),
-     *             @SWG\Property(property="status_code", type="integer", default=422, description="Status code from server"),
+     *             required={"message", "status_code", "debug"},
+     *             @SWG\Property(property="message", type="string", default="No query results for model [HRis\\Api\\Eloquent\\EducationLevel].", description="Status message from server"),
+     *             @SWG\Property(property="status_code", type="integer", default=500, description="Status code from server"),
+     *             @SWG\Property(property="debug", type="object", description="Debug back trace"),
      *         )
      *     ),
      *     @SWG\Parameter(
-     *         name="id",
-     *         in="formData",
+     *         name="education_level",
+     *         in="path",
      *         description="education level id to be deleted",
      *         required=true,
      *         type="integer",
@@ -89,15 +90,16 @@ class EducationsController extends BaseController
      *     ),
      * )
      *
+     * @param EducationLevel        $education_level
      * @param EducationLevelRequest $request
      *
      * @return \Dingo\Api\Http\Response
      *
      * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
      */
-    public function destroy(EducationLevelRequest $request)
+    public function destroy(EducationLevel $education_level, EducationLevelRequest $request)
     {
-        return $this->destroyModel($request, $this->education_level);
+        return $this->destroyModel($education_level, $this->education_level);
     }
 
     /**
@@ -107,7 +109,7 @@ class EducationsController extends BaseController
      *     path="/admin/qualifications/educations",
      *     tags={"Administration"},
      *     consumes={"application/json"},
-     *     summary="Save the Admin - Qualifications Education.",
+     *     summary="Retrieve the Admin - Qualifications Education.",
      *     @SWG\Response(response="200", description="Success",
      *         @SWG\Schema(
      *             title="data",
