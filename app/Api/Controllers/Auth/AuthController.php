@@ -109,7 +109,7 @@ class AuthController extends BaseController
      *     ),
      *     @SWG\Parameter(
      *         name="email",
-     *         in="formData",
+     *         in="query",
      *         description="Registered user's email address",
      *         required=true,
      *         type="string",
@@ -117,7 +117,7 @@ class AuthController extends BaseController
      *     ),
      *     @SWG\Parameter(
      *         name="password",
-     *         in="formData",
+     *         in="query",
      *         description="Registered user's password",
      *         required=true,
      *         type="string",
