@@ -5,148 +5,105 @@ header('Access-Control-Allow-Methods: GET, POST');
 
 header("Access-Control-Allow-Headers: X-Requested-With");
 ?>
-        <!DOCTYPE html>
-<html>
+<!doctype html>
+<html ng-app="myApp">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <!-- TODO: dynamic title -->
     <title>HRis API Documentation</title>
-    <link rel="icon" type="image/png" href="vendor/swaggervel/images/favicon-32x32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="vendor/swaggervel/images/favicon-16x16.png" sizes="16x16" />
-    <link href='vendor/swaggervel/css/typography.css' media='screen' rel='stylesheet' type='text/css'/>
-    <link href='vendor/swaggervel/css/reset.css' media='screen' rel='stylesheet' type='text/css'/>
-    <link href='vendor/swaggervel/css/themes/muted.css' rel='stylesheet' type='text/css'/>
-    <link href='vendor/swaggervel/css/reset.css' media='print' rel='stylesheet' type='text/css'/>
-    <link href='vendor/swaggervel/css/print.css' media='print' rel='stylesheet' type='text/css'/>
-    <script src='vendor/swaggervel/lib/jquery-1.8.0.min.js' type='text/javascript'></script>
-    <script src='vendor/swaggervel/lib/jquery.slideto.min.js' type='text/javascript'></script>
-    <script src='vendor/swaggervel/lib/jquery.wiggle.min.js' type='text/javascript'></script>
-    <script src='vendor/swaggervel/lib/jquery.ba-bbq.min.js' type='text/javascript'></script>
-    <script src='vendor/swaggervel/lib/handlebars-2.0.0.js' type='text/javascript'></script>
-    <script src='vendor/swaggervel/lib/underscore-min.js' type='text/javascript'></script>
-    <script src='vendor/swaggervel/lib/backbone-min.js' type='text/javascript'></script>
-    <script src='vendor/swaggervel/swagger-ui.js' type='text/javascript'></script>
-    <script src='vendor/swaggervel/lib/highlight.7.3.pack.js' type='text/javascript'></script>
-    <script src='vendor/swaggervel/lib/marked.js' type='text/javascript'></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
-    <script src='vendor/swaggervel/lib/swagger-oauth.js' type='text/javascript'></script>
+    <!-- styles CDN -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/1.0.5/angular-material.min.css">
 
-    <!-- Some basic translations -->
-    <!-- <script src='lang/translator.js' type='text/javascript'></script> -->
-    <!-- <script src='lang/ru.js' type='text/javascript'></script> -->
-    <!-- <script src='lang/en.js' type='text/javascript'></script> -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="./vendor/material-swagger-ui/github-markdown.min.css">
+    <link rel="stylesheet" href="./vendor/material-swagger-ui/swagger-ui-material.min.css">
+    <!-- endinject -->
 
-    <script type="text/javascript">
-
-        function log() {
-            if ('console' in window) {
-                console.log.apply(console, arguments);
-            }
+    <style>
+        .ng-cloak {
+            display: none;
         }
-
-        $(function () {
-            var url = window.location.search.match(/url=([^&]+)/);
-            if (url && url.length > 1) {
-                url = decodeURIComponent(url[1]);
-            } else {
-                url = "{!! $urlToDocs !!}";
-            }
-
-            // Pre load translate...
-            if (window.SwaggerTranslator) {
-                window.SwaggerTranslator.translate();
-            }
-            window.swaggerUi = new SwaggerUi({
-                url: url,
-                dom_id: "swagger-ui-container",
-                supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
-                onComplete: function (swaggerApi, swaggerUi) {
-
-                    log("Loaded SwaggerUI");
-                    @if (isset($requestHeaders))
-                    @foreach($requestHeaders as $requestKey => $requestValue)
-                    window.authorizations.add("{!!$requestKey!!}", new ApiKeyAuthorization("{!!$requestKey!!}", "{!!$requestValue!!}", "header"));
-                    @endforeach
-                            @endif
-
-                    if (typeof initOAuth == "function") {
-                        initOAuth({
-                            clientId: "{!! $clientId !!}"||"my-client-id",
-                            clientSecret: "{!! $clientSecret !!}"||"_",
-                            realm: "{!! $realm !!}"||"_",
-                            appName: "{!! $appName !!}"||"_",
-                            scopeSeparator: ',',
-                            serviceId: "{{$serviceId}}"||"_",
-                        });
-
-                        window.oAuthRedirectUrl = "{{ url('vendor/swaggervel/o2c.html') }}";
-                        $('#clientId').html("{!! $clientId !!}"||"my-client-id");
-                        $('#redirectUrl').html(window.oAuthRedirectUrl);
-                    }
-
-                    if ('{{$serviceId}}')
-                        $('input[name="Service-Id"]').val('{{$serviceId}}');
-
-                    if (window.SwaggerTranslator) {
-                        window.SwaggerTranslator.translate();
-                    }
-
-                    $('pre code').each(function (i, e) {
-                        hljs.highlightBlock(e)
-                    });
-
-                    addApiKeyAuthorization();
-                },
-                onFailure: function (data) {
-                    log("Unable to Load SwaggerUI");
-                },
-                docExpansion: "none",
-                apisSorter: "alpha",
-                showRequestHeaders: false
-            });
-
-            function addApiKeyAuthorization() {
-                var key = encodeURIComponent($('#input_apiKey')[0].value);
-                if (key && key.trim() != "") {
-                    var apiKeyAuth = new SwaggerClient.ApiKeyAuthorization("api_key", key, "query");
-                    window.swaggerUi.api.clientAuthorizations.add("api_key", apiKeyAuth);
-                    log("added key " + key);
-                }
-            }
-
-            $('#input_apiKey').change(addApiKeyAuthorization);
-
-            $('#init-oauth').click(function(){
-                if (typeof initOAuth == "function") {
-                    initOAuth({
-                        clientId: $('#input_clientId').val()||"my-client-id",
-                        clientSecret: $('#input_clientSecret').val()||"_",
-                        realm: $('#input_realm').val()||"_",
-                        appName: $('#input_appName').val()||"_",
-                        scopeSeparator: ',',
-                        serviceId: "{{$serviceId}}"||"_",
-                    });
-                }
-            });
-
-            window.swaggerUi.load();
-
-        });
-    </script>
+    </style>
 </head>
+<body ng-controller="DetailController as vm" layout="row" class="ng-cloak sw-ui-md"
+      ng-include="'views/app.layout.html'">
 
-<body class="swagger-section">
-<div id='header'>
-    <div class="swagger-ui-wrap">
-        <a id="logo" href="#">api-docs</a>
-        <form id='api_selector'>
-            <div class='input'><input placeholder="http://example.com/api" id="input_baseUrl" name="baseUrl" type="text"/></div>
-            <div class='input'><input placeholder="api_key" id="input_apiKey" name="apiKey" type="text"/></div>
-            <div class='input'><a id="explore" href="#" data-sw-translate>Explore</a></div>
-        </form>
-    </div>
-</div>
+<!-- scripts CDN -->
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-animate.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-aria.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-messages.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angular_material/1.0.5/angular-material.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-sanitize.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/showdown/1.3.0/showdown.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/js-yaml/3.5.3/js-yaml.min.js"></script>
 
-<div id="message-bar" class="swagger-ui-wrap" data-sw-translate>&nbsp;</div>
-<div id="swagger-ui-container" class="swagger-ui-wrap"></div>
+<!-- inject:js -->
+<script src="./vendor/material-swagger-ui/swagger-ui-material.full.min.js"></script>
+<!-- endinject -->
+
+<script type="text/javascript">
+    angular.module('myApp', [
+            'sw.ui.md',
+            // 'sw.plugin.auth',
+            'sw.plugin.markdown',
+            // 'sw.plugin.xmlFormater',
+            'sw.plugin.operations',
+            'sw.plugin.sort',
+            'sw.plugin.parser',
+            'sw.plugin.base',
+            'sw.plugin.split',
+            'sw.plugin.transform',
+            'sw.plugin.yaml'
+            // 'sw.plugin.externalReferences'
+        ])
+        .config(function ($mdThemingProvider, $logProvider, $windowProvider) {
+            var $window = $windowProvider.$get();
+            var search = {};
+            var query = $window.location.search.substring(1);
+            var vars = query.split('&');
+
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split('=');
+                search[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+            }
+
+            $mdThemingProvider.definePalette('accent', $mdThemingProvider.extendPalette(search.accent || 'grey', {
+                // tweaking md-button.md-accent.md-focused background-color
+                '700': 'dadada'
+            }));
+
+            //noinspection JSUnresolvedFunction
+            $mdThemingProvider
+                .theme('default')
+                .primaryPalette(search.primary || 'teal')
+                .accentPalette('accent')
+                .warnPalette(search.warn || 'amber')
+                .foregroundPalette[3] = 'rgba(0, 0, 0, 0.4)';
+
+            if ($window.location.hostname !== 'localhost') {
+                $logProvider.debugEnabled(false);
+            }
+        })
+        .run(function ($location, $mdToast, $log, $window, data) {
+            //noinspection JSCheckFunctionSignatures
+            var swaggerUrl = './docs'
+
+            data.setUrl(swaggerUrl);
+            // data.validatorUrl = 'http://online.swagger.io/validator';
+
+            // error management
+            function myErrorHandler(error) {
+                var e = error || {};
+                var m = 'Something is wrong';
+                $mdToast.show($mdToast.simple().textContent(e.statusText || e.message || m));
+                $log.error(error || m);
+            }
+        });
+</script>
 </body>
 </html>
