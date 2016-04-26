@@ -25,5 +25,11 @@ module.exports = {
     this.logged.employee_id = localStorage.getItem('employee_id');
     this.logged.avatar = localStorage.getItem('avatar');
     this.logged.has_access = JSON.parse(atob(localStorage.getItem('permissions')));
+  },
+
+  ready: function() {
+    $('img').load(function(){
+      $(this).css('background','none');
+    });
   }
 };

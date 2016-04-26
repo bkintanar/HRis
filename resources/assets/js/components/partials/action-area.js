@@ -5,5 +5,11 @@ module.exports = {
 
   route: {
     canReuse: false
+  },
+
+  ready: function() {
+    $('img').load(function(){
+      $(this).css('background','none');
+    });
   }
 };

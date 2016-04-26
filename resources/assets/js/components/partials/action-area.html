@@ -1,7 +1,7 @@
 <div class="col-sm-6" v-if="employee">
     <div class="profile-img">
 
-        <img id="profile-image" alt="avatar" v-bind:src="employee.avatar"/>
+        <img id="profile-image" alt="avatar" class="hris-action-loader" v-bind:src="employee.avatar"/>
         <div class="profile-details">
 
             <h2>{{employee.first_name}} {{employee.last_name}}</h2>
