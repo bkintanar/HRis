@@ -28,7 +28,7 @@ module.exports = {
   },
 
   ready: function() {
-    $('img').load(function(){
+    $('img').load(function() {
       $(this).css('background','none');
     });
   }
