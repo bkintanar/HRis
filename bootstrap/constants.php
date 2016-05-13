@@ -28,3 +28,5 @@ const EMPLOYEE_ID_NOT_FOUND = 'Employee Id not found.';
 const SUCCESS_RETRIEVE_SIDEBAR_MESSAGE = 'Navlinks successfully retrieved.';
 const SUCCESS_TOKEN_REFRESH_MESSAGE = 'Token successfully refreshed.';
 const SUCCESS_TOKEN_CREATED_MESSAGE = 'Token successfully created.';
+
+const UNABLE_TO_CREATE_TIMELOG = 'Unable to create timelog.';

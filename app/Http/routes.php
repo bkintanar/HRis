@@ -35,6 +35,8 @@ $api->version('v1', function (Router $api) {
         'limit'   => 200,
         'expires' => 5, ], function (Router $api) {
 
+        $api->get('/', 'BaseController@apiInformation');
+
         // Login route
         $api->post('login', 'Auth\AuthController@authenticate');                                                      // docs done
         $api->post('register', 'Auth\AuthController@register');
@@ -146,6 +148,16 @@ $api->version('v1', function (Router $api) {
                     $api->patch('educations', 'EducationsController@update');                                         // docs done
                     $api->delete('educations/{education_level}', 'EducationsController@destroy');                     // docs done
                 });
+            });
+
+            // Presence
+            $api->group(['prefix' => 'presence', 'namespace' => 'Presence'], function (Router $api){
+                $api->get('timelogs', 'TimelogController@index');
+                $api->get('alert/time-in', 'TimelogController@attemptTimeIn');
+                $api->get('alert/time-out', 'TimelogController@attemptTimeOut');
+                $api->post('time-in', 'TimelogController@timeIn');
+                $api->post('time-out', 'TimelogController@timeOut');
+                $api->get('server-time', 'TimelogController@serverTime');
             });
 
             // Chosen

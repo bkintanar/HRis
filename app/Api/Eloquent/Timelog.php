@@ -27,40 +27,59 @@ class Timelog extends Model
     protected $dates = ['in', 'out'];
 
     /**
-     * Automatically update rendered hours everytime
-     * "in" field is occupied or changed.
+     * Automatically update rendered hours everytime "in" field is occupied or changed.
      *
-     * @author Harlequin Doyon
+     * @param $in
+     *
+     * @author Harlequin Doyon <harlequin.doyon@gmail.com>
      */
     public function setInAttribute($in)
     {
-        $this->attributes['in'] = $in;
+        $this->attributes['in'] = (new Carbon($in))->format('Y-m-d H:i');
 
         if (!empty($this->attributes['in']) && !empty($this->attributes['out'])) {
             $out = Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes['out']);
-            $hours = $in->diffInHours($out);
-            $mins = $in->diffInMinutes($out);
 
-            $this->attributes['rendered_hours'] = number_format(($hours * 60 + $mins) / 60, 2);
+            $this->attributes['rendered_hours'] = $this->setRenderedHours($in, $out);
         }
     }
 
     /**
-     * Automatically update rendered hours everytime
-     * "out" field is occupied or changed.
+     * Returns the rendered hours after calculation of the diff.
      *
-     * @author Harlequin Doyon
+     * @param Carbon $in
+     * @param Carbon $out
+     *
+     * @return string
+     *
+     * @author Bertrand Kintanar <bertrand.kintanar@gmail.com>
+     */
+    public function setRenderedHours(Carbon $in, Carbon $out)
+    {
+        $diff = $in->diff($out);
+
+        $d = $diff->d ?: 0;
+        $h = $diff->h + ($d * 24);
+        $i = $diff->i / 60;
+
+        return number_format(($h + $i), 2);
+    }
+
+    /**
+     * Automatically update rendered hours everytime "out" field is occupied or changed.
+     *
+     * @param $out
+     *
+     * @author Harlequin Doyon <harlequin.doyon@gmail.com>
      */
     public function setOutAttribute($out)
     {
-        $this->attributes['out'] = $out;
+        $this->attributes['out'] = (new Carbon($out))->format('Y-m-d H:i');
 
         if (!empty($this->attributes['in']) && !empty($this->attributes['out'])) {
             $in = Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes['in']);
-            $hours = $in->diffInHours($out);
-            $mins = $in->diffInMinutes($out);
 
-            $this->attributes['rendered_hours'] = number_format(($hours * 60 + $mins) / 60, 2);
+            $this->attributes['rendered_hours'] = $this->setRenderedHours($in, $out);
         }
     }
 }
