@@ -1,7 +1,7 @@
 module.exports = {
 
   route: {
-    activate: function(transition) {
+    activate: function (transition) {
 
       this.$root.authenticated = false;
       this.$root.user = null;

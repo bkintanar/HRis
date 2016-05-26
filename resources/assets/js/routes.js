@@ -1,6 +1,6 @@
 module.exports = {
 
-  configRouter: function(router) {
+  configRouter: function (router) {
 
     router.map({
       '*': {
@@ -77,7 +77,7 @@ module.exports = {
           },
           '/presence': {
             name: 'presence',
-            component: require('./compiled/pages/page.vue'),
+            component: require('./compiled/pages/presence/index.vue'),
             auth: true
           },
           '/performance': {
@@ -313,7 +313,7 @@ module.exports = {
       '/translator': '/translator/translations'
     });
 
-    router.beforeEach(function(transition) {
+    router.beforeEach(function (transition) {
 
       var auth = localStorage.getItem('jwt-token');
 
@@ -323,28 +323,28 @@ module.exports = {
           let params = {
             path: '/auth/refresh',
             method: 'GET',
-            headers: { Authorization: localStorage.getItem('jwt-token') }
+            headers: {Authorization: localStorage.getItem('jwt-token')}
           };
 
           client(params).then(
-          function(response) {
+            function (response) {
 
-            var token = response.entity.token;
+              var token = response.entity.token;
 
-            if (token.indexOf('Bearer ') === -1) {
-              token = 'Bearer ' + token;
-            }
+              if (token.indexOf('Bearer ') === -1) {
+                token = 'Bearer ' + token;
+              }
 
-            localStorage.setItem('jwt-token', token);
-            transition.next();
-          },
+              localStorage.setItem('jwt-token', token);
+              transition.next();
+            },
 
-          function() {
+            function () {
 
-            localStorage.removeItem('user');
-            localStorage.removeItem('jwt-token');
-            transition.redirect('/');
-          });
+              localStorage.removeItem('user');
+              localStorage.removeItem('jwt-token');
+              transition.redirect('/');
+            });
         } else {
           transition.redirect('/login');
         }

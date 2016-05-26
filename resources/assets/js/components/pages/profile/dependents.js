@@ -3,14 +3,14 @@ module.exports = {
     'employee', 'page_title', 'job_titles', 'employment_statuses', 'routes', 'has_access', 'permission', 'logged', 'custom_field_values'
   ],
 
-  compiled: function() {
+  compiled: function () {
 
     this.$dispatch(
       'update-page-title', ((this.$route.path.indexOf('pim') > -1) ? 'Employee\'s ' : 'My ') + 'Dependents'
     );
   },
 
-  data: function() {
+  data: function () {
 
     return {
       editMode: false,
@@ -31,18 +31,18 @@ module.exports = {
     };
   },
 
-  ready: function() {
+  ready: function () {
 
     this.queryDatabase();
     this.chosenRelationships();
 
-    $('#dependentsForm').submit(function() {
+    $('#dependentsForm').submit(function () {
       return false;
     });
   },
 
   methods: {
-    queryDatabase: function() {
+    queryDatabase: function () {
 
       if (this.$route.path.indexOf('/pim') > -1) {
         this.employee_id = this.$route.params.employee_id;
@@ -52,59 +52,59 @@ module.exports = {
 
       client({
         path: '/pim/configuration/custom-field-sections-by-screen-id',
-        entity: { screen_name: 'Dependents' },
-        headers: { Authorization: localStorage.getItem('jwt-token') }
+        entity: {screen_name: 'Dependents'},
+        headers: {Authorization: localStorage.getItem('jwt-token')}
       }).then(
-      function(response) {
+        function (response) {
 
-        this.custom_field_sections = response.entity.custom_field_sections;
+          this.custom_field_sections = response.entity.custom_field_sections;
 
-      }.bind(this),
+        }.bind(this),
 
-      function(response) {
+        function (response) {
 
-        if (response.status.code == 422) {
-          this.$route.router.go({
-            name: 'error-404'
-          });
-          console.log(response.entity);
-        }
-      }.bind(this));
+          if (response.status.code == 422) {
+            this.$route.router.go({
+              name: 'error-404'
+            });
+            console.log(response.entity);
+          }
+        }.bind(this));
 
       let params = {
         method: 'GET',
         path: '/employee/' + this.employee_id + '?include=user,dependents',
-        entity: { employee_id: this.employee_id },
-        headers: { Authorization: localStorage.getItem('jwt-token') }
+        entity: {employee_id: this.employee_id},
+        headers: {Authorization: localStorage.getItem('jwt-token')}
       };
 
       client(params).then(
-      function(response) {
+        function (response) {
 
-        this.$dispatch('update-employee', response.entity.data);
-        this.custom_field_values = response.entity.data.custom_field_values;
+          this.$dispatch('update-employee', response.entity.data);
+          this.custom_field_values = response.entity.data.custom_field_values;
 
-        client({
-          path: '/relationships?table_view=true',
-          headers: { Authorization: localStorage.getItem('jwt-token') }
-        }).then(
-              function(response) {
-                this.relationships = response.entity.data;
-              }.bind(this));
+          client({
+            path: '/relationships?table_view=true',
+            headers: {Authorization: localStorage.getItem('jwt-token')}
+          }).then(
+            function (response) {
+              this.relationships = response.entity.data;
+            }.bind(this));
 
-      }.bind(this),
-      function(response) {
+        }.bind(this),
+        function (response) {
 
-        if (response.status.code == 422) {
-          this.$route.router.go({
-            name: 'error-404'
-          });
-          console.log(response.entity);
-        }
-      }.bind(this));
+          if (response.status.code == 422) {
+            this.$route.router.go({
+              name: 'error-404'
+            });
+            console.log(response.entity);
+          }
+        }.bind(this));
     },
 
-    toggleModal: function() {
+    toggleModal: function () {
 
       this.editMode = false;
 
@@ -126,13 +126,13 @@ module.exports = {
       });
 
       $('#dependent_modal').modal('toggle');
-      $('#dependent_modal').on('shown.bs.modal', function() {
+      $('#dependent_modal').on('shown.bs.modal', function () {
         $('.vue-chosen', this).trigger('chosen:updated');
         $('#first_name').focus();
       });
     },
 
-    submitForm: function() {
+    submitForm: function () {
 
       // jasny bug work around
       $('#first_name').focus();
@@ -146,37 +146,37 @@ module.exports = {
           path: '/profile/dependents',
           method: this.editMode ? 'PATCH' : 'POST',
           entity: this.modal,
-          headers: { Authorization: localStorage.getItem('jwt-token') }
+          headers: {Authorization: localStorage.getItem('jwt-token')}
         }).then(
-        function(response) {
+          function (response) {
 
-          $('#dependent_modal').modal('toggle');
-          if (this.editMode) {
-            this.updateRowInTable();
-            swal({ title: response.entity.message, type: 'success', timer: 2000 });
-          } else {
-            this.employee.dependents.data.push(response.entity.dependent);
-            swal({ title: response.entity.message, type: 'success', timer: 2000 });
-          }
+            $('#dependent_modal').modal('toggle');
+            if (this.editMode) {
+              this.updateRowInTable();
+              swal({title: response.entity.message, type: 'success', timer: 2000});
+            } else {
+              this.employee.dependents.data.push(response.entity.dependent);
+              swal({title: response.entity.message, type: 'success', timer: 2000});
+            }
 
-          $('.vue-chosen').trigger('chosen:updated');
+            $('.vue-chosen').trigger('chosen:updated');
 
-        }.bind(this),
-        function(response) {
+          }.bind(this),
+          function (response) {
 
-          if (response.status.code == 422) {
-            swal({ title: response.entity.message, type: 'error', timer: 2000 });
-          }
+            if (response.status.code == 422) {
+              swal({title: response.entity.message, type: 'error', timer: 2000});
+            }
 
-        });
+          });
       } else {
-        $('#dependent_modal').on('shown.bs.modal', function() {
+        $('#dependent_modal').on('shown.bs.modal', function () {
           $('.vue-chosen', this).trigger('chosen:open');
         });
       }
     },
 
-    updateRowInTable: function() {
+    updateRowInTable: function () {
 
       this.employee.dependents.data[this.editIndex].first_name = this.modal.first_name;
       this.employee.dependents.data[this.editIndex].middle_name = this.modal.middle_name;
@@ -185,7 +185,7 @@ module.exports = {
       this.employee.dependents.data[this.editIndex].birth_date = this.modal.birth_date;
     },
 
-    editRecord: function(dependent, index) {
+    editRecord: function (dependent, index) {
 
       this.editMode = true;
       this.editIndex = index;
@@ -203,14 +203,14 @@ module.exports = {
       });
 
       $('#dependent_modal').modal('toggle');
-      $('#dependent_modal').on('shown.bs.modal', function() {
+      $('#dependent_modal').on('shown.bs.modal', function () {
         $('.vue-chosen', this).trigger('chosen:updated');
       });
 
       $('#first_name').focus();
     },
 
-    deleteRecord: function(dependent, index) {
+    deleteRecord: function (dependent, index) {
 
       var previousWindowKeyDown = window.onkeydown; // https://github.com/t4t5/sweetalert/issues/127
       swal({
@@ -224,35 +224,35 @@ module.exports = {
         confirmButtonText: 'Yes, delete it!',
         closeOnConfirm: false,
         closeOnCancel: false
-      }, function(isConfirm) {
+      }, function (isConfirm) {
         swal.disableButtons();
         window.onkeydown = previousWindowKeyDown; // https://github.com/t4t5/sweetalert/issues/127
         if (isConfirm) {
           client({
             path: '/profile/dependents/' + dependent.id,
             method: 'DELETE',
-            headers: { Authorization: localStorage.getItem('jwt-token') }
+            headers: {Authorization: localStorage.getItem('jwt-token')}
           }).then(
-          function(response) {
+            function (response) {
 
-            swal({ title: response.entity.message, type: 'success', timer: 2000 });
-            this.employee.dependents.data.splice(index, 1);
+              swal({title: response.entity.message, type: 'success', timer: 2000});
+              this.employee.dependents.data.splice(index, 1);
 
-          }.bind(this),
-          function(response) {
+            }.bind(this),
+            function (response) {
 
-            if (response.status.code == 422) {
-              swal({ title: response.entity.message, type: 'error', timer: 2000 });
-            }
+              if (response.status.code == 422) {
+                swal({title: response.entity.message, type: 'error', timer: 2000});
+              }
 
-          });
+            });
         } else {
           swal('Cancelled', 'No record has been deleted', 'error');
         }
       }.bind(this));
     },
 
-    assignValuesToModal: function(dependent) {
+    assignValuesToModal: function (dependent) {
 
       this.modal.id = dependent.id;
       this.modal.first_name = dependent.first_name;
@@ -263,20 +263,20 @@ module.exports = {
       this.modal.birth_date = dependent.birth_date.substring(0, 10);
     },
 
-    chosenRelationships: function() {
+    chosenRelationships: function () {
 
       // retrieve relationshops
       client({
         path: '/relationships',
-        headers: { Authorization: localStorage.getItem('jwt-token') }
+        headers: {Authorization: localStorage.getItem('jwt-token')}
       }).then(
-      function(response) {
-        if (response) {
-          this.relationships_chosen = response.entity.chosen;
-        }
+        function (response) {
+          if (response) {
+            this.relationships_chosen = response.entity.chosen;
+          }
 
-        $('.vue-chosen').trigger('chosen:updated');
-      }.bind(this));
+          $('.vue-chosen').trigger('chosen:updated');
+        }.bind(this));
     }
   }
 };

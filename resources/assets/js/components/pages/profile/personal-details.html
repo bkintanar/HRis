@@ -132,16 +132,20 @@
                     <!-- Start - Control Buttons -->
                     <div class="form-group save-form" style="display:none;">
                         <div class="col-sm-4 col-sm-offset-2">
-                            <button class="btn btn-white btn-xs cancel-form" type="button" @click.prevent="cancelForm">
+                            <button class="btn btn-white btn-xs cancel-form" type="button" id="cancelButton"
+                                    @click.prevent="cancelForm">
                                 Cancel
                             </button>
-                            <input class="btn btn-primary btn-xs" type="submit" @click="submitForm" id="submitButton" value="Save changes">
+                            <input class="btn btn-primary btn-xs" type="submit" @click="submitForm" id="submitButton"
+                                   value="Save changes">
 
                         </div>
                     </div>
                     <div class="form-group" v-if="has_access && has_access[permission + '.update']">
                         <div class="col-sm-4 col-sm-offset-2">
-                            <button class="btn btn-primary btn-xs modify-form" type="button" @click.prevent="modifyForm">Modify</button>
+                            <button class="btn btn-primary btn-xs modify-form" type="button"
+                                    @click.prevent="modifyForm">Modify
+                            </button>
                         </div>
                     </div>
                     <!-- End - Control Buttons -->
@@ -151,4 +155,6 @@
     </div>
 </div>
 
-<custom-field-section v-if="employee" :employee="employee" :custom_field_sections="custom_field_sections" :has_access="has_access" :permission="permission" :custom_field_values="custom_field_values"></custom-field-section>
+<custom-field-section v-if="employee" :employee="employee" :custom_field_sections="custom_field_sections"
+                      :has_access="has_access" :permission="permission"
+                      :custom_field_values="custom_field_values"></custom-field-section>

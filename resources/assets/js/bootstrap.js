@@ -2,9 +2,10 @@
 //window.Vue = require('vue');
 //window.VueRouter = require('vue-router');
 
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import VueResource from 'vue-resource';
+import Vue from "vue";
+import VueRouter from "vue-router";
+import VueResource from "vue-resource";
+import {configRouter} from "./routes";
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
@@ -12,7 +13,6 @@ Vue.use(VueResource);
 // Insert vue-router and vue-resource into Vue
 
 // Import the actual routes, aliases, ...
-import { configRouter } from './routes';
 
 // Create our router object and set options on it
 const router = new VueRouter({});
@@ -33,10 +33,10 @@ var errorCode = require('rest/interceptor/errorCode');
 var interceptor = require('rest/interceptor');
 var jwtAuth = require('./interceptors/jwtAuth');
 
-window.client = rest.wrap(pathPrefix, { prefix: config.api.base_url })
-    .wrap(mime)
-    .wrap(defaultRequest, config.api.defaultRequest)
-    .wrap(errorCode, { code: 400 });
+window.client = rest.wrap(pathPrefix, {prefix: config.api.base_url})
+  .wrap(mime)
+  .wrap(defaultRequest, config.api.defaultRequest)
+  .wrap(errorCode, {code: 400});
 
 // Bootstrap the app
 // HRis Components
@@ -78,6 +78,42 @@ Vue.component(
   'education-levels',
   require('./compiled/partials/tables/admin/qualifications/educations.vue')
 );
+Vue.component(
+  'timelogs',
+  require('./compiled/partials/tables/presence/timelogs.vue')
+);
+
+Vue.filter('dateFormat', function (date) {
+  var local = moment.utc(date).toDate();
+
+  return moment(local).format('ddd, ll');
+});
+
+Vue.filter('timeFormat', function (time) {
+  if (!time) {
+    return '--:--';
+  }
+
+  var local = moment.utc(time).toDate();
+
+  return moment(local).format('LT');
+});
+
+Vue.filter('decimalPlace', function (num, decimal = 2) {
+  return Number(num).toFixed(decimal);
+});
+
+Vue.filter('durationFormat', function (d) {
+
+  var hours = Math.floor(Number(d).toFixed(2));
+  var minutes = (d - hours) * 60;
+  var seconds = ((d - hours) - minutes ) * 60;
+
+  return moment.duration({
+    minutes: minutes,
+    hours: hours,
+  }).humanize();
+});
 
 // Partial Profile
 Vue.component('custom-field-section', require('./compiled/pages/profile/partials/custom-field-section.vue'));

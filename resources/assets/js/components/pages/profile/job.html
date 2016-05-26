@@ -45,7 +45,10 @@
                         <label for="effective_date" class="col-md-2 control-label">Effective Date</label>
                         <div class="col-sm-4" id="datepicker_effective_date">
                             <div class="input-group date">
-                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input class="form-control" data-mask="9999-99-99" disabled="disabled" name="effective_date" type="text" v-model.sync="employee.job_history.data.effective_date" id="effective_date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input
+                                    class="form-control" data-mask="9999-99-99" disabled="disabled"
+                                    name="effective_date" type="text"
+                                    v-model.sync="employee.job_history.data.effective_date" id="effective_date">
                             </div>
                         </div>
                     </div>
@@ -63,7 +66,10 @@
                     <div class="form-group">
                         <label for="comments" class="col-md-2 control-label">Comments</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control form-fields" rows="3" disabled="disabled" style="resize:vertical;" name="comments" v-model.sync="employee.job_history.data.comments" id="comments" cols="50"></textarea>
+                            <textarea class="form-control form-fields" rows="3" disabled="disabled"
+                                      style="resize:vertical;" name="comments"
+                                      v-model.sync="employee.job_history.data.comments" id="comments"
+                                      cols="50"></textarea>
                         </div>
                     </div>
                     <!-- End - Job Details -->
@@ -76,14 +82,19 @@
                         <label for="joined_date" class="col-md-2 control-label">Joined Date</label>
                         <div class="col-md-4" id="datepicker_joined_date">
                             <div class="input-group date">
-                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input class="form-control" data-mask="9999-99-99" disabled="disabled" name="joined_date" type="text" v-model.sync="employee.joined_date" id="joined_date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input
+                                    class="form-control" data-mask="9999-99-99" disabled="disabled" name="joined_date"
+                                    type="text" v-model.sync="employee.joined_date" id="joined_date">
                             </div>
                         </div>
 
                         <label for="probation_end_date" class="col-md-2 control-label">Probation End Date</label>
                         <div class="col-md-4" id="datepicker_probation_end_date">
                             <div class="input-group date">
-                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input class="form-control" data-mask="9999-99-99" disabled="disabled" name="probation_end_date" type="text" v-model.sync="employee.probation_end_date" id="probation_end_date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input
+                                    class="form-control" data-mask="9999-99-99" disabled="disabled"
+                                    name="probation_end_date" type="text" v-model.sync="employee.probation_end_date"
+                                    id="probation_end_date">
                             </div>
                         </div>
                     </div>
@@ -92,7 +103,10 @@
                         <label for="permanency_date" class="col-md-2 control-label">Date of Permanency</label>
                         <div class="col-md-4" id="datepicker_permanency_date">
                             <div class="input-group date">
-                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input class="form-control" data-mask="9999-99-99" disabled="disabled" name="permanency_date" type="text" v-model.sync="employee.permanency_date" id="permanency_date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input
+                                    class="form-control" data-mask="9999-99-99" disabled="disabled"
+                                    name="permanency_date" type="text" v-model.sync="employee.permanency_date"
+                                    id="permanency_date">
                             </div>
                         </div>
                     </div>
@@ -104,13 +118,17 @@
                     <div class="form-group save-form" style="display:none;">
                         <div class="col-sm-4 col-sm-offset-2">
                             <button class="btn btn-white btn-xs cancel-form" @click.prevent="cancelForm">Cancel</button>
-                            <input class="btn btn-primary btn-xs" type="submit" @click="submitForm" value="Save changes">
-                            <button class="btn btn-danger btn-xs terminate-form" @click.prevent="terminateForm">Terminate Employment</button>
+                            <input class="btn btn-primary btn-xs" type="submit" @click="submitForm"
+                                   value="Save changes">
+                            <button class="btn btn-danger btn-xs terminate-form" @click.prevent="terminateForm">
+                                Terminate Employment
+                            </button>
                         </div>
                     </div>
                     <div class="form-group" v-if="has_access[permission + '.update']">
                         <div class="col-sm-4 col-sm-offset-2">
-                            <button class="btn btn-primary btn-xs modify-form" @click.prevent="modifyForm">Modify</button>
+                            <button class="btn btn-primary btn-xs modify-form" @click.prevent="modifyForm">Modify
+                            </button>
                         </div>
                     </div>
                     <!-- End - Control Buttons -->
@@ -146,16 +164,30 @@
 
                         <tbody id="job_histories_body">
 
-                        <tr v-for="job_history in employee.job_histories.data" class="job_histories_list" id="job_history_1">
+                        <tr v-for="job_history in employee.job_histories.data" class="job_histories_list"
+                            id="job_history_1">
 
-                            <td v-if="job_titles_chosen[job_history.job_title_id-1]">{{job_titles_chosen[job_history.job_title_id-1].name}}</td>
-                            <td v-if="departments_chosen[job_history.department_id-1]">{{departments_chosen[job_history.department_id-1].name}}</td>
+                            <td v-if="job_titles_chosen[job_history.job_title_id-1]">
+                                {{job_titles_chosen[job_history.job_title_id-1].name}}
+                            </td>
+                            <td v-if="departments_chosen[job_history.department_id-1]">
+                                {{departments_chosen[job_history.department_id-1].name}}
+                            </td>
                             <td>{{job_history.effective_date}}</td>
-                            <td v-if="employment_statuses_chosen[job_history.employment_status_id-1]"><span class="label {{employment_statuses_chosen[job_history.employment_status_id-1].class}}">{{employment_statuses_chosen[job_history.employment_status_id-1].name}}</span></td>
-                            <td v-if="locations_chosen[job_history.location_id-1]">{{locations_chosen[job_history.location_id-1].name}}</td>
+                            <td v-if="employment_statuses_chosen[job_history.employment_status_id-1]"><span
+                                    class="label {{employment_statuses_chosen[job_history.employment_status_id-1].class}}">{{employment_statuses_chosen[job_history.employment_status_id-1].name}}</span>
+                            </td>
+                            <td v-if="locations_chosen[job_history.location_id-1]">
+                                {{locations_chosen[job_history.location_id-1].name}}
+                            </td>
                             <td>{{job_history.comments}}</td>
                             <td>
-                                <button v-if="employee.job_histories.data.length > 1" rel="delete" id="delete_{{job_history.id}}" v-if="has_access[permission + '.delete']" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" title="" type="button" @click="deleteRecord(job_history, $index)" data-original-title="Delete"><i class="fa fa-times"></i></button>
+                                <button v-if="employee.job_histories.data.length > 1" rel="delete"
+                                        id="delete_{{job_history.id}}" v-if="has_access[permission + '.delete']"
+                                        class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip"
+                                        data-placement="bottom" title="" type="button"
+                                        @click="deleteRecord(job_history, $index)" data-original-title="Delete"><i
+                                        class="fa fa-times"></i></button>
                             </td>
                         </tr>
                         </tbody>
@@ -166,4 +198,6 @@
     </div>
 </div>
 
-<custom-field-section v-if="employee" :employee="employee" :custom_field_sections="custom_field_sections" :has_access="has_access" :permission="permission" :custom_field_values="custom_field_values"></custom-field-section>
+<custom-field-section v-if="employee" :employee="employee" :custom_field_sections="custom_field_sections"
+                      :has_access="has_access" :permission="permission"
+                      :custom_field_values="custom_field_values"></custom-field-section>

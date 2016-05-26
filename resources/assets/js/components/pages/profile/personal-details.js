@@ -3,7 +3,7 @@ module.exports = {
     'employee', 'page_title', 'job_titles', 'employment_statuses', 'routes', 'has_access', 'permission', 'logged', 'custom_field_values'
   ],
 
-  compiled: function() {
+  compiled: function () {
 
     this.$dispatch(
       'update-page-title', ((this.$route.path.indexOf('pim') > -1) ? 'Employee\'s ' : 'My ') + 'Personal Details'
@@ -14,7 +14,7 @@ module.exports = {
     canReuse: false
   },
 
-  data: function() {
+  data: function () {
 
     return {
       id: '',
@@ -29,14 +29,14 @@ module.exports = {
     };
   },
 
-  ready: function() {
+  ready: function () {
 
     this.queryDatabase();
   },
 
   methods: {
 
-    queryDatabase: function() {
+    queryDatabase: function () {
 
       if (this.$route.path.indexOf('/pim') > -1) {
         this.employee_id = this.$route.params.employee_id;
@@ -46,84 +46,85 @@ module.exports = {
 
       client({
         path: '/pim/configuration/custom-field-sections-by-screen-id',
-        entity: { screen_name: 'Personal Details' },
-        headers: { Authorization: localStorage.getItem('jwt-token') }
+        entity: {screen_name: 'Personal Details'},
+        headers: {Authorization: localStorage.getItem('jwt-token')}
       }).then(
-      function(response) {
+        function (response) {
 
-        this.custom_field_sections = response.entity.custom_field_sections;
+          this.custom_field_sections = response.entity.custom_field_sections;
 
-      }.bind(this),
+        }.bind(this),
 
-      function(response) {
+        function (response) {
 
-        if (response.status.code == 422) {
-          this.$route.router.go({
-            name: 'error-404'
-          });
-          console.log(response.entity);
-        }
-      }.bind(this));
+          if (response.status.code == 422) {
+            this.$route.router.go({
+              name: 'error-404'
+            });
+            console.log(response.entity);
+          }
+        }.bind(this));
 
       let params = {
         method: 'GET',
         path: '/employee/' + this.employee_id + '?include=user',
-        headers: { Authorization: localStorage.getItem('jwt-token') }
+        headers: {Authorization: localStorage.getItem('jwt-token')}
       };
 
       client(params).then(
-      function(response) {
+        function (response) {
 
-        this.$dispatch('update-employee', response.entity.data);
-        this.custom_field_values = response.entity.data.custom_field_values;
+          this.$dispatch('update-employee', response.entity.data);
+          this.custom_field_values = response.entity.data.custom_field_values;
 
-        this.original_employee_id = response.entity.data.employee_id;
+          this.original_employee_id = response.entity.data.employee_id;
 
-        this.chosenNationalities();
-        this.chosenMaritalStatuses();
+          this.chosenNationalities();
+          this.chosenMaritalStatuses();
 
-        var genderWatcher = setInterval(function() {
+          var genderWatcher = setInterval(function () {
 
-          if (this.employee != null) {
+            if (this.employee != null) {
 
-            var _this = this;
+              var _this = this;
 
-            // iCheck
-            $('.i-checks').iCheck({
-              checkboxClass: 'icheckbox_square-green',
-              radioClass: 'iradio_square-green'
+              // iCheck
+              $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green'
+              });
+              clearInterval(genderWatcher);
+
+              $('input[name="gender"]').on('ifChecked', function () {
+
+                _this.employee.gender = this.value;
+              });
+
+              this.switchGender(this.employee.gender);
+            }
+          }.bind(this), 1);
+
+        }.bind(this),
+
+        function (response) {
+
+          if (response.status.code == 422) {
+            this.$route.router.go({
+              name: 'error-404'
             });
-            clearInterval(genderWatcher);
-
-            $('input[name="gender"]').on('ifChecked', function() {
-
-              _this.employee.gender = this.value;
-            });
-
-            this.switchGender(this.employee.gender);
+            console.log(response.entity);
           }
-        }.bind(this), 1);
-
-      }.bind(this),
-
-      function(response) {
-
-        if (response.status.code == 422) {
-          this.$route.router.go({
-            name: 'error-404'
-          });
-          console.log(response.entity);
-        }
-      }.bind(this));
+        }.bind(this));
     },
 
-    submitForm: function() {
+    submitForm: function () {
 
       // jasny bug work around
       $('#first_name').focus();
 
       this.disableFields();
 
+      $('#cancelButton').prop('disabled', true);
       $('#submitButton').val('Saving...');
       $('#submitButton').prop('disabled', true);
 
@@ -133,41 +134,41 @@ module.exports = {
       let params = {
         path: '/profile/personal-details',
         method: 'PATCH',
-        entity: { employee: this.employee },
-        headers: { Authorization: localStorage.getItem('jwt-token') }
+        entity: {employee: this.employee},
+        headers: {Authorization: localStorage.getItem('jwt-token')}
       };
 
       client(params).then(
-      function(response) {
+        function (response) {
 
-        this.updateLocalStorage(response.entity.employee.employee_id);
+          this.updateLocalStorage(response.entity.employee.employee_id);
 
-        if (this.$route.path.indexOf('/pim') > -1) {
-          this.$route.router.go({
-            name: 'pim-employee-list-personal-details',
-            params: { employee_id: response.entity.employee.employee_id }
-          });
-        }
+          if (this.$route.path.indexOf('/pim') > -1) {
+            this.$route.router.go({
+              name: 'pim-employee-list-personal-details',
+              params: {employee_id: response.entity.employee.employee_id}
+            });
+          }
 
-        this.$route.params.employee_id = response.entity.employee.employee_id;
-        swal({ title: response.entity.message, type: 'success', timer: 2000 });
-        this.cancelForm();
+          this.$route.params.employee_id = response.entity.employee.employee_id;
+          swal({title: response.entity.message, type: 'success', timer: 2000});
+          this.cancelForm();
 
-      }.bind(this),
-      function(response) {
-        switch (response.status.code) {
-          case 405:
-            swal({ title: response.entity.message, type: 'warning', timer: 2000 });
-            break;
-          case 422:
-            $('#first_name').focus();
-            swal({ title: response.entity.message, type: 'error', timer: 2000 });
-            break;
-        }
-      }.bind(this));
+        }.bind(this),
+        function (response) {
+          switch (response.status.code) {
+            case 405:
+              swal({title: response.entity.message, type: 'warning', timer: 2000});
+              break;
+            case 422:
+              $('#first_name').focus();
+              swal({title: response.entity.message, type: 'error', timer: 2000});
+              break;
+          }
+        }.bind(this));
     },
 
-    modifyForm: function() {
+    modifyForm: function () {
 
       $('.avatar').css('display', '');
       $('.job-title').css('display', 'none');
@@ -191,8 +192,9 @@ module.exports = {
       $('#first_name').focus();
     },
 
-    cancelForm: function() {
-      
+    cancelForm: function () {
+
+      $('#cancelButton').prop('disabled', false);
       $('#submitButton').prop('disabled', false);
       $('#submitButton').val('Save changes');
 
@@ -208,7 +210,7 @@ module.exports = {
       this.disableFields();
     },
 
-    disableFields: function() {
+    disableFields: function () {
       $('.vue-chosen').prop('disabled', true).trigger('chosen:updated');
 
       $('.form-control').prop('disabled', true);
@@ -218,7 +220,7 @@ module.exports = {
       $('#datepicker_birth_date .input-group.date').datepicker('remove');
     },
 
-    switchGender: function(gender) {
+    switchGender: function (gender) {
 
       switch (gender) {
         case 'M' :
@@ -230,45 +232,45 @@ module.exports = {
       }
     },
 
-    updateLocalStorage: function(new_employee_id) {
+    updateLocalStorage: function (new_employee_id) {
 
       if (this.original_employee_id == localStorage.getItem('employee_id')) {
         localStorage.setItem('employee_id', new_employee_id);
       }
     },
 
-    chosenNationalities: function() {
+    chosenNationalities: function () {
 
       // retrieve nationalities
       client({
         path: '/nationalities',
-        headers: { Authorization: localStorage.getItem('jwt-token') }
+        headers: {Authorization: localStorage.getItem('jwt-token')}
       }).then(
-      function(response) {
-        if (response) {
-          this.nationalities_chosen = response.entity.chosen;
-        }
+        function (response) {
+          if (response) {
+            this.nationalities_chosen = response.entity.chosen;
+          }
 
-        this.nationality_obj = this.nationalities_chosen[this.employee.nationality_id - 1];
-        $('.vue-chosen').trigger('chosen:updated');
-      }.bind(this));
+          this.nationality_obj = this.nationalities_chosen[this.employee.nationality_id - 1];
+          $('.vue-chosen').trigger('chosen:updated');
+        }.bind(this));
     },
 
-    chosenMaritalStatuses: function() {
+    chosenMaritalStatuses: function () {
 
       // retrieve marital status
       client({
         path: '/marital-statuses',
-        headers: { Authorization: localStorage.getItem('jwt-token') }
+        headers: {Authorization: localStorage.getItem('jwt-token')}
       }).then(
-      function(response) {
-        if (response) {
-          this.marital_statuses_chosen = response.entity.chosen;
-        }
+        function (response) {
+          if (response) {
+            this.marital_statuses_chosen = response.entity.chosen;
+          }
 
-        this.marital_status_obj = this.marital_statuses_chosen[this.employee.marital_status_id - 1];
-        $('.vue-chosen').trigger('chosen:updated');
-      }.bind(this));
+          this.marital_status_obj = this.marital_statuses_chosen[this.employee.marital_status_id - 1];
+          $('.vue-chosen').trigger('chosen:updated');
+        }.bind(this));
     }
   }
 };

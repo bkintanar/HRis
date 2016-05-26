@@ -1,0 +1,132 @@
+<div class="row wrapper border-bottom page-heading"
+     :class="{ 'grad-red': ($route.path.indexOf('/pim') == 0 || $route.path.indexOf('/admin') == 0), 'greenpro-bg': ($route.path.indexOf('/pim') == -1 && $route.path.indexOf('/admin') == -1) }">
+    <div class="col-sm-6">
+        <h2>{{page_title}}</h2>
+        <!-- Breadcrumbs -->
+        <ol class="breadcrumb">
+            <li>
+                <a v-link="{name: 'dashboard'}">Home</a>
+            </li>
+            <li v-for="route in routes">
+                <a v-link="{name: route.name, params: {employee_id: route.params.employee_id} }">{{route.segment}}</a>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="row wrapper border-bottom">
+    <div id="reportrange"
+         class="pull-right"
+         style="cursor: pointer; padding: 10px 0;margin-right:6px">
+        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;&nbsp;<span></span> <b class="caret"></b>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="wrapper wrapper-content">
+            <!-- content starts here -->
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="row">
+                        <div class="ibox">
+                            <div class="ibox-title">
+                                <h5>Compose Timelog</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="row">
+                                    <h1 class="text-center">{{ time }}</h1>
+                                </div>
+                                <div class="row">
+                                    <div class="text-center">
+                                        <a href="#" v-if="!timelog_id" class="btn btn-primary" @click="timeIn">Time
+                                            In</a>
+                                        <a href="#" v-if="timelog_id" class="btn btn-default" @click="timeOut">Time
+                                            Out</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="ibox">
+                            <div class="ibox-title">
+                                <h5>Summary Report</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <ul class="list-group clear-list">
+                                    <li class="list-group-item fist-item">
+                                <span class="pull-right">
+                                     {{ summaryReport.total_hours }} {{summaryReport.total_hours | pluralize 'hour' }}
+                                </span>
+                                        Total Hours
+                                    </li>
+                                    <li class="list-group-item">
+                                <span class="pull-right">
+                                     {{ summaryReport.late }} {{ summaryReport.late | pluralize 'hour' }}
+                                </span>
+                                        Late
+                                    </li>
+                                    <li class="list-group-item">
+                                <span class="pull-right">
+                                     {{ summaryReport.undertime }} {{ summaryReport.undertime | pluralize 'hour' }}
+                                </span>
+                                        Undertime
+                                    </li>
+                                    <li class="list-group-item">
+                                <span class="pull-right">
+                                     {{ summaryReport.overtime }} {{ summaryReport.overtime | pluralize 'hour' }}
+                                </span>
+                                        Overtime
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table-presenter :has_access="has_access" :table="table" :name="'timelogs'"
+                                 :modal="modal"></table-presenter>
+
+                <!-- Modal -->
+                <div class="modal inmodal fade" id="edit_timelog" tabindex="-1">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span aria-hidden="true">×</span>
+                                    <span class="sr-only">Close</span>
+                                </button>
+                                <h4 class="modal-title">Edit timelog</h4>
+                            </div>
+                            <form class="form-horizontal">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        {!! Form::label('time_in', 'Time In', ['class' => 'col-md-3 control-label']) !!}
+                                        <div class="col-md-9">
+                                            {!! Form::text('time_in', null, ['class' => 'form-control', 'placeholder' =>
+                                            'Time In']) !!}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        {!! Form::label('time_out', 'Time Out', ['class' => 'col-md-3 control-label'])
+                                        !!}
+                                        <div class="col-md-9">
+                                            {!! Form::text('time_out', null, ['class' => 'form-control', 'placeholder'
+                                            => 'Time Out']) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-white" data-dismiss="modal" type="button">Close</button>
+                                    <button
+                                            class="btn btn-primary"
+                                            data-dismiss="modal">
+                                        Save changes
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

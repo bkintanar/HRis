@@ -1,5 +1,5 @@
 module.exports = {
-  data: function() {
+  data: function () {
 
     return {
       changing: false
@@ -7,7 +7,7 @@ module.exports = {
   },
 
   directives: {
-    jData: function(value) {
+    jData: function (value) {
 
       var el = this.el;
       $(el).data('chosen', value);
@@ -16,9 +16,9 @@ module.exports = {
 
   props: {
     options: null,
-    'v-model': { twoWay: true, default: null },
+    'v-model': {twoWay: true, default: null},
     'selected-options': {
-      twoWay: true, default: function() {
+      twoWay: true, default: function () {
 
         return [];
       }, type: Array
@@ -26,11 +26,11 @@ module.exports = {
     chosen: null,
     'text-key': null,
     placeholder: null,
-    multiple: { type: Boolean, required: false }
+    multiple: {type: Boolean, required: false}
   },
 
   filters: {
-    toOptionData: function(val) {
+    toOptionData: function (val) {
 
       if (!val) {
         return val;
@@ -41,19 +41,19 @@ module.exports = {
         return val;
       }
 
-      return val.map(function(x) {
+      return val.map(function (x) {
 
         if (key) {
-          return { text: x[key], value: x };
+          return {text: x[key], value: x};
         } else {
-          return { text: (x ? x : '').toString(), value: x };
+          return {text: (x ? x : '').toString(), value: x};
         }
       });
     }
   },
 
   methods: {
-    select: function(objs) {
+    select: function (objs) {
 
       if (!objs) {
         var objs = [];
@@ -61,7 +61,7 @@ module.exports = {
 
       this.changing = true;
       try {
-        $(this.$el).find('option').each(function(i, e) {
+        $(this.$el).find('option').each(function (i, e) {
           var data = $(e).data('chosen');
           if (!data) {
             return;
@@ -83,11 +83,11 @@ module.exports = {
       }
     }
   },
-  ready: function() {
+  ready: function () {
     var _this = this;
 
     // initialize
-    var coptions = $.extend({}, { width: '10em' }, this.chosen);
+    var coptions = $.extend({}, {width: '10em'}, this.chosen);
     $(this.$el).chosen(coptions);
 
     // initialize selection
@@ -98,9 +98,9 @@ module.exports = {
     }
 
     // track changes
-    $(this.$el).on('change', function() {
+    $(this.$el).on('change', function () {
       if (_this.changing)
-          return;
+        return;
       _this.changing = true;
       try {
         var target = _this.selectedOptions;
@@ -110,9 +110,11 @@ module.exports = {
         }
 
         target.splice(0, target.length);
-        $(_this.$el).find(':selected').each(function(i, e) {
+        $(_this.$el).find(':selected').each(function (i, e) {
           var data = $(e).data('chosen');
-          if (data) {target.push(data.value);}
+          if (data) {
+            target.push(data.value);
+          }
         });
 
         _this.vModel = target.length > 0 ? target[0] : null;
@@ -124,15 +126,17 @@ module.exports = {
   },
 
   watch: {
-    vModel: function(value) {
+    vModel: function (value) {
       if (this.changing)
-          return;
+        return;
       if (value) {
         this.select([value]);
-      } else {this.select([]);}
+      } else {
+        this.select([]);
+      }
     },
 
-    selectedOptions: function(value) {
+    selectedOptions: function (value) {
       if (this.changing) {
         return;
       }

@@ -35,7 +35,8 @@
                     <div class="form-group">
                         <label for="address_city_id" class="col-md-2 control-label">City</label>
                         <div class="col-md-4">
-                            <chosen id="address_city_id" disabled="disabled" class="vue-chosen" :options="cities_chosen"
+                            <chosen id="address_city_id" required="required" disabled="disabled" class="vue-chosen"
+                                    :options="cities_chosen"
                                     :v-model.sync="address_city_obj" :chosen="{ width:'100%' }"
                                     placeholder="--- Select ---" text-key="name"></chosen>
 
@@ -43,7 +44,7 @@
 
                         <label for="address_province_id" class="col-md-2 control-label">Province</label>
                         <div class="col-md-4">
-                            <chosen id="address_province_id" disabled="disabled" class="vue-chosen"
+                            <chosen id="address_province_id" required="required" disabled="disabled" class="vue-chosen"
                                     :options="provinces_chosen" :v-model.sync="address_province_obj"
                                     :chosen="{ width:'100%' }" placeholder="--- Select ---" text-key="name"></chosen>
                         </div>
@@ -60,7 +61,7 @@
                         </div>
                         <label for="address_country_id" class="col-md-2 control-label">Country</label>
                         <div class="col-md-4">
-                            <chosen id="address_country_id" disabled="disabled" class="vue-chosen"
+                            <chosen id="address_country_id" required="required" disabled="disabled" class="vue-chosen"
                                     :options="countries_chosen" :v-model.sync="address_country_obj"
                                     :chosen="{ width:'100%' }" placeholder="--- Select ---" text-key="name"></chosen>
                         </div>
@@ -108,15 +109,20 @@
                     <!-- Start - Control Buttons -->
                     <div class="form-group save-form" style="display:none;">
                         <div class="col-sm-4 col-sm-offset-2">
-                            <button class="btn btn-white btn-xs cancel-form" type="button" @click.prevent="cancelForm">
+                            <button class="btn btn-white btn-xs cancel-form" type="button" id="cancelButton"
+                                    @click.prevent="cancelForm">
                                 Cancel
                             </button>
-                            <input class="btn btn-primary btn-xs" type="submit" @click="submitForm" id="submitButton" value="Save changes">
+                            <input class="btn btn-primary btn-xs" type="submit" @click="submitForm" id="submitButton"
+                                   :class="{ 'disabled': address_country_obj == null || address_province_obj == null || address_city_obj == null }"
+                                   value="Save changes">
                         </div>
                     </div>
                     <div class="form-group" v-if="has_access && has_access[permission + '.update']">
                         <div class="col-sm-4 col-sm-offset-2">
-                            <button class="btn btn-primary btn-xs modify-form" type="button" @click.prevent="modifyForm">Modify</button>
+                            <button class="btn btn-primary btn-xs modify-form" type="button"
+                                    @click.prevent="modifyForm">Modify
+                            </button>
                         </div>
                     </div>
                     <!-- End - Control Buttons -->
@@ -126,4 +132,6 @@
     </div>
 </div>
 
-<custom-field-section v-if="employee" :employee="employee" :custom_field_sections="custom_field_sections" :has_access="has_access" :permission="permission" :custom_field_values="custom_field_values"></custom-field-section>
+<custom-field-section v-if="employee" :employee="employee" :custom_field_sections="custom_field_sections"
+                      :has_access="has_access" :permission="permission"
+                      :custom_field_values="custom_field_values"></custom-field-section>

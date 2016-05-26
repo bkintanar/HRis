@@ -1,4 +1,6 @@
 <label for="custom_field_{{custom_field.id}}" class="col-md-2 control-label">{{custom_field.name}}</label>
 <div class="col-sm-4">
-    <input v-model.sync="custom_field_values[custom_field.id]" class="form-control" :class="{'required': custom_field.required}" data-mask="{{custom_field.mask}}" disabled="disabled" type="text" id="custom_field_{{custom_field.id}}">
+    <input v-model.sync="custom_field_values[custom_field.id]" class="form-control"
+           :class="{'required': custom_field.required}" data-mask="{{custom_field.mask}}" disabled="disabled"
+           type="text" id="custom_field_{{custom_field.id}}">
 </div>

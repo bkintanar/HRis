@@ -5,24 +5,24 @@ module.exports = {
 
   methods: {
 
-    editRecord: function(model, index) {
+    editRecord: function (model, index) {
 
       this.$parent.editRecord(model, index);
     },
 
-    deleteRecord: function(model, index) {
+    deleteRecord: function (model, index) {
 
       this.$parent.deleteRecord(model, index);
     },
 
-    toggleModal: function() {
+    toggleModal: function () {
 
       this.modal.editMode = false;
 
       this.$parent.toggleModal();
     },
 
-    goto: function(page) {
+    goto: function (page) {
 
       let count = this.table.items.total - 1 % 10;
 

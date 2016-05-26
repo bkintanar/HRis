@@ -3,14 +3,14 @@ module.exports = {
     'employee', 'page_title', 'job_titles', 'employment_statuses', 'routes', 'has_access', 'permission', 'logged', 'custom_field_values'
   ],
 
-  compiled: function() {
+  compiled: function () {
 
     this.$dispatch(
       'update-page-title', ((this.$route.path.indexOf('pim') > -1) ? 'Employee\'s ' : 'My ') + 'Contact Details'
     );
   },
 
-  data: function() {
+  data: function () {
 
     return {
       id: '',
@@ -29,7 +29,7 @@ module.exports = {
   },
 
   watch: {
-    address_province_obj: function() {
+    address_province_obj: function () {
 
       // retrieve cities
       if (this.address_province_obj) {
@@ -38,9 +38,12 @@ module.exports = {
         // call twice since there's a bug in chosen.js vue directive.
         this.chosenCities(this.address_province_obj.id, true);
       }
+      else {
+        this.address_city_obj = null;
+      }
     },
 
-    cities_chosen: function() {
+    cities_chosen: function () {
 
       for (var i = 0; i < this.cities_chosen.length; i++) {
         if (this.employee.address_city_id == this.cities_chosen[i].id) {
@@ -51,13 +54,13 @@ module.exports = {
     }
   },
 
-  ready: function() {
+  ready: function () {
 
     this.queryDatabase();
   },
 
   methods: {
-    queryDatabase: function() {
+    queryDatabase: function () {
 
       if (this.$route.path.indexOf('/pim') > -1) {
         this.employee_id = this.$route.params.employee_id;
@@ -67,54 +70,55 @@ module.exports = {
 
       client({
         path: '/pim/configuration/custom-field-sections-by-screen-id',
-        entity: { screen_name: 'Contact Details' },
-        headers: { Authorization: localStorage.getItem('jwt-token') }
+        entity: {screen_name: 'Contact Details'},
+        headers: {Authorization: localStorage.getItem('jwt-token')}
       }).then(
-      function(response) {
+        function (response) {
 
-        this.custom_field_sections = response.entity.custom_field_sections;
+          this.custom_field_sections = response.entity.custom_field_sections;
 
-      }.bind(this),
+        }.bind(this),
 
-      function(response) {
+        function (response) {
 
-        if (response.status.code == 422) {
-          this.$route.router.go({
-            name: 'error-404'
-          });
-          console.log(response.entity);
-        }
-      }.bind(this));
+          if (response.status.code == 422) {
+            this.$route.router.go({
+              name: 'error-404'
+            });
+            console.log(response.entity);
+          }
+        }.bind(this));
 
       let params = {
         method: 'GET',
         path: '/employee/' + this.employee_id + '?include=user',
-        entity: { employee_id: this.employee_id },
-        headers: { Authorization: localStorage.getItem('jwt-token') }
+        entity: {employee_id: this.employee_id},
+        headers: {Authorization: localStorage.getItem('jwt-token')}
       };
 
       client(params).then(
-      function(response) {
+        function (response) {
 
-        this.$dispatch('update-employee', response.entity.data);
-        this.custom_field_values = response.entity.data.custom_field_values;
+          this.$dispatch('update-employee', response.entity.data);
+          this.custom_field_values = response.entity.data.custom_field_values;
 
-        this.chosenProvinces();
-        this.chosenCountries();
-      }.bind(this),
-      function(response) {
+          this.chosenProvinces();
+          this.chosenCountries();
+        }.bind(this),
+        function (response) {
 
-        console.log(response);
-      });
+          console.log(response);
+        });
     },
 
-    submitForm: function() {
+    submitForm: function () {
 
       // jasny bug work around
       $('#address_1').focus();
 
       this.disableFields();
 
+      $('#cancelButton').prop('disabled', true);
       $('#submitButton').val('Saving...');
       $('#submitButton').prop('disabled', true);
 
@@ -126,38 +130,38 @@ module.exports = {
       let params = {
         path: '/profile/contact-details',
         method: 'PATCH',
-        entity: { employee: this.employee },
-        headers: { Authorization: localStorage.getItem('jwt-token') }
+        entity: {employee: this.employee},
+        headers: {Authorization: localStorage.getItem('jwt-token')}
       };
 
       client(params).then(
-      function(response) {
+        function (response) {
 
-        if (this.$route.path.indexOf('/pim') > -1) {
-          this.$route.router.go({
-            name: 'pim-employee-list-contact-details',
-            params: { employee_id: response.entity.employee.employee_id }
-          });
-        }
+          if (this.$route.path.indexOf('/pim') > -1) {
+            this.$route.router.go({
+              name: 'pim-employee-list-contact-details',
+              params: {employee_id: response.entity.employee.employee_id}
+            });
+          }
 
-        swal({ title: response.entity.message, type: 'success', timer: 2000 });
-        this.cancelForm();
+          swal({title: response.entity.message, type: 'success', timer: 2000});
+          this.cancelForm();
 
-      }.bind(this),
-      function(response) {
-        switch (response.status.code) {
-          case 405:
-            swal({ title: response.entity.message, type: 'warning', timer: 2000 });
-            break;
-          case 422:
-            $('#first_name').focus();
-            swal({ title: response.entity.message, type: 'error', timer: 2000 });
-            break;
-        }
-      });
+        }.bind(this),
+        function (response) {
+          switch (response.status.code) {
+            case 405:
+              swal({title: response.entity.message, type: 'warning', timer: 2000});
+              break;
+            case 422:
+              $('#first_name').focus();
+              swal({title: response.entity.message, type: 'error', timer: 2000});
+              break;
+          }
+        });
     },
 
-    modifyForm: function() {
+    modifyForm: function () {
 
       $('.save-form').css('display', '');
       $('.modify-form').css('display', 'none');
@@ -167,11 +171,12 @@ module.exports = {
       $('#address_1').focus();
     },
 
-    cancelForm: function() {
+    cancelForm: function () {
 
       // retrieve original data since cancel button was pressed.
       this.queryDatabase();
 
+      $('#cancelButton').prop('disabled', false);
       $('#submitButton').prop('disabled', false);
       $('#submitButton').val('Save changes');
 
@@ -181,64 +186,64 @@ module.exports = {
       this.disableFields();
     },
 
-    disableFields: function() {
+    disableFields: function () {
       $('.vue-chosen').prop('disabled', true).trigger('chosen:updated');
       $('.form-control').prop('disabled', true);
     },
 
-    chosenProvinces: function() {
+    chosenProvinces: function () {
 
       // retrieve provinces
       client({
         path: '/provinces',
-        headers: { Authorization: localStorage.getItem('jwt-token') }
+        headers: {Authorization: localStorage.getItem('jwt-token')}
       }).then(
-      function(response) {
+        function (response) {
 
-        if (response) {
-          this.provinces_chosen = response.entity.chosen;
-        }
+          if (response) {
+            this.provinces_chosen = response.entity.chosen;
+          }
 
-        this.address_province_obj = this.provinces_chosen[this.employee.address_province_id - 1];
-      }.bind(this));
+          this.address_province_obj = this.provinces_chosen[this.employee.address_province_id - 1];
+        }.bind(this));
     },
 
-    chosenCountries: function() {
+    chosenCountries: function () {
 
       // retrieve countries
       client({
         path: '/countries',
-        headers: { Authorization: localStorage.getItem('jwt-token') }
+        headers: {Authorization: localStorage.getItem('jwt-token')}
       }).then(
-      function(response) {
+        function (response) {
 
-        if (response) {
-          this.countries_chosen = response.entity.chosen;
-        }
+          if (response) {
+            this.countries_chosen = response.entity.chosen;
+          }
 
-        this.address_country_obj = this.countries_chosen[this.employee.address_country_id - 1];
-      }.bind(this));
+          this.address_country_obj = this.countries_chosen[this.employee.address_country_id - 1];
+        }.bind(this));
     },
 
-    chosenCities: function(value, open) {
+    chosenCities: function (value, open) {
 
       // retrieve cities
       client({
         path: '/cities?province_id=' + value,
-        headers: { Authorization: localStorage.getItem('jwt-token') }
+        headers: {Authorization: localStorage.getItem('jwt-token')}
       }).then(
-      function(response) {
+        function (response) {
 
-        if (response) {
-          this.cities_chosen = response.entity.chosen;
-        }
+          if (response) {
+            this.cities_chosen = response.entity.chosen;
+          }
 
-        $('.vue-chosen').trigger('chosen:updated');
+          $('.vue-chosen').trigger('chosen:updated');
 
-        if (open) {
-          $('#address_city_id').trigger('chosen:open');
-        }
-      }.bind(this));
+          if (open) {
+            $('#address_city_id').trigger('chosen:open');
+          }
+        }.bind(this));
     }
   }
 };

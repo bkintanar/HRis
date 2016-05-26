@@ -7,10 +7,12 @@
     text-align: center;
     margin-top: 20%;
 }
+
 .title a {
     display: block;
     margin-top: 20px;
 }
+
 .title a:hover {
     text-decoration: none;
 }

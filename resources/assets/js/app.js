@@ -9,7 +9,7 @@ module.exports = {
     canReuse: false
   },
 
-  data: function() {
+  data: function () {
 
     return {
       employee: {
@@ -51,16 +51,16 @@ module.exports = {
     };
   },
 
-  ready: function() {
+  ready: function () {
 
     this.t = 1;
 
-    this.$on('userHasLoggedOut', function() {
+    this.$on('userHasLoggedOut', function () {
 
       this.destroyLogin();
     });
 
-    this.$on('userHasLoggedIn', function(user) {
+    this.$on('userHasLoggedIn', function (user) {
 
       this.setLogin(user);
       localStorage.setItem('logged', btoa(JSON.stringify(user)));
@@ -69,7 +69,7 @@ module.exports = {
       localStorage.setItem('permissions', btoa(JSON.stringify(user.role.data[0].permissions)));
     });
 
-    this.$on('update-page-title', function(page_title) {
+    this.$on('update-page-title', function (page_title) {
 
       this.page_title = page_title;
       var route = [];
@@ -94,20 +94,20 @@ module.exports = {
           route.push({
             segment: route_segments[i],
             name: route_name + '-personal-details',
-            params: { employee_id: route_segments[i] }
+            params: {employee_id: route_segments[i]}
           });
         } else if (i > 1 && !isNaN(route_segments[i]) && route_segments[i - 1].indexOf('Custom Field Sections') == 0) {
 
           route.push({
             segment: route_segments[i],
             name: 'pim-configuration-custom-fields',
-            params: { custom_field_section_id: route_segments[i] }
+            params: {custom_field_section_id: route_segments[i]}
           });
         } else {
           route.push({
             segment: route_segments[i],
             name: route_name,
-            params: { employee_id: route_segments[i - 1] }
+            params: {employee_id: route_segments[i - 1]}
           });
         }
       }
@@ -120,10 +120,18 @@ module.exports = {
       document.title = 'HRis | ' + page_title;
     });
 
-    this.$on('update-employee', function(employee) {
+    this.$on('update-employee', function (employee) {
 
       this.employee = employee;
       this.employee.birth_date = this.employee.birth_date ? this.employee.birth_date.date.substring(0, 10) : null;
+
+      this.logged = JSON.parse(atob(localStorage.getItem('logged')));
+
+      if (this.logged.employee.data.id == this.employee.id) {
+        this.logged.employee.data.avatar = this.employee.avatar;
+
+        localStorage.setItem('logged', btoa(JSON.stringify(this.logged)));
+      }
 
       this.$broadcast('employee-loaded');
     });
@@ -133,26 +141,26 @@ module.exports = {
     if (token !== null && token !== 'undefined') {
       client({
         path: '/users/me?include=employee,role',
-        headers: { Authorization: localStorage.getItem('jwt-token') }
+        headers: {Authorization: localStorage.getItem('jwt-token')}
       }).then(
-      function(response) {
+        function (response) {
 
-        // User has successfully logged in using the token from storage
-        this.setLogin(response);
+          // User has successfully logged in using the token from storage
+          this.setLogin(response);
 
-        // broadcast an event telling our children that the data is ready and views can be rendered
-        this.$broadcast('data-loaded');
-      }.bind(this),
+          // broadcast an event telling our children that the data is ready and views can be rendered
+          this.$broadcast('data-loaded');
+        }.bind(this),
 
-      function() {
+        function () {
 
-        // Login with our token failed, do some cleanup and redirect if we're on an authenticated route
-        this.destroyLogin();
-      }.bind(this));
+          // Login with our token failed, do some cleanup and redirect if we're on an authenticated route
+          this.destroyLogin();
+        }.bind(this));
     }
   },
 
-  data: function() {
+  data: function () {
 
     return {
       user: null,
@@ -163,7 +171,7 @@ module.exports = {
 
   methods: {
 
-    setLogin: function(user) {
+    setLogin: function (user) {
 
       // Save login info in our data and set header in case it's not set already
       this.user = user;
@@ -171,48 +179,48 @@ module.exports = {
       client({
         method: 'POST',
         path: '/sidebar',
-        headers: { Authorization: localStorage.getItem('jwt-token') }
+        headers: {Authorization: localStorage.getItem('jwt-token')}
       }).then(
-      function(response) {
+        function (response) {
 
-        localStorage.setItem('sidebar', btoa(response.entity.sidebar));
-        this.$broadcast('set-sidebar');
-      }.bind(this));
+          localStorage.setItem('sidebar', btoa(response.entity.sidebar));
+          this.$broadcast('set-sidebar');
+        }.bind(this));
     },
 
-    setEmploymentStatuses: function() {
+    setEmploymentStatuses: function () {
 
       client({
         path: '/employment-statuses?table_view=true',
-        headers: { Authorization: localStorage.getItem('jwt-token') }
+        headers: {Authorization: localStorage.getItem('jwt-token')}
       }).then(
-      function(response) {
+        function (response) {
 
-        this.employment_statuses = response.entity.data;
-      }.bind(this),
-      function(response) {
+          this.employment_statuses = response.entity.data;
+        }.bind(this),
+        function (response) {
 
-        console.log(response);
-      });
+          console.log(response);
+        });
     },
 
-    setJobTitles: function() {
+    setJobTitles: function () {
 
       client({
         path: '/job-titles?table_view=true',
-        headers: { Authorization: localStorage.getItem('jwt-token') }
+        headers: {Authorization: localStorage.getItem('jwt-token')}
       }).then(
-      function(response) {
+        function (response) {
 
-        this.job_titles = response.entity.data;
-      }.bind(this),
-      function(response) {
+          this.job_titles = response.entity.data;
+        }.bind(this),
+        function (response) {
 
-        console.log(response);
-      });
+          console.log(response);
+        });
     },
 
-    destroyLogin: function() {
+    destroyLogin: function () {
 
       // Cleanup when token was invalid our user has logged out
       this.user = null;
@@ -230,14 +238,14 @@ module.exports = {
       }
     },
 
-    toTitleCase: function(str) {
+    toTitleCase: function (str) {
 
-      return str.replace(/\w\S*/g, function(txt) {
+      return str.replace(/\w\S*/g, function (txt) {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
       });
     },
 
-    preparePermission: function() {
+    preparePermission: function () {
 
       var properties = [
         localStorage.hasOwnProperty('logged'),
@@ -266,7 +274,7 @@ module.exports = {
         this.permission = 'pim.' + route_segment;
       }
 
-      this.route = { path: route_path, dotted: route_dotted, segment: route_segment, pim: route_is_pim };
+      this.route = {path: route_path, dotted: route_dotted, segment: route_segment, pim: route_is_pim};
 
       this.has_access = JSON.parse(atob(localStorage.getItem('permissions')));
     }

@@ -3,7 +3,7 @@ module.exports = {
     'employee', 'page_title', 'job_titles', 'employment_statuses', 'routes', 'has_access', 'permission', 'logged'
   ],
 
-  data: function() {
+  data: function () {
 
     return {
       table: {
@@ -31,39 +31,39 @@ module.exports = {
     canReuse: false
   },
 
-  compiled: function() {
+  compiled: function () {
 
     this.$dispatch('update-page-title', 'Pay Grades');
   },
 
-  ready: function() {
+  ready: function () {
 
     this.queryDatabase(1);
   },
 
   methods: {
-    queryDatabase: function(page) {
+    queryDatabase: function (page) {
 
       let params = {
         method: 'GET',
         path: '/admin/job/pay-grades?page=' + page,
-        entity: { employee_id: this.employee_id },
-        headers: { Authorization: localStorage.getItem('jwt-token') }
+        entity: {employee_id: this.employee_id},
+        headers: {Authorization: localStorage.getItem('jwt-token')}
       };
 
       client(params).then(
-          function(response) {
+        function (response) {
 
-            this.table = response.entity.table;
+          this.table = response.entity.table;
 
-          }.bind(this),
-          function(response) {
+        }.bind(this),
+        function (response) {
 
-            console.log(response);
-          });
+          console.log(response);
+        });
     },
 
-    editRecord: function(pay_grade, index) {
+    editRecord: function (pay_grade, index) {
 
       this.modal.editMode = true;
       this.modal.editIndex = index;
@@ -71,41 +71,41 @@ module.exports = {
       this.assignValuesToModal(pay_grade);
 
       $('#pay_grade_modal').modal('toggle');
-      $('#pay_grade_modal').on('shown.bs.modal', function() {
+      $('#pay_grade_modal').on('shown.bs.modal', function () {
         $('.vue-chosen', this).trigger('chosen:updated');
       });
     },
 
-    submitForm: function() {
+    submitForm: function () {
       client({
         path: '/admin/job/pay-grades',
         method: this.modal.editMode ? 'PATCH' : 'POST',
         entity: this.modal,
-        headers: { Authorization: localStorage.getItem('jwt-token') }
+        headers: {Authorization: localStorage.getItem('jwt-token')}
       }).then(
-          function(response) {
+        function (response) {
 
-            $('#pay_grade_modal').modal('toggle');
-            if (this.modal.editMode) {
-              this.updateRowInTable();
-              swal({ title: response.entity.message, type: 'success', timer: 2000 });
-            } else {
+          $('#pay_grade_modal').modal('toggle');
+          if (this.modal.editMode) {
+            this.updateRowInTable();
+            swal({title: response.entity.message, type: 'success', timer: 2000});
+          } else {
 
-              let page = this.table.items.last_page;
+            let page = this.table.items.last_page;
 
-              this.queryDatabase(page);
+            this.queryDatabase(page);
 
-              swal({ title: response.entity.message, type: 'success', timer: 2000 });
-            }
-          }.bind(this),
-          function(response) {
-            if (response.status.code == 422) {
-              swal({ title: response.entity.message, type: 'error', timer: 2000 });
-            }
-          });
+            swal({title: response.entity.message, type: 'success', timer: 2000});
+          }
+        }.bind(this),
+        function (response) {
+          if (response.status.code == 422) {
+            swal({title: response.entity.message, type: 'error', timer: 2000});
+          }
+        });
     },
 
-    deleteRecord: function(pay_grade) {
+    deleteRecord: function (pay_grade) {
 
       var previousWindowKeyDown = window.onkeydown; // https://github.com/t4t5/sweetalert/issues/127
       swal({
@@ -119,43 +119,44 @@ module.exports = {
         confirmButtonText: 'Yes, delete it!',
         closeOnConfirm: false,
         closeOnCancel: false
-      }, function(isConfirm) {
+      }, function (isConfirm) {
         swal.disableButtons();
         window.onkeydown = previousWindowKeyDown; // https://github.com/t4t5/sweetalert/issues/127
         if (isConfirm) {
           client({
-            path: '/admin/job/pay-grades/' + pay_grade.id,
+            path: '/admin/job/pay-grades',
             method: 'DELETE',
-            headers: { Authorization: localStorage.getItem('jwt-token') }
+            entity: {id: pay_grade.id},
+            headers: {Authorization: localStorage.getItem('jwt-token')}
           }).then(
-              function(response) {
+            function (response) {
 
-                this.goto(this.table.items.current_page);
+              this.goto(this.table.items.current_page);
 
-                swal({ title: response.entity.message, type: 'success', timer: 2000 });
+              swal({title: response.entity.message, type: 'success', timer: 2000});
 
-              }.bind(this),
-              function(response) {
+            }.bind(this),
+            function (response) {
 
-                if (response.status.code == 422) {
-                  swal({ title: response.entity.message, type: 'error', timer: 2000 });
-                }
+              if (response.status.code == 422) {
+                swal({title: response.entity.message, type: 'error', timer: 2000});
+              }
 
-              });
+            });
         } else {
           swal('Cancelled', 'No record has been deleted', 'error');
         }
       }.bind(this));
     },
 
-    updateRowInTable: function() {
+    updateRowInTable: function () {
 
       this.table.items.data[this.modal.editIndex].name = this.modal.name;
       this.table.items.data[this.modal.editIndex].min_salary = this.modal.min_salary;
       this.table.items.data[this.modal.editIndex].max_salary = this.modal.max_salary;
     },
 
-    assignValuesToModal: function(pay_grade) {
+    assignValuesToModal: function (pay_grade) {
 
       this.modal.id = pay_grade.id;
       this.modal.name = pay_grade.name;
@@ -163,7 +164,7 @@ module.exports = {
       this.modal.max_salary = pay_grade.max_salary;
     },
 
-    goto: function(page) {
+    goto: function (page) {
 
       let count = this.table.items.total - 1 % 10;
 
@@ -174,7 +175,7 @@ module.exports = {
       this.queryDatabase(page);
     },
 
-    toggleModal: function() {
+    toggleModal: function () {
 
       this.modal.name = null;
       this.modal.min_salary = null;

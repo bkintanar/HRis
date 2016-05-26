@@ -3,7 +3,7 @@ module.exports = {
     'employee', 'page_title', 'job_titles', 'employment_statuses', 'routes', 'has_access', 'permission', 'logged', 'custom_field_values'
   ],
 
-  compiled: function() {
+  compiled: function () {
 
     var properties = [
       localStorage.hasOwnProperty('logged'),
@@ -27,9 +27,9 @@ module.exports = {
     this.logged.has_access = JSON.parse(atob(localStorage.getItem('permissions')));
   },
 
-  ready: function() {
-    $('img').load(function() {
-      $(this).css('background','none');
+  ready: function () {
+    $('img').load(function () {
+      $(this).css('background', 'none');
     });
   }
 };

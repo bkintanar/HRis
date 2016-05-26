@@ -1,5 +1,5 @@
 module.exports = {
-  data: function() {
+  data: function () {
 
     return {
       navlinks: '',
@@ -9,9 +9,9 @@ module.exports = {
     };
   },
 
-  ready: function() {
+  ready: function () {
 
-    this.$on('set-sidebar', function() {
+    this.$on('set-sidebar', function () {
 
       this.navlinks = JSON.parse(atob(localStorage.getItem('sidebar')));
       $('#side-menu').metisMenu();

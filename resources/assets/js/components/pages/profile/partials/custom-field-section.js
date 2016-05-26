@@ -5,7 +5,7 @@ module.exports = {
     canReuse: false
   },
 
-  data: function() {
+  data: function () {
     return {
       custom_field_value_objs: [{}]
     };
@@ -13,37 +13,37 @@ module.exports = {
 
   methods: {
 
-    submitForm: function() {
+    submitForm: function () {
 
       let params = {
         path: '/profile/custom-fields',
         method: 'PATCH',
-        entity: { custom_field_values: this.custom_field_values, employee_id: this.employee.id },
-        headers: { Authorization: localStorage.getItem('jwt-token') }
+        entity: {custom_field_values: this.custom_field_values, employee_id: this.employee.id},
+        headers: {Authorization: localStorage.getItem('jwt-token')}
       };
 
       client(params).then(
-      function(response) {
+        function (response) {
 
-        swal({ title: response.entity.message, type: 'success', timer: 2000 });
-        this.cancelForm();
+          swal({title: response.entity.message, type: 'success', timer: 2000});
+          this.cancelForm();
 
-      }.bind(this),
-      function(response) {
+        }.bind(this),
+        function (response) {
 
-        switch (response.status.code) {
-          case 405:
-            swal({ title: response.entity.message, type: 'warning', timer: 2000 });
-            break;
-          case 422:
-            swal({ title: response.entity.message, type: 'error', timer: 2000 });
-            break;
-        }
+          switch (response.status.code) {
+            case 405:
+              swal({title: response.entity.message, type: 'warning', timer: 2000});
+              break;
+            case 422:
+              swal({title: response.entity.message, type: 'error', timer: 2000});
+              break;
+          }
 
-      });
+        });
     },
 
-    modifyForm: function() {
+    modifyForm: function () {
       $('.save-form').css('display', '');
       $('.modify-form').css('display', 'none');
       $('.vue-chosen').prop('disabled', false).trigger('chosen:updated');
@@ -52,7 +52,7 @@ module.exports = {
       $('.i-checks').iCheck('enable');
     },
 
-    cancelForm: function() {
+    cancelForm: function () {
 
       $('.save-form').css('display', 'none');
       $('.modify-form').css('display', '');

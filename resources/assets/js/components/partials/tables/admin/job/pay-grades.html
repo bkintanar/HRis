@@ -1,26 +1,30 @@
 <table class="table table-striped">
-  <thead>
+    <thead>
     <tr>
         <th v-for="header in table.headers">{{ header }}</th>
         <th class="fix-width">Action</th>
     </tr>
-  </thead>
-  <tbody id="{{ table.model.plural }}_body">
-    <tr v-for="item in table.items.data" v-if="table.items.data" class="item-{{$index}} {{table.model.plural}}_list" id="{{table.model.singular}}_{{item.id}}">
-      <input type="hidden" v-model.sync="item.id" id="pay_grade_id">
-      <td>{{item.id}}</td>
-      <td>{{item.name}}</td>
-      <td>{{item.min_salary}}</td>
-      <td>{{item.max_salary}}</td>
-      <td>
-          <button v-if="has_access[table.permission+'.update']" rel="edit" id="{{item.id}}" class="btn btn-primary btn-xs btn-warning" name="edit"
-                  title="Edit" @click="editRecord(item, $index)" type="button"><i class="fa fa-edit"></i></button>
-          <button v-if="has_access[table.permission+'.delete']" rel="delete" id="{{item.id}}" class="btn btn-primary btn-xs btn-danger" name="delete"
-                  title="Delete" @click="deleteRecord(item, $index)" type="button"><i class="fa fa-times"></i></button>
-      </td>
+    </thead>
+    <tbody id="{{ table.model.plural }}_body">
+    <tr v-for="item in table.items.data" v-if="table.items.data" class="item-{{$index}} {{table.model.plural}}_list"
+        id="{{table.model.singular}}_{{item.id}}">
+        <input type="hidden" v-model.sync="item.id" id="pay_grade_id">
+        <td>{{item.id}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.min_salary}}</td>
+        <td>{{item.max_salary}}</td>
+        <td>
+            <button v-if="has_access[table.permission+'.update']" rel="edit" id="{{item.id}}"
+                    class="btn btn-primary btn-xs btn-warning" name="edit"
+                    title="Edit" @click="editRecord(item, $index)" type="button"><i class="fa fa-edit"></i></button>
+            <button v-if="has_access[table.permission+'.delete']" rel="delete" id="{{item.id}}"
+                    class="btn btn-primary btn-xs btn-danger" name="delete"
+                    title="Delete" @click="deleteRecord(item, $index)" type="button"><i class="fa fa-times"></i>
+            </button>
+        </td>
     </tr>
     <tr v-if="table.items.data && table.items.data.length == 0">
         <td colspan="{{table.headers.length + 1}}">No pay grades listed</td>
     </tr>
-  </tbody>
+    </tbody>
 </table>

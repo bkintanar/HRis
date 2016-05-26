@@ -1,7 +1,7 @@
-(function(define) {
+(function (define) {
   'use strict';
 
-  define(function(require) {
+  define(function (require) {
 
     var interceptor;
 
@@ -16,7 +16,7 @@
      * @returns {Client}
      */
     return interceptor({
-      request: function(request) {
+      request: function (request) {
 
         var token;
         var headers;
@@ -31,7 +31,7 @@
         return request;
       },
 
-      response: function(response) {
+      response: function (response) {
         if (response.status && response.status.code == 401) {
           localStorage.removeItem('jwt-token');
         }
@@ -51,10 +51,9 @@
   });
 
 }(
+  typeof define === 'function' && define.amd ? define : function (factory) {
+    module.exports = factory(require);
+  }
 
-    typeof define === 'function' && define.amd ? define : function(factory) {
-      module.exports = factory(require);
-    }
-
-    // Boilerplate for AMD and Node
+  // Boilerplate for AMD and Node
 ));

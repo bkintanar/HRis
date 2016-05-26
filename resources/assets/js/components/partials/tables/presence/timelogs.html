@@ -8,10 +8,11 @@
     <tbody id="{{ table.model.plural }}_body">
     <tr v-for="item in table.items.data" v-if="table.items.data" class="item-{{$index}} {{table.model.plural}}_list"
         id="{{table.model.singular}}_{{item.id}}">
-        <input type="hidden" v-model.sync="item.id" id="job_title_id">
-        <td>{{item.id}}</td>
-        <td>{{item.name}}</td>
-        <td>{{item.description}}</td>
+        <input type="hidden" v-model.sync="item.id" id="termination_reason_id">
+        <td>{{ item.in | dateFormat }}</td>
+        <td>{{ item.in | timeFormat }}</td>
+        <td>{{ item.out | timeFormat }}</td>
+        <td>{{preciseDiff(item.in, item.out)}}</td>
         <td>
             <button v-if="has_access[table.permission+'.update']" rel="edit" id="{{item.id}}"
                     class="btn btn-primary btn-xs btn-warning" name="edit"
@@ -23,7 +24,7 @@
         </td>
     </tr>
     <tr v-if="table.items.data && table.items.data.length == 0">
-        <td colspan="{{table.headers.length + 1}}">No job titles listed</td>
+        <td colspan="{{table.headers.length + 1}}">No timelogs listed</td>
     </tr>
     </tbody>
 </table>

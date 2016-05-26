@@ -5,7 +5,7 @@ module.exports = {
     canReuse: false
   },
 
-  ready: function() {
+  ready: function () {
 
     for (var i = 0; i < this.custom_field.options.length; i++) {
 

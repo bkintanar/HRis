@@ -25,7 +25,10 @@ var paths = {
     'slimScroll': './bower_components/slimScroll/',
     'sweetalert2': './bower_components/sweetalert2/',
     'moment': './bower_components/moment/',
+    'moment_precise_range': './bower_components/moment-precise-range/',
+    'filthypillow': './bower_components/jquery.filthypillow/',
     'datetimepicker': './bower_components/eonasdan-bootstrap-datetimepicker/',
+    'daterangepicker': './bower_components/bootstrap-daterangepicker/',
     'nestable': './bower_components/nestable/',
     'tagsinput': './bower_components/bootstrap-tagsinput/',
     'inspinia': './resources/assets/sass/inspinia/'
@@ -44,6 +47,8 @@ elixir(function (mix) {
         paths.metisMenu + 'dist/metisMenu.min.css',
         paths.sweetalert2 + 'dist/sweetalert2.css',
         paths.datetimepicker + 'build/css/bootstrap-datetimepicker.min.css',
+        paths.daterangepicker + 'daterangepicker.css',
+        paths.filthypillow + 'jquery.filthypillow.css',
         'public/css/inspinia.css'
     ], 'public/css/all.css', './');//.version('public/css/app.css');
     mix.copy(paths.bootstrap + 'fonts/bootstrap/**', 'public/fonts/bootstrap')
@@ -63,7 +68,10 @@ elixir(function (mix) {
             paths.slimScroll + "jquery.slimscroll.min.js",
             paths.sweetalert2 + "dist/sweetalert2.min.js",
             paths.moment + "min/moment.min.js",
+            paths.moment_precise_range + "readable-range.js",
+            paths.filthypillow + "jquery.filthypillow.min.js",
             paths.datetimepicker + "build/js/bootstrap-datetimepicker.min.js",
+            paths.daterangepicker + "daterangepicker.js",
             paths.nestable + "jquery.nestable.js",
             paths.tagsinput + "dist/bootstrap-tagsinput.min.js",
             "resources/assets/js/vendor/ie10-viewport-bug-workaround.js",

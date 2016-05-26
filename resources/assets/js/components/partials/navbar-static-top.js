@@ -1,6 +1,6 @@
 module.exports = {
   methods: {
-    doLogout: function() {
+    doLogout: function () {
 
       localStorage.removeItem('avatar');
       localStorage.removeItem('employee_id');
@@ -8,7 +8,7 @@ module.exports = {
       localStorage.removeItem('logged');
       localStorage.removeItem('permissions');
       localStorage.removeItem('sidebar');
-      this.$route.router.go({ name: 'login' });
+      this.$route.router.go({name: 'login'});
     }
   }
 };

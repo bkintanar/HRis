@@ -18,11 +18,16 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th><a href="/pim/employee-list?page=1&amp;sort=employees.id&amp;direction=asc">Id  <span class="asc "></span> </a></th>
-                            <th><a href="/pim/employee-list?page=1&amp;sort=employees.first_name&amp;direction=asc">First Name  <span class="asc "></span> </a></th>
-                            <th><a href="/pim/employee-list?page=1&amp;sort=employees.last_name&amp;direction=asc">Last Name  <span class="asc "></span> </a></th>
-                            <th><a href="/pim/employee-list?page=1&amp;sort=job_titles.name&amp;direction=asc">Job Title  <span class="asc "></span> </a></th>
-                            <th><a href="/pim/employee-list?page=1&amp;sort=employment_statuses.name&amp;direction=asc">Status  <span class="asc "></span> </a></th>
+                            <th><a href="/pim/employee-list?page=1&amp;sort=employees.id&amp;direction=asc">Id <span
+                                    class="asc "></span> </a></th>
+                            <th><a href="/pim/employee-list?page=1&amp;sort=employees.first_name&amp;direction=asc">First
+                                Name <span class="asc "></span> </a></th>
+                            <th><a href="/pim/employee-list?page=1&amp;sort=employees.last_name&amp;direction=asc">Last
+                                Name <span class="asc "></span> </a></th>
+                            <th><a href="/pim/employee-list?page=1&amp;sort=job_titles.name&amp;direction=asc">Job Title
+                                <span class="asc "></span> </a></th>
+                            <th><a href="/pim/employee-list?page=1&amp;sort=employment_statuses.name&amp;direction=asc">Status
+                                <span class="asc "></span> </a></th>
                             <th class="fix-width">Action</th>
                         </tr>
                         </thead>
@@ -30,7 +35,9 @@
                         <tbody>
 
                         <tr v-for="item in employees" id="employee_1">
-                            <td><a v-link="{ name: 'pim-employee-list-personal-details', params: {employee_id: item.employee_id} }">{{item.employee_id}}</a></td>
+                            <td>
+                                <a v-link="{ name: 'pim-employee-list-personal-details', params: {employee_id: item.employee_id} }">{{item.employee_id}}</a>
+                            </td>
                             <td>{{item.first_name}}</td>
                             <td>{{item.last_name}}</td>
                             <td>{{item.job}}</td>
@@ -38,8 +45,14 @@
                                 <span class="label {{item.class}}">{{item.status}}</span>
                             </td>
                             <td>
-                                <a href="/pim/employee-list/HRis-0001/personal-details"><button rel="edit" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip" data-placement="bottom" title="" type="button" data-original-title="Edit"><i class="fa fa-edit"></i></button></a>
-                                <button rel="delete" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip" data-placement="bottom" title="" type="button" data-original-title="Delete"><i class="fa fa-times"></i></button>
+                                <a href="/pim/employee-list/HRis-0001/personal-details">
+                                    <button rel="edit" class="btn btn-primary btn-xs btn-warning" data-toggle="tooltip"
+                                            data-placement="bottom" title="" type="button" data-original-title="Edit"><i
+                                            class="fa fa-edit"></i></button>
+                                </a>
+                                <button rel="delete" class="btn btn-primary btn-xs btn-danger" data-toggle="tooltip"
+                                        data-placement="bottom" title="" type="button" data-original-title="Delete"><i
+                                        class="fa fa-times"></i></button>
                             </td>
                         </tr>
                         </tbody>

@@ -1,6 +1,7 @@
 <div class="row">
 
-    <table-presenter :has_access="has_access" :table="table" :name="'education-levels'" :modal="modal"></table-presenter>
+    <table-presenter :has_access="has_access" :table="table" :name="'education-levels'"
+                     :modal="modal"></table-presenter>
 
     <!-- Modal -->
     <div class="modal fade" id="education_level_modal" tabindex="-1">
@@ -14,13 +15,15 @@
 
                 <div class="modal-body">
                     <!--Add form-->
-                    <form method="POST" onsubmit="return false;" accept-charset="UTF-8" class="form-horizontal" id="jobTitleForm">
+                    <form method="POST" onsubmit="return false;" accept-charset="UTF-8" class="form-horizontal"
+                          id="jobTitleForm">
                         <input name="education_level_id" type="hidden" v-model="education_level_id">
 
                         <div class="form-group">
                             <label for="name" class="col-md-3 control-label">Name</label>
                             <div class="col-md-9">
-                                <input class="form-control" type="text" required="required" v-model.sync="modal.name" id="name">
+                                <input class="form-control" type="text" required="required" v-model.sync="modal.name"
+                                       id="name">
                             </div>
                         </div>
 

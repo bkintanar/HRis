@@ -7,12 +7,12 @@ module.exports = {
     canReuse: false
   },
 
-  compiled: function() {
+  compiled: function () {
 
     this.$dispatch('update-page-title', 'Dashboard');
   },
 
-  ready: function() {
+  ready: function () {
 
     if (this.$route.path.indexOf('/pim') > -1) {
       this.employee_id = this.$route.params.employee_id;
@@ -23,14 +23,14 @@ module.exports = {
     let params = {
       method: 'GET',
       path: '/employee/' + this.employee_id + '?include=user',
-      entity: { employee_id: this.employee_id },
-      headers: { Authorization: localStorage.getItem('jwt-token') }
+      entity: {employee_id: this.employee_id},
+      headers: {Authorization: localStorage.getItem('jwt-token')}
     };
 
     client(params).then(
-    function(response) {
+      function (response) {
 
-      this.$dispatch('update-employee', response.entity.data);
-    }.bind(this));
+        this.$dispatch('update-employee', response.entity.data);
+      }.bind(this));
   }
 };

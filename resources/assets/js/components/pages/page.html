@@ -8,8 +8,10 @@
                 <a v-link="{name: 'dashboard'}">Home</a>
             </li>
             <li v-for="route in routes">
-                <a v-if="!route.params.custom_field_section_id" v-link="{name: route.name, params: {employee_id: route.params.employee_id} }">{{route.segment}}</a>
-                <a v-if="route.params.custom_field_section_id" v-link="{name: route.name, params: {custom_field_section_id: route.params.custom_field_section_id} }">{{route.segment}}</a>
+                <a v-if="!route.params.custom_field_section_id"
+                   v-link="{name: route.name, params: {employee_id: route.params.employee_id} }">{{route.segment}}</a>
+                <a v-if="route.params.custom_field_section_id"
+                   v-link="{name: route.name, params: {custom_field_section_id: route.params.custom_field_section_id} }">{{route.segment}}</a>
             </li>
         </ol>
     </div>
@@ -21,7 +23,8 @@
         <div class="wrapper wrapper-content">
             <router-view :employee="employee" :page_title="page_title" :job_titles="job_titles"
                          :employment_statuses="employment_statuses" :routes="routes" :has_access="has_access"
-                         :permission="permission" :logged="logged" :custom_field_values="custom_field_values"></router-view>
+                         :permission="permission" :logged="logged"
+                         :custom_field_values="custom_field_values"></router-view>
         </div>
     </div>
 </div>

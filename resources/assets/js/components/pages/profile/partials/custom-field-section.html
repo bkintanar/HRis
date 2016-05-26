@@ -1,4 +1,5 @@
-<div v-if="custom_field_sections && custom_field_values" v-for="custom_field_section in custom_field_sections" class="row">
+<div v-if="custom_field_sections && custom_field_values" v-for="custom_field_section in custom_field_sections"
+     class="row">
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
@@ -15,10 +16,20 @@
                     <input type="hidden" v-model.sync="custom_field_section.id">
 
                     <div class="form-group" v-for="custom_field in custom_field_section.fields">
-                        <custom-field-text v-if="custom_field[0] && custom_field[0].custom_field_type_id == 1" :custom_field="custom_field[0]" :custom_field_values="custom_field_values"></custom-field-text>
-                        <custom-field-text v-if="custom_field[1] && custom_field[1].custom_field_type_id == 1" :custom_field="custom_field[1]" :custom_field_values="custom_field_values"></custom-field-text>
-                        <custom-field-drop-down v-if="custom_field[0] && custom_field[0].custom_field_type_id == 2" :custom_field="custom_field[0]" :custom_field_values="custom_field_values" :custom_field_value_objs="custom_field_value_objs"></custom-field-drop-down>
-                        <custom-field-drop-down v-if="custom_field[1] && custom_field[1].custom_field_type_id == 2" :custom_field="custom_field[1]" :custom_field_values="custom_field_values" :custom_field_value_objs="custom_field_value_objs"></custom-field-drop-down>
+                        <custom-field-text v-if="custom_field[0] && custom_field[0].custom_field_type_id == 1"
+                                           :custom_field="custom_field[0]"
+                                           :custom_field_values="custom_field_values"></custom-field-text>
+                        <custom-field-text v-if="custom_field[1] && custom_field[1].custom_field_type_id == 1"
+                                           :custom_field="custom_field[1]"
+                                           :custom_field_values="custom_field_values"></custom-field-text>
+                        <custom-field-drop-down v-if="custom_field[0] && custom_field[0].custom_field_type_id == 2"
+                                                :custom_field="custom_field[0]"
+                                                :custom_field_values="custom_field_values"
+                                                :custom_field_value_objs="custom_field_value_objs"></custom-field-drop-down>
+                        <custom-field-drop-down v-if="custom_field[1] && custom_field[1].custom_field_type_id == 2"
+                                                :custom_field="custom_field[1]"
+                                                :custom_field_values="custom_field_values"
+                                                :custom_field_value_objs="custom_field_value_objs"></custom-field-drop-down>
                     </div>
 
                     <div class="hr-line-dashed"></div>

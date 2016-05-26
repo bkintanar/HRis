@@ -7,9 +7,9 @@ module.exports = {
     canReuse: false
   },
 
-  ready: function() {
-    $('img').load(function() {
-      $(this).css('background','none');
+  ready: function () {
+    $('img').load(function () {
+      $(this).css('background', 'none');
     });
   }
 };
