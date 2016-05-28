@@ -176,7 +176,9 @@ class EmploymentStatusController extends BaseController
     {
         $employment_statuses = $this->employment_status->paginate(ROWS_PER_PAGE);
 
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, ['data' => $employment_statuses, 'table' => $this->setupDataTable($employment_statuses)]);
+        $data = ['data' => $employment_statuses, 'table' => $this->setupDataTable($employment_statuses)];
+
+        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, $data);
     }
 
     /**

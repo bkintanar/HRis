@@ -69,7 +69,6 @@ class TimelogControllerTest extends TestCase
      */
     public function it_should_return_success_message_if_no_timein_found_in_database()
     {
-
         $this->login();
 
         $response = $this->get('/api/presence/alert/time-in', ['HTTP_Authorization' => 'Bearer '.$this->token])->response;

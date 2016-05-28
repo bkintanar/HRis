@@ -176,7 +176,9 @@ class TerminationReasonsController extends BaseController
     {
         $termination_reasons = $this->termination_reason->paginate(ROWS_PER_PAGE);
 
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, ['data' => $termination_reasons, 'table' => $this->setupDataTable($termination_reasons)]);
+        $data = ['data' => $termination_reasons, 'table' => $this->setupDataTable($termination_reasons)];
+
+        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, $data);
     }
 
     /**

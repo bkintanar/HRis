@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link http://github.com/HB-Co/HRis
+ */
 namespace HRis\Api\Repositories;
 
 class Repository implements RepositoryInterface
@@ -26,7 +33,7 @@ class Repository implements RepositoryInterface
     /**
      * Get all records.
      *
-     * @return Collection
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
      *
      * @author Harlequin Doyon
      */

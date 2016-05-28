@@ -176,7 +176,9 @@ class EducationsController extends BaseController
     {
         $education_levels = $this->education_level->paginate(ROWS_PER_PAGE);
 
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, ['data' => $education_levels, 'table' => $this->setupDataTable($education_levels)]);
+        $data = ['data' => $education_levels, 'table' => $this->setupDataTable($education_levels)];
+
+        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, $data);
     }
 
     /**

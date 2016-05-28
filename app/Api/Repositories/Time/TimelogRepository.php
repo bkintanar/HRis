@@ -1,9 +1,16 @@
 <?php
 
+/**
+ * This file is part of the HRis Software package.
+ *
+ * HRis - Human Resource and Payroll System
+ *
+ * @link http://github.com/HB-Co/HRis
+ */
 namespace HRis\Api\Repositories\Time;
 
-use HRis\Api\Eloquent\Timelog;
 use HRis\Api\Eloquent\Employee;
+use HRis\Api\Eloquent\Timelog;
 use HRis\Api\Repositories\Repository;
 
 class TimelogRepository extends Repository
@@ -21,11 +28,11 @@ class TimelogRepository extends Repository
     /**
      * Pagination.
      *
-     * @param int $id
+     * @param int    $id
      * @param string $sort
      * @param string $direction
      *
-     * @return Collection
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
      *
      * @author Harlequin Doyon
      */
