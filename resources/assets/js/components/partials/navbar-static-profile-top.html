@@ -1,7 +1,7 @@
 <div class="col-lg-12 top-nav-b">
     <div class="btn-group top-nav-li">
         <ul>
-            <li :class="{'active': $route.path.indexOf('/profile/personal-details') > -1 || $route.path.indexOf('/pim/employee-list/'+$route.params.employee_id+'/personal-details') > -1, 'navy': $route.path.indexOf('/pim') > -1 }">
+            <li v-if="has_access['profile.personal-details.view'] || has_access['pim.personal-details.view']" :class="{'active': $route.path.indexOf('/profile/personal-details') > -1 || $route.path.indexOf('/pim/employee-list/'+$route.params.employee_id+'/personal-details') > -1, 'navy': $route.path.indexOf('/pim') > -1 }">
                 <a v-if="$route.path.indexOf('/profile') > -1" v-link="{name : 'profile-personal-details'}">
                     <i class="fa fa-file-text-o  m-right-a"></i>
                     Personal Details
@@ -12,7 +12,7 @@
                     Personal Details
                 </a>
             </li>
-            <li :class="{'active': $route.path.indexOf('/profile/contact-details') > -1 || $route.path.indexOf('/pim/employee-list/'+$route.params.employee_id+'/contact-details') > -1, 'navy': $route.path.indexOf('/pim') > -1 }">
+            <li v-if="has_access['profile.contact-details.view'] || has_access['pim.contact-details.view']" :class="{'active': $route.path.indexOf('/profile/contact-details') > -1 || $route.path.indexOf('/pim/employee-list/'+$route.params.employee_id+'/contact-details') > -1, 'navy': $route.path.indexOf('/pim') > -1 }">
                 <a v-if="$route.path.indexOf('/profile') > -1" v-link="{name : 'profile-contact-details'}">
                     <i class="fa fa-phone-square m-right-a"></i>
                     Contact Details
@@ -23,7 +23,7 @@
                     Contact Details
                 </a>
             </li>
-            <li :class="{'active': $route.path.indexOf('/profile/emergency-contacts') > -1 || $route.path.indexOf('/pim/employee-list/'+$route.params.employee_id+'/emergency-contacts') > -1, 'navy': $route.path.indexOf('/pim') > -1 }">
+            <li v-if="has_access['profile.emergency-contacts.view'] || has_access['pim.emergency-contacts.view']" :class="{'active': $route.path.indexOf('/profile/emergency-contacts') > -1 || $route.path.indexOf('/pim/employee-list/'+$route.params.employee_id+'/emergency-contacts') > -1, 'navy': $route.path.indexOf('/pim') > -1 }">
                 <a v-if="$route.path.indexOf('/profile') > -1" v-link="{name : 'profile-emergency-contacts'}">
                     <i class="fa fa-plus-square  m-right-a"></i>
                     Emergency Contacts
@@ -34,7 +34,7 @@
                     Emergency Contacts
                 </a>
             </li>
-            <li :class="{'active': $route.path.indexOf('/profile/dependents') > -1 || $route.path.indexOf('/pim/employee-list/'+$route.params.employee_id+'/dependents') > -1, 'navy': $route.path.indexOf('/pim') > -1 }">
+            <li v-if="has_access['profile.dependents.view'] || has_access['pim.dependents.view']" :class="{'active': $route.path.indexOf('/profile/dependents') > -1 || $route.path.indexOf('/pim/employee-list/'+$route.params.employee_id+'/dependents') > -1, 'navy': $route.path.indexOf('/pim') > -1 }">
                 <a v-if="$route.path.indexOf('/profile') > -1" v-link="{name : 'profile-dependents'}">
                     <i class="fa fa-child m-right-a"></i>
                     Dependents
@@ -45,7 +45,7 @@
                     Dependents
                 </a>
             </li>
-            <li :class="{'active': $route.path.indexOf('/profile/job') > -1 || $route.path.indexOf('/pim/employee-list/'+$route.params.employee_id+'/job') > -1, 'navy': $route.path.indexOf('/pim') > -1 }">
+            <li v-if="has_access['profile.job.view'] || has_access['pim.job.view']" :class="{'active': $route.path.indexOf('/profile/job') > -1 || $route.path.indexOf('/pim/employee-list/'+$route.params.employee_id+'/job') > -1, 'navy': $route.path.indexOf('/pim') > -1 }">
                 <a v-if="$route.path.indexOf('/profile') > -1" v-link="{name : 'profile-job'}">
                     <i class="fa fa-briefcase m-right-a"></i>
                     Job
@@ -56,7 +56,7 @@
                     Job
                 </a>
             </li>
-            <li :class="{'active': $route.path.indexOf('/profile/work-shifts') > -1 || $route.path.indexOf('/pim/employee-list/'+$route.params.employee_id+'/work-shifts') > -1, 'navy': $route.path.indexOf('/pim') > -1 }">
+            <li v-if="has_access['profile.work-shifts.view'] || has_access['pim.work-shifts.view']" :class="{'active': $route.path.indexOf('/profile/work-shifts') > -1 || $route.path.indexOf('/pim/employee-list/'+$route.params.employee_id+'/work-shifts') > -1, 'navy': $route.path.indexOf('/pim') > -1 }">
                 <a v-if="$route.path.indexOf('/profile') > -1" v-link="{name : 'profile-work-shifts'}">
                     <i class="fa fa-clock-o m-right-a"></i>
                     Work Shifts
@@ -67,7 +67,7 @@
                     Work Shifts
                 </a>
             </li>
-            <li :class="{'active': $route.path.indexOf('/profile/salary') > -1 || $route.path.indexOf('/pim/employee-list/'+$route.params.employee_id+'/salary') > -1, 'navy': $route.path.indexOf('/pim') > -1 }">
+            <li v-if="has_access['profile.salary.view'] || has_access['pim.salary.view']" :class="{'active': $route.path.indexOf('/profile/salary') > -1 || $route.path.indexOf('/pim/employee-list/'+$route.params.employee_id+'/salary') > -1, 'navy': $route.path.indexOf('/pim') > -1 }">
                 <a v-if="$route.path.indexOf('/profile') > -1" v-link="{name : 'profile-salary'}">
                     <i class="fa fa-money m-right-a"></i>
                     Salary
@@ -78,7 +78,7 @@
                     Salary
                 </a>
             </li>
-            <li :class="{'active': $route.path.indexOf('/profile/reports-to') > -1 || $route.path.indexOf('/pim/employee-list/'+$route.params.employee_id+'/reports-to') > -1, 'navy': $route.path.indexOf('/pim') > -1 }">
+            <li v-if="has_access['profile.reports-to.view'] || has_access['pim.reports-to.view']" :class="{'active': $route.path.indexOf('/profile/reports-to') > -1 || $route.path.indexOf('/pim/employee-list/'+$route.params.employee_id+'/reports-to') > -1, 'navy': $route.path.indexOf('/pim') > -1 }">
                 <a v-if="$route.path.indexOf('/profile') > -1" v-link="{name : 'profile-reports-to'}">
                     <i class="fa fa-flag m-right-a"></i>
                     Reports To
@@ -89,7 +89,7 @@
                     Reports To
                 </a>
             </li>
-            <li :class="{'active': $route.path.indexOf('/profile/qualifications') > -1 || $route.path.indexOf('/pim/employee-list/'+$route.params.employee_id+'/qualifications') > -1, 'navy': $route.path.indexOf('/pim') > -1 }">
+            <li v-if="has_access['profile.qualifications.view'] || has_access['pim.qualifications.view']" :class="{'active': $route.path.indexOf('/profile/qualifications') > -1 || $route.path.indexOf('/pim/employee-list/'+$route.params.employee_id+'/qualifications') > -1, 'navy': $route.path.indexOf('/pim') > -1 }">
                 <a v-if="$route.path.indexOf('/profile') > -1" v-link="{name : 'profile-qualifications'}">
                     <i class="fa fa-bookmark m-right-a"></i>
                     Qualifications
@@ -100,7 +100,7 @@
                     Qualifications
                 </a>
             </li>
-            <li :class="{'active': $route.path.indexOf('/profile/projects') > -1 || $route.path.indexOf('/pim/employee-list/'+$route.params.employee_id+'/projects') > -1, 'navy': $route.path.indexOf('/pim') > -1 }">
+            <li v-if="has_access['profile.projects.view'] || has_access['pim.projects.view']" :class="{'active': $route.path.indexOf('/profile/projects') > -1 || $route.path.indexOf('/pim/employee-list/'+$route.params.employee_id+'/projects') > -1, 'navy': $route.path.indexOf('/pim') > -1 }">
                 <a v-if="$route.path.indexOf('/profile') > -1" v-link="{name : 'profile-projects'}">
                     <i class="fa fa-product-hunt m-right-a"></i>
                     Projects
