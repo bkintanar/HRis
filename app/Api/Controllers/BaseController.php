@@ -47,17 +47,17 @@ class BaseController extends Controller
     public function apiInformation()
     {
         $data = [
-            'schema' => ['http', 'https'],
-            'host' => 'api.hris.dev',
-            'version' => '1.0.0',
-            'title' => 'HRis',
-            'description' => 'Human Resource and Payroll System',
-            'contact' => [
+            'schema'        => ['http', 'https'],
+            'host'          => 'api.hris.dev',
+            'version'       => '1.0.0',
+            'title'         => 'HRis',
+            'description'   => 'Human Resource and Payroll System',
+            'contact'       => [
                 'email' => 'bertrand.kintanar@gmail.com',
             ],
             'documentation' => [
                 'description' => 'Fork HRis on GitHub',
-                'url' => 'https://github.com/bkintanar/HRis',
+                'url'         => 'https://github.com/bkintanar/HRis',
             ],
         ];
 
@@ -101,7 +101,7 @@ class BaseController extends Controller
      *
      * @param        $status_code
      * @param string $message
-     * @param array $data
+     * @param array  $data
      *
      * @return \Dingo\Api\Http\Response
      *

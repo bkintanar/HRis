@@ -8,11 +8,12 @@
  * @link http://github.com/HB-Co/HRis
  */
 use Dingo\Api\Routing\Router;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 $api = app(Router::class);
 $response = app(Dingo\Api\Http\Response\Factory::class);
 
-app(Dingo\Api\Exception\Handler::class)->register(function (Illuminate\Database\Eloquent\ModelNotFoundException $e) use ($response) {
+app(Dingo\Api\Exception\Handler::class)->register(function (ModelNotFoundException $e) use ($response) {
 
     $response_array = [
         'message'     => '422 Unprocessable Entity',
@@ -32,8 +33,9 @@ $api->version('v1', function (Router $api) {
             'cors',
             'api.throttle',
         ],
-        'limit'   => 200,
-        'expires' => 5, ], function (Router $api) {
+        'limit'      => 200,
+        'expires'    => 5,
+    ], function (Router $api) {
 
         $api->get('/', 'BaseController@apiInformation');
 
@@ -151,7 +153,7 @@ $api->version('v1', function (Router $api) {
             });
 
             // Presence
-            $api->group(['prefix' => 'presence', 'namespace' => 'Presence'], function (Router $api){
+            $api->group(['prefix' => 'presence', 'namespace' => 'Presence'], function (Router $api) {
                 $api->get('timelogs', 'TimelogController@index');
                 $api->get('alert/time-in', 'TimelogController@attemptTimeIn');
                 $api->get('alert/time-out', 'TimelogController@attemptTimeOut');

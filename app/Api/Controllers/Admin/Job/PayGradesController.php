@@ -176,7 +176,9 @@ class PayGradesController extends BaseController
     {
         $pay_grades = $this->pay_grade->paginate(ROWS_PER_PAGE);
 
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, ['data' => $pay_grades, 'table' => $this->setupDataTable($pay_grades)]);
+        $data = ['data' => $pay_grades, 'table' => $this->setupDataTable($pay_grades)];
+
+        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, $data);
     }
 
     /**

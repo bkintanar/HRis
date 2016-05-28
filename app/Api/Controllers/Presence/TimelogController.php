@@ -11,6 +11,7 @@ namespace HRis\Api\Controllers\Presence;
 
 use Carbon\Carbon;
 use Dingo\Api\Http\Request;
+use Exception;
 use HRis\Api\Controllers\BaseController;
 use HRis\Api\Eloquent\Employee;
 use HRis\Api\Eloquent\Timelog;
@@ -76,14 +77,14 @@ class TimelogController extends BaseController
         }
 
         $data = [
-            'timelogs' => $timelogs,
-            'date_range' => $dateRange,
+            'timelogs'       => $timelogs,
+            'date_range'     => $dateRange,
             'summary_report' => [
                 'total_hours' => $this->totalHours($timelogs),
-                'late' => 0,
-                'undertime' => 0,
-                'overtime' => 0,
-            ]
+                'late'        => 0,
+                'undertime'   => 0,
+                'overtime'    => 0,
+            ],
         ];
 
         return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE,
@@ -91,7 +92,7 @@ class TimelogController extends BaseController
     }
 
     /**
-     * @param $input
+     * @param        $input
      * @param string $format
      *
      * @return static
@@ -101,12 +102,12 @@ class TimelogController extends BaseController
     private function startOfMonth($input, $format = 'Y-m-d H:i:s')
     {
         return isset($input['start']) ?
-            Carbon::createFromFormat($format, $input['start'] . ' 00:00:00') :
+            Carbon::createFromFormat($format, $input['start'].' 00:00:00') :
             Carbon::now()->startOfMonth();
     }
 
     /**
-     * @param $input
+     * @param        $input
      * @param string $format
      *
      * @return static
@@ -116,7 +117,7 @@ class TimelogController extends BaseController
     private function endOfMonth($input, $format = 'Y-m-d H:i:s')
     {
         return isset($input['end']) ?
-            Carbon::createFromFormat($format, $input['end'] . ' 23:59:59') :
+            Carbon::createFromFormat($format, $input['end'].' 23:59:59') :
             Carbon::now()->endOfMonth();
     }
 
@@ -135,10 +136,12 @@ class TimelogController extends BaseController
             $end->day == $end->format('t')
         ) {
             $this->rows_per_page = cal_days_in_month(CAL_GREGORIAN, $start->month, $start->year);
+
             return $start->format('F Y');
         } else {
             $this->rows_per_page = $start->diffInDays($end);
-            return $start->format('F d, Y') . ' - ' . $end->format('F d, Y');
+
+            return $start->format('F d, Y').' - '.$end->format('F d, Y');
         }
     }
 
@@ -178,8 +181,8 @@ class TimelogController extends BaseController
         $table['headers'] = ['Date', 'Time In', 'Time Out', 'Hours'];
         $table['model'] = [
             'singular' => 'timelog',
-            'plural' => 'timelogs',
-            'dashed' => 'timelogs',
+            'plural'   => 'timelogs',
+            'dashed'   => 'timelogs',
         ];
         $table['items'] = $timelogs;
 
@@ -213,11 +216,11 @@ class TimelogController extends BaseController
         }
 
         $data = [
-            'title' => 'Are you sure?',
-            'html' => $this->html('You want to time in!', $note),
-            'showCancelButton' => true,
+            'title'              => 'Are you sure?',
+            'html'               => $this->html('You want to time in!', $note),
+            'showCancelButton'   => true,
             'confirmButtonColor' => '#DD6B55',
-            'closeOnConfirm' => false,
+            'closeOnConfirm'     => false,
         ];
 
         return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, $data);
@@ -241,7 +244,7 @@ class TimelogController extends BaseController
 
         if ($note !== '') {
             $output .= '<span style="font-size:12px" class="text-muted">';
-            $output .= 'Note: ' . $note;
+            $output .= 'Note: '.$note;
             $output .= '</span>';
         }
 
@@ -265,11 +268,11 @@ class TimelogController extends BaseController
         }
 
         $data = [
-            'title' => 'Are you sure?',
-            'html' => $this->html('You want to time out!', $note),
-            'showCancelButton' => true,
+            'title'              => 'Are you sure?',
+            'html'               => $this->html('You want to time out!', $note),
+            'showCancelButton'   => true,
             'confirmButtonColor' => '#DD6B55',
-            'closeOnConfirm' => false,
+            'closeOnConfirm'     => false,
         ];
 
         return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, $data);
@@ -291,13 +294,13 @@ class TimelogController extends BaseController
 
         $timelog = Timelog::create([
             'employee_id' => $user->employee->id,
-            'in' => Carbon::now(),
+            'in'          => Carbon::now(),
         ]);
 
         $data = [
-            'title' => 'Punch In',
-            'text' => 'You have successfully submitted your timelog.',
-            'timelog_id' => $timelog->id
+            'title'      => 'Punch In',
+            'text'       => 'You have successfully submitted your timelog.',
+            'timelog_id' => $timelog->id,
         ];
 
         return $this->responseAPI(201, SUCCESS_ADD_MESSAGE, $data);
@@ -321,10 +324,9 @@ class TimelogController extends BaseController
 
         try {
             if (is_null($id)) {
-
                 $timelog->create([
                     'employee_id' => $user->employee->id,
-                    'out' => Carbon::now(),
+                    'out'         => Carbon::now(),
                 ]);
             } else {
                 $t = $timelog->find($id);
@@ -337,10 +339,9 @@ class TimelogController extends BaseController
 
         $data = [
             'title' => 'Punch Out',
-            'text' => 'You have successfully submitted your timelog.',
+            'text'  => 'You have successfully submitted your timelog.',
         ];
 
         return $this->responseAPI(201, SUCCESS_ADD_MESSAGE, $data);
-
     }
 }

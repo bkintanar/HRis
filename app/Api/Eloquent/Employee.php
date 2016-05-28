@@ -58,6 +58,21 @@ class Employee extends Model
      */
     protected $dates = ['birth_date', 'resign_date'];
 
+    protected $eager_loads = [
+        'user',
+        'country',
+        'province',
+        'city',
+        'jobHistories',
+        'emergencyContacts',
+        'dependents',
+        'employeeWorkShift',
+        'customFieldValues',
+        'workExperiences',
+        'educations',
+        'employeeSkills',
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -248,17 +263,13 @@ class Employee extends Model
     public function getEmployeeById($employee_id, $user_id)
     {
         if ($employee_id) {
-            $employee = self::whereEmployeeId($employee_id)->with([
-                'user', 'country', 'province', 'city', 'jobHistories', 'emergencyContacts', 'dependents', 'employeeWorkShift', 'customFieldValues', 'workExperiences', 'educations', 'employeeSkills',
-            ])->first();
+            $employee = self::whereEmployeeId($employee_id)->with($this->eager_loads)->first();
             $employee->job_history = $employee->jobHistory();
 
             return $employee;
         }
 
-        $employee = self::whereUserId($user_id)->with([
-            'user', 'country', 'province', 'city', 'jobHistories', 'emergencyContacts', 'dependents', 'employeeWorkShift', 'customFieldValues', 'workExperiences', 'educations', 'employeeSkills',
-        ])->first();
+        $employee = self::whereUserId($user_id)->with($this->eager_loads)->first();
         $employee->job_history = $employee->jobHistory();
 
         return $employee;

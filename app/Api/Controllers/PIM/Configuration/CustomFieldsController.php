@@ -103,7 +103,9 @@ class CustomFieldsController extends BaseController
     {
         $custom_field_sections = $this->custom_field_section->with('screen')->paginate(ROWS_PER_PAGE);
 
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, ['data' => $custom_field_sections, 'table' => $this->setupDataTable($custom_field_sections)]);
+        $data = ['data' => $custom_field_sections, 'table' => $this->setupDataTable($custom_field_sections)];
+
+        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, $data);
     }
 
     /**
@@ -152,7 +154,9 @@ class CustomFieldsController extends BaseController
 
         $custom_fields = $this->custom_field->with('type', 'options')->whereCustomFieldSectionId($custom_field_section_id)->paginate(ROWS_PER_PAGE);
 
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, ['data' => $custom_fields, 'table' => $this->setupDataTableCustomField($custom_fields)]);
+        $data = ['data' => $custom_fields, 'table' => $this->setupDataTableCustomField($custom_fields)];
+
+        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, $data);
     }
 
     /**

@@ -176,7 +176,9 @@ class JobTitlesController extends BaseController
     {
         $job_titles = $this->job_title->paginate(ROWS_PER_PAGE);
 
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, ['data' => $job_titles, 'table' => $this->setupDataTable($job_titles)]);
+        $data = ['data' => $job_titles, 'table' => $this->setupDataTable($job_titles)];
+
+        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, $data);
     }
 
     /**
