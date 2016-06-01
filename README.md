@@ -6,6 +6,12 @@
 
 Documentation can be read in the [wiki section](https://github.com/bkintanar/HRis/wiki).
 
+## Screens
+
+![screen 1](https://cloud.githubusercontent.com/assets/685928/15705576/9f7db564-2822-11e6-9680-3107688b5599.png)
+
+![screen 2](https://cloud.githubusercontent.com/assets/685928/15705641/d4c9b290-2822-11e6-85a6-c7d90cac97a5.png)
+
 ## Contributing
 
 Thank you for considering contributing to the HRis project! Please contact one of the contributors for the contribution guidelines.
