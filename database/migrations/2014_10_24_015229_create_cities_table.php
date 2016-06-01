@@ -39,7 +39,6 @@ class CreateCitiesTable extends Migration
             $table->string('name');
 
             $table->foreign('province_id')->references('id')->on('provinces')->onDelete('cascade');
-
         });
     }
 }
