@@ -14,7 +14,6 @@ $api = app(Router::class);
 $response = app(Dingo\Api\Http\Response\Factory::class);
 
 app(Dingo\Api\Exception\Handler::class)->register(function (ModelNotFoundException $e) use ($response) {
-
     $response_array = [
         'message'     => '422 Unprocessable Entity',
         'status_code' => 422,
@@ -36,7 +35,6 @@ $api->version('v1', function (Router $api) {
         'limit'      => 200,
         'expires'    => 5,
     ], function (Router $api) {
-
         $api->get('/', 'BaseController@apiInformation');
 
         // Login route
@@ -98,7 +96,6 @@ $api->version('v1', function (Router $api) {
 
                 // Configuration
                 $api->group(['prefix' => 'configuration', 'namespace' => 'Configuration'], function (Router $api) {
-
                     $api->get('termination-reasons', 'TerminationReasonsController@index');                           // docs done
                     $api->get('termination-reasons/{termination_reason}', 'TerminationReasonsController@show');       // docs done
                     $api->post('termination-reasons', 'TerminationReasonsController@store');                          // docs done
@@ -181,5 +178,4 @@ $api->version('v1', function (Router $api) {
 
         $api->get('playground', 'PlaygroundController@index');
     });
-
 });

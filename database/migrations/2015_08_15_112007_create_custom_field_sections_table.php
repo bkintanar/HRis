@@ -27,7 +27,6 @@ class CreateCustomFieldSectionsTable extends Migration
             $table->unsignedInteger('screen_id');
 
             $table->foreign('screen_id')->references('id')->on('navlinks')->onDelete('cascade');
-
         });
     }
 
