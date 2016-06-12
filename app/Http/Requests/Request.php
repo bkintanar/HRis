@@ -1,17 +1,29 @@
 <?php
 
-/**
+/*
  * This file is part of the HRis Software package.
  *
- * HRis - Human Resource and Payroll System
+ * NOTICE OF LICENSE
  *
- * @link http://github.com/HB-Co/HRis
+ * Licensed under the 3-clause BSD License.
+ *
+ * This source file is subject to the 3-clause BSD License that is
+ * bundled with this package in the LICENSE file.
+ *
+ * @version    alpha
+ *
+ * @author     Bertrand Kintanar <bertrand.kintanar@gmail.com>
+ * @license    BSD License (3-clause)
+ * @copyright  (c) 2014-2016, b8 Studios, Ltd
+ *
+ * @link       http://github.com/HB-Co/HRis
  */
+ 
 namespace HRis\Http\Requests;
 
 use Dingo\Api\Http\FormRequest;
 use HRis\Api\Eloquent\User;
-use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\JWTAuth;
 
 abstract class Request extends FormRequest
 {
@@ -19,12 +31,12 @@ abstract class Request extends FormRequest
 
     public $logged_user;
 
-    public function __construct()
+    public function __construct(JWTAuth $jwt, User $user)
     {
-        $token = JWTAuth::getToken();
+        $token = $jwt->getToken();
         if (!empty($token)) {
-            $user = JWTAuth::toUser($token);
-            $this->logged_user = User::find($user->id);
+            $user = $jwt->toUser($token);
+            $this->logged_user = $user->find($user->id);
         }
     }
 
