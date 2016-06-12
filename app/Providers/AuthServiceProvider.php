@@ -18,7 +18,7 @@
  *
  * @link       http://github.com/HB-Co/HRis
  */
- 
+
 namespace HRis\Providers;
 
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;

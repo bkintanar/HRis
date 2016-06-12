@@ -18,7 +18,7 @@
  *
  * @link       http://github.com/HB-Co/HRis
  */
- 
+
 namespace HRis\Api\Controllers;
 
 use Dingo\Api\Routing\Helpers;

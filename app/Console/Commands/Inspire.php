@@ -18,7 +18,7 @@
  *
  * @link       http://github.com/HB-Co/HRis
  */
- 
+
 namespace HRis\Console\Commands;
 
 use Illuminate\Console\Command;

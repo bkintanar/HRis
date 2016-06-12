@@ -18,7 +18,7 @@
  *
  * @link       http://github.com/HB-Co/HRis
  */
- 
+
 use Illuminate\Database\Seeder;
 
 class JobHistoriesTableSeeder extends Seeder

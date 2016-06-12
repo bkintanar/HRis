@@ -18,7 +18,7 @@
  *
  * @link       http://github.com/HB-Co/HRis
  */
- 
+
 namespace HRis\Http\Requests;
 
 use Dingo\Api\Http\FormRequest;

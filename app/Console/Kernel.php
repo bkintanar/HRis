@@ -18,7 +18,7 @@
  *
  * @link       http://github.com/HB-Co/HRis
  */
- 
+
 namespace HRis\Console;
 
 use Illuminate\Console\Scheduling\Schedule;

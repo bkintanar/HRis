@@ -18,7 +18,7 @@
  *
  * @link       http://github.com/HB-Co/HRis
  */
- 
+
 namespace HRis\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;

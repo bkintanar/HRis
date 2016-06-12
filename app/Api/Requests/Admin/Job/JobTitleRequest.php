@@ -18,7 +18,7 @@
  *
  * @link       http://github.com/HB-Co/HRis
  */
- 
+
 namespace HRis\Api\Requests\Admin\Job;
 
 use HRis\Http\Requests\Request;

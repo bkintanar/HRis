@@ -18,7 +18,7 @@
  *
  * @link       http://github.com/HB-Co/HRis
  */
- 
+
 namespace HRis\Api\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;

@@ -18,7 +18,7 @@
  *
  * @link       http://github.com/HB-Co/HRis
  */
- 
+
 namespace HRis\Api\Requests\PIM;
 
 use HRis\Http\Requests\Request;

@@ -18,7 +18,7 @@
  *
  * @link       http://github.com/HB-Co/HRis
  */
- 
+
 namespace HRis\Providers;
 
 use HRis\Api\Eloquent\Employee;

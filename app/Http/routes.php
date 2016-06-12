@@ -18,7 +18,7 @@
  *
  * @link       http://github.com/HB-Co/HRis
  */
- 
+
 use Dingo\Api\Routing\Router;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
