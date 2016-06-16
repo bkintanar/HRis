@@ -21,10 +21,10 @@
 
 namespace HRis\Api\Controllers\Profile;
 
+use HRis\Api\Requests\Profile\DependentsRequest;
 use Irradiate\Api\Controllers\BaseController;
 use Irradiate\Eloquent\Dependent;
 use Irradiate\Eloquent\Employee;
-use HRis\Api\Requests\Profile\DependentsRequest;
 use Swagger\Annotations as SWG;
 
 class DependentsController extends BaseController

@@ -22,13 +22,13 @@
 namespace HRis\Api\Controllers\PIM;
 
 use Exception;
+use HRis\Api\Requests\PIM\PIMRequest;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Request;
 use Irradiate\Api\Controllers\BaseController;
 use Irradiate\Eloquent\Employee;
 use Irradiate\Eloquent\EmployeeSalaryComponent;
 use Irradiate\Eloquent\SalaryComponent;
-use HRis\Api\Requests\PIM\PIMRequest;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Request;
 
 class EmployeeListController extends BaseController
 {
