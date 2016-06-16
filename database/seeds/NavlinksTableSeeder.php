@@ -19,7 +19,7 @@
  * @link       http://github.com/HB-Co/HRis
  */
 
-use HRis\Api\Eloquent\Navlink;
+use Irradiate\Eloquent\Navlink;
 use Illuminate\Database\Seeder;
 
 class NavlinksTableSeeder extends Seeder

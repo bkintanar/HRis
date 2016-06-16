@@ -22,12 +22,12 @@
 namespace HRis\Api\Controllers\PIM\Configuration;
 
 use Exception;
-use HRis\Api\Controllers\BaseController;
-use HRis\Api\Eloquent\CustomField;
-use HRis\Api\Eloquent\CustomFieldOption;
-use HRis\Api\Eloquent\CustomFieldSection;
-use HRis\Api\Eloquent\CustomFieldType;
-use HRis\Api\Eloquent\Navlink;
+use Irradiate\Api\Controllers\BaseController;
+use Irradiate\Eloquent\CustomField;
+use Irradiate\Eloquent\CustomFieldOption;
+use Irradiate\Eloquent\CustomFieldSection;
+use Irradiate\Eloquent\CustomFieldType;
+use Irradiate\Eloquent\Navlink;
 use HRis\Api\Requests\PIM\CustomFieldRequest;
 use HRis\Api\Requests\PIM\CustomFieldSectionsRequest;
 use Illuminate\Http\Request;

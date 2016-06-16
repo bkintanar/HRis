@@ -21,9 +21,9 @@
 
 namespace HRis\Api\Controllers\Profile;
 
-use HRis\Api\Controllers\BaseController;
-use HRis\Api\Eloquent\EmergencyContact;
-use HRis\Api\Eloquent\Employee;
+use Irradiate\Api\Controllers\BaseController;
+use Irradiate\Eloquent\EmergencyContact;
+use Irradiate\Eloquent\Employee;
 use HRis\Api\Requests\Profile\EmergencyContactsRequest;
 use Swagger\Annotations as SWG;
 

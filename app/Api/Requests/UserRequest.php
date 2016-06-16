@@ -21,7 +21,7 @@
 
 namespace Api\Requests;
 
-use HRis\Http\Requests\Request;
+use Irradiate\Api\Requests\Request;
 
 class UserRequest extends Request
 {

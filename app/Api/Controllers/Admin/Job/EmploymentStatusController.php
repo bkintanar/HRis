@@ -21,8 +21,8 @@
 
 namespace HRis\Api\Controllers\Admin\Job;
 
-use HRis\Api\Controllers\BaseController;
-use HRis\Api\Eloquent\EmploymentStatus;
+use Irradiate\Api\Controllers\BaseController;
+use Irradiate\Eloquent\EmploymentStatus;
 use HRis\Api\Requests\Admin\Job\EmploymentStatusRequest;
 use Swagger\Annotations as SWG;
 

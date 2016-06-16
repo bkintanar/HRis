@@ -21,7 +21,8 @@
 
 namespace HRis\Api\Controllers;
 
-use HRis\Api\Eloquent\Employee;
+use Irradiate\Api\Controllers\BaseController;
+use Irradiate\Eloquent\Employee;
 use HRis\Api\ThirdParty\Elastic;
 use Illuminate\Http\Request;
 

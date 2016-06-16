@@ -22,8 +22,8 @@
 namespace HRis\Api\Controllers\Profile;
 
 use Exception;
-use HRis\Api\Controllers\BaseController;
-use HRis\Api\Eloquent\CustomFieldValue;
+use Irradiate\Api\Controllers\BaseController;
+use Irradiate\Eloquent\CustomFieldValue;
 use Illuminate\Http\Request;
 
 class CustomFieldsController extends BaseController

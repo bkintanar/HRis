@@ -21,9 +21,9 @@
 
 namespace HRis\Api\Controllers\Profile;
 
-use HRis\Api\Controllers\BaseController;
-use HRis\Api\Eloquent\Employee;
-use HRis\Api\Eloquent\EmployeeSupervisor;
+use Irradiate\Api\Controllers\BaseController;
+use Irradiate\Eloquent\Employee;
+use Irradiate\Eloquent\EmployeeSupervisor;
 use HRis\Api\Requests\Profile\ReportsToRequest;
 use Swagger\Annotations as SWG;
 

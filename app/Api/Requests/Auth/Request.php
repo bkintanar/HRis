@@ -21,7 +21,7 @@
 
 namespace HRis\Api\Requests\Auth;
 
-use HRis\Http\Requests\Request as BaseRequest;
+use Irradiate\Api\Requests\Request as BaseRequest;
 
 class Request extends BaseRequest
 {

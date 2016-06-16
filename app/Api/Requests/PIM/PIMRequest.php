@@ -21,7 +21,7 @@
 
 namespace HRis\Api\Requests\PIM;
 
-use HRis\Http\Requests\Request;
+use Irradiate\Api\Requests\Request;
 
 /**
  * Class PIMRequest.

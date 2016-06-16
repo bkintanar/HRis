@@ -21,7 +21,7 @@
 
 namespace HRis\Api\Requests\PIM\Configuration;
 
-use HRis\Http\Requests\Request;
+use Irradiate\Api\Requests\Request;
 
 class TerminationReasonRequest extends Request
 {

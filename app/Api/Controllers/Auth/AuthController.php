@@ -22,11 +22,11 @@
 namespace HRis\Api\Controllers\Auth;
 
 use Exception;
-use HRis\Api\Controllers\BaseController;
-use HRis\Api\Eloquent\Navlink;
-use HRis\Api\Eloquent\User;
+use Irradiate\Api\Controllers\BaseController;
+use Irradiate\Eloquent\Navlink;
+use Irradiate\Eloquent\User;
 use HRis\Api\Requests\Auth\Request;
-use HRis\Api\Transformers\UserTransformer;
+use Irradiate\Api\Transformers\UserTransformer;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;

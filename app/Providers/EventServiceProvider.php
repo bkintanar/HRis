@@ -21,7 +21,7 @@
 
 namespace HRis\Providers;
 
-use HRis\Api\Eloquent\Employee;
+use Irradiate\Eloquent\Employee;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Artisan;
