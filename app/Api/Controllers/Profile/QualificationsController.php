@@ -22,13 +22,13 @@
 namespace HRis\Api\Controllers\Profile;
 
 use Exception;
-use HRis\Api\Controllers\BaseController;
-use HRis\Api\Eloquent\CustomFieldSection;
-use HRis\Api\Eloquent\Education;
-use HRis\Api\Eloquent\Employee;
-use HRis\Api\Eloquent\EmployeeSkill;
-use HRis\Api\Eloquent\Navlink;
-use HRis\Api\Eloquent\WorkExperience;
+use Irradiate\Api\Controllers\BaseController;
+use Irradiate\Eloquent\CustomFieldSection;
+use Irradiate\Eloquent\Education;
+use Irradiate\Eloquent\Employee;
+use Irradiate\Eloquent\EmployeeSkill;
+use Irradiate\Eloquent\Navlink;
+use Irradiate\Eloquent\WorkExperience;
 use HRis\Api\Requests\Profile\QualificationsEducationRequest;
 use HRis\Api\Requests\Profile\QualificationsSkillRequest;
 use HRis\Api\Requests\Profile\QualificationsWorkExperienceRequest;

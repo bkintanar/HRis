@@ -3,7 +3,7 @@
 namespace HRis\Api\ThirdParty;
 
 use Elasticsearch\Client;
-use HRis\Api\Eloquent\Employee;
+use Irradiate\Eloquent\Employee;
 
 class Elastic
 {

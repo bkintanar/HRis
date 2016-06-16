@@ -52,7 +52,7 @@ return [
 
     'users' => [
 
-        'model' => 'HRis\Api\Eloquent\User',
+        'model' => 'Irradiate\Eloquent\User',
 
     ],
     /*

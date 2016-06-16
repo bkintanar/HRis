@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model'  => HRis\Api\Eloquent\User::class,
+            'model'  => Irradiate\Eloquent\User::class,
         ],
 
         // 'users' => [

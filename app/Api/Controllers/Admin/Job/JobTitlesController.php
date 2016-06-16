@@ -21,8 +21,8 @@
 
 namespace HRis\Api\Controllers\Admin\Job;
 
-use HRis\Api\Controllers\BaseController;
-use HRis\Api\Eloquent\JobTitle;
+use Irradiate\Api\Controllers\BaseController;
+use Irradiate\Eloquent\JobTitle;
 use HRis\Api\Requests\Admin\Job\JobTitleRequest;
 use Swagger\Annotations as SWG;
 

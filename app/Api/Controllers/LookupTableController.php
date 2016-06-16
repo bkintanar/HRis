@@ -21,20 +21,21 @@
 
 namespace HRis\Api\Controllers;
 
-use HRis\Api\Eloquent\City;
-use HRis\Api\Eloquent\Country;
-use HRis\Api\Eloquent\CustomFieldType;
-use HRis\Api\Eloquent\Department;
-use HRis\Api\Eloquent\EducationLevel;
-use HRis\Api\Eloquent\EmploymentStatus;
-use HRis\Api\Eloquent\JobTitle;
-use HRis\Api\Eloquent\Location;
-use HRis\Api\Eloquent\MaritalStatus;
-use HRis\Api\Eloquent\Nationality;
-use HRis\Api\Eloquent\Navlink;
-use HRis\Api\Eloquent\Province;
-use HRis\Api\Eloquent\Relationship;
-use HRis\Api\Eloquent\Skill;
+use Irradiate\Api\Controllers\BaseController;
+use Irradiate\Eloquent\City;
+use Irradiate\Eloquent\Country;
+use Irradiate\Eloquent\CustomFieldType;
+use Irradiate\Eloquent\Department;
+use Irradiate\Eloquent\EducationLevel;
+use Irradiate\Eloquent\EmploymentStatus;
+use Irradiate\Eloquent\JobTitle;
+use Irradiate\Eloquent\Location;
+use Irradiate\Eloquent\MaritalStatus;
+use Irradiate\Eloquent\Nationality;
+use Irradiate\Eloquent\Navlink;
+use Irradiate\Eloquent\Province;
+use Irradiate\Eloquent\Relationship;
+use Irradiate\Eloquent\Skill;
 use Illuminate\Http\Request;
 use Swagger\Annotations as SWG;
 

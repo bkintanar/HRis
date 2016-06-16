@@ -30,7 +30,7 @@ return [
     ],
 
     'stripe' => [
-        'model'  => HRis\Api\Eloquent\User::class,
+        'model'  => Irradiate\Eloquent\User::class,
         'key'    => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],

@@ -22,7 +22,7 @@
 namespace HRis\Console\Commands;
 
 use Exception;
-use HRis\Api\Eloquent\Employee;
+use Irradiate\Eloquent\Employee;
 use HRis\Api\ThirdParty\Elastic;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;

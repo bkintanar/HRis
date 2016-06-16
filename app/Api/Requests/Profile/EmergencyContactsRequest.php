@@ -21,7 +21,7 @@
 
 namespace HRis\Api\Requests\Profile;
 
-use HRis\Http\Requests\Request;
+use Irradiate\Api\Requests\Request;
 
 /**
  * Class EmergencyContactsRequest.

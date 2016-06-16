@@ -156,7 +156,6 @@ return [
         HRis\Providers\EventServiceProvider::class,
         HRis\Providers\RouteServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         Jlapp\Swaggervel\SwaggervelServiceProvider::class,

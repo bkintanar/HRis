@@ -1,7 +1,7 @@
 <?php
 
 use Carbon\Carbon;
-use HRis\Api\Eloquent\User;
+use Irradiate\Eloquent\User;
 use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder

@@ -21,7 +21,7 @@
 
 namespace HRis\Api\Requests;
 
-use HRis\Http\Requests\Request;
+use Irradiate\Api\Requests\Request;
 
 class EmployeeRequest extends Request
 {

@@ -21,7 +21,7 @@
 
 namespace HRis\Api\Requests\Admin\Job;
 
-use HRis\Http\Requests\Request;
+use Irradiate\Api\Requests\Request;
 
 class JobTitleRequest extends Request
 {

@@ -10,31 +10,20 @@
   "repositories": [
     {
       "type": "vcs",
-      "url": "https://github.com/tralves/Swaggervel"
+      "url": "git@github.com:b-eight/framework.git"
     }
   ],
   "require": {
     "php": ">=5.5.9",
     "laravel/framework": "5.2.*",
-    "dingo/api": "1.0.*@dev",
-    "tymon/jwt-auth": "dev-develop",
-    "barryvdh/laravel-cors": "^0.7.1",
-    "cartalyst/sentinel": "^2.0",
-    "league/fractal": "^0.13.0",
-    "jlapp/swaggervel": "master-dev",
-    "felixkiss/uniquewith-validator": "^2.0",
-    "thomaswelton/laravel-gravatar": "^1.1",
-    "elasticsearch/elasticsearch": "^2.1"
+    "elasticsearch/elasticsearch": "^2.1",
+    "b-eight/framework": "dev-master"
   },
   "require-dev": {
-    "barryvdh/laravel-ide-helper": "^2.1",
     "doctrine/dbal": "^2.5",
     "fzaninotto/faker": "~1.4",
-    "mayflower/php-codebrowser": "~1.1",
     "mockery/mockery": "0.9.*",
     "phpunit/phpunit": "~4.0",
-    "phpspec/phpspec": "~2.1",
-    "phpmd/phpmd": "~2.3",
     "symfony/css-selector": "2.8.*|3.0.*",
     "symfony/dom-crawler": "2.8.*|3.0.*"
   },
@@ -68,7 +57,6 @@
       "php artisan optimize"
     ]
   },
-  "config": {
-    "preferred-install": "dist"
-  }
+  "prefer-stable": true,
+  "minimum-stability": "dev"
 }

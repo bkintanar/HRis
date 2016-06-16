@@ -21,7 +21,7 @@
 
 namespace HRis\Api\Requests\Admin\Qualifications;
 
-use HRis\Http\Requests\Request;
+use Irradiate\Api\Requests\Request;
 
 class EducationLevelRequest extends Request
 {

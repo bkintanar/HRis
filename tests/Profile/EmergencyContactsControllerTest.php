@@ -2,7 +2,7 @@
 
 namespace Tests\Profile;
 
-use HRis\Api\Eloquent\Relationship;
+use Irradiate\Eloquent\Relationship;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 

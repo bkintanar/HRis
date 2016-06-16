@@ -21,10 +21,11 @@
 
 namespace HRis\Api\Controllers;
 
-use HRis\Api\Eloquent\CustomField;
-use HRis\Api\Eloquent\CustomFieldValue;
-use HRis\Api\Eloquent\Employee;
-use HRis\Api\Transformers\EmployeeTransformer;
+use Irradiate\Api\Controllers\BaseController;
+use Irradiate\Eloquent\CustomField;
+use Irradiate\Eloquent\CustomFieldValue;
+use Irradiate\Eloquent\Employee;
+use Irradiate\Api\Transformers\EmployeeTransformer;
 
 class EmployeeController extends BaseController
 {
