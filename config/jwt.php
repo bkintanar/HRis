@@ -1,14 +1,22 @@
 <?php
 
 /*
- * This file is part of jwt-auth.
+ * This file is part of the HRis Software package.
  *
- * @author Sean Tymon <tymon148@gmail.com>
- * @copyright Copyright (c) Sean Tymon
- * @link https://github.com/tymondesigns/jwt-auth
+ * NOTICE OF LICENSE
  *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * Licensed under the 3-clause BSD License.
+ *
+ * This source file is subject to the 3-clause BSD License that is
+ * bundled with this package in the LICENSE file.
+ *
+ * @version    alpha
+ *
+ * @author     Bertrand Kintanar <bertrand.kintanar@gmail.com>
+ * @license    BSD License (3-clause)
+ * @copyright  (c) 2014-2016, b8 Studios, Ltd
+ *
+ * @link       http://github.com/HB-Co/HRis
  */
 
 return [

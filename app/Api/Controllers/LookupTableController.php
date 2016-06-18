@@ -21,6 +21,7 @@
 
 namespace HRis\Api\Controllers;
 
+use Illuminate\Http\Request;
 use Irradiate\Api\Controllers\BaseController;
 use Irradiate\Eloquent\City;
 use Irradiate\Eloquent\Country;
@@ -36,7 +37,6 @@ use Irradiate\Eloquent\Navlink;
 use Irradiate\Eloquent\Province;
 use Irradiate\Eloquent\Relationship;
 use Irradiate\Eloquent\Skill;
-use Illuminate\Http\Request;
 use Swagger\Annotations as SWG;
 
 class LookupTableController extends BaseController

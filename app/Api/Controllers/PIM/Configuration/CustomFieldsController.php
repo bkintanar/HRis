@@ -22,16 +22,16 @@
 namespace HRis\Api\Controllers\PIM\Configuration;
 
 use Exception;
+use HRis\Api\Requests\PIM\CustomFieldRequest;
+use HRis\Api\Requests\PIM\CustomFieldSectionsRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Irradiate\Api\Controllers\BaseController;
 use Irradiate\Eloquent\CustomField;
 use Irradiate\Eloquent\CustomFieldOption;
 use Irradiate\Eloquent\CustomFieldSection;
 use Irradiate\Eloquent\CustomFieldType;
 use Irradiate\Eloquent\Navlink;
-use HRis\Api\Requests\PIM\CustomFieldRequest;
-use HRis\Api\Requests\PIM\CustomFieldSectionsRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 /**
  * Class CustomFieldsController.

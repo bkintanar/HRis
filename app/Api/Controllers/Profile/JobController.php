@@ -22,10 +22,10 @@
 namespace HRis\Api\Controllers\Profile;
 
 use Exception;
+use HRis\Api\Requests\Profile\JobRequest;
 use Irradiate\Api\Controllers\BaseController;
 use Irradiate\Eloquent\Employee;
 use Irradiate\Eloquent\JobHistory;
-use HRis\Api\Requests\Profile\JobRequest;
 
 class JobController extends BaseController
 {

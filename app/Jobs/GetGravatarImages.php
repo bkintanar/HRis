@@ -21,11 +21,11 @@
 
 namespace HRis\Jobs;
 
-use Irradiate\Eloquent\Employee;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
+use Irradiate\Eloquent\Employee;
 use Thomaswelton\LaravelGravatar\Facades\Gravatar;
 
 class GetGravatarImages extends Job implements ShouldQueue

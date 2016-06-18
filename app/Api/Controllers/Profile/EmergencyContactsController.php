@@ -21,10 +21,10 @@
 
 namespace HRis\Api\Controllers\Profile;
 
+use HRis\Api\Requests\Profile\EmergencyContactsRequest;
 use Irradiate\Api\Controllers\BaseController;
 use Irradiate\Eloquent\EmergencyContact;
 use Irradiate\Eloquent\Employee;
-use HRis\Api\Requests\Profile\EmergencyContactsRequest;
 use Swagger\Annotations as SWG;
 
 class EmergencyContactsController extends BaseController

@@ -21,9 +21,9 @@
 
 namespace HRis\Api\Controllers\Admin\Qualifications;
 
+use HRis\Api\Requests\Admin\Qualifications\EducationLevelRequest;
 use Irradiate\Api\Controllers\BaseController;
 use Irradiate\Eloquent\EducationLevel;
-use HRis\Api\Requests\Admin\Qualifications\EducationLevelRequest;
 use Swagger\Annotations as SWG;
 
 /**

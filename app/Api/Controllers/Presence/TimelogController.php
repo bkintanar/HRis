@@ -24,10 +24,10 @@ namespace HRis\Api\Controllers\Presence;
 use Carbon\Carbon;
 use Dingo\Api\Http\Request;
 use Exception;
+use HRis\Api\Repositories\Time\TimelogRepository;
 use Irradiate\Api\Controllers\BaseController;
 use Irradiate\Eloquent\Employee;
 use Irradiate\Eloquent\Timelog;
-use HRis\Api\Repositories\Time\TimelogRepository;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class TimelogController extends BaseController

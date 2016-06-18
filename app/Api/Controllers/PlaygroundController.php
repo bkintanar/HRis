@@ -21,10 +21,10 @@
 
 namespace HRis\Api\Controllers;
 
-use Irradiate\Api\Controllers\BaseController;
-use Irradiate\Eloquent\Employee;
 use HRis\Api\ThirdParty\Elastic;
 use Illuminate\Http\Request;
+use Irradiate\Api\Controllers\BaseController;
+use Irradiate\Eloquent\Employee;
 
 class PlaygroundController extends BaseController
 {
