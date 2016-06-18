@@ -22,10 +22,10 @@
 namespace HRis\Console\Commands;
 
 use Exception;
-use Irradiate\Eloquent\Employee;
 use HRis\Api\ThirdParty\Elastic;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
+use Irradiate\Eloquent\Employee;
 
 class IndexAllEmployees extends Command
 {

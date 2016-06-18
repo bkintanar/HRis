@@ -22,6 +22,9 @@
 namespace HRis\Api\Controllers\Profile;
 
 use Exception;
+use HRis\Api\Requests\Profile\QualificationsEducationRequest;
+use HRis\Api\Requests\Profile\QualificationsSkillRequest;
+use HRis\Api\Requests\Profile\QualificationsWorkExperienceRequest;
 use Irradiate\Api\Controllers\BaseController;
 use Irradiate\Eloquent\CustomFieldSection;
 use Irradiate\Eloquent\Education;
@@ -29,9 +32,6 @@ use Irradiate\Eloquent\Employee;
 use Irradiate\Eloquent\EmployeeSkill;
 use Irradiate\Eloquent\Navlink;
 use Irradiate\Eloquent\WorkExperience;
-use HRis\Api\Requests\Profile\QualificationsEducationRequest;
-use HRis\Api\Requests\Profile\QualificationsSkillRequest;
-use HRis\Api\Requests\Profile\QualificationsWorkExperienceRequest;
 
 /**
  * Class QualificationsController.

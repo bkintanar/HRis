@@ -22,9 +22,9 @@
 namespace HRis\Api\Controllers\Profile;
 
 use Exception;
+use Illuminate\Http\Request;
 use Irradiate\Api\Controllers\BaseController;
 use Irradiate\Eloquent\CustomFieldValue;
-use Illuminate\Http\Request;
 
 class CustomFieldsController extends BaseController
 {

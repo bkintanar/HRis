@@ -21,10 +21,10 @@
 
 namespace HRis\Api\Controllers\Profile;
 
-use Irradiate\Api\Controllers\BaseController;
-use Irradiate\Eloquent\Employee;
 use HRis\Api\Requests\Profile\PersonalContactDetailsRequest;
 use Illuminate\Support\Facades\Config;
+use Irradiate\Api\Controllers\BaseController;
+use Irradiate\Eloquent\Employee;
 use Swagger\Annotations as SWG;
 
 /**

@@ -21,9 +21,9 @@
 
 namespace HRis\Api\Repositories\Time;
 
+use HRis\Api\Repositories\Repository;
 use Irradiate\Eloquent\Employee;
 use Irradiate\Eloquent\Timelog;
-use HRis\Api\Repositories\Repository;
 
 class TimelogRepository extends Repository
 {

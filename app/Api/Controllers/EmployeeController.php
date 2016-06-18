@@ -22,10 +22,10 @@
 namespace HRis\Api\Controllers;
 
 use Irradiate\Api\Controllers\BaseController;
+use Irradiate\Api\Transformers\EmployeeTransformer;
 use Irradiate\Eloquent\CustomField;
 use Irradiate\Eloquent\CustomFieldValue;
 use Irradiate\Eloquent\Employee;
-use Irradiate\Api\Transformers\EmployeeTransformer;
 
 class EmployeeController extends BaseController
 {

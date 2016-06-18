@@ -21,9 +21,9 @@
 
 namespace HRis\Api\Controllers\PIM\Configuration;
 
+use HRis\Api\Requests\PIM\Configuration\TerminationReasonRequest;
 use Irradiate\Api\Controllers\BaseController;
 use Irradiate\Eloquent\TerminationReason;
-use HRis\Api\Requests\PIM\Configuration\TerminationReasonRequest;
 use Swagger\Annotations as SWG;
 
 /**

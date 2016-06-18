@@ -21,9 +21,9 @@
 
 namespace HRis\Api\Controllers\Admin\Job;
 
+use HRis\Api\Requests\Admin\Job\PayGradeRequest;
 use Irradiate\Api\Controllers\BaseController;
 use Irradiate\Eloquent\PayGrade;
-use HRis\Api\Requests\Admin\Job\PayGradeRequest;
 use Swagger\Annotations as SWG;
 
 /**

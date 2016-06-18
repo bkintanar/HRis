@@ -47,7 +47,6 @@ $api->version('v1', function (Router $api) {
         'limit'      => 200,
         'expires'    => 5,
     ], function (Router $api) {
-        $api->get('/', 'BaseController@apiInformation');
 
         // Login route
         $api->post('login', 'Auth\AuthController@authenticate');                                                      // docs done
@@ -56,7 +55,7 @@ $api->version('v1', function (Router $api) {
         $api->get('auth/refresh', 'Auth\AuthController@token');
 
         // All routes in here are protected and thus need a valid token
-        $api->group(['protected' => true, 'middleware' => 'jwt.auth'], function (Router $api) {
+        $api->group(['protected' => true, 'middleware' => 'api.auth'], function (Router $api) {
 
             // Authentication
             $api->get('logout', 'Auth\AuthController@logout');                                                        // docs done
