@@ -47,8 +47,7 @@ $api->version('v1', function (Router $api) {
         'limit'      => 200,
         'expires'    => 5,
     ], function (Router $api) {
-
-        $api->post('oauth/access-token','Auth\OAuth\Controller@accessToken');
+        $api->post('oauth/access-token', 'Auth\OAuth\Controller@accessToken');
 
         // Login route
         $api->post('login', 'Auth\AuthController@authenticate');                                                      // docs done
