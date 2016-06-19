@@ -48,6 +48,8 @@ $api->version('v1', function (Router $api) {
         'expires'    => 5,
     ], function (Router $api) {
 
+        $api->post('oauth/access-token','Auth\OAuth\Controller@accessToken');
+
         // Login route
         $api->post('login', 'Auth\AuthController@authenticate');                                                      // docs done
         $api->post('register', 'Auth\AuthController@register');
