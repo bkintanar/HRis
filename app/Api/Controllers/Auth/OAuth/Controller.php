@@ -57,5 +57,4 @@ class Controller extends BaseController
             return $this->responseAPI(401, 'Forbidden');
         }
     }
-
 }
