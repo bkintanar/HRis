@@ -36,6 +36,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \Barryvdh\Cors\HandleCors::class,
         \Barryvdh\Cors\HandlePreflight::class,
+        \LucaDegasperi\OAuth2Server\Middleware\OAuthExceptionHandlerMiddleware::class,
     ];
 
     /**
@@ -63,8 +64,12 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'jwt.auth'    => \Tymon\JWTAuth\Http\Middleware\Authenticate::class,
-        'jwt.refresh' => \Tymon\JWTAuth\Http\Middleware\RefreshToken::class,
-        'cors'        => \Barryvdh\Cors\HandleCors::class,
+        'jwt.auth'                   => \Tymon\JWTAuth\Http\Middleware\Authenticate::class,
+        'jwt.refresh'                => \Tymon\JWTAuth\Http\Middleware\RefreshToken::class,
+        'cors'                       => \Barryvdh\Cors\HandleCors::class,
+        'oauth'                      => \LucaDegasperi\OAuth2Server\Middleware\OAuthMiddleware::class,
+        'oauth-user'                 => \LucaDegasperi\OAuth2Server\Middleware\OAuthUserOwnerMiddleware::class,
+        'oauth-client'               => \LucaDegasperi\OAuth2Server\Middleware\OAuthClientOwnerMiddleware::class,
+        'check-authorization-params' => \LucaDegasperi\OAuth2Server\Middleware\CheckAuthCodeRequestMiddleware::class,
     ];
 }

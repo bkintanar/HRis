@@ -174,15 +174,21 @@ return [
         HRis\Providers\AuthServiceProvider::class,
         HRis\Providers\EventServiceProvider::class,
         HRis\Providers\RouteServiceProvider::class,
+        HRis\Providers\OAuthServiceProvider::class,
+        HRis\Providers\JWTServiceProvider::class,
+
+        /*
+         * 3rd Party Service Providers...
+         */
         Barryvdh\Cors\ServiceProvider::class,
         Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         Jlapp\Swaggervel\SwaggervelServiceProvider::class,
         Felixkiss\UniqueWithValidator\UniqueWithValidatorServiceProvider::class,
         Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider::class,
-
-        // Overrides
         Dingo\Api\Provider\LaravelServiceProvider::class,
+        LucaDegasperi\OAuth2Server\Storage\FluentStorageServiceProvider::class,
+        LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider::class,
     ],
 
     /*
@@ -233,6 +239,9 @@ return [
         // Dingo related aliases
         'APIRoute'   => Dingo\Api\Facade\Route::class,
         'API'        => Dingo\Api\Facade\API::class,
+
+        // OAuth related aliases
+        'Authorizer' => LucaDegasperi\OAuth2Server\Facades\Authorizer::class,
 
         // JWT related aliases
         'JWTAuth'    => Tymon\JWTAuth\Facades\JWTAuth::class,
