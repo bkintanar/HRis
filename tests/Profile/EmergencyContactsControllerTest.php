@@ -136,9 +136,9 @@ class EmergencyContactsControllerTest extends TestCase
      * @test
      * @depends it_should_return_an_emergency_contact_object_if_post_is_successful
      *
-     * +------------------------------------------------------+
+     * +-------------------------------------------------------+
      * | POSITIVE TEST | PATCH /api/profile/emergency-contacts |
-     * +------------------------------------------------------+
+     * +-------------------------------------------------------+
      */
     public function it_should_return_a_success_message_if_patch_is_successful()
     {
@@ -176,9 +176,9 @@ class EmergencyContactsControllerTest extends TestCase
      * @test
      * @depends it_should_return_an_emergency_contact_object_if_post_is_successful
      *
-     * +--------------------------------------------------------+
-     * | POSITIVE TEST | DELETE /api/profile/emergency-contacts |
-     * +--------------------------------------------------------+
+     * +----------------------------------------------------------------------------+
+     * | POSITIVE TEST | DELETE /api/profile/emergency-contacts/{emergency_contact} |
+     * +----------------------------------------------------------------------------+
      */
     public function it_should_return_a_success_message_if_delete_is_successful()
     {
@@ -209,9 +209,9 @@ class EmergencyContactsControllerTest extends TestCase
     /**
      * @test
      *
-     * +----------------------------------------------+
-     * | NEGATIVE TEST | DELETE /api/admin/job/titles |
-     * +----------------------------------------------+
+     * +----------------------------------------------------------------------------+
+     * | NEGATIVE TEST | DELETE /api/profile/emergency-contacts/{emergency_contact} |
+     * +----------------------------------------------------------------------------+
      */
     public function it_should_return_an_error_if_delete_fails()
     {
