@@ -38,6 +38,7 @@ use Irradiate\Eloquent\Province;
 use Irradiate\Eloquent\Relationship;
 use Irradiate\Eloquent\Skill;
 use Swagger\Annotations as SWG;
+use Symfony\Component\HttpFoundation\Response;
 
 class LookupTableController extends BaseController
 {
@@ -208,7 +209,7 @@ class LookupTableController extends BaseController
         $province_id = $request->get('province_id');
 
         if (!$province_id) {
-            return $this->responseAPI(404, UNABLE_RETRIEVE_MESSAGE);
+            return $this->responseAPI(Response::HTTP_NOT_FOUND, UNABLE_RETRIEVE_MESSAGE);
         }
 
         if ($this->table_view) {
@@ -231,12 +232,12 @@ class LookupTableController extends BaseController
         if ($custom_attribute) {
             $data = $model->get(['name', 'id', 'class']);
 
-            return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, compact('data'));
+            return $this->responseAPI(Response::HTTP_OK, SUCCESS_RETRIEVE_MESSAGE, compact('data'));
         }
 
         $data = $model->lists('name', 'id');
 
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, compact('data'));
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_RETRIEVE_MESSAGE, compact('data'));
     }
 
     /**
@@ -262,7 +263,7 @@ class LookupTableController extends BaseController
             }
         }
 
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, compact('chosen'));
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_RETRIEVE_MESSAGE, compact('chosen'));
     }
 
     /**

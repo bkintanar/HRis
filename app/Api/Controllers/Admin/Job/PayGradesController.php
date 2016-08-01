@@ -25,6 +25,7 @@ use HRis\Api\Requests\Admin\Job\PayGradeRequest;
 use Irradiate\Api\Controllers\BaseController;
 use Irradiate\Eloquent\PayGrade;
 use Swagger\Annotations as SWG;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class PayGradesController.
@@ -190,7 +191,7 @@ class PayGradesController extends BaseController
 
         $data = ['data' => $pay_grades, 'table' => $this->setupDataTable($pay_grades)];
 
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, $data);
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_RETRIEVE_MESSAGE, $data);
     }
 
     /**
@@ -349,7 +350,7 @@ class PayGradesController extends BaseController
      */
     public function show(PayGrade $pay_grade)
     {
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, compact('pay_grade'));
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_RETRIEVE_MESSAGE, compact('pay_grade'));
     }
 
     /**

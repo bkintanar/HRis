@@ -25,6 +25,7 @@ use HRis\Api\Requests\Admin\Job\JobTitleRequest;
 use Irradiate\Api\Controllers\BaseController;
 use Irradiate\Eloquent\JobTitle;
 use Swagger\Annotations as SWG;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class JobTitlesController.
@@ -190,7 +191,7 @@ class JobTitlesController extends BaseController
 
         $data = ['data' => $job_titles, 'table' => $this->setupDataTable($job_titles)];
 
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, $data);
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_RETRIEVE_MESSAGE, $data);
     }
 
     /**
@@ -349,7 +350,7 @@ class JobTitlesController extends BaseController
      */
     public function show(JobTitle $job_title)
     {
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, compact('job_title'));
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_RETRIEVE_MESSAGE, compact('job_title'));
     }
 
     /**

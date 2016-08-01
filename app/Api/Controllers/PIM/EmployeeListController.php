@@ -29,6 +29,7 @@ use Irradiate\Api\Controllers\BaseController;
 use Irradiate\Eloquent\Employee;
 use Irradiate\Eloquent\EmployeeSalaryComponent;
 use Irradiate\Eloquent\SalaryComponent;
+use Symfony\Component\HttpFoundation\Response;
 
 class EmployeeListController extends BaseController
 {
@@ -91,7 +92,7 @@ class EmployeeListController extends BaseController
     {
         $employees = $this->employee->getEmployeeList(false, $request->sort(), $request->direction())->get();
 
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, compact('employees'));
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_RETRIEVE_MESSAGE, compact('employees'));
     }
 
     /**

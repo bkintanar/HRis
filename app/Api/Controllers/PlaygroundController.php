@@ -25,6 +25,7 @@ use HRis\Api\ThirdParty\Elastic;
 use Illuminate\Http\Request;
 use Irradiate\Api\Controllers\BaseController;
 use Irradiate\Eloquent\Employee;
+use Symfony\Component\HttpFoundation\Response;
 
 class PlaygroundController extends BaseController
 {
@@ -42,6 +43,6 @@ class PlaygroundController extends BaseController
     {
         $result = $this->elastic->searchEmployee($request->all());
 
-        return $this->responseAPI(201, SUCCESS_RETRIEVE_MESSAGE, compact('result'));
+        return $this->responseAPI(Response::HTTP_CREATED, SUCCESS_RETRIEVE_MESSAGE, compact('result'));
     }
 }

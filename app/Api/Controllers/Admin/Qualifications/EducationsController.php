@@ -25,6 +25,7 @@ use HRis\Api\Requests\Admin\Qualifications\EducationLevelRequest;
 use Irradiate\Api\Controllers\BaseController;
 use Irradiate\Eloquent\EducationLevel;
 use Swagger\Annotations as SWG;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class EducationsController.
@@ -190,7 +191,7 @@ class EducationsController extends BaseController
 
         $data = ['data' => $education_levels, 'table' => $this->setupDataTable($education_levels)];
 
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, $data);
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_RETRIEVE_MESSAGE, $data);
     }
 
     /**
@@ -349,7 +350,7 @@ class EducationsController extends BaseController
      */
     public function show(EducationLevel $education_level)
     {
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, compact('education_level'));
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_RETRIEVE_MESSAGE, compact('education_level'));
     }
 
     /**

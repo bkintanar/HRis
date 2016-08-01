@@ -25,6 +25,7 @@ use HRis\Api\Requests\PIM\Configuration\TerminationReasonRequest;
 use Irradiate\Api\Controllers\BaseController;
 use Irradiate\Eloquent\TerminationReason;
 use Swagger\Annotations as SWG;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class TerminationReasonsController.
@@ -190,7 +191,7 @@ class TerminationReasonsController extends BaseController
 
         $data = ['data' => $termination_reasons, 'table' => $this->setupDataTable($termination_reasons)];
 
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, $data);
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_RETRIEVE_MESSAGE, $data);
     }
 
     /**
@@ -349,7 +350,7 @@ class TerminationReasonsController extends BaseController
      */
     public function show(TerminationReason $termination_reason)
     {
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, compact('termination_reason'));
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_RETRIEVE_MESSAGE, compact('termination_reason'));
     }
 
     /**

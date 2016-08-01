@@ -32,6 +32,7 @@ use Irradiate\Eloquent\Employee;
 use Irradiate\Eloquent\EmployeeSkill;
 use Irradiate\Eloquent\Navlink;
 use Irradiate\Eloquent\WorkExperience;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class QualificationsController.
@@ -121,16 +122,16 @@ class QualificationsController extends BaseController
         $workExperience = $workExperience->whereId($request->get('work_experience_id'))->first();
 
         if (!$workExperience) {
-            return $this->responseAPI(404, UNABLE_RETRIEVE_MESSAGE);
+            return $this->responseAPI(Response::HTTP_NOT_FOUND, UNABLE_RETRIEVE_MESSAGE);
         }
 
         try {
             $workExperience->update($request->all());
         } catch (Exception $e) {
-            return $this->responseAPI(422, UNABLE_UPDATE_MESSAGE);
+            return $this->responseAPI(Response::HTTP_UNPROCESSABLE_ENTITY, UNABLE_UPDATE_MESSAGE);
         }
 
-        return $this->responseAPI(200, SUCCESS_UPDATE_MESSAGE);
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_UPDATE_MESSAGE);
     }
 
     /**
@@ -178,16 +179,16 @@ class QualificationsController extends BaseController
         $education = $education->whereId($request->get('education_id'))->first();
 
         if (!$education) {
-            return $this->responseAPI(404, UNABLE_RETRIEVE_MESSAGE);
+            return $this->responseAPI(Response::HTTP_NOT_FOUND, UNABLE_RETRIEVE_MESSAGE);
         }
 
         try {
             $education->update($request->except(['education_level', 'education_levels']));
         } catch (Exception $e) {
-            return $this->responseAPI(422, UNABLE_UPDATE_MESSAGE);
+            return $this->responseAPI(Response::HTTP_UNPROCESSABLE_ENTITY, UNABLE_UPDATE_MESSAGE);
         }
 
-        return $this->responseAPI(200, SUCCESS_UPDATE_MESSAGE);
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_UPDATE_MESSAGE);
     }
 
     /**
@@ -214,12 +215,12 @@ class QualificationsController extends BaseController
                 'comment'             => $comment,
             ]);
         } catch (Exception $e) {
-            return $this->responseAPI(422, UNABLE_ADD_MESSAGE);
+            return $this->responseAPI(Response::HTTP_UNPROCESSABLE_ENTITY, UNABLE_ADD_MESSAGE);
         }
 
         $skill = $employee_skill::whereEmployeeId($employee->id)->orderBy('id', 'desc')->first();
 
-        return $this->responseAPI(201, SUCCESS_ADD_MESSAGE, compact('skill'));
+        return $this->responseAPI(Response::HTTP_CREATED, SUCCESS_ADD_MESSAGE, compact('skill'));
     }
 
     /**
@@ -237,7 +238,7 @@ class QualificationsController extends BaseController
         $employeeSkill = $employeeSkill->whereId($request->get('id'))->first();
 
         if (!$employeeSkill) {
-            return $this->responseAPI(404, UNABLE_RETRIEVE_MESSAGE);
+            return $this->responseAPI(Response::HTTP_NOT_FOUND, UNABLE_RETRIEVE_MESSAGE);
         }
 
         try {
@@ -247,10 +248,10 @@ class QualificationsController extends BaseController
 
             $employeeSkill->save();
         } catch (Exception $e) {
-            return $this->responseAPI(422, UNABLE_UPDATE_MESSAGE);
+            return $this->responseAPI(Response::HTTP_UNPROCESSABLE_ENTITY, UNABLE_UPDATE_MESSAGE);
         }
 
-        return $this->responseAPI(200, SUCCESS_UPDATE_MESSAGE);
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_UPDATE_MESSAGE);
     }
 
     /**

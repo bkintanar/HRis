@@ -24,6 +24,7 @@ namespace HRis\Api\Controllers\Auth\OAuth;
 use Exception;
 use Irradiate\Api\Controllers\BaseController;
 use LucaDegasperi\OAuth2Server\Authorizer;
+use Symfony\Component\HttpFoundation\Response;
 
 class Controller extends BaseController
 {
@@ -54,7 +55,7 @@ class Controller extends BaseController
         try {
             return $this->authorizer->issueAccessToken();
         } catch (Exception $e) {
-            return $this->responseAPI(401, 'Forbidden');
+            return $this->responseAPI(Response::HTTP_UNAUTHORIZED, 'Forbidden');
         }
     }
 }

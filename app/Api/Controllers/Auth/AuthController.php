@@ -28,6 +28,7 @@ use Irradiate\Api\Transformers\UserTransformer;
 use Irradiate\Eloquent\Navlink;
 use Irradiate\Eloquent\User;
 use Swagger\Annotations as SWG;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -67,7 +68,7 @@ class AuthController extends BaseController
             throw new AccessDeniedHttpException('The token is invalid');
         }
 
-        return $this->responseAPI(201, SUCCESS_TOKEN_REFRESH_MESSAGE, compact('token'));
+        return $this->responseAPI(Response::HTTP_CREATED, SUCCESS_TOKEN_REFRESH_MESSAGE, compact('token'));
     }
 
     /**
@@ -81,7 +82,7 @@ class AuthController extends BaseController
 
         $sidebar = Navlink::sidebar($user);
 
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_SIDEBAR_MESSAGE, compact('sidebar'));
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_RETRIEVE_SIDEBAR_MESSAGE, compact('sidebar'));
     }
 
     /**
@@ -153,14 +154,14 @@ class AuthController extends BaseController
         try {
             // attempt to verify the credentials and create a token for the user
             if (!$token = JWTAuth::attempt($credentials, $claims)) {
-                return $this->responseAPI(401, 'invalid_credentials');
+                return $this->responseAPI(Response::HTTP_UNAUTHORIZED, 'invalid_credentials');
             }
         } catch (Exception $e) {
-            return $this->responseAPI(422, 'could_not_create_token');
+            return $this->responseAPI(Response::HTTP_UNPROCESSABLE_ENTITY, 'could_not_create_token');
         }
 
         // all good so return the token
-        return $this->responseAPI(201, SUCCESS_TOKEN_CREATED_MESSAGE, compact('token'));
+        return $this->responseAPI(Response::HTTP_CREATED, SUCCESS_TOKEN_CREATED_MESSAGE, compact('token'));
     }
 
     /**

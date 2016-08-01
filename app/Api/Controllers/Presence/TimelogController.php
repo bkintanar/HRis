@@ -28,6 +28,7 @@ use HRis\Api\Repositories\Time\TimelogRepository;
 use Irradiate\Api\Controllers\BaseController;
 use Irradiate\Eloquent\Employee;
 use Irradiate\Eloquent\Timelog;
+use Symfony\Component\HttpFoundation\Response;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class TimelogController extends BaseController
@@ -99,7 +100,7 @@ class TimelogController extends BaseController
             ],
         ];
 
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE,
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_RETRIEVE_MESSAGE,
             ['data' => $data, 'table' => $this->setupDataTable($timelogs)]);
     }
 
@@ -208,7 +209,7 @@ class TimelogController extends BaseController
     {
         $server = Carbon::now();
 
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, ['server' => $server]);
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_RETRIEVE_MESSAGE, ['server' => $server]);
     }
 
     /**
@@ -235,7 +236,7 @@ class TimelogController extends BaseController
             'closeOnConfirm'     => false,
         ];
 
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, $data);
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_RETRIEVE_MESSAGE, $data);
     }
 
     /**
@@ -287,7 +288,7 @@ class TimelogController extends BaseController
             'closeOnConfirm'     => false,
         ];
 
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, $data);
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_RETRIEVE_MESSAGE, $data);
     }
 
     /**
@@ -315,7 +316,7 @@ class TimelogController extends BaseController
             'timelog_id' => $timelog->id,
         ];
 
-        return $this->responseAPI(201, SUCCESS_ADD_MESSAGE, $data);
+        return $this->responseAPI(Response::HTTP_CREATED, SUCCESS_ADD_MESSAGE, $data);
     }
 
     /**
@@ -354,6 +355,6 @@ class TimelogController extends BaseController
             'text'  => 'You have successfully submitted your timelog.',
         ];
 
-        return $this->responseAPI(201, SUCCESS_ADD_MESSAGE, $data);
+        return $this->responseAPI(Response::HTTP_CREATED, SUCCESS_ADD_MESSAGE, $data);
     }
 }

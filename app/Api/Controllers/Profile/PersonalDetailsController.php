@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Config;
 use Irradiate\Api\Controllers\BaseController;
 use Irradiate\Eloquent\Employee;
 use Swagger\Annotations as SWG;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Updates a single instance of Employee Personal Details.
@@ -187,19 +188,19 @@ class PersonalDetailsController extends BaseController
         $employee = $this->employee->find($id);
 
         if (!$employee || !$employee_id || $employee_id == Config::get('company.employee_id_prefix').'____') {
-            return $this->responseAPI(405, UNABLE_UPDATE_MESSAGE);
+            return $this->responseAPI(Response::HTTP_METHOD_NOT_ALLOWED, UNABLE_UPDATE_MESSAGE);
         }
 
         // If user is trying to update the employee_id to a used employee_id.
         $original_employee_id = $this->employee->whereEmployeeId($employee_id)->value('id');
         if ($id != $original_employee_id && !is_null($original_employee_id)) {
-            return $this->responseAPI(405, EMPLOYEE_ID_IN_MESSAGE);
+            return $this->responseAPI(Response::HTTP_METHOD_NOT_ALLOWED, EMPLOYEE_ID_IN_MESSAGE);
         }
 
         $attributes = array_filter(array_slice($request->get('employee'), 0, 33));
 
         $employee->update($attributes);
 
-        return $this->responseAPI(200, SUCCESS_UPDATE_MESSAGE, compact('employee'));
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_UPDATE_MESSAGE, compact('employee'));
     }
 }

@@ -25,6 +25,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Irradiate\Api\Controllers\BaseController;
 use Irradiate\Eloquent\CustomFieldValue;
+use Symfony\Component\HttpFoundation\Response;
 
 class CustomFieldsController extends BaseController
 {
@@ -77,9 +78,9 @@ class CustomFieldsController extends BaseController
                 $this->custom_field_value->updateOrCreate($data, $values);
             }
         } catch (Exception $e) {
-            return $this->responseAPI(422, UNABLE_UPDATE_MESSAGE);
+            return $this->responseAPI(Response::HTTP_UNPROCESSABLE_ENTITY, UNABLE_UPDATE_MESSAGE);
         }
 
-        return $this->responseAPI(200, SUCCESS_UPDATE_MESSAGE);
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_UPDATE_MESSAGE);
     }
 }

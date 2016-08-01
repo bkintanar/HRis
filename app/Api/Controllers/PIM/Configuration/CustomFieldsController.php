@@ -32,6 +32,7 @@ use Irradiate\Eloquent\CustomFieldOption;
 use Irradiate\Eloquent\CustomFieldSection;
 use Irradiate\Eloquent\CustomFieldType;
 use Irradiate\Eloquent\Navlink;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class CustomFieldsController.
@@ -117,7 +118,7 @@ class CustomFieldsController extends BaseController
 
         $data = ['data' => $custom_field_sections, 'table' => $this->setupDataTable($custom_field_sections)];
 
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, $data);
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_RETRIEVE_MESSAGE, $data);
     }
 
     /**
@@ -161,14 +162,14 @@ class CustomFieldsController extends BaseController
         $custom_field_section = $this->custom_field_section->whereId($custom_field_section_id)->first();
 
         if (!$custom_field_section) {
-            return $this->responseAPI(404, UNABLE_RETRIEVE_MESSAGE);
+            return $this->responseAPI(Response::HTTP_NOT_FOUND, UNABLE_RETRIEVE_MESSAGE);
         }
 
         $custom_fields = $this->custom_field->with('type', 'options')->whereCustomFieldSectionId($custom_field_section_id)->paginate(ROWS_PER_PAGE);
 
         $data = ['data' => $custom_fields, 'table' => $this->setupDataTableCustomField($custom_fields)];
 
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, $data);
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_RETRIEVE_MESSAGE, $data);
     }
 
     /**
@@ -248,12 +249,12 @@ class CustomFieldsController extends BaseController
         } catch (Exception $e) {
             DB::rollback();
 
-            return $this->responseAPI(422, UNABLE_ADD_MESSAGE);
+            return $this->responseAPI(Response::HTTP_UNPROCESSABLE_ENTITY, UNABLE_ADD_MESSAGE);
         }
 
         $custom_field = $this->custom_field->with('type', 'options')->whereId($custom_field->id)->first();
 
-        return $this->responseAPI(201, SUCCESS_ADD_MESSAGE, compact('custom_field'));
+        return $this->responseAPI(Response::HTTP_CREATED, SUCCESS_ADD_MESSAGE, compact('custom_field'));
     }
 
     /**
@@ -271,15 +272,15 @@ class CustomFieldsController extends BaseController
             $custom_field_section = $this->custom_field_section->whereId($request->get('custom_field_section_id'))->first();
 
             if (!$custom_field_section) {
-                return $this->responseAPI(404, UNABLE_RETRIEVE_MESSAGE);
+                return $this->responseAPI(Response::HTTP_NOT_FOUND, UNABLE_RETRIEVE_MESSAGE);
             }
 
             $custom_field_section->update($request->only(['name', 'screen_id']));
         } catch (Exception $e) {
-            return $this->responseAPI(422, UNABLE_UPDATE_MESSAGE);
+            return $this->responseAPI(Response::HTTP_UNPROCESSABLE_ENTITY, UNABLE_UPDATE_MESSAGE);
         }
 
-        return $this->responseAPI(200, SUCCESS_UPDATE_MESSAGE);
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_UPDATE_MESSAGE);
     }
 
     /**
@@ -297,7 +298,7 @@ class CustomFieldsController extends BaseController
             $custom_field = $this->custom_field->whereId($request->get('custom_field_id'))->first();
 
             if (!$custom_field) {
-                return $this->responseAPI(404, UNABLE_RETRIEVE_MESSAGE);
+                return $this->responseAPI(Response::HTTP_NOT_FOUND, UNABLE_RETRIEVE_MESSAGE);
             }
 
             $data = $this->getRequestData($request);
@@ -318,10 +319,10 @@ class CustomFieldsController extends BaseController
                 $this->createNewOptions($options, $custom_field);
             }
         } catch (Exception $e) {
-            return $this->responseAPI(422, UNABLE_UPDATE_MESSAGE);
+            return $this->responseAPI(Response::HTTP_UNPROCESSABLE_ENTITY, UNABLE_UPDATE_MESSAGE);
         }
 
-        return $this->responseAPI(200, SUCCESS_UPDATE_MESSAGE);
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_UPDATE_MESSAGE);
     }
 
     /**
@@ -401,6 +402,6 @@ class CustomFieldsController extends BaseController
             $custom_field_section->fields = array_chunk($custom_fields->toArray(), 2);
         });
 
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, compact('custom_field_sections'));
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_RETRIEVE_MESSAGE, compact('custom_field_sections'));
     }
 }

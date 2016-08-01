@@ -25,6 +25,7 @@ use HRis\Api\Requests\Admin\Job\EmploymentStatusRequest;
 use Irradiate\Api\Controllers\BaseController;
 use Irradiate\Eloquent\EmploymentStatus;
 use Swagger\Annotations as SWG;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class EmploymentStatusController.
@@ -190,7 +191,7 @@ class EmploymentStatusController extends BaseController
 
         $data = ['data' => $employment_statuses, 'table' => $this->setupDataTable($employment_statuses)];
 
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, $data);
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_RETRIEVE_MESSAGE, $data);
     }
 
     /**
@@ -349,7 +350,7 @@ class EmploymentStatusController extends BaseController
      */
     public function show(EmploymentStatus $employment_status)
     {
-        return $this->responseAPI(200, SUCCESS_RETRIEVE_MESSAGE, compact('employment_status'));
+        return $this->responseAPI(Response::HTTP_OK, SUCCESS_RETRIEVE_MESSAGE, compact('employment_status'));
     }
 
     /**
