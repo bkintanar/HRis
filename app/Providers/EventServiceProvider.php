@@ -50,6 +50,8 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot($events);
 
-        Employee::updated(function () {Artisan::queue('elasticsearch:employees');});
+        Employee::updated(function () {
+            Artisan::queue('elasticsearch:employees');
+        });
     }
 }
