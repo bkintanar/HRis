@@ -43,7 +43,11 @@ class EventServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(){parent::boot();Employee::updated(function () {Artisan::queue('elasticsearch:employees');
+    public function boot()
+    {
+        parent::boot();
+        Employee::updated(function () {
+            Artisan::queue('elasticsearch:employees');
         });
     }
 }
